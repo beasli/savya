@@ -1,13 +1,24 @@
+import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
+import { crausel } from 'src/config';
+
 declare var $: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
 
-  constructor() { }
+export class HomeComponent implements OnInit {
+  //slider_imgs = [];
+  slider_imgs = ['../../../../assets/images/slider/800x400.png', '../../../../assets/images/slider/DSC_6018.jpg'];
+  url: any;
+  constructor(private api: ApiService ) {
+    // this.api.Post(crausel, {}).then(data => {
+    //  this.slider_imgs = data['body'][0]['app_banners'];
+    //   this.url = data['url'];
+    // });
+   }
 
   ngOnInit() {
     $(".testimonial-carousel").slick({

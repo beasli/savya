@@ -1,3 +1,4 @@
+import {  HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -21,9 +22,10 @@ import { BestSellerProductComponent } from '../best-seller-product/best-seller-p
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
-      { path: 'filter' ,component: FilterProductComponent}
+      { path: 'filter' , component: FilterProductComponent}
     ])
   ]
 })
