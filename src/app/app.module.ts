@@ -10,6 +10,7 @@ import { LayoutModule } from './components/layout/layout/layout.module';
 import { ShoppingModule } from './components/shopping/shopping/shopping.module';
 import { SiteModule } from './components/site/site/site.module';
 import { NavBarComponent } from './components/layout/nav-bar/nav-bar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -29,7 +30,9 @@ import { NavBarComponent } from './components/layout/nav-bar/nav-bar.component';
     AuthModule,
     LayoutModule,
     ShoppingModule,
-    SiteModule
+    SiteModule,
+    FormsModule,
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
