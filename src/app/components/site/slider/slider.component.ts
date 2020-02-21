@@ -10,11 +10,15 @@ export class SliderComponent implements OnInit {
   @Input() slider_imgs;
   @Input() url;
 
+  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+
+
   constructor(private sanitizer: DomSanitizer) { 
     console.log(this.slider_imgs)
    }
 
   ngOnInit() {
+    console.log(this.slider_imgs)
   }
 
   getlink(s): SafeStyle {
