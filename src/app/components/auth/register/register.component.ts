@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/api/api.service';
+import { REGISTER } from 'src/config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -7,7 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api:ApiService,private router:Router) { }
+  mobile_no:any;
+  SignUp(value){
+    this.mobile_no=value.mobile_no;
+    // console.log(value);
+      this.api.Post(REGISTER,value).then(data=>{
+          console.log(data);
+          this.router.navigate(['/otp',this.mobile_no]);
+      });
+  
+  }
 
   ngOnInit() {
   }

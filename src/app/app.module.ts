@@ -9,6 +9,7 @@ import { AuthModule } from './components/auth/auth/auth.module';
 import { LayoutModule } from './components/layout/layout/layout.module';
 import { ShoppingModule } from './components/shopping/shopping/shopping.module';
 import { SiteModule } from './components/site/site/site.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,7 +19,8 @@ import { SiteModule } from './components/site/site/site.module';
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent, 
+    FooterComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,9 @@ import { SiteModule } from './components/site/site/site.module';
     AuthModule,
     LayoutModule,
     ShoppingModule,
-    SiteModule
+    SiteModule,
+    FormsModule,
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
