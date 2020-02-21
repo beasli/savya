@@ -11,6 +11,8 @@ import { ShoppingModule } from './components/shopping/shopping/shopping.module';
 import { SiteModule } from './components/site/site/site.module';
 import { NavBarComponent } from './components/layout/nav-bar/nav-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -32,7 +34,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ShoppingModule,
     SiteModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule ,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
