@@ -10,7 +10,9 @@ export class SliderComponent implements OnInit {
   @Input() slider_imgs;
   @Input() url;
 
-  constructor(private sanitizer: DomSanitizer) {  }
+  constructor(private sanitizer: DomSanitizer) { 
+    console.log(this.slider_imgs)
+   }
 
   ngOnInit() {
   }
