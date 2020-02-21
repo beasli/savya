@@ -16,8 +16,8 @@ export class SliderComponent implements OnInit {
   }
 
   getlink(s): SafeStyle {
-    // let z = this.url + '/' + s;
-    // console.log(z);
-    return this.sanitizer.bypassSecurityTrustStyle('url(' + s + ')');
+    let z = this.url + '/' + s;
+    console.log(s);
+    return this.sanitizer.bypassSecurityTrustStyle('url(' + z + ')');
   }
 }

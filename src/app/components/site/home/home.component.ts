@@ -1,6 +1,6 @@
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
-import { crausel } from 'src/config';
+import { CRAUSEL } from 'src/config';
 
 declare var $: any;
 @Component({
@@ -10,14 +10,14 @@ declare var $: any;
 })
 
 export class HomeComponent implements OnInit {
-  //slider_imgs = [];
-  slider_imgs = ['../../../../assets/images/slider/800x400.png', '../../../../assets/images/slider/DSC_6018.jpg'];
+  slider_imgs = [];
+  //slider_imgs = ['../../../../assets/images/slider/800x400.png', '../../../../assets/images/slider/DSC_6018.jpg'];
   url: any;
   constructor(private api: ApiService ) {
-    // this.api.Post(crausel, {}).then(data => {
-    //  this.slider_imgs = data['body'][0]['app_banners'];
-    //   this.url = data['url'];
-    // });
+    this.api.Post(CRAUSEL, {}).then(data => {
+     this.slider_imgs = data['body'][0]['app_banners'];
+      this.url = data['url'];
+    });
    }
 
   ngOnInit() {
