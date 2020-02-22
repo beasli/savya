@@ -1,3 +1,4 @@
+import {  HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -7,6 +8,7 @@ import { TestimonialsComponent } from '../testimonials/testimonials.component';
 import { FilterProductComponent } from '../filter-product/filter-product.component';
 import { ProductHolderComponent } from '../product-holder/product-holder.component';
 import { BestSellerProductComponent } from '../best-seller-product/best-seller-product.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -21,6 +23,8 @@ import { BestSellerProductComponent } from '../best-seller-product/best-seller-p
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
+    NgbModule,
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
       { path: 'filter' , component: FilterProductComponent}
