@@ -23,7 +23,7 @@ import { BestSellerProductComponent } from '../best-seller-product/best-seller-p
     CommonModule,
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
-      { path: 'filter' ,component: FilterProductComponent}
+      { path: 'filter' , component: FilterProductComponent}
     ])
   ]
 })
