@@ -1,3 +1,4 @@
+import { ExclusiveBannerComponent } from './../../layout/exclusive-banner/exclusive-banner.component';
 import {  HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,8 +11,6 @@ import { ProductHolderComponent } from '../product-holder/product-holder.compone
 import { BestSellerProductComponent } from '../best-seller-product/best-seller-product.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-
-
 @NgModule({
   declarations: [
     HomeComponent,
@@ -20,6 +19,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FilterProductComponent,
     ProductHolderComponent,
     BestSellerProductComponent,
+    ExclusiveBannerComponent
   ],
   imports: [
     CommonModule,

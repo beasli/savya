@@ -11,12 +11,20 @@ declare var $: any;
 
 export class HomeComponent implements OnInit {
   slider_imgs = [];
-  //slider_imgs = ['../../../../assets/images/slider/800x400.png', '../../../../assets/images/slider/DSC_6018.jpg'];
+  exclusive = [];
+  mostselling = [];
   url: any;
+  url2: any;
+  url3: any;
   constructor(private api: ApiService ) {
-    this.api.Post(CRAUSEL, {}).then(data => {
-     this.slider_imgs = data['body'][0]['app_banners'];
+      this.api.Post(CRAUSEL, {}).then(data => {
+      this.slider_imgs = data['body'][0]['app_banners'];
+      this.exclusive = data['body'][2]['exclusive_banners'];
       this.url = data['url'];
+      this.url2 = this.url + '/';
+      this.url3 = data['product_url'] + '/';
+      this.mostselling = data['body'][3]['product'];
+
     });
    }
 

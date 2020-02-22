@@ -7,28 +7,15 @@
     <!-- Product Holder -->
     <app-product-holder></app-product-holder>
     <!--/Product Holder -->
-    
-    <!-- Product Holder -->
-    <app-best-seller-product></app-best-seller-product>
-    <!--/Product Holder -->
-    
+        
     <!-- Promotional Section -->
-    <div class="holder fullboxed full-nopad mt-0">
-        <div class="container">
-            <div class="row row-chess">
-                <div class="chess-right-bg" style="background-image: url('https://sgws3productimages.azureedge.net/sgwproductimages/images/69/2-21-2019/53482612194930er.JPG')"></div>
-                <div class="col-md-6">
-                    <div class="py-3 py-md-10 px-md-6">
-                        <h2 class="h1-style text-center">Best Home for all kind of Jewelery</h2>
-                        <p>Lorem ipsum dolor sit amet consestuer adicpising elitr anno dolor sit amet. Lorem ipsum dolor sit amet consestuer adicpising elitr anno dolor sit amet.</p>
-                        <div class="more-link-wrapper text-center mt-2"><a href="#" class="btn-decor">show me all</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <app-exclusive-banner [url2] = 'url2' [exclusive] = 'exclusive'></app-exclusive-banner>
     <!--/Promotional section -->
     
+    <!-- Product Holder -->
+    <app-best-seller-product [url3] = 'url3' [mostselling] = 'mostselling'></app-best-seller-product>
+    <!--/Product Holder -->
+
     <!-- Testimonials -->
     <app-testimonials></app-testimonials>
     <!--/Testimonial -->
