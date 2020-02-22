@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api/api.service';
-import { OTPVERIFIED,  OTPRESEND } from 'src/config';
+import { OTPVERIFIED, OTPRESEND } from 'src/config';
 
 @Component({
-  selector: 'app-otp',
-  templateUrl: './otp.component.html',
-  styleUrls: ['./otp.component.css']
+  selector: 'app-forget-otp',
+  templateUrl: './forget-otp.component.html',
+  styleUrls: ['./forget-otp.component.css']
 })
-export class OtpComponent implements OnInit {
-mobile_no:any;
+export class ForgetOtpComponent implements OnInit {
+
+  mobile_no:any;
   constructor(private route:ActivatedRoute,private api: ApiService,private router: Router) {
     this.mobile_no=this.route.snapshot.paramMap.get('no');
     console.log(this.mobile_no);
@@ -22,7 +23,7 @@ mobile_no:any;
         mobile_no:this.mobile_no,
         otp:value.otp
       }}).then(data=>{
-        this.router.navigate(['/login']);
+        this.router.navigate(['/change',this.mobile_no]);
         console.log(data);
       });
 
@@ -36,6 +37,7 @@ mobile_no:any;
       console.log(data);
     });
   }
+
   ngOnInit() {
   }
 

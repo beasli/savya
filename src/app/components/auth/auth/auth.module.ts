@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { OtpComponent } from '../otp/otp.component';
+import { ForgetPasswordComponent } from '../forget-password/forget-password.component';
+import { ForgetOtpComponent } from '../forget-otp/forget-otp.component';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
 
 
 @NgModule({
@@ -13,6 +16,9 @@ import { OtpComponent } from '../otp/otp.component';
     LoginComponent,
     RegisterComponent,
     OtpComponent, 
+    ForgetPasswordComponent,
+    ForgetOtpComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -22,7 +28,10 @@ import { OtpComponent } from '../otp/otp.component';
     RouterModule.forChild([
       { path: 'login', component: LoginComponent},
       { path: 'register', component: RegisterComponent},
-      { path: 'otp/:no' , component: OtpComponent}
+      { path: 'registerOtp/:no' , component: OtpComponent},
+      { path: 'forget' , component: ForgetPasswordComponent},
+      { path: 'forgetOtp/:no' , component: ForgetOtpComponent},
+      { path: 'change/:no' , component: ChangePasswordComponent},
     ])
   ]
 })

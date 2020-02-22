@@ -1,7 +1,20 @@
-<div class="holder fullboxed full-nopad mt-0" *ngFor='let s of exclusive'>
-    <div class="container">
+<div class="holder fullboxed full-nopad mt-0" *ngFor='let s of exclusive; let i = index;'>
+    <div class="container" *ngIf="i%2 == 0">
         <div class="row row-chess" >
         <div class="chess-right-bg" [ngStyle]="{'background-image': 'url(' + url2 + s.image + ')'}"></div>
+            <div class="col-md-6">
+                <div class="py-3 py-md-10 px-md-6">
+                    <h2 class="h1-style text-center">{{s.title}}</h2>
+                    <p>{{s.description}}</p>
+                    <div class="more-link-wrapper text-center mt-2"><a href="#" class="btn-decor">show me all</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" *ngIf="i%2 != 0">
+        <div class="row row-chess" >
+            <div class="chess-left-bg" [ngStyle]="{'background-image': 'url(' + url2 + s.image + ')'}"></div>
             <div class="col-md-6">
                 <div class="py-3 py-md-10 px-md-6">
                     <h2 class="h1-style text-center">{{s.title}}</h2>
