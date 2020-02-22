@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
     // console.log(value);
       this.api.Post(REGISTER,value).then(data=>{
           console.log(data);
-          this.router.navigate(['/otp',this.mobile_no]);
+          this.router.navigate(['/registerOtp',this.mobile_no]);
       });
   
   }
