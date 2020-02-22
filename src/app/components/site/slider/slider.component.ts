@@ -13,7 +13,6 @@ export class SliderComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    console.log(this.slider_imgs)
+    console.log(this.slider_imgs);
   }
-  
 }

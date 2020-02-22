@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api/api.service';
-import { OTPVERIFIED, OTPRESEND } from 'src/config';
+import { OTPVERIFIED,  OTPRESEND } from 'src/config';
 
 @Component({
   selector: 'app-otp',
