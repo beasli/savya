@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-slider',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./slider.component.css']
 })
 export class SliderComponent implements OnInit {
+  @Input() slider_imgs;
+  @Input() url;
 
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    console.log(this.slider_imgs)
   }
-
+  
 }

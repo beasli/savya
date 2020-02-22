@@ -7,3 +7,9 @@ export const OTPRESEND= 'user/register/otpresend';
 export const FORGETPASSWORD= 'user/forgetpassword';
 export const CHANGEPASSWORD= 'user/update/password';
 
+
+// Dashboard
+
+export const CRAUSEL = 'user/dashboard/home';
+export const NAVIGATION = 'admin/app/navigation' ;
+export const SUB_SUB = 'admin/app/navigation' ;
