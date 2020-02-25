@@ -1,3 +1,4 @@
+import { EventsComponent } from './../../site/events/events.component';
 import { ExclusiveBannerComponent } from './../../layout/exclusive-banner/exclusive-banner.component';
 import {  HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -19,7 +20,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FilterProductComponent,
     ProductHolderComponent,
     BestSellerProductComponent,
-    ExclusiveBannerComponent
+    ExclusiveBannerComponent,
+    EventsComponent
   ],
   imports: [
     CommonModule,

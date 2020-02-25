@@ -19,7 +19,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    NavBarComponent
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
