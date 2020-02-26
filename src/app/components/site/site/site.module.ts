@@ -11,6 +11,8 @@ import { ProductHolderComponent } from '../product-holder/product-holder.compone
 import { BestSellerProductComponent } from '../best-seller-product/best-seller-product.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -25,6 +27,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     HttpClientModule,
     NgbModule,
+    SlickCarouselModule,
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
       { path: 'filter' , component: FilterProductComponent}

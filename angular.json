@@ -25,14 +25,17 @@
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/slick-carousel/slick/slick.scss",
+              "./node_modules/slick-carousel/slick/slick-theme.scss",
               "src/styles.css",
               "src/assets/css/plugins.css",
               "src/assets/css/custom.css",
-              "src/assets/fonts/icomoon/icomoon.css"
+              "src/assets/fonts/icomoon/icomoon.css",
             ],
             "scripts": [
               "src/assets/js/plugins.js",
-              "src/assets/js/app.js"
+              "src/assets/js/app.js",
+              "./node_modules/slick-carousel/slick/slick.min.js"
             ]
           },
           "configurations": {
