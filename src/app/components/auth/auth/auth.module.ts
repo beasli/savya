@@ -9,7 +9,7 @@ import { OtpComponent } from '../otp/otp.component';
 import { ForgetPasswordComponent } from '../forget-password/forget-password.component';
 import { ForgetOtpComponent } from '../forget-otp/forget-otp.component';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap' ;
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { ChangePasswordComponent } from '../change-password/change-password.comp
   imports: [
     CommonModule,
     FormsModule,
+    NgbModule,
     HttpClientModule,
     ReactiveFormsModule ,
     RouterModule.forChild([
