@@ -12,14 +12,22 @@ export class ForgetPasswordComponent implements OnInit {
 
   constructor(private api: ApiService,private router: Router) { }
   mobile_no:any;
+  sign:boolean=true;
+ loading:boolean;
   forgot(value)
   {
+    this.loading=true;
+    this.sign=false;
       this.mobile_no=value.mobile_no;
       console.log(value.mobile_no);
-      this.api.Post(FORGETPASSWORD+"?APP_KEY=8447126401&mobile_no="+value.mobile_no,{}).then(data=>{
+      this.api.Post(FORGETPASSWORD,{mobile_no :value.mobile_no}).then(data=>{
         console.log(data);
         this.router.navigate(['/forgetOtp',this.mobile_no]);
-    });
+      }).catch(d=>{
+       this.loading=false;
+       this.sign=true;
+       console.log(d);
+      });
 
   }
 

@@ -10,8 +10,8 @@ import { FilterProductComponent } from '../filter-product/filter-product.compone
 import { ProductHolderComponent } from '../product-holder/product-holder.component';
 import { BestSellerProductComponent } from '../best-seller-product/best-seller-product.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+
 
 @NgModule({
   declarations: [
