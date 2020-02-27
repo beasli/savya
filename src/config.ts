@@ -12,4 +12,5 @@ export const CHANGEPASSWORD= 'user/update/password';
 
 export const CRAUSEL = 'user/dashboard/home';
 export const NAVIGATION = 'admin/app/navigation' ;
+export const LIVERATE = 'https://skymcx.in/NKChainsJSON.php';
 

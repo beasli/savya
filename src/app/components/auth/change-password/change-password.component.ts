@@ -16,7 +16,8 @@ export class ChangePasswordComponent implements OnInit {
   changePassword(value)
   {
     console.log(value);
-    this.api.Post(CHANGEPASSWORD+"?APP_KEY=8447126401&mobile_no="+this.mobile_no,{}).then(data=>{
+    value.mobile_no = this.mobile_no;
+    this.api.Post(CHANGEPASSWORD,value).then(data=>{
       console.log(data);
      this.router.navigate(['/login']);
   });

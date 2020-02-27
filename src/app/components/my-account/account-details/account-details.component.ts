@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account-details.component.css']
 })
 export class AccountDetailsComponent implements OnInit {
-
-  constructor() { }
+data:any;
+  constructor() { 
+    this.data=JSON.parse(localStorage.getItem('data'));
+    console.log(this.data);
+   }
 
   ngOnInit() {
   }

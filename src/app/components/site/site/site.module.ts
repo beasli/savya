@@ -1,3 +1,4 @@
+import { LiveratesComponent } from './../liverates/liverates.component';
 import { ExclusiveBannerComponent } from './../../layout/exclusive-banner/exclusive-banner.component';
 import {  HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,7 @@ import { FilterProductComponent } from '../filter-product/filter-product.compone
 import { ProductHolderComponent } from '../product-holder/product-holder.component';
 import { BestSellerProductComponent } from '../best-seller-product/best-seller-product.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FilterProductComponent,
     ProductHolderComponent,
     BestSellerProductComponent,
-    ExclusiveBannerComponent
+    ExclusiveBannerComponent,
+    LiveratesComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     NgbModule,
+    SlickCarouselModule,
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
       { path: 'filter' , component: FilterProductComponent}

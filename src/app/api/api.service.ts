@@ -35,4 +35,25 @@ export class ApiService {
     });
   }
 
+  public Post2(api, formData) {
+    return new Promise((resolve, reject) => {
+      this.http.post(api, formData)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  public Get2(api) {
+    return new Promise((resolve, reject) => {
+      this.http.get(api)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 }

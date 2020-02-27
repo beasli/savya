@@ -3,25 +3,23 @@
     <!-- BN Slider 1 -->
     <app-slider [slider_imgs] = 'slider_imgs' [url] = 'url'></app-slider>
     <!-- //BN Slider 1 -->
-    
+    <!-- <app-testimonials [input] = 'events'  [url] = 'url2'></app-testimonials> -->
+     <!-- Product Holder -->
+     <!-- <app-best-seller-product [url3] = 'url3' [mostselling] = 'mostselling'></app-best-seller-product> -->
+     <!--/Product Holder -->
+    <app-liverates></app-liverates>
     <!-- Product Holder -->
-    <app-product-holder></app-product-holder>
+    <app-product-holder [heading] = '"Mostselling Product"' [url3] = 'url3' [mostselling] = 'mostselling'></app-product-holder>
     <!--/Product Holder -->
         
     <!-- Promotional Section -->
     <app-exclusive-banner [url2] = 'url2' [exclusive] = 'exclusive'></app-exclusive-banner>
     <!--/Promotional section -->
     
-    <!-- Promotional Section -->
-    <app-event [url2] = 'url2' [exclusive] = 'exclusive'></app-exclusive-banner>
-    <!--/Promotional section -->
-
-    <!-- Product Holder -->
-    <app-best-seller-product [url3] = 'url3' [mostselling] = 'mostselling'></app-best-seller-product>
-    <!--/Product Holder -->
+   
 
     <!-- Testimonials -->
-    <app-testimonials></app-testimonials>
+    <app-testimonials [heading] = '"Events"' [input] = 'events'  [url] = 'url2'></app-testimonials>
     <!--/Testimonial -->
     
 
