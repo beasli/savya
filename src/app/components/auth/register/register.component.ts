@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/api/api.service';
 import { REGISTER } from 'src/config';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -11,15 +12,52 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   constructor(private api:ApiService,private router:Router) { }
+  sign:boolean=true;
+  loading:boolean=false;
+  message:any;
+  alert:boolean;
+  type:any;
   mobile_no:any;
+  scroll:boolean=false;
+
   SignUp(value){
-    this.mobile_no=value.mobile_no;
-    // console.log(value);
-      this.api.Post(REGISTER,value).then(data=>{
-          console.log(data);
-          this.router.navigate(['/registerOtp',this.mobile_no]);
-      });
-  
+    
+        this.loading=true;
+        this.sign=false;
+        this.mobile_no=value.mobile_no;
+        // console.log(value);
+         
+        this.api.Post(REGISTER,value).then(data=>{
+          
+                  console.log(data);
+                  this.alert=true;
+                  this.message="Successful Sign Up "
+                  this.type="success";
+                  this.router.navigate(['/registerOtp',this.mobile_no]);
+          }).catch(d=>{
+                   this.scroll=true;
+                  this.type="danger";
+                  this.loading=false;
+                  this.sign=true;
+                  this.alert=true;
+                  console.log(d);
+                console.log(d.error.errors.email);
+                if(d.error.errors.email&&d.error.errors.mobile_no)
+                {
+                    this.message=d.error.errors.email + d.error.errors.mobile_no;
+                }
+                else if(d.error.errors.email)
+                {
+                  this.message=d.error.errors.email;
+                }
+                else if(d.error.errors.mobile_no)
+                {
+                  this.message= d.error.errors.mobile_no;
+                }
+               
+
+          });
+      
   }
 
   ngOnInit() {

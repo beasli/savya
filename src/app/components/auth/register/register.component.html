@@ -13,6 +13,7 @@
             <div class="row justify-content-center">
                 <div class="col-sm-8 col-md-6">
                     <h2 class="text-center">CREATE AN ACCOUNT</h2>
+                  
                     <div class="form-wrapper">
                         <p class="text-center">To access your whishlist, address book and contact preferences and to take advantage of our speedy checkout, create an account with us now.</p>
                         <form #f="ngForm" (ngSubmit)="SignUp(f.value)">
@@ -127,7 +128,17 @@
                             <div class="clearfix">
                                 <input id="checkbox1"  name="checkbox1" type="checkbox" checked="checked" required> 
                                 <label for="checkbox1">By registering your details you agree to our Terms and Conditions and privacy and cookie policy</label></div>
-                            <div class="text-center"><input  class="btn" type="submit" value="create an account" [disabled]="!f.valid||password.value!=retyped.value" ></div>
+                                <div *ngIf="alert">
+                                    <p>
+                                      <ngb-alert [type]="type" >
+                                      <strong>{{message}}</strong> .
+                                      </ngb-alert>
+                                    </p>
+                              </div>
+                            <div class="text-center" ><input  class="btn"  *ngIf="sign" type="submit" value="create an account" [disabled]="!f.valid||password.value!=retyped.value" ></div>
+                            <div class="text-center"><input  class="btn"   *ngIf="loading" type="submit" value="Loading..."  disabled></div>
+                            
+                          
                         </form>
                     </div>
                 </div>
