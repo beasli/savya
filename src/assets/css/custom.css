@@ -15286,7 +15286,7 @@ ul.category-list {
     opacity: 1; } }
 
 .slick-track {
-  margin: 0 auto;
+  margin: 0;
   touch-action: pan-y;
   -ms-touch-action: pan-y; }
 
@@ -21286,11 +21286,11 @@ body.theme-dark .bnslide-fashion-4 .bnslider-text--xxs {
 body.theme-dark .bnslide-fashion-4 .btn-decor {
   color: #fff !important; }
 
-body.rtl .bnslide-fashion-4 .bnslider-image {
+/* body.rtl .bnslide-fashion-4 .bnslider-image {
   background-image: url("../images/slider/slide4-rtl.png") !important; }
 
 body.rtl .bnslide-fashion-4 .bnslider-image-mobile {
-  background-image: url("../images/slider/slide4-mobile-rtl.png") !important; }
+  background-image: url("../images/slider/slide4-mobile-rtl.png") !important; } */
 
 body.rtl .bnslide-fashion-4 .bnslider-text--lg {
   direction: ltr !important; }

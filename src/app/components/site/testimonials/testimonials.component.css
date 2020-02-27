@@ -1,0 +1,5 @@
+.slick-track {
+    margin: 0 0;
+    touch-action: pan-y;
+    -ms-touch-action: pan-y;
+}
