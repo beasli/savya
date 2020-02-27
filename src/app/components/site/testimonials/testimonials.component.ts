@@ -10,21 +10,18 @@ export class TestimonialsComponent implements OnInit {
   @Input() input;
   @Input() url;
   @Input() heading;
- 
+
   slideConfig = {
-    "slidesToShow": 2, 
-    "slidesToScroll": 1,  
-    "dots": false, 
-    "infinite": true, 
+    "slidesToShow": 2,
+    "slidesToScroll": 1,
+    "dots": false,
+    "infinite": true,
     "autoplay": true,
     "arrows": false,
-  
   };
-  
   constructor() { }
 
   ngOnInit() {
-   
   }
 
 }

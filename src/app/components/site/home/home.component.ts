@@ -26,12 +26,12 @@ export class HomeComponent implements OnInit {
       this.url3 = data['product_url'] + '/';
       this.mostselling = data['body'][3]['product'];
       this.events = data['body'][4]['events'];
+      });
 
-    });
    }
 
   ngOnInit() {
-    
+
   }
 
 }

@@ -1,3 +1,4 @@
+import { LiveratesComponent } from './../liverates/liverates.component';
 import { ExclusiveBannerComponent } from './../../layout/exclusive-banner/exclusive-banner.component';
 import {  HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -21,7 +22,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     FilterProductComponent,
     ProductHolderComponent,
     BestSellerProductComponent,
-    ExclusiveBannerComponent
+    ExclusiveBannerComponent,
+    LiveratesComponent
   ],
   imports: [
     CommonModule,
