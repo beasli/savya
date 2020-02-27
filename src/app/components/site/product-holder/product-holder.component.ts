@@ -9,6 +9,14 @@ export class ProductHolderComponent implements OnInit {
   @Input() mostselling;
   @Input() url3;
   @Input() heading;
+  slideConfig = {
+    "slidesToShow": 4,
+    "slidesToScroll": 4,
+    "dots": false,
+    "infinite": true,
+    "autoplay": false,
+    "arrows": true,
+  };
   constructor() { }
 
   ngOnInit() {

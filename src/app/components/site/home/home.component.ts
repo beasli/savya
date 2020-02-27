@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   exclusive = [];
   mostselling = [];
   events = [];
+  models = [{image: 'model_1.jpg'}, {image: 'model_2.jpg'}]
   url: any;
   url2: any;
   url3: any;
