@@ -12,6 +12,7 @@ import { SiteModule } from './components/site/site/site.module';
 import { NavBarComponent } from './components/layout/nav-bar/nav-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { LiveratesComponent } from './components/site/liverates/liverates.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    NavBarComponent
+    NavBarComponent,
+    LiveratesComponent
   ],
   imports: [
     BrowserModule,
