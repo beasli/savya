@@ -10,12 +10,16 @@ import { OTPVERIFIED,  OTPRESEND } from 'src/config';
 })
 export class OtpComponent implements OnInit {
 mobile_no:any;
+sign:boolean=true;
+loading:boolean;
   constructor(private route:ActivatedRoute,private api: ApiService,private router: Router) {
     this.mobile_no=this.route.snapshot.paramMap.get('no');
     console.log(this.mobile_no);
    }
   otpVerify(value)
   {
+    this.loading=true;
+    this.sign=false;
       console.log(value);
       this.api.Post(OTPVERIFIED,{params:{
         APP_KEY:8447126401,
@@ -24,6 +28,9 @@ mobile_no:any;
       }}).then(data=>{
         this.router.navigate(['/login']);
         console.log(data);
+      }).catch(d=>{
+        this.loading=false;
+        this.sign=true;
       });
 
   }

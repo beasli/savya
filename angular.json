@@ -35,7 +35,7 @@
             "scripts": [
               "src/assets/js/plugins.js",
               "src/assets/js/app.js",
-              "./node_modules/slick-carousel/slick/slick.min.js"
+              "node_modules/slick-carousel/slick/slick.min.js"
             ]
           },
           "configurations": {
