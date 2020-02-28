@@ -181,15 +181,19 @@
                         <!-- /Header Wishlist -->
                         
                         <!-- Header Account -->
-                        <div class="dropdn dropdn_account @@classes"><a href="#" class="dropdn-link"><i class="icon icon-person"></i><span>My Account</span></a>
+                        <div class="dropdn dropdn_account @@classes"><a  class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop">My Account</span></a>
+
+                            
+                      
                             <div class="dropdn-content">
                                 <div class="container">
                                     <div class="dropdn-close">CLOSE</div>
                                     <ul>
-                                        <li><a routerLink="/account-details"><i class="icon icon-person-fill"></i><span>My Account</span></a></li>
-                                        <li><a routerLink="/login"><i class="icon icon-lock"></i><span>Log In</span></a></li>
-                                        <li><a routerLink="/register"><i class="icon icon-person-fill-add"></i><span>Register</span></a></li>
-                                        <li><a routerLink="/checkout"><i class="icon icon-check-box"></i><span>Checkout</span></a></li>
+                                        <li><a routerLink="/account-details"*ngIf="drop"><i class="icon icon-person-fill"></i><span>Profile</span></a></li>
+                                        <li><a routerLink="/login" *ngIf="!drop"><i class="icon icon-lock"></i><span>Log In</span></a></li>
+                                        <li><a *ngIf="drop"><i class="icon icon-person-fill"></i><span (click)="logout()">Log Out</span></a></li>
+                                        <li><a routerLink="/register" *ngIf="!drop"><i class="icon icon-person-fill-add"></i><span>Register</span></a></li>
+                                        <li><a routerLink="/checkout" *ngIf="drop"><i class="icon icon-check-box"></i><span>Checkout</span></a></li>
                                     </ul>
                                 </div>
                             </div>

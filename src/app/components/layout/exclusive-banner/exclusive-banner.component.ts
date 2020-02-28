@@ -11,8 +11,8 @@ export class ExclusiveBannerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.url2);
-    console.log(this.exclusive);
+    // console.log(this.url2);
+    // console.log(this.exclusive);
   }
 
 }
