@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/api/api.service';
 
 @Component({
   selector: 'app-account-details',
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountDetailsComponent implements OnInit {
 data:any;
-  constructor() { 
-    this.data=JSON.parse(localStorage.getItem('data'));
+  constructor(private api: ApiService) { 
+    this.data=this.api.getUserInfo();
     console.log(this.data);
    }
 

@@ -25,8 +25,8 @@ export class NavBarComponent implements OnInit {
         }
         }
       );
-      console.log(this.catwithsub[0].subcategory);
-      console.log(this.catwithoutsub);
+      // console.log(this.catwithsub[0].subcategory);
+      // console.log(this.catwithoutsub);
     });
    }
 
