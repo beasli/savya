@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LIVERATE } from 'src/config';
-import { ApiService } from 'src/app/api/api.service';
 
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
 
@@ -12,7 +11,7 @@ const proxyurl = "https://cors-anywhere.herokuapp.com/";
 export class LiveratesComponent implements OnInit {
 rates: [];
 
-  constructor(private api: ApiService) {
+  constructor() {
    
     this.getRates();
     
