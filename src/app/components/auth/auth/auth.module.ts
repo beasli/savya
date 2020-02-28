@@ -10,6 +10,7 @@ import { ForgetPasswordComponent } from '../forget-password/forget-password.comp
 import { ForgetOtpComponent } from '../forget-otp/forget-otp.component';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap' ;
+import { KycComponent } from '../kyc/kyc.component';
 import { ChangeProfileComponent } from '../change-profile/change-profile.component';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ChangeProfileComponent } from '../change-profile/change-profile.compone
     ForgetPasswordComponent,
     ForgetOtpComponent,
     ChangePasswordComponent,
+    KycComponent,
     ChangeProfileComponent
   ],
   imports: [
@@ -35,8 +37,8 @@ import { ChangeProfileComponent } from '../change-profile/change-profile.compone
       { path: 'forget' , component: ForgetPasswordComponent},
       { path: 'forgetOtp/:no' , component: ForgetOtpComponent},
       { path: 'change/:no' , component: ChangePasswordComponent},
+      { path: 'kyc' , component: KycComponent},
       { path: 'changeProfile' , component: ChangeProfileComponent},
-
     ])
   ]
 })
