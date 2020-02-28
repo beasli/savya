@@ -1,0 +1,98 @@
+
+  
+<div class="page-content" style="margin-bottom: 65px;">
+    <div class="holder mt-0">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li><a href="index.html">Home</a></li>
+                <li><span>Change Profile</span></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="holder mt-0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-8 col-md-6">
+                    <h2 class="text-center">CHANGE PROFILE</h2>
+                  
+                    <div class="form-wrapper">
+                        <form #f="ngForm" (ngSubmit)="kyc(f.value)">
+                            <div class="form-group">
+                                <label for='gstno'>Gst No</label>
+                                <input type="text"  #gst_no="ngModel" ngModel  name="gst_no" class="form-control" placeholder="GST No.*" required>
+                                <div class="alert alert-danger" *ngIf="gst_no.touched && gst_no.invalid">
+                                    Gst no. is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='panno'>Pan No</label>
+                                <input type="text"  #pan_no="ngModel"  ngModel  name="pan_no" class="form-control" placeholder="Pan Card No.*" required>
+                                <div class="alert alert-danger" *ngIf="pan_no.touched && pan_no.invalid">
+                                    Pan no. is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='aadhar'>Aadhar No.</label>
+                                <input type="text"  #aadhar="ngModel"  ngModel  name="aadhar" class="form-control" placeholder="Aadhar No." required>
+                                <div class="alert alert-danger" *ngIf="aadhar.touched && aadhar.invalid" >
+                                    Aadhar NO. is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='gst_doc'>Gst Document</label>
+                                <input type="file"  #gst_doc="ngModel"  ngModel name="gst_doc" class="form-control" placeholder="Gst Document" required>
+                                <div class="alert alert-danger" *ngIf="gst_doc.touched && gst_doc.invalid">
+                                    Gst Document is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='aadhar_doc'>Aadhar Document</label>
+                                <input type="file"  #aadhar_doc="ngModel"  ngModel name="aadhar_doc" class="form-control" placeholder="Aadhar Document" required>
+                                <div class="alert alert-danger" *ngIf="aadhar_doc.touched && aadhar_doc.invalid">
+                                    Aadhar Document is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='visiting_doc'>Visiting Document</label>
+                                <input type="file"  #visiting_doc="ngModel"  ngModel name="visiting_doc" class="form-control" placeholder="Visiting Document" required>
+                                <div class="alert alert-danger" *ngIf="visiting_doc.touched && visiting_doc.invalid">
+                                    Visiting Document is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='pan_doc'>Pan Document</label>
+                                <input type="file"  #pan_doc="ngModel"  ngModel name="pan_doc" class="form-control" placeholder="Pan Document" required>
+                                <div class="alert alert-danger" *ngIf="pan_doc.touched && pan_doc.invalid">
+                                    Pan Document is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='mobile_no'>Mobile No</label>
+                                <input type="text"  #pan_no="ngModel"  ngModel  name="mobile_no" class="form-control" placeholder="Mobile No.*" required>
+                                <div class="alert alert-danger" *ngIf="pan_no.touched && pan_no.invalid">
+                                    Pan No. is required.
+                                </div>
+                            </div>
+                            <div *ngIf="alert">
+                                <p>
+                                  <ngb-alert [type]="type" >
+                                  <strong>{{message}}</strong> 
+                                  </ngb-alert>
+                                </p>
+                          </div>
+                            <!-- <p *ngIf="!f.valid" class="text-center"><strong>All details are required for update</strong></p>
+                            <p *ngIf="f.valid" class="text-center"><strong>You can update</strong></p> -->
+                            <div class="text-center" ><input  class="btn"  *ngIf="sign" type="submit" value="Submit" [disabled]="!f.valid"></div>
+                            <div class="text-center"><input  class="btn"   *ngIf="loading" type="submit" value="Loading..."  disabled></div>
+                            <div *ngIf="alert">
+                                <a routerLink="/home"><strong>Click to go Home</strong></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
