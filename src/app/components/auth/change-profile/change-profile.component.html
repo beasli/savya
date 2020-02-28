@@ -1,0 +1,136 @@
+<div class="page-content" style="margin-bottom: 65px;">
+    <div class="holder mt-0">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li><a href="index.html">Home</a></li>
+                <li><span>Change Profile</span></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="holder mt-0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-8 col-md-6">
+                    <h2 class="text-center">CHANGE PROFILE</h2>
+                  
+                    <div class="form-wrapper">
+                        <form #f="ngForm" (ngSubmit)="update(f.value)">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group"><label for='name'>Name</label><input type="text" #name="ngModel"  [(ngModel)]="data.name" name="name" class="form-control" placeholder="Name" required>
+                                        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+                                            Name is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group"> <label for='register'>Register type</label>
+                                <select id="register" #register_type="ngModel"  [(ngModel)]="data.register_type"  name="register_type"  class="form-control" required>
+                                    <option value=""></option>
+                                    <option >customer</option>
+                                    <option >Manufacturer</option>
+                                    <option >Retailer</option>
+                                    <option >Wholesaler</option>
+                                    <option >Franchise</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="register_type.touched && register_type.invalid">
+                                    Register Type is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='designation'>Designation</label>
+                                <input type="text"  #designation="ngModel"  [(ngModel)]="data.designation"  name="designation" class="form-control" placeholder="Designation*" required>
+                                <div class="alert alert-danger" *ngIf="designation.touched && designation.invalid">
+                                    Designation is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='company_name'>Company Name</label>
+                                <input type="text"  #company_name="ngModel"  [(ngModel)]="data.company_name"  name="company_name" class="form-control" placeholder="Company/Firm Name" required>
+                                <div class="alert alert-danger" *ngIf="company_name.touched && company_name.invalid">
+                                    company name is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='gstno'>Gst No</label>
+                                <input type="text"  #gstno="ngModel"  [(ngModel)]="data.gst_no"  name="gstno" class="form-control" placeholder="GST No.*" required>
+                                <div class="alert alert-danger" *ngIf="gstno.touched && gstno.invalid">
+                                    Gst no. is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='panno'>Pan No</label>
+                                <input type="text"  #panno="ngModel"  [(ngModel)]="data.pan_no"  name="panno" class="form-control" placeholder="Pan Card No.*" required>
+                                <div class="alert alert-danger" *ngIf="panno.touched && panno.invalid">
+                                    Pan no. is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='email'>Email</label>
+                                <input type="text"  #email="ngModel"  [(ngModel)]="data.email"  name="email" class="form-control" placeholder="E-mail" required>
+                                <div class="alert alert-danger" *ngIf="email.touched && email.invalid" >
+                                    Email is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='mobile_no'>Mobile No</label>
+                                <input type="number"  #mobile_no="ngModel"  [(ngModel)]="data.mobile_no" name="mobile_no" class="form-control" placeholder="Mobile No*" required>
+                                <div class="alert alert-danger" *ngIf="mobile_no.touched && mobile_no.invalid">
+                                    Mobile No. is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='address'>Address</label>
+                                <input type="text"  #address="ngModel"  [(ngModel)]="data.address"  name="address" class="form-control" placeholder="Address*" required>
+                                <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
+                                    Address is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='city'>City</label>
+                                <input type="text"  #city="ngModel"  [(ngModel)]="data.city"  name="city" class="form-control" placeholder="City*" required>
+                                <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+                                    City is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='pincode'>Pin Code</label>
+                                <input type="number"  #pincode="ngModel"  [(ngModel)]="data.pincode"  name="pincode" class="form-control" placeholder="Pin Code" required>
+                                <div class="alert alert-danger" *ngIf="pincode.touched && pincode.invalid">
+                                    Pin code is required.
+                                </div>
+                            </div>
+                            <div class="form-group"> <label for='state'>Select State</label>
+                                <select id="register" #state="ngModel"  [(ngModel)]="data.state"  name="state"  class="form-control" required >
+                                    <option value=""></option>
+                                    <option >Rajasthan</option>
+                                    <option >Haryana</option>
+                                    <option >Gujrat</option>
+                                    <option >Himachal Pradesh</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="state.touched && state.invalid">
+                                    State is required.
+                                </div>
+                            </div>
+                            <div *ngIf="alert">
+                                <p>
+                                  <ngb-alert [type]="type" >
+                                  <strong>{{message}}</strong> 
+                                  </ngb-alert>
+                                </p>
+                          </div>
+                            <p *ngIf="!f.valid" class="text-center"><strong>All details are required for update</strong></p>
+                            <p *ngIf="f.valid" class="text-center"><strong>You can update</strong></p>
+                            <div class="text-center" ><input  class="btn"  *ngIf="sign" type="submit" value="Update" [disabled]="!f.valid"></div>
+                            <div class="text-center"><input  class="btn"   *ngIf="loading" type="submit" value="Loading..."  disabled></div>
+                            <div *ngIf="alert">
+                                <a routerLink="/home"><strong>Click to go Home</strong></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

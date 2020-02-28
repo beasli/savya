@@ -11,6 +11,7 @@ import { ForgetOtpComponent } from '../forget-otp/forget-otp.component';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap' ;
 import { KycComponent } from '../kyc/kyc.component';
+import { ChangeProfileComponent } from '../change-profile/change-profile.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { KycComponent } from '../kyc/kyc.component';
     ForgetPasswordComponent,
     ForgetOtpComponent,
     ChangePasswordComponent,
-    KycComponent
+    KycComponent,
+    ChangeProfileComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { KycComponent } from '../kyc/kyc.component';
       { path: 'forgetOtp/:no' , component: ForgetOtpComponent},
       { path: 'change/:no' , component: ChangePasswordComponent},
       { path: 'kyc' , component: KycComponent},
+      { path: 'changeProfile' , component: ChangeProfileComponent},
     ])
   ]
 })
