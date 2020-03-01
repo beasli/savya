@@ -10,6 +10,7 @@ import { JsonPipe } from '@angular/common';
 })
 export class ApiService {
   @Output() getlogin:EventEmitter<string> = new EventEmitter();
+  @Output() getUserData:EventEmitter<string> = new EventEmitter();
   drop:any;
   constructor(
     public http: HttpClient
@@ -66,7 +67,7 @@ export class ApiService {
   }
 
   public encrypt(data) {
-    console.log(JSON.stringify(data));
+   // console.log(JSON.stringify(data));
    const encryptedMessage = CryptoJS.AES.encrypt(JSON.stringify(data), 'test').toString();
    return encryptedMessage;
   }
@@ -78,9 +79,31 @@ export class ApiService {
 
   setUserInfo(value)
   {
-    let e=this.encrypt(value);
+   let e=this.encrypt(value);
+   this.setMobileNo(value.mobile_no);
     localStorage.setItem('savya_userInfo',e);
-    
+   
+  }
+  setMobileNo(value)
+  {
+   // let e=this.encrypt(value.mobile_no);
+    localStorage.setItem('token',value);
+              // var encrypted = CryptoJS.AES.encrypt(
+              //   value,
+              //   'test',
+              //   {
+              //     mode: CryptoJS.mode.CBC,
+              //     padding: CryptoJS.pad.PKCS7
+              //   }
+              // );
+  }
+  getMobileNo()
+  {
+    let m=localStorage.getItem('token');
+    // let d =this.decrypt(m);
+    //  return d;
+    return m;
+
   }
   setlogin(value)
 {
@@ -91,12 +114,13 @@ export class ApiService {
 }
   getUserInfo()
   {
-    let d =this.decrypt(localStorage.getItem('savya_userInfo'))
+    let d =this.decrypt(localStorage.getItem('savya_userInfo'));
     return d;
   }
   logout()
   {
       localStorage.removeItem('savya_userInfo');
+      localStorage.removeItem('token');
   }
 
 }
