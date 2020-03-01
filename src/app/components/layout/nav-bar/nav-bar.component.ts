@@ -15,7 +15,6 @@ export class NavBarComponent implements OnInit {
   constructor(private api: ApiService ) {
     this.api.Post(NAVIGATION, {}).then(data => {
       this.catall = data['data'];
-      this.api.testcrypt(this.catall);
       this.catall.forEach(element => {
         if (element['subcategory'].length){
           this.catwithsub.push(element);
@@ -25,6 +24,8 @@ export class NavBarComponent implements OnInit {
         }
         }
       );
+      // console.log(this.catwithsub[0].subcategory);
+      // console.log(this.catwithoutsub);
     });
    }
 

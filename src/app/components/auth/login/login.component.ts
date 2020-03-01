@@ -30,10 +30,9 @@ type:any;
             this.type="success";
             // this.loading=true;
             // this.sign=false;
+            this.api.setUserInfo(this.d);
+            this.api.setlogin(1);
             this.router.navigate(['/home']);
-            localStorage.setItem('data',JSON.stringify(this.d));   
-         
-
         }).catch(d=>{
           this.type="danger";
           this.loading=false;

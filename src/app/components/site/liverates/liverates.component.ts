@@ -27,6 +27,7 @@ rates: [];
     .then((contents: any) => {
       contents = JSON.parse(contents);
       this.rates = contents.rows;
+    //  console.log(contents)
     })
     .catch(() => console.log("Can’t access " + LIVERATE + " response. Blocked by browser?"))
   }
