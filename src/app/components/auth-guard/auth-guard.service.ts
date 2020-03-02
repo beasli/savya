@@ -5,23 +5,20 @@ import { CanActivate, Router, RouterStateSnapshot } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthGuardService  implements CanActivate {
-  user;
-  drop:any;
-  constructor( private router: Router,private api: ApiService) { 
+  drop: any;
+  constructor( private router: Router, private api: ApiService) {
     this.drop = this.api.drop;
   }
-  canActivate(route, state: RouterStateSnapshot)
-  {
+  canActivate(route, state: RouterStateSnapshot) {
     this.api.getlogin.subscribe(data => {
-      this.drop=data
-     });
+      this.drop = data;
+    });
 
-        if (this.drop==1)
+    if (this.drop == 1 ) {
           return true;
-        else{
-          if(confirm('Please Login to access this Page'))
-           this.router.navigate(['/login']);
-        return false;
+         } else {
+           this.router.navigate(['/login']); }
+    return false;
         }
-  }
 }
+
