@@ -25,32 +25,27 @@ export class ForgetOtpComponent implements OnInit {
    }
   otpVerify(value)
   {
-    this.loading=true;
-    this.sign=false;
+        this.loading=true;
+        this.sign=false;
     
-      console.log(value);
+     // console.log(value.otp);
       if(this.otp==value.otp)
       {
+        console.log("if condition");
         this.alert=true;
         this.type="success";
         this.message=" OTP Verified";
         this.router.navigate(['/change',this.mobile_no]);
         this.message=" otp Verified";
       }
-      else {
+      else{
         this.alert=true;
         this.type="danger";
         this.message=" OTP Doesn't Match . Re-Enter OTP";
         this.loading=false;
-        if (confirm('OTP Does not Match . Go to Login'))
-        {
-          this.router.navigate(['/login']);
-        }
-        else{
-          this.router.navigate(['/home']);
-        }
-         this.sign=true;
+        this.sign=true;
       }
+      
       // this.api.Post(OTPVERIFIED,{params:{
       //   APP_KEY:8447126401,
       //   mobile_no:this.mobile_no,
@@ -66,12 +61,19 @@ export class ForgetOtpComponent implements OnInit {
   }
   resend()
   {
-    this.api.Post(OTPRESEND,{params:{
-      APP_KEY:8447126401,
-      mobile_no:this.mobile_no,
-    }}).then(data=>{
+      this.loading=true;
+      this.sign=false;
+      this.alert=false;
+      this.api.Post(OTPRESEND,{
+      mobile_no:this.mobile_no,}).then(data=>{
+        this.alert=false;
+        this.loading=false;
+        this.sign=true;
+        this.otp=data['otp'];
       console.log(data);
     }).catch(d=>{
+      this.alert=true;
+      this.message="Error Occured";
       console.log(d);
         });
  
