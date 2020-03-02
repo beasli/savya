@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
-import { PROFILEUPDATE } from 'src/config';
+import { PROFILEUPDATE, PROFILEVIEW } from 'src/config';
 
 @Component({
   selector: 'app-change-profile',
@@ -17,10 +17,19 @@ export class ChangeProfileComponent implements OnInit {
   d:any;
 
   constructor(private api:ApiService) {
-    this.data=JSON.parse(localStorage.getItem('data'));
-    console.log(this.data);
-   }
+    let mobile=this.api.getMobileNo();
+    console.log(mobile);
+    this.api.Post(PROFILEVIEW,{
+      mobile:mobile
+    }).then(data=>{
+      console.log(data);
+      this.data=data['data'][0];
+      //this.router.navigate(['/registerOtp']);
+    }).catch(d=>{
+          console.log(d);
+    });
 
+  }
    
    update(value){
     
@@ -34,9 +43,12 @@ export class ChangeProfileComponent implements OnInit {
               this.alert=true;
               this.message="Successful Updated "
               this.type="success";
+              this.loading=false;
+              this.sign=false;
               this.d=data['data'][0];
-              console.log(this.d);
-              localStorage.setItem('data',JSON.stringify(this.d));   
+              console.log(this.d); 
+            
+             this.api.setlogin(this.d);
               //this.router.navigate(['/registerOtp']);
       }).catch(d=>{
               
