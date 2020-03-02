@@ -21,7 +21,7 @@ export class ApiService {
       this.drop = 0;
     }
    }
-  
+
   public Get(api) {
     return new Promise((resolve, reject) => {
       this.http.get(apiUrl + api)

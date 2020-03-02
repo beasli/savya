@@ -15,7 +15,6 @@ export class NavBarComponent implements OnInit {
   constructor(private api: ApiService ) {
     this.api.Post(NAVIGATION, {}).then(data => {
       this.catall = data['data'];
-
       this.catall.forEach(element => {
         if (element['subcategory'].length){
           this.catwithsub.push(element);

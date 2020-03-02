@@ -1,3 +1,4 @@
+import { AuthGuardService } from './../../auth-guard/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from '../login/login.component';
@@ -38,7 +39,7 @@ import { ChangeProfileComponent } from '../change-profile/change-profile.compone
       { path: 'forgetOtp/:no/:qpzm' , component: ForgetOtpComponent},
       { path: 'change/:no' , component: ChangePasswordComponent},
       { path: 'kyc' , component: KycComponent},
-      { path: 'changeProfile' , component: ChangeProfileComponent},
+      { path: 'changeProfile' , component: ChangeProfileComponent,  canActivate: [AuthGuardService]},
     ])
   ]
 })
