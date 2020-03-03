@@ -38,7 +38,7 @@ import { ChangeProfileComponent } from '../change-profile/change-profile.compone
       { path: 'forget' , component: ForgetPasswordComponent},
       { path: 'forgetOtp/:no/:qpzm' , component: ForgetOtpComponent},
       { path: 'change/:no' , component: ChangePasswordComponent},
-      { path: 'kyc' , component: KycComponent},
+      { path: 'kyc' , component: KycComponent, canActivate: [AuthGuardService]},
       { path: 'changeProfile' , component: ChangeProfileComponent,  canActivate: [AuthGuardService]},
     ])
   ]
