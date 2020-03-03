@@ -5,6 +5,7 @@ import { AccountAddressesComponent } from '../account-addresses/account-addresse
 import { AccountWishlistComponent } from '../account-wishlist/account-wishlist.component';
 import { AccountHistoryComponent } from '../account-history/account-history.component';
 import { RouterModule } from '@angular/router';
+import { AuthGuardService } from '../../auth-guard/auth-guard.service';
 
 
 
@@ -18,10 +19,10 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: 'account-details', component: AccountDetailsComponent},
-      { path: 'account-addresses', component: AccountAddressesComponent},
-      { path: 'account-wishlist', component: AccountWishlistComponent},
-      { path: 'account-history', component: AccountHistoryComponent},
+      { path: 'account-details', component: AccountDetailsComponent,  canActivate: [AuthGuardService]},
+      { path: 'account-addresses', component: AccountAddressesComponent,  canActivate: [AuthGuardService]},
+      { path: 'account-wishlist', component: AccountWishlistComponent,  canActivate: [AuthGuardService]},
+      { path: 'account-history', component: AccountHistoryComponent,  canActivate: [AuthGuardService]},
     ])
   ]
 })

@@ -8,6 +8,8 @@ export const FORGETPASSWORD= 'user/forgetpassword';
 export const CHANGEPASSWORD= 'user/update/password';
 export const USERKYC= 'user/kyc';
 export const PROFILEUPDATE= 'user/profile/update';
+export const PROFILEVIEW= 'user/profile/view';
+
 // Dashboard
 
 export const CRAUSEL = 'user/dashboard/home';

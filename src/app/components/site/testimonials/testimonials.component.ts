@@ -19,7 +19,8 @@ export class TestimonialsComponent implements OnInit {
     "autoplay": true,
     "arrows": false,
   };
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit() {
   }

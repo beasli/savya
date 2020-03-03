@@ -1,3 +1,4 @@
+import { AuthGuardService } from './../../auth-guard/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from '../login/login.component';
@@ -33,12 +34,12 @@ import { ChangeProfileComponent } from '../change-profile/change-profile.compone
     RouterModule.forChild([
       { path: 'login', component: LoginComponent},
       { path: 'register', component: RegisterComponent},
-      { path: 'registerOtp/:no' , component: OtpComponent},
+      { path: 'registerOtp/:no/:qpzm' , component: OtpComponent},
       { path: 'forget' , component: ForgetPasswordComponent},
-      { path: 'forgetOtp/:no' , component: ForgetOtpComponent},
+      { path: 'forgetOtp/:no/:qpzm' , component: ForgetOtpComponent},
       { path: 'change/:no' , component: ChangePasswordComponent},
       { path: 'kyc' , component: KycComponent},
-      { path: 'changeProfile' , component: ChangeProfileComponent},
+      { path: 'changeProfile' , component: ChangeProfileComponent,  canActivate: [AuthGuardService]},
     ])
   ]
 })

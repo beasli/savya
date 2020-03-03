@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
       this.mostselling = data['body'][3]['product'];
       this.events = data['body'][4]['events'];
       });
-
+      let test = [{one: '1', two: '2'}, {three: '3', four: '4'}];
    }
 
   ngOnInit() {
