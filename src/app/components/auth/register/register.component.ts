@@ -144,7 +144,8 @@ changeNumber(e)
                   this.alert=true;
                   this.message="Successful Sign Up "
                   this.type="success";
-                  this.router.navigate(['/registerOtp',this.mobile_no,this.otp]);
+                  this.router.navigate(['/registerOtp',this.mobile_no]);
+                  this.api.setOtp(this.otp);
           }).catch(d=>{
                    this.scroll=true;
                   this.type="danger";
