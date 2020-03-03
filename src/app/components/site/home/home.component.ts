@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   mostselling = [];
   events = [];
   models = [{image: 'model_1.jpg'}, {image: 'model_2.jpg'}]
+  partners = [{image: 'IGI_Expo.jpg'}]
+  
   url: any;
   url2: any;
   url3: any;
