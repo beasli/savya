@@ -19,7 +19,7 @@ export class ChangeProfileComponent implements OnInit {
   constructor(private api:ApiService) {
     let mobile=this.api.getMobileNo();
     console.log(mobile);
-    this.api.Post(PROFILEVIEW,{
+    this.api.Post(PROFILEVIEW, {
       mobile:mobile
     }).then(data=>{
       console.log(data);
@@ -36,9 +36,8 @@ export class ChangeProfileComponent implements OnInit {
     this.loading=true;
     this.sign=false;
     // console.log(value);
-     
-    this.api.Post(PROFILEUPDATE,value).then(data=>{
-      
+    this.api.Post(PROFILEUPDATE, value).then(data => {
+
               console.log(data);
               this.alert=true;
               this.message="Successful Updated "
@@ -58,12 +57,8 @@ export class ChangeProfileComponent implements OnInit {
               this.alert=true;
               this.message="Enter your all detail";
               console.log(d);
-
-
       });
-  
 }
-
 
   ngOnInit(): void {
 }

@@ -9,6 +9,7 @@ import { JsonPipe } from '@angular/common';
   providedIn: 'root'
 })
 export class ApiService {
+
   @Output() getlogin:EventEmitter<string> = new EventEmitter();
   @Output() getUserData:EventEmitter<string> = new EventEmitter();
   drop:any;
