@@ -190,8 +190,9 @@
                                     <div class="dropdn-close">CLOSE</div>
                                     <ul>
                                         <li><a routerLink="/account-details"*ngIf="drop"><i class="icon icon-person-fill"></i><span>Profile</span></a></li>
+                                        <li><a routerLink="/kyc"*ngIf="drop"><span>KYC</span></a></li>
                                         <li><a routerLink="/login" *ngIf="!drop"><i class="icon icon-lock"></i><span>Log In</span></a></li>
-                                        <li><a *ngIf="drop"><i class="icon icon-person-fill"></i><span (click)="logout()">Log Out</span></a></li>
+                                        <li><a *ngIf="drop"><i class=" icon-signout"></i><span (click)="logout()">Log Out</span></a></li>
                                         <li><a routerLink="/register" *ngIf="!drop"><i class="icon icon-person-fill-add"></i><span>Register</span></a></li>
                                         <li><a routerLink="/checkout" *ngIf="drop"><i class="icon icon-check-box"></i><span>Checkout</span></a></li>
                                     </ul>

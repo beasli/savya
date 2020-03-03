@@ -4,9 +4,9 @@ import { HomeComponent } from './components/site/home/home.component';
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent},
-  { path: '',
-    redirectTo:'/home',
+  { path: '', component: HomeComponent},
+  { path: 'home',
+    redirectTo:'',
     pathMatch:'full'
   }
 ];

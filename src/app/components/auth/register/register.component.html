@@ -19,14 +19,14 @@
                         <form #f="ngForm" (ngSubmit)="SignUp(f.value)">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="form-group"><input type="text" #name="ngModel"  ngModel  name="name" class="form-control" placeholder="First name" required>
+                                    <div class="form-group"><input type="text" #name="ngModel"  ngModel  name="name" class="form-control" (ngModelChange)="changeFname($event)" placeholder="First name" required>
                                         <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
                                             Name is required.
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group"><input type="text" #name="ngModel"  ngModel  name="name" class="form-control" placeholder="Last name"></div>
+                                    <div class="form-group"><input type="text" #name="ngModel"  ngModel  name="name" class="form-control" (ngModelChange)="changeLname($event)" placeholder="Last name"></div>
                                 </div>
                             </div>
                             <div class="form-group"> <label for='register'>Register type</label>
@@ -55,28 +55,34 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="text"  #gstno="ngModel"  ngModel  name="gstno" class="form-control" placeholder="GST No.*" required>
+                                <input type="text"  #gstno="ngModel"  ngModel  name="gstno" class="form-control"  (ngModelChange)="changeGst($event)" placeholder="GST No.*" required>
                                 <div class="alert alert-danger" *ngIf="gstno.touched && gstno.invalid">
                                     Gst no. is required.
                                 </div>
+                                <div *ngIf="gst" class="alert alert-danger">Incorrect Gst no. </div>
                             </div>
                             <div class="form-group">
-                                <input type="text"  #panno="ngModel"  ngModel  name="panno" class="form-control" placeholder="Pan Card No.*" required>
+                                <input type="text"  #panno="ngModel"  ngModel  name="panno" class="form-control" placeholder="Pan Card No.*"  (ngModelChange)="changePan($event)" required>
                                 <div class="alert alert-danger" *ngIf="panno.touched && panno.invalid">
                                     Pan no. is required.
                                 </div>
+                                <div *ngIf="pan" class="alert alert-danger">Incorrect Pan no. </div>
+
                             </div>
                             <div class="form-group">
-                                <input type="text"  #email="ngModel"  ngModel  name="email" class="form-control" placeholder="E-mail" required>
+                                <input type="text"  #email="ngModel"  ngModel  name="email" class="form-control" placeholder="E-mail" required email>
                                 <div class="alert alert-danger" *ngIf="email.touched && email.invalid" >
-                                    Email is required.
+                                    <div *ngIf="email.errors.required">Email is required.</div>
+                                    <div *ngIf="email.errors.email">Please enter a valid Email</div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="number"  #mobile_no="ngModel"  ngModel  name="mobile_no" class="form-control" placeholder="Mobile No*" required>
+                                <input type="number"  #mobile_no="ngModel"  ngModel  name="mobile_no" class="form-control" (ngModelChange)="changeNumber($event)" placeholder="Mobile No*" required >
                                 <div class="alert alert-danger" *ngIf="mobile_no.touched && mobile_no.invalid">
-                                    Mobile No. is required.
+                                    <div *ngIf="mobile_no.errors.required">Mobile No. is required.</div>
                                 </div>
+                               <div *ngIf="mob" class="alert alert-danger">Mobile no. should be atleast 10 digits  </div>
+                                
                             </div>
                             <div class="form-group">
                                 <input type="text"  #address="ngModel"  ngModel  name="address" class="form-control" placeholder="Address*" required>
@@ -91,7 +97,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="number"  #pincode="ngModel"  ngModel  name="pincode" class="form-control" placeholder="Pin Code" required>
+                                <input type="number"  #pincode="ngModel"  ngModel  name="pincode" class="form-control"  (ngModelChange)="changePin($event)" placeholder="Pin Code" required>
+                                <div *ngIf="pin" class="alert alert-danger">Pin code should be atleast 10 digits  </div>
                                 <div class="alert alert-danger" *ngIf="pincode.touched && pincode.invalid">
                                     Pin code is required.
                                 </div>
@@ -109,17 +116,18 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="password"  #password="ngModel"  ngModel  name="password" class="form-control" placeholder="Password" required>
+                                <input type="password"  #password="ngModel"  ngModel  name="password" class="form-control" (ngModelChange)="setPassword($event)" placeholder="Password" required>
                                 <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
                                     Password is required.
                                 </div>
                             </div>
                             <div class="form-group">                                                                                        
             
-                                <input type="password"  #retyped="ngModel"  ngModel  name="retyped" class="form-control" placeholder="Retype Password"  >
+                                <input type="password"  #retyped="ngModel"  ngModel  name="retyped" class="form-control" (ngModelChange)="changePassword($event)" placeholder="Retype Password"  >
                                 <!-- <div class="alert alert-danger" *ngIf="retyped.touched && retyped.invalid">
                                    Confirmed Password is required.
                                 </div> -->
+                                <div *ngIf="pass" class="alert alert-danger">Password doesn't match  </div>
                                 <div class="alert alert-danger" *ngIf="retyped.errors?.equalTo">
                                     Password doesn't match
                                  </div>
