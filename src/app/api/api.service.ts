@@ -12,6 +12,8 @@ export class ApiService {
   @Output() getlogin:EventEmitter<string> = new EventEmitter();
   @Output() getUserData:EventEmitter<string> = new EventEmitter();
   drop:any;
+  otp:any;
+  otpGuard:any;
   constructor(
     public http: HttpClient
   ) {
@@ -122,5 +124,23 @@ export class ApiService {
       localStorage.removeItem('savya_userInfo');
       localStorage.removeItem('token');
   }
-
+setOtp(value)
+{
+ this.otp=value;
+}
+getOtp()
+{
+  return this.otp;
+}
+setOtpGuard(value)
+{
+    this.otpGuard=value;
+   // console.log("apiservice"+this.otpGuard);
+}
+getOtpGuard()
+{
+  //console.log("apiservice"+this.otpGuard);
+    return this.otpGuard;
+    
+}
 }
