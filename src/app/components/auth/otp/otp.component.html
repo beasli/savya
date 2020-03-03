@@ -30,6 +30,13 @@
                                 </div>
                                 <!-- <p class="text-uppercase"><a href="#" class="js-toggle-forms">Forgot Your Password?</a></p> -->
                                 <!-- <div class="clearfix"><input id="checkbox1" name="checkbox1" type="checkbox" checked="checked"> <label for="checkbox1">Remember me</label></div>-->
+                                <div *ngIf="alert">
+                                    <p>
+                                      <ngb-alert [type]="type" >
+                                      <strong>{{message}}</strong> 
+                                      </ngb-alert>
+                                    </p>
+                               </div>
                                 <button style="float: left;" type="submit" class="btn">Submit</button> 
                                 <button  style="float: right;" class="btn" (click)="resend()">Resend OTP</button>
                             </form>

@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   type:any;
   mobile_no:any;
   scroll:boolean=false;
-
+  otp:any;
   SignUp(value){
     
         this.loading=true;
@@ -30,10 +30,12 @@ export class RegisterComponent implements OnInit {
         this.api.Post(REGISTER,value).then(data=>{
           
                   console.log(data);
+                  console.log(data['otp']);
+                  this.otp=data['otp'];
                   this.alert=true;
                   this.message="Successful Sign Up "
                   this.type="success";
-                  this.router.navigate(['/registerOtp',this.mobile_no]);
+                  this.router.navigate(['/registerOtp',this.mobile_no,this.otp]);
           }).catch(d=>{
                    this.scroll=true;
                   this.type="danger";
@@ -41,7 +43,7 @@ export class RegisterComponent implements OnInit {
                   this.sign=true;
                   this.alert=true;
                   console.log(d);
-                console.log(d.error.errors.email);
+               // console.log(d.error.errors.email);
                 if(d.error.errors.email&&d.error.errors.mobile_no)
                 {
                     this.message=d.error.errors.email + d.error.errors.mobile_no;

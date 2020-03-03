@@ -14,15 +14,17 @@ export class ForgetPasswordComponent implements OnInit {
   mobile_no:any;
   sign:boolean=true;
  loading:boolean;
+ otp:any;
   forgot(value)
   {
     this.loading=true;
     this.sign=false;
       this.mobile_no=value.mobile_no;
-      console.log(value.mobile_no);
+     // console.log(value.mobile_no);
       this.api.Post(FORGETPASSWORD,{mobile_no :value.mobile_no}).then(data=>{
+        this.otp=data['otp'];
         console.log(data);
-        this.router.navigate(['/forgetOtp',this.mobile_no]);
+        this.router.navigate(['/forgetOtp',this.mobile_no,this.otp]);
       }).catch(d=>{
        this.loading=false;
        this.sign=true;

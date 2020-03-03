@@ -121,11 +121,12 @@
                                 </p>
                           </div>
                             <p *ngIf="!f.valid" class="text-center"><strong>All details are required for update</strong></p>
-                            <p *ngIf="f.valid" class="text-center"><strong>You can update</strong></p>
+                            <!-- <p *ngIf="f.valid" class="text-center"><strong>You can update</strong></p> -->
                             <div class="text-center" ><input  class="btn"  *ngIf="sign" type="submit" value="Update" [disabled]="!f.valid"></div>
                             <div class="text-center"><input  class="btn"   *ngIf="loading" type="submit" value="Loading..."  disabled></div>
-                            <div *ngIf="alert">
-                                <a routerLink="/home"><strong>Click to go Home</strong></a>
+                            <div >
+                                <a routerLink="/home"><strong style="float: right;">Click to go Home</strong></a>
+                                <a routerLink="/account-details"><strong style="float: left;">My Profile</strong></a>
                             </div>
                         </form>
                     </div>
