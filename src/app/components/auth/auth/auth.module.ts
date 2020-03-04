@@ -13,6 +13,7 @@ import { ChangePasswordComponent } from '../change-password/change-password.comp
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap' ;
 import { KycComponent } from '../kyc/kyc.component';
 import { ChangeProfileComponent } from '../change-profile/change-profile.component';
+import { OtpGuardService } from '../../auth-guard/otp-guard.service';
 
 @NgModule({
   declarations: [
@@ -34,11 +35,11 @@ import { ChangeProfileComponent } from '../change-profile/change-profile.compone
     RouterModule.forChild([
       { path: 'login', component: LoginComponent},
       { path: 'register', component: RegisterComponent},
-      { path: 'registerOtp/:no/:qpzm' , component: OtpComponent},
+      { path: 'registerOtp/:no' , component: OtpComponent,canActivate: [OtpGuardService]},
       { path: 'forget' , component: ForgetPasswordComponent},
-      { path: 'forgetOtp/:no/:qpzm' , component: ForgetOtpComponent},
-      { path: 'change/:no' , component: ChangePasswordComponent},
-      { path: 'kyc' , component: KycComponent},
+      { path: 'forgetOtp/:no' , component: ForgetOtpComponent},
+      { path: 'change/:no' , component: ChangePasswordComponent, canActivate: [OtpGuardService]},
+      { path: 'kyc' , component: KycComponent, canActivate: [AuthGuardService]},
       { path: 'changeProfile' , component: ChangeProfileComponent,  canActivate: [AuthGuardService]},
     ])
   ]

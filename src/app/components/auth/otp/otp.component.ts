@@ -19,7 +19,7 @@ type:any;
   constructor(private route:ActivatedRoute,private api: ApiService,private router: Router) {
     this.mobile_no=this.route.snapshot.paramMap.get('no');
    // console.log(this.mobile_no);
-    this.otp=this.route.snapshot.paramMap.get('qpzm');
+    this.otp=this.api.getOtp();
     //console.log(this.otp);
    }
   otpVerify(value)
@@ -36,6 +36,7 @@ type:any;
           this.message=" OTP Verified";
           this.router.navigate(['/change',this.mobile_no]);
           this.message=" otp Verified";
+          this.api.setOtpGuard(1);
         }
         else{
           this.alert=true;
@@ -43,6 +44,7 @@ type:any;
           this.message=" OTP Doesn't Match . Re-Enter OTP";
           this.loading=false;
           this.sign=true;
+          this.api.setOtpGuard(0);
         }
       // this.api.Post(OTPVERIFIED,{params:{
       //   APP_KEY:8447126401,
@@ -68,6 +70,8 @@ type:any;
           this.loading=false;
           this.sign=true;
           this.otp=data['otp'];
+          this.api.setOtp(this.otp);
+
         console.log(data);
       }).catch(d=>{
         this.alert=true;

@@ -8,7 +8,9 @@ import { CONTACT } from 'src/config';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'savya';
+
  values:any;
   constructor(private api:ApiService)
   {
@@ -22,5 +24,6 @@ export class AppComponent {
         console.log(d);
       })
        
+
   }
 }

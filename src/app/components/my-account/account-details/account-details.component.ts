@@ -23,10 +23,9 @@ mobile:any;
       console.log(d);
 });
 
-   }
-
-  ngOnInit() {
-  
   }
 
+  ngOnInit() {
+
+}
 }
