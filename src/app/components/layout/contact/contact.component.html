@@ -1,0 +1,15 @@
+
+<div class="card" class="text-center">
+    <h2>CONTACT DETAIL</h2>
+    <div class="card-body">
+    
+        <i class="icon-phone"></i><span><span class="h6-style"><strong>Call Us:</strong> {{values.mobile}}<br>{{values.landline}}</span></span><br>
+        <i class="icon-mail-envelope1"></i><span><span class="h6-style"><strong>E-mail:</strong><a [href]="'mailto:'+values.email">{{values.email}}</a></span></span><br>
+        <i class="icon-location1"></i><span><span class="h6-style"><strong>Address:</strong>{{values.address}}</span></span><br>
+    
+        <ul class="social-list">
+            <li><a [href]="values.facebook" class="icon icon-facebook"></a></li>
+            <li><a [href]="values.instagram" class="icon icon-instagram"></a></li>
+        </ul>
+    </div>
+  </div>

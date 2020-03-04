@@ -33,10 +33,12 @@
                     </div>
                     <div class="collapsed-content">
                         <ul>
-                            <li><a href="terms-of-use.html">Terms of Use</a></li>
+                            <li><a routerLink="/terms">Terms of Use</a></li>
                             <li><a href="privacy-policy.html">Privacy Policy</a></li>
                             <li><a href="faq.html">F.A.Q.</a></li>
-                            <li><a href="contact.html">Contact Info</a></li>
+                            <li><a routerLink="/contact">Contact Info</a></li>
+                            <li><a routerLink="/about">About Us</a></li>
+                            <li><a routerLink="/payment">Payment</a></li>
                             <li><a routerLink="/register" class="js-back-to-top">Create Account</a></li>
                         </ul>
                     </div>
@@ -59,6 +61,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6 col-lg-3">
                 <div class="footer-block collapsed-mobile">
                     <div class="title">
@@ -67,15 +70,15 @@
                     </div>
                     <div class="collapsed-content">
                         <ul class="contact-list">
-                            <li><i class="icon-phone"></i><span><span class="h6-style">Call Us:</span><span>+91-80 3966 4955</span></span></li>
-                            <li><i class="icon-mail-envelope1"></i><span><span class="h6-style">E-mail:</span><span><a href="mailto:info@savya.us">info@savya.us</a></span></span></li>
-                            <li><i class="icon-location1"></i><span><span class="h6-style">Address:</span><span>Shop No. 25, Kucha, Neel Gali, Sarafa Bazar, Kotla Bazaar, Velli Bazaar, Meerut, Uttar Pradesh 250002</span></span></li>
+                            <li><i class="icon-phone"></i><span><span class="h6-style">Call Us:</span><span>{{values.mobile}}<br>{{values.landline}}</span></span></li>
+                            <li><i class="icon-mail-envelope1"></i><span><span class="h6-style">E-mail:</span><span><a [href]="'mailto:'+values.email">{{values.email}}</a></span></span></li>
+                            <li><i class="icon-location1"></i><span><span class="h6-style">Address:</span><span>{{values.address}}</span></span></li>
                         </ul>
                         <ul class="social-list">
-                            <li><a href="#" class="icon icon-facebook"></a></li>
+                            <li><a [href]="values.facebook" class="icon icon-facebook"></a></li>
                             <li><a href="#" class="icon icon-twitter"></a></li>
                             <li><a href="#" class="icon icon-google"></a></li>
-                            <li><a href="#" class="icon icon-instagram"></a></li>
+                            <li><a [href]="values.instagram" class="icon icon-instagram"></a></li>
                             <li><a href="#" class="icon icon-youtube"></a></li>
                         </ul>
                     </div>

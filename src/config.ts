@@ -9,6 +9,10 @@ export const CHANGEPASSWORD= 'user/update/password';
 export const USERKYC= 'user/kyc';
 export const PROFILEUPDATE= 'user/profile/update';
 export const PROFILEVIEW= 'user/profile/view';
+export const CONTACT= 'user/contact';
+export const ABOUT= 'user/about';
+export const TERMSANDCONDITION= 'user/terms';
+export const PAYMENT= 'user/payment';
 
 // Dashboard
 
