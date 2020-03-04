@@ -10,8 +10,14 @@ import { CONTACT } from 'src/config';
 })
 export class ContactComponent implements OnInit {
 values:any;
+im:boolean;
+val:boolean;
   constructor(private api:ApiService) { 
+  this.im=true;
+  this.val=false;
     this.api.Post(CONTACT,{}).then(data=>{
+      this.im=false;
+  this.val=true;
       this.values=data['data'][0];
       console.log(this.values);
     }).catch(d=>{

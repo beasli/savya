@@ -9,8 +9,14 @@ import { ABOUT } from 'src/config';
 })
 export class AboutComponent implements OnInit {
   values:any;
+  im:boolean;
+  val:boolean;
   constructor(private api:ApiService) { 
+    this.im=true;
+    this.val=false;
     this.api.Post(ABOUT,{}).then(data=>{
+      this.im=false;
+     this.val=true;
       this.values=data['data'][0].description;
       console.log(this.values);
     }).catch(d=>{
