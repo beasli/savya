@@ -1,0 +1,9 @@
+<div class="card" class="text-center" style="padding:100px">
+    <h2>About Us</h2>
+    <div >
+    <img *ngIf="im" src="assets/images/loading.gif">
+    </div>
+    <div [innerHTML]="values"  *ngIf="val" class="card-body">
+       
+    </div>
+</div>
