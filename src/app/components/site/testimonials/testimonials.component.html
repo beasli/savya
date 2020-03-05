@@ -8,9 +8,10 @@
           <ngx-slick-carousel class="carousel" 
                     #slickModal="slick-carousel" 
                     [config]="slideConfig" >
-          <div ngxSlickItem *ngFor="let slide of input" class="slide">
-          <img src="{{ url + slide.image }}" alt="" width="100%">
+          <div ngxSlickItem *ngFor="let slide of input" (click)='detail(slide)' class="slide embed-responsive embed-responsive-16by9">
+          <img src="{{ url + slide.image }}" class="embed-responsive-item"  alt="" width="100%">
           </div>
           </ngx-slick-carousel>
     </div>
+    <div class="more-link-wrapper text-center mt-2"><a routerLink="/events" class="btn-decor">show me all</a></div>
 </div>

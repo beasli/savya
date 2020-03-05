@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import { ApiService } from './../../../api/api.service';
 declare var $: any;
 @Component({
   selector: 'app-testimonials',
@@ -19,8 +19,12 @@ export class TestimonialsComponent implements OnInit {
     "autoplay": true,
     "arrows": false,
   };
-  constructor() {
+  constructor(private api: ApiService) {
    }
+
+   detail(value) {
+    this.api.setEvent(value,this.url);
+  }
 
   ngOnInit() {
   }
