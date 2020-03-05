@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm">
+  </div>
+  <div class="col-sm">
+    
+<div class="card border" style="width: 50rem;">
+    <img src="{{ event.url + event.image }}" class="card-img-top" alt="...">
+    <div class="card-body text-center">
+      <h3 class="card-title">{{event.title}}</h3>
+      <p class="card-text">{{event.description}}<br><br>{{event.address}}<br><br>Event Fees: <span *ngIf="event.amount">₹</span><span *ngIf="!event.amount">Free</span> {{event.amount}}</p>
+      <a href="#" (click)='share()' class="btn btn-primary">SHARE EVENT</a><br><br>
+      <a href="#" (click)='register()' class="btn btn--alt">REGISTER</a>
+    </div>
+  </div>
+  </div>
+  <div class="col-sm">
+  </div>
+</div>
