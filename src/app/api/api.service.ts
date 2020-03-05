@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { apiUrl } from '../../config';
+import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE } from '../../config';
 import * as CryptoJS from 'crypto-ts';
 import { JsonPipe } from '@angular/common';
 
@@ -9,20 +9,31 @@ import { JsonPipe } from '@angular/common';
   providedIn: 'root'
 })
 export class ApiService {
-
   @Output() getlogin:EventEmitter<string> = new EventEmitter();
+  @Output() getWish:EventEmitter<string> = new EventEmitter();
   @Output() getUserData:EventEmitter<string> = new EventEmitter();
   drop:any;
   otp:any;
   otpGuard:any;
-  constructor(
-    public http: HttpClient
-  ) {
+  uid:any;
+  wish:any[];
+  constructor( public http: HttpClient) {
+  let u=this.getUserInfo();
+  this.uid=u.uid;
+  // console.log("userid"+this.uid);
     if (localStorage.getItem('drop')) {
       this.drop =  +this.decrypt((localStorage.getItem('drop')));
     } else {
       this.drop = 0;
     }
+
+
+    this.Post(WISHLISTVIEW,{uid:this.uid}).then(data=>{
+      console.log(data);
+      localStorage.setItem('wishlist',JSON.stringify(data));
+    }).catch(d=>{
+      console.log(d);
+    })
    }
 
   public Get(api) {
@@ -67,6 +78,73 @@ export class ApiService {
           reject(err);
         });
     });
+  }
+  updateWishlist()
+  {
+    this.Post(WISHLISTVIEW,{uid:this.uid}).then(data=>{
+      console.log(data);
+      localStorage.setItem('wishlist',JSON.stringify(data));
+    }).catch(d=>{
+      console.log(d);
+    })
+  }
+  deleteWishlist(pid)
+  {
+      this.Post(WISHLISTDELETE,{uid:this.uid,product_id:pid}).then(data=>{
+        console.log(data);
+       this.updateWishlist();
+          
+      }).catch(d=>{
+        console.log(d);
+      })
+     
+  }
+ 
+checkWishlist(pid)
+{
+   // console.log("check"+pid); 
+  
+    this.wish=this.getWishlist();
+    if(this.wish)
+    {
+            let result=this.wish.find(x => x.product_id === pid);
+        //  console.log(this.wish.find(x => x.product_id === pid));
+        //  console.log("result="+result);
+            if(result)
+            {
+              console.log("product already exist ");
+            }
+            else
+            {
+              this.Post(WISHLISTADD,{uid:this.uid,product_id:pid}).then(data=>{
+                console.log(data);
+                   this.updateWishlist();
+              }).catch(d=>{
+                console.log(d);
+              })
+            }
+         
+      }
+      else{
+        this.Post(WISHLISTADD,{uid:this.uid,product_id:pid}).then(data=>{
+          console.log(data);
+             this.updateWishlist();
+        }).catch(d=>{
+          console.log(d);
+        })
+      }    
+}
+ 
+  // setWish(value) {
+    
+  //   localStorage.setItem('wish',value);
+  //    
+  
+  // }
+  getWishlist()
+  {
+    let m=JSON.parse(localStorage.getItem('wishlist'));
+    return m['data'];
   }
 
   public encrypt(data) {
@@ -124,6 +202,7 @@ export class ApiService {
   {
       localStorage.removeItem('savya_userInfo');
       localStorage.removeItem('token');
+      localStorage.removeItem('wishlist');
   }
 setOtp(value)
 {
@@ -144,4 +223,5 @@ getOtpGuard()
     return this.otpGuard;
     
 }
+
 }

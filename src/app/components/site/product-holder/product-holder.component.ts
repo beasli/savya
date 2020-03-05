@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ApiService } from 'src/app/api/api.service';
 
 @Component({
   selector: 'app-product-holder',
@@ -9,6 +10,7 @@ export class ProductHolderComponent implements OnInit {
   @Input() mostselling;
   @Input() url3;
   @Input() heading;
+  value:boolean;
   slideConfig = {
     "slidesToShow": 4,
     "slidesToScroll": 4,
@@ -17,8 +19,17 @@ export class ProductHolderComponent implements OnInit {
     "autoplay": false,
     "arrows": true,
   };
-  constructor() { }
-
+  constructor(private api:ApiService) { }
+  wishlist(pid)
+  {
+   // console.log("in wishlist");
+    //console.log(pid);
+    this.api.checkWishlist(pid);
+  }
+  deleteWishlist(pid)
+  {
+      this.api.deleteWishlist(pid);
+  }
   ngOnInit() {
   }
 
