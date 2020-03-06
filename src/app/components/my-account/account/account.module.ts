@@ -9,6 +9,7 @@ import { AccountHistoryComponent } from '../account-history/account-history.comp
 import { RouterModule } from '@angular/router';
 import { AuthGuardService } from '../../auth-guard/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EventHistoryComponent } from '../event-history/event-history.component';
 @NgModule({
   declarations: [
     AccountDetailsComponent,
@@ -16,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AccountWishlistComponent,
     AccountHistoryComponent,
     EditAddressComponent,
+    EventHistoryComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       { path: 'account-history', component: AccountHistoryComponent,  canActivate: [AuthGuardService]},
       { path: 'edit-address/:id', component: EditAddressComponent,  canActivate: [AuthGuardService]},
       { path: 'add-address/:id', component: EditAddressComponent,  canActivate: [AuthGuardService]},
+      { path: 'event-history', component: EventHistoryComponent,  canActivate: [AuthGuardService]}
     ])
   ]
 })

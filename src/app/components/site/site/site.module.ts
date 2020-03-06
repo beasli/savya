@@ -1,3 +1,4 @@
+import { EventsComponent } from './../events/events.component';
 import { LiveratesComponent } from './../liverates/liverates.component';
 import { ExclusiveBannerComponent } from './../../layout/exclusive-banner/exclusive-banner.component';
 import {  HttpClientModule } from '@angular/common/http';
@@ -12,7 +13,7 @@ import { ProductHolderComponent } from '../product-holder/product-holder.compone
 import { BestSellerProductComponent } from '../best-seller-product/best-seller-product.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-
+import { EventComponent } from '../event/event.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     ProductHolderComponent,
     BestSellerProductComponent,
     ExclusiveBannerComponent,
-    LiveratesComponent
+    LiveratesComponent,
+    EventsComponent,
+    EventComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +35,9 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     SlickCarouselModule,
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
-      { path: 'filter' , component: FilterProductComponent}
+      { path: 'filter' , component: FilterProductComponent},
+      { path: 'events' , component: EventsComponent},
+      { path: 'event' , component: EventComponent}
     ])
   ]
 })

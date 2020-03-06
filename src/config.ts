@@ -22,8 +22,8 @@ export const PROFILEVIEW= 'user/profile/view';
  export const WISHLISTADD= 'user/wishlist/store';
  export const WISHLISTDELETE= 'user/wishlist/delete';
 
-// Dashboard
 
+// Dashboard
 export const CRAUSEL = 'user/dashboard/home';
 export const NAVIGATION = 'admin/app/navigation' ;
 export const LIVERATE = 'https://skymcx.in/NKChainsJSON.php';
@@ -33,4 +33,8 @@ export const GETADDRESS = 'user/address/view';
 export const ADDADDRESS = 'user/address/add';
 export const DELADDRESS = 'user/address/delete';
 export const EDITADDRESS = 'user/address/edit';
+
+// Events
+export const EVENTS = 'user/events/all';
+export const MYEVENTS = 'events/';
 

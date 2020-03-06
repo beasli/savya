@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE } from '../../config';
@@ -15,12 +16,16 @@ export class ApiService {
   drop:any;
   otp:any;
   otpGuard:any;
+  
+  constructor( public http: HttpClient) {
   uid:any;
   wish:any[];
-  constructor( public http: HttpClient) {
-  let u=this.getUserInfo();
-  this.uid=u.uid;
-  // console.log("userid"+this.uid);
+  event:any;
+  constructor(public http: HttpClient, private router: Router) {
+     let u=this.getUserInfo();
+    this.uid=u.uid;
+    // console.log("userid"+this.uid);
+    
     if (localStorage.getItem('drop')) {
       this.drop =  +this.decrypt((localStorage.getItem('drop')));
     } else {
@@ -28,6 +33,17 @@ export class ApiService {
     }
 
  }
+
+   public setEvent(value, url) {
+     this.event = value;
+     this.event['url'] = url;
+     localStorage.setItem('event', JSON.stringify(this.event));
+     this.router.navigate(['/event']);
+   }
+
+   public getEvent() {
+    return localStorage.getItem('event');
+  }
 
   public Get(api) {
     return new Promise((resolve, reject) => {
@@ -50,7 +66,7 @@ export class ApiService {
         });
     });
   }
-
+    
   public Post2(api, formData) {
     return new Promise((resolve, reject) => {
       this.http.post(api, formData)
@@ -151,7 +167,7 @@ checkWishlist(pid)
    const encryptedMessage = CryptoJS.AES.encrypt(JSON.stringify(data), 'test').toString();
    return encryptedMessage;
   }
-  
+
   public decrypt(data) {
     const decryptedMessage = CryptoJS.AES.decrypt(data, 'test');
     return JSON.parse(decryptedMessage.toString(CryptoJS.enc.Utf8));
