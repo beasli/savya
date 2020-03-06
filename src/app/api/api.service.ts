@@ -27,14 +27,7 @@ export class ApiService {
       this.drop = 0;
     }
 
-
-    this.Post(WISHLISTVIEW,{uid:this.uid}).then(data=>{
-      console.log(data);
-      localStorage.setItem('wishlist',JSON.stringify(data));
-    }).catch(d=>{
-      console.log(d);
-    })
-   }
+ }
 
   public Get(api) {
     return new Promise((resolve, reject) => {
@@ -84,8 +77,12 @@ export class ApiService {
     this.Post(WISHLISTVIEW,{uid:this.uid}).then(data=>{
       console.log(data);
       localStorage.setItem('wishlist',JSON.stringify(data));
+     
     }).catch(d=>{
       console.log(d);
+      //console.log("deleteWishllist"+d.error.data);
+      localStorage.removeItem('wishlist');
+      this.getWish.emit("emptyWishlist"+Date.now());
     })
   }
   deleteWishlist(pid)
@@ -93,9 +90,10 @@ export class ApiService {
       this.Post(WISHLISTDELETE,{uid:this.uid,product_id:pid}).then(data=>{
         console.log(data);
        this.updateWishlist();
-          
+       this.getWish.emit("wishlist updated"+Date.now());
       }).catch(d=>{
         console.log(d);
+      
       })
      
   }
@@ -108,7 +106,6 @@ checkWishlist(pid)
     if(this.wish)
     {
             let result=this.wish.find(x => x.product_id === pid);
-        //  console.log(this.wish.find(x => x.product_id === pid));
         //  console.log("result="+result);
             if(result)
             {
@@ -122,8 +119,7 @@ checkWishlist(pid)
               }).catch(d=>{
                 console.log(d);
               })
-            }
-         
+            } 
       }
       else{
         this.Post(WISHLISTADD,{uid:this.uid,product_id:pid}).then(data=>{
@@ -135,16 +131,19 @@ checkWishlist(pid)
       }    
 }
  
-  // setWish(value) {
-    
-  //   localStorage.setItem('wish',value);
-  //    
-  
-  // }
+
   getWishlist()
   {
-    let m=JSON.parse(localStorage.getItem('wishlist'));
-    return m['data'];
+    let m=localStorage.getItem('wishlist');
+    if(m)
+    {
+      let n=JSON.parse(localStorage.getItem('wishlist'));
+      return n['data'];
+    }
+    else{
+      return null;
+    }
+   
   }
 
   public encrypt(data) {
