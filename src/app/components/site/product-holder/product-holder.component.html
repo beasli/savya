@@ -19,7 +19,7 @@
                 <img src="{{ url + slide.image }}" alt="" width="100%">
                 </div> -->
                 <div ngxSlickItem  class="prd prd-new prd-popular" *ngFor="let s of mostselling">
-                    <div class="prd-inside">
+                    <div class="prd-inside" >
                         <div class="prd-img-area"><a href="product.html" class="prd-img"><img [src]="url3 + s.image" alt="Tyssot 1853"></a>
                             <div class="label-new">NEW</div><a href="#" class="label-wishlist icon-heart js-label-wishlist"></a>
                             <div class="gdw-loader"></div>
@@ -32,9 +32,8 @@
                             </div>
                             <div class="prd-hover">
                                 <div class="prd-action">
-                                    <form action="#"><input type="hidden"> <button class="btn" data-fancybox data-src="#modalCheckOut"><i class="icon icon-handbag"></i><span>Add To Cart</span></button></form>
-                                    
-                                    <div class="prd-links hide-mobile"><a href="#" class="icon-eye prd-qview-link js-qview-link" data-fancybox data-src="#modalQuickView"></a></div>
+                                    <form action="#"><input type="hidden"> <button class="btn" data-fancybox data-src="#modalCheckOut"><i class="icon icon-handbag"></i><span>Add To Cart</span></button></form> 
+                                    <div class="prd-links hide-mobile"><a href="#" class="icon-eye prd-qview-link js-qview-link" data-fancybox data-src="#modalQuickView"></a> <a (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
                                 </div>
                                 <div class="prd-options prd-hidemobile"><span class="label-options">Custom Fields:</span>
                                     <ul class="list-options size-swatch">

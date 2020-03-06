@@ -23,6 +23,7 @@ type:any;
     this.sign=false;
       console.log(value);
       this.api.Post(LOGIN,value).then(data=>{
+        this.api.updateWishlist();
           this.d=data['data'][0];
          console.log(this.d);
            this.alert=true;
