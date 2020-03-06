@@ -28,30 +28,33 @@ export class ProductHolderComponent implements OnInit {
     //console.log(pid);
     this.api.checkWishlist(pid);
   }
-  // checkHeart(pid)
-  // {
-  //   let isInWishlist:boolean;
-  //   console.log("checkheart");
-  //   this.wish=this.api.getWishlist();
-  //   if(this.wish)
-  //   {
-  //           let result=this.wish.find(x => x.product_id === pid);
-  //       //  console.log("result="+result);
-  //           if(result)
-  //           { 
-  //             console.log("present");
+  checkHeart(pid)
+  {
+    let isInWishlist:boolean;
+    //console.log("checkheart");
+    this.wish=this.api.getWishlist();
+    if(this.wish)
+    {
+            let result=this.wish.find(x => x.product_id === pid);
+        //  console.log("result="+result);
+            if(result)
+            { 
+             // console.log("present");
+              return true;
             
-  //           }
-  //           else
-  //           {
-  //             console.log("not present");
+            }
+            else
+            {
+              //console.log("not present");
+              return false;
               
-  //           } 
-  //     }
-  //     else{
-  //       console.log("not present");
-  //     }
-  // }
+            } 
+      }
+      else{
+        //console.log("not present");
+        return false;
+      }
+  }
   deleteWishlist(pid)
   {
       this.api.deleteWishlist(pid);
