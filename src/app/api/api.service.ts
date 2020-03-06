@@ -16,11 +16,10 @@ export class ApiService {
   drop:any;
   otp:any;
   otpGuard:any;
-  
-  constructor( public http: HttpClient) {
   uid:any;
   wish:any[];
   event:any;
+  
   constructor(public http: HttpClient, private router: Router) {
      let u=this.getUserInfo();
     this.uid=u.uid;
