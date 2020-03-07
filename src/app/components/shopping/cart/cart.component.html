@@ -11,8 +11,8 @@
     <div class="holder mt-0">
         <div class="container">
             <h1 class="text-center">Shopping Cart</h1>
-            <div class="cart-table">
-                <div class="cart-table-prd">
+            <div class="cart-table" *ngIf="div">
+                <div class="cart-table-prd"  *ngFor="let r of results">
                     <div class="cart-table-prd-image"><a href="#"><img src="../../../../assets/images/products/xsmall/product-05.jpg" alt=""></a></div>
                     <div class="cart-table-prd-name">
                         <h5><a href="#">Ring</a></h5>
@@ -22,7 +22,8 @@
                     <div class="cart-table-prd-price"><span>price:</span> <b>₹ 75.00</b></div>
                     <div class="cart-table-prd-action"><a href="#" class="icon-heart"></a> <a href="#" class="icon-pencil"></a> <a href="#" class="icon-cross"></a></div>
                 </div>
-                <div class="cart-table-prd">
+               
+                <!-- <div class="cart-table-prd">
                     <div class="cart-table-prd-image"><a href="#"><img src="../../../../assets/images/products/xsmall/product-02.jpg" alt=""></a></div>
                     <div class="cart-table-prd-name">
                         <h5><a href="#">Pendants</a></h5>
@@ -41,13 +42,18 @@
                     <div class="cart-table-prd-qty"><span>qty:</span> <b>1</b></div>
                     <div class="cart-table-prd-price"><span>price:</span> <b>₹ 199.00</b></div>
                     <div class="cart-table-prd-action"><a href="#" class="icon-heart"></a> <a href="#" class="icon-pencil"></a> <a href="#" class="icon-cross"></a></div>
-                </div>
+                </div> -->
                 <div class="cart-table-total">
                     <div class="row">
-                        <div class="col-sm"><a href="#" class="btn btn--alt"><i class="icon-angle-left"></i><span>continue shopping</span></a> <a href="#" class="btn btn--grey"><i class="icon-repeat"></i><span>update cart</span></a></div>
-                        <div class="col-sm-auto"><a href="checkout.html" class="btn"><span>continue checkout</span> <i class="icon-angle-right"></i></a></div>
+                        <div class="col-sm"><a routerLink="/home" class="btn btn--alt"><i class="icon-angle-left"></i><span>continue shopping</span></a> <a href="#" class="btn btn--grey"><i class="icon-repeat"></i><span>update cart</span></a></div>
+                        <div class="col-sm-auto"><a routerLink="/home" class="btn"><span>continue checkout</span> <i class="icon-angle-right"></i></a></div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-9 aside" *ngIf="alert">
+                <ngb-alert [dismissible]="false" >
+                    <strong>{{message}}</strong> 
+                </ngb-alert>
             </div>
             
         </div>

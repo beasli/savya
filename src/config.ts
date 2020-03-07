@@ -21,6 +21,13 @@ export const PROFILEVIEW= 'user/profile/view';
  export const WISHLISTVIEW= 'user/wishlist/view';
  export const WISHLISTADD= 'user/wishlist/store';
  export const WISHLISTDELETE= 'user/wishlist/delete';
+ 
+
+//cart
+ export const CARTVIEW= 'user/cart/view';
+ export const CARTDELETE= 'user/cart/delete';
+ export const CARTADD= 'user/cart';
+ export const CARTUPDATE= 'user/cart/qty';
 
 
 // Dashboard
