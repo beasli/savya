@@ -27,8 +27,8 @@ export class HomeComponent implements OnInit {
       this.url = data['url'];
       this.url2 = this.url + '/';
       this.url3 = data['product_url'] + '/';
-      this.mostselling = data['body'][3]['product'];
-      this.events = data['body'][4]['events'];
+      this.mostselling = data['body'][4]['product'];
+      this.events = data['body'][5]['events'];
       });
       let test = [{one: '1', two: '2'}, {three: '3', four: '4'}];
    }
