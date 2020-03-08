@@ -15,15 +15,14 @@ export class HomeComponent implements OnInit {
   mostselling = [];
   events = [];
   models = [{image: 'model_1.jpg'}, {image: 'model_2.jpg'}]
-  partners = [{image: 'IGI_Expo.jpg'}]
-  
+  partners = [{image: 'IGI_Expo.jpg'}];
   url: any;
   url2: any;
   url3: any;
   constructor(private api: ApiService ) {
       this.api.Post(CRAUSEL, {}).then(data => {
       this.slider_imgs = data['body'][0]['app_banners'];
-      this.exclusive = data['body'][2]['exclusive_banners'];
+      this.exclusive = data['body'][3]['exclusive_banners'];
       this.url = data['url'];
       this.url2 = this.url + '/';
       this.url3 = data['product_url'] + '/';
