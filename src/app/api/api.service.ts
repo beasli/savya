@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE } from '../../config';
+import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD } from '../../config';
 import * as CryptoJS from 'crypto-ts';
 import { JsonPipe } from '@angular/common';
 
@@ -21,8 +21,11 @@ export class ApiService {
   event:any;
   
   constructor(public http: HttpClient, private router: Router) {
+    if(localStorage.getItem('savya_userInfo'))
+    {
      let u=this.getUserInfo();
     this.uid=u.uid;
+   }
     // console.log("userid"+this.uid);
     
     if (localStorage.getItem('drop')) {
@@ -160,6 +163,8 @@ checkWishlist(pid)
     }
    
   }
+
+
 
   public encrypt(data) {
    // console.log(JSON.stringify(data));
