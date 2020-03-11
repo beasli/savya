@@ -8,8 +8,14 @@
           <ngx-slick-carousel class="carousel" 
                     #slickModal="slick-carousel" 
                     [config]="slideConfig" >
-          <div ngxSlickItem *ngFor="let slide of input" (click)='detail(slide)' class="slide embed-responsive embed-responsive-16by9">
+          <div ngxSlickItem *ngFor="let slide of input" (click)='detail(slide)' class="slide embed-responsive embed-responsive-16by9 overlay-wrapper ">
           <img src="{{ url + slide.image }}" class="embed-responsive-item"  alt="" width="100%">
+          <div class="overlay-effect">
+              <div class="overlay-effect-content">
+                <h2>Lorem Ipsum</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</p>
+              </div>
+          </div>
           </div>
           </ngx-slick-carousel>
     </div>

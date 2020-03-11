@@ -10,6 +10,7 @@ export class FilterProductComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

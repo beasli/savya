@@ -4799,9 +4799,10 @@ body.has-slider .hdr {
     .hdr-content .custom-text span, .hdr-bottom .custom-text span, .sticky-holder .custom-text span {
       color: #c59f59; }
   .hdr .hdr-topline {
-    color: #424242; }
+    color: #fff; 
+    background-color:#000}
     .hdr .hdr-topline .dropdn-link, .hdr .hdr-topline .custom-text a, .hdr .hdr-topline .header-inline-link a {
-      color: #424242;
+      color: #fff;
       text-decoration: none; }
       .hdr .hdr-topline .dropdn-link:hover, .hdr .hdr-topline .custom-text a:hover, .hdr .hdr-topline .header-inline-link a:hover {
         color: #c59f59;
@@ -8524,8 +8525,8 @@ body.boxed .page-footer.global_width .footer-bottom:not(:first-child) .row:befor
   top: auto !important;
   bottom: 0;
   right: 30px;
-  width: 72px;
-  height: 72px;
+  width: 50px;
+  height: 50px;
   background: #c59f59;
   text-align: center;
   pointer-events: none;
