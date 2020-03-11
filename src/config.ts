@@ -2,32 +2,32 @@ export const apiUrl = 'http://newapp.savyajewels.net/api/';
 // authentication
 export const LOGIN = 'user/login';
 export const REGISTER = 'user/register';
-export const OTPVERIFIED= 'user/register/otpverified';
-export const OTPRESEND= 'user/register/otpresend';
-export const FORGETPASSWORD= 'user/forgetpassword';
-export const CHANGEPASSWORD= 'user/update/password';
-export const USERKYC= 'user/kyc';
-export const PROFILEUPDATE= 'user/profile/update';
-export const PROFILEVIEW= 'user/profile/view';
+export const OTPVERIFIED = 'user/register/otpverified';
+export const OTPRESEND = 'user/register/otpresend';
+export const FORGETPASSWORD = 'user/forgetpassword';
+export const CHANGEPASSWORD = 'user/update/password';
+export const USERKYC = 'user/kyc';
+export const PROFILEUPDATE = 'user/profile/update';
+export const PROFILEVIEW = 'user/profile/view';
 
 
- //pages
- export const CONTACT= 'user/contact';
- export const ABOUT= 'user/about';
- export const TERMSANDCONDITION= 'user/terms';
- export const PAYMENT= 'user/payment';
+ // pages
+export const CONTACT = 'user/contact';
+export const ABOUT = 'user/about';
+export const TERMSANDCONDITION = 'user/terms';
+export const PAYMENT = 'user/payment';
 
- //wishlist
- export const WISHLISTVIEW= 'user/wishlist/view';
- export const WISHLISTADD= 'user/wishlist/store';
- export const WISHLISTDELETE= 'user/wishlist/delete';
- 
+ // wishlist
+export const WISHLISTVIEW = 'user/wishlist/view';
+export const WISHLISTADD = 'user/wishlist/store';
+export const WISHLISTDELETE = 'user/wishlist/delete';
 
-//cart
- export const CARTVIEW= 'user/cart/view';
- export const CARTDELETE= 'user/cart/delete';
- export const CARTADD= 'user/cart';
- export const CARTUPDATE= 'user/cart/qty';
+
+// cart
+export const CARTVIEW = 'user/cart/view';
+export const CARTDELETE = 'user/cart/delete';
+export const CARTADD = 'user/cart';
+export const CARTUPDATE = 'user/cart/qty';
 
 
 // Dashboard
@@ -44,4 +44,10 @@ export const EDITADDRESS = 'user/address/edit';
 // Events
 export const EVENTS = 'user/events/all';
 export const MYEVENTS = 'events/';
+
+// Products
+export const PRODUCTDETAILS = 'single/product/details';
+export const CATEGORY = 'user/category/all';
+export const SUBCATEGORY = 'user/subcategory/single';
+export const SUBCATEGORYTYPE = 'user/subsubcategory/single';
 

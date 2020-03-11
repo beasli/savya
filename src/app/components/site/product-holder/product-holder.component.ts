@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-holder',
@@ -19,25 +20,27 @@ export class ProductHolderComponent implements OnInit {
     "autoplay": false,
     "arrows": true,
   };
- wish:any;
+ wish: any;
 
-  constructor(private api:ApiService) { }
-  wishlist(pid)
-  {
+  constructor(private api: ApiService, private router: Router) { }
+
+  go(value,img) {
+    sessionStorage.setItem('prd_image', img);
+    this.api.godetail(value);
+  }
+  wishlist(pid) {
    // console.log("in wishlist");
     //console.log(pid);
     this.api.checkWishlist(pid);
   }
-  checkHeart(pid)
-  {
+  checkHeart(pid) {
     let isInWishlist:boolean;
     //console.log("checkheart");
-    this.wish=this.api.getWishlist();
-    if(this.wish)
-    {
-            let result=this.wish.find(x => x.product_id === pid);
+    this.wish = this.api.getWishlist();
+    if (this.wish) {
+            let result = this.wish.find(x => x.product_id === pid);
         //  console.log("result="+result);
-            if(result)
+            if (result)
             { 
              // console.log("present");
               return true;

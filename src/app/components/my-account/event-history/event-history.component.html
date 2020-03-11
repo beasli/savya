@@ -16,8 +16,15 @@
                 </div>
                 <div class="col-md-9 aside">
                     <h2>My Event History</h2>
+                    <div *ngIf='!event.length'>
+                        <p>
+                            <ngb-alert [dismissible]="false">
+                              <strong>You don't have any Event Orders</strong> 
+                            </ngb-alert>
+                        </p>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-order-history">
+                        <table class="table table-bordered table-striped table-order-history" *ngIf='event.length'>
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>

@@ -12,21 +12,16 @@
         
         <!-- <div class="prd-grid prd-carousel js-prd-carousel-tab slick-arrows-aside-simple slick-arrows-mobile-lg data-to-show-4 data-to-show-md-3 data-to-show-sm-2 data-to-show-xs-2 js-product-isotope-sm" id="tabCarousel-01" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'> -->
         
-            <ngx-slick-carousel class="carousel" 
-            #slickModal="slick-carousel" 
-            [config]="slideConfig" >
-                <!-- <div ngxSlickItem *ngFor="let slide of input" class="slide">
-                <img src="{{ url + slide.image }}" alt="" width="100%">
-                </div> -->
+            <ngx-slick-carousel class="carousel"  #slickModal="slick-carousel"  [config]="slideConfig" >
                 <div ngxSlickItem  class="prd prd-new prd-popular" *ngFor="let s of mostselling">
                     <div class="prd-inside" >
-                        <div class="prd-img-area"><a href="product.html" class="prd-img"><img [src]="url3 + s.image" alt="Tyssot 1853"></a>
+                        <div class="prd-img-area"><a (click)='go(s.product_id,s.image)' class="prd-img"><img [src]="url3 + s.image" alt="Tyssot 1853"></a>
                             <div class="label-new">NEW</div><a href="#" class="label-wishlist icon-heart js-label-wishlist"></a>
                             <div class="gdw-loader"></div>
                         </div>
                         <div class="prd-info">
                             <div class="prd-tag prd-hidemobile"><a href="#">{{s.size}}</a></div>
-                            <h2 class="prd-title"><a href="product.html">{{s.productname}}</a></h2>
+                            <h2 class="prd-title"><a (click)='go(s.product_id,s.image)'>{{s.productname}}</a></h2>
                             <div class="prd-rating prd-hidemobile">
                                 <i class="icon-star fill"></i><i class="icon-star fill"></i><i class="icon-star fill"></i><i class="icon-star fill"></i><i class="icon-star"></i>
                             </div>
@@ -47,12 +42,6 @@
                     </div>
                 </div>
             </ngx-slick-carousel>
-
-            
-            
-            
-        
-        <!-- </div> -->
         <div class="more-link-wrapper text-center"><a href="#" class="btn-decor">show all</a></div>
     </div>
 </div>

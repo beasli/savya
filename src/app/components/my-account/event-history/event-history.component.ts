@@ -10,11 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class EventHistoryComponent implements OnInit {
   uid: any;
   event: [];
-  url:any;
+  url: any;
   constructor(private api: ApiService) {
     this.uid = this.api.getUserInfo();
     this.uid = this.uid['uid'];
-    this.api.Get(MYEVENTS+3).then(data => {
+    this.api.Get(MYEVENTS + this.uid).then(data => {
       this.event = data['data'];
       this.event['url'] = data['url'] + "/";
       this.url = this.event['url'];
