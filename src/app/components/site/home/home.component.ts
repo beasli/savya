@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
         this.url2 = this.url + '/';
         this.url3 = data['product_url'] + '/';
       });
-      let test = [{one: '1', two: '2'}, {three: '3', four: '4'}];
    }
 
   ngOnInit() {
