@@ -21,14 +21,24 @@ export class HomeComponent implements OnInit {
   url3: any;
   constructor(private api: ApiService ) {
       this.api.Post(CRAUSEL, {}).then(data => {
-      this.slider_imgs = data['body'][0]['app_banners'];
-      this.exclusive = data['body'][3]['exclusive_banners'];
-      this.url = data['url'];
-      this.url2 = this.url + '/';
-      this.url3 = data['product_url'] + '/';
-      this.mostselling = data['body'][4]['product'];
-      this.events = data['body'][5]['events'];
-      console.log(this.mostselling);
+
+        data['body'].forEach(childObj => {
+          if (childObj.category === 'app_banners') {
+            this.slider_imgs = childObj['app_banners'];
+          }
+          else if (childObj.category === 'exclusive_banners') {
+            this.exclusive = childObj['exclusive_banners'];
+          }
+          else if (childObj.category === 'product') {
+            this.mostselling = childObj['product'];
+          }
+          else if (childObj.category === 'events') {
+            this.events = childObj['events']
+          }
+       });
+        this.url = data['url'];
+        this.url2 = this.url + '/';
+        this.url3 = data['product_url'] + '/';
       });
       let test = [{one: '1', two: '2'}, {three: '3', four: '4'}];
    }

@@ -19,16 +19,15 @@ export class ProductDetailsComponent implements OnInit {
   url: any;
   prd_img: any;
   constructor(private api: ApiService, private route: ActivatedRoute) {
-    
+
     this.pid = this.route.snapshot.paramMap.get('id');
-    
+
     this.api.Post(PRODUCTDETAILS, {product_id: this.pid} ).then(data  => {
 
         this.data = data['data'];
         console.log(this.data);
         this.assets = data['assets'];
-        this.prd_img = this.assets['image']['image'];
-        console.log(this.assets['image'].image);
+        this.prd_img = this.assets['image'][0]['image'];
         this.recents = data['recentproduct'];
         this.url = data['url'] + '/';
 
