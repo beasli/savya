@@ -11,8 +11,8 @@
         </div>
         
         <!-- <div class="prd-grid prd-carousel js-prd-carousel-tab slick-arrows-aside-simple slick-arrows-mobile-lg data-to-show-4 data-to-show-md-3 data-to-show-sm-2 data-to-show-xs-2 js-product-isotope-sm" id="tabCarousel-01" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'> -->
-        
             <ngx-slick-carousel class="carousel"  #slickModal="slick-carousel"  [config]="slideConfig" >
+
                 <div ngxSlickItem  class="prd prd-new prd-popular" *ngFor="let s of mostselling">
                     <div class="prd-inside" >
                         <div class="prd-img-area"><a (click)='go(s.product_id,s.image)' class="prd-img"><img [src]="url3 + s.image" alt="Tyssot 1853"></a>
@@ -29,8 +29,21 @@
                             </div>
                             <div class="prd-hover">
                                 <div class="prd-action">
-                                    <form action="#"><input type="hidden"> <button class="btn" data-fancybox data-src="#modalCheckOut"><i class="icon icon-handbag"></i><span>Add To Cart</span></button></form> 
-                                    <div class="prd-links hide-mobile products-love-icon"><a href="#" class="icon-eye prd-qview-link js-qview-link" data-fancybox data-src="#modalQuickView"></a> <a (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
+
+                                    <div   *ngIf= "checkCart(s.product_id)" class="row no=gutters" >
+                                        <div class="col-2">
+                                            <button  (click)="qtyUpdate(s.product_id,-1)" class="btn btn-secondary btn-block">-</button>
+                                        </div>
+        
+                                        <div class="col-4 text-right">{{quantity(s.product_id)}}</div>
+        
+                                        <div class="col-2">
+                                            <button  (click)="qtyUpdate(s.product_id,+1)" class="btn btn-secondary btn-block">+</button>
+                                        </div>
+                                    </div>
+                                    <form action="#"><input type="hidden"> <button class="btn"  *ngIf= "!checkCart(s.product_id)"  (click)="addToCart(s)" data-fancybox data-src="#modalCheckOut"><i class="icon icon-handbag"></i><span>Add To Cart</span></button></form> 
+                                    <div class="prd-links hide-mobile"><a href="#" class="icon-eye prd-qview-link js-qview-link" data-fancybox data-src="#mod0alQuickView"></a> <a (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
+
                                 </div>
                                 <div class="prd-options"><span class="label-options">Custom Fields:</span>
                                     <ul class="list-options size-swatch">
@@ -43,6 +56,7 @@
                         </div>
                     </div>
                 </div>
+               
             </ngx-slick-carousel>
         <div class="more-link-wrapper text-center"><a href="#" class="btn-decor">show all</a></div>
     </div>

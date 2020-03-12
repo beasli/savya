@@ -29,6 +29,7 @@ this.api.getlogin.subscribe(data=>{
   if(data==1)
   {
     this.api.updateWishlist();
+    this.api.updateCart();
   }
 })
   }

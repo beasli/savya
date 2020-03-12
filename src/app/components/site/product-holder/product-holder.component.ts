@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
+import { CARTVIEW, CRAUSEL } from 'src/config';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-product-holder',
@@ -42,9 +44,49 @@ export class ProductHolderComponent implements OnInit {
     ]
     
   };
- wish: any;
 
-  constructor(private api: ApiService, private router: Router) { }
+ wish:any;
+ cart:any[];
+
+
+  constructor(private api:ApiService) {
+  
+    console.log(this.mostselling);
+    console.log(this.url3);
+    console.log(this.heading);
+
+    this.api.Post(CARTVIEW,{user_id:this.api.uid}).then(data=>{
+        this.cart=data['data'];
+    }).catch(d=>{
+      console.log(d);
+    })
+   }
+   quantity(pid)
+   {
+        let cart=this.api.getCart();
+        if(cart)
+      {
+              let result=cart.find(x => x.product_id == pid);
+              // console.log(result);
+              if(result)
+              { 
+                    let cartId=result.cart_id;
+                    let c=Number(result.count);
+                    return c;
+                } 
+                else{
+                  return(0);
+                }
+        }
+   }
+   qtyUpdate(pid,value)
+   {
+        this.api.qtyUpdate(pid,value);
+   }
+ 
+ 
+
+  
 
   go(value,img) {
     sessionStorage.setItem('prd_image', img);
@@ -55,8 +97,10 @@ export class ProductHolderComponent implements OnInit {
     //console.log(pid);
     this.api.checkWishlist(pid);
   }
-  checkHeart(pid) {
-    let isInWishlist:boolean;
+
+  checkHeart(pid)
+  {
+
     //console.log("checkheart");
     this.wish = this.api.getWishlist();
     if (this.wish) {
@@ -80,11 +124,26 @@ export class ProductHolderComponent implements OnInit {
         return false;
       }
   }
+  checkCart(pid)
+  {
+      let check=this.api.checkCart(pid);
+     // console.log(check);
+      return check;
+ }
   deleteWishlist(pid)
   {
       this.api.deleteWishlist(pid);
   }
+  addToCart(s)
+  {
+    this.api.addToCart(s);
+  }
   ngOnInit() {
+    console.log("oninit");
+    console.log(this.heading);
+    console.log(this.url3);
+    console.log(this.mostselling);
+
   }
 
 }

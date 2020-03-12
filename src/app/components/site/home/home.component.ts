@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
   };
   constructor(private api: ApiService ) {
       this.api.Post(CRAUSEL, {}).then(data => {
-
         data['body'].forEach(childObj => {
           if (childObj.category === 'app_banners') {
             this.slider_imgs = childObj['app_banners'];

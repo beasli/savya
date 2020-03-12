@@ -20,10 +20,15 @@ message:any="CART IS EMPTY";
 
         this.view();
    }
+   deleteCart(pid)
+   {
+     this.api.deleteCart(pid);
+   }
    view()
    {
-        this.api.Post(CARTVIEW,{uid:this.uid}).then(data=>{
+        this.api.Post(CARTVIEW,{user_id:this.uid}).then(data=>{
           console.log(data);
+          
           this.baseurl=data['url']+"/";
           this.results=data['data'];
           this.alert=false;
@@ -37,6 +42,12 @@ message:any="CART IS EMPTY";
    }
 
   ngOnInit() {
+    this.api.Cart.subscribe(data=>{
+      this.view();
+       console.log("getWishSubscribe"+data);
+       }) 
+    
   }
+  
 
 }

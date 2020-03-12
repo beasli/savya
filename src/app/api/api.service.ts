@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD } from '../../config';
+import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, CARTDELETE, CARTUPDATE } from '../../config';
 import * as CryptoJS from 'crypto-ts';
 import { JsonPipe } from '@angular/common';
 
@@ -13,6 +13,7 @@ export class ApiService {
   @Output() getlogin:EventEmitter<string> = new EventEmitter();
   @Output() getWish:EventEmitter<string> = new EventEmitter();
   @Output() getUserData:EventEmitter<string> = new EventEmitter();
+  @Output() Cart:EventEmitter<string> = new EventEmitter();
   drop:any;
   otp:any;
   otpGuard:any;
@@ -20,11 +21,13 @@ export class ApiService {
   wish:any[];
   event:any;
   
+  
   constructor(public http: HttpClient, private router: Router) {
     if(localStorage.getItem('savya_userInfo'))
     {
      let u=this.getUserInfo();
     this.uid=u.uid;
+    console.log(this.uid);
    }
     // console.log("userid"+this.uid);
     
@@ -69,6 +72,130 @@ export class ApiService {
     });
   }
     
+
+ 
+  
+//cart functions
+
+  updateCart()
+  {
+    //console.log("in update cart function")
+    this.Post(CARTVIEW,{user_id:this.uid}).then(data=>{
+      //console.log(data['data'][0].cart_id);
+      console.log( data);
+      localStorage.setItem('cart',JSON.stringify(data));  
+    }).catch(d=>{
+      console.log(d);
+      localStorage.removeItem('cart');
+      this.Cart.emit("emptycart"+Date.now());
+    })
+  }
+  checkCart(pid)
+  { 
+    //console.log("pid =" + pid)
+        let cart=this.getCart();
+       // console.log(cart);
+        if(cart)
+        {
+                let result=cart.find(x => x.product_id == pid);
+                
+             // console.log(result);
+                if(result)
+                { 
+               //  console.log("present");
+                  return true;
+                
+                }
+                else
+                {
+               // console.log("inner else not present");
+                  return false;
+                  
+                } 
+          }
+          else{
+           // console.log(" external else not present");
+            return false;
+          }
+  }
+getCart()
+{
+  let m=localStorage.getItem('cart');
+  if(m)
+  {
+    let n=JSON.parse(localStorage.getItem('cart'));
+    return n['data'];
+  }
+  else{
+    return null;
+  }
+}
+qtyUpdate(pid,value)
+{
+  console.log("in qtyupdate function");
+  console.log("value="+value);
+   let cart=this.getCart();
+   if(cart)
+   {
+           let result=cart.find(x => x.product_id == pid);
+           console.log(result);
+           if(result)
+           { 
+                let cartId=result.cart_id;
+                let c=Number(result.count);
+               
+                if(c==1&&value==-1)
+                {
+                  this.deleteCart(pid);
+                }
+                else
+                {
+                      c=c+value;
+                    this.Post(CARTUPDATE,{user_id:this.uid,cart_id:cartId,count:c}).then(data=>{
+                      console.log(data);
+                      this.updateCart(); 
+                      this.Cart.emit("cartUpdate"+Date.now()); 
+                    }).catch(d=>{
+                      console.log(d);
+                    })
+                }
+            } 
+     }
+}
+
+  deleteCart(pid)
+  {
+   
+    this.Post(CARTDELETE,{user_id:this.uid,product_id:pid}).then(data=>{
+      //console.log("deletecart"+data)
+      this.updateCart();
+      this.Cart.emit("cartUpdated"+Date.now());
+     
+    }).catch(d=>{
+      this.updateCart();
+      console.log(d);
+      this.Cart.emit("cartUpdated"+Date.now());
+     
+    })
+  }
+  addToCart(product)
+  {
+   console.log(product.product_id);
+    this.Post(CARTADD,{"data":[{"assests":[{"makingCharge":"10.0","materialType":"18K","metal":"Dimaond","option":"percentage","productId":product.product_id,"weight":"7.15"}],"category":"1","count":1,"defaultColor":"","description":"<p>{{product.productname}}</p>","productCode":"SJILR30","productId":product.product_id,"productName":product.productname,"productType":"ring","subCategory":"2","subSubCategory":"1","userid":this.uid}]}).then(data=>{
+      console.log(data);
+      this.updateCart();
+    //  localStorage.setItem('cart',JSON.stringify(data));  
+    }).catch(d=>{
+      console.log(d);
+      
+    })
+  }
+
+
+
+//wishlist functions
+
+
   godetail(value) {
     if (value >= 0) {
        this.router.navigate(['/product-details', value]);
@@ -87,6 +214,7 @@ export class ApiService {
       this.getWish.emit("emptyWishlist"+Date.now());
     })
   }
+
   deleteWishlist(pid)
   {
       this.Post(WISHLISTDELETE,{uid:this.uid,product_id:pid}).then(data=>{
@@ -132,8 +260,6 @@ checkWishlist(pid)
         })
       }    
 }
- 
-
   getWishlist()
   {
     let m=localStorage.getItem('wishlist');
@@ -206,6 +332,7 @@ checkWishlist(pid)
       localStorage.removeItem('savya_userInfo');
       localStorage.removeItem('token');
       localStorage.removeItem('wishlist');
+      localStorage.removeItem('cart');
   }
 setOtp(value)
 {
