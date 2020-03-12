@@ -5,6 +5,8 @@ import { CartComponent } from '../cart/cart.component';
 import { ProductComponent } from '../product/product.component';
 import { RouterModule } from '@angular/router';
 import { AuthGuardService } from '../../auth-guard/auth-guard.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -16,6 +18,7 @@ import { AuthGuardService } from '../../auth-guard/auth-guard.service';
   ],
   imports: [
     CommonModule,
+    NgbModule,
     RouterModule.forChild([
       { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService]},
       { path: 'cart', component: CartComponent},

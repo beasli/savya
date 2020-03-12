@@ -15,6 +15,7 @@ heading: any;
 addresses:[];
 mob:boolean;
 pin:boolean;
+loading: boolean;
   constructor(private api: ApiService, private router: Router, private route: ActivatedRoute) {
     this.uid = this.api.getUserInfo();
     this.uid = this.uid['uid'];
