@@ -1,25 +1,43 @@
-<div class="row" style="padding:5%;" *ngIf="rates">
-        <div class="col-sm-6 padding" *ngFor="let rate of rates">
-        <h2 class='text-center '>{{ (rate.Symbol === 'GLD') ? 'Gold [₹]' : (rate.Symbol === 'SLR') ? 'Silver [₹]' : (rate.Symbol === 'XAUUSD') ? 'Gold [$]' : (rate.Symbol === 'XAGUSD') ? 'Silver [$]' : (rate.Symbol === 'INRSpot') ? 'INR [₹]' : ''}} </h2>
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th><strong>Bid</strong></th>
-                  <th><strong>Ask</strong></th>
-                  <th><strong>High</strong></th>
-                  <th><strong>Low</strong></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{{rate.Bid}}</td>
-                  <td>{{rate.Ask}}</td>
-                  <td>{{rate.High}}</td>
-                  <td>{{rate.Low}}</td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-      
-        
+  <div class="table-box-wrapper  for-desktop hide-mobile" style="padding:5% 0% 0%;" *ngIf="rates" >
+    <div class="each-table-box padding" *ngFor="let rate of rates">
+      <h2 class='text-center '>{{ (rate.Symbol === 'GLD') ? 'Gold [₹]' : (rate.Symbol === 'SLR') ? 'Silver [₹]' : (rate.Symbol === 'XAUUSD') ? 'Gold [$]' : (rate.Symbol === 'XAGUSD') ? 'Silver [$]' : (rate.Symbol === 'INRSpot') ? 'INR [₹]' : ''}}</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><strong>Bid</strong></th>
+              <th><strong>Ask</strong></th>
+              <th><strong>High</strong></th>
+              <th><strong>Low</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{rate.Bid}}</td>
+              <td>{{rate.Ask}}</td>
+              <td>{{rate.High}}</td>
+              <td>{{rate.Low}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
   </div>
+<div class="table-box-wrapper for-mobile" *ngIf="rates">
+  <h2 class='text-center '></h2>
+  <table>
+    <tr>
+        <th></th>
+        <th>Bid</th>
+        <th>Ask</th>
+        <th>Low</th>
+        <th>High</th>
+    </tr>
+    
+    <tr  *ngFor="let rate of rates">
+      <td>{{ (rate.Symbol === 'GLD') ? 'Gold [₹]' : (rate.Symbol === 'SLR') ? 'Silver [₹]' : (rate.Symbol === 'XAUUSD') ? 'Gold [$]' : (rate.Symbol === 'XAGUSD') ? 'Silver [$]' : (rate.Symbol === 'INRSpot') ? 'INR [₹]' : ''}}</td>
+      <td>{{rate.Bid}}</td>
+      <td>{{rate.Ask}}</td>
+      <td>{{rate.High}}</td>
+      <td>{{rate.Low}}</td>
+    </tr>
+  </table>
+</div>

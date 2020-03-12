@@ -1,5 +1,7 @@
 <div class="page-content">
-	
+	<div class="floating-whatsaap-btn">
+        <a href=""><img src="assets/images/WhatsApp.svg"/></a>
+    </div>
     <!-- BN Slider 1 -->
     <app-slider [slider_imgs] = 'slider_imgs' [url] = 'url'></app-slider>
     <!-- //BN Slider 1 -->
@@ -9,6 +11,28 @@
      <!--/Product Holder -->
     <app-liverates></app-liverates>
     <!-- Product Holder -->
+    <!--youtube-video-->
+    <section class="youtube-video py-3 py-md-6">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="youtube-heading text-center">
+                        <h2>We are the most trusted Brand in India</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="youtube-video-box">
+                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/WcfTs5nhlwg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="youtube-video-box">
+                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/tIqJFsgQQGU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <app-product-holder [heading] = '"Mostselling Product"' [url3] = 'url3' [mostselling] = 'mostselling'></app-product-holder>
     <!--/Product Holder -->
     
@@ -26,8 +50,36 @@
     <!--/Testimonial -->
 
      <!-- Testimonials -->
-     <app-testimonials [heading] = '"Partners"' [input] = 'partners'  [url] = '"assets/images/"'></app-testimonials>
+     <!--<app-testimonials [heading] = '"Partners"' [input] = 'partners'  [url] = '"assets/images/"'></app-testimonials>-->
      <!--/Testimonial -->
+
+
+     <div class="holder py-3 py-md-6 fullboxed aside--bg-none  mt-0">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="h1-style">Partneers</h2>
+                <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
+            </div>
+            <div class="testimonials">
+              <ngx-slick-carousel class="carousel" 
+                        #slickModal="slick-carousel" 
+                        [config]="slideConfig" >
+              <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
+                <img src="assets/images/IGI_Expo.jpg" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+              </div>
+              <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
+                <img src="assets/images/download.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+              </div>
+              <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
+                <img src="assets/images/bvclogo.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+              </div>
+              <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
+                <img src="assets/images/mtv_live_stream.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+              </div>
+              </ngx-slick-carousel>
+        </div>
+        
+    </div>
     
 
 

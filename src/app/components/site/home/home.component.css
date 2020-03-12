@@ -1,0 +1,17 @@
+.youtube-video{
+    background-color: #f9f9fa;
+    margin-top:50px;
+}
+.youtube-heading{
+    margin-bottom: 30px;
+}
+.floating-whatsaap-btn{
+    position:fixed;
+    bottom: 20%;
+    right: 26px;
+    z-index:9999;
+}
+.floating-whatsaap-btn img{
+    max-width:50px;
+    height: auto;;
+}
