@@ -10,10 +10,10 @@ declare var $: any;
 })
 
 export class HomeComponent implements OnInit {
-  slider_imgs = [];
-  exclusive = [];
-  mostselling = [];
-  events = [];
+  slider_imgs: any;
+  exclusive: any;
+  mostselling: any;
+  events: any;
   models = [{image: 'model_1.jpg'}, {image: 'model_2.jpg'}]
   partners = [{image: 'IGI_Expo.jpg'}];
   url: any;
