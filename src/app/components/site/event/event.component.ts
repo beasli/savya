@@ -7,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
-event: [];
+event: any;
 constructor(private api: ApiService) {
         this.event = JSON.parse(this.api.getEvent());
-        console.log(this.event);
    }
 register() {
   console.log("register method called");

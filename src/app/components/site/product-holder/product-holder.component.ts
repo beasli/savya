@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { CARTVIEW, CRAUSEL } from 'src/config';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-product-holder',
@@ -19,7 +21,30 @@ export class ProductHolderComponent implements OnInit {
     "infinite": true,
     "autoplay": false,
     "arrows": true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ]
+    
   };
+
  wish:any;
  cart:any[];
 
@@ -58,22 +83,30 @@ export class ProductHolderComponent implements OnInit {
    {
         this.api.qtyUpdate(pid,value);
    }
-  wishlist(pid)
-  {
+ 
+ 
+
+  
+
+  go(value,img) {
+    sessionStorage.setItem('prd_image', img);
+    this.api.godetail(value);
+  }
+  wishlist(pid) {
    // console.log("in wishlist");
     //console.log(pid);
     this.api.checkWishlist(pid);
   }
+
   checkHeart(pid)
   {
-   
+
     //console.log("checkheart");
-    this.wish=this.api.getWishlist();
-    if(this.wish)
-    {
-            let result=this.wish.find(x => x.product_id === pid);
+    this.wish = this.api.getWishlist();
+    if (this.wish) {
+            let result = this.wish.find(x => x.product_id === pid);
         //  console.log("result="+result);
-            if(result)
+            if (result)
             { 
              // console.log("present");
               return true;

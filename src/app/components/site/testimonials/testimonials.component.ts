@@ -10,7 +10,7 @@ export class TestimonialsComponent implements OnInit {
   @Input() input;
   @Input() url;
   @Input() heading;
-
+  @Input() redirect;
   slideConfig = {
     "slidesToShow": 2,
     "slidesToScroll": 1,
@@ -18,12 +18,21 @@ export class TestimonialsComponent implements OnInit {
     "infinite": true,
     "autoplay": true,
     "arrows": false,
+    responsive: [
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      }]
   };
   constructor(private api: ApiService) {
    }
 
    detail(value) {
-    this.api.setEvent(value,this.url);
+     if(this.redirect == 'Y')
+    this.api.setEvent(value, this.url);
   }
 
   ngOnInit() {

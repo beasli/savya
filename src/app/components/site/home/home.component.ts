@@ -10,34 +10,64 @@ declare var $: any;
 })
 
 export class HomeComponent implements OnInit {
-  slider_imgs = [];
-  exclusive = [];
-  mostselling = [];
-  events = [];
+  slider_imgs: any;
+  exclusive: any;
+  mostselling: any;
+  events: any;
   models = [{image: 'model_1.jpg'}, {image: 'model_2.jpg'}]
-  partners = [{image: 'IGI_Expo.jpg'}]
-  
+  partners = [{image: 'IGI_Expo.jpg'}];
   url: any;
   url2: any;
   url3: any;
+  slideConfig = {
+    "slidesToShow": 4,
+    "slidesToScroll": 1,
+    "dots": false,
+    "infinite": true,
+    "autoplay": true,
+    "arrows": false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ]
+  };
   constructor(private api: ApiService ) {
       this.api.Post(CRAUSEL, {}).then(data => {
-      this.slider_imgs = data['body'][0]['app_banners'];
-      this.exclusive = data['body'][3]['exclusive_banners'];
-      this.url = data['url'];
-      this.url2 = this.url + '/';
-      this.url3 = data['product_url'] + '/';
-      this.mostselling = data['body'][4]['product'];
-      this.events = data['body'][5]['events'];
-     console.log("home data");
-      console.log(this.mostselling);
-     console.log(this.url3);
-    //  console.log(this.slider_imgs);
-    //  console.log(this.exclusive);
-     // console.log(this.mostselling[0].diamond.created_at);
-
+        data['body'].forEach(childObj => {
+          if (childObj.category === 'app_banners') {
+            this.slider_imgs = childObj['app_banners'];
+          }
+          else if (childObj.category === 'exclusive_banners') {
+            this.exclusive = childObj['exclusive_banners'];
+          }
+          else if (childObj.category === 'product') {
+            this.mostselling = childObj['product'];
+          }
+          else if (childObj.category === 'events') {
+            this.events = childObj['events']
+          }
+       });
+        this.url = data['url'];
+        this.url2 = this.url + '/';
+        this.url3 = data['product_url'] + '/';
       });
-      let test = [{one: '1', two: '2'}, {three: '3', four: '4'}];
    }
 
   ngOnInit() {

@@ -14,6 +14,7 @@ import { BestSellerProductComponent } from '../best-seller-product/best-seller-p
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { EventComponent } from '../event/event.component';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EventComponent } from '../event/event.component';
     ExclusiveBannerComponent,
     LiveratesComponent,
     EventsComponent,
-    EventComponent
+    EventComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { EventComponent } from '../event/event.component';
       { path: 'home', component: HomeComponent},
       { path: 'filter' , component: FilterProductComponent},
       { path: 'events' , component: EventsComponent},
-      { path: 'event' , component: EventComponent}
+      { path: 'event' , component: EventComponent},
+      { path: 'product-details/:id' , component: ProductDetailsComponent},
     ])
   ]
 })

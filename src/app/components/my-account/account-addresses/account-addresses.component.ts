@@ -17,12 +17,11 @@ export class AccountAddressesComponent implements OnInit {
    getaddress() {
     this.uid = this.api.getUserInfo();
     this.uid = this.uid['uid'];
-    this.api.Post(GETADDRESS, {uid: this.uid}).then(data => {
-      this.addresses = data['data'];});
+    this.api.Post(GETADDRESS, {uid: this.uid}).then(data => {this.addresses = data['data']; });
    }
 
    edit(value) {
-     if (value>=0) {
+     if (value >= 0) {
         this.router.navigate(['/edit-address', value]);
               }
     else {
@@ -32,8 +31,7 @@ export class AccountAddressesComponent implements OnInit {
 
    delete(value) {
     if (confirm ("Are you sure you want to delete this address?"))  {
-      this.api.Post(DELADDRESS, {address_id: value}).then(data => {
-      this.addresses = data['data']; });
+      this.api.Post(DELADDRESS, {address_id: value}).then(data => {this.addresses = data['data']; });
       this.getaddress();
      }
    }
