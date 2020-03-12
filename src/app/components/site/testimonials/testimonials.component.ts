@@ -11,6 +11,8 @@ export class TestimonialsComponent implements OnInit {
   @Input() url;
   @Input() heading;
   @Input() redirect;
+  title: any;
+  desc: any;
   slideConfig = {
     "slidesToShow": 2,
     "slidesToScroll": 1,
@@ -29,10 +31,17 @@ export class TestimonialsComponent implements OnInit {
   };
   constructor(private api: ApiService) {
    }
+   text(value) {
+    if  (this.redirect == 'Y')  {
+     this.title = value.title;
+     this.desc = value.description;
+    }
+   }
 
    detail(value) {
-     if(this.redirect == 'Y')
+     if (this.redirect == 'Y'){
     this.api.setEvent(value, this.url);
+    }
   }
 
   ngOnInit() {

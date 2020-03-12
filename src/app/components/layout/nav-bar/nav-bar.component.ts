@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NAVIGATION, CARTVIEW } from 'src/config';
 import { ApiService } from 'src/app/api/api.service';
@@ -17,7 +18,7 @@ export class NavBarComponent implements OnInit {
   baseurl: string;
   alert: boolean;
   div: boolean;
-  constructor(private api: ApiService ) {
+  constructor(private api: ApiService, private router: Router) {
                   //cart work start //
                   this.uid=this.api.uid;
                   console.log("userid"+this.uid); 
@@ -61,12 +62,16 @@ export class NavBarComponent implements OnInit {
       })
   }
 
+  gofilter(value) {
+    console.log(value);
+    this.router.navigate(['/filter', value]);
+  }
+
 ngOnInit() {
-  this.api.Cart.subscribe(data=>{
+  this.api.Cart.subscribe(data => {
     this.view();
      console.log("getWishSubscribe"+data);
-     }) 
-  
+     });
 }
 
 }
