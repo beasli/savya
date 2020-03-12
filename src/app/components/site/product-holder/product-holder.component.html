@@ -18,7 +18,7 @@
                 <!-- <div ngxSlickItem *ngFor="let slide of input" class="slide">
                 <img src="{{ url + slide.image }}" alt="" width="100%">
                 </div> -->
-                <div *ngIf="mostselling">
+              
                 <div ngxSlickItem  class="prd prd-new prd-popular" *ngFor="let s of mostselling">
                     <div class="prd-inside" >
                         <div class="prd-img-area"><a href="product.html" class="prd-img"><img [src]="url3 + s.image" alt="Tyssot 1853"></a>
@@ -38,7 +38,7 @@
                                             <button  (click)="qtyUpdate(s.product_id,-1)" class="btn btn-secondary btn-block">-</button>
                                         </div>
         
-                                        <div class="col text-center">{{quantity(s.product_id)}}</div>
+                                        <div class="col-4 text-right">{{quantity(s.product_id)}}</div>
         
                                         <div class="col-2">
                                             <button  (click)="qtyUpdate(s.product_id,+1)" class="btn btn-secondary btn-block">+</button>
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-               </div>
+               
             </ngx-slick-carousel>
 
             

@@ -27,6 +27,7 @@ export class ApiService {
     {
      let u=this.getUserInfo();
     this.uid=u.uid;
+    console.log(this.uid);
    }
     // console.log("userid"+this.uid);
     
