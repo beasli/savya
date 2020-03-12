@@ -30,7 +30,7 @@
               "src/styles.css",
               "src/assets/css/plugins.css",
               "src/assets/css/custom.css",
-              "src/assets/fonts/icomoon/icomoon.css",
+              "src/assets/fonts/icomoon/icomoon.css"
             ],
             "scripts": [
               "src/assets/js/plugins.js",
@@ -130,6 +130,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "savya"
+    }
+  },
+  "defaultProject": "savya",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -18,6 +18,14 @@ export class TestimonialsComponent implements OnInit {
     "infinite": true,
     "autoplay": true,
     "arrows": false,
+    responsive: [
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      }]
   };
   constructor(private api: ApiService) {
    }

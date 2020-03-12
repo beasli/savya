@@ -19,6 +19,35 @@ export class HomeComponent implements OnInit {
   url: any;
   url2: any;
   url3: any;
+  slideConfig = {
+    "slidesToShow": 4,
+    "slidesToScroll": 1,
+    "dots": false,
+    "infinite": true,
+    "autoplay": true,
+    "arrows": false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ]
+  };
   constructor(private api: ApiService ) {
       this.api.Post(CRAUSEL, {}).then(data => {
 
