@@ -37,7 +37,7 @@
     <!--/Product Holder -->
     
     
-    <app-testimonials [heading] = '""' [input] = 'models'  [url] = '"assets/images/model/"'></app-testimonials>
+    <app-testimonials [heading] = '""' [input] = 'models' [redirect] = '"N"'  [url] = '"assets/images/model/"'></app-testimonials>
 
     <!-- Promotional Section -->
     <app-exclusive-banner [url2] = 'url2' [exclusive] = 'exclusive'></app-exclusive-banner>
@@ -46,11 +46,11 @@
    
 
     <!-- Testimonials -->
-    <app-testimonials [heading] = '"Events"' [input] = 'events'  [url] = 'url2'></app-testimonials>
+    <app-testimonials [heading] = '"Events"' [redirect] = '"Y"' [input] = 'events'  [url] = 'url2'></app-testimonials>
     <!--/Testimonial -->
 
      <!-- Testimonials -->
-     <!--<app-testimonials [heading] = '"Partners"' [input] = 'partners'  [url] = '"assets/images/"'></app-testimonials>-->
+     <!--<app-testimonials [heading] = '"Partners"' [redirect] = '"N"' [input] = 'partners'  [url] = '"assets/images/"'></app-testimonials>-->
      <!--/Testimonial -->
 
 
@@ -81,7 +81,5 @@
         
     </div>
     
-
-
 
 </div>
