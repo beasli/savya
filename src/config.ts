@@ -1,4 +1,4 @@
-export const apiUrl = 'http://newapp.savyajewels.net/api/';
+export const apiUrl =  'http://admin.savyajewelsbusiness.com/api/';
 // authentication
 export const LOGIN = 'user/login';
 export const REGISTER = 'user/register';
