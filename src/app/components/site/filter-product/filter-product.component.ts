@@ -13,12 +13,12 @@ export class FilterProductComponent implements OnInit {
   data:any;
   
   constructor(private api: ApiService, private route: ActivatedRoute) {
-    this.route.queryParamMap.subscribe(params => {this.subid=params;
+    this.route.queryParamMap.subscribe(params => {this.subid = params;
       this.getsubsub ();
     })
   }
   getsubsub (){
-    this.api.Post(SUBCATEGORYTYPE, {subcategory_id:this.subid } ).then(data  => {
+    this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subid } ).then(data  => {
       this.data = data['data'];
       console.log(data);});
   }
