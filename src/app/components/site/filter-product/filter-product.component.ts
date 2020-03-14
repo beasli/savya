@@ -13,7 +13,7 @@ export class FilterProductComponent implements OnInit {
   data:any;
   
   constructor(private api: ApiService, private route: ActivatedRoute) {
-    this.getsubsub();
+    //this.getsubsub();
     this.route.params.subscribe(params => {
       this.subid = params.id;
       this.getsubsub();
