@@ -35,21 +35,41 @@
             <div class="next-menu-scroll icon-angle-right next-menu-js"></div>
             <!--//navigation-->
             <div class="col-auto minicart-holder">
-                <div class="minicart minicart-js"><a href="#" class="minicart-link"><i class="icon icon-handbag"></i> <span class="minicart-qty">3</span> <span class="minicart-title">Shopping Cart</span> <span class="minicart-total">₹750.00</span></a>
+                <div class="minicart minicart-js"><a href="#" class="minicart-link"><i class="icon icon-handbag"></i> <span class="minicart-qty">{{ProductsInCart()}}</span> <span class="minicart-title">Shopping Cart</span> <span class="minicart-total">₹750.00</span></a>
                     <div class="minicart-drop">
                         <div class="container">
                             <div class="minicart-drop-close">CLOSE</div>
-                            <div class="minicart-drop-content" *ngIf="div">
-                                <h3>Recently added items:</h3>
-                                <div class="minicart-prd"  *ngFor="let r of results">
-                                    <div class="minicart-prd-image"><a href="#"><img src="{{baseurl + r.image}}" data-srcset="assets/images/products/product-05.jpg" class="lazyload" alt=""></a></div>
-                                    <div class="minicart-prd-name">
-                                        <h5><a href="#">Category</a></h5>
-                                        <h2><a href="#">{{r.productName}}</a></h2>
+                            <div class="minicart-drop-content" >
+                                <div *ngIf="div">
+                                    <h3>Recently added items:</h3>
+                                    <div class="minicart-prd"  *ngFor="let r of results">
+                                        <div class="minicart-prd-image"><a href="#"><img src="{{baseurl + r.image}}" data-srcset="assets/images/products/product-05.jpg" class="lazyload" alt=""></a></div>
+                                        <div class="minicart-prd-name">
+                                            <h5><a href="#">Category</a></h5>
+                                            <h2><a href="#">{{r.productName}}</a></h2>
+                                        </div>
+                                        <div   *ngIf= "checkCart(r.product_id)" class="row no=gutters" >
+                                            <div class="row">
+                                                    <div class="col-1">
+                                                        <button  (click)="qtyUpdate(r.product_id,-1)" class="btn btn-secondary btn-block">-</button>
+                                                    </div>
+                            
+                                                    <div class="col-2 text-right">{{quantity(r.product_id)}}</div>
+                            
+                                                    <div class="col-1 ">
+                                                        <button  (click)="qtyUpdate(r.product_id,+1)" class="btn btn-secondary btn-block">+</button>
+                                                    </div>
+                                        </div>
+                                        </div>
+                                        <!-- <div class="minicart-prd-qty"><span>qty:</span> <b>{{r.count}}</b></div> -->
+                                        <div class="minicart-prd-price"><span>price:</span> <b>₹75.00</b></div>
+                                        <div class="minicart-prd-action"><a href="#" class="icon-heart js-label-wishlist"></a> <a routerLink="/product" class="icon-pencil"></a> <a (click)="deleteCart(r.product_id)" class="icon-cross js-product-remove"></a></div>
                                     </div>
-                                    <div class="minicart-prd-qty"><span>qty:</span> <b>{{r.count}}</b></div>
-                                    <div class="minicart-prd-price"><span>price:</span> <b>₹75.00</b></div>
-                                    <div class="minicart-prd-action"><a href="#" class="icon-heart js-label-wishlist"></a> <a routerLink="/product" class="icon-pencil"></a> <a (click)="deleteCart(r.product_id)" class="icon-cross js-product-remove"></a></div>
+                                </div>
+                                <div class="col-md-9 aside" *ngIf="alert">
+                                    <ngb-alert [dismissible]="false" >
+                                        <strong>{{message}}</strong> 
+                                    </ngb-alert>
                                 </div>
                                 <!-- <div class="minicart-prd">
                                     <div class="minicart-prd-image"><a href="#"><img src="assets/images/products/product-placeholder.png" data-srcset="assets/images/products/product-02.jpg" class="lazyload" alt=""></a></div>
@@ -73,15 +93,11 @@
                                 </div> -->
                                 <div class="minicart-drop-total">
                                     <div class="float-right"><span class="minicart-drop-summa"><span>Cart Subtotal:</span> <b>₹294.00</b></span>
-                                        <div class="minicart-drop-btns-wrap"><a href="checkout.html" class="btn"><i class="icon-check-box"></i><span>checkout</span></a> <a href="cart.html" class="btn btn--alt"><i class="icon-handbag"></i><span>view cart</span></a></div>
+                                        <div class="minicart-drop-btns-wrap"><a href="checkout.html" class="btn"><i class="icon-check-box"></i><span>checkout</span></a> <a routerLink="/cart" class="btn btn--alt is-hovered"><i class="icon-handbag"></i><span>view cart</span></a></div>
                                     </div>
                                     <div  class="float-left"><a routerLink="/cart"class="btn btn--alt minicart-drop-close"><i class="icon-handbag"></i><span >view cart</span></a></div>
                                 </div>
-                                <div class="col-md-9 aside" *ngIf="alert">
-                                    <ngb-alert [dismissible]="false" >
-                                        <strong>{{message}}</strong> 
-                                    </ngb-alert>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>

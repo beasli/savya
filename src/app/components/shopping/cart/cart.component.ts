@@ -40,7 +40,34 @@ message:any="CART IS EMPTY";
           console.log(d);
         })
    }
-
+   checkCart(pid)
+   {
+       let check=this.api.checkCart(pid);
+      // console.log(check);
+       return check;
+  }
+   quantity(pid)
+   {
+        let cart=this.api.getCart();
+        if(cart)
+      {
+              let result=cart.find(x => x.product_id == pid);
+              // console.log(result);
+              if(result)
+              { 
+                    let cartId=result.cart_id;
+                    let c=Number(result.count);
+                    return c;
+                } 
+                else{
+                  return(0);
+                }
+        }
+   }
+   qtyUpdate(pid,value)
+   {
+        this.api.qtyUpdate(pid,value);
+   }
   ngOnInit() {
     this.api.Cart.subscribe(data=>{
       this.view();

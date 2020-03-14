@@ -49,6 +49,30 @@ message:any;
       this.api.deleteWishlist(pid);
      
   }
+  addToCart(s)
+  {
+    this.api.addToCart(s);
+  }
+  checkProductInCart(pid)
+  {
+     let cart=this.api.getCart();
+     console.log(cart);
+     if(cart)
+     {
+             let result=cart.find(x => x.product_id == pid);
+            
+             if(result)
+             { 
+             // console.log(result);
+                 return false;
+            }
+            else{
+             // console.log("this product is not present in cart");
+              return true;
+            } 
+       }
+  }  
+
 
   ngOnInit() {
 
