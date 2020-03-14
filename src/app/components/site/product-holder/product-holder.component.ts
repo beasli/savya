@@ -51,9 +51,9 @@ export class ProductHolderComponent implements OnInit {
 
   constructor(private api:ApiService) {
   
-    console.log(this.mostselling);
-    console.log(this.url3);
-    console.log(this.heading);
+    // console.log(this.mostselling);
+    // console.log(this.url3);
+    // console.log(this.heading);
 
     this.api.Post(CARTVIEW,{user_id:this.api.uid}).then(data=>{
         this.cart=data['data'];
@@ -138,10 +138,10 @@ export class ProductHolderComponent implements OnInit {
     this.api.addToCart(s);
   }
   ngOnInit() {
-    console.log("oninit");
-    console.log(this.heading);
-    console.log(this.url3);
-    console.log(this.mostselling);
+    // console.log("oninit");
+    // console.log(this.heading);
+    // console.log(this.url3);
+    // console.log(this.mostselling);
 
   }
 
