@@ -21,7 +21,7 @@ export class NavBarComponent implements OnInit {
   div:boolean=false;
   baseurl:any;
   message:any="CART IS EMPTY";
-  constructor(private api: ApiService, private router: Router) ) {
+  constructor(private api: ApiService, private router: Router) {
     
                   //cart work start //
                   this.uid=this.api.uid;
