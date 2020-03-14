@@ -10,9 +10,9 @@ import { PRODUCTDETAILS, CATEGORY, SUBCATEGORY, SUBCATEGORYTYPE } from 'src/conf
 })
 export class ProductDetailsComponent implements OnInit {
   pid: string;
-  data: [];
-  assets: [];
-  recents: [];
+  data: any;
+  assets: any;
+  recents: any;
   category: any;
   subcategory: any;
   subsubcategory: any;

@@ -37,7 +37,7 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
     SlickCarouselModule,
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
-      { path: 'filter' , component: FilterProductComponent},
+      { path: 'filter/:id' , component: FilterProductComponent},
       { path: 'events' , component: EventsComponent},
       { path: 'event' , component: EventComponent},
       { path: 'product-details/:id' , component: ProductDetailsComponent},

@@ -88,8 +88,7 @@ export class ProductHolderComponent implements OnInit {
 
   
 
-  go(value,img) {
-    sessionStorage.setItem('prd_image', img);
+  go(value) {
     this.api.godetail(value);
   }
   wishlist(pid) {

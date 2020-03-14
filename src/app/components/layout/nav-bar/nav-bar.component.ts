@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NAVIGATION, CARTVIEW } from 'src/config';
 import { ApiService } from 'src/app/api/api.service';
@@ -13,13 +14,14 @@ export class NavBarComponent implements OnInit {
   catall = [];
   catwithsub = [];
   catwithoutsub = [];
+
   uid:any;
   results:any[];
   alert:boolean=false;
   div:boolean=false;
   baseurl:any;
   message:any="CART IS EMPTY";
-  constructor(private api: ApiService ) {
+  constructor(private api: ApiService, private router: Router) ) {
     
                   //cart work start //
                   this.uid=this.api.uid;
@@ -74,6 +76,12 @@ ProductsInCart()
         console.log(d);
       })
   }
+
+  gofilter(value) {
+    console.log(value);
+    this.router.navigate(['/filter', value]);
+  }
+
   checkCart(pid)
   {
       let check=this.api.checkCart(pid);
@@ -103,12 +111,11 @@ ProductsInCart()
        this.api.qtyUpdate(pid,value);
   }
 ngOnInit() {
-  this.api.Cart.subscribe(data=>{
+  this.api.Cart.subscribe(data => {
     this.view();
     console.log("changed");
      console.log("getWishSubscribe"+data);
-     }) 
-  
+     });
 }
 
 }

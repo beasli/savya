@@ -10,19 +10,19 @@
                     <ul  class="mmenu mmenu-js">
                         
                         <ul class="mmenu mmenu-js">
-                            <li *ngFor='let s of catwithsub' class="mmenu-item--simple"><a href="#" title="">{{s.category}}<span class="menu-label menu-label--color1">NEW</span></a>
+                            <li *ngFor='let s of catwithsub' class="mmenu-item--simple"><a href="javascript:void(0)" title="">{{s.category}}<span class="menu-label menu-label--color1">NEW</span></a>
                                 <div class="mmenu-submenu">
                                     <ul class="submenu-list">
-                                        <li *ngFor='let p of s.subcategory'><a href="category.html">{{p.subcategory}}</a>
+                                        <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" (click)='gofilter(p.subcategory_id)'>{{p.subcategory}}</a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
 
-                            <li class="mmenu-item--simple"><a href="#" title="">More<span class="menu-label menu-label--color1">NEW</span></a>
+                            <li class="mmenu-item--simple"><a href="javascript:void(0)" title="">More<span class="menu-label menu-label--color1">NEW</span></a>
                                 <div class="mmenu-submenu">
                                     <ul class="submenu-list">
-                                        <li *ngFor='let s of catwithoutsub'><a href="#" title="">{{s.category}}</a></li>
+                                        <li *ngFor='let s of catwithoutsub'><a href="javascript:void(0)" title="">{{s.category}}</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -72,24 +72,24 @@
                                     </ngb-alert>
                                 </div>
                                 <!-- <div class="minicart-prd">
-                                    <div class="minicart-prd-image"><a href="#"><img src="assets/images/products/product-placeholder.png" data-srcset="assets/images/products/product-02.jpg" class="lazyload" alt=""></a></div>
+                                    <div class="minicart-prd-image"><a href="javascript:void(0)"><img src="assets/images/products/product-placeholder.png" data-srcset="assets/images/products/product-02.jpg" class="lazyload" alt=""></a></div>
                                     <div class="minicart-prd-name">
-                                        <h5><a href="#">Category</a></h5>
-                                        <h2><a href="#">Product name</a></h2>
+                                        <h5><a href="javascript:void(0)">Category</a></h5>
+                                        <h2><a href="javascript:void(0)">Product name</a></h2>
                                     </div>
                                     <div class="minicart-prd-qty"><span>qty:</span> <b>1</b></div>
                                     <div class="minicart-prd-price"><span>price:</span> <b>₹2000</b></div>
-                                    <div class="minicart-prd-action"><a href="#" class="icon-heart js-label-wishlist"></a> <a routerLink="/product" class="icon-pencil"></a> <a href="#" class="icon-cross js-product-remove"></a></div>
+                                    <div class="minicart-prd-action"><a href="javascript:void(0)" class="icon-heart js-label-wishlist"></a> <a routerLink="/product" class="icon-pencil"></a> <a href="javascript:void(0)" class="icon-cross js-product-remove"></a></div>
                                 </div>
                                 <div class="minicart-prd">
-                                    <div class="minicart-prd-image"><a href="#"><img src="assets/images/products/product-placeholder.png" data-srcset="assets/images/products/product-10.jpg" class="lazyload" alt=""></a></div>
+                                    <div class="minicart-prd-image"><a href="javascript:void(0)"><img src="assets/images/products/product-placeholder.png" data-srcset="assets/images/products/product-10.jpg" class="lazyload" alt=""></a></div>
                                     <div class="minicart-prd-name">
-                                        <h5><a href="#">Category</a></h5>
-                                        <h2><a href="#">Product name</a></h2>
+                                        <h5><a href="javascript:void(0)">Category</a></h5>
+                                        <h2><a href="javascript:void(0)">Product name</a></h2>
                                     </div>
                                     <div class="minicart-prd-qty"><span>qty:</span> <b>1</b></div>
                                     <div class="minicart-prd-price"><span>price:</span> <b>₹19900</b></div>
-                                    <div class="minicart-prd-action"><a href="#" class="icon-heart js-label-wishlist"></a> <a routerLink="/product" class="icon-pencil"></a> <a href="#" class="icon-cross js-product-remove"></a></div>
+                                    <div class="minicart-prd-action"><a href="javascript:void(0)" class="icon-heart js-label-wishlist"></a> <a routerLink="/product" class="icon-pencil"></a> <a href="javascript:void(0)" class="icon-cross js-product-remove"></a></div>
                                 </div> -->
                                 <div class="minicart-drop-total">
                                     <div class="float-right"><span class="minicart-drop-summa"><span>Cart Subtotal:</span> <b>₹294.00</b></span>
