@@ -8,15 +8,17 @@ import { ApiService } from 'src/app/api/api.service';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  uid:any;
+
   url: any;
   catall = [];
   catwithsub = [];
   catwithoutsub = [];
-  results: any;
-  baseurl: string;
-  alert: boolean;
-  div: boolean;
+  uid:any;
+  results:any[];
+  alert:boolean=false;
+  div:boolean=false;
+  baseurl:any;
+  message:any="CART IS EMPTY";
   constructor(private api: ApiService ) {
     
                   //cart work start //
@@ -60,8 +62,7 @@ ProductsInCart()
   view()
   {
       this.api.Post(CARTVIEW,{user_id:this.uid}).then(data=>{
-        console.log(data);
-        
+        console.log(data);  
         this.baseurl=data['url']+"/";
         this.results=data['data'];
         this.alert=false;
@@ -104,6 +105,7 @@ ProductsInCart()
 ngOnInit() {
   this.api.Cart.subscribe(data=>{
     this.view();
+    console.log("changed");
      console.log("getWishSubscribe"+data);
      }) 
   
