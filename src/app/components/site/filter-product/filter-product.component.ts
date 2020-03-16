@@ -10,22 +10,20 @@ import { SUBCATEGORYTYPE } from 'src/config';
 })
 export class FilterProductComponent implements OnInit {
   subid: any;
-  data:any;
-  
+  data: any;
+
   constructor(private api: ApiService, private route: ActivatedRoute) {
-    //this.getsubsub();
     this.route.params.subscribe(params => {
       this.subid = params.id;
       this.getsubsub();
       console.log(params);
       });
   }
-  getsubsub (){
+  getsubsub() {
     this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subid } ).then(data  => {
       this.data = data['data'];
-      console.log(data);});
+      console.log(data); });
   }
-  
 
   ngOnInit() {
   }

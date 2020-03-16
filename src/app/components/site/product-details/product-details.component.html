@@ -90,11 +90,17 @@
                         
                         <div class="prd-block_options topline">
                             <div class="prd-size swatches">
-                                <span class="option-label">Gold:</span> 
-                                <div class="radio-group">
-                                    <input type="radio" id="18kt" name="gold"><label for="18kt">18Kt</label>
-                                    <input type="radio" id="20kt" name="gold"><label for="20kt">20Kt</label>
-                                    <input type="radio" id="22kt" name="gold"><label for="22kt">22Kt</label>
+                                <span class="option-label" *ngIf=(assets.gold)>Gold:</span>
+                                <span class="option-label" *ngIf=(assets.productsilver)>Silver:</span>
+                                <span class="option-label" *ngIf=(assets.productpaltinum)>Paltinum:</span> 
+                                <div *ngIf=(assets.gold) class="radio-group">
+                                <span *ngFor='let s of assets.gold'><input type="radio" id="s.goldquality" name="gold"><label for="s.goldquality">{{s.goldquality}}</label></span>
+                                </div>
+                                <div *ngIf=(assets.productsilver) class="radio-group">
+                                    <span *ngFor='let s of assets.productsilver'><input type="radio" id="s.silverquality" name="productsilver"><label for="s.productpaltinum">{{s.goldquality}}</label></span>
+                                </div>
+                                <div *ngIf=(assets.productpaltinum) class="radio-group">
+                                    <span *ngFor='let s of assets.productpaltinum'><input type="radio" id="s.platinumquality" name="productpaltinum"><label for="s.productpaltinum">{{s.goldquality}}</label></span>
                                 </div>
                             </div>
                             

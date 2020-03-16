@@ -27,6 +27,7 @@ export class ProductDetailsComponent implements OnInit {
         this.data = data['data'];
         console.log(this.data);
         this.assets = data['assets'];
+        console.log(this.assets);
         this.prd_img = this.assets['image'][0]['image'];
         this.recents = data['recentproduct'];
         this.url = data['url'] + '/';

@@ -138,10 +138,6 @@ export class ProductHolderComponent implements OnInit {
     this.api.addToCart(s);
   }
   ngOnInit() {
-    // console.log("oninit");
-    // console.log(this.heading);
-    // console.log(this.url3);
-    // console.log(this.mostselling);
 
   }
 
