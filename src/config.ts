@@ -50,4 +50,5 @@ export const PRODUCTDETAILS = 'single/product/details';
 export const CATEGORY = 'user/category/all';
 export const SUBCATEGORY = 'user/subcategory/single';
 export const SUBCATEGORYTYPE = 'user/subsubcategory/single';
+export const PRODUCTLIST = 'product/list';
 
