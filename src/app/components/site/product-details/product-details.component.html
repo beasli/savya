@@ -82,7 +82,15 @@
                             }
                         </style>
                         
-                        
+                        <div *ngIf=(data.size)>
+                        <label for="id_select"> Select Size </label>
+                        <select id="id_select" (change)="sizechange($event.target.value)" autofocus="true">
+                            <option *ngFor="let option of sizes" [value]="option" [selected]="option === defaultsize">
+                              {{option}}
+                            </option>
+                        </select>
+                        </div>
+
                         <div  class="prd-block_options topline ">
                             <div *ngIf=(assets.gold.length) class="prd-size swatches">
                                 <span class="option-label">Gold:</span>
@@ -92,11 +100,14 @@
                                 </div>
 
                                 <div *ngIf=(assets.gold.length)>
-                                    <div *ngIf=(gold.goldweight) class="option-label">Gold (weight):  {{gold.goldweight}} gram</div>
+                                    <div *ngIf=(gold.goldweight)>Gold (weight):  {{gold.goldweight}} gram</div>
                                     <div *ngIf=(assets.gold.length) class="option-label">Fine Gold Rate:  {{pricegold.price}} Per gram</div>
                                     <div *ngIf=(gold.wastage) class="option-label">Gold wastage:  {{gold.wastage}} %</div>
-                                    <div *ngIf=(gold.makingcharge) class="option-label">Making Charges:  {{gold.makingcharge}}</div>
-                                    <div *ngIf=(gold.option) class="option-label">Gold Charges Type:  {{gold.option}}</div>
+                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Gold wastage:  {{gold.makingcharge}} %</div>
+                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Making Charges:  {{gold.makingcharge}}</div>
+                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Weight:  {{finegold}}</div>
+                                    <div *ngIf="gold.option!= 'percentage'" class="option-label">Gold Charges Type:  {{gold.option}}</div>
+                                    <div class="option-label">Total Gold Price:  {{totalgold}}</div>
                                 </div>
 
                                 <div *ngIf=(assets.productsilver)>
@@ -108,14 +119,17 @@
                                 </div>
 
                                 <div *ngIf=(assets.productpaltinum)>
-                                    <div *ngIf=(assets.productpaltinum.platinum_qty)>Paltinum (weight):  {{assets.productpaltinum.platinum_qty}} gram</div>
-                                    <div *ngIf=(assets.productpaltinum.platinum_qty) class="option-label">Fine Paltinum Rate:  {{this.pricelist.platinum[0].price}} Per gram</div>
-                                    <div *ngIf=(assets.productpaltinum.wastage) class="option-label">Planitum wastage:  {{assets.productpaltinum.wastage}} %</div>
-                                    <div *ngIf=(assets.productpaltinum.platinum_charge) class="option-label">Making Charges:  {{assets.productpaltinum.platinum_charge}}</div>
-                                    <div *ngIf=(assets.productpaltinum.charge_type) class="option-label">Charges Type:  {{assets.productpaltinum.charge_type}}</div> 
+                                    <div *ngIf=(assets.productpaltinum.platinum_qty)>Platinum (weight):  {{platinum.platinum_qty}} gram</div>
+                                    <div *ngIf=(assets.productpaltinum.platinum_qty) class="option-label">Fine Platinum Rate:  {{this.pricelist.platinum[0].price}} Per gram</div>
+                                    <div *ngIf=(platinum.wastage) class="option-label">Planitum wastage:  {{platinum.wastage}} %</div>
+                                    <div *ngIf="platinum.charge_type == 'percentage'" class="option-label">Planitum wastage:  {{platinum.platinum_charge}} %</div>
+                                    <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Making Charges:  {{platinum.platinum_charge}}</div>
+                                    <div *ngIf="platinum.charge_type == 'percentage'" class="option-label">Fine Platinum Weight:  {{fineplat}}</div>
+                                    <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Charges Type:  {{platinum.charge_type}}</div>
+                                    <div class="option-label">Total Platinum Price:  {{totalplat}}</div> 
                                 </div>
                             
-                            <div *ngIf=(assets.diamond) class="prd-size swatches">
+                            <div *ngIf=(assets.diamond[0]) class="prd-size swatches">
                                 <span class="option-label">Diamond:</span>
                                     <div class="radio-group">
                                         <ng-container *ngFor='let s of assets.diamond;let i = index'>
@@ -125,7 +139,7 @@
                                     </div>
                             </div>
 
-                            <div *ngIf=(assets.diamond)  class="prd-size swatches">
+                            <div *ngIf=(assets.diamond[0])  class="prd-size swatches">
                                 <span class="option-label">Diamond Clarity:</span>
                                     <div class="radio-group">
                                         <ng-container *ngFor='let s of diamondclarity;let i = index'>
@@ -135,7 +149,7 @@
                                     </div>
                             </div>
 
-                            <div *ngIf=(assets.diamond)  class="prd-size swatches">
+                            <div *ngIf=(assets.diamond[0])  class="prd-size swatches">
                                 <span class="option-label">Diamond Color:</span>
                                     <div class="radio-group">
                                         <ng-container *ngFor='let s of diamondcolour;let i = index'>
@@ -153,23 +167,24 @@
                                 <div *ngIf=(assets.diamond[0].type) class="option-label">Charges Type:  {{assets.diamond[0].type}}</div> 
                                 <div>Diamond Total: {{totaldiamond}} </div>
                             </div>
-                            
+<!--                             
                             <div class="prd-size swatches">
                                 <span class="option-label">Stone:</span> 
                                 <div class="radio-group">
                                     <input type="radio" id="ruby" name="stone"><label for="ruby">Ruby</label>
                                 </div>
                             </div>
-                            
+                             -->
 
                             <div class="prd-block_qty"><span class="option-label">Qty:</span>
                                 <div class="qty qty-changer">
-                                    <fieldset><input type="button" value="&#8210;" class="decrease"> <input type="text" class="qty-input" value="2" data-min="0" data-max="10"> <input type="button" value="+" class="increase"></fieldset>
+                                    <fieldset><input type="button" value="&#8210;" class="decrease"> <input type="text" class="qty-input" value="1" (input)="quantity($event.target.value)" data-min="0" data-max="10"> <input type="button" value="+" class="increase"></fieldset>
                                 </div><span class="option-label">max <span class="qty-max">10</span> item(s)</span>
                             </div>
+
                         </div>
                         <div class="prd-block_actions topline">
-                            <div class="prd-block_price"><span class="prd-block_price--actual">₹{{data.productcode}}</span></div>
+                            <div class="prd-block_price"><span class="prd-block_price--actual">₹{{totalprice}}</span></div>
                             <div class="btn-wrap"><button class="btn btn--add-to-cart" data-fancybox data-src="#modalCheckOut"><i class="icon icon-handbag"></i><span>Add to cart</span></button></div>
                             <div class="prd-block_link"><a href="#" class="icon-heart-1"></a> <a href="#" class="icon-share"></a></div>
                         </div>
