@@ -27,8 +27,8 @@ export class ProductDetailsComponent implements OnInit {
   diamondclarity: any;
   diamondcolour: any;
   defaultdiamond: any;
-  pricediamond = 0;
-  totaldiamond: any;
+  pricediamond:any;
+  totaldiamond = 0;;
   totalgold = 0;
   finegold: number;
   platinum: any;
