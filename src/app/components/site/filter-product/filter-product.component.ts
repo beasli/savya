@@ -26,6 +26,7 @@ export class FilterProductComponent implements OnInit {
   message:string="NO PRODUCT AVAILABLE";
   f:any;
   constructor(private api: ApiService, private route: ActivatedRoute) {
+
     this.route.params.subscribe(params => {
       this.subid = params.id;
       this.getsubsub();
