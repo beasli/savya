@@ -30,16 +30,17 @@ export class ProductDetailsComponent implements OnInit {
   pricediamond:any;
   totaldiamond = 0;;
   totalgold = 0;
-  finegold: number;
+  finegold: any;
   platinum: any;
   priceplat: any;
-  fineplat: number;
+  fineplat: any;
   totalplat = 0;
   defaultsize: any;
   sizes: any;
   selectedsize: any;
   totalprice: any;
   certificate: any;
+  certificateurl:any;
   constructor(private api: ApiService, private route: ActivatedRoute) {
 
     this.api.Post(PRICELIST, {} ).then(data  => {
@@ -74,25 +75,23 @@ export class ProductDetailsComponent implements OnInit {
     this.api.Post(PRODUCTDETAILS, {product_id: this.pid} ).then(data  => {
 
       this.data = data['data'];
-      // console.log(this.data);
       this.assets = data['assets'];
       // console.log(this.assets);
-      this.prd_img = this.assets['image'][0]['image'];
-    //  this.certificate = this.assets['Certification'][0]['image'];
+      this.prd_img = this.assets['image'];
+      this.certificate = data['Certification'];
+      this.certificateurl = data['certificte_url']+'/';
+      console.log(data['certificte_url'])
       this.recents = data['recentproduct'];
       this.url = data['url'] + '/';
       if (this.data.size) {
         this.defaultsize = this.data.default_size;
         this.sizes = this.data.size_type.split(',');
         this.selectedsize = this.defaultsize;
-        console.log(this.defaultsize);
-        console.log(this.sizes);
-        console.log(this.selectedsize);
       }
       if (this.assets.gold.length) {
         this.getgold(this.assets.gold[0]);
       }
-
+      console.log(this.diamond);
       if (this.assets.diamond.length) {
         this.diamond = this.assets.diamond[0];
         this.diamondcolour = this.diamond.diamondcolor.split(',');
@@ -135,6 +134,7 @@ export class ProductDetailsComponent implements OnInit {
      if (this.gold.option == "pergram") {
           // console.log("per gram");
           this.totalgold  =  (Number(this.pricegold.price) + Number(this.gold.makingcharge)) * Number(this.gold.goldweight);
+          this.finegold = this.totalgold;
      }
 
      if (this.gold.option == "percentage") {
@@ -150,6 +150,7 @@ export class ProductDetailsComponent implements OnInit {
       let wasteprice = ((Number(this.gold.goldweight) / 100) *  Number(this.gold.wastage)) * Number(this.pricegold.price);
       this.totalgold = (Number(this.pricegold.price) + Number(this.gold.makingcharge)) * Number(this.finegold) + wasteprice;
      }
+     this.finegold = this.finegold.toFixed(2);
      this.totalgold = Math.round(this.totalgold);
      this.totalprice = this.totaldiamond+this.totalgold+this.totalplat;
     //  console.log( this.totalgold);
@@ -167,7 +168,8 @@ export class ProductDetailsComponent implements OnInit {
     if (this.platinum.charge_type == "pergram") {
         //  console.log("per gram");
          this.totalplat =  (Number(this.priceplat[0].price) + Number(this.platinum.platinum_charge)) * Number(this.platinum.platinum_qty);
-        //  console.log(this.priceplat[0].price);
+         this.fineplat = this.totalplat;
+         //  console.log(this.priceplat[0].price);
         //  console.log(this.platinum.platinum_charge);
         //  console.log(this.platinum.platinum_qty);
         //  console.log(this.totalplat);
@@ -190,6 +192,7 @@ export class ProductDetailsComponent implements OnInit {
     }
     this.totalplat = Math.round(this.totalplat);
     // console.log(this.totalplat);
+    this.fineplat = this.fineplat.toFixed(2);
     this.totalprice = this.totaldiamond+this.totalgold+this.totalplat;
   }
    color(value) {

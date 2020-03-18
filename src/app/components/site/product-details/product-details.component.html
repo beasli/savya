@@ -2,9 +2,10 @@
     <div class="holder mt-0">
         <div class="container">
             <ul class="breadcrumbs">
-                <li><a href="index-2.html">Home</a></li>
-                <li><a href="category.html">Recommended products</a></li>
-                <li><span>hello</span></li>
+                <li><a>Home</a></li>
+                <li><a>{{category}}</a></li>
+                <li><a>{{subcategory}}</a></li>
+                <li><a>{{data.productname}}</a></li>
             </ul>
         </div>
     </div>
@@ -16,14 +17,21 @@
                     <div class="prd-block_info js-prd-m-holder mb-2 mb-md-0"></div><!-- Product Gallery -->
                     <div class="prd-block_main-image main-image--slide js-main-image--slide">
                         <div class="prd-block_main-image-holder js-main-image-zoom" data-zoomtype="inner">
-                            <div class="prd-has-loader">
+                            <app-testimonials [heading] = '""' [isShowAll] = 'false' [input] = 'prd_img' [slidetoshow] = '"1"' [redirect] = '"N"'  [url] = 'url'></app-testimonials>
+
+                            <!-- <div class="prd-has-loader">
                                 <div class="gdw-loader"></div><img [src]="url + prd_img" class="zoom" alt="" data-zoom-image="images/products/large/product-01.jpg">
                             </div>
                             <div class="prd-block_main-image-next slick-next js-main-image-next">NEXT</div>
-                            <div class="prd-block_main-image-prev slick-prev js-main-image-prev">PREV</div>
+                            <div class="prd-block_main-image-prev slick-prev js-main-image-prev">PREV</div> -->
                         </div>
                     </div>
                     <!-- /Product Gallery -->
+                    <div class="prd-safecheckout topline">
+                        <h3 class="h2-style">certified by:</h3><img [src]="certificateurl + certificate[0]['image']" width="100" height="50">
+                    
+                        <h3 class="h2-style">Manufactured by:</h3><img [src]="url + data['image']" width="100" height="50"><h3 class="h2-style">{{data.manufacture}}</h3>
+                    </div>
                 </div>
                 <div class="col-md">
                     <div class="prd-block_info">
@@ -82,7 +90,7 @@
                             }
                         </style>
                         
-                        <div *ngIf=(data.size)>
+                        <div *ngIf="data.default_size">
                         <label for="id_select"> Select Size </label>
                         <select id="id_select" (change)="sizechange($event.target.value)" autofocus="true">
                             <option *ngFor="let option of sizes" [value]="option" [selected]="option === defaultsize">
@@ -112,7 +120,7 @@
 
                                 <div *ngIf=(assets.productsilver)>
                                     <div class="option-label">Silver(weight): {{assets.productsilver.silver_qty}} gram</div>
-                                    <div class="option-label">Fine Silver Rate: {{this.pricelist.silver[0].price}} gram</div>
+                                    <div class="option-label">Fine Silver Rate: {{pricelist.silver[0].price}} gram</div>
                                     <div class="option-label">Silver wastage:  {{assets.productsilver.wastage}} %</div>
                                     <div class="option-label">Making Charges: {{assets.productsilver.silver_charge}}</div>
                                     <div class="option-label">Charges Type: {{assets.productsilver.charge_type}}</div>
@@ -161,7 +169,7 @@
 
                             <div *ngIf=(assets.diamond[0])>
                                 <div *ngIf=(assets.diamond[0].diamondqty)>Diamond (weight):  {{assets.diamond[0].diamondqty}} ct</div>
-                                <div *ngIf=(assets.diamond[0].diamondqty) class="option-label">Fine Diamond Rate:  {{pricediamond.price}}/ct</div>
+                                <div *ngIf=(assets.diamond[0].diamondqty) class="option-label">Fine Diamond Rate:₹ {{pricediamond.price}}/ct</div>
                                 <div *ngIf=(assets.diamond[0].no_diamond) class="option-label">No Diamond:  {{assets.diamond[0].no_diamond}} pc</div>
                                 <div *ngIf=(assets.diamond[0].diamondcharge) class="option-label">Making Charges: ₹ {{assets.diamond[0].diamondcharge}}</div>
                                 <div *ngIf=(assets.diamond[0].type) class="option-label">Charges Type:  {{assets.diamond[0].type}}</div> 
@@ -188,9 +196,7 @@
                             <div class="btn-wrap"><button class="btn btn--add-to-cart" data-fancybox data-src="#modalCheckOut"><i class="icon icon-handbag"></i><span>Add to cart</span></button></div>
                             <div class="prd-block_link"><a href="#" class="icon-heart-1"></a> <a href="#" class="icon-share"></a></div>
                         </div>
-                        <div class="prd-safecheckout topline">
-                            <h3 class="h2-style">certified by:</h3><img [src]="url" alt="Tyssot 1853">
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="col-xl-3 mt-3 mt-xl-0 sidebar-product">

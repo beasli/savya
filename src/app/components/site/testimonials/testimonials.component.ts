@@ -11,12 +11,13 @@ export class TestimonialsComponent implements OnInit {
   @Input() url;
   @Input() heading;
   @Input() redirect;
-  @Input() slides;
+  @Input() slidetoshow;
+  @Input() isShowAll;
+
   title: any;
   desc: any;
-  slideToShow = (this.slides)? this.slides : 2;
   slideConfig = {
-    "slidesToShow": this.slideToShow,
+    "slidesToShow": 2,
     "slidesToScroll": 1,
     "dots": false,
     "infinite": true,
@@ -32,6 +33,7 @@ export class TestimonialsComponent implements OnInit {
       }]
   };
   constructor(private api: ApiService) {
+    console.log(this.heading);
    }
    text(value) {
     if  (this.redirect == 'Y')  {
@@ -47,6 +49,7 @@ export class TestimonialsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.slideConfig.slidesToShow = this.slidetoshow;
   }
 
 }

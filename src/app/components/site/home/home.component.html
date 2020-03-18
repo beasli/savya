@@ -59,7 +59,16 @@
             </div>
         </div>
     </section>
+
+    <app-product-holder [heading] = '"Mostselling Product"' [url3] = 'url3' [mostselling] = 'mostselling'></app-product-holder>
+
+    <!--/Product Holder -->
+    
+    
+    <app-testimonials [heading] = '""' [isShowAll] = 'true' [input] = 'models' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = '"assets/images/model/"'></app-testimonials>
+
     <!--youtube-video-->
+
 
     <!-- Promotional Section -->
     <app-exclusive-banner [url2] = 'url2' [exclusive] = 'exclusive'></app-exclusive-banner>
@@ -71,9 +80,11 @@
     <app-product-holder [heading] = '"Mostselling Product"' [url3] = 'url3' [mostselling] = 'mostselling'></app-product-holder>
     <!-- Mostselling Product -->
 
-    <!-- Events -->
-    <app-testimonials [heading] = '"Events"' [redirect] = '"Y"' [input] = 'events'  [url] = 'url2'></app-testimonials>
-    <!-- Events -->
+
+    <!-- Testimonials -->
+    <app-testimonials [heading] = '"Events"' [isShowAll] = 'true' [redirect] = '"Y"' [slidetoshow] = '"2"' [input] = 'events'  [url] = 'url2'></app-testimonials>
+    <!--/Testimonial -->
+
 
      <!-- Testimonials -->
      <!--<app-testimonials [heading] = '"Partners"' [redirect] = '"N"' [input] = 'partners'  [url] = '"assets/images/"'></app-testimonials>-->
