@@ -27,18 +27,19 @@ export class ProductDetailsComponent implements OnInit {
   diamondclarity: any;
   diamondcolour: any;
   defaultdiamond: any;
-  pricediamond: any;
+  pricediamond = 0;
   totaldiamond: any;
-  totalgold: any;
+  totalgold = 0;
   finegold: number;
   platinum: any;
   priceplat: any;
   fineplat: number;
-  totalplat: any;
+  totalplat = 0;
   defaultsize: any;
   sizes: any;
   selectedsize: any;
   totalprice: any;
+  certificate: any;
   constructor(private api: ApiService, private route: ActivatedRoute) {
 
     this.api.Post(PRICELIST, {} ).then(data  => {
@@ -77,6 +78,7 @@ export class ProductDetailsComponent implements OnInit {
       this.assets = data['assets'];
       // console.log(this.assets);
       this.prd_img = this.assets['image'][0]['image'];
+    //  this.certificate = this.assets['Certification'][0]['image'];
       this.recents = data['recentproduct'];
       this.url = data['url'] + '/';
       if (this.data.size) {
