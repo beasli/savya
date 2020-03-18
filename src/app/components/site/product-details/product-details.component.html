@@ -101,13 +101,13 @@
 
                                 <div *ngIf=(assets.gold.length)>
                                     <div *ngIf=(gold.goldweight)>Gold (weight):  {{gold.goldweight}} gram</div>
-                                    <div *ngIf=(assets.gold.length) class="option-label">Fine Gold Rate:  {{pricegold.price}} Per gram</div>
+                                    <div *ngIf=(assets.gold.length) class="option-label">Fine Gold Rate: ₹ {{pricegold.price}} Per gram</div>
                                     <div *ngIf=(gold.wastage) class="option-label">Gold wastage:  {{gold.wastage}} %</div>
                                     <div *ngIf="gold.option == 'percentage'" class="option-label">Gold wastage:  {{gold.makingcharge}} %</div>
-                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Making Charges:  {{gold.makingcharge}}</div>
-                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Weight:  {{finegold}}</div>
+                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Making Charges: ₹  {{gold.makingcharge}}</div>
+                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Weight:  {{finegold}} gram</div>
                                     <div *ngIf="gold.option!= 'percentage'" class="option-label">Gold Charges Type:  {{gold.option}}</div>
-                                    <div class="option-label">Total Gold Price:  {{totalgold}}</div>
+                                    <div class="option-label">Total Gold Price: ₹ {{totalgold}}</div>
                                 </div>
 
                                 <div *ngIf=(assets.productsilver)>
@@ -123,10 +123,10 @@
                                     <div *ngIf=(assets.productpaltinum.platinum_qty) class="option-label">Fine Platinum Rate:  {{this.pricelist.platinum[0].price}} Per gram</div>
                                     <div *ngIf=(platinum.wastage) class="option-label">Planitum wastage:  {{platinum.wastage}} %</div>
                                     <div *ngIf="platinum.charge_type == 'percentage'" class="option-label">Planitum wastage:  {{platinum.platinum_charge}} %</div>
-                                    <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Making Charges:  {{platinum.platinum_charge}}</div>
-                                    <div *ngIf="platinum.charge_type == 'percentage'" class="option-label">Fine Platinum Weight:  {{fineplat}}</div>
+                                    <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Making Charges: ₹ {{platinum.platinum_charge}}</div>
+                                    <div *ngIf="platinum.charge_type == 'percentage'" class="option-label">Fine Platinum Weight:  {{fineplat}} gram</div>
                                     <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Charges Type:  {{platinum.charge_type}}</div>
-                                    <div class="option-label">Total Platinum Price:  {{totalplat}}</div> 
+                                    <div class="option-label">Total Platinum Price: ₹ {{totalplat}}</div> 
                                 </div>
                             
                             <div *ngIf=(assets.diamond[0]) class="prd-size swatches">
@@ -160,12 +160,12 @@
                             </div>
 
                             <div *ngIf=(assets.diamond[0])>
-                                <div *ngIf=(assets.diamond[0].diamondqty)>Diamond (weight):  {{assets.diamond[0].diamondqty}} gram</div>
-                                <div *ngIf=(assets.diamond[0].diamondqty) class="option-label">Fine Diamond Rate:  {{pricediamond.price}} Per gram</div>
-                                <div *ngIf=(assets.diamond[0].no_diamond) class="option-label">No Diamond:  {{assets.diamond[0].no_diamond}}</div>
-                                <div *ngIf=(assets.diamond[0].diamondcharge) class="option-label">Making Charges:  {{assets.diamond[0].diamondcharge}}</div>
+                                <div *ngIf=(assets.diamond[0].diamondqty)>Diamond (weight):  {{assets.diamond[0].diamondqty}} ct</div>
+                                <div *ngIf=(assets.diamond[0].diamondqty) class="option-label">Fine Diamond Rate:  {{pricediamond.price}}/ct</div>
+                                <div *ngIf=(assets.diamond[0].no_diamond) class="option-label">No Diamond:  {{assets.diamond[0].no_diamond}} pc</div>
+                                <div *ngIf=(assets.diamond[0].diamondcharge) class="option-label">Making Charges: ₹ {{assets.diamond[0].diamondcharge}}</div>
                                 <div *ngIf=(assets.diamond[0].type) class="option-label">Charges Type:  {{assets.diamond[0].type}}</div> 
-                                <div>Diamond Total: {{totaldiamond}} </div>
+                                <div>Diamond Total:₹ {{totaldiamond}} </div>
                             </div>
 <!--                             
                             <div class="prd-size swatches">
@@ -189,7 +189,7 @@
                             <div class="prd-block_link"><a href="#" class="icon-heart-1"></a> <a href="#" class="icon-share"></a></div>
                         </div>
                         <div class="prd-safecheckout topline">
-                            <h3 class="h2-style">guaranteed safe checkout</h3><img src="images/payment/safecheckout.png" alt="" class="img-fluid">
+                            <h3 class="h2-style">certified by:</h3><img [src]="url" alt="Tyssot 1853">
                         </div>
                     </div>
                 </div>
