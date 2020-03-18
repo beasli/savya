@@ -30,7 +30,7 @@
             <h2 class="h1-style">Product with side filter</h2>
         </div>
         
-        <div class="row">
+        <div class="row" >
             <!-- Left column -->
             <div class="col-lg-3 aside aside--left fixed-col js-filter-col">
                 <div class="fixed-col_container">
@@ -47,15 +47,33 @@
                         </div>
                         <div class="sidebar-block_content">
                             <div class="selected-filters-wrap">
-                                <ul class="selected-filters">
-                                    <li><a href="#">Women</a></li>
-                                    <li><a href="#">Silver</a></li>
-                                    <li><a href="#">18K</a></li>
-                                    <li><a href="#">Above ₹20,000</a></li>
-                                    <li><a href="#">GOLD</a></li>
+                                <div class="row">
+                                    <ul class="selected-filters" *ngFor="let m of f.menu.jewelery_for">
+                                        <li><a href="javascript:void(0)">{{m}}</a></li>
+                                    </ul>
+                               </div>
+                               <div class="row">
+                                    <ul class="selected-filters" *ngFor="let m of  f.menu.material">
+                                        <li><a href="javascript:void(0)">{{m}}</a></li>
+                                    </ul>
+                               </div>
+                               <div class="row">
+                                        <ul class="selected-filters" *ngFor="let m of  f.menu.jewelery_type">
+                                            <li><a href="javascript:void(0)">{{m}}</a></li>
+                                        </ul>
+                              </div>
+                              <div class="row">
+                                    <ul class="selected-filters" *ngFor="let m of f.menu.purity">
+                                        <li><a href="javascript:void(0)">{{m}}</a></li>
+                                    </ul>
+                              </div>
+                              <div class="row" *ngIf="f.menu.price.min">
+                                <ul class="selected-filters" >
+                                    <li><a href="javascript:void(0)">₹{{f.menu.price.min}}-₹{{f.menu.price.max}}</a></li>
                                 </ul>
-                                <div class="d-flex align-items-center"><a href="#" class="clear-filters"><span>Clear All</span></a>
-                                    <div class="selected-count ml-auto d-none d-lg-block">SELECTED<span><b>25 items</b></span></div>
+                              </div>
+                                <div class="d-flex align-items-center"><a href="javascript:void(0)" class="clear-filters" (click)="clearFilter()"><span>Clear All</span></a>
+                                    <!-- <div class="selected-count ml-auto d-none d-lg-block">SELECTED<span><b>25 items</b></span></div> -->
                                 </div>
                             </div>
                         </div>
@@ -66,11 +84,15 @@
                             <div class="toggle-arrow"></div>
                         </div>
                         <div class="sidebar-block_content">
-                            <ul class="category-list">
-                                <li><a href="#">₹1000-₹200000</a></li>
-                                <li class="active"><a href="#">Above ₹20,000</a></li>
-                                <li><a href="#">Under ₹100000</a></li>
-                            </ul>
+                            <div class="radio-group">
+                                <!-- value="{min:{{price[0]}},max:{{price[1]}}}" -->
+                                <!-- [checked]="checkedprice($event)" -->
+                                <ng-container > <input type="radio" value="{{price[0]}}-{{price[1]}}" [checked]="checkedprice(price[0])"  (change)="getprice($event)"  id="price" name="price"><label for="price">₹{{price[0]}}-₹{{price[1]}}</label></ng-container>
+                                <ng-container > <input type="radio" value="{{price[1]}}-{{price[2]}}" [checked]="checkedprice(price[1])" (change)="getprice($event)"  id="price1" name="price"><label for="price1">₹{{price[1]}}-₹{{price[2]}}</label></ng-container>
+                                <ng-container > <input type="radio" value="{{price[2]}}-{{price[3]}}" [checked]="checkedprice(price[2])"  (change)="getprice($event)"  id="price2" name="price"><label for="price2">₹{{price[2]}}-₹{{price[3]}}</label></ng-container>
+                                <ng-container > <input type="radio" value="{{price[3]}}-{{price[4]}}" [checked]="checkedprice(price[3])" (change)="getprice($event)"  id="price3" name="price"><label for="price3">₹{{price[3]}}-₹{{price[4]}}</label></ng-container>
+                                <ng-container > <input type="radio" value="{{price[4]}}-1000000" id="price4"  [checked]="checkedprice(price[4])" (change)="getprice($event)"  name="price"><label for="price4">Above ₹{{price[4]}}</label></ng-container>
+                            </div>
                         </div>
                     </div>
                     
@@ -80,12 +102,21 @@
                             <div class="toggle-arrow"></div>
                         </div>
                         <div class="sidebar-block_content">
-                            <ul class="category-list">
-                                <li class="active"><a href="#">Women</a></li>
-                                <li><a href="#">Men</a></li>
-                                <li><a href="#">Diamond & Gemstone</a></li>
-                                <li><a href="#">Navaratna</a></li>
-                            </ul>
+                            
+                                <div class="radio-group">
+                                <ng-container  *ngFor='let j of jewelery_for' > <input type="checkbox"  [checked]="checkedjewelery_for(j)" (change)="changefilter($event,j)"  id="{{j}}" name="jewelery_for"><label for="{{j}}">{{j}}</label></ng-container>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-block filter-group-block open">
+                        <div class="sidebar-block_title"><span>Product</span>
+                            <div class="toggle-arrow"></div>
+                        </div>
+                        <div class="sidebar-block_content">
+                            <div class="radio-group">
+                                <ng-container  *ngFor='let jt of jewelery_type' > <input type="radio" [checked]="checkedjewelery_type(jt)" (change)="changefilter($event,jt)" id="{{jt}}" name="jewelery_type"><label for="{{jt}}">{{jt}}</label></ng-container>
+                            </div>
                         </div>
                     </div>
                     
@@ -95,9 +126,9 @@
                         </div>
                         <div class="sidebar-block_content">
                             <ul class="color-list two-column">
-                                <li><a href="#" data-tooltip="Yellow" title="Yellow"><span class="value"><img src="../../../../assets/images/colorswatch/color-yellow.png" alt=""></span><span class="colorname">Yellow (125)</span></a></li>
+                                <li><a href="javascript:void(0)" data-tooltip="Yellow" title="Yellow"><span class="value"><img src="../../../../assets/images/colorswatch/color-yellow.png" alt=""></span><span class="colorname">Yellow (125)</span></a></li>
 
-                                <li><a href="#" data-tooltip="Silver" title="Silver"><span class="value"><img src="../../../../assets/images/colorswatch/color-white.png" alt=""></span><span class="colorname">Silver (125)</span></a></li>
+                                <li><a href="javascript:void(0)" data-tooltip="Silver" title="Silver"><span class="value"><img src="../../../../assets/images/colorswatch/color-white.png" alt=""></span><span class="colorname">Silver (125)</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -107,12 +138,9 @@
                             <div class="toggle-arrow"></div>
                         </div>
                         <div class="sidebar-block_content">
-                            <ul class="category-list">
-                                <li class="active"><a href="#">Gold (200)</a></li>
-                                <li><a href="#">White Gold (1200)</a></li>
-                                <li><a href="#">Rose Gold</a></li>
-                                <li><a href="#">Platinum</a></li>
-                            </ul>
+                            <div class="radio-group">
+                                <ng-container  *ngFor='let m of material' > <input type="checkbox" [checked]="checkedmaterial(m)" (change)="changefilter($event,m)" id="{{m}}" name="material"><label for="{{m}}">{{m}}</label></ng-container>
+                            </div>
                         </div>
                     </div>
                     
@@ -121,14 +149,14 @@
                             <div class="toggle-arrow"></div>
                         </div>
                         <div class="sidebar-block_content">
-                            <ul class="category-list">
-                                <li class="active"><a href="#">18K (2150)</a></li>
-                                <li><a href="#">24K (1100)</a></li>
-                            </ul>
+                            <div class="radio-group">
+                                <ng-container  *ngFor='let p of purity' > <input type="checkbox" [checked]="checkedpurity(p)" (change)="changefilter($event,p)" id="{{p}}" name="purity"><label for="{{p}}">{{p}}</label></ng-container>
+                            </div>
                         </div>
                     </div>
+
                     
-                    <div class="sidebar-block filter-group-block open">
+                    <!-- <div class="sidebar-block filter-group-block open">
                         <div class="sidebar-block_title"><span>Size 2 Column</span>
                             <div class="toggle-arrow"></div>
                         </div>
@@ -141,9 +169,9 @@
                                 <li data-value="XS"><a href="#">XS</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                     
-                    <div class="sidebar-block filter-group-block open">
+                    <!-- <div class="sidebar-block filter-group-block open">
                         <div class="sidebar-block_title"><span>Size 1 Column</span>
                             <div class="toggle-arrow"></div>
                         </div>
@@ -158,9 +186,11 @@
                                 <li data-value="XXXL"><a href="#">XXXL</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                     
                 </div>
+               
+                 
             </div>
             <!-- /Left column -->
             
@@ -182,17 +212,15 @@
                             <div class="col-left d-flex align-items-center">
                                 <div class="sort-by-holder">
                                     <div class="select-label d-none d-lg-inline">Sort by:</div>
-                                    <div class="select-wrapper-sm d-none d-lg-inline-block"><select class="form-control input-sm">
-                                            <option value="featured">Featured</option>
-                                            <option value="rating">Rating</option>
-                                            <option value="price">Price</option>
+                                    <div class="select-wrapper-sm d-none d-lg-inline-block"><select (change)="orderBy($event)" class="form-control input-sm">
+                                            <option value="ASC" >ASC</option>
+                                            <option value="DSC" >DSC</option>
                                         </select></div>
-                                    <div class="select-directions d-none d-lg-inline"><span><i class="icon icon-arrow-down"></i></span> <span><i class="icon icon-arrow-up"></i></span></div>
+                                    <div class="select-directions d-none d-lg-inline"><span><i class="icon icon-arrow-down"  (click)="orderBy(1)" ></i></span> <span><i (click)="orderBy(2)" class="icon icon-arrow-up"></i></span></div>
                                     <div class="dropdown d-flex d-lg-none align-items-center justify-content-center"><span class="select-label">Sort By</span>
-                                        <div class="select-wrapper-sm"><select class="form-control input-sm">
-                                                <option value="featured">Featured</option>
-                                                <option value="rating">Rating</option>
-                                                <option value="price">Price</option>
+                                        <div class="select-wrapper-sm"><select (change)="orderBy($event)" class="form-control input-sm">
+                                            <option value="ASC" >ASC</option>
+                                            <option value="DSC" >DSC</option>
                                             </select></div>
                                     </div>
                                 </div>
@@ -218,7 +246,7 @@
                     <!-- /Filter Row -->
                     
                     <!-- Products Grid -->
-                    <div class="prd-grid product-listing data-to-show-3 data-to-show-md-3 data-to-show-sm-2 js-category-grid" >
+                    <div class="prd-grid product-listing data-to-show-3 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div" >
                     
                         <!-- <div class="prd prd-has-loader prd-new prd-popular">
                             <div class="prd-inside">
@@ -627,50 +655,58 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="prd" *ngFor="let s of products">
-                                <div class="prd-inside" >
-                                    <div class="prd-img-area"><a (click)='go(s.product_id)' class="prd-img"><img [src]="url + s.image" alt="Tyssot 1853"></a>
-                                        <div class="label-new">NEW</div>
-                                        <div class="gdw-loader"></div>
-                                    </div>
-                                    <div class="prd-info">
-            
-                                        <div class="prd-tag prd-hidemobile"><a href="#">{{s.size}}</a></div>
-                                        <h2 class="prd-title"><a (click)='go(s.product_id,s.image)'>{{s.productname}}</a></h2>
-            
-                                        <div class="prd-rating prd-hidemobile">
-                                            <i class="icon-star fill"></i><i class="icon-star fill"></i><i class="icon-star fill"></i><i class="icon-star fill"></i><i class="icon-star"></i>
-                                        </div>
-                                        <div class="prd-hover">
-                                            <div class="prd-action">
-            
-                                                <div   *ngIf= "checkCart(s.product_id)" class="row no=gutters" >
-                                                    <div class="col-2">
-                                                        <button  (click)="qtyUpdate(s.product_id,-1)" class="btn btn-secondary btn-block">-</button>
+                      
+                                <div class="prd" *ngFor="let s of products"  >
+                                        <div class="prd-inside" >
+                                            <div class="prd-img-area"><a (click)='go(s.product_id)' class="prd-img"><img [src]="url + s.image" alt="Tyssot 1853"></a>
+                                                <div class="label-new">NEW</div>
+                                                <div class="gdw-loader"></div>
+                                            </div>
+                                            <div class="prd-info">
+                    
+                                                <div class="prd-tag prd-hidemobile"><a href="#">{{s.size}}</a></div>
+                                                <h2 class="prd-title"><a (click)='go(s.product_id,s.image)'>{{s.productname}}</a></h2>
+                    
+                                                <div class="prd-rating prd-hidemobile">
+                                                    <i class="icon-star fill"></i><i class="icon-star fill"></i><i class="icon-star fill"></i><i class="icon-star fill"></i><i class="icon-star"></i>
+                                                </div>
+                                                <div class="prd-hover">
+                                                    <div class="prd-action">
+                    
+                                                        <div   *ngIf= "checkCart(s.product_id)" class="row no=gutters" >
+                                                            <div class="col-2">
+                                                                <button  (click)="qtyUpdate(s.product_id,-1)" class="btn btn-secondary btn-block">-</button>
+                                                            </div>
+                            
+                                                            <div class="col-4 text-right">{{quantity(s.product_id)}}</div>
+                            
+                                                            <div class="col-2">
+                                                                <button  (click)="qtyUpdate(s.product_id,+1)" class="btn btn-secondary btn-block">+</button>
+                                                            </div>
+                                                        </div>
+                                                        <form action="#"><input type="hidden"> <button class="btn" *ngIf= "!checkCart(s.product_id)"  (click)="addToCart(s)"    data-fancybox data-src="#modalCheckOut"><i class="icon icon-handbag"></i><span>Add To Cart</span></button></form> 
+                                                        <div class="prd-links hide-mobile"><a href="#" class="icon-eye prd-qview-link js-qview-link" data-fancybox data-src="#mod0alQuickView"></a> <a (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)"  class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
+                    
                                                     </div>
-                    
-                                                    <div class="col-4 text-right">{{quantity(s.product_id)}}</div>
-                    
-                                                    <div class="col-2">
-                                                        <button  (click)="qtyUpdate(s.product_id,+1)" class="btn btn-secondary btn-block">+</button>
+                                                    <div class="prd-options"><span class="label-options">Custom Fields:</span>
+                                                        <ul class="list-options size-swatch">
+                                                            <li class="active"><span>1</span></li>
+                                                            <li><span>2</span></li>
+                                                            <li><span>3</span></li>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                                <form action="#"><input type="hidden"> <button class="btn" *ngIf= "!checkCart(s.product_id)"  (click)="addToCart(s)"    data-fancybox data-src="#modalCheckOut"><i class="icon icon-handbag"></i><span>Add To Cart</span></button></form> 
-                                                <div class="prd-links hide-mobile"><a href="#" class="icon-eye prd-qview-link js-qview-link" data-fancybox data-src="#mod0alQuickView"></a> <a (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)"  class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
-            
-                                            </div>
-                                            <div class="prd-options"><span class="label-options">Custom Fields:</span>
-                                                <ul class="list-options size-swatch">
-                                                    <li class="active"><span>1</span></li>
-                                                    <li><span>2</span></li>
-                                                    <li><span>3</span></li>
-                                                </ul>
                                             </div>
                                         </div>
-                                    </div>
                                 </div>
-                         </div>       
+                       
+                       
                     </div>
+                    <div  *ngIf="alert">
+                        <ngb-alert [dismissible]="false" >
+                            <strong>{{message}}</strong> 
+                        </ngb-alert>
+                    </div>      
                     <div class="loader-wrap">
                         <div class="dots">
                             <div class="dot one"></div>
@@ -679,8 +715,8 @@
                         </div>
                     </div>
                     <!-- /Products Grid -->
-                    <div class="show-more d-flex mt-4 mt-md-6 justify-content-center align-items-start"><a href="#" class="btn btn--alt js-product-show-more" data-load="ajax-products-load.html">show more</a>
-                    </div>
+                    <!-- <div class="show-more d-flex mt-4 mt-md-6 justify-content-center align-items-start"><a href="#" class="btn btn--alt js-product-show-more" data-load="ajax-products-load.html">show more</a>
+                    </div> -->
                 </div>
             </div>
             <!-- /Center column -->
