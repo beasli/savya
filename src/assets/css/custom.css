@@ -1697,7 +1697,7 @@ h1.h-lined, h2.h-lined, h3.h-lined, h4.h-lined, h5.h-lined, h6.h-lined, .h1-styl
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-color: #f7f7f7;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 20px;
   text-transform: uppercase;
   font-weight: bold;
@@ -1709,7 +1709,9 @@ h1.h-lined, h2.h-lined, h3.h-lined, h4.h-lined, h5.h-lined, h6.h-lined, .h1-styl
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
   border-top: 1px solid #f7f7f7;
-  padding: 11px 15px; }
+  padding: 11px 5px; 
+  font-size: 11px;
+}
   .table > thead > tr > th b, .table > thead > tr > th strong, .table > tbody > tr > th b, .table > tbody > tr > th strong,
   .table > tfoot > tr > th b,
   .table > tfoot > tr > th strong,
