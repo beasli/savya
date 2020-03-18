@@ -11,6 +11,8 @@ export class TestimonialsComponent implements OnInit {
   @Input() url;
   @Input() heading;
   @Input() redirect;
+  @Input() slidetoshow;
+  @Input() isShowAll;
   title: any;
   desc: any;
   slideConfig = {
@@ -30,6 +32,7 @@ export class TestimonialsComponent implements OnInit {
       }]
   };
   constructor(private api: ApiService) {
+    console.log(this.heading);
    }
    text(value) {
     if  (this.redirect == 'Y')  {
@@ -45,6 +48,7 @@ export class TestimonialsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.slideConfig.slidesToShow = this.slidetoshow;
   }
 
 }
