@@ -26,9 +26,7 @@ export class FilterProductComponent implements OnInit {
   message:string="NO PRODUCT AVAILABLE";
   f:any;
   constructor(private api: ApiService, private route: ActivatedRoute) {
- 
 
-    //this.getsubsub();
     this.route.params.subscribe(params => {
       this.subid = params.id;
       this.getsubsub();
@@ -54,10 +52,11 @@ export class FilterProductComponent implements OnInit {
       });
      
   }
-  getsubsub (){
+  getsubsub() {
     this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subid } ).then(data  => {
       this.data = data['data'];
-   //   console.log(data);
+
+      console.log(data);
      }).catch(d=>{
       console.log(d);
     });
