@@ -16,7 +16,7 @@
                         <h2 class="text-left">SIGN IN</h2>
                         <div *ngIf="alert">
                             <p>
-                                <ngb-alert [type]="type" >
+                                <ngb-alert [dismissible]="false" type="danger" >
                                   <strong>{{message}}</strong> .
                                 </ngb-alert>
                               </p>
@@ -24,14 +24,14 @@
                         <div class="form-wrapper">
                             <p>If you have an account with us, please log in.</p>
                             <form  #f="ngForm" (ngSubmit)="login(f.value)">
-                                <div class="form-group">
+                                <div class="form-group" *ngIf="mobile">
                                     <input type="text" #mobile_no="ngModel"  name="mobile_no" ngModel class="form-control" placeholder="Your Mobile No." required>
                                     <div class="alert alert-danger" *ngIf="mobile_no.touched && mobile_no.invalid">
                                         Mobile number is required.
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="password"  #password="ngModel"  name="password" ngModel class="form-control" placeholder="Password" required>
+                                <div class="form-group" *ngIf="password">
+                                    <input type="password"  #password="ngModel"  name="password" ngModel class="form-control" placeholder="Enter Otp" required>
                                     <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
                                        Password is required.
                                     </div>
@@ -40,6 +40,7 @@
                                 <div class="clearfix"><input id="checkbox1" name="checkbox1" type="checkbox" checked="checked"> <label for="checkbox1">Remember me</label></div>
                                 <button type="submit" *ngIf="sign"  class="btn">Sign in</button>
                                 <button type="submit" *ngIf="loading"  class="btn">Loading...</button>
+                                <button type="submit" *ngIf="otpcheck" class="btn">Verify Otp</button>
                             </form>
                         </div>
                     </div>
