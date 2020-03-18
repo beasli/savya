@@ -11,10 +11,12 @@ export class TestimonialsComponent implements OnInit {
   @Input() url;
   @Input() heading;
   @Input() redirect;
+  @Input() slides;
   title: any;
   desc: any;
+  slideToShow = (this.slides)? this.slides : 2;
   slideConfig = {
-    "slidesToShow": 2,
+    "slidesToShow": this.slideToShow,
     "slidesToScroll": 1,
     "dots": false,
     "infinite": true,
