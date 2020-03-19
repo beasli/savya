@@ -702,11 +702,11 @@
                        
                        
                     </div>
-                    <div  *ngIf="alert">
-                        <ngb-alert [dismissible]="false" >
+                   
+                        <ngb-alert [dismissible]="false" *ngIf="alert">
                             <strong>{{message}}</strong> 
                         </ngb-alert>
-                    </div>      
+                        
                     <div class="loader-wrap">
                         <div class="dots">
                             <div class="dot one"></div>

@@ -137,10 +137,12 @@
                         <div class="dropdn dropdn_search hide-mobile @@classes"><a href="#" class="dropdn-link"><i class="icon icon-search2"></i><span>Search</span></a>
                             <div class="dropdn-content">
                                 <div class="container">
-                                    <form action="#" class="search">
-                                    <button type="submit" class="search-button"><i class="icon-search2"></i></button> <input type="text" class="search-input" placeholder="search keyword">
-                                        <div class="search-popular js-search-autofill"><span class="search-popular-label">popular searches:</span><a href="#">RINGS</a> <a href="#">Solitaries</a> <a href="#">Diamond</a> <a href="#">Discount</a> <a href="#">Valentine’s gift</a> <a href="#">Gift for Wife</a> <a href="#">Gold Coin</a><a href="#">New Design</a></div>
-                                    </form>
+                                        <button class="search-button"><i class="icon-search2"></i></button>
+                                    <div class="form-group"><input type="text" (keyup.enter)="search()" (keyup)="change($event)" class="form-control" class="search-input" placeholder="search keyword"></div> 
+                                    <div class="search-popular js-search-autofill"><span class="search-popular-label">popular searches:</span><a href="#">RINGS</a> <a href="#">Solitaries</a> <a href="#">Diamond</a> <a href="#">Discount</a> <a href="#">Valentine’s gift</a> <a href="#">Gift for Wife</a> <a href="#">Gold Coin</a><a href="#">New Design</a></div>
+                                    <ngb-alert [dismissible]="false" *ngIf="alert()" >
+                                        <strong>{{message}}</strong> 
+                                    </ngb-alert>
                                 </div>
                             </div>
                         </div>

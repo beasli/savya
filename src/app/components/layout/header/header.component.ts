@@ -8,9 +8,36 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   drop:any;
+  message:any="minimum 3 characters are required";
+  searchValue:any;
   constructor(private api:ApiService ,private router:Router) {
     this.drop=this.api.drop; 
    console.log(this.drop);
+  }
+  change(value)
+  {
+    
+    this.searchValue=value.target.value;
+    //console.log(this.searchValue);
+  }
+  search()
+  {
+    console.log(this.searchValue);
+    if(this.searchValue.length>3)
+    {
+        this.router.navigate(['/search',this.searchValue]);
+    }
+  }
+  alert()
+  {
+    if(this.searchValue.length>3)
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
   }
   logout()
   {
