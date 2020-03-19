@@ -13,8 +13,30 @@
     <!-- live rates area-->
     <app-liverates></app-liverates>
     <!-- live rates area-->
-    <app-manufacture  [heading] = '""' [isShowAll] = 'false' [input] = 'manufacturer' [slidetoshow] = '"4"' [redirect] = '"N"'  [url] = 'url2'></app-manufacture>
-
+    <!-- <app-manufacture  [heading] = '""' [isShowAll] = 'false' [input] = 'logo' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = 'url2'></app-manufacture> -->
+    <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09 mt-0">
+      <div class="container">
+          <div class="text-center">
+              <h2 class="h1-style">skldjfslkfjsfjslf</h2>
+              <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
+          </div>
+          <div class="testimonials">
+            <ngx-slick-carousel class="carousel" 
+                      #slickModal="slick-carousel" 
+                      [config]="slideConfig" >
+            <div ngxSlickItem *ngFor="let slide of logo;let i = index" class="slide embed-responsive embed-responsive-16by9">
+            <img src="{{ url2 + slide.image }}"  class="embed-responsive-item"  alt="" width="100%">
+            <div class="overlay-effect">
+                <div class="overlay-effect-content">
+                  <h2>title</h2>
+                  <p>desc</p>
+                </div>
+            </div>
+            </div>
+            </ngx-slick-carousel>
+      </div>
+      <div class="more-link-wrapper text-center mt-2"><a routerLink="/events" class="btn-decor">show me all</a></div>
+  </div>
     <!--Company name slider-->
     <!--<app-testimonials [slides]="4" [heading] = '"Company Logo"' [redirect] = '"N"' [input] = 'company_slider'  [url] = '"assets/images/"'></app-testimonials>-->
    
@@ -72,9 +94,7 @@
     <!-- Promotional Section -->
     <app-exclusive-banner [url2] = 'url2' [exclusive] = 'exclusive'></app-exclusive-banner>
     <!--/Promotional section -->
-    
-    <app-testimonials  [heading] = '""' [input] = 'models' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = '"assets/images/model/"'></app-testimonials>
-
+   
     <!-- Mostselling Product -->
     <app-product-holder [heading] = '"Mostselling Product"' [url3] = 'url3' [mostselling] = 'mostselling'></app-product-holder>
     <!-- Mostselling Product -->
