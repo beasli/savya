@@ -55,9 +55,9 @@ export class ProductHolderComponent implements OnInit {
     // console.log(this.url3);
     // console.log(this.heading);
 
-    this.api.Post(CARTVIEW,{user_id:this.api.uid}).then(data=>{
-        this.cart=data['data'];
-    }).catch(d=>{
+    this.api.Post(CARTVIEW, {user_id: this.api.uid}).then(data => {
+        this.cart = data['data'];
+    }).catch(d => {
       console.log(d);
     })
    }
