@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   models = [{image: 'model_1.jpg'}, {image: 'model_2.jpg'}]
   partners = [{image: 'IGI_Expo.jpg'}];
   company_slider =[{image: "IGI_Expo.jpg"}, {image: "download.png"}, {image: "bvclogo.png"}, {image: "bvclogo.png"}];
-  logo =[{image: "1583387862_000.jpg"}, {image: "1583410753_BT.png"}, {image: "1584361390_Chainganganew.jpg"}, {image: "1584361460_Somya-Jeweller.jpg"}, {image: "1584363984_logo.jpg"}, {image: "1584516771_PT-Logo-1.jpg"}, {image: "1584623038_logo.png"}];
+  logo =[{image: "1583387862_000.jpg", title:"NK Chains Pvt. Ltd."}, {image: "1583410753_BT.png", title:"Bhatia & Company"}, {image: "1584361390_Chainganganew.jpg", title:"Chain Ganga"}, {image: "1584361460_Somya-Jeweller.jpg", title:"Somya Jeweller"}, {image: "1584363984_logo.jpg", title:"Raj & Sons Jewellers"}, {image: "1584516771_PT-Logo-1.jpg", title:"PURE PLATINUM JEWELLERY"}, {image: "1584623038_logo.png", title:"Jai Maa Brijeshwari Jewellers"}];
   url: any;
   url2: any;
   url3: any;
