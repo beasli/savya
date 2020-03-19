@@ -17,12 +17,12 @@
                     <div class="prd-block_info js-prd-m-holder mb-2 mb-md-0"></div>
                     <div class="prd-block_main-image main-image--slide js-main-image--slide">
                         <div class="prd-block_main-image-holder js-main-image-zoom" data-zoomtype="inner">
-                            <app-testimonials [heading] = '""'  [isShowAll] = 'false' [input] = 'prd_img' [slidetoshow] = '"1"' [redirect] = '"N"'  [url] = 'url'></app-testimonials>
+                            <app-testimonials [heading] = '" "'  [isShowAll] = 'false' [input] = 'prd_img' [slidetoshow] = '"1"' [redirect] = '"N"'  [url] = 'url'></app-testimonials>
                         </div>
                     </div>
                     <!-- /Product Gallery -->
                     <div class="prd-safecheckout topline">
-                        <h3 class="h2-style">certified by:</h3><img [src]="certificateurl + certificate[0]['image']" width="100" height="50">
+                      <div *ngIf='certificate.length>0'> <h3 class="h2-style">certified by:</h3><img [src]="certificateurl + certificate[0]['image']" width="100" height="50"> </div>
                     
                         <h3 class="h2-style">Manufactured by:</h3><img [src]="url + data['image']" width="100" height="50"><h3 class="h2-style">{{data.manufacture}}</h3>
                     </div>
@@ -201,7 +201,7 @@
                                             <button  (click)="qtyUpdate(data.id,+1)" class="btn btn-secondary btn-block">+</button>
                                         </div>
                                     </div>
-                                    <form action="#"><input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="addToCart(data)"><i class="icon icon-handbag"></i><span>Add To Cart</span></button></form> 
+                                    <input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="addToCart(data)"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
                                     <div class="prd-links hide-mobile"><a class="icon-eye prd-qview-link js-qview-link"></a> <a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
                                 </div>
                             </div>

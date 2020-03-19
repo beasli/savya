@@ -11,7 +11,7 @@ import { PRODUCTDETAILS, CATEGORY, SUBCATEGORY, SUBCATEGORYTYPE } from 'src/conf
 })
 export class ProductDetailsComponent implements OnInit {
   pid: string;
-  data:any[];
+  data:any;
   assets: any;
   recents: any;
   category: any;
@@ -43,7 +43,7 @@ export class ProductDetailsComponent implements OnInit {
   certificateurl: any;
   value = 1;
   wish:any;
- cart:any[];
+ cart:any;
   constructor(private api: ApiService, private route: ActivatedRoute) {
 
     this.api.Post(PRICELIST, {} ).then(data  => {
