@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   drop:any;
   message:any="minimum 3 characters are required";
-  searchValue:any="";
+
+  searchValue= "";
+
   constructor(private api:ApiService ,private router:Router) {
     this.drop=this.api.drop; 
    console.log(this.drop);
