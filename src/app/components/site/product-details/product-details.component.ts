@@ -1,4 +1,4 @@
-import { PRICELIST } from './../../../../config';
+import { PRICELIST, CARTVIEW } from './../../../../config';
 import { ApiService } from 'src/app/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -27,8 +27,8 @@ export class ProductDetailsComponent implements OnInit {
   diamondclarity: any;
   diamondcolour: any;
   defaultdiamond: any;
-  pricediamond:any;
-  totaldiamond = 0;;
+  pricediamond: any;
+  totaldiamond = 0;
   totalgold = 0;
   finegold: any;
   platinum: any;
@@ -40,18 +40,28 @@ export class ProductDetailsComponent implements OnInit {
   selectedsize: any;
   totalprice: any;
   certificate: any;
-  certificateurl:any;
+  certificateurl: any;
+  value = 1;
+  wish:any;
+ cart:any[];
   constructor(private api: ApiService, private route: ActivatedRoute) {
 
     this.api.Post(PRICELIST, {} ).then(data  => {
+      if  (data['data']) {
       this.pricelist = data['data'];
-      // console.log(this.pricelist);
+      }
     });
 
     this.route.params.subscribe(params => {
       this.pid = params.id;
       this.getproduct();
       });
+
+      this.api.Post(CARTVIEW,{user_id: this.api.uid}).then(data=>{
+        this.cart=data['data'];
+    }).catch(d => {
+      console.log(d);
+    })
       this.totalprice = this.totaldiamond+this.totalgold+this.totalplat;
    }
    sizechange(value) {
@@ -64,23 +74,99 @@ export class ProductDetailsComponent implements OnInit {
     }
     this.totalprice = this.totaldiamond+this.totalgold+this.totalplat;
     let increament = this.selectedsize - this.defaultsize;
-      if(increament !=0 ) {
+    if  (increament !=0 ) {
         this.defaultsize = this.selectedsize;
       }
    }
-   quantity(value) {
-      console.log(value);
+   quantity(pid)
+   {
+        let cart=this.api.getCart();
+        if(cart)
+      {
+              let result=cart.find(x => x.product_id == pid);
+              // console.log(result);
+              if(result)
+              { 
+                    let cartId=result.cart_id;
+                    let c=Number(result.count);
+                    this.value = c;
+                    return c;
+                } 
+                else{
+                  return(0);
+                }
+        }
+   }
+   wishlist(pid) {
+    // console.log("in wishlist");
+     //console.log(pid);
+     this.api.checkWishlist(pid);
+   }
+   checkHeart(pid)
+  {
+
+    //console.log("checkheart");
+    this.wish = this.api.getWishlist();
+    if (this.wish) {
+            let result = this.wish.find(x => x.product_id === pid);
+        //  console.log("result="+result);
+            if (result)
+            { 
+             // console.log("present");
+              return true;
+            
+            }
+            else
+            {
+              //console.log("not present");
+              return false;
+              
+            } 
+      }
+      else{
+        //console.log("not present");
+        return false;
+      }
+  }
+   qtyUpdate(pid,value)
+   {
+        this.api.qtyUpdate(pid,value);
+   }
+   checkCart(pid)
+  {
+      let check=this.api.checkCart(pid);
+     // console.log(check);
+      return check;
+ }
+  deleteWishlist(pid)
+  {
+      this.api.deleteWishlist(pid);
+  }
+  addToCart(s)
+  {
+    this.api.addToCart(s);
+  }
+   quantity2(value) {
+     if (this.value != 0 && value == -1)
+    {
+      this.value = this.value+value;
+    }
+    if(value == 1)
+    {
+      this.value = this.value+value;
+    }
+      console.log(this.value);
    }
    getproduct() {
     this.api.Post(PRODUCTDETAILS, {product_id: this.pid} ).then(data  => {
-
-      this.data = data['data'];
+      if(data['data'])  {
+        this.data = data['data'];
+    }
+      console.log(this.data);
       this.assets = data['assets'];
-      // console.log(this.assets);
       this.prd_img = this.assets['image'];
       this.certificate = data['Certification'];
       this.certificateurl = data['certificte_url']+'/';
-      console.log(data['certificte_url'])
       this.recents = data['recentproduct'];
       this.url = data['url'] + '/';
       if (this.data.size) {
@@ -91,7 +177,6 @@ export class ProductDetailsComponent implements OnInit {
       if (this.assets.gold.length) {
         this.getgold(this.assets.gold[0]);
       }
-      console.log(this.diamond);
       if (this.assets.diamond.length) {
         this.diamond = this.assets.diamond[0];
         this.diamondcolour = this.diamond.diamondcolor.split(',');
@@ -132,20 +217,17 @@ export class ProductDetailsComponent implements OnInit {
      this.pricegold = this.pricelist.gold.find(x => x.gold_type == this.gold.goldquality);
 
      if (this.gold.option == "pergram") {
-          // console.log("per gram");
           this.totalgold  =  (Number(this.pricegold.price) + Number(this.gold.makingcharge)) * Number(this.gold.goldweight);
           this.finegold = this.totalgold;
      }
 
      if (this.gold.option == "percentage") {
-      // console.log("percentage");
       this.pricegold = this.pricelist.gold.find(x => x.gold_type == '24K');
       this.finegold = Number(this.gold.goldweight) - (Number(this.gold.goldweight) / 100) * Number(this.gold.makingcharge);
       this.totalgold = this.pricegold.price * this.finegold;
     }
 
      if (this.gold.wastage) {
-      // console.log("gold waste and per gram");
       this.finegold = Number(this.gold.goldweight);
       let wasteprice = ((Number(this.gold.goldweight) / 100) *  Number(this.gold.wastage)) * Number(this.pricegold.price);
       this.totalgold = (Number(this.pricegold.price) + Number(this.gold.makingcharge)) * Number(this.finegold) + wasteprice;
@@ -153,7 +235,6 @@ export class ProductDetailsComponent implements OnInit {
      this.finegold = this.finegold.toFixed(2);
      this.totalgold = Math.round(this.totalgold);
      this.totalprice = this.totaldiamond+this.totalgold+this.totalplat;
-    //  console.log( this.totalgold);
    }
 
    getplatinum() {
@@ -164,34 +245,22 @@ export class ProductDetailsComponent implements OnInit {
       this.platinum.platinum_qty = (Number(this.platinum.platinum_qty) + increament).toFixed(2);
     }
     this.priceplat = this.pricelist.platinum;
-    // console.log( this.platinum);
     if (this.platinum.charge_type == "pergram") {
-        //  console.log("per gram");
          this.totalplat =  (Number(this.priceplat[0].price) + Number(this.platinum.platinum_charge)) * Number(this.platinum.platinum_qty);
          this.fineplat = this.totalplat;
-         //  console.log(this.priceplat[0].price);
-        //  console.log(this.platinum.platinum_charge);
-        //  console.log(this.platinum.platinum_qty);
-        //  console.log(this.totalplat);
     }
 
     if (this.platinum.charge_type == "percentage") {
-    //  console.log("percentage");
     this.fineplat = Number(this.platinum.platinum_qty) - (Number(this.platinum.platinum_qty) / 100) * Number(this.platinum.platinum_charge);
     this.totalplat = this.priceplat[0].price * this.fineplat;
    }
 
     if (this.platinum.wastage) {
-    //  console.log("platinum waste and per gram");
      this.fineplat = Number(this.platinum.platinum_qty);
-    //  console.log(this.fineplat);
-    //  console.log((Number(this.platinum.platinum_qty) / 100) *  Number(this.platinum.wastage));
      let wasteprice = ((Number(this.platinum.platinum_qty) / 100) *  Number(this.platinum.wastage))*Number(this.priceplat[0].price);
      this.totalplat = (Number(this.priceplat[0].price) + Number(this.platinum.platinum_charge)) * Number(this.fineplat)+wasteprice;
-    //  console.log(this.totalplat);
     }
     this.totalplat = Math.round(this.totalplat);
-    // console.log(this.totalplat);
     this.fineplat = this.fineplat.toFixed(2);
     this.totalprice = this.totaldiamond+this.totalgold+this.totalplat;
   }

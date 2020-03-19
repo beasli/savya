@@ -14,16 +14,10 @@
         <div class="container">
             <div class="row prd-block prd-block--mobile-image-first js-prd-gallery" id="prdGallery100">
                 <div class="col-md-6 col-xl-5">
-                    <div class="prd-block_info js-prd-m-holder mb-2 mb-md-0"></div><!-- Product Gallery -->
+                    <div class="prd-block_info js-prd-m-holder mb-2 mb-md-0"></div>
                     <div class="prd-block_main-image main-image--slide js-main-image--slide">
                         <div class="prd-block_main-image-holder js-main-image-zoom" data-zoomtype="inner">
                             <app-testimonials [heading] = '""' [isShowAll] = 'false' [input] = 'prd_img' [slidetoshow] = '"1"' [redirect] = '"N"'  [url] = 'url'></app-testimonials>
-
-                            <!-- <div class="prd-has-loader">
-                                <div class="gdw-loader"></div><img [src]="url + prd_img" class="zoom" alt="" data-zoom-image="images/products/large/product-01.jpg">
-                            </div>
-                            <div class="prd-block_main-image-next slick-next js-main-image-next">NEXT</div>
-                            <div class="prd-block_main-image-prev slick-prev js-main-image-prev">PREV</div> -->
                         </div>
                     </div>
                     <!-- /Product Gallery -->
@@ -184,17 +178,33 @@
                             </div>
                              -->
 
-                            <div class="prd-block_qty"><span class="option-label">Qty:</span>
+                            <!-- <div class="prd-block_qty"><span class="option-label">Qty:</span>
                                 <div class="qty qty-changer">
-                                    <fieldset><input type="button" value="&#8210;" class="decrease"> <input type="text" class="qty-input" value="1" (input)="quantity($event.target.value)" data-min="0" data-max="10"> <input type="button" value="+" class="increase"></fieldset>
+                                    <fieldset><input type="button" value="&#8210;" (click) ='quantity2(-1)' class="decrease"> <input type="text" class="qty-input" value="1" data-min="0" data-max="10"> <input (click) ='quantity2(1)' type="button" value="+" class="increase"></fieldset>
                                 </div><span class="option-label">max <span class="qty-max">10</span> item(s)</span>
-                            </div>
+                            </div> -->
 
                         </div>
                         <div class="prd-block_actions topline">
-                            <div class="prd-block_price"><span class="prd-block_price--actual">₹{{totalprice}}</span></div>
-                            <div class="btn-wrap"><button class="btn btn--add-to-cart" data-fancybox data-src="#modalCheckOut"><i class="icon icon-handbag"></i><span>Add to cart</span></button></div>
-                            <div class="prd-block_link"><a href="#" class="icon-heart-1"></a> <a href="#" class="icon-share"></a></div>
+                            <div *ngIf='value>0' class="prd-block_price"><span class="prd-block_price--actual">₹{{totalprice * value}}</span></div>
+                            <div class="prd-hover">
+                                <div class="prd-action">
+
+                                    <div   *ngIf= "checkCart(data.id)" class="row no=gutters" >
+                                        <div class="col-2">
+                                            <button  (click)="qtyUpdate(data.id,-1)" class="btn btn-secondary btn-block">-</button>
+                                        </div>
+        
+                                        <div class="col-4 text-right">{{quantity(data.id)}}</div>
+        
+                                        <div class="col-2">
+                                            <button  (click)="qtyUpdate(data.id,+1)" class="btn btn-secondary btn-block">+</button>
+                                        </div>
+                                    </div>
+                                    <form action="#"><input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="addToCart(data)"><i class="icon icon-handbag"></i><span>Add To Cart</span></button></form> 
+                                    <div class="prd-links hide-mobile"><a class="icon-eye prd-qview-link js-qview-link"></a> <a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
+                                </div>
+                            </div>
                         </div>
                         
                     </div>
