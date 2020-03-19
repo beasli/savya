@@ -14,7 +14,6 @@ export class TestimonialsComponent implements OnInit {
   @Input() slidetoshow;
   @Input() isShowAll;
   
-
   title: any;
   desc: any;
   slideConfig = {
