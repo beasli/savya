@@ -11,7 +11,7 @@ import { PRODUCTDETAILS, CATEGORY, SUBCATEGORY, SUBCATEGORYTYPE } from 'src/conf
 })
 export class ProductDetailsComponent implements OnInit {
   pid: string;
-  data: any;
+  data:any[];
   assets: any;
   recents: any;
   category: any;
@@ -39,7 +39,7 @@ export class ProductDetailsComponent implements OnInit {
   sizes: any;
   selectedsize: any;
   totalprice: any;
-  certificate: any;
+  certificate: [];
   certificateurl: any;
   value = 1;
   wish:any;
@@ -89,7 +89,8 @@ export class ProductDetailsComponent implements OnInit {
               { 
                     let cartId=result.cart_id;
                     let c=Number(result.count);
-                    this.value = c;
+                    if(c!=0){
+                    this.value = c;}
                     return c;
                 } 
                 else{
