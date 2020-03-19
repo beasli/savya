@@ -28,6 +28,11 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/search',this.searchValue]);
     }
   }
+  popularSearch(value)
+  {
+    console.log("in search");
+    this.router.navigate(['/search',value]);
+  }
   alert()
   {
     if(this.searchValue.length>3)
