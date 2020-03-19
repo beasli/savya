@@ -201,8 +201,8 @@
                                             <button  (click)="qtyUpdate(data.id,+1)" class="btn btn-secondary btn-block">+</button>
                                         </div>
                                     </div>
-                                    <form action="#"><input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="addToCart(data)" data-fancybox><i class="icon icon-handbag"></i><span>Add To Cart</span></button></form> 
-                                    <div class="prd-links hide-mobile"><a href="#" class="icon-eye prd-qview-link js-qview-link" data-fancybox data-src="#mod0alQuickView"></a> <a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
+                                    <form action="#"><input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="addToCart(data)"><i class="icon icon-handbag"></i><span>Add To Cart</span></button></form> 
+                                    <div class="prd-links hide-mobile"><a class="icon-eye prd-qview-link js-qview-link"></a> <a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
                                 </div>
                             </div>
                         </div>
