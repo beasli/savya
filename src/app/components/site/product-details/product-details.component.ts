@@ -39,7 +39,7 @@ export class ProductDetailsComponent implements OnInit {
   sizes: any;
   selectedsize: any;
   totalprice: any;
-  certificate: [];
+  certificate:any;
   certificateurl: any;
   value = 1;
   wish:any;
