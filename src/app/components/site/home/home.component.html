@@ -13,6 +13,7 @@
     <!-- live rates area-->
     <app-liverates></app-liverates>
     <!-- live rates area-->
+    <app-manufacture  [heading] = '""' [isShowAll] = 'false' [input] = 'manufacturer' [slidetoshow] = '"4"' [redirect] = '"N"'  [url] = 'url2'></app-manufacture>
 
     <!--Company name slider-->
     <!--<app-testimonials [slides]="4" [heading] = '"Company Logo"' [redirect] = '"N"' [input] = 'company_slider'  [url] = '"assets/images/"'></app-testimonials>-->
@@ -60,8 +61,6 @@
         </div>
     </section>
 
-    <app-product-holder [heading] = '"Mostselling Product"' [url3] = 'url3' [mostselling] = 'mostselling'></app-product-holder>
-
     <!--/Product Holder -->
     
     
@@ -74,7 +73,7 @@
     <app-exclusive-banner [url2] = 'url2' [exclusive] = 'exclusive'></app-exclusive-banner>
     <!--/Promotional section -->
     
-    <app-testimonials  [heading] = '""' [input] = 'models' [redirect] = '"N"'  [url] = '"assets/images/model/"'></app-testimonials>
+    <app-testimonials  [heading] = '""' [input] = 'models' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = '"assets/images/model/"'></app-testimonials>
 
     <!-- Mostselling Product -->
     <app-product-holder [heading] = '"Mostselling Product"' [url3] = 'url3' [mostselling] = 'mostselling'></app-product-holder>

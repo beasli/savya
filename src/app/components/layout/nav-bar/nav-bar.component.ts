@@ -32,6 +32,7 @@ export class NavBarComponent implements OnInit {
           
             this.api.Post(NAVIGATION, {}).then(data => {
               this.catall = data['data'];
+              console.log(data);
               this.catall.forEach(element => {
                 if (element['subcategory'].length){
                   this.catwithsub.push(element);
@@ -42,7 +43,9 @@ export class NavBarComponent implements OnInit {
                 }
               );
               // console.log(this.catwithsub[0].subcategory);
-              // console.log(this.catwithoutsub);
+              console.log(this.catwithoutsub);
+              
+              console.log(this.catwithsub);
             });
 }
 ProductsInCart()

@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
   url: any;
   url2: any;
   url3: any;
+  manufacturerurl:any;
+  manufacturer: any;
   slideConfig = {
     "slidesToShow": 4,
     "slidesToScroll": 1,
@@ -65,6 +67,10 @@ export class HomeComponent implements OnInit {
           }
           else if (childObj.category === 'events') {
             this.events = childObj['events']
+          }
+          else if (childObj.category === 'manufacture') {
+            this.manufacturer = childObj['manufacture'];
+            console.log( this.manufacturer);
           }
        });
         this.url = data['url'];

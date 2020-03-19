@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiService } from './../../../api/api.service';
-declare var $: any;
+import { ApiService } from 'src/app/api/api.service';
+
 @Component({
-  selector: 'app-testimonials',
-  templateUrl: './testimonials.component.html',
-  styleUrls: ['./testimonials.component.css']
+  selector: 'app-manufacture',
+  templateUrl: './manufacture.component.html',
+  styleUrls: ['./manufacture.component.css']
 })
-export class TestimonialsComponent implements OnInit {
+export class ManufactureComponent implements OnInit {
+
   @Input() input;
   @Input() url;
   @Input() heading;
@@ -54,3 +55,5 @@ export class TestimonialsComponent implements OnInit {
   }
 
 }
+
+
