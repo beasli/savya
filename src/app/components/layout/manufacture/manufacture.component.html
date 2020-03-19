@@ -1,0 +1,22 @@
+<div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09 mt-0">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="h1-style">{{heading}}</h2>
+            <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
+        </div>
+        <div class="testimonials" *ngIf="input">
+          <ngx-slick-carousel class="carousel" 
+                    #slickModal="slick-carousel" 
+                    [config]="slideConfig" >
+          <div ngxSlickItem *ngFor="let slide of input;let i = index" (click)='detail(slide)' [ngClass]="{'overlay-wrapper':redirect=='Y'}" class="slide embed-responsive embed-responsive-16by9">
+          <img src="{{ url + slide.logo }}" (mouseover)="text(slide)" class="embed-responsive-item"  alt="" width="100%">
+          <div class="overlay-effect">
+              <div class="overlay-effect-content">
+                <h2>{{company_name}}</h2>
+              </div>
+          </div>
+          </div>
+          </ngx-slick-carousel>
+    </div>
+    <div *ngIf='isShowAll' class="more-link-wrapper text-center mt-2"><a routerLink="/events" class="btn-decor">show me all</a></div>
+</div>
