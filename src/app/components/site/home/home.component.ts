@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   events: any;
   models = [{image: 'model_1.jpg'}, {image: 'model_2.jpg'}]
   partners = [{image: 'IGI_Expo.jpg'}];
+  company_slider =[{image: "IGI_Expo.jpg"}, {image: "download.png"}, {image: "bvclogo.png"}, {image: "bvclogo.png"}];
   url: any;
   url2: any;
   url3: any;
@@ -48,8 +49,10 @@ export class HomeComponent implements OnInit {
       // instead of a settings object
     ]
   };
+  
   constructor(private api: ApiService ) {
       this.api.Post(CRAUSEL, {}).then(data => {
+        console.log(data);
         data['body'].forEach(childObj => {
           if (childObj.category === 'app_banners') {
             this.slider_imgs = childObj['app_banners'];

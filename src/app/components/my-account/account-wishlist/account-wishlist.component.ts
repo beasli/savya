@@ -19,22 +19,24 @@ message:any;
   constructor(private api:ApiService) {
     this.data=this.api. getUserInfo();
     this.uid=this.data.uid;
-    // console.log("uid"+this.uid);
+     console.log("uid"+this.uid);
     this.view();
-     console.log(this.data);
+     //console.log(this.data);
     this.value=localStorage.getItem('wish');
   }
   view()
   {
     
     this.api.Post(WISHLISTVIEW,{uid:this.uid}).then(data=>{
+    console.log(data);
       this.div=true;
       this.alert=false;
       // console.log(data['data']);
        this.baseurl=data['url']+"/";
-      console.log("url"+this.baseurl);
+      // console.log("url"+this.baseurl);
        this.results=data['data'];
-      // console.log(this.results);
+      //  console.log(this.results);
+      //  console.log(this.baseurl);
      }).catch(d=>{
        this.alert=true;
        this.div=false;
@@ -53,6 +55,9 @@ message:any;
   {
     this.api.addToCart(s);
   }
+  go(value) {
+    this.api.godetail(value);
+  }
   checkProductInCart(pid)
   {
      let cart=this.api.getCart();
@@ -70,6 +75,9 @@ message:any;
              // console.log("this product is not present in cart");
               return true;
             } 
+       }
+       else{
+         return true;
        }
   }  
 

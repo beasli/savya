@@ -9,9 +9,34 @@
      <!-- Product Holder -->
      <!-- <app-best-seller-product [url3] = 'url3' [mostselling] = 'mostselling'></app-best-seller-product> -->
      <!--/Product Holder -->
-    <app-liverates></app-liverates>
 
-    <!-- Product Holder -->
+    <!-- live rates area-->
+    <app-liverates></app-liverates>
+    <!-- live rates area-->
+
+    <!--Company name slider-->
+    <!--<app-testimonials [slides]="4" [heading] = '"Company Logo"' [redirect] = '"N"' [input] = 'company_slider'  [url] = '"assets/images/"'></app-testimonials>-->
+   
+   <!-- <section class="company-name-slider py-3 py-md-6">
+        <div class="company-logo">
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel">
+            <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
+              <img src="assets/images/IGI_Expo.jpg" class="embed-responsive-item"  alt="" width="100%" >
+            </div>
+            <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
+              <img src="assets/images/download.png" class="embed-responsive-item"  alt="" width="100%">
+            </div>
+            <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
+              <img src="assets/images/bvclogo.png" class="embed-responsive-item"  alt="" width="100%" >
+            </div>
+            <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
+              <img src="assets/images/mtv_live_stream.png" class="embed-responsive-item"  alt="" width="100%">
+            </div>
+            </ngx-slick-carousel>
+      </div>
+    </section> -->
+    <!--Company name slider-->
+
     <!--youtube-video-->
     <section class="youtube-video py-3 py-md-6">
         <div class="container">
@@ -34,6 +59,7 @@
             </div>
         </div>
     </section>
+
     <app-product-holder [heading] = '"Mostselling Product"' [url3] = 'url3' [mostselling] = 'mostselling'></app-product-holder>
 
     <!--/Product Holder -->
@@ -41,15 +67,24 @@
     
     <app-testimonials [heading] = '""' [isShowAll] = 'true' [input] = 'models' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = '"assets/images/model/"'></app-testimonials>
 
+    <!--youtube-video-->
+
+
     <!-- Promotional Section -->
     <app-exclusive-banner [url2] = 'url2' [exclusive] = 'exclusive'></app-exclusive-banner>
     <!--/Promotional section -->
     
-   
+    <app-testimonials  [heading] = '""' [input] = 'models' [redirect] = '"N"'  [url] = '"assets/images/model/"'></app-testimonials>
+
+    <!-- Mostselling Product -->
+    <app-product-holder [heading] = '"Mostselling Product"' [url3] = 'url3' [mostselling] = 'mostselling'></app-product-holder>
+    <!-- Mostselling Product -->
+
 
     <!-- Testimonials -->
     <app-testimonials [heading] = '"Events"' [isShowAll] = 'true' [redirect] = '"Y"' [slidetoshow] = '"2"' [input] = 'events'  [url] = 'url2'></app-testimonials>
     <!--/Testimonial -->
+
 
      <!-- Testimonials -->
      <!--<app-testimonials [heading] = '"Partners"' [redirect] = '"N"' [input] = 'partners'  [url] = '"assets/images/"'></app-testimonials>-->

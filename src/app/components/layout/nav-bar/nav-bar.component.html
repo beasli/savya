@@ -43,20 +43,20 @@
                                 <div *ngIf="div">
                                     <h3>Recently added items:</h3>
                                     <div class="minicart-prd"  *ngFor="let r of results">
-                                        <div class="minicart-prd-image"><a href="#"><img src="{{baseurl + r.image}}" data-srcset="assets/images/products/product-05.jpg" class="lazyload" alt=""></a></div>
+                                        <div class="minicart-prd-image"><a href="javascript:void(0)"><img src="{{baseurl + r.image}}"  class="lazyload" alt=""></a></div>
                                         <div class="minicart-prd-name">
                                             <h5><a href="#">Category</a></h5>
                                             <h2><a href="#">{{r.productName}}</a></h2>
                                         </div>
                                         <div   *ngIf= "checkCart(r.product_id)" class="row no=gutters" >
                                             <div class="row">
-                                                    <div class="col-1">
+                                                    <div class="col-2">
                                                         <button  (click)="qtyUpdate(r.product_id,-1)" class="btn btn-secondary btn-block">-</button>
                                                     </div>
                             
-                                                    <div class="col-2 text-right">{{quantity(r.product_id)}}</div>
+                                                    <div class="col-1 ">{{quantity(r.product_id)}}</div>
                             
-                                                    <div class="col-1 ">
+                                                    <div class="col- 2">
                                                         <button  (click)="qtyUpdate(r.product_id,+1)" class="btn btn-secondary btn-block">+</button>
                                                     </div>
                                         </div>

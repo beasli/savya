@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AboutComponent } from '../about/about.component';
 import { TermsAndConditionComponent } from '../terms-and-condition/terms-and-condition.component';
 import { PaymentComponent } from '../payment/payment.component';
+import { SearchComponent } from '../search/search.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { PaymentComponent } from '../payment/payment.component';
     AboutComponent,
     TermsAndConditionComponent,
     PaymentComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { PaymentComponent } from '../payment/payment.component';
       { path: 'about', component: AboutComponent},
       { path: 'terms', component: TermsAndConditionComponent},
       { path: 'payment', component: PaymentComponent},
+      { path: 'search/:value', component: SearchComponent},
     ])
   ]
 })
