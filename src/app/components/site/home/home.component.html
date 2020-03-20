@@ -14,10 +14,12 @@
     <app-liverates></app-liverates>
     <!-- live rates area-->
     <!-- <app-manufacture  [heading] = '""' [isShowAll] = 'false' [input] = 'logo' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = 'url2'></app-manufacture> -->
-    <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09 mt-0">
+    <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09 mt-0 seller">
       <div class="container">
           <div class="text-center">
-              <h2 class="h1-style"></h2>
+
+              <h2 class="h1-style">Our Associate Brands</h2>
+
               <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
           </div>
           <div class="testimonials">
@@ -27,7 +29,10 @@
             <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide embed-responsive embed-responsive-16by9">
             <img src="{{ url2 + slide.logo }}"  class="embed-responsive-item"  alt="" width="100%">
             <div class="overlay-effect">
-                
+
+                <div class="overlay-effect-content">
+                  <h2>{{ slide.title }}</h2>
+                </div>
             </div>
             </div>
             </ngx-slick-carousel>
