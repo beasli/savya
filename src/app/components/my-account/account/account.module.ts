@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { AuthGuardService } from '../../auth-guard/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventHistoryComponent } from '../event-history/event-history.component';
+import { OrderDetailComponent } from '../order-detail/order-detail.component';
 @NgModule({
   declarations: [
     AccountDetailsComponent,
@@ -17,7 +18,8 @@ import { EventHistoryComponent } from '../event-history/event-history.component'
     AccountWishlistComponent,
     AccountHistoryComponent,
     EditAddressComponent,
-    EventHistoryComponent
+    EventHistoryComponent,
+    OrderDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { EventHistoryComponent } from '../event-history/event-history.component'
       { path: 'account-history', component: AccountHistoryComponent,  canActivate: [AuthGuardService]},
       { path: 'edit-address/:id', component: EditAddressComponent,  canActivate: [AuthGuardService]},
       { path: 'add-address/:id', component: EditAddressComponent,  canActivate: [AuthGuardService]},
-      { path: 'event-history', component: EventHistoryComponent,  canActivate: [AuthGuardService]}
+      { path: 'event-history', component: EventHistoryComponent,  canActivate: [AuthGuardService]},
+      { path: 'order-detail/:result', component: OrderDetailComponent,  canActivate: [AuthGuardService]},
     ])
   ]
 })
