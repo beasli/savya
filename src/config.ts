@@ -57,3 +57,5 @@ export const ORDERBY = 'product/list?subsubcategory_id=';
 export const PRICELIST = 'product/list/price';
 export const SEARCH = 'search';
 
+// order
+export const ORDERHISTORY = 'order/history';
