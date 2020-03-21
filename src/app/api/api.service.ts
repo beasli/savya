@@ -182,8 +182,7 @@ qtyUpdate(pid,value)
   addToCart(product)
   {
    console.log(product);
-   console.log(product.id);
-    this.Post(CARTADD,{"data":[{"assests":[{"makingCharge":"10.0","materialType":"18K","metal":"Dimaond","option":"percentage","productId":product.id.toString(),"weight":"7.15"}],"category":"1","count":1,"defaultColor":"","description":"<p>{{product.productname}}</p>","productCode":"SJILR30","productId":product.id,"productName":product.productname,"productType":"ring","subCategory":"2","subSubCategory":"1","userid":this.uid}]}).then(data=>{
+    this.Post(CARTADD, product).then(data=>{
       console.log(data);
       this.updateCart();
       this.Cart.emit("cartUpdated"+Date.now());

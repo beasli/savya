@@ -44,6 +44,9 @@ export class ProductDetailsComponent implements OnInit {
   value = 1;
   wish:any;
  cart:any;
+  stone: any;
+  totalstone = 0;
+  pricestone: any;
   constructor(private api: ApiService, private route: ActivatedRoute) {
 
     this.api.Post(PRICELIST, {} ).then(data  => {
@@ -163,7 +166,6 @@ export class ProductDetailsComponent implements OnInit {
       if(data['data'])  {
         this.data = data['data'];
     }
-      console.log(this.data);
       this.assets = data['assets'];
       this.prd_img = this.assets['image'];
       this.certificate = data['Certification'];
@@ -177,6 +179,9 @@ export class ProductDetailsComponent implements OnInit {
       }
       if (this.assets.gold.length) {
         this.getgold(this.assets.gold[0]);
+      }
+      if (this.assets.stone.length) {
+        this.getstone(this.assets.stone[0]);
       }
       if (this.assets.diamond.length) {
         this.diamond = this.assets.diamond[0];
@@ -206,6 +211,96 @@ export class ProductDetailsComponent implements OnInit {
      let result = data['data'].find(x => x.id == this.data['category']);
      this.category = result['category'];
   });
+}
+
+   createjson() {
+    let j = {};
+    let temparray = [];
+    if (this.gold!=null) {
+        j['option'] = this.gold.option;
+        j['weight'] = this.gold.goldweight;
+        j['materialType'] = this.pricegold.gold_type;
+        j['productId'] = this.pid;
+        j['metal'] = 'Gold';
+        j['makingCharge'] = this.gold.makingcharge;
+        temparray.push(j);
+        console.log(j);
+        j = {};
+      }
+    if (this.diamond!=null) {
+      j['option'] = this.diamond.type;
+      j['weight'] = this.diamond.diamondqty;
+      j['materialType'] = this.defaultdiamond[0] + '/' + this.defaultdiamond[1];
+      j['productId'] = this.pid;
+      j['metal'] = 'Diamond';
+      j['makingCharge'] = this.diamond.diamondcharge;
+      temparray.push(j);
+      console.log(j);
+      j = {};
+    }
+    if (this.platinum!=null) {
+      j['option'] = this.platinum.charge_type;
+      j['weight'] = this.platinum.platinum_qty;
+      j['materialType'] = "Platinum";
+      j['productId'] = this.pid;
+      j['metal'] = 'Platinum';
+      j['makingCharge'] = this.platinum.platinum_charge;
+      temparray.push(j);
+      console.log(j);
+      j = {};
+    }
+    if (this.stone!=null) {
+      j['option'] = this.stone.type;
+      j['weight'] = this.stone.stoneqty;
+      j['materialType'] = this.stone.stonetype;
+      j['productId'] = this.pid;
+      j['metal'] = 'Stone';
+      j['makingCharge'] = this.stone.stonecharges;
+      temparray.push(j);
+      console.log(j);
+      j = {};
+    }
+    console.log(temparray);
+    let uid = this.api.getUserInfo();
+    uid = uid['uid'];
+    j['assests'] = temparray;
+    j['category'] = this.data['category'];
+    j['count'] = this.value;
+    this.data.color ? j['defaultColor'] = this.data.color : j['defaultColor'] = "";
+    j['description'] = this.data.description;
+    j['productCode'] = this.data.productcode;
+    j['productId'] = Number(this.pid);
+    j['productName'] = this.data.productname;
+    j['productType'] = this.data.size_type;
+    j['subCategory'] = this.data['subcategory'];
+    j['subSubCategory'] = this.data['subcategorytype'];
+    j['userid'] = (uid).toString();
+    temparray = [];
+    temparray.push(j);
+    j = {};
+    j['data'] = temparray;
+    this.api.addToCart(j);
+
+
+    }
+
+   getstone(value){
+      this.stone = value;
+      let name = value.stonetype;
+      this.pricestone = this.pricelist.stone.find(x => x.stone_type == name);
+      console.log(this.pricestone.price);
+      console.log(this.stone.stoneqty);
+      console.log(this.stone.stonecharges);
+      console.log(this.totalstone);
+      if (!this.stone.stonecharges || this.stone.stonecharges == 0) {
+      this.totalstone = this.pricestone.price * Number(this.stone.stoneqty);
+      console.log(this.totalstone);
+    } else {
+      this.totalstone = ((Number(this.stone.stonecharges) + Number(this.pricestone.price)) * Number(this.stone.stoneqty));
+      this.totalstone = Math.round(this.totalstone);
+      console.log(this.totalstone);
+    }
+      this.totalprice = this.totaldiamond+this.totalgold+this.totalplat+this.totalstone;
    }
 
    getgold(value) {

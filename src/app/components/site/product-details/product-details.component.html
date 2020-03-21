@@ -169,20 +169,22 @@
                                 <div *ngIf=(assets.diamond[0].type) class="option-label">Charges Type:  {{assets.diamond[0].type}}</div> 
                                 <div>Diamond Total:₹ {{totaldiamond}} </div>
                             </div>
-<!--                             
-                            <div class="prd-size swatches">
-                                <span class="option-label">Stone:</span> 
+                            
+                            <div *ngIf=(assets.stone.length) class="prd-size swatches">
+                                <span class="option-label">Stone:</span>
                                 <div class="radio-group">
-                                    <input type="radio" id="ruby" name="stone"><label for="ruby">Ruby</label>
-                                </div>
+                                    <ng-container *ngFor='let s of assets.stone;let i = index'><input [checked]='(i==0) ? true:false' class='radio-control' (change)='getstone(s)' type="radio" id="{{s.stonetype}}" name="stone"><label for="{{s.stonetype}}">{{s.stonetype}}</label></ng-container>
+                                    </div>
                             </div>
-                             -->
 
-                            <!-- <div class="prd-block_qty"><span class="option-label">Qty:</span>
-                                <div class="qty qty-changer">
-                                    <fieldset><input type="button" value="&#8210;" (click) ='quantity2(-1)' class="decrease"> <input type="text" class="qty-input" value="1" data-min="0" data-max="10"> <input (click) ='quantity2(1)' type="button" value="+" class="increase"></fieldset>
-                                </div><span class="option-label">max <span class="qty-max">10</span> item(s)</span>
-                            </div> -->
+                            <div *ngIf=(assets.stone[0])>
+                                <div>Stone (weight):  {{stone.stoneqty}} ct</div>
+                                <div class="option-label">Fine Stone Rate:₹ {{pricestone.price}}/ct</div>
+                                <div class="option-label">No Stone:  {{stone.stoneno}} pc</div>
+                                <div class="option-label">Making Charges: ₹ {{stone.stonecharges}}</div>
+                                <div class="option-label">Charges Type:  {{stone.type}}</div> 
+                                <div>Stone Total:₹ {{totalstone}} </div>
+                            </div>
 
                         </div>
                         <div class="prd-block_actions topline">
@@ -201,12 +203,11 @@
                                             <button  (click)="qtyUpdate(data.id,+1)" class="btn btn-secondary btn-block">+</button>
                                         </div>
                                     </div>
-                                    <input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="addToCart(data)"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
+                                    <input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="createjson()"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
                                     <div class="prd-links hide-mobile"><a class="icon-eye prd-qview-link js-qview-link"></a> <a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
                 <div class="col-xl-3 mt-3 mt-xl-0 sidebar-product">
