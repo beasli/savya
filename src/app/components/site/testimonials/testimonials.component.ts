@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { ApiService } from './../../../api/api.service';
 declare var $: any;
 @Component({
@@ -47,9 +47,13 @@ export class TestimonialsComponent implements OnInit {
     this.api.setEvent(value, this.url);
     }
   }
-
+  ngOnChanges(changes: SimpleChanges){
+    console.log(changes);
+  }
+  
   ngOnInit() {
     this.slideConfig.slidesToShow = this.slidetoshow;
+    console.log("changes");
   }
 
 }
