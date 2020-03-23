@@ -288,17 +288,11 @@ export class ProductDetailsComponent implements OnInit {
       this.stone = value;
       let name = value.stonetype;
       this.pricestone = this.pricelist.stone.find(x => x.stone_type == name);
-      console.log(this.pricestone.price);
-      console.log(this.stone.stoneqty);
-      console.log(this.stone.stonecharges);
-      console.log(this.totalstone);
       if (!this.stone.stonecharges || this.stone.stonecharges == 0) {
       this.totalstone = this.pricestone.price * Number(this.stone.stoneqty);
-      console.log(this.totalstone);
     } else {
       this.totalstone = ((Number(this.stone.stonecharges) + Number(this.pricestone.price)) * Number(this.stone.stoneqty));
       this.totalstone = Math.round(this.totalstone);
-      console.log(this.totalstone);
     }
       this.totalprice = this.totaldiamond+this.totalgold+this.totalplat+this.totalstone;
    }
