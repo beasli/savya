@@ -220,11 +220,11 @@ export class ProductDetailsComponent implements OnInit {
         j['option'] = this.gold.option;
         j['weight'] = this.gold.goldweight;
         j['materialType'] = this.pricegold.gold_type;
+        j['wastage'] = this.gold.wastage;
         j['productId'] = this.pid;
         j['metal'] = 'Gold';
         j['makingCharge'] = this.gold.makingcharge;
         temparray.push(j);
-        console.log(j);
         j = {};
       }
     if (this.diamond!=null) {
@@ -235,18 +235,17 @@ export class ProductDetailsComponent implements OnInit {
       j['metal'] = 'Diamond';
       j['makingCharge'] = this.diamond.diamondcharge;
       temparray.push(j);
-      console.log(j);
       j = {};
     }
     if (this.platinum!=null) {
       j['option'] = this.platinum.charge_type;
       j['weight'] = this.platinum.platinum_qty;
       j['materialType'] = "Platinum";
+      j['wastage'] = this.platinum.wastage;
       j['productId'] = this.pid;
       j['metal'] = 'Platinum';
       j['makingCharge'] = this.platinum.platinum_charge;
       temparray.push(j);
-      console.log(j);
       j = {};
     }
     if (this.stone!=null) {
@@ -257,10 +256,8 @@ export class ProductDetailsComponent implements OnInit {
       j['metal'] = 'Stone';
       j['makingCharge'] = this.stone.stonecharges;
       temparray.push(j);
-      console.log(j);
       j = {};
     }
-    console.log(temparray);
     let uid = this.api.getUserInfo();
     uid = uid['uid'];
     j['assests'] = temparray;
