@@ -68,7 +68,7 @@
                                 </div>
                                     
                                 <div class="product-code">Product Code: {{data.productcode}}</div>
-                                <div *ngIf=(assets.gold.length)>
+                                <div *ngIf='assets.gold.length && pricegold'>
                                     <div *ngIf=(gold.goldweight)>Gold (weight):  {{gold.goldweight}} gram</div>
 
                                     <div *ngIf="gold.option != 'percentage'" class="option-label">Fine Gold Rate: Rs. {{pricegold.price}} Per gram</div>
@@ -132,7 +132,7 @@
                                         </div>
                                 </div>
 
-                                <div *ngIf=(assets.diamond[0]) class="about-product">
+                                <div *ngIf='assets.diamond[0] && defaultdiamond' class="about-product">
                                     <div>Name: {{assets.diamond[0].diamond}}</div>
                                     <div *ngIf=(assets.diamond[0].diamondqty)>Weight:  {{assets.diamond[0].diamondqty}} ct</div>
                                     <div *ngIf=(assets.diamond[0].diamondqty) class="option-label">Diamond Price:Rs. {{pricediamond.price}}/ct</div>
