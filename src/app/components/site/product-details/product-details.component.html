@@ -70,9 +70,20 @@
                                 <div *ngIf=(assets.gold.length) class="gold-rate-details">
                                     <div class="product-code">Product Code: NK-R7801</div>
                                     <div *ngIf=(gold.goldweight)>Gold (weight):  {{gold.goldweight}} gram</div>
+
+                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Fine Gold Rate: ₹ {{pricegold.price}} Per gram</div>
+                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Rate: ₹ {{pricegold2.price}} Per gram</div>
+                                    <div *ngIf=(gold.wastage) class="option-label">Gold wastage:  {{gold.wastage}} %</div>
+                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Gold wastage:  {{gold.makingcharge}} %</div>
+                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Making Charges: ₹  {{gold.makingcharge}}</div>
+                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Weight:  {{finegold}} gram</div>
+                                    <div *ngIf="gold.option!= 'percentage'" class="option-label">Gold Charges Type:  {{gold.option}}</div>
+                                    <div class="option-label">Total Gold Price: ₹ {{totalgold}}</div>
+<!--
                                     <div class="">Gold Rate: Rs.3386.0/g</div>
                                     <div class="">Gold Making Charge: Rs.1920.0</div>
-                                    <div class="">Gold Total: Rs.12755.0</div>
+                                    <div class="">Gold Total: Rs.12755.0</div> 
+        -->
                                 </div>
 
                                 <div *ngIf=(assets.productsilver)>
