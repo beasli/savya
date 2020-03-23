@@ -103,7 +103,8 @@
 
                                 <div *ngIf=(assets.gold.length)>
                                     <div *ngIf=(gold.goldweight)>Gold (weight):  {{gold.goldweight}} gram</div>
-                                    <div *ngIf=(assets.gold.length) class="option-label">Fine Gold Rate: ₹ {{pricegold.price}} Per gram</div>
+                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Fine Gold Rate: ₹ {{pricegold.price}} Per gram</div>
+                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Rate: ₹ {{pricegold2.price}} Per gram</div>
                                     <div *ngIf=(gold.wastage) class="option-label">Gold wastage:  {{gold.wastage}} %</div>
                                     <div *ngIf="gold.option == 'percentage'" class="option-label">Gold wastage:  {{gold.makingcharge}} %</div>
                                     <div *ngIf="gold.option != 'percentage'" class="option-label">Making Charges: ₹  {{gold.makingcharge}}</div>
