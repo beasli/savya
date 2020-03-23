@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { SUBCATEGORYTYPE, PRODUCTLIST, PRODUCTFILTERMENU, PRODUCTFILTER, ORDERBY } from 'src/config';
@@ -25,6 +25,8 @@ export class FilterProductComponent implements OnInit {
   alert:boolean=false;
   message:string="NO PRODUCT AVAILABLE";
   f:any;
+  @ViewChild('addclosebutton') addclosebutton;
+@ViewChild('deleteclosebutton') deleteclosebutton;
   constructor(private api: ApiService, private route: ActivatedRoute) {
 
     this.route.params.subscribe(params => {
@@ -51,6 +53,13 @@ export class FilterProductComponent implements OnInit {
         console.log(d);
       });
      
+  }
+  addmodal() {
+    this.addclosebutton.nativeElement.click();
+  }
+  deletemodal()
+  {
+    this.deleteclosebutton.nativeElement.click();
   }
   getsubsub() {
     this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subid } ).then(data  => {

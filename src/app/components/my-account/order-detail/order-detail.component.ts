@@ -10,16 +10,23 @@ export class OrderDetailComponent implements OnInit {
 baseurl:any="http://admin.savyajewelsbusiness.com/img/product/";
   constructor(private route:ActivatedRoute) { }
 products:any;
-assests:any;
+orders:any;
+alert:boolean;
   ngOnInit() {
+       this.orders=JSON.parse(localStorage.getItem('orders'));
       this.route.params.subscribe(params=>{
-        // console.log(params.result);
-        let data=params.result;
-        let order=JSON.parse(data);
-        // console.log(order);
-        this.products=order.product;
-        // console.log(this.products);
-        // console.log(JSON.parse(order));
+        console.log(params.id);
+        let result=this.orders.find(x => x.Order_id == params.id);
+        if(result)
+        {
+          this.products=result.product;
+          this.alert=false;
+        }
+        else
+        {
+          this.alert=true;
+        }
+      
       })
   }
 

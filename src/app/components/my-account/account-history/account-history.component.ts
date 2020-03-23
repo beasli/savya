@@ -11,17 +11,14 @@ import { Router } from '@angular/router';
 export class AccountHistoryComponent implements OnInit {
  orders:any;
   constructor(private api:ApiService,private router:Router) { }
-  orderDetail(Order_id)
+  orderDetail(id)
   {
-    let result=this.orders.find(x => x.Order_id == Order_id);
-    if(result)
-    {
-          this.router.navigate(['order-detail',JSON.stringify(result)]);
-    }
+    this.router.navigate(['order-detail',id]);
   }
   ngOnInit() {
     this.api.Post(ORDERHISTORY,{user_id:3 }).then(data=>{
       this.orders=data['data'];
+      localStorage.setItem('orders',JSON.stringify(data['data']));
       console.log( data['data']);
      
     }).catch(d=>{

@@ -1,4 +1,42 @@
 <div class="hdr-content hide-mobile">
+     <!--added Modal start-->
+     <div class="modal fade" id="myaddModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" #addclosebutton class="close" data-dismiss="modal">&times;</button>
+              <!-- <h4 class="modal-title">Modal Header</h4> -->
+            </div>
+            <div class="modal-body" class="modal-text">
+              <i class="icon icon-heart-fill modal-icon-info"></i> <h2><strong>Product  added to wishlist</strong></h2><br><p>(Please wait this may take time)</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="closeModal"  (click)="addmodal()">Ok</button>
+             </div> 
+          </div>
+        </div>
+      </div>
+ <!-- added Modal end -->
+  <!--delete Modal start-->
+  <div class="modal fade" id="mydeleteModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" #deleteclosebutton class="close" data-dismiss="modal">&times;</button>
+          <!-- <h4 class="modal-title">Modal Header</h4> -->
+        </div>
+        <div class="modal-body" class="modal-text">
+            <i class="icon icon-heart modal-icon-info"></i> <h2><strong>Product removed from wishlist</strong></h2><br><p>(Please wait this may take time)</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="closeModal"  (click)="  deletemodal()">Ok</button>
+         </div> 
+      </div>
+    </div>
+  </div>
+<!-- delete Modal end -->
     <div class="container">
         <div class="row">
             <div class="col-auto"><h2>SUBCATEGORY</h2></div>
@@ -685,7 +723,7 @@
                                                             </div>
                                                         </div>
                                                         <input type="hidden"> <button class="btn" *ngIf= "!checkCart(s.product_id)"  (click)="go(s.product_id)" ><i class="icon icon-handbag"></i><span>View Detail</span></button>
-                                                        <div class="prd-links hide-mobile"><a href="#" class="icon-eye prd-qview-link js-qview-link" data-fancybox data-src="#mod0alQuickView"></a> <a (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)"  class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
+                                                        <div class="prd-links hide-mobile"><a href="#" class="icon-eye prd-qview-link js-qview-link" data-fancybox data-src="#mod0alQuickView"></a> <a data-toggle="modal" data-target="#myaddModal" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a data-toggle="modal" data-target="#mydeleteModal" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)"  class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
                     
                                                     </div>
                                                     <div class="prd-options"><span class="label-options">Custom Fields:</span>
