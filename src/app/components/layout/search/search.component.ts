@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { SEARCH } from 'src/config';
@@ -16,6 +16,8 @@ wish:any;
 alert:boolean;
 div:boolean;
 message:any="Nothing To Show";
+@ViewChild('addclosebutton') addclosebutton;
+@ViewChild('deleteclosebutton') deleteclosebutton;
   constructor(private api:ApiService,private route:ActivatedRoute) { 
     this.route.params.subscribe(params => {
       console.log(params.value);
@@ -104,7 +106,14 @@ wishlist(pid) {
       return false;
     }
 }
-  ngOnInit(): void {
+addmodal() {
+  this.addclosebutton.nativeElement.click();
+}
+deletemodal()
+{
+  this.deleteclosebutton.nativeElement.click();
+}
+  ngOnInit() {
   }
 
 }

@@ -1,5 +1,5 @@
 
-<div class="row">
+<div class="row" *ngIf="products">
     <div class="col-sm-4">
     </div>
     <div class="col-sm">
@@ -13,8 +13,12 @@
         <p class="card-text" *ngFor="let a of r.assests">METAL: {{a.metal}} <br><span >Purity:</span> {{a.materialType}}</p>
       </div>
     </div>
+
     </div>
     <div class="col-sm-2">
     </div>
   </div>
+  <ngb-alert [dismissible]="false" *ngIf="alert">
+    <strong>No products to show</strong> 
+  </ngb-alert>
    
