@@ -48,6 +48,7 @@ export class ProductDetailsComponent implements OnInit {
   totalstone = 0;
   pricestone: any;
   pricegold2: any;
+  gross:any;
   constructor(private api: ApiService, private route: ActivatedRoute) {
 
     this.api.Post(PRICELIST, {} ).then(data  => {
@@ -204,14 +205,14 @@ export class ProductDetailsComponent implements OnInit {
                 let result = data['data'].find(x => x.id == this.data['subcategorytype']);
                 this.subsubcategory = result['title'];
 
-            });
-     });
-  });
+            }).catch(d=>{console.log(d);});
+     }).catch(d=>{console.log(d);});
+  }).catch(d=>{console.log(d);});
 
     this.api.Post(CATEGORY, {} ).then(data  => {
      let result = data['data'].find(x => x.id == this.data['category']);
      this.category = result['category'];
-  });
+  }).catch(d=>{console.log(d);});
 }
 
    createjson() {
@@ -298,6 +299,7 @@ export class ProductDetailsComponent implements OnInit {
       this.totalstone = Math.round(this.totalstone);
     }
       this.totalprice = this.totaldiamond+this.totalgold+this.totalplat+this.totalstone;
+      this.grossweight();
    }
 
    getgold(value) {
@@ -331,6 +333,7 @@ export class ProductDetailsComponent implements OnInit {
      this.finegold = this.finegold.toFixed(2);
      this.totalgold = Math.round(this.totalgold);
      this.totalprice = this.totaldiamond+this.totalgold+this.totalplat;
+     this.grossweight();
    }
 
    getplatinum() {
@@ -354,6 +357,7 @@ export class ProductDetailsComponent implements OnInit {
     this.totalplat = Math.round(this.totalplat);
     this.fineplat = this.fineplat.toFixed(2);
     this.totalprice = this.totaldiamond+this.totalgold+this.totalplat+this.totalstone;
+    this.grossweight();
   }
    color(value) {
     this.defaultdiamond[0] = value;
@@ -362,6 +366,23 @@ export class ProductDetailsComponent implements OnInit {
   clarity(value) {
     this.defaultdiamond[1] = value;
     this.diamondprice();
+  }
+
+  grossweight() {
+    let weight = 0;
+    if(this.gold){
+      weight = weight+Number(this.gold.goldweight)
+    }
+    if(this.platinum){
+      weight = weight+Number(this.platinum.platinum_qty)
+    }
+    if(this.diamond){
+      weight = weight+Number(this.diamond.diamondqty*0.2)
+    }
+    if(this.stone){
+      weight = weight+Number(this.stone.stoneqty*0.2)
+    }
+    this.gross = weight.toFixed(3);
   }
 
   diamondprice()  {
@@ -374,6 +395,7 @@ export class ProductDetailsComponent implements OnInit {
       this.totaldiamond = Math.round(this.totaldiamond);
     }
     this.totalprice = this.totaldiamond+this.totalgold+this.totalplat+this.totalstone;
+    this.grossweight();
   }
   ngOnInit(): void {
     }

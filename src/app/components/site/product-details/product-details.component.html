@@ -3,13 +3,13 @@
         <div class="container">
             <ul class="breadcrumbs">
                 <li><a>Home</a></li>
-                <li><a>DIAMOND</a></li>
-                <li><a>DIAMOND LADIES RING</a></li>
+                <li *ngIf='subcategory'><a>{{subcategory}}</a></li>
+                <li *ngIf='subsubcategory'><a>{{subsubcategory}}</a></li>
             </ul>
         </div>
     </div>
     
-    <div class="holder mt-0">
+    <div *ngIf='data && pricelist' class="holder mt-0">
         <div class="container">
             <div class="row prd-block prd-block--mobile-image-first js-prd-gallery" id="prdGallery100">
                 <div class="col-md-6 col-xl-5">
@@ -21,7 +21,7 @@
                     </div>
                     <!-- /Product Gallery -->
                     <div class="prd-safecheckout topline slider-bottom-support-image">
-                      <div *ngIf='certificate.length>0' > 
+                      <div *ngIf='certificate && certificate.length>0' > 
                           <h3 class="h2-style">certified by:</h3>
                           <img [src]="certificateurl + certificate[0]['image']" > </div>
                     
@@ -37,8 +37,8 @@
                                 <div class="prd-block__labels"><span class="prd-label--new">NEW</span></div>
                             </div>
                             <div class="prd-block_info-top">
-                                <div class="product-sku product-price">Rs: 16691.00<span class="product-size">( 18k )</span></div>
-                                <div class="product-weight">Gross Weight: &nbsp;&nbsp; 3.252g</div>
+                                <div *ngIf='value>0' class="product-sku product-price">Rs: {{totalprice * value}}<span *ngIf=(assets.gold.length) class="product-size">( {{gold.goldquality}} )</span></div>
+                                <div class="product-weight">Gross Weight: &nbsp;&nbsp; {{gross}}</div>
                             </div>
                         </div>   
                         <div *ngIf="data.default_size" class="product-size-box">
@@ -52,9 +52,9 @@
                                 <div class="color-text d-table-cell"><p>Choose Color:</p></div>
                                 <div class="sample-box d-table-cell">
                                     <ul>
-                                        <li><a href="" class="red">Red</a></li>
-                                        <li><a href="" class="yellow">Yellow</a></li>
-                                        <li><a href="" class="white">White</a></li>
+                                        <li><a href="javascript:void(0)" class="red">Red</a></li>
+                                        <li><a href="javascript:void(0)" class="yellow">Yellow</a></li>
+                                        <li><a href="javascript:void(0)" class="white">White</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -66,19 +66,19 @@
                                     <ng-container *ngFor='let s of assets.gold;let i = index'><input [checked]='(i==0) ? true:false' class='radio-control' (change)='getgold(s)' type="radio" id="{{s.goldquality}}" name="gold"><label for="{{s.goldquality}}">{{s.goldquality}}</label></ng-container>
                                     </div>
                                 </div>
-
-                                <div *ngIf=(assets.gold.length) class="gold-rate-details">
-                                    <div class="product-code">Product Code: NK-R7801</div>
+                                    
+                                <div class="product-code">Product Code: {{data.productcode}}</div>
+                                <div *ngIf=(assets.gold.length)>
                                     <div *ngIf=(gold.goldweight)>Gold (weight):  {{gold.goldweight}} gram</div>
 
-                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Fine Gold Rate: ₹ {{pricegold.price}} Per gram</div>
-                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Rate: ₹ {{pricegold2.price}} Per gram</div>
+                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Fine Gold Rate: Rs. {{pricegold.price}} Per gram</div>
+                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Rate: Rs. {{pricegold2.price}} Per gram</div>
                                     <div *ngIf=(gold.wastage) class="option-label">Gold wastage:  {{gold.wastage}} %</div>
                                     <div *ngIf="gold.option == 'percentage'" class="option-label">Gold wastage:  {{gold.makingcharge}} %</div>
-                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Making Charges: ₹  {{gold.makingcharge}}</div>
+                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Making Charges: Rs.  {{gold.makingcharge}}</div>
                                     <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Weight:  {{finegold}} gram</div>
                                     <div *ngIf="gold.option!= 'percentage'" class="option-label">Gold Charges Type:  {{gold.option}}</div>
-                                    <div class="option-label">Total Gold Price: ₹ {{totalgold}}</div>
+                                    <div class="option-label">Total Gold Price: Rs. {{totalgold}}</div>
 <!--
                                     <div class="">Gold Rate: Rs.3386.0/g</div>
                                     <div class="">Gold Making Charge: Rs.1920.0</div>
@@ -94,22 +94,21 @@
                                     <div class="option-label">Charges Type: {{assets.productsilver.charge_type}}</div>
                                 </div>
 
-                                <div *ngIf=(assets.productpaltinum)>
+                                <div *ngIf=(assets.productpaltinum) >
                                     <div *ngIf=(assets.productpaltinum.platinum_qty)>Platinum (weight):  {{platinum.platinum_qty}} gram</div>
                                     <div *ngIf=(assets.productpaltinum.platinum_qty) class="option-label">Fine Platinum Rate:  {{this.pricelist.platinum[0].price}} Per gram</div>
                                     <div *ngIf=(platinum.wastage) class="option-label">Planitum wastage:  {{platinum.wastage}} %</div>
                                     <div *ngIf="platinum.charge_type == 'percentage'" class="option-label">Planitum wastage:  {{platinum.platinum_charge}} %</div>
-                                    <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Making Charges: ₹ {{platinum.platinum_charge}}</div>
+                                    <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Making Charges: Rs. {{platinum.platinum_charge}}</div>
                                     <div *ngIf="platinum.charge_type == 'percentage'" class="option-label">Fine Platinum Weight:  {{fineplat}} gram</div>
                                     <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Charges Type:  {{platinum.charge_type}}</div>
-                                    <div class="option-label">Total Platinum Price: ₹ {{totalplat}}</div> 
+                                    <div class="option-label">Total Platinum Price: Rs. {{totalplat}}</div> 
                                 </div>
-                                <div class="choose-diamond">
+                                <div *ngIf=(assets.diamond[0]) class="choose-diamond">
                                     <label for="id_select"> Diamond: </label>
                                     <div class="diamond-selectbox">
                                         <select class="product-size-select">
-                                            <option>ROUND CUT DIAMOND - EXCELLENT</option>
-                                            <option>ROUND CUT DIAMOND</option>
+                                            <option *ngFor='let s of assets.diamond;let i = index' [value]="s.diamond" [selected]="(i==0) ? true:false">{{s.diamond}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -133,14 +132,20 @@
                                         </div>
                                 </div>
 
+                                <div *ngIf=(assets.diamond[0]) class="about-product">
+                                    <div>Name: {{assets.diamond[0].diamond}}</div>
+                                    <div *ngIf=(assets.diamond[0].diamondqty)>Weight:  {{assets.diamond[0].diamondqty}} ct</div>
+                                    <div *ngIf=(assets.diamond[0].diamondqty) class="option-label">Diamond Price:Rs. {{pricediamond.price}}/ct</div>
+                                    <div *ngIf=(assets.diamond[0].no_diamond) class="option-label">No of Diamond:  {{assets.diamond[0].no_diamond}} pc</div>
+                                    <div *ngIf=(assets.diamond[0].diamondcharge) class="option-label">Making Charges: Rs. {{assets.diamond[0].diamondcharge}}</div>
+                                    <div *ngIf=(assets.diamond[0].type) class="option-label">Charges Type:  {{assets.diamond[0].type}}</div> 
+                                    <div>Diamond Total:Rs. {{totaldiamond}} </div>
+                                    <div>Diamond Color/Clarity: {{this.defaultdiamond[0] + '/' + this.defaultdiamond[1]}}</div>
+                                </div>
+
                             <div *ngIf=(assets.diamond[0]) class="about-product">
-                                <div>Name: Round CUT DIAMOND - EXCELLENT</div>
-                                <div>Weight: 0.260ct</div>
-                                <div>Diamond Price: RS. 15000.0/ct</div>
-                                <div>No of Diamond: 45 pc</div>
-                                <div>Diamond Making Charges: RS. 140.0</div>
-                                <div>Diamond Total: RS. 3936</div>
-                                <div>Diamond Color/Clarity: J-K/SI</div>
+                                
+                                
                             </div>
                             
                             <div *ngIf=(assets.stone.length) class="prd-size swatches">
@@ -150,18 +155,17 @@
                                     </div>
                             </div>
 
-                            <div *ngIf=(assets.stone[0])>
+                            <div *ngIf=(assets.stone[0])  class="about-product">
                                 <div>Stone (weight):  {{stone.stoneqty}} ct</div>
-                                <div class="option-label">Fine Stone Rate:₹ {{pricestone.price}}/ct</div>
+                                <div class="option-label">Fine Stone Rate:Rs. {{pricestone.price}}/ct</div>
                                 <div class="option-label">No Stone:  {{stone.stoneno}} pc</div>
-                                <div class="option-label">Making Charges: ₹ {{stone.stonecharges}}</div>
+                                <div class="option-label">Making Charges: Rs. {{stone.stonecharges}}</div>
                                 <div class="option-label">Charges Type:  {{stone.type}}</div> 
-                                <div>Stone Total:₹ {{totalstone}} </div>
+                                <div>Stone Total:Rs. {{totalstone}} </div>
                             </div>
 
                         </div>
                         <div class="prd-block_actions topline">
-                            <div *ngIf='value>0' class="prd-block_price"><span class="prd-block_price--actual">₹{{totalprice * value}}</span></div>
                             <div class="prd-hover">
                                 <div class="prd-action button-margin-none">
 
