@@ -34,7 +34,7 @@ import { OrderDetailComponent } from '../order-detail/order-detail.component';
       { path: 'edit-address/:id', component: EditAddressComponent,  canActivate: [AuthGuardService]},
       { path: 'add-address/:id', component: EditAddressComponent,  canActivate: [AuthGuardService]},
       { path: 'event-history', component: EventHistoryComponent,  canActivate: [AuthGuardService]},
-      { path: 'order-detail/:result', component: OrderDetailComponent,  canActivate: [AuthGuardService]},
+      { path: 'order-detail/:id', component: OrderDetailComponent,  canActivate: [AuthGuardService]},
     ])
   ]
 })

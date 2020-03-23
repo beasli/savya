@@ -20092,14 +20092,14 @@ body.mac .subscribe-form input.form-control {
         color: #c59f59; }
     .breadcrumbs li:after {
       position: relative;
-      margin-right: -8px;
+      margin-right: 3px;
       padding-left: 8px;
       color: #000;
       content: "\e919";
       vertical-align: bottom;
       font-size: 8px;
       font-family: 'icomoon';
-      line-height: 20px; }
+      line-height: 17px; }
     .breadcrumbs li:last-child:after {
       display: none; }
 

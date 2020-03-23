@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { CARTVIEW, CRAUSEL } from 'src/config';
 import { Router } from '@angular/router';
@@ -48,7 +48,8 @@ export class ProductHolderComponent implements OnInit {
  wish:any;
  cart:any[];
 
-
+@ViewChild('addclosebutton') addclosebutton;
+@ViewChild('deleteclosebutton') deleteclosebutton;
   constructor(private api:ApiService) {
   
     // console.log(this.mostselling);
@@ -95,6 +96,7 @@ export class ProductHolderComponent implements OnInit {
    // console.log("in wishlist");
     //console.log(pid);
     this.api.checkWishlist(pid);
+  
   }
 
   checkHeart(pid)
@@ -132,10 +134,18 @@ export class ProductHolderComponent implements OnInit {
   deleteWishlist(pid)
   {
       this.api.deleteWishlist(pid);
+     
   }
   addToCart(s)
   {
     this.api.addToCart(s);
+  }
+  addmodal() {
+    this.addclosebutton.nativeElement.click();
+  }
+  deletemodal()
+  {
+    this.deleteclosebutton.nativeElement.click();
   }
   ngOnInit() {
 

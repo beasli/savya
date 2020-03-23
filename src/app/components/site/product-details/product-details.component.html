@@ -3,9 +3,8 @@
         <div class="container">
             <ul class="breadcrumbs">
                 <li><a>Home</a></li>
-                <li><a>{{category}}</a></li>
-                <li><a>{{subcategory}}</a></li>
-                <li><a>{{data.productname}}</a></li>
+                <li><a>DIAMOND</a></li>
+                <li><a>DIAMOND LADIES RING</a></li>
             </ul>
         </div>
     </div>
@@ -21,78 +20,45 @@
                         </div>
                     </div>
                     <!-- /Product Gallery -->
-                    <div class="prd-safecheckout topline">
-                      <div *ngIf='certificate.length>0'> <h3 class="h2-style">certified by:</h3><img [src]="certificateurl + certificate[0]['image']" width="100" height="50"> </div>
+                    <div class="prd-safecheckout topline slider-bottom-support-image">
+                      <div *ngIf='certificate.length>0' > 
+                          <h3 class="h2-style">certified by:</h3>
+                          <img [src]="certificateurl + certificate[0]['image']" > </div>
                     
-                        <h3 class="h2-style">Manufactured by:</h3><img [src]="url + data['image']" width="100" height="50"><h3 class="h2-style">{{data.manufacture}}</h3>
+                        <h3 class="h2-style">Manufactured by:</h3>
+                        <img [src]="url + data['image']"><h3 class="h2-style">{{data.manufacture}}</h3>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="prd-block_info">
-                        <div class="js-prd-d-holder prd-holder">
+                        <div class="js-prd-d-holder prd-holder product-name-details">
                             <div class="prd-block_title-wrap">
-                                <h1 class="prd-block_title">{{data.productname}}</h1>
+                                <h1 class="prd-block_title product-details-item-heading">{{data.productname}}</h1>
                                 <div class="prd-block__labels"><span class="prd-label--new">NEW</span></div>
                             </div>
                             <div class="prd-block_info-top">
-                                <div class="product-sku">SKU: <span>{{data.productcode}}</span></div>
+                                <div class="product-sku product-price">Rs: 16691.00<span class="product-size">( 18k )</span></div>
+                                <div class="product-weight">Gross Weight: &nbsp;&nbsp; 3.252g</div>
                             </div>
-                            <div class="prd-block_description topline">
-                                <div [innerHTML]="data.description"></div>
+                        </div>   
+                        <div *ngIf="data.default_size" class="product-size-box">
+                            <label for="id_select"> Select Size </label>
+                            <select id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                                <option *ngFor="let option of sizes" [value]="option" [selected]="option === defaultsize">
+                                {{option}}
+                                </option>
+                            </select>
+                            <div class="color-chose-box d-table">
+                                <div class="color-text d-table-cell"><p>Choose Color:</p></div>
+                                <div class="sample-box d-table-cell">
+                                    <ul>
+                                        <li><a href="" class="red">Red</a></li>
+                                        <li><a href="" class="yellow">Yellow</a></li>
+                                        <li><a href="" class="white">White</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        
-                        <style>
-                            .radio-group input[type=radio] {
-                              position: absolute;
-                              visibility: hidden;
-                              display: none;
-                            }
-
-                            .radio-group label {
-                                color: #4a4a4a;
-                                display: inline-block;
-                                cursor: pointer;
-                                font-weight: 400 !important;
-                                padding: 5px 21px !important;
-                                position: initial !important;
-                                min-width: inherit !important;
-                                margin: initial !important;
-                                line-height: 17px !important;
-                                font-size: 10px !important;
-                            }
-
-                            .radio-group input[type=radio]:checked + label {
-                                  color: #ffffff;
-                                background: #c59f59;
-                            }
-
-                            .radio-group label + input[type=radio] + label {
-                              border-left: solid 1px #e2e2e2;
-                            }
-
-                            .radio-group {
-                                 border: solid 1px #e2e2e2;
-                                display: inline-block;
-                                margin: 0px;
-                                border-radius: 0px;
-                                overflow: hidden;
-                            }
-                            
-                            .radio-group input[type="checkbox"] + label:before, .radio-group input[type="checkbox"] + label:after, .radio-group input[type="radio"] + label:before, .radio-group input[type="radio"] + label:after {
-                                content: none !important;
-                            }
-                        </style>
-                        
-                        <div *ngIf="data.default_size">
-                        <label for="id_select"> Select Size </label>
-                        <select id="id_select" (change)="sizechange($event.target.value)" autofocus="true">
-                            <option *ngFor="let option of sizes" [value]="option" [selected]="option === defaultsize">
-                              {{option}}
-                            </option>
-                        </select>
-                        </div>
-
                         <div  class="prd-block_options topline ">
                             <div *ngIf=(assets.gold.length) class="prd-size swatches">
                                 <span class="option-label">Gold:</span>
@@ -101,8 +67,10 @@
                                     </div>
                                 </div>
 
-                                <div *ngIf=(assets.gold.length)>
+                                <div *ngIf=(assets.gold.length) class="gold-rate-details">
+                                    <div class="product-code">Product Code: NK-R7801</div>
                                     <div *ngIf=(gold.goldweight)>Gold (weight):  {{gold.goldweight}} gram</div>
+
                                     <div *ngIf="gold.option != 'percentage'" class="option-label">Fine Gold Rate: ₹ {{pricegold.price}} Per gram</div>
                                     <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Rate: ₹ {{pricegold2.price}} Per gram</div>
                                     <div *ngIf=(gold.wastage) class="option-label">Gold wastage:  {{gold.wastage}} %</div>
@@ -111,6 +79,11 @@
                                     <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Weight:  {{finegold}} gram</div>
                                     <div *ngIf="gold.option!= 'percentage'" class="option-label">Gold Charges Type:  {{gold.option}}</div>
                                     <div class="option-label">Total Gold Price: ₹ {{totalgold}}</div>
+<!--
+                                    <div class="">Gold Rate: Rs.3386.0/g</div>
+                                    <div class="">Gold Making Charge: Rs.1920.0</div>
+                                    <div class="">Gold Total: Rs.12755.0</div> 
+        -->
                                 </div>
 
                                 <div *ngIf=(assets.productsilver)>
@@ -131,44 +104,43 @@
                                     <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Charges Type:  {{platinum.charge_type}}</div>
                                     <div class="option-label">Total Platinum Price: ₹ {{totalplat}}</div> 
                                 </div>
-                            
-                            <div *ngIf=(assets.diamond[0]) class="prd-size swatches">
-                                <span class="option-label">Diamond:</span>
-                                    <div class="radio-group">
-                                        <ng-container *ngFor='let s of assets.diamond;let i = index'>
-                                            <input [checked]='(i==0) ? true:false' class='radio-control' type="radio" id="{{s.diamond}}" name="diamond">
-                                            <label for="{{s.diamond}}">{{s.diamond}}</label>
-                                        </ng-container>
+                                <div class="choose-diamond">
+                                    <label for="id_select"> Diamond: </label>
+                                    <div class="diamond-selectbox">
+                                        <select class="product-size-select">
+                                            <option>ROUND CUT DIAMOND - EXCELLENT</option>
+                                            <option>ROUND CUT DIAMOND</option>
+                                        </select>
                                     </div>
-                            </div>
+                                </div>
+                                <div *ngIf=(assets.diamond[0])  class="prd-size">
+                                    <label for="id_select"> Diamond Clarity:</label>
+                                        <div class="radio-group">
+                                            <ng-container *ngFor='let s of diamondclarity;let i = index'>
+                                                <input [checked]='(s==defaultdiamond[1]) ? true:false' class='radio-control' (change)='clarity(s)' type="radio" id="{{s}}" name="diamondclarity">
+                                                <label for="{{s}}">{{s}}</label>
+                                            </ng-container>
+                                        </div>
+                                </div>
 
-                            <div *ngIf=(assets.diamond[0])  class="prd-size swatches">
-                                <span class="option-label">Diamond Clarity:</span>
-                                    <div class="radio-group">
-                                        <ng-container *ngFor='let s of diamondclarity;let i = index'>
-                                            <input [checked]='(s==defaultdiamond[1]) ? true:false' class='radio-control' (change)='clarity(s)' type="radio" id="{{s}}" name="diamondclarity">
-                                            <label for="{{s}}">{{s}}</label>
-                                        </ng-container>
-                                    </div>
-                            </div>
+                                <div *ngIf=(assets.diamond[0])  class="prd-size">
+                                    <span class="option-label">Diamond Color:</span>
+                                        <div class="radio-group">
+                                            <ng-container *ngFor='let s of diamondcolour;let i = index'>
+                                                <input [checked]='(s==defaultdiamond[0]) ? true:false' class='radio-control' (change)='color(s)' type="radio" id="{{s}}" name="diamondcolour">
+                                                <label for="{{s}}">{{s}}</label>
+                                            </ng-container>
+                                        </div>
+                                </div>
 
-                            <div *ngIf=(assets.diamond[0])  class="prd-size swatches">
-                                <span class="option-label">Diamond Color:</span>
-                                    <div class="radio-group">
-                                        <ng-container *ngFor='let s of diamondcolour;let i = index'>
-                                            <input [checked]='(s==defaultdiamond[0]) ? true:false' class='radio-control' (change)='color(s)' type="radio" id="{{s}}" name="diamondcolour">
-                                            <label for="{{s}}">{{s}}</label>
-                                        </ng-container>
-                                    </div>
-                            </div>
-
-                            <div *ngIf=(assets.diamond[0])>
-                                <div *ngIf=(assets.diamond[0].diamondqty)>Diamond (weight):  {{assets.diamond[0].diamondqty}} ct</div>
-                                <div *ngIf=(assets.diamond[0].diamondqty) class="option-label">Fine Diamond Rate:₹ {{pricediamond.price}}/ct</div>
-                                <div *ngIf=(assets.diamond[0].no_diamond) class="option-label">No Diamond:  {{assets.diamond[0].no_diamond}} pc</div>
-                                <div *ngIf=(assets.diamond[0].diamondcharge) class="option-label">Making Charges: ₹ {{assets.diamond[0].diamondcharge}}</div>
-                                <div *ngIf=(assets.diamond[0].type) class="option-label">Charges Type:  {{assets.diamond[0].type}}</div> 
-                                <div>Diamond Total:₹ {{totaldiamond}} </div>
+                            <div *ngIf=(assets.diamond[0]) class="about-product">
+                                <div>Name: Round CUT DIAMOND - EXCELLENT</div>
+                                <div>Weight: 0.260ct</div>
+                                <div>Diamond Price: RS. 15000.0/ct</div>
+                                <div>No of Diamond: 45 pc</div>
+                                <div>Diamond Making Charges: RS. 140.0</div>
+                                <div>Diamond Total: RS. 3936</div>
+                                <div>Diamond Color/Clarity: J-K/SI</div>
                             </div>
                             
                             <div *ngIf=(assets.stone.length) class="prd-size swatches">
@@ -191,7 +163,7 @@
                         <div class="prd-block_actions topline">
                             <div *ngIf='value>0' class="prd-block_price"><span class="prd-block_price--actual">₹{{totalprice * value}}</span></div>
                             <div class="prd-hover">
-                                <div class="prd-action">
+                                <div class="prd-action button-margin-none">
 
                                     <div   *ngIf= "checkCart(data.id)" class="row no=gutters" >
                                         <div class="col-2">
