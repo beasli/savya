@@ -104,7 +104,7 @@
                                     <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Charges Type:  {{platinum.charge_type}}</div>
                                     <div class="option-label">Total Platinum Price: Rs. {{totalplat}}</div> 
                                 </div>
-                                <div *ngIf=(assets.diamond[0]) class="choose-diamond">
+                                <div *ngIf=(assets.diamond.length) class="choose-diamond">
                                     <label for="id_select"> Diamond: </label>
                                     <div class="diamond-selectbox">
                                         <select class="product-size-select">
@@ -112,7 +112,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div *ngIf=(assets.diamond[0])  class="prd-size">
+                                <div *ngIf=(assets.diamond.length)  class="prd-size">
                                     <label for="id_select"> Diamond Clarity:</label>
                                         <div class="radio-group">
                                             <ng-container *ngFor='let s of diamondclarity;let i = index'>
@@ -122,7 +122,7 @@
                                         </div>
                                 </div>
 
-                                <div *ngIf=(assets.diamond[0])  class="prd-size">
+                                <div *ngIf=(assets.diamond.length)  class="prd-size">
                                     <span class="option-label">Diamond Color:</span>
                                         <div class="radio-group">
                                             <ng-container *ngFor='let s of diamondcolour;let i = index'>

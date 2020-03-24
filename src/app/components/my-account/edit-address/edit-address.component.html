@@ -50,7 +50,7 @@
                             </div>
                             <div class="form-group">
                                 <input type="number"  #pincode="ngModel"  [(ngModel)]="addresses['pincode']" (ngModelChange)="changePin($event)"  name="pincode" class="form-control" placeholder="Pin Code" required>
-                                <div *ngIf="pin" class="alert alert-danger">Pin code should be atleast 10 digits  </div>
+                                <div *ngIf="pin" class="alert alert-danger">Pin code should be atleast 6 digits  </div>
                                 <div class="alert alert-danger" *ngIf="pincode.touched && pincode.invalid">
                                     Pin code is required.
                                 </div>
@@ -73,7 +73,7 @@
                                     region is required.
                                 </div>
                             </div>
-                            <div class="text-center" ><input  class="btn" type="submit" value="Done" [disabled]="!f.valid || ! mob" ></div>
+                            <div class="text-center" ><input  class="btn" type="submit" value="Done" [disabled]="!f.valid || mob || pin" ></div>
                             <div class="text-center"><input  class="btn"   *ngIf="loading" type="submit" value="Loading..."  disabled></div>
                             
                         </form>
