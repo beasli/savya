@@ -275,7 +275,7 @@ export class ProductDetailsComponent implements OnInit {
     j['productId'] = Number(this.pid);
     j['productName'] = this.data.productname;
     j['productType'] = this.data.size;
-    j['productSize'] = this.selectedsize;
+    j['Size'] = this.selectedsize;
     j['subCategory'] = this.data['subcategory'];
     j['subSubCategory'] = this.data['subcategorytype'];
     j['userid'] = (uid).toString();
