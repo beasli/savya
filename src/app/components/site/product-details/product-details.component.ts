@@ -286,6 +286,17 @@ export class ProductDetailsComponent implements OnInit {
     j['productName'] = this.data.productname;
     j['productType'] = this.data.size;
     j['productSize'] = this.selectedsize;
+    let size = {'size': this.selectedsize,'type': this.data.size };
+    let prd_sizes = {};
+    prd_sizes[this.pid] = size;
+    if (localStorage.getItem("prd_sizes") != null) {
+      prd_sizes = JSON.parse(localStorage.getItem("prd_sizes"));
+      prd_sizes[this.pid] = size;
+      localStorage.setItem("prd_sizes", JSON.stringify(prd_sizes));
+    } else {
+      prd_sizes[this.pid] = size;
+      localStorage.setItem("prd_sizes", JSON.stringify(prd_sizes));
+    }
     j['subCategory'] = this.data['subcategory'];
     j['subSubCategory'] = this.data['subcategorytype'];
     j['userid'] = (uid).toString();
