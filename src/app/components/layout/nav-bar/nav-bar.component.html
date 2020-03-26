@@ -63,7 +63,7 @@
                                         </div>
                                         <!-- <div class="minicart-prd-qty"><span>qty:</span> <b>{{r.count}}</b></div> -->
                                         <!-- <div class="minicart-prd-price"><span>price:</span> <b>₹75.00</b></div> -->
-                                        <div class="minicart-prd-action"> <a routerLink="/product" class="icon-pencil"></a> <a (click)="deleteCart(r.product_id)" class="icon-cross js-product-remove"></a></div>
+                                        <div class="minicart-prd-action"> <a (click)="deleteCart(r.product_id)" class="icon-cross js-product-remove"></a></div>
                                     </div>
                                 </div>
                                 <div class="col-md-9 aside" *ngIf="alert">
@@ -93,7 +93,7 @@
                                 </div> -->
                                 <div class="minicart-drop-total">
                                     <div class="float-right">
-                                        <div class="minicart-drop-btns-wrap"><a href="checkout.html" class="btn"><i class="icon-check-box"></i><span>checkout</span></a> <a routerLink="/cart" class="btn btn--alt is-hovered"><i class="icon-handbag"></i><span>view cart</span></a></div>
+                                        <div class="minicart-drop-btns-wrap"><a routerLink="/checkout" class="btn"><i class="icon-check-box"></i><span>checkout</span></a> <a routerLink="/cart" class="btn btn--alt is-hovered"><i class="icon-handbag"></i><span>view cart</span></a></div>
                                     </div>
                                     <div  class="float-left"><a routerLink="/cart"class="btn btn--alt minicart-drop-close"><i class="icon-handbag"></i><span >view cart</span></a></div>
                                 </div>
