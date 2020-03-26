@@ -50,7 +50,7 @@ export class ChangeProfileComponent implements OnInit {
              this.api.setlogin(this.d);
               //this.router.navigate(['/registerOtp']);
       }).catch(d=>{
-              
+              console.log(d);
               this.type="danger";
               this.loading=false;
               this.sign=true;

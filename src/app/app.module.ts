@@ -13,6 +13,8 @@ import { SiteModule } from './components/site/site/site.module';
 import { NavBarComponent } from './components/layout/nav-bar/nav-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CheckoutService } from './components/auth-guard/checkout.service';
+import { OtpGuardService } from './components/auth-guard/otp-guard.service';
 
 
 @NgModule({
@@ -37,7 +39,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule ,
     NgbModule
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService,CheckoutService,OtpGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

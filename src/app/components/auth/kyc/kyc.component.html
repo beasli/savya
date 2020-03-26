@@ -24,7 +24,7 @@
                                 <div class="alert alert-danger" *ngIf="gst_no.touched && gst_no.invalid">
                                     Gst no. is required.
                                 </div>
-                                <div *ngIf="gst" class="alert alert-danger">Incorrect Gst no. </div>
+                                <div *ngIf="checkGst()" class="alert alert-danger">Incorrect Gst no. </div>
                             </div>
                             <div class="form-group">
                                 <label for='panno'>Pan No</label>
@@ -32,15 +32,15 @@
                                 <div class="alert alert-danger" *ngIf="pan_no.touched && pan_no.invalid">
                                     Pan no. is required.
                                 </div>
-                                <div *ngIf="pan" class="alert alert-danger">Incorrect Pan no. </div>
+                                <div *ngIf="checkPan()" class="alert alert-danger">Incorrect Pan no. </div>
                             </div>
                             <div class="form-group">
                                 <label for='aadhar'>Aadhar No.</label>
                                 <input type="text"  #aadhar="ngModel"  ngModel  name="aadhar" class="form-control" (ngModelChange)="changeAadhar($event)" placeholder="Aadhar No." required>
                                 <div class="alert alert-danger" *ngIf="aadhar.touched && aadhar.invalid" >
-                                    Aadhar NO. is required.
+                                    Aadhar no. is required.
                                 </div>
-                                <div *ngIf="aadhar" class="alert alert-danger">Incorrect Aadhar no. </div>
+                                <div *ngIf=" checkAdhar()" class="alert alert-danger">Incorrect Aadhar no. </div>
                             </div>
                             <div class="form-group">
                                 <label for='gst_doc'>Gst Document</label>

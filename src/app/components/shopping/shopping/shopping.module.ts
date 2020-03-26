@@ -6,6 +6,7 @@ import { ProductComponent } from '../product/product.component';
 import { RouterModule } from '@angular/router';
 import { AuthGuardService } from '../../auth-guard/auth-guard.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CheckoutService } from '../../auth-guard/checkout.service';
 
 
 
@@ -20,7 +21,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     NgbModule,
     RouterModule.forChild([
-      { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService]},
+      { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService,CheckoutService]},
       { path: 'cart', component: CartComponent},
       { path: 'product', component: ProductComponent},
     ])

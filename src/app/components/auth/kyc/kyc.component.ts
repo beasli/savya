@@ -16,58 +16,106 @@ export class KycComponent implements OnInit {
   alert:boolean;
   type:any;
   mobile_no:any;
-  gst:boolean;
-  pan:boolean;
-  aadhar:boolean;
+  gst:any;
+  pan:any;
+  aadhar:any;
+  userinfo:any;
+  fName:any;
+  lName:any;
   constructor(private api:ApiService,private router:Router) {}
   changeAadhar(e)
   {
-    this.aadhar=this.AadharValidate(e);
+   // console.log(e.length);
+    this.aadhar=e;
   }
-   AadharValidate(value) {
-    var aadhar = value;
-    var adharcardTwelveDigit = /^\d{12}$/;
-    var adharSixteenDigit = /^\d{16}$/;
-    if (aadhar != '') {
-        if (aadhar.match(adharcardTwelveDigit)) {
-            return false;
+  checkAdhar()
+  {
+    if(this.aadhar==null)
+    {
+      return false;
+    }
+    else if(this.aadhar>0)
+    {
+        var response=this.AadharValidate()
+        if(response==false)
+        {
+          return false;
         }
-        else if (aadhar.match(adharSixteenDigit)) {
-            return false;
-        }
-        else {
-            // alert("Enter valid Aadhar Number");
-            return true;
+        else if(response==true){
+          return true;
         }
     }
+  }
+   AadharValidate() {
+    var adharcardTwelveDigit = /^\d{12}$/;
+    var adharSixteenDigit = /^\d{16}$/;
+    if (this.aadhar.match(adharcardTwelveDigit)) {
+      return false;
+    }
+    else if (this.aadhar.match(adharSixteenDigit)) {
+        return false;
+    }
+    else {
+        return true;
+    }
+    
 }
   changePan(e)
 {
-  let t =new String(e);
-  // console.log(this.fName);
-  // console.log(this.lName);
-  // if(t=="[A-Z]{3}([CHFATBLJGP])(?:(?<=P)" + this.fName+ "|(?<!P)" + this.lName + ")[0-9]{4}[A-Z]")
-  // {
-  //   this.pan=false;
-  // }
-  // else
-  // {
-  //   this.pan=true;
-  // }
-  
+  this.pan=e; 
 }
-  changeGst(e)
+checkPan()
   {
-    let t =new String(e);
-    if(t=="d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}")
+    //console.log(this.pan);
+    if(this.pan==undefined||this.pan=="")
     {
-      this.gst=false;
+      return false;
+    }
+    else if(this.pan.length>0)
+    {
+        if(this.pan=="[A-Z]{3}([CHFATBLJGP])(?:(?<=P)" + this.fName+ "|(?<!P)" + this.lName + ")[0-9]{4}[A-Z]")
+        {
+          return false;
+        }
+        else if(this.pan!="[A-Z]{3}([CHFATBLJGP])(?:(?<=P)" + this.fName+ "|(?<!P)" + this.lName + ")[0-9]{4}[A-Z]")
+        {
+          return true;
+        }
     }
     else
     {
-      this.gst=true;
+      return false;
     }
+  }
 
+  changeGst(e)
+  {
+    this.gst=e;
+  }
+  checkGst()
+  {
+
+        // console.log(this.gst);
+         if(this.gst==undefined||this.gst=="")
+         {
+           return false;
+         }
+        else if(this.gst.length>0)
+        {
+            if(this.gst=="d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}")
+            {
+              return false;
+            }
+            else if(this.gst!="d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}")
+            {
+              return true;
+            }
+        }
+          
+        else
+        {
+          return false;
+        }
   }
   kyc(value){
     
@@ -93,7 +141,12 @@ export class KycComponent implements OnInit {
   
 }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.userinfo=  this.api. getUserInfo()
+    console.log(this.userinfo);
+    this.fName=this.userinfo.name.charAt(0);
+    console.log(this.fName);
+    this.lName=this.userinfo.lastname.charAt0(0);
   }
 
 }

@@ -113,6 +113,7 @@ ProductsInCart()
   {
        this.api.qtyUpdate(pid,value);
   }
+ 
 ngOnInit() {
   this.api.Cart.subscribe(data => {
     this.view();
