@@ -165,7 +165,11 @@ qtyUpdate(pid,value)
 
   deleteCart(pid)
   {
-   
+    if(localStorage.getItem("waste")!=null)
+    {let waste = JSON.parse(localStorage.getItem("waste"));
+     delete waste[pid];
+    localStorage.setItem("waste",JSON.stringify(waste));
+   }
     this.Post(CARTDELETE,{user_id:this.uid,product_id:pid}).then(data=>{
       //console.log("deletecart"+data)
       this.updateCart();
@@ -355,6 +359,29 @@ getOtpGuard()
   //console.log("apiservice"+this.otpGuard);
     return this.otpGuard;
     
+}
+
+price(weight, rate, option, makingcharge, wastage = 0, value = 0) {
+  let metalprice = 0;
+  if  (option == "pergram") {
+      metalprice  =  (Number(rate) + Number(makingcharge)) * Number(weight);
+  } else if (option == "percentage") {
+  weight = ((Number(makingcharge) + Number(value)) / 100) * Number(weight);
+  metalprice = Number(rate) * weight;
+  } else if (option == "fixed") {
+      metalprice = Number(weight) * Number(rate) + Number(makingcharge);
+  }
+  if (wastage != 0) {
+    let wasteprice = ((Number(weight) / 100) *  Number(wastage)) * Number(rate);
+    metalprice = metalprice + wasteprice;
+ }
+  let data = {'weight': weight,'price': metalprice};
+  return data;
+}
+
+grossweight(gold=0,platinum=0,silver=0,diamond=0,stone=0) {
+  let weight = Number(gold)+Number(platinum)+Number(silver)+Number(diamond)+Number(stone);
+  return weight.toFixed(3);
 }
 
 }

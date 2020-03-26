@@ -52,9 +52,9 @@
                                 <div class="color-text d-table-cell"><p>Choose Color:</p></div>
                                 <div class="sample-box d-table-cell">
                                     <ul>
-                                        <li><a href="javascript:void(0)" class="red">Red</a></li>
-                                        <li><a href="javascript:void(0)" class="yellow">Yellow</a></li>
-                                        <li><a href="javascript:void(0)" class="white">White</a></li>
+                                        <li><a href="javascript:void(0)" (click)="colormetal('red')" [ngClass]="{active: colvalue=='red'}" class="red">Red</a></li>
+                                        <li><a href="javascript:void(0)" (click)="colormetal('yellow')" [ngClass]="{active: colvalue=='yellow'}" class="yellow">Yellow</a></li>
+                                        <li><a href="javascript:void(0)" (click)="colormetal('white')" [ngClass]="{active: colvalue=='white'}" class="white">White</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -79,11 +79,7 @@
                                     <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Weight:  {{finegold}} gram</div>
                                     <div *ngIf="gold.option!= 'percentage'" class="option-label">Gold Charges Type:  {{gold.option}}</div>
                                     <div class="option-label">Total Gold Price: Rs. {{totalgold}}</div>
-<!--
-                                    <div class="">Gold Rate: Rs.3386.0/g</div>
-                                    <div class="">Gold Making Charge: Rs.1920.0</div>
-                                    <div class="">Gold Total: Rs.12755.0</div> 
-        -->
+
                                 </div>
 
                                 <div *ngIf=(assets.productsilver)>
@@ -98,9 +94,7 @@
                                     <div *ngIf=(assets.productpaltinum.platinum_qty)>Platinum (weight):  {{platinum.platinum_qty}} gram</div>
                                     <div *ngIf=(assets.productpaltinum.platinum_qty) class="option-label">Fine Platinum Rate:  {{this.pricelist.platinum[0].price}} Per gram</div>
                                     <div *ngIf=(platinum.wastage) class="option-label">Planitum wastage:  {{platinum.wastage}} %</div>
-                                    <div *ngIf="platinum.charge_type == 'percentage'" class="option-label">Planitum wastage:  {{platinum.platinum_charge}} %</div>
                                     <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Making Charges: Rs. {{platinum.platinum_charge}}</div>
-                                    <div *ngIf="platinum.charge_type == 'percentage'" class="option-label">Fine Platinum Weight:  {{fineplat}} gram</div>
                                     <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Charges Type:  {{platinum.charge_type}}</div>
                                     <div class="option-label">Total Platinum Price: Rs. {{totalplat}}</div> 
                                 </div>
@@ -116,7 +110,7 @@
                                     <label for="id_select"> Diamond Clarity:</label>
                                         <div class="radio-group">
                                             <ng-container *ngFor='let s of diamondclarity;let i = index'>
-                                                <input [checked]='(s==defaultdiamond[1]) ? true:false' class='radio-control' (change)='clarity(s)' type="radio" id="{{s}}" name="diamondclarity">
+                                                <input [checked]='(s==defaultdiamond[1]) ? true:false' class='radio-control' (change)='colorClarity(0,s)' type="radio" id="{{s}}" name="diamondclarity">
                                                 <label for="{{s}}">{{s}}</label>
                                             </ng-container>
                                         </div>
@@ -126,7 +120,7 @@
                                     <span class="option-label">Diamond Color:</span>
                                         <div class="radio-group">
                                             <ng-container *ngFor='let s of diamondcolour;let i = index'>
-                                                <input [checked]='(s==defaultdiamond[0]) ? true:false' class='radio-control' (change)='color(s)' type="radio" id="{{s}}" name="diamondcolour">
+                                                <input [checked]='(s==defaultdiamond[0]) ? true:false' class='radio-control' (change)='colorClarity(s,0)' type="radio" id="{{s}}" name="diamondcolour">
                                                 <label for="{{s}}">{{s}}</label>
                                             </ng-container>
                                         </div>
