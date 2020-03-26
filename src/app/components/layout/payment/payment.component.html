@@ -1,10 +1,14 @@
-<div class="card" class="text-center" style="padding:100px">
-    <h2>Payment</h2>
-    <div >
-    <img *ngIf="im" src="assets/images/loading.gif">
-    </div>
-    <div [innerHTML]="values"  *ngIf="val" class="card-body">
+<div class="container">
+    <div class="about-details">
+        <div class="card" class="text-center">
+            <div class="about-heading text-left"><h2>Payment</h2></div>
+            <div>
+                <img *ngIf="im" src="assets/images/loading.gif">
+            </div>
+            <div [innerHTML]="values"  *ngIf="val" class="card-body text-left">
        
+            </div>
+        </div>
     </div>
 </div>
 
