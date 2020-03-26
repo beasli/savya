@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { REGISTER } from 'src/config';
 import { Router } from '@angular/router';
+//import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-register',
@@ -26,22 +27,40 @@ export class RegisterComponent implements OnInit {
   pass:boolean;
   setpassword:any;
   confirmpassword:any;
-  pan:boolean;
+  pan:any;
   fName:any;
   lName:any;
-  gst:boolean;
+  gst:any;
   changeGst(e)
   {
-    let t =new String(e);
-    if(t=="d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}")
-    {
-      this.gst=false;
-    }
-    else
-    {
-      this.gst=true;
-    }
+    //console.log(e.length,e);
+    //this.gst=new String(e);
+    this.gst=e;
+  }
+  checkGst()
+  {
 
+        // console.log(this.gst);
+         if(this.gst==undefined||this.gst=="")
+         {
+           return false;
+         }
+        else if(this.gst.length>0)
+        {
+            if(this.gst=="d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}")
+            {
+              return false;
+            }
+            else if(this.gst!="d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}")
+            {
+              return true;
+            }
+        }
+          
+        else
+        {
+          return false;
+        }
   }
 changeFname(e)
 {
@@ -56,42 +75,65 @@ changeLname(e)
 }
 changePan(e)
 {
-  let t =new String(e);
-  console.log(this.fName);
-  console.log(this.lName);
-  if(t=="[A-Z]{3}([CHFATBLJGP])(?:(?<=P)" + this.fName+ "|(?<!P)" + this.lName + ")[0-9]{4}[A-Z]")
-  {
-    this.pan=false;
-  }
-  else
-  {
-    this.pan=true;
-  }
+  // console.log(e);
+  // this.pan =new String(e);
+  this.pan=e;
 }
+checkPan()
+  {
+    //console.log(this.pan);
+    if(this.pan==undefined||this.pan=="")
+    {
+      return false;
+    }
+    else if(this.pan.length>0)
+    {
+        if(this.pan=="[A-Z]{3}([CHFATBLJGP])(?:(?<=P)" + this.fName+ "|(?<!P)" + this.lName + ")[0-9]{4}[A-Z]")
+        {
+          return false;
+        }
+        else if(this.pan!="[A-Z]{3}([CHFATBLJGP])(?:(?<=P)" + this.fName+ "|(?<!P)" + this.lName + ")[0-9]{4}[A-Z]")
+        {
+          return true;
+        }
+    }
+    else
+    {
+      return false;
+    }
+  }
 setPassword(e)
 {
   this.setpassword=e;
-  if(this.confirmpassword==this.setpassword)
-  {
-    this.pass=false;
-//   console.log("perfect");
-  }
-  else{
-    this.pass=true;
-  //  console.log("imperfect");
-  }
 }
 changePassword(e)
 {
+  //console.log(e);
   this.confirmpassword=e
-  if(this.confirmpassword==this.setpassword)
+}
+checkPassword()
+{
+ // console.log(this.confirmpassword.length);
+  if(this.setpassword==null)
   {
-    this.pass=false;
-//   console.log("perfect");
+    return false;
   }
-  else{
-    this.pass=true;
-  //  console.log("imperfect");
+  else if(this.setpassword.length>0)
+  {
+    if(this.confirmpassword.length==0)
+    {
+      return false;
+    }
+    else(this.confirmpassword.length>0)
+    {
+      if(this.confirmpassword==this.setpassword)
+      {
+        return false;
+      }
+      else{
+        return true;
+      }
+    }
   }
 }
 changePin(e)
