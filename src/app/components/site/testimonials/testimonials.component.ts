@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from './../../../api/api.service';
+import { Router } from '@angular/router';
 declare var $: any;
 @Component({
   selector: 'app-testimonials',
@@ -32,7 +33,7 @@ export class TestimonialsComponent implements OnInit {
         }
       }]
   };
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private router: Router) {
     console.log(this.heading);
    }
    text(value) {
@@ -44,16 +45,13 @@ export class TestimonialsComponent implements OnInit {
 
    detail(value) {
      if (this.redirect == 'Y'){
-    this.api.setEvent(value, this.url);
+      this.router.navigate(['/event', value.id]);
     }
   }
-  ngOnChanges(changes: SimpleChanges){
-    console.log(changes);
-  }
+  
   
   ngOnInit() {
     this.slideConfig.slidesToShow = this.slidetoshow;
-    console.log("changes");
   }
 
 }

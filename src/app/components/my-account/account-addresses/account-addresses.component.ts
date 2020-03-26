@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account-addresses.component.css']
 })
 export class AccountAddressesComponent implements OnInit {
-  addresses = [];
-  uid = [];
+  addresses:any;
+  uid:any;
   constructor(private api: ApiService, private router: Router) {
     this.getaddress();
    }
@@ -31,11 +31,13 @@ export class AccountAddressesComponent implements OnInit {
 
    delete(value) {
     if (confirm ("Are you sure you want to delete this address?"))  {
-      this.api.Post(DELADDRESS, {address_id: value}).then(data => {this.addresses = data['data']; });
+      this.api.Post(DELADDRESS, {address_id: value}).then(data => {this.addresses = data['data']; 
       this.getaddress();
+    });
      }
    }
   ngOnInit() {
+    
   }
 
 }

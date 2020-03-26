@@ -39,7 +39,7 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
       { path: 'home', component: HomeComponent},
       { path: 'filter/:id' , component: FilterProductComponent},
       { path: 'events' , component: EventsComponent},
-      { path: 'event' , component: EventComponent},
+      { path: 'event/:id' , component: EventComponent},
       { path: 'product-details/:id' , component: ProductDetailsComponent},
     ])
   ]

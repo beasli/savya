@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { EVENTS } from './../../../../config';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class EventsComponent implements OnInit {
 events: [];
 url: any;
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService,private router: Router) {
     this.api.Post(EVENTS, {}).then(data => {
       this.events = data['data']['data'];
       this.events['url'] = data['url'] + "/";
@@ -19,7 +20,7 @@ url: any;
   }
 
   detail(value) {
-    this.api.setEvent(value, this.url);
+    this.router.navigate(['/event', value.id]);
   }
   ngOnInit(): void {
   }
