@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   constructor(private api:ApiService ,private router:Router) {
     this.drop=this.api.drop; 
    console.log(this.drop);
+  
   }
   change(value)
   {
@@ -55,8 +56,10 @@ export class HeaderComponent implements OnInit {
   }
   ngOnInit() {
     this.api.getlogin.subscribe(data => {
-      this.drop=data
-      console.log(data);
+      console.log(+data);
+      this.drop=data;
+      console.log(this.drop);
+      
      });
   }
 

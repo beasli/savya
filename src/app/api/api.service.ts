@@ -10,7 +10,7 @@ import { JsonPipe } from '@angular/common';
   providedIn: 'root'
 })
 export class ApiService {
-  @Output() getlogin:EventEmitter<string> = new EventEmitter();
+  @Output() getlogin:EventEmitter<number> = new EventEmitter();
   @Output() getWish:EventEmitter<string> = new EventEmitter();
   @Output() getUserData:EventEmitter<string> = new EventEmitter();
   @Output() Cart:EventEmitter<string> = new EventEmitter();
