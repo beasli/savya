@@ -12,7 +12,9 @@ export class EventHistoryComponent implements OnInit {
   uid: any;
   event: [];
   url: any;
-  constructor(private api: ApiService,private router: Router) {
+
+  constructor(private api: ApiService,private router:Router) {
+
     this.uid = this.api.getUserInfo();
     this.uid = this.uid['uid'];
     this.api.Get(MYEVENTS + this.uid).then(data => {
