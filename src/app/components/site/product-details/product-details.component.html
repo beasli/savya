@@ -43,20 +43,25 @@
                         </div>   
                         <div *ngIf="data.default_size" class="product-size-box">
                             <label for="id_select"> Select Size </label>
-                            <select id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                            <select *ngIf="data.size_type != ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
                                 <option *ngFor="let option of sizes" [value]="option" [selected]="option === defaultsize">
                                 {{option}}
                                 </option>
                             </select>
-                            <div class="color-chose-box d-table">
-                                <div class="color-text d-table-cell"><p>Choose Color:</p></div>
-                                <div class="sample-box d-table-cell">
-                                    <ul>
-                                        <li><a href="javascript:void(0)" (click)="colormetal('red')" [ngClass]="{active: colvalue=='red'}" class="red">Red</a></li>
-                                        <li><a href="javascript:void(0)" (click)="colormetal('yellow')" [ngClass]="{active: colvalue=='yellow'}" class="yellow">Yellow</a></li>
-                                        <li><a href="javascript:void(0)" (click)="colormetal('white')" [ngClass]="{active: colvalue=='white'}" class="white">White</a></li>
-                                    </ul>
-                                </div>
+                            <select *ngIf="data.size_type == ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                                <option [value]="option" [selected]="option === defaultsize">
+                                {{defaultsize}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="color-chose-box d-table">
+                            <div class="color-text d-table-cell"><p>Choose Color:</p></div>
+                            <div class="sample-box d-table-cell">
+                                <ul>
+                                    <li><a href="javascript:void(0)" (click)="colormetal('rose')" [ngClass]="{active: colvalue=='rose'}" class="red">Rose</a></li>
+                                    <li><a href="javascript:void(0)" (click)="colormetal('yellow')" [ngClass]="{active: colvalue=='yellow'}" class="yellow">Yellow</a></li>
+                                    <li><a href="javascript:void(0)" (click)="colormetal('white')" [ngClass]="{active: colvalue=='white'}" class="white">White</a></li>
+                                </ul>
                             </div>
                         </div>
                         <div  class="prd-block_options topline ">
@@ -71,8 +76,8 @@
                                 <div *ngIf='assets.gold.length && pricegold'>
                                     <div *ngIf=(gold.goldweight)>Gold (weight):  {{gold.goldweight}} gram</div>
 
-                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Fine Gold Rate: Rs. {{pricegold.price}} Per gram</div>
-                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Rate: Rs. {{pricegold2.price}} Per gram</div>
+                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Gold Rate: Rs. {{pricegold.price}} Per gram</div>
+                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Gold Rate: Rs. {{pricegold2.price}} Per gram</div>
                                     <div *ngIf=(gold.wastage) class="option-label">Gold wastage:  {{gold.wastage}} %</div>
                                     <div *ngIf="gold.option == 'percentage'" class="option-label">Gold wastage:  {{gold.makingcharge}} %</div>
                                     <div *ngIf="gold.option != 'percentage'" class="option-label">Making Charges: Rs.  {{gold.makingcharge}}</div>
@@ -84,20 +89,12 @@
 
                                 <div *ngIf=(assets.productsilver)>
                                     <div class="option-label">Silver(weight): {{assets.productsilver.silver_qty}} gram</div>
-                                    <div class="option-label">Fine Silver Rate: {{pricelist.silver[0].price}} gram</div>
+                                    <div class="option-label">Silver Rate: {{pricelist.silver[0].price}} gram</div>
                                     <div class="option-label">Silver wastage:  {{assets.productsilver.wastage}} %</div>
                                     <div class="option-label">Making Charges: {{assets.productsilver.silver_charge}}</div>
                                     <div class="option-label">Charges Type: {{assets.productsilver.charge_type}}</div>
                                 </div>
 
-                                <div *ngIf=(assets.productpaltinum) >
-                                    <div *ngIf=(assets.productpaltinum.platinum_qty)>Platinum (weight):  {{platinum.platinum_qty}} gram</div>
-                                    <div *ngIf=(assets.productpaltinum.platinum_qty) class="option-label">Fine Platinum Rate:  {{this.pricelist.platinum[0].price}} Per gram</div>
-                                    <div *ngIf=(platinum.wastage) class="option-label">Planitum wastage:  {{platinum.wastage}} %</div>
-                                    <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Making Charges: Rs. {{platinum.platinum_charge}}</div>
-                                    <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Charges Type:  {{platinum.charge_type}}</div>
-                                    <div class="option-label">Total Platinum Price: Rs. {{totalplat}}</div> 
-                                </div>
                                 <div *ngIf=(assets.diamond.length) class="choose-diamond">
                                     <label for="id_select"> Diamond: </label>
                                     <div class="diamond-selectbox">
@@ -107,20 +104,19 @@
                                     </div>
                                 </div>
                                 <div *ngIf=(assets.diamond.length)  class="prd-size">
-                                    <label for="id_select"> Diamond Clarity:</label>
-                                        <div class="radio-group">
-                                            <ng-container *ngFor='let s of diamondclarity;let i = index'>
-                                                <input [checked]='(s==defaultdiamond[1]) ? true:false' class='radio-control' (change)='colorClarity(0,s)' type="radio" id="{{s}}" name="diamondclarity">
-                                                <label for="{{s}}">{{s}}</label>
-                                            </ng-container>
-                                        </div>
-                                </div>
-
-                                <div *ngIf=(assets.diamond.length)  class="prd-size">
                                     <span class="option-label">Diamond Color:</span>
                                         <div class="radio-group">
                                             <ng-container *ngFor='let s of diamondcolour;let i = index'>
                                                 <input [checked]='(s==defaultdiamond[0]) ? true:false' class='radio-control' (change)='colorClarity(s,0)' type="radio" id="{{s}}" name="diamondcolour">
+                                                <label for="{{s}}">{{s}}</label>
+                                            </ng-container>
+                                        </div>
+                                </div>
+                                <div *ngIf=(assets.diamond.length)  class="prd-size">
+                                    <label for="id_select"> Diamond Clarity:</label>
+                                        <div class="radio-group">
+                                            <ng-container *ngFor='let s of diamondclarity;let i = index'>
+                                                <input [checked]='(s==defaultdiamond[1]) ? true:false' class='radio-control' (change)='colorClarity(0,s)' type="radio" id="{{s}}" name="diamondclarity">
                                                 <label for="{{s}}">{{s}}</label>
                                             </ng-container>
                                         </div>
@@ -137,10 +133,15 @@
                                     <div>Diamond Color/Clarity: {{this.defaultdiamond[0] + '/' + this.defaultdiamond[1]}}</div>
                                 </div>
 
-                            <div *ngIf=(assets.diamond[0]) class="about-product">
-                                
-                                
-                            </div>
+                                <div *ngIf=(assets.productpaltinum) >
+                                    <div *ngIf=(assets.productpaltinum.platinum_qty)>Platinum (weight):  {{platinum.platinum_qty}} gram</div>
+                                    <div *ngIf=(assets.productpaltinum.platinum_qty) class="option-label">Platinum Rate:  {{this.pricelist.platinum[0].price}} Per gram</div>
+                                    <div *ngIf=(platinum.wastage) class="option-label">Planitum wastage:  {{platinum.wastage}} %</div>
+                                    <div *ngIf=(!platinum.wastage) class="option-label">Planitum wastage:  0 %</div>
+                                    <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Making Charges: Rs. {{platinum.platinum_charge}}</div>
+                                    <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Charges Type:  {{platinum.charge_type}}</div>
+                                    <div class="option-label">Total Platinum Price: Rs. {{totalplat}}</div> 
+                                </div>
                             
                             <div *ngIf=(assets.stone.length) class="prd-size swatches">
                                 <span class="option-label">Stone:</span>
@@ -175,7 +176,7 @@
                                         </div>
                                     </div>
                                     <input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="createjson()"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
-                                    <div class="prd-links hide-mobile"><a class="icon-eye prd-qview-link js-qview-link"></a> <a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
+                                    <div class="prd-links hide-mobile"><a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
                                 </div>
                             </div>
                         </div>
@@ -236,38 +237,8 @@
                 </ul><!-- Tab panes -->
                 <div class="tab-content">
                 
-                    <div role="tabpanel" class="tab-pane fade" id="Tab1">
-                        <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful</p>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-borderless h-font text-uppercase">
-                                <tbody>
-                                    <tr>
-                                        <td>PROOF</td>
-                                        <td><b>PDF Proof</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>SAMPLES</td>
-                                        <td><b>Digital, Printed</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>WRAPPING</td>
-                                        <td><b>Yes, No</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>UV GLOSS COATING</td>
-                                        <td><b>Yes</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>SHRINK WRAPPING</td>
-                                        <td><b>No Shrink Wrapping, Shrink in 25s, Shrink in 50s, Shrink in 100s</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>WEIGHT</td>
-                                        <td><b>0.05, 0.06, 0.07ess cards</b></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div role="tabpanel" class="tab-pane fade" [innerHTML]="data.description" id="Tab1">
+                        
                     </div>
                  
                     <div role="tabpanel" class="tab-pane fade" id="Tab4">

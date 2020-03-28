@@ -66,7 +66,7 @@ export class ProductDetailsComponent implements OnInit {
       }
     });
 
-      this.api.Post(CARTVIEW,{user_id: this.api.uid}).then(data=>{
+    this.api.Post(CARTVIEW,{user_id: this.api.uid}).then(data=>{
         this.cart=data['data'];
     }).catch(d => {
       console.log(d);
@@ -81,7 +81,13 @@ export class ProductDetailsComponent implements OnInit {
     if (this.assets.productpaltinum)  {
     this.getplatinum();
     }
-    this.totalprice = this.totaldiamond+this.totalgold+this.totalplat;
+    if (this.assets.productpaltinum)  {
+      this.getplatinum();
+      }
+    if (this.assets.productsilver) {
+        this.getsilver();
+      }
+    this.total();
     let increament = this.selectedsize - this.defaultsize;
     if  (increament !=0 ) {
         this.defaultsize = this.selectedsize;
@@ -188,6 +194,9 @@ export class ProductDetailsComponent implements OnInit {
       }
       if (this.assets.productpaltinum) {
         this.getplatinum();
+      }
+      if (this.assets.productsilver) {
+        this.getsilver();
       }
       this.api.Post(SUBCATEGORY, {category_id: this.data['category']} ).then(data  => {
 
