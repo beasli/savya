@@ -57,14 +57,10 @@ export class ProductDetailsComponent implements OnInit {
     
     this.route.params.subscribe(params => {
       this.pid = params.id;
+      this.getproduct();
       });
 
-    this.api.Post(PRICELIST, {} ).then(data  => {
-      if  (data['data']) {
-      this.pricelist = data['data'];
-      this.getproduct();
-      }
-    });
+    
 
     this.api.Post(CARTVIEW,{user_id: this.api.uid}).then(data=>{
         this.cart=data['data'];
@@ -163,54 +159,61 @@ export class ProductDetailsComponent implements OnInit {
     this.api.addToCart(s);
   }
    getproduct() {
-    this.api.Post(PRODUCTDETAILS, {product_id: this.pid} ).then(data  => {
-      if(data['data'])  {
-        this.data = data['data'];
+    this.api.Post(PRICELIST, {} ).then(data  => {
+      if  (data['data']) {
+      this.pricelist = data['data'];
+      this.api.Post(PRODUCTDETAILS, {product_id: this.pid} ).then(data  => {
+        if(data['data'])  {
+          this.data = data['data'];
+        }
+        this.data.color ? this.colvalue = this.data.color : this.colvalue = "";
+        this.assets = data['assets'];
+        this.prd_img = this.assets['image'];
+        this.certificate = data['Certification'];
+        this.certificateurl = data['certificte_url']+'/';
+        this.recents = data['recentproduct'];
+        this.url = data['url'] + '/';
+        if (this.data.size) {
+          this.defaultsize = this.data.default_size;
+          this.sizes = this.data.size_type.split(',');
+          this.selectedsize = this.defaultsize;
+        }
+        if (this.assets.gold.length) {
+          this.getgold(this.assets.gold[0]);
+        }
+        if (this.assets.stone.length) {
+          this.getstone(this.assets.stone[0]);
+        }
+        if (this.assets.diamond.length) {
+          this.diamond = this.assets.diamond[0];
+          this.diamondcolour = this.diamond.diamondcolor.split(',');
+          this.diamondclarity = this.diamond.diamondclarity.split(',');
+          this.defaultdiamond = this.diamond.default_size.split(',');
+          this.diamondprice();
+        }
+        if (this.assets.productpaltinum) {
+          this.getplatinum();
+        }
+        if (this.assets.productsilver) {
+          this.getsilver();
+        }
+        this.api.Post(SUBCATEGORY, {category_id: this.data['category']} ).then(data  => {
+  
+              let result = data['data'].find(x => x.id == this.data['subcategory']);
+              this.subcategory = result['subcategory'];
+  
+              this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.data['subcategory']} ).then(data  => {
+  
+                  let result = data['data'].find(x => x.id == this.data['subcategorytype']);
+                  this.subsubcategory = result['title'];
+  
+              }).catch(d=>{console.log(d);});
+       }).catch(d=>{console.log(d);});
+    }).catch(d=>{console.log(d);});
       }
-      this.data.color ? this.colvalue = this.data.color : this.colvalue = "";
-      this.assets = data['assets'];
-      this.prd_img = this.assets['image'];
-      this.certificate = data['Certification'];
-      this.certificateurl = data['certificte_url']+'/';
-      this.recents = data['recentproduct'];
-      this.url = data['url'] + '/';
-      if (this.data.size) {
-        this.defaultsize = this.data.default_size;
-        this.sizes = this.data.size_type.split(',');
-        this.selectedsize = this.defaultsize;
-      }
-      if (this.assets.gold.length) {
-        this.getgold(this.assets.gold[0]);
-      }
-      if (this.assets.stone.length) {
-        this.getstone(this.assets.stone[0]);
-      }
-      if (this.assets.diamond.length) {
-        this.diamond = this.assets.diamond[0];
-        this.diamondcolour = this.diamond.diamondcolor.split(',');
-        this.diamondclarity = this.diamond.diamondclarity.split(',');
-        this.defaultdiamond = this.diamond.default_size.split(',');
-        this.diamondprice();
-      }
-      if (this.assets.productpaltinum) {
-        this.getplatinum();
-      }
-      if (this.assets.productsilver) {
-        this.getsilver();
-      }
-      this.api.Post(SUBCATEGORY, {category_id: this.data['category']} ).then(data  => {
+    });
 
-            let result = data['data'].find(x => x.id == this.data['subcategory']);
-            this.subcategory = result['subcategory'];
-
-            this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.data['subcategory']} ).then(data  => {
-
-                let result = data['data'].find(x => x.id == this.data['subcategorytype']);
-                this.subsubcategory = result['title'];
-
-            }).catch(d=>{console.log(d);});
-     }).catch(d=>{console.log(d);});
-  }).catch(d=>{console.log(d);});
+    
 
     this.api.Post(CATEGORY, {} ).then(data  => {
      let result = data['data'].find(x => x.id == this.data['category']);

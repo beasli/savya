@@ -231,8 +231,8 @@ getprice(event){
     {
        min=a;
        max=1000000;
-       f.menu.price.min=min;
-       f.menu.price.max=max;
+       f.menu.price.min=Number(min);
+       f.menu.price.max=Number(max);
        this.setfilter(f);
     }
     else
@@ -240,8 +240,8 @@ getprice(event){
        res = a.split("-");
         min =res[0];
         max  =res[1]
-        f.menu.price.min=min;
-        f.menu.price.max=max;
+        f.menu.price.min=Number(min);
+        f.menu.price.max=Number(max);
         this.setfilter(f);
     }
 }
