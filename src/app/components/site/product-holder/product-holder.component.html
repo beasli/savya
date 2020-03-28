@@ -80,7 +80,7 @@
 
                                     <!-- data-src="#modalCheckOut" -->
                                     <input type="hidden"> <button class="btn"  *ngIf= "!checkCart(s.product_id)"  (click)='go(s.product_id)'><i class="icon icon-handbag"></i><span>View Details</span></button> 
-                                    <div class="prd-links hide-mobile"><a href="#" class="icon-eye prd-qview-link js-qview-link" ></a> <a data-toggle="modal" data-target="#myaddModal" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a data-toggle="modal" data-target="#mydeleteModal" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
+                                    <div class="prd-links hide-mobile"><a data-toggle="modal" data-target="#myaddModal" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a data-toggle="modal" data-target="#mydeleteModal" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
                                   
                                 </div>
                                 <div class="prd-options"><span class="label-options">Custom Fields:</span>
