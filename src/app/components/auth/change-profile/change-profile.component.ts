@@ -15,13 +15,16 @@ export class ChangeProfileComponent implements OnInit {
   message:any;
   type:any;
   d:any;
-
+  loader:boolean;
+  page:boolean;
   constructor(private api:ApiService) {
     let mobile=this.api.getMobileNo();
     console.log(mobile);
     this.api.Post(PROFILEVIEW, {
       mobile:mobile
     }).then(data=>{
+      this.page=true;
+      this.loader=false;
       console.log(data);
       this.data=data['data'][0];
       //this.router.navigate(['/registerOtp']);
@@ -32,12 +35,15 @@ export class ChangeProfileComponent implements OnInit {
   }
    
    update(value){
+    this.loader=true;
+    this.page=false;
     this.alert=false
     this.loading=true;
     this.sign=false;
     // console.log(value);
     this.api.Post(PROFILEUPDATE, value).then(data => {
-
+      this.page=true;
+      this.loader=false;
               console.log(data);
               this.alert=true;
               this.message="Successful Updated "
@@ -50,6 +56,8 @@ export class ChangeProfileComponent implements OnInit {
              this.api.setUserInfo(this.d);
               //this.router.navigate(['/registerOtp']);
       }).catch(d=>{
+        this.page=true;
+        this.loader=false;
               console.log(d);
               this.type="danger";
               this.loading=false;
@@ -61,6 +69,8 @@ export class ChangeProfileComponent implements OnInit {
 }
 
   ngOnInit(): void {
+    this.loader=true;
+    this.page=false;
 }
 
 }

@@ -10,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class AccountAddressesComponent implements OnInit {
   addresses:any;
   uid:any;
+  loader:boolean;
+  page:boolean; 
   constructor(private api: ApiService, private router: Router) {
     this.getaddress();
    }
@@ -17,7 +19,10 @@ export class AccountAddressesComponent implements OnInit {
    getaddress() {
     this.uid = this.api.getUserInfo();
     this.uid = this.uid['uid'];
-    this.api.Post(GETADDRESS, {uid: this.uid}).then(data => {this.addresses = data['data']; });
+    this.api.Post(GETADDRESS, {uid: this.uid}).then(data => {
+      this.page=true;
+      this.loader=false;
+      this.addresses = data['data']; });
    }
 
    edit(value) {
@@ -30,6 +35,7 @@ export class AccountAddressesComponent implements OnInit {
    }
 
    delete(value) {
+    
     if (confirm ("Are you sure you want to delete this address?"))  {
       this.api.Post(DELADDRESS, {address_id: value}).then(data => {this.addresses = data['data']; 
       this.getaddress();
@@ -37,7 +43,8 @@ export class AccountAddressesComponent implements OnInit {
      }
    }
   ngOnInit() {
-    
+    this.loader=true;
+    this.page=false;
   }
 
 }

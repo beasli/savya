@@ -12,12 +12,15 @@ export class EventHistoryComponent implements OnInit {
   uid: any;
   event: [];
   url: any;
-
+  loader:boolean;
+  page:boolean;
   constructor(private api: ApiService,private router:Router) {
 
     this.uid = this.api.getUserInfo();
     this.uid = this.uid['uid'];
     this.api.Get(MYEVENTS + this.uid).then(data => {
+      this.page=true;
+      this.loader=false;
       this.event = data['data'];
       this.event['url'] = data['url'] + "/";
       this.url = this.event['url'];
@@ -28,6 +31,8 @@ export class EventHistoryComponent implements OnInit {
     this.router.navigate(['/event', value.id]);
   }
   ngOnInit(): void {
+    this.loader=true;
+    this.page=false;
   }
 
 }
