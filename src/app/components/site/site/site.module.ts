@@ -1,3 +1,4 @@
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventsComponent } from './../events/events.component';
 import { LiveratesComponent } from './../liverates/liverates.component';
 import { ExclusiveBannerComponent } from './../../layout/exclusive-banner/exclusive-banner.component';
@@ -16,7 +17,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { EventComponent } from '../event/event.component';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { ShareButtonsConfig, ShareModule } from '@ngx-share/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const customConfig: ShareButtonsConfig = {
   autoSetMeta: true,
@@ -41,11 +41,11 @@ const customConfig: ShareButtonsConfig = {
     ProductDetailsComponent,
   ],
   imports: [
+    FontAwesomeModule,
     CommonModule,
     HttpClientModule,
     NgbModule,
     SlickCarouselModule,
-    FontAwesomeModule,
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
