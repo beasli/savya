@@ -15,6 +15,8 @@ url:any;
 wish:any;
 alert:boolean;
 div:boolean;
+loader:boolean;
+page:boolean;
 message:any="Nothing To Show";
 @ViewChild('addclosebutton') addclosebutton;
 @ViewChild('deleteclosebutton') deleteclosebutton;
@@ -27,7 +29,11 @@ message:any="Nothing To Show";
   }
 searchApi()
 {
+  this.loader=true;
+    this.page=false;
   this.api.Post(SEARCH,{name:this.data}).then(data=>{
+    this.page=true;
+      this.loader=false;
     this.alert=false;
     this.div=true;
     console.log(data);
@@ -35,6 +41,8 @@ searchApi()
     console.log(this.products);
     this.url = data['url'] + '/';
   }).catch(d=>{
+    this.page=true;
+      this.loader=false;
     this.alert=true;
     this.div=false;
     console.log(d); 
@@ -114,6 +122,8 @@ deletemodal()
   this.deleteclosebutton.nativeElement.click();
 }
   ngOnInit() {
+    this.loader=true;
+    this.page=false;
   }
 
 }
