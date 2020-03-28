@@ -16,6 +16,8 @@ baseurl:any;
 div:boolean;
 alert:boolean;
 message:any;
+loader:boolean;
+page:boolean;
   constructor(private api:ApiService) {
     this.data=this.api. getUserInfo();
     this.uid=this.data.uid;
@@ -29,15 +31,20 @@ message:any;
     
     this.api.Post(WISHLISTVIEW,{uid:this.uid}).then(data=>{
     console.log(data);
+     this.page=true;
+      this.loader=false;
       this.div=true;
       this.alert=false;
       // console.log(data['data']);
        this.baseurl=data['url']+"/";
       // console.log("url"+this.baseurl);
        this.results=data['data'];
-      //  console.log(this.results);
+      //  console.log("results");
+      //   console.log(this.results);
       //  console.log(this.baseurl);
      }).catch(d=>{
+      this.page=true;
+      this.loader=false;
        this.alert=true;
        this.div=false;
        this.message=d.error.data; 
@@ -47,9 +54,11 @@ message:any;
   }
   deleteWishlist(pid)
   {
-  
+    this.loader=true;
+    this.page=false;
       this.api.deleteWishlist(pid);
-     
+      this.page=true;
+      this.loader=false;
   }
   addToCart(s)
   {
@@ -83,7 +92,8 @@ message:any;
 
 
   ngOnInit() {
-
+    this.loader=true;
+    this.page=false;
     this.api.getWish.subscribe(data=>{
       this.view();
        console.log("getWishSubscribe"+data);

@@ -36,46 +36,74 @@
             </div>
           </div>
         <!-- delete Modal end -->  
-<div class="prd-grid product-listing data-to-show-3 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div" >
+<div  *ngIf="page">     
+      <div class="prd-grid product-listing data-to-show-3 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div" >
 
-            <div class="prd" *ngFor="let s of products"  >
-                    <div class="prd-inside" >
-                        <div class="prd-img-area"><a (click)='go(s.product_id)' class="prd-img"><img [src]="url + s.image" alt="Tyssot 1853"></a>
-                            <div class="label-new">NEW</div>
-                            <div class="gdw-loader"></div>
-                        </div>
-                        <div class="prd-info">
+                  <div class="prd" *ngFor="let s of products"  >
+                          <div class="prd-inside" >
+                              <div class="prd-img-area"><a (click)='go(s.product_id)' class="prd-img"><img [src]="url + s.image" alt="Tyssot 1853"></a>
+                                  <div class="label-new">NEW</div>
+                                  <div class="gdw-loader"></div>
+                              </div>
+                              <div class="prd-info">
 
-                            <div class="prd-tag prd-hidemobile"><a href="javascript:void(0)">{{s.size}}</a></div>
-                            <h2 class="prd-title"><a (click)='go(s.product_id)'>{{s.productname}}</a></h2>
+                                  <div class="prd-tag prd-hidemobile"><a href="javascript:void(0)">{{s.size}}</a></div>
+                                  <h2 class="prd-title"><a (click)='go(s.product_id)'>{{s.productname}}</a></h2>
 
-                            <div class="prd-hover">
-                                <div class="prd-action">
+                                  <div class="prd-hover">
+                                      <div class="prd-action">
 
-                                    <div   *ngIf= "checkCart(s.product_id)" class="row no=gutters" >
-                                        <div class="col-2">
-                                            <button  (click)="qtyUpdate(s.product_id,-1)" class="btn btn-secondary btn-block">-</button>
-                                        </div>
+                                          <div   *ngIf= "checkCart(s.product_id)" class="row no=gutters" >
+                                              <div class="col-2">
+                                                  <button  (click)="qtyUpdate(s.product_id,-1)" class="btn btn-secondary btn-block">-</button>
+                                              </div>
+              
+                                              <div class="col-4 text-right">{{quantity(s.product_id)}}</div>
+              
+                                              <div class="col-2">
+                                                  <button  (click)="qtyUpdate(s.product_id,+1)" class="btn btn-secondary btn-block">+</button>
+                                              </div>
+                                          </div>
+                                          <form action="#"><input type="hidden"> <button class="btn" *ngIf= "!checkCart(s.product_id)"  (click)="go(s.product_id)" ><i class="icon icon-handbag"></i><span>View Detail</span></button></form> 
+                                          <div class="prd-links hide-mobile"><a data-toggle="modal" data-target="#myaddModal" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a data-toggle="modal" data-target="#mydeleteModal" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)"  class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
+
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                  </div>
         
-                                        <div class="col-4 text-right">{{quantity(s.product_id)}}</div>
         
-                                        <div class="col-2">
-                                            <button  (click)="qtyUpdate(s.product_id,+1)" class="btn btn-secondary btn-block">+</button>
-                                        </div>
-                                    </div>
-                                    <form action="#"><input type="hidden"> <button class="btn" *ngIf= "!checkCart(s.product_id)"  (click)="go(s.product_id)" ><i class="icon icon-handbag"></i><span>View Detail</span></button></form> 
-                                    <div class="prd-links hide-mobile"><a data-toggle="modal" data-target="#myaddModal" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a data-toggle="modal" data-target="#mydeleteModal" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)"  class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-   
-   
-</div>
-<div  *ngIf="alert">
-    <ngb-alert [dismissible]="false" >
-        <strong>{{message}}</strong> 
-    </ngb-alert>
-</div>      
+      </div>
+      <div  *ngIf="alert" style="padding: 200px;">
+          <ngb-alert [dismissible]="false" >
+              <strong>{{message}}</strong> 
+          </ngb-alert>
+      </div>  
+</div>   
+<div class="text-center" *ngIf="loader" style="padding: 200px;">
+  <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-secondary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-success" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-danger" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-warning" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-info" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-light" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-dark" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div> 

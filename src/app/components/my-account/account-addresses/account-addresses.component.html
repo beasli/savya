@@ -14,7 +14,7 @@
                 <div class="col-md-3 aside aside--left">
                     <div class="list-group"><a routerLink="/account-details" class="list-group-item ">Account Details</a> <a routerLink="/account-addresses" class="list-group-item active">My Addresses</a> <a routerLink="/account-wishlist" class="list-group-item">My Wishlist</a> <a routerLink="/account-history" class="list-group-item">My Order History</a><a routerLink="/event-history" class="list-group-item">My Event History</a></div>
                 </div>
-                <div class="col-md-9 aside" >
+                <div class="col-md-9 aside" *ngIf="page" >
                     <div style="padding:10px;">
                     <h2 *ngIf='addresses.length'>My Addresses</h2>
                     </div>
@@ -37,6 +37,32 @@
                         </div>
                     </div>
                     <div><button (click)='edit(-1)' type="button" class="btn ml-1">Add New Address</button></div>
+                </div>
+                <div class="text-center" *ngIf="loader">
+                    <div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                      <div class="spinner-grow text-secondary" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                      <div class="spinner-grow text-success" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                      <div class="spinner-grow text-danger" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                      <div class="spinner-grow text-warning" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                      <div class="spinner-grow text-info" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                      <div class="spinner-grow text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                      <div class="spinner-grow text-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
                 </div>
             </div>
         </div>

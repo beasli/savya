@@ -10,12 +10,16 @@ import { PROFILEVIEW } from 'src/config';
 export class AccountDetailsComponent implements OnInit {
 data:any;
 mobile:any;
+loader:boolean;
+page:boolean;
   constructor(private api: ApiService) { 
     let mobile=this.api.getMobileNo();
     console.log(mobile);
     this.api.Post(PROFILEVIEW,{
       mobile:mobile
     }).then(data=>{
+      this.page=true;
+      this.loader=false;
       console.log(data);
       this.data=data['data'][0];
       //this.router.navigate(['/registerOtp']);
@@ -26,6 +30,7 @@ mobile:any;
   }
 
   ngOnInit() {
-
+    this.loader=true;
+    this.page=false;
 }
 }
