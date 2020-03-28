@@ -49,9 +49,6 @@
                             <div class="prd-tag prd-hidemobile"><a href="javascript:void(0)">{{s.size}}</a></div>
                             <h2 class="prd-title"><a (click)='go(s.product_id)'>{{s.productname}}</a></h2>
 
-                            <div class="prd-rating prd-hidemobile">
-                                <i class="icon-star fill"></i><i class="icon-star fill"></i><i class="icon-star fill"></i><i class="icon-star fill"></i><i class="icon-star"></i>
-                            </div>
                             <div class="prd-hover">
                                 <div class="prd-action">
 
@@ -69,13 +66,6 @@
                                     <form action="#"><input type="hidden"> <button class="btn" *ngIf= "!checkCart(s.product_id)"  (click)="go(s.product_id)" ><i class="icon icon-handbag"></i><span>View Detail</span></button></form> 
                                     <div class="prd-links hide-mobile"><a data-toggle="modal" data-target="#myaddModal" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a data-toggle="modal" data-target="#mydeleteModal" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)"  class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
 
-                                </div>
-                                <div class="prd-options"><span class="label-options">Custom Fields:</span>
-                                    <ul class="list-options size-swatch">
-                                        <li class="active"><span>1</span></li>
-                                        <li><span>2</span></li>
-                                        <li><span>3</span></li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
