@@ -15,6 +15,16 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { EventComponent } from '../event/event.component';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
+import { ShareButtonsConfig, ShareModule } from '@ngx-share/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+const customConfig: ShareButtonsConfig = {
+  autoSetMeta: true,
+  twitterAccount: ''
+};
+
+
+
 
 @NgModule({
   declarations: [
@@ -35,11 +45,13 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
     HttpClientModule,
     NgbModule,
     SlickCarouselModule,
+    FontAwesomeModule,
+    ShareModule.withConfig(customConfig),
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
       { path: 'filter/:id' , component: FilterProductComponent},
       { path: 'events' , component: EventsComponent},
-      { path: 'event' , component: EventComponent},
+      { path: 'event/:id' , component: EventComponent},
       { path: 'product-details/:id' , component: ProductDetailsComponent},
     ])
   ]

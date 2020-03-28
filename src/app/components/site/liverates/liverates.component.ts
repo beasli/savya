@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LIVERATE } from 'src/config';
+import { Router } from '@angular/router';
 
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
 
@@ -10,24 +11,29 @@ const proxyurl = "https://cors-anywhere.herokuapp.com/";
 })
 export class LiveratesComponent implements OnInit {
 rates: [];
+  timer: any;
 
   constructor() {
     this.getRates();
   }
 
   ngOnInit(): void {
-    setInterval(() => {
+    this.timer = setInterval(() => {
       this.getRates();
     }, 3000);
-  }ß
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.timer);
+  }
+
 
   getRates() {
-    fetch(proxyurl + LIVERATE) 
+    fetch(proxyurl + LIVERATE)
     .then(response => response.text())
     .then((contents: any) => {
       contents = JSON.parse(contents);
       this.rates = contents.rows;
-    //  console.log(contents)
     })
     .catch(() => console.log("Can’t access " + LIVERATE + " response. Blocked by browser?"))
   }

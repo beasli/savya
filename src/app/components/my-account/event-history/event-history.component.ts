@@ -1,6 +1,7 @@
 import { MYEVENTS } from './../../../../config';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-history',
@@ -11,7 +12,9 @@ export class EventHistoryComponent implements OnInit {
   uid: any;
   event: [];
   url: any;
-  constructor(private api: ApiService) {
+
+  constructor(private api: ApiService,private router:Router) {
+
     this.uid = this.api.getUserInfo();
     this.uid = this.uid['uid'];
     this.api.Get(MYEVENTS + this.uid).then(data => {
@@ -22,7 +25,7 @@ export class EventHistoryComponent implements OnInit {
   }
 
   detail(value) {
-    this.api.setEvent(value, this.url);
+    this.router.navigate(['/event', value.id]);
   }
   ngOnInit(): void {
   }

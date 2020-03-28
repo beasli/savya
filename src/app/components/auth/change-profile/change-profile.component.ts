@@ -32,7 +32,7 @@ export class ChangeProfileComponent implements OnInit {
   }
    
    update(value){
-    
+    this.alert=false
     this.loading=true;
     this.sign=false;
     // console.log(value);
@@ -43,11 +43,11 @@ export class ChangeProfileComponent implements OnInit {
               this.message="Successful Updated "
               this.type="success";
               this.loading=false;
-              this.sign=false;
+              this.sign=true;
               this.d=data['data'][0];
               console.log(this.d); 
             
-             this.api.setlogin(this.d);
+             this.api.setUserInfo(this.d);
               //this.router.navigate(['/registerOtp']);
       }).catch(d=>{
               console.log(d);

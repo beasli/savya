@@ -10,7 +10,7 @@ import { JsonPipe } from '@angular/common';
   providedIn: 'root'
 })
 export class ApiService {
-  @Output() getlogin:EventEmitter<string> = new EventEmitter();
+  @Output() getlogin:EventEmitter<number> = new EventEmitter();
   @Output() getWish:EventEmitter<string> = new EventEmitter();
   @Output() getUserData:EventEmitter<string> = new EventEmitter();
   @Output() Cart:EventEmitter<string> = new EventEmitter();
@@ -38,17 +38,6 @@ export class ApiService {
     }
 
  }
-
-   public setEvent(value, url) {
-     this.event = value;
-     this.event['url'] = url;
-     localStorage.setItem('event', JSON.stringify(this.event));
-     this.router.navigate(['/event']);
-   }
-
-   public getEvent() {
-    return localStorage.getItem('event');
-  }
 
   public Get(api) {
     return new Promise((resolve, reject) => {
@@ -166,9 +155,16 @@ qtyUpdate(pid,value)
   deleteCart(pid)
   {
     if(localStorage.getItem("waste")!=null)
-    {let waste = JSON.parse(localStorage.getItem("waste"));
-     delete waste[pid];
-    localStorage.setItem("waste",JSON.stringify(waste));
+    {
+      let waste = JSON.parse(localStorage.getItem("waste"));
+      delete waste[pid];
+      localStorage.setItem("waste",JSON.stringify(waste));
+   }
+   if(localStorage.getItem("prd_sizes")!=null)
+   {
+    let prd_sizes = JSON.parse(localStorage.getItem("prd_sizes"));
+    delete prd_sizes[pid];
+    localStorage.setItem("prd_sizes",JSON.stringify(prd_sizes));
    }
     this.Post(CARTDELETE,{user_id:this.uid,product_id:pid}).then(data=>{
       //console.log("deletecart"+data)
@@ -377,11 +373,6 @@ price(weight, rate, option, makingcharge, wastage = 0, value = 0) {
  }
   let data = {'weight': weight,'price': metalprice};
   return data;
-}
-
-grossweight(gold=0,platinum=0,silver=0,diamond=0,stone=0) {
-  let weight = Number(gold)+Number(platinum)+Number(silver)+Number(diamond)+Number(stone);
-  return weight.toFixed(3);
 }
 
 }

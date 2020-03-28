@@ -66,7 +66,7 @@ export class ProductDetailsComponent implements OnInit {
       }
     });
 
-      this.api.Post(CARTVIEW,{user_id: this.api.uid}).then(data=>{
+    this.api.Post(CARTVIEW,{user_id: this.api.uid}).then(data=>{
         this.cart=data['data'];
     }).catch(d => {
       console.log(d);
@@ -81,7 +81,13 @@ export class ProductDetailsComponent implements OnInit {
     if (this.assets.productpaltinum)  {
     this.getplatinum();
     }
-    this.totalprice = this.totaldiamond+this.totalgold+this.totalplat;
+    if (this.assets.productpaltinum)  {
+      this.getplatinum();
+      }
+    if (this.assets.productsilver) {
+        this.getsilver();
+      }
+    this.total();
     let increament = this.selectedsize - this.defaultsize;
     if  (increament !=0 ) {
         this.defaultsize = this.selectedsize;
@@ -189,6 +195,9 @@ export class ProductDetailsComponent implements OnInit {
       if (this.assets.productpaltinum) {
         this.getplatinum();
       }
+      if (this.assets.productsilver) {
+        this.getsilver();
+      }
       this.api.Post(SUBCATEGORY, {category_id: this.data['category']} ).then(data  => {
 
             let result = data['data'].find(x => x.id == this.data['subcategory']);
@@ -286,6 +295,17 @@ export class ProductDetailsComponent implements OnInit {
     j['productName'] = this.data.productname;
     j['productType'] = this.data.size;
     j['productSize'] = this.selectedsize;
+    let size = {'size': this.selectedsize,'type': this.data.size };
+    let prd_sizes = {};
+    prd_sizes[this.pid] = size;
+    if (localStorage.getItem("prd_sizes") != null) {
+      prd_sizes = JSON.parse(localStorage.getItem("prd_sizes"));
+      prd_sizes[this.pid] = size;
+      localStorage.setItem("prd_sizes", JSON.stringify(prd_sizes));
+    } else {
+      prd_sizes[this.pid] = size;
+      localStorage.setItem("prd_sizes", JSON.stringify(prd_sizes));
+    }
     j['subCategory'] = this.data['subcategory'];
     j['subSubCategory'] = this.data['subcategorytype'];
     j['userid'] = (uid).toString();
