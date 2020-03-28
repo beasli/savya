@@ -10,7 +10,7 @@ const proxyurl = "https://cors-anywhere.herokuapp.com/";
 })
 export class LiveratesComponent implements OnInit {
 rates: [];
-  timer: NodeJS.Timer;
+  timer: any;
 
   constructor() {
     this.getRates();
