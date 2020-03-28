@@ -3,6 +3,11 @@ import { ApiService } from 'src/app/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { iconpack } from 'src/icons';
+
+import { ShareService } from '@ngx-share/core';
+
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
@@ -13,7 +18,8 @@ event: any;
 uid: any;
 eid: any;
 url: any;
-constructor(private api: ApiService, private route: ActivatedRoute) {
+constructor(private api: ApiService, private route: ActivatedRoute, public share: ShareService, library: FaIconLibrary) {
+        library.addIcons(...iconpack);
         this.uid = this.api.uid;
 
        // this.event = JSON.parse(this.api.getEvent());
@@ -34,7 +40,7 @@ register() {
   }
 }
 
-share() {
+shareservice() {
   console.log("share method called");
 
 }

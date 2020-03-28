@@ -27,6 +27,7 @@ rates: [];
     clearInterval(this.timer);
   }
 
+
   getRates() {
     fetch(proxyurl + LIVERATE)
     .then(response => response.text())
