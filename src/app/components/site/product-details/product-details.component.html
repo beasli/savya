@@ -50,7 +50,7 @@
                                         </option>
                                     </select>
                                     <select *ngIf="data.size_type == ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
-                                        <option [value]="option" [selected]="option === defaultsize">
+                                        <option [value]="defaultsize" [selected]>
                                         {{defaultsize}}
                                         </option>
                                     </select>
