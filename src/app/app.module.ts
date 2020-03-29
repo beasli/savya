@@ -17,12 +17,14 @@ import { CheckoutService } from './components/auth-guard/checkout.service';
 import { OtpGuardService } from './components/auth-guard/otp-guard.service';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     NavBarComponent,
+
   ],
   imports: [
     BrowserModule,

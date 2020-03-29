@@ -8,6 +8,7 @@ import { TermsAndConditionComponent } from '../terms-and-condition/terms-and-con
 import { PaymentComponent } from '../payment/payment.component';
 import { SearchComponent } from '../search/search.component';
 import { ManufactureComponent } from '../manufacture/manufacture.component';
+import { PrivacyComponent } from '../privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ManufactureComponent } from '../manufacture/manufacture.component';
     TermsAndConditionComponent,
     PaymentComponent,
     SearchComponent,
-    ManufactureComponent
+    ManufactureComponent,
+    PrivacyComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { ManufactureComponent } from '../manufacture/manufacture.component';
       { path: 'terms', component: TermsAndConditionComponent},
       { path: 'payment', component: PaymentComponent},
       { path: 'search/:value', component: SearchComponent},
+      { path: 'privacy', component: PrivacyComponent},
     ])
   ]
 })
