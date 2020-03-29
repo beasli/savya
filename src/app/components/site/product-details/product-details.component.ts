@@ -55,6 +55,7 @@ export class ProductDetailsComponent implements OnInit {
   totalsilver:any;
   loader:boolean;
 page:boolean;
+scroll:boolean;
   constructor(private api: ApiService, private route: ActivatedRoute) {
     
     this.route.params.subscribe(params => {
