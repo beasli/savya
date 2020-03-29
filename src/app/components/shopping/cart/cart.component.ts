@@ -14,6 +14,8 @@ alert:boolean;
 div:boolean;
 baseurl:any;
 message:any="CART IS EMPTY";
+loader:boolean;
+page:boolean;
   constructor(private api:ApiService) {
         this.uid=this.api.uid;
         console.log("userid"+this.uid); 
@@ -28,13 +30,16 @@ message:any="CART IS EMPTY";
    {
         this.api.Post(CARTVIEW,{user_id:this.uid}).then(data=>{
           console.log(data);
-          
+          this.page=true;
+          this.loader=false;
           this.baseurl=data['url']+"/";
           this.results=data['data'];
           this.alert=false;
           this.div=true;
         
         }).catch(d=>{
+          this.page=true;
+         this.loader=false;
           this.div=false;
           this.alert=true;
           console.log(d);
@@ -70,6 +75,8 @@ message:any="CART IS EMPTY";
    }
   
   ngOnInit() {
+    this.loader=true;
+    this.page=false;
     this.api.Cart.subscribe(data=>{
       this.view();
        console.log("getWishSubscribe"+data);
