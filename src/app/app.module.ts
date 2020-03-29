@@ -23,9 +23,6 @@ import { OtpGuardService } from './components/auth-guard/otp-guard.service';
     HeaderComponent,
     FooterComponent,
     NavBarComponent,
-    
-    
-
   ],
   imports: [
     BrowserModule,
