@@ -1,3 +1,4 @@
+import { SubsubComponent } from './../subsub/subsub.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventsComponent } from './../events/events.component';
 import { LiveratesComponent } from './../liverates/liverates.component';
@@ -39,6 +40,7 @@ const customConfig: ShareButtonsConfig = {
     EventsComponent,
     EventComponent,
     ProductDetailsComponent,
+    SubsubComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -53,6 +55,7 @@ const customConfig: ShareButtonsConfig = {
       { path: 'events' , component: EventsComponent},
       { path: 'event/:id' , component: EventComponent},
       { path: 'product-details/:id' , component: ProductDetailsComponent},
+      { path: 'subsub' , component: SubsubComponent}
     ])
   ]
 })
