@@ -23,6 +23,8 @@ export class FilterProductComponent implements OnInit {
   filter:any;
   div:boolean=false;
   alert:boolean=false;
+  loader:boolean;
+  page:boolean;
   message:string="NO PRODUCT AVAILABLE";
   f:any;
   @ViewChild('addclosebutton') addclosebutton;
@@ -72,8 +74,11 @@ export class FilterProductComponent implements OnInit {
   }
   getProduct(value)
   {
-    
+    this.loader=true;
+    this.page=false;
     this.api.Post(PRODUCTLIST, {subsubcategory_id: value } ).then(data  => {
+      this.page=true;
+      this.loader=false;
       this.div=true;
       this.alert=false
       this.products = data['data'];
@@ -81,6 +86,8 @@ export class FilterProductComponent implements OnInit {
       this.url = data['url'] + '/';
       console.log(this.url);
        }).catch(d=>{
+        this.page=true;
+        this.loader=false;
          this.div=false;
          this.alert=true;
         console.log(d);
@@ -97,8 +104,11 @@ export class FilterProductComponent implements OnInit {
  }
  filterApi(value)
  {
-   
+  this.loader=true;
+  this.page=false;
   this.api.Post(PRODUCTFILTER,  value  ).then(data  => {
+    this.page=true;
+    this.loader=false;
     this.div=true;
       this.alert=false
     console.log(data);
@@ -107,6 +117,8 @@ export class FilterProductComponent implements OnInit {
    this.url = data['url'] + '/';
    console.log(this.url);
      }).catch(d=>{
+      this.page=true;
+      this.loader=false;
       this.div=false;
       this.alert=true;
       console.log(d);
@@ -219,8 +231,8 @@ getprice(event){
     {
        min=a;
        max=1000000;
-       f.menu.price.min=min;
-       f.menu.price.max=max;
+       f.menu.price.min=Number(min);
+       f.menu.price.max=Number(max);
        this.setfilter(f);
     }
     else
@@ -228,8 +240,8 @@ getprice(event){
        res = a.split("-");
         min =res[0];
         max  =res[1]
-        f.menu.price.min=min;
-        f.menu.price.max=max;
+        f.menu.price.min=Number(min);
+        f.menu.price.max=Number(max);
         this.setfilter(f);
     }
 }
@@ -430,7 +442,8 @@ clearFilter()
   this.filterChange.emit("cartUpdate"+Date.now());
 }
   ngOnInit() {
-    
+    this.loader=true;
+    this.page=false;
     this.f=this.getfilter();
     if(this.f)
     {

@@ -1,24 +1,50 @@
+<div *ngIf="page">
+      <div class="row" *ngIf="products">
+          <div class="col-sm-4">
+          </div>
+          <div class="col-sm">
+            
+          <div  class="card border col-sm-4" style="width: 50rem;" *ngFor="let r of products">
+            <img src="{{ baseurl + r.image }}" class="card-img-top" alt="...">
+            <div class="card-body text-center">
+              <h3 class="card-title">{{r.productName}}</h3>
+              <h4 class="card-title">qty:{{r.count}}</h4>
+              <h4 class="card-title">Total Price:<strong>{{r.productTotal}}</strong></h4>
+              <p class="card-text" *ngFor="let a of r.assests">METAL: {{a.metal}} <br><span >Purity:</span> {{a.materialType}}</p>
+            </div>
+          </div>
 
-<div class="row" *ngIf="products">
-    <div class="col-sm-4">
+          </div>
+          <div class="col-sm-2">
+          </div>
+        </div>
+        <ngb-alert [dismissible]="false" *ngIf="alert">
+          <strong>No products to show</strong> 
+        </ngb-alert> 
+</div>
+<div class="text-center" *ngIf="loader">
+  <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
     </div>
-    <div class="col-sm">
-      
-    <div  class="card border col-sm-4" style="width: 50rem;" *ngFor="let r of products">
-      <img src="{{ baseurl + r.image }}" class="card-img-top" alt="...">
-      <div class="card-body text-center">
-        <h3 class="card-title">{{r.productName}}</h3>
-        <h4 class="card-title">qty:{{r.count}}</h4>
-        <h4 class="card-title">Total Price:<strong>{{r.productTotal}}</strong></h4>
-        <p class="card-text" *ngFor="let a of r.assests">METAL: {{a.metal}} <br><span >Purity:</span> {{a.materialType}}</p>
-      </div>
+    <div class="spinner-grow text-secondary" role="status">
+      <span class="sr-only">Loading...</span>
     </div>
-
+    <div class="spinner-grow text-success" role="status">
+      <span class="sr-only">Loading...</span>
     </div>
-    <div class="col-sm-2">
+    <div class="spinner-grow text-danger" role="status">
+      <span class="sr-only">Loading...</span>
     </div>
-  </div>
-  <ngb-alert [dismissible]="false" *ngIf="alert">
-    <strong>No products to show</strong> 
-  </ngb-alert>
-   
+    <div class="spinner-grow text-warning" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-info" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-light" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-dark" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div>

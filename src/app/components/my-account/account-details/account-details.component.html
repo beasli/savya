@@ -19,12 +19,38 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-body" *ngIf="page">
                                     <h3>Personal Info</h3>
                                     <p><b>First Name:</b>{{data.name}}<br><b>Register Type:</b> {{data.register_type}}<br><b>E-mail:</b> {{data.email}}<br><b>Phone:</b> {{data.mobile_no}}
                                         <br><b>Address:</b>{{data.address}}<br><b>City:</b>{{data.city}}<br><b>Pin Code:</b>{{data.pincode}}<br><b>State:</b>{{data.state}}<br><b>Designation:</b>{{data.designation}}
                                         <br><b>Company Name:</b>{{data.company_name}}<br><b>Gst No:</b>{{data.gst_no}}<br><b>Pan No:</b>{{data.pan_no}}</p>
                                     <div class="mt-2 clearfix"><a routerLink="/changeProfile" class="link-icn js-show-form" data-form="#updateDetails"><i class="icon-pencil"></i>Edit</a></div>
+                                </div>
+                                <div class="text-center" *ngIf="loader">
+                                    <div class="spinner-grow text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                      </div>
+                                      <div class="spinner-grow text-secondary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                      </div>
+                                      <div class="spinner-grow text-success" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                      </div>
+                                      <div class="spinner-grow text-danger" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                      </div>
+                                      <div class="spinner-grow text-warning" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                      </div>
+                                      <div class="spinner-grow text-info" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                      </div>
+                                      <div class="spinner-grow text-light" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                      </div>
+                                      <div class="spinner-grow text-dark" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                      </div>
                                 </div>
                             </div>
                         </div>
