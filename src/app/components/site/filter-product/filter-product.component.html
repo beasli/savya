@@ -1,197 +1,197 @@
 <div class="hdr-content hide-mobile">
-     <!--added Modal start-->
-     <div class="modal fade" id="myaddModal" role="dialog">
-        <div class="modal-dialog">
-        
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" #addclosebutton class="close" data-dismiss="modal">&times;</button>
-              <!-- <h4 class="modal-title">Modal Header</h4> -->
-            </div>
-            <div class="modal-body" class="modal-text">
-              <i class="icon icon-heart-fill modal-icon-info"></i> <h2><strong>Product  added to wishlist</strong></h2><br><p>(Please wait this may take time)</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" id="closeModal"  (click)="addmodal()">Ok</button>
-             </div> 
-          </div>
-        </div>
-      </div>
- <!-- added Modal end -->
-  <!--delete Modal start-->
-  <div class="modal fade" id="mydeleteModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" #deleteclosebutton class="close" data-dismiss="modal">&times;</button>
-          <!-- <h4 class="modal-title">Modal Header</h4> -->
-        </div>
-        <div class="modal-body" class="modal-text">
-            <i class="icon icon-heart modal-icon-info"></i> <h2><strong>Product removed from wishlist</strong></h2><br><p>(Please wait this may take time)</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="closeModal"  (click)="  deletemodal()">Ok</button>
-         </div> 
-      </div>
-    </div>
-  </div>
+    <!--added Modal start-->
+    <div class="modal fade" id="myaddModal" role="dialog">
+       <div class="modal-dialog">
+       
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" #addclosebutton class="close" data-dismiss="modal">&times;</button>
+             <!-- <h4 class="modal-title">Modal Header</h4> -->
+           </div>
+           <div class="modal-body" class="modal-text">
+             <i class="icon icon-heart-fill modal-icon-info"></i> <h2><strong>Product  added to wishlist</strong></h2><br><p>(Please wait this may take time)</p>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-danger" id="closeModal"  (click)="addmodal()">Ok</button>
+            </div> 
+         </div>
+       </div>
+     </div>
+<!-- added Modal end -->
+ <!--delete Modal start-->
+ <div class="modal fade" id="mydeleteModal" role="dialog">
+   <div class="modal-dialog">
+   
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" #deleteclosebutton class="close" data-dismiss="modal">&times;</button>
+         <!-- <h4 class="modal-title">Modal Header</h4> -->
+       </div>
+       <div class="modal-body" class="modal-text">
+           <i class="icon icon-heart modal-icon-info"></i> <h2><strong>Product removed from wishlist</strong></h2><br><p>(Please wait this may take time)</p>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-danger" id="closeModal"  (click)="  deletemodal()">Ok</button>
+        </div> 
+     </div>
+   </div>
+ </div>
 <!-- delete Modal end -->
-    <div class="container">
-        <div class="row">
-            <div class="col-auto"><h2>SUBCATEGORY</h2></div>
-            
-            <!--navigation-->
-            <div class="nav-holder">
-                
-                <div class="hdr-nav">
-                    <!--mmenu-->
-                    <ul  class="mmenu mmenu-js">
-                        
-                        <ul class="mmenu mmenu-js">
-                            <li *ngFor='let s of data' class="mmenu-item--simple"><a (click)="getProduct(s.id)" href="javascript:void(0)" title="">{{s.title}}</a>
+   <div class="container">
+       <div class="row">
+           <div class="col-auto"><h2>SUBCATEGORY</h2></div>
+           
+           <!--navigation-->
+           <div class="nav-holder">
+               
+               <div class="hdr-nav">
+                   <!--mmenu-->
+                   <ul  class="mmenu mmenu-js">
+                       
+                       <ul class="mmenu mmenu-js">
+                           <li *ngFor='let s of data' class="mmenu-item--simple"><a (click)="getProduct(s.id)" href="javascript:void(0)" title="">{{s.title}}</a>
 
-                            </li>
-                        </ul>
-                    </ul>  
-                    <!--/mmenu-->
-                </div>
-            </div>
-            <!--//navigation-->
-        </div>
-    </div>
+                           </li>
+                       </ul>
+                   </ul>  
+                   <!--/mmenu-->
+               </div>
+           </div>
+           <!--//navigation-->
+       </div>
+   </div>
 </div>
 
 <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09">
-    <div class="container">
-        <div class="text-center">
-            <h2 class="h1-style">Product with side filter</h2>
-        </div>
-        
-        <div class="row" >
-            <!-- Left column -->
-            <div class="col-lg-3 aside aside--left fixed-col js-filter-col">
-                <div class="fixed-col_container">
-                    <div class="filter-close">CLOSE</div>
-                    <div class="sidebar-block sidebar-block--mobile d-block d-lg-none">
-                        <div class="d-flex align-items-center">
-                            <div class="selected-label">(6) FILTER</div>
-                            <div class="selected-count ml-auto">SELECTED <span><b>25 items</b></span></div>
-                        </div>
-                    </div>
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Current Selection</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <div class="selected-filters-wrap">
-                                <div class="row">
-                                    <ul class="selected-filters" *ngFor="let m of f.menu.jewelery_for">
-                                        <li><a href="javascript:void(0)">{{m}}</a></li>
-                                    </ul>
-                               </div>
+   <div class="container">
+       <div class="text-center">
+           <h2 class="h1-style">Product with side filter</h2>
+       </div>
+       
+       <div class="row" >
+           <!-- Left column -->
+           <div class="col-lg-3 aside aside--left fixed-col js-filter-col">
+               <div class="fixed-col_container">
+                   <div class="filter-close">CLOSE</div>
+                   <div class="sidebar-block sidebar-block--mobile d-block d-lg-none">
+                       <div class="d-flex align-items-center">
+                           <div class="selected-label">(6) FILTER</div>
+                           <div class="selected-count ml-auto">SELECTED <span><b>25 items</b></span></div>
+                       </div>
+                   </div>
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Current Selection</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           <div class="selected-filters-wrap">
                                <div class="row">
-                                    <ul class="selected-filters" *ngFor="let m of  f.menu.material">
-                                        <li><a href="javascript:void(0)">{{m}}</a></li>
-                                    </ul>
-                               </div>
-                               <div class="row">
-                                        <ul class="selected-filters" *ngFor="let m of  f.menu.jewelery_type">
-                                            <li><a href="javascript:void(0)">{{m}}</a></li>
-                                        </ul>
+                                   <ul class="selected-filters" *ngFor="let m of f.menu.jewelery_for">
+                                       <li><a href="javascript:void(0)">{{m}}</a></li>
+                                   </ul>
                               </div>
                               <div class="row">
-                                    <ul class="selected-filters" *ngFor="let m of f.menu.purity">
-                                        <li><a href="javascript:void(0)">{{m}}</a></li>
-                                    </ul>
+                                   <ul class="selected-filters" *ngFor="let m of  f.menu.material">
+                                       <li><a href="javascript:void(0)">{{m}}</a></li>
+                                   </ul>
                               </div>
-                              <div class="row" *ngIf="f.menu.price.min">
-                                <ul class="selected-filters" >
-                                    <li><a href="javascript:void(0)">₹{{f.menu.price.min}}-₹{{f.menu.price.max}}</a></li>
-                                </ul>
-                              </div>
-                                <div class="d-flex align-items-center"><a href="javascript:void(0)" class="clear-filters" (click)="clearFilter()"><span>Clear All</span></a>
-                                    <!-- <div class="selected-count ml-auto d-none d-lg-block">SELECTED<span><b>25 items</b></span></div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Price</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <div class="radio-group">
-                                <!-- value="{min:{{price[0]}},max:{{price[1]}}}" -->
-                                <!-- [checked]="checkedprice($event)" -->
-                                <ng-container > <input type="radio" value="{{price[0]}}-{{price[1]}}" [checked]="checkedprice(price[0])"  (change)="getprice($event)"  id="price" name="price"><label for="price">₹{{price[0]}}-₹{{price[1]}}</label></ng-container>
-                                <ng-container > <input type="radio" value="{{price[1]}}-{{price[2]}}" [checked]="checkedprice(price[1])" (change)="getprice($event)"  id="price1" name="price"><label for="price1">₹{{price[1]}}-₹{{price[2]}}</label></ng-container>
-                                <ng-container > <input type="radio" value="{{price[2]}}-{{price[3]}}" [checked]="checkedprice(price[2])"  (change)="getprice($event)"  id="price2" name="price"><label for="price2">₹{{price[2]}}-₹{{price[3]}}</label></ng-container>
-                                <ng-container > <input type="radio" value="{{price[3]}}-{{price[4]}}" [checked]="checkedprice(price[3])" (change)="getprice($event)"  id="price3" name="price"><label for="price3">₹{{price[3]}}-₹{{price[4]}}</label></ng-container>
-                                <ng-container > <input type="radio" value="{{price[4]}}-1000000" id="price4"  [checked]="checkedprice(price[4])" (change)="getprice($event)"  name="price"><label for="price4">Above ₹{{price[4]}}</label></ng-container>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Categories</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            
-                                <div class="radio-group">
-                                <ng-container  *ngFor='let j of jewelery_for' > <input type="checkbox"  [checked]="checkedjewelery_for(j)" (change)="changefilter($event,j)"  id="{{j}}" name="jewelery_for"><label for="{{j}}">{{j}}</label></ng-container>
-                                </div>
-                        </div>
-                    </div>
+                              <div class="row">
+                                       <ul class="selected-filters" *ngFor="let m of  f.menu.jewelery_type">
+                                           <li><a href="javascript:void(0)">{{m}}</a></li>
+                                       </ul>
+                             </div>
+                             <div class="row">
+                                   <ul class="selected-filters" *ngFor="let m of f.menu.purity">
+                                       <li><a href="javascript:void(0)">{{m}}</a></li>
+                                   </ul>
+                             </div>
+                             <div class="row" *ngIf="f.menu.price.min">
+                               <ul class="selected-filters" >
+                                   <li><a href="javascript:void(0)">₹{{f.menu.price.min}}-₹{{f.menu.price.max}}</a></li>
+                               </ul>
+                             </div>
+                               <div class="d-flex align-items-center"><a href="javascript:void(0)" class="clear-filters" (click)="clearFilter()"><span>Clear All</span></a>
+                                   <!-- <div class="selected-count ml-auto d-none d-lg-block">SELECTED<span><b>25 items</b></span></div> -->
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Price</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           <div class="radio-group">
+                               <!-- value="{min:{{price[0]}},max:{{price[1]}}}" -->
+                               <!-- [checked]="checkedprice($event)" -->
+                               <ng-container > <input type="radio" value="{{price[0]}}-{{price[1]}}" [checked]="checkedprice(price[0])"  (change)="getprice($event)"  id="price" name="price"><label for="price">₹{{price[0]}}-₹{{price[1]}}</label></ng-container>
+                               <ng-container > <input type="radio" value="{{price[1]}}-{{price[2]}}" [checked]="checkedprice(price[1])" (change)="getprice($event)"  id="price1" name="price"><label for="price1">₹{{price[1]}}-₹{{price[2]}}</label></ng-container>
+                               <ng-container > <input type="radio" value="{{price[2]}}-{{price[3]}}" [checked]="checkedprice(price[2])"  (change)="getprice($event)"  id="price2" name="price"><label for="price2">₹{{price[2]}}-₹{{price[3]}}</label></ng-container>
+                               <ng-container > <input type="radio" value="{{price[3]}}-{{price[4]}}" [checked]="checkedprice(price[3])" (change)="getprice($event)"  id="price3" name="price"><label for="price3">₹{{price[3]}}-₹{{price[4]}}</label></ng-container>
+                               <ng-container > <input type="radio" value="{{price[4]}}-1000000" id="price4"  [checked]="checkedprice(price[4])" (change)="getprice($event)"  name="price"><label for="price4">Above ₹{{price[4]}}</label></ng-container>
+                           </div>
+                       </div>
+                   </div>
+                   
+                   
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Categories</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           
+                               <div class="radio-group">
+                               <ng-container  *ngFor='let j of jewelery_for' > <input type="checkbox"  [checked]="checkedjewelery_for(j)" (change)="changefilter($event,j)"  id="{{j}}" name="jewelery_for"><label for="{{j}}">{{j}}</label></ng-container>
+                               </div>
+                       </div>
+                   </div>
 
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Product</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <div class="radio-group">
-                                <ng-container  *ngFor='let jt of jewelery_type' > <input type="radio" [checked]="checkedjewelery_type(jt)" (change)="changefilter($event,jt)" id="{{jt}}" name="jewelery_type"><label for="{{jt}}">{{jt}}</label></ng-container>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Colors</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <ul class="color-list two-column">
-                                <li><a href="javascript:void(0)" data-tooltip="Yellow" title="Yellow"><span class="value"><img src="../../../../assets/images/colorswatch/color-yellow.png" alt=""></span><span class="colorname">Yellow (125)</span></a></li>
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Product</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           <div class="radio-group">
+                               <ng-container  *ngFor='let jt of jewelery_type' > <input type="radio" [checked]="checkedjewelery_type(jt)" (change)="changefilter($event,jt)" id="{{jt}}" name="jewelery_type"><label for="{{jt}}">{{jt}}</label></ng-container>
+                           </div>
+                       </div>
+                   </div>
+                   
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Colors</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           <ul class="color-list two-column">
+                               <li><a href="javascript:void(0)" data-tooltip="Yellow" title="Yellow"><span class="value"><img src="../../../../assets/images/colorswatch/color-yellow.png" alt=""></span><span class="colorname">Yellow (125)</span></a></li>
 
-                                <li><a href="javascript:void(0)" data-tooltip="Silver" title="Silver"><span class="value"><img src="../../../../assets/images/colorswatch/color-white.png" alt=""></span><span class="colorname">Silver (125)</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Metal</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <div class="radio-group">
-                                <ng-container  *ngFor='let m of material' > <input type="checkbox" [checked]="checkedmaterial(m)" (change)="changefilter($event,m)" id="{{m}}" name="material"><label for="{{m}}">{{m}}</label></ng-container>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Gold Purity</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <div class="radio-group">
-                                <ng-container  *ngFor='let p of purity' > <input type="checkbox" [checked]="checkedpurity(p)" (change)="changefilter($event,p)" id="{{p}}" name="purity"><label for="{{p}}">{{p}}</label></ng-container>
-                            </div>
-                        </div>
-                    </div>
+                               <li><a href="javascript:void(0)" data-tooltip="Silver" title="Silver"><span class="value"><img src="../../../../assets/images/colorswatch/color-white.png" alt=""></span><span class="colorname">Silver (125)</span></a></li>
+                           </ul>
+                       </div>
+                   </div>
+                   
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Metal</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           <div class="radio-group">
+                               <ng-container  *ngFor='let m of material' > <input type="checkbox" [checked]="checkedmaterial(m)" (change)="changefilter($event,m)" id="{{m}}" name="material"><label for="{{m}}">{{m}}</label></ng-container>
+                           </div>
+                       </div>
+                   </div>
+                   
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Gold Purity</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           <div class="radio-group">
+                               <ng-container  *ngFor='let p of purity' > <input type="checkbox" [checked]="checkedpurity(p)" (change)="changefilter($event,p)" id="{{p}}" name="purity"><label for="{{p}}">{{p}}</label></ng-container>
+                           </div>
+                       </div>
+                   </div>
 
                     
                     <!-- <div class="sidebar-block filter-group-block open">
