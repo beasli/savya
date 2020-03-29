@@ -53,6 +53,8 @@ export class ProductDetailsComponent implements OnInit {
   silver:any;
   pricesilver:any;
   totalsilver:any;
+  loader:boolean;
+page:boolean;
   constructor(private api: ApiService, private route: ActivatedRoute) {
     
     this.route.params.subscribe(params => {
@@ -163,6 +165,8 @@ export class ProductDetailsComponent implements OnInit {
       if  (data['data']) {
       this.pricelist = data['data'];
       this.api.Post(PRODUCTDETAILS, {product_id: this.pid} ).then(data  => {
+        this.page=true;
+        this.loader=false;
         if(data['data'])  {
           this.data = data['data'];
         }
@@ -435,6 +439,8 @@ export class ProductDetailsComponent implements OnInit {
     this.totalprice = price;
   }
   ngOnInit(): void {
+    this.loader=true;
+    this.page=false;
     }
 
 }

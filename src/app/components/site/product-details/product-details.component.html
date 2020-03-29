@@ -1,325 +1,352 @@
 <div class="page-content">
-    <div class="holder mt-0">
-        <div class="container">
-            <ul class="breadcrumbs">
-                <li><a>Home</a></li>
-                <li *ngIf='subcategory'><a>{{subcategory}}</a></li>
-                <li *ngIf='subsubcategory'><a>{{subsubcategory}}</a></li>
-            </ul>
-        </div>
-    </div>
-    
-    <div *ngIf='data && pricelist' class="holder mt-0">
-        <div class="container">
-            <div class="row prd-block prd-block--mobile-image-first js-prd-gallery" id="prdGallery100">
-                <div class="col-md-6 col-xl-5">
-                    <div class="prd-block_info js-prd-m-holder mb-2 mb-md-0"></div>
-                    <div class="prd-block_main-image main-image--slide js-main-image--slide">
-                        <div class="prd-block_main-image-holder js-main-image-zoom" data-zoomtype="inner">
-                            <app-testimonials [heading] = '" "'  [isShowAll] = 'false' [input] = 'prd_img' [slidetoshow] = '"1"' [redirect] = '"N"'  [url] = 'url'></app-testimonials>
-                        </div>
-                    </div>
-                    <!-- /Product Gallery -->
-                    <div class="prd-safecheckout topline slider-bottom-support-image">
-                      <div *ngIf='certificate && certificate.length>0' > 
-                          <h3 class="h2-style">certified by:</h3>
-                          <img [src]="certificateurl + certificate[0]['image']" > </div>
-                    
-                        <h3 class="h2-style">Manufactured by:</h3>
-                        <img [src]="url + data['image']"><h3 class="h2-style">{{data.company_name}}</h3>
-                    </div>
+    <div *ngIf="page">
+            <div class="holder mt-0">
+                <div class="container">
+                    <ul class="breadcrumbs">
+                        <li><a>Home</a></li>
+                        <li *ngIf='subcategory'><a>{{subcategory}}</a></li>
+                        <li *ngIf='subsubcategory'><a>{{subsubcategory}}</a></li>
+                    </ul>
                 </div>
-                <div class="col-md">
-                    <div class="prd-block_info">
-                        <div class="js-prd-d-holder prd-holder product-name-details">
-                            <div class="prd-block_title-wrap">
-                                <h1 class="prd-block_title product-details-item-heading">{{data.productname}}</h1>
-                                <div class="prd-block__labels"><span class="prd-label--new">NEW</span></div>
+            </div>
+            
+            <div *ngIf='data && pricelist' class="holder mt-0">
+                <div class="container">
+                    <div class="row prd-block prd-block--mobile-image-first js-prd-gallery" id="prdGallery100">
+                        <div class="col-md-6 col-xl-5">
+                            <div class="prd-block_info js-prd-m-holder mb-2 mb-md-0"></div>
+                            <div class="prd-block_main-image main-image--slide js-main-image--slide">
+                                <div class="prd-block_main-image-holder js-main-image-zoom" data-zoomtype="inner">
+                                    <app-testimonials [heading] = '" "'  [isShowAll] = 'false' [input] = 'prd_img' [slidetoshow] = '"1"' [redirect] = '"N"'  [url] = 'url'></app-testimonials>
+                                </div>
                             </div>
-                            <div class="prd-block_info-top">
-                                <div *ngIf='value>0' class="product-sku product-price">Rs: {{totalprice * value}}<span *ngIf=(assets.gold.length) class="product-size">( {{gold.goldquality}} )</span></div>
-                                <div class="product-weight">Gross Weight: &nbsp;&nbsp; {{gross}}</div>
-                            </div>
-                        </div>   
-                        <div *ngIf="data.default_size" class="product-size-box">
-                            <label for="id_select"> Select Size </label>
-                            <select *ngIf="data.size_type != ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
-                                <option *ngFor="let option of sizes" [value]="option" [selected]="option === defaultsize">
-                                {{option}}
-                                </option>
-                            </select>
-                            <select *ngIf="data.size_type == ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
-                                <option [value]="option" [selected]="option === defaultsize">
-                                {{defaultsize}}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="color-chose-box d-table">
-                            <div class="color-text d-table-cell"><p>Choose Color:</p></div>
-                            <div class="sample-box">
-                                <ul>
-                                    <li><a href="javascript:void(0)" (click)="colormetal('rose')" [ngClass]="{focus: colvalue=='rose'}" class="btn-danger">Rose</a></li>
-                                    <li><a href="javascript:void(0)" (click)="colormetal('yellow')" [ngClass]="{focus: colvalue=='yellow'}" class="btn-warning">Yellow</a></li>
-                                    <li><a href="javascript:void(0)" (click)="colormetal('white')" [ngClass]="{focus: colvalue=='white'}" class="btn-light">White</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div  class="prd-block_options topline ">
-                            <div *ngIf=(assets.gold.length) class="prd-size swatches">
-                                <span class="option-label">Gold:</span>
-                                <div class="radio-group">
-                                    <ng-container *ngFor='let s of assets.gold;let i = index'><input [checked]='(i==0) ? true:false' class='radio-control' (change)='getgold(s)' type="radio" id="{{s.goldquality}}" name="gold"><label for="{{s.goldquality}}">{{s.goldquality}}</label></ng-container>
-                                    </div>
-                                </div>
-                                    
-                                <div class="product-code">Product Code: {{data.productcode}}</div>
-                                <div *ngIf='assets.gold.length && pricegold'>
-                                    <div *ngIf=(gold.goldweight)>Gold (weight):  {{gold.goldweight}} gram</div>
-
-                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Gold Rate: Rs. {{pricegold.price}} Per gram</div>
-                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Gold Rate: Rs. {{pricegold2.price}} Per gram</div>
-                                    <div *ngIf=(gold.wastage) class="option-label">Gold wastage:  {{gold.wastage}} %</div>
-                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Gold wastage:  {{gold.makingcharge}} %</div>
-                                    <div *ngIf="gold.option != 'percentage'" class="option-label">Making Charges: Rs.  {{gold.makingcharge}}</div>
-                                    <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Weight:  {{finegold}} gram</div>
-                                    <div *ngIf="gold.option!= 'percentage'" class="option-label">Gold Charges Type:  {{gold.option}}</div>
-                                    <div class="option-label">Total Gold Price: Rs. {{totalgold}}</div>
-
-                                </div>
-
-                                <div *ngIf=(assets.productsilver)>
-                                    <div class="option-label">Silver(weight): {{assets.productsilver.silver_qty}} gram</div>
-                                    <div class="option-label">Silver Rate: {{pricelist.silver[0].price}} gram</div>
-                                    <div class="option-label">Silver wastage:  {{assets.productsilver.wastage}} %</div>
-                                    <div class="option-label">Making Charges: {{assets.productsilver.silver_charge}}</div>
-                                    <div class="option-label">Charges Type: {{assets.productsilver.charge_type}}</div>
-                                </div>
-
-                                <div *ngIf=(assets.diamond.length) class="choose-diamond">
-                                    <label for="id_select"> Diamond: </label>
-                                    <div class="diamond-selectbox">
-                                        <select class="product-size-select">
-                                            <option *ngFor='let s of assets.diamond;let i = index' [value]="s.diamond" [selected]="(i==0) ? true:false">{{s.diamond}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div *ngIf=(assets.diamond.length)  class="prd-size">
-                                    <span class="option-label">Diamond Color:</span>
-                                        <div class="radio-group">
-                                            <ng-container *ngFor='let s of diamondcolour;let i = index'>
-                                                <input [checked]='(s==defaultdiamond[0]) ? true:false' class='radio-control' (change)='colorClarity(s,0)' type="radio" id="{{s}}" name="diamondcolour">
-                                                <label for="{{s}}">{{s}}</label>
-                                            </ng-container>
-                                        </div>
-                                </div>
-                                <div *ngIf=(assets.diamond.length)  class="prd-size">
-                                    <label for="id_select"> Diamond Clarity:</label>
-                                        <div class="radio-group">
-                                            <ng-container *ngFor='let s of diamondclarity;let i = index'>
-                                                <input [checked]='(s==defaultdiamond[1]) ? true:false' class='radio-control' (change)='colorClarity(0,s)' type="radio" id="{{s}}" name="diamondclarity">
-                                                <label for="{{s}}">{{s}}</label>
-                                            </ng-container>
-                                        </div>
-                                </div>
-
-                                <div *ngIf='assets.diamond[0] && defaultdiamond' class="about-product">
-                                    <div>Name: {{assets.diamond[0].diamond}}</div>
-                                    <div *ngIf=(assets.diamond[0].diamondqty)>Weight:  {{assets.diamond[0].diamondqty}} ct</div>
-                                    <div *ngIf=(assets.diamond[0].diamondqty) class="option-label">Diamond Price:Rs. {{pricediamond.price}}/ct</div>
-                                    <div *ngIf=(assets.diamond[0].no_diamond) class="option-label">No of Diamond:  {{assets.diamond[0].no_diamond}} pc</div>
-                                    <div *ngIf=(assets.diamond[0].diamondcharge) class="option-label">Making Charges: Rs. {{assets.diamond[0].diamondcharge}}</div>
-                                    <div *ngIf=(assets.diamond[0].type) class="option-label">Charges Type:  {{assets.diamond[0].type}}</div> 
-                                    <div>Diamond Total:Rs. {{totaldiamond}} </div>
-                                    <div>Diamond Color/Clarity: {{this.defaultdiamond[0] + '/' + this.defaultdiamond[1]}}</div>
-                                </div>
-
-                                <div *ngIf=(assets.productpaltinum) >
-                                    <div *ngIf=(assets.productpaltinum.platinum_qty)>Platinum (weight):  {{platinum.platinum_qty}} gram</div>
-                                    <div *ngIf=(assets.productpaltinum.platinum_qty) class="option-label">Platinum Rate:  {{this.pricelist.platinum[0].price}} Per gram</div>
-                                    <div *ngIf=(platinum.wastage) class="option-label">Planitum wastage:  {{platinum.wastage}} %</div>
-                                    <div *ngIf=(!platinum.wastage) class="option-label">Planitum wastage:  0 %</div>
-                                    <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Making Charges: Rs. {{platinum.platinum_charge}}</div>
-                                    <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Charges Type:  {{platinum.charge_type}}</div>
-                                    <div class="option-label">Total Platinum Price: Rs. {{totalplat}}</div> 
-                                </div>
+                            <!-- /Product Gallery -->
+                            <div class="prd-safecheckout topline slider-bottom-support-image">
+                            <div *ngIf='certificate && certificate.length>0' > 
+                                <h3 class="h2-style">certified by:</h3>
+                                <img [src]="certificateurl + certificate[0]['image']" > </div>
                             
-                            <div *ngIf=(assets.stone.length) class="prd-size swatches">
-                                <span class="option-label">Stone:</span>
-                                <div class="radio-group">
-                                    <ng-container *ngFor='let s of assets.stone;let i = index'><input [checked]='(i==0) ? true:false' class='radio-control' (change)='getstone(s)' type="radio" id="{{s.stonetype}}" name="stone"><label for="{{s.stonetype}}">{{s.stonetype}}</label></ng-container>
-                                    </div>
+                                <h3 class="h2-style">Manufactured by:</h3>
+                                <img [src]="url + data['image']"><h3 class="h2-style">{{data.company_name}}</h3>
                             </div>
-
-                            <div *ngIf=(assets.stone[0])  class="about-product">
-                                <div>Stone (weight):  {{stone.stoneqty}} ct</div>
-                                <div class="option-label">Fine Stone Rate:Rs. {{pricestone.price}}/ct</div>
-                                <div class="option-label">No Stone:  {{stone.stoneno}} pc</div>
-                                <div class="option-label">Making Charges: Rs. {{stone.stonecharges}}</div>
-                                <div class="option-label">Charges Type:  {{stone.type}}</div> 
-                                <div>Stone Total:Rs. {{totalstone}} </div>
-                            </div>
-
                         </div>
-                        <div class="prd-block_actions topline">
-                            <div class="prd-hover">
-                                <div class="prd-action button-margin-none">
-
-                                    <div   *ngIf= "checkCart(data.id)" class="row no=gutters" >
-                                        <button routerLink="/cart" class="btn"><i class="icon icon-handbag"></i><span>Go to Cart</span></button>
-                                        <!-- <div class="col-2">
-                                            <button  (click)="qtyUpdate(data.id,-1)" class="btn btn-secondary btn-block">-</button>
-                                        </div>
-        
-                                        <div class="col-4 text-right">{{quantity(data.id)}}</div>
-        
-                                        <div class="col-2">
-                                            <button  (click)="qtyUpdate(data.id,+1)" class="btn btn-secondary btn-block">+</button>
-                                        </div> -->
+                        <div class="col-md">
+                            <div class="prd-block_info">
+                                <div class="js-prd-d-holder prd-holder product-name-details">
+                                    <div class="prd-block_title-wrap">
+                                        <h1 class="prd-block_title product-details-item-heading">{{data.productname}}</h1>
+                                        <div class="prd-block__labels"><span class="prd-label--new">NEW</span></div>
                                     </div>
-                                    <input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="createjson()"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
-                                    <div style="padding-left:15px;" class="prd-links hide-mobile"><a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
+                                    <div class="prd-block_info-top">
+                                        <div *ngIf='value>0' class="product-sku product-price">Rs: {{totalprice * value}}<span *ngIf=(assets.gold.length) class="product-size">( {{gold.goldquality}} )</span></div>
+                                        <div class="product-weight">Gross Weight: &nbsp;&nbsp; {{gross}}</div>
+                                    </div>
+                                </div>   
+                                <div *ngIf="data.default_size" class="product-size-box">
+                                    <label for="id_select"> Select Size </label>
+                                    <select *ngIf="data.size_type != ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                                        <option *ngFor="let option of sizes" [value]="option" [selected]="option === defaultsize">
+                                        {{option}}
+                                        </option>
+                                    </select>
+                                    <select *ngIf="data.size_type == ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                                        <option [value]="option" [selected]="option === defaultsize">
+                                        {{defaultsize}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="color-chose-box d-table">
+                                    <div class="color-text d-table-cell"><p>Choose Color:</p></div>
+                                    <div class="sample-box">
+                                        <ul>
+                                            <li><a href="javascript:void(0)" (click)="colormetal('rose')" [ngClass]="{focus: colvalue=='rose'}" class="btn-danger">Rose</a></li>
+                                            <li><a href="javascript:void(0)" (click)="colormetal('yellow')" [ngClass]="{focus: colvalue=='yellow'}" class="btn-warning">Yellow</a></li>
+                                            <li><a href="javascript:void(0)" (click)="colormetal('white')" [ngClass]="{focus: colvalue=='white'}" class="btn-light">White</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div  class="prd-block_options topline ">
+                                    <div *ngIf=(assets.gold.length) class="prd-size swatches">
+                                        <span class="option-label">Gold:</span>
+                                        <div class="radio-group">
+                                            <ng-container *ngFor='let s of assets.gold;let i = index'><input [checked]='(i==0) ? true:false' class='radio-control' (change)='getgold(s)' type="radio" id="{{s.goldquality}}" name="gold"><label for="{{s.goldquality}}">{{s.goldquality}}</label></ng-container>
+                                            </div>
+                                        </div>
+                                            
+                                        <div class="product-code">Product Code: {{data.productcode}}</div>
+                                        <div *ngIf='assets.gold.length && pricegold'>
+                                            <div *ngIf=(gold.goldweight)>Gold (weight):  {{gold.goldweight}} gram</div>
+
+                                            <div *ngIf="gold.option != 'percentage'" class="option-label">Gold Rate: Rs. {{pricegold.price}} Per gram</div>
+                                            <div *ngIf="gold.option == 'percentage'" class="option-label">Gold Rate: Rs. {{pricegold2.price}} Per gram</div>
+                                            <div *ngIf=(gold.wastage) class="option-label">Gold wastage:  {{gold.wastage}} %</div>
+                                            <div *ngIf="gold.option == 'percentage'" class="option-label">Gold wastage:  {{gold.makingcharge}} %</div>
+                                            <div *ngIf="gold.option != 'percentage'" class="option-label">Making Charges: Rs.  {{gold.makingcharge}}</div>
+                                            <div *ngIf="gold.option == 'percentage'" class="option-label">Fine Gold Weight:  {{finegold}} gram</div>
+                                            <div *ngIf="gold.option!= 'percentage'" class="option-label">Gold Charges Type:  {{gold.option}}</div>
+                                            <div class="option-label">Total Gold Price: Rs. {{totalgold}}</div>
+
+                                        </div>
+
+                                        <div *ngIf=(assets.productsilver)>
+                                            <div class="option-label">Silver(weight): {{assets.productsilver.silver_qty}} gram</div>
+                                            <div class="option-label">Silver Rate: {{pricelist.silver[0].price}} gram</div>
+                                            <div class="option-label">Silver wastage:  {{assets.productsilver.wastage}} %</div>
+                                            <div class="option-label">Making Charges: {{assets.productsilver.silver_charge}}</div>
+                                            <div class="option-label">Charges Type: {{assets.productsilver.charge_type}}</div>
+                                        </div>
+
+                                        <div *ngIf=(assets.diamond.length) class="choose-diamond">
+                                            <label for="id_select"> Diamond: </label>
+                                            <div class="diamond-selectbox">
+                                                <select class="product-size-select">
+                                                    <option *ngFor='let s of assets.diamond;let i = index' [value]="s.diamond" [selected]="(i==0) ? true:false">{{s.diamond}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div *ngIf=(assets.diamond.length)  class="prd-size">
+                                            <span class="option-label">Diamond Color:</span>
+                                                <div class="radio-group">
+                                                    <ng-container *ngFor='let s of diamondcolour;let i = index'>
+                                                        <input [checked]='(s==defaultdiamond[0]) ? true:false' class='radio-control' (change)='colorClarity(s,0)' type="radio" id="{{s}}" name="diamondcolour">
+                                                        <label for="{{s}}">{{s}}</label>
+                                                    </ng-container>
+                                                </div>
+                                        </div>
+                                        <div *ngIf=(assets.diamond.length)  class="prd-size">
+                                            <label for="id_select"> Diamond Clarity:</label>
+                                                <div class="radio-group">
+                                                    <ng-container *ngFor='let s of diamondclarity;let i = index'>
+                                                        <input [checked]='(s==defaultdiamond[1]) ? true:false' class='radio-control' (change)='colorClarity(0,s)' type="radio" id="{{s}}" name="diamondclarity">
+                                                        <label for="{{s}}">{{s}}</label>
+                                                    </ng-container>
+                                                </div>
+                                        </div>
+
+                                        <div *ngIf='assets.diamond[0] && defaultdiamond' class="about-product">
+                                            <div>Name: {{assets.diamond[0].diamond}}</div>
+                                            <div *ngIf=(assets.diamond[0].diamondqty)>Weight:  {{assets.diamond[0].diamondqty}} ct</div>
+                                            <div *ngIf=(assets.diamond[0].diamondqty) class="option-label">Diamond Price:Rs. {{pricediamond.price}}/ct</div>
+                                            <div *ngIf=(assets.diamond[0].no_diamond) class="option-label">No of Diamond:  {{assets.diamond[0].no_diamond}} pc</div>
+                                            <div *ngIf=(assets.diamond[0].diamondcharge) class="option-label">Making Charges: Rs. {{assets.diamond[0].diamondcharge}}</div>
+                                            <div *ngIf=(assets.diamond[0].type) class="option-label">Charges Type:  {{assets.diamond[0].type}}</div> 
+                                            <div>Diamond Total:Rs. {{totaldiamond}} </div>
+                                            <div>Diamond Color/Clarity: {{this.defaultdiamond[0] + '/' + this.defaultdiamond[1]}}</div>
+                                        </div>
+
+                                        <div *ngIf=(assets.productpaltinum) >
+                                            <div *ngIf=(assets.productpaltinum.platinum_qty)>Platinum (weight):  {{platinum.platinum_qty}} gram</div>
+                                            <div *ngIf=(assets.productpaltinum.platinum_qty) class="option-label">Platinum Rate:  {{this.pricelist.platinum[0].price}} Per gram</div>
+                                            <div *ngIf=(platinum.wastage) class="option-label">Planitum wastage:  {{platinum.wastage}} %</div>
+                                            <div *ngIf=(!platinum.wastage) class="option-label">Planitum wastage:  0 %</div>
+                                            <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Making Charges: Rs. {{platinum.platinum_charge}}</div>
+                                            <div *ngIf="platinum.charge_type != 'percentage'" class="option-label">Charges Type:  {{platinum.charge_type}}</div>
+                                            <div class="option-label">Total Platinum Price: Rs. {{totalplat}}</div> 
+                                        </div>
+                                    
+                                    <div *ngIf=(assets.stone.length) class="prd-size swatches">
+                                        <span class="option-label">Stone:</span>
+                                        <div class="radio-group">
+                                            <ng-container *ngFor='let s of assets.stone;let i = index'><input [checked]='(i==0) ? true:false' class='radio-control' (change)='getstone(s)' type="radio" id="{{s.stonetype}}" name="stone"><label for="{{s.stonetype}}">{{s.stonetype}}</label></ng-container>
+                                            </div>
+                                    </div>
+
+                                    <div *ngIf=(assets.stone[0])  class="about-product">
+                                        <div>Stone (weight):  {{stone.stoneqty}} ct</div>
+                                        <div class="option-label">Fine Stone Rate:Rs. {{pricestone.price}}/ct</div>
+                                        <div class="option-label">No Stone:  {{stone.stoneno}} pc</div>
+                                        <div class="option-label">Making Charges: Rs. {{stone.stonecharges}}</div>
+                                        <div class="option-label">Charges Type:  {{stone.type}}</div> 
+                                        <div>Stone Total:Rs. {{totalstone}} </div>
+                                    </div>
+
+                                </div>
+                                <div class="prd-block_actions topline">
+                                    <div class="prd-hover">
+                                        <div class="prd-action button-margin-none">
+
+                                            <div   *ngIf= "checkCart(data.id)" class="row no=gutters" >
+                                                <button routerLink="/cart" class="btn"><i class="icon icon-handbag"></i><span>Go to Cart</span></button>
+                                                <!-- <div class="col-2">
+                                                    <button  (click)="qtyUpdate(data.id,-1)" class="btn btn-secondary btn-block">-</button>
+                                                </div>
+                
+                                                <div class="col-4 text-right">{{quantity(data.id)}}</div>
+                
+                                                <div class="col-2">
+                                                    <button  (click)="qtyUpdate(data.id,+1)" class="btn btn-secondary btn-block">+</button>
+                                                </div> -->
+                                            </div>
+                                            <input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="createjson()"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
+                                            <div style="padding-left:15px;" class="prd-links hide-mobile"><a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 mt-3 mt-xl-0 sidebar-product">
+                            <div class="shop-features-style4"><a href="#" class="shop-feature">
+                                    <div class="shop-feature-icon"><i class="icon-box3"></i></div>
+                                    <div class="shop-feature-text">
+                                        <div class="text1">Free worlwide delivery</div>
+                                        <div class="text2">Lorem ipsum dolor sit amet conset</div>
+                                    </div>
+                                </a><a href="#" class="shop-feature">
+                                    <div class="shop-feature-icon"><i class="icon-arrow-left-circle"></i></div>
+                                    <div class="shop-feature-text">
+                                        <div class="text1">100% money back guarantee</div>
+                                        <div class="text2">Lorem ipsum dolor sit amet conset</div>
+                                    </div>
+                                </a><a href="#" class="shop-feature">
+                                    <div class="shop-feature-icon"><i class="icon-call"></i></div>
+                                    <div class="shop-feature-text">
+                                        <div class="text1">24/7 customer support</div>
+                                        <div class="text2">Lorem ipsum dolor sit amet conset</div>
+                                    </div>
+                                </a></div>
+                        </div>
+                        <div class="prd-block-prevnext"><a href="#" class="prd-block-prevnext-arrow js-prd-block-next"><i class="icon-angle-right"></i></a>
+                            <div class="prd-next">
+                                <div class="prd-next-img"><img src="images/products/xsmall/product-02.jpg" alt=""></div>
+                                <div class="prd-next-info">
+                                    <div class="prd-next-tag"><a href="#">canverse</a></div>
+                                    <h2 class="prd-next-title"><a href="#">Long top with print</a></h2>
+                                    <div class="prd-prevnext-price">
+                                        <div class="price-new">₹ 20.00</div>
+                                    </div>
+                                </div>
+                            </div><a href="#" class="prd-block-prevnext-arrow js-prd-block-prev"><i class="icon-angle-left"></i></a>
+                            <div class="prd-prev">
+                                <div class="prd-next-img"><img src="images/products/xsmall/product-03.jpg" alt=""></div>
+                                <div class="prd-next-info">
+                                    <div class="prd-next-tag"><a href="#">colvin klein</a></div>
+                                    <h2 class="prd-next-title"><a href="#">Tie with texture</a></h2>
+                                    <div class="prd-prevnext-price">
+                                        <div class="price-new">₹ 34.00</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 mt-3 mt-xl-0 sidebar-product">
-                    <div class="shop-features-style4"><a href="#" class="shop-feature">
-                            <div class="shop-feature-icon"><i class="icon-box3"></i></div>
-                            <div class="shop-feature-text">
-                                <div class="text1">Free worlwide delivery</div>
-                                <div class="text2">Lorem ipsum dolor sit amet conset</div>
-                            </div>
-                        </a><a href="#" class="shop-feature">
-                            <div class="shop-feature-icon"><i class="icon-arrow-left-circle"></i></div>
-                            <div class="shop-feature-text">
-                                <div class="text1">100% money back guarantee</div>
-                                <div class="text2">Lorem ipsum dolor sit amet conset</div>
-                            </div>
-                        </a><a href="#" class="shop-feature">
-                            <div class="shop-feature-icon"><i class="icon-call"></i></div>
-                            <div class="shop-feature-text">
-                                <div class="text1">24/7 customer support</div>
-                                <div class="text2">Lorem ipsum dolor sit amet conset</div>
-                            </div>
-                        </a></div>
-                </div>
-                <div class="prd-block-prevnext"><a href="#" class="prd-block-prevnext-arrow js-prd-block-next"><i class="icon-angle-right"></i></a>
-                    <div class="prd-next">
-                        <div class="prd-next-img"><img src="images/products/xsmall/product-02.jpg" alt=""></div>
-                        <div class="prd-next-info">
-                            <div class="prd-next-tag"><a href="#">canverse</a></div>
-                            <h2 class="prd-next-title"><a href="#">Long top with print</a></h2>
-                            <div class="prd-prevnext-price">
-                                <div class="price-new">₹ 20.00</div>
-                            </div>
-                        </div>
-                    </div><a href="#" class="prd-block-prevnext-arrow js-prd-block-prev"><i class="icon-angle-left"></i></a>
-                    <div class="prd-prev">
-                        <div class="prd-next-img"><img src="images/products/xsmall/product-03.jpg" alt=""></div>
-                        <div class="prd-next-info">
-                            <div class="prd-next-tag"><a href="#">colvin klein</a></div>
-                            <h2 class="prd-next-title"><a href="#">Tie with texture</a></h2>
-                            <div class="prd-prevnext-price">
-                                <div class="price-new">₹ 34.00</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="holder mt-2 mt-sm-5">
-            <div class="container">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs product-tab">
-                    <li class="nav-item"><a href="#Tab1" class="nav-link" data-toggle="tab">Description</a></li>
-                    <li class="nav-item"><a href="#Tab4" class="nav-link" data-toggle="tab">Sizing Guide</a></li>
-                </ul><!-- Tab panes -->
-                <div class="tab-content">
                 
-                    <div role="tabpanel" class="tab-pane fade" [innerHTML]="data.description" id="Tab1">
+                <div class="holder mt-2 mt-sm-5">
+                    <div class="container">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs product-tab">
+                            <li class="nav-item"><a href="#Tab1" class="nav-link" data-toggle="tab">Description</a></li>
+                            <li class="nav-item"><a href="#Tab4" class="nav-link" data-toggle="tab">Sizing Guide</a></li>
+                        </ul><!-- Tab panes -->
+                        <div class="tab-content">
                         
-                    </div>
-                 
-                    <div role="tabpanel" class="tab-pane fade" id="Tab4">
-                        <h3>Single Size Conversion</h3>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table--size">
-                                <tr>
-                                    <th scope="row">US Sizes</th>
-                                    <td>6</td>
-                                    <td>6,5</td>
-                                    <td>7</td>
-                                    <td>7,5</td>
-                                    <td>8</td>
-                                    <td>8,5</td>
-                                    <td>9</td>
-                                    <td>9,5</td>
-                                    <td>10</td>
-                                    <td>10,5</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Euro Sizes</th>
-                                    <td>39</td>
-                                    <td>39</td>
-                                    <td>40</td>
-                                    <td>40-41</td>
-                                    <td>41</td>
-                                    <td>41-42</td>
-                                    <td>42</td>
-                                    <td>42-43</td>
-                                    <td>43</td>
-                                    <td>43-44</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">UK Sizes</th>
-                                    <td>5,5</td>
-                                    <td>6</td>
-                                    <td>6,5</td>
-                                    <td>7</td>
-                                    <td>7,5</td>
-                                    <td>8</td>
-                                    <td>8,5</td>
-                                    <td>9</td>
-                                    <td>9,5</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Inches</th>
-                                    <td>9.25&quot;</td>
-                                    <td>9.5&quot;</td>
-                                    <td>9.625&quot;</td>
-                                    <td>9.75&quot;</td>
-                                    <td>9.9375&quot;</td>
-                                    <td>10.125&quot;</td>
-                                    <td>10.25&quot;</td>
-                                    <td>10.5&quot;</td>
-                                    <td>10.625&quot;</td>
-                                    <td>10.75&quot;</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">CM</th>
-                                    <td>23,5</td>
-                                    <td>24,1</td>
-                                    <td>24,4</td>
-                                    <td>24,8</td>
-                                    <td>25,4</td>
-                                    <td>25,7</td>
-                                    <td>26</td>
-                                    <td>26,7</td>
-                                    <td>27</td>
-                                    <td>27,3</td>
-                                </tr>
-                            </table>
+                            <div role="tabpanel" class="tab-pane fade" [innerHTML]="data.description" id="Tab1">
+                                
+                            </div>
+                        
+                            <div role="tabpanel" class="tab-pane fade" id="Tab4">
+                                <h3>Single Size Conversion</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped table--size">
+                                        <tr>
+                                            <th scope="row">US Sizes</th>
+                                            <td>6</td>
+                                            <td>6,5</td>
+                                            <td>7</td>
+                                            <td>7,5</td>
+                                            <td>8</td>
+                                            <td>8,5</td>
+                                            <td>9</td>
+                                            <td>9,5</td>
+                                            <td>10</td>
+                                            <td>10,5</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Euro Sizes</th>
+                                            <td>39</td>
+                                            <td>39</td>
+                                            <td>40</td>
+                                            <td>40-41</td>
+                                            <td>41</td>
+                                            <td>41-42</td>
+                                            <td>42</td>
+                                            <td>42-43</td>
+                                            <td>43</td>
+                                            <td>43-44</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">UK Sizes</th>
+                                            <td>5,5</td>
+                                            <td>6</td>
+                                            <td>6,5</td>
+                                            <td>7</td>
+                                            <td>7,5</td>
+                                            <td>8</td>
+                                            <td>8,5</td>
+                                            <td>9</td>
+                                            <td>9,5</td>
+                                            <td>10</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Inches</th>
+                                            <td>9.25&quot;</td>
+                                            <td>9.5&quot;</td>
+                                            <td>9.625&quot;</td>
+                                            <td>9.75&quot;</td>
+                                            <td>9.9375&quot;</td>
+                                            <td>10.125&quot;</td>
+                                            <td>10.25&quot;</td>
+                                            <td>10.5&quot;</td>
+                                            <td>10.625&quot;</td>
+                                            <td>10.75&quot;</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">CM</th>
+                                            <td>23,5</td>
+                                            <td>24,1</td>
+                                            <td>24,4</td>
+                                            <td>24,8</td>
+                                            <td>25,4</td>
+                                            <td>25,7</td>
+                                            <td>26</td>
+                                            <td>26,7</td>
+                                            <td>27</td>
+                                            <td>27,3</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
-                       
                 </div>
             </div>
-        </div>
     </div>
-    
+    <div class="text-center" *ngIf="loader" >
+        <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-info" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-light" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+    </div>
     <!-- Recent Products -->
     <app-product-holder [heading] = '"Related Product"' [url3] = 'url' [mostselling] = 'recents'></app-product-holder>
 </div>
