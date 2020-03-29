@@ -1,3 +1,4 @@
+
 <div class=" page-content"  *ngIf="page">
         <div class="holder mt-0">
             <div class="container">
@@ -176,7 +177,8 @@
                                                 <button  (click)="qtyUpdate(data.id,+1)" class="btn btn-secondary btn-block">+</button>
                                             </div> -->
                                         </div>
-                                        <input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="createjson()"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
+                                        <input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="createjson() "><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
+                                        <button class="btn" (click)="showtoast()">toast</button>
                                         <div style="padding-left:15px;" class="prd-links hide-mobile"><a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
                                     </div>
                                 </div>

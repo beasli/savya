@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutService } from './components/auth-guard/checkout.service';
 import { OtpGuardService } from './components/auth-guard/otp-guard.service';
-
+import { ToastrModule } from "ngx-toastr";
 
 
 @NgModule({
@@ -36,7 +36,9 @@ import { OtpGuardService } from './components/auth-guard/otp-guard.service';
     SiteModule,
     FormsModule,
     ReactiveFormsModule ,
-    NgbModule
+    NgbModule,
+    BrowserModule,
+    ToastrModule.forRoot()
   ],
   providers: [AuthGuardService,CheckoutService,OtpGuardService],
   bootstrap: [AppComponent]

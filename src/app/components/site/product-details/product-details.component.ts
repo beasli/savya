@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PRODUCTDETAILS, CATEGORY, SUBCATEGORY, SUBCATEGORYTYPE } from 'src/config';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-details',
@@ -56,7 +57,7 @@ export class ProductDetailsComponent implements OnInit {
   loader:boolean;
 page:boolean;
 scroll:boolean;
-  constructor(private api: ApiService, private route: ActivatedRoute) {
+  constructor(private api: ApiService, private route: ActivatedRoute,private toastr:ToastrService) {
     
     this.route.params.subscribe(params => {
       this.pid = params.id;
@@ -160,6 +161,12 @@ scroll:boolean;
   addToCart(s)
   {
     this.api.addToCart(s);
+    
+  }
+  showtoast()
+  {
+    console.log("in showtoast function");
+        this.toastr.success('Product is added to cart');
   }
    getproduct() {
     this.api.Post(PRICELIST, {} ).then(data  => {

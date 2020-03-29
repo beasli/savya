@@ -18,6 +18,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { EventComponent } from '../event/event.component';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { ShareButtonsConfig, ShareModule } from '@ngx-share/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { ToastrModule } from 'ngx-toastr';
 
 const customConfig: ShareButtonsConfig = {
   autoSetMeta: true,
@@ -48,6 +50,8 @@ const customConfig: ShareButtonsConfig = {
     HttpClientModule,
     NgbModule,
     SlickCarouselModule,
+    BrowserModule,
+    ToastrModule.forRoot(),
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
