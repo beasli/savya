@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { CARTVIEW, CRAUSEL } from 'src/config';
 import { Router } from '@angular/router';
+import { $ } from 'protractor';
 
 
 @Component({

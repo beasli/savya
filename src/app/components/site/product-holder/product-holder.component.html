@@ -54,7 +54,7 @@
                 <div ngxSlickItem  class="prd prd-new prd-popular" *ngFor="let s of mostselling">
                     <div class="prd-inside" >
                         <div class="prd-img-area"><a (click)='go(s.product_id)' class="prd-img"><img [src]="url3 + s.image" alt="Tyssot 1853"></a>
-                            <div class="label-new">NEW</div><a href="#" class="label-wishlist icon-heart js-label-wishlist"></a>
+                            <div class="label-new">NEW</div><a href="javascript:void(0)" class="label-wishlist icon-heart js-label-wishlist"></a>
                             <div class="gdw-loader"></div>
                         </div>
                         <div class="prd-info">
@@ -77,7 +77,7 @@
 
                                     <!-- data-src="#modalCheckOut" -->
                                     <input type="hidden"> <button class="btn"  *ngIf= "!checkCart(s.product_id)"  (click)='go(s.product_id)'><i class="icon icon-handbag"></i><span>View Details</span></button> 
-                                    <div class="prd-links hide-mobile"><a data-toggle="modal" data-target="#myaddModal" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a data-toggle="modal" data-target="#mydeleteModal" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
+                                  <!--<div class="prd-links hide-mobile"><a data-toggle="modal" data-target="#myaddModal" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a data-toggle="modal" data-target="#mydeleteModal" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>-->
                                   
                                 </div>
                             </div>

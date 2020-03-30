@@ -5523,7 +5523,8 @@ body.has-slider .hdr {
   margin-bottom: 2px;
   font-size: 11px;
   line-height: 16px;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  padding-top:12px; }
 
 .minicart-total {
   display: block;
@@ -11695,7 +11696,8 @@ body:not(.zoom-off) .bnr.bnr-hover-scale:hover > img {
   padding-right: 0; }
   .prd-img img {
     width: 100%;
-    transition: opacity 0.4s; }
+    transition: opacity 0.4s;
+  border:1px solid #e7e7e7; }
   .prd-img img + img {
     display: block;
     opacity: 0;
@@ -11803,7 +11805,7 @@ body:not(.zoom-off) .bnr.bnr-hover-scale:hover > img {
 
 .prd-img-area .label-wishlist {
   transition: opacity 0.4s ease 0.1s;
-  opacity: 0; }
+  }
 
 .data-to-show-4.prd-grid:not(.listing-view) .prd-info .prd-action .btn,
 [class*='col-md'] .data-to-show-3.prd-grid:not(.listing-view) .prd-info .prd-action .btn {
