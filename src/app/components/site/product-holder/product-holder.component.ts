@@ -47,11 +47,11 @@ export class ProductHolderComponent implements OnInit {
 
  wish:any;
  cart:any[];
-
+drop:any;
 @ViewChild('addclosebutton') addclosebutton;
 @ViewChild('deleteclosebutton') deleteclosebutton;
-  constructor(private api:ApiService) {
-  
+  constructor(private api:ApiService,private router:Router) {
+    this.drop=this.api.drop; 
     // console.log(this.mostselling);
     // console.log(this.url3);
     // console.log(this.heading);
@@ -93,10 +93,26 @@ export class ProductHolderComponent implements OnInit {
     this.api.godetail(value);
   }
   wishlist(pid) {
-   // console.log("in wishlist");
+    // console.log("in wishlist");
     //console.log(pid);
-    this.api.checkWishlist(pid);
-  
+   
+     if(this.drop==0)
+     {
+        if(confirm('Please Login first'))
+        {
+            this.router.navigate(['/login']);
+            return false;
+        }
+        else
+        {
+          this.router.navigate(['/login']);
+          return false;
+        }
+     }
+     else if(this.drop==1)
+    {
+      this.api.checkWishlist(pid);
+    }
   }
 
   checkHeart(pid)
@@ -148,6 +164,11 @@ export class ProductHolderComponent implements OnInit {
     this.deleteclosebutton.nativeElement.click();
   }
   ngOnInit() {
+    this.api.getlogin.subscribe(data => {
+      console.log(+data);
+      this.drop=data;
+      console.log(this.drop);    
+     });
 
   }
 
