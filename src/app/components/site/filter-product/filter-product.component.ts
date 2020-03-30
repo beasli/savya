@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SUBCATEGORYTYPE, PRODUCTLIST, PRODUCTFILTERMENU, PRODUCTFILTER, ORDERBY } from 'src/config';
 
 @Component({
@@ -27,10 +27,11 @@ export class FilterProductComponent implements OnInit {
   page:boolean;
   message:string="NO PRODUCT AVAILABLE";
   f:any;
+  drop:any;
   @ViewChild('addclosebutton') addclosebutton;
 @ViewChild('deleteclosebutton') deleteclosebutton;
-  constructor(private api: ApiService, private route: ActivatedRoute) {
-
+  constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
+    this.drop=this.api.drop; 
     this.route.params.subscribe(params => {
       this.subid = params.id;
       this.getsubsub();
@@ -188,7 +189,23 @@ export class FilterProductComponent implements OnInit {
   wishlist(pid) {
     // console.log("in wishlist");
      //console.log(pid);
-     this.api.checkWishlist(pid);
+     if(this.drop==0)
+     {
+        if(confirm('Please Login first'))
+        {
+            this.router.navigate(['/login']);
+            return false;
+        }
+        else
+        {
+          this.router.navigate(['/login']);
+          return false;
+        }
+     }
+     else if(this.drop==1)
+    {
+      this.api.checkWishlist(pid);
+    }
    }
    deleteWishlist(pid)
    {
@@ -444,6 +461,12 @@ clearFilter()
   ngOnInit() {
     this.loader=true;
     this.page=false;
+    this.api.getlogin.subscribe(data => {
+      console.log(+data);
+      this.drop=data;
+      console.log(this.drop);    
+     });
+
     this.f=this.getfilter();
     if(this.f)
     {
