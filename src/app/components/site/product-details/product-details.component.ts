@@ -1,7 +1,7 @@
 import { PRICELIST, CARTVIEW } from './../../../../config';
 import { ApiService } from 'src/app/api/api.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PRODUCTDETAILS, CATEGORY, SUBCATEGORY, SUBCATEGORYTYPE } from 'src/config';
 
 @Component({
@@ -55,8 +55,10 @@ export class ProductDetailsComponent implements OnInit {
   totalsilver:any;
   loader:boolean;
 page:boolean;
-  constructor(private api: ApiService, private route: ActivatedRoute) {
-    
+scroll:boolean;
+drop:any;
+  constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
+    this.drop=this.api.drop; 
     this.route.params.subscribe(params => {
       this.pid = params.id;
       this.getproduct();
@@ -85,6 +87,7 @@ page:boolean;
     if (this.assets.productsilver) {
         this.getsilver();
       }
+
     this.total();
     let increament = this.selectedsize - this.defaultsize;
     if  (increament !=0 ) {
@@ -226,6 +229,16 @@ page:boolean;
 }
 
    createjson() {
+    if(this.drop==0)
+    {
+       if(confirm('Please Login first'))
+       {
+           this.router.navigate(['/login']);
+           return false;
+       }
+    }
+    else if(this.drop==1)
+   {
     let j = {};
     let temparray = [];
     let waste = {};
@@ -321,7 +334,10 @@ page:boolean;
     j = {};
     j['data'] = temparray;
     this.api.addToCart(j);
-    }
+   }
+
+    
+   }
 
   colormetal(value) {
     this.colvalue = value;
@@ -439,8 +455,14 @@ page:boolean;
     this.totalprice = price;
   }
   ngOnInit(): void {
+
     this.loader=true;
     this.page=false;
-    }
+    this.api.getlogin.subscribe(data => {
+      console.log(+data);
+      this.drop=data;
+      console.log(this.drop);    
+     });  
+  }
 
 }
