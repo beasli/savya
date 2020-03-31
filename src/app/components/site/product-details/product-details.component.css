@@ -137,11 +137,4 @@
   .radio-group input[type="checkbox"] + label:before, .radio-group input[type="checkbox"] + label:after, .radio-group input[type="radio"] + label:before, .radio-group input[type="radio"] + label:after {
       content: none !important;
   }
-  .embed-responsive .embed-responsive-item{
-      position: relative !important;
-  }
-  .embed-responsive::before {
-    display: block;
-    content: "";
-    padding-top:0px;
-}
+  
