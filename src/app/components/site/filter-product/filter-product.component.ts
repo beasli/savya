@@ -190,11 +190,6 @@ export class FilterProductComponent implements OnInit {
             this.router.navigate(['/login']);
             return false;
         }
-        else
-        {
-          this.router.navigate(['/login']);
-          return false;
-        }
      }
      else if(this.drop==1)
     {
