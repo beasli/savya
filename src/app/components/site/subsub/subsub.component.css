@@ -1,0 +1,98 @@
+.subsub-listing-page{
+    padding:100px 0px;
+}
+.each-listing-product{
+    height:165px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    margin-bottom: 30px;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    
+}
+.each-listing-product:hover{
+    -webkit-box-shadow: 0px 0px 25px -2px rgba(0,0,0,0.65);
+    -moz-box-shadow: 0px 0px 25px -2px rgba(0,0,0,0.65);
+    box-shadow: 0px 0px 25px -2px rgba(0,0,0,0.65);
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+.each-listing-product:after{
+    content:'';
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.6);
+}
+.contant-box{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    border:2px solid #c59f59;
+    width:90%;
+    height: 90%;
+    background: transparent;
+    z-index: 9;
+}
+.product-content{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    width:100%;
+    text-align:center;
+}
+.product-content p{
+    color:#fff;
+    font-size:13px;
+    margin-bottom: 0px;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+
+.product-page-link > a.btn{
+    position: relative;
+}
+.product-page-link> a.btn:after{
+    width:100px;
+    height:2px;
+    background-color: #c59f59;
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    content:'';
+}
+.product-page-link{
+    position: absolute;
+    top:60px;
+    width: 100%;
+    opacity: 0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+.each-listing-product:hover .product-page-link{
+    position: absolute;
+    top:50px;
+    width: 100%;
+    opacity: 1;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+.each-listing-product:hover .product-content h2{
+    margin-bottom: 20px;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+.subsub-product-listing-heading{
+    margin-bottom:70px;
+}
+@media(max-width:767px){
+    .subsub-product-listing-heading {
+        margin-bottom: 30px;
+    }
+}

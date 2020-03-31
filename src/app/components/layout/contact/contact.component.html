@@ -1,32 +1,40 @@
-
-<div class="card" class="text-center">
-    <h2>CONTACT DETAIL</h2>
-    <div class="card-body">
-    
-        
-        <div class="col-md-6 col-lg-3">
-            <div class="footer-block collapsed-mobile" >
-                <div class="title">
-                    <h4>contact us</h4>
-                    <div class="toggle-arrow"></div>
-                </div>
-                <div class="collapsed-content"  >
-                    <img *ngIf="im" src="assets/images/loading.gif">
-                    <ul class="contact-list" *ngIf="val">
-                        <li><i class="icon-phone"></i><span><span class="h6-style">Call Us:</span><span>{{values.mobile}}<br>{{values.landline}}</span></span></li>
-                        <li><i class="icon-mail-envelope1"></i><span><span class="h6-style">E-mail:</span><span><a [href]="'mailto:'+values.email">{{values.email}}</a></span></span></li>
-                        <li><i class="icon-location1"></i><span><span class="h6-style">Address:</span><span>{{values.address}}</span></span></li>
-                    </ul>
-                    <ul class="social-list" *ngIf="val">
-                        <li><a [href]="values.facebook" class="icon icon-facebook"></a></li>
-                        <li><a href="#" class="icon icon-twitter"></a></li>
-                        <li><a href="#" class="icon icon-google"></a></li>
-                        <li><a [href]="values.instagram" class="icon icon-instagram"></a></li>
-                        <li><a href="#" class="icon icon-youtube"></a></li>
-                    </ul>
-                </div>
+<div class="contact-details-wrapper">
+    <div class="container">
+        <div class="contact-heading text-center">
+            <h2>CONTACT DETAIL</h2>
+        </div>
+        <div class="call-us text-center">
+            <div class="call-us-icon">
+                <span><i class="icon-phone"></i></span>
+                <p>Call Us</p>
+            </div>
+            <div class="call-us-numbers">
+                <ul>
+                    <li><a href="">18004199612</a></li>
+                    <li><a href="">01204576620</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="call-us text-center">
+            <div class="call-us-icon">
+                <span><i class="icon-mail-envelope1"></i></span>
+                <p>Email</p>
+            </div>
+            <div class="call-us-numbers">
+                <ul>
+                    <li><a href="">INFO@SAVYAJEWELSBUSINESS.COM</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="call-us text-center address">
+            <div class="call-us-icon">
+                <span><i class="icon-location1"></i></span>
+                <p>Address:</p>
+            </div>
+            <div class="call-us-numbers">
+                <p>B-122, IIIRD FLOOR, SECTOR-2, NOIDA, <br>UTTAR PRACDESH - 201301</p>
             </div>
         </div>
     </div>
-  </div>
+</div>
  
