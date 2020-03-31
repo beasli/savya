@@ -18,6 +18,7 @@ import { OtpGuardService } from './components/auth-guard/otp-guard.service';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,7 @@ import { OtpGuardService } from './components/auth-guard/otp-guard.service';
     SiteModule,
     FormsModule,
     ReactiveFormsModule ,
-    NgbModule
+    NgbModule,
   ],
   providers: [AuthGuardService,CheckoutService,OtpGuardService],
   bootstrap: [AppComponent]
