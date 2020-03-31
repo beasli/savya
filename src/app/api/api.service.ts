@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, CARTDELETE, CARTUPDATE } from '../../config';
 import * as CryptoJS from 'crypto-ts';
 import { JsonPipe } from '@angular/common';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Injectable({
@@ -22,7 +23,7 @@ export class ApiService {
   event:any;
   
   
-  constructor(public http: HttpClient, private router: Router) {
+  constructor(public http: HttpClient,private service: NotificationsService, private router: Router) {
     if(localStorage.getItem('savya_userInfo'))
     {
      let u=this.getUserInfo();
@@ -61,7 +62,16 @@ export class ApiService {
     });
   }
     
-
+  onSuccess(message){
+    console.log('im called');
+    this.service.success('Success',message,{
+     position: ['bottom', 'right'],
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
  
   
 //cart functions
@@ -170,6 +180,7 @@ qtyUpdate(pid,value)
       //console.log("deletecart"+data)
       this.updateCart();
       this.Cart.emit("cartUpdated"+Date.now());
+      this.onSuccess('Product Successfully Removed from the cart');
      
     }).catch(d=>{
       this.updateCart();
@@ -186,6 +197,8 @@ qtyUpdate(pid,value)
       console.log(data);
       this.updateCart();
       this.Cart.emit("cartUpdated"+Date.now());
+      
+    this.onSuccess('Product Successfully added to the cart');
     //  localStorage.setItem('cart',JSON.stringify(data));  
     }).catch(d=>{
       console.log(d);
@@ -220,9 +233,12 @@ qtyUpdate(pid,value)
 
   deleteWishlist(pid)
   {
+      
+    
       this.Post(WISHLISTDELETE,{uid:this.uid,product_id:pid}).then(data=>{
         console.log(data);
        this.updateWishlist();
+       this.onSuccess('Product Successfully Removed from the Wishlist');
        this.getWish.emit("wishlist updated"+Date.now());
       }).catch(d=>{
         console.log(d);
@@ -249,6 +265,7 @@ checkWishlist(pid)
               this.Post(WISHLISTADD,{uid:this.uid,product_id:pid}).then(data=>{
                 console.log(data);
                    this.updateWishlist();
+                   this.onSuccess('Product Successfully added to the Wishlist');
               }).catch(d=>{
                 console.log(d);
               })
@@ -258,6 +275,7 @@ checkWishlist(pid)
         this.Post(WISHLISTADD,{uid:this.uid,product_id:pid}).then(data=>{
           console.log(data);
              this.updateWishlist();
+             this.onSuccess('Product Successfully added to the Wishlist');
         }).catch(d=>{
           console.log(d);
         })

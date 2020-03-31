@@ -57,13 +57,7 @@ export class FilterProductComponent implements OnInit {
       });
      
   }
-  addmodal() {
-    this.addclosebutton.nativeElement.click();
-  }
-  deletemodal()
-  {
-    this.deleteclosebutton.nativeElement.click();
-  }
+ 
   getsubsub() {
     this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subid } ).then(data  => {
       this.data = data['data'];
@@ -195,11 +189,6 @@ export class FilterProductComponent implements OnInit {
         {
             this.router.navigate(['/login']);
             return false;
-        }
-        else
-        {
-          this.router.navigate(['/login']);
-          return false;
         }
      }
      else if(this.drop==1)
