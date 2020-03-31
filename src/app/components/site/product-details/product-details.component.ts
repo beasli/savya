@@ -73,6 +73,7 @@ drop:any;
     })
       this.totalprice = this.totaldiamond+this.totalgold+this.totalplat;
    }
+   
    sizechange(value) {
     this.selectedsize = value;
     if (this.assets.gold.length)  {
@@ -161,6 +162,7 @@ drop:any;
   }
   addToCart(s)
   {
+    console.log('im called');
     this.api.addToCart(s);
   }
    getproduct() {
