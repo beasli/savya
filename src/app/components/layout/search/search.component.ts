@@ -92,11 +92,6 @@ wishlist(pid) {
             this.router.navigate(['/login']);
             return false;
         }
-        else
-        {
-          this.router.navigate(['/login']);
-          return false;
-        }
      }
      else if(this.drop==1)
     {
@@ -133,13 +128,7 @@ wishlist(pid) {
       return false;
     }
 }
-addmodal() {
-  this.addclosebutton.nativeElement.click();
-}
-deletemodal()
-{
-  this.deleteclosebutton.nativeElement.click();
-}
+
   ngOnInit() {
     this.loader=true;
     this.page=false;
