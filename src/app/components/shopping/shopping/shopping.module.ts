@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { AuthGuardService } from '../../auth-guard/auth-guard.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutService } from '../../auth-guard/checkout.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 
 
@@ -20,6 +22,8 @@ import { CheckoutService } from '../../auth-guard/checkout.service';
   imports: [
     CommonModule,
     NgbModule,
+    BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot(),
     RouterModule.forChild([
       { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService,CheckoutService]},
       { path: 'cart', component: CartComponent},

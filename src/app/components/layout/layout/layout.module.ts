@@ -9,6 +9,8 @@ import { PaymentComponent } from '../payment/payment.component';
 import { SearchComponent } from '../search/search.component';
 import { ManufactureComponent } from '../manufacture/manufacture.component';
 import { PrivacyComponent } from '../privacy/privacy.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { PrivacyComponent } from '../privacy/privacy.component';
   imports: [
     CommonModule,
     NgbModule,
+    BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot(),
     RouterModule.forChild([
       { path: 'contact', component: ContactComponent},
       { path: 'about', component: AboutComponent},

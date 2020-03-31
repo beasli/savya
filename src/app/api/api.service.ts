@@ -146,7 +146,6 @@ qtyUpdate(pid,value)
                 if(c==1&&value==-1)
                 {
                   this.deleteCart(pid);
-                  this.onSuccess('Product Successfully Removed from the cart');
                 }
                 else
                 {
@@ -234,11 +233,13 @@ qtyUpdate(pid,value)
 
   deleteWishlist(pid)
   {
+      
+    
       this.Post(WISHLISTDELETE,{uid:this.uid,product_id:pid}).then(data=>{
         console.log(data);
        this.updateWishlist();
-       this.getWish.emit("wishlist updated"+Date.now());
        this.onSuccess('Product Successfully Removed from the Wishlist');
+       this.getWish.emit("wishlist updated"+Date.now());
       }).catch(d=>{
         console.log(d);
       
