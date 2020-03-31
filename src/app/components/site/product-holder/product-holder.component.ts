@@ -156,13 +156,7 @@ drop:any;
   {
     this.api.addToCart(s);
   }
-  addmodal() {
-    this.addclosebutton.nativeElement.click();
-  }
-  deletemodal()
-  {
-    this.deleteclosebutton.nativeElement.click();
-  }
+
   ngOnInit() {
     this.api.getlogin.subscribe(data => {
       console.log(+data);
