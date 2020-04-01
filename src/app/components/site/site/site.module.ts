@@ -23,6 +23,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { LoaderComponent } from '../loader/loader.component';
 
 
+
 const customConfig: ShareButtonsConfig = {
   autoSetMeta: true,
   twitterAccount: ''
@@ -62,7 +63,7 @@ const customConfig: ShareButtonsConfig = {
       { path: 'events' , component: EventsComponent},
       { path: 'event/:id' , component: EventComponent},
       { path: 'product-details/:id' , component: ProductDetailsComponent},
-      { path: 'subsub' , component: SubsubComponent}
+      { path: 'subsub/:id' , component: SubsubComponent}
     ])
   ]
 })
