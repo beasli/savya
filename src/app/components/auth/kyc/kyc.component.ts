@@ -122,22 +122,26 @@ checkPan()
     this.loading=true;
     this.sign=false;
     console.log(value);
-     
-    this.api.Post(USERKYC,value).then(data=>{
+    var Ngocr = require("Ngocr");
+    Ngocr.decodeFile(value.gst_doc, function(error, data){
+      console.log("decodefile function");
+      console.log(data); 
+    });
+    // this.api.Post(USERKYC,value).then(data=>{
       
-              console.log(data);
-              this.alert=true;
-              this.message="Successful "
-              this.type="success";
-              this.router.navigate(['/registerOtp',this.mobile_no]);
-      }).catch(d=>{
-              this.type="danger";
-              this.message="Sorry !  Something Went Wrong Please Recheck";
-              this.loading=false;
-              this.sign=true;
-              this.alert=true;
-              console.log(d);
-      });
+    //           console.log(data);
+    //           this.alert=true;
+    //           this.message="Successful "
+    //           this.type="success";
+    //           this.router.navigate(['/registerOtp',this.mobile_no]);
+    //   }).catch(d=>{
+    //           this.type="danger";
+    //           this.message="Sorry !  Something Went Wrong Please Recheck";
+    //           this.loading=false;
+    //           this.sign=true;
+    //           this.alert=true;
+    //           console.log(d);
+    //   });
   
 }
 
