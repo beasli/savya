@@ -20,6 +20,7 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 import { ShareButtonsConfig, ShareModule } from '@ngx-share/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { LoaderComponent } from '../loader/loader.component';
 
 
 const customConfig: ShareButtonsConfig = {
@@ -43,7 +44,8 @@ const customConfig: ShareButtonsConfig = {
     EventsComponent,
     EventComponent,
     ProductDetailsComponent,
-    SubsubComponent
+    SubsubComponent,
+    LoaderComponent,
   ],
   imports: [
     FontAwesomeModule,
