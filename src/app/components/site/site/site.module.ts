@@ -21,6 +21,8 @@ import { ShareButtonsConfig, ShareModule } from '@ngx-share/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { LoaderComponent } from '../loader/loader.component';
+import { FilterNavBarComponent } from '../filter-nav-bar/filter-nav-bar.component';
+
 
 
 const customConfig: ShareButtonsConfig = {
@@ -46,6 +48,7 @@ const customConfig: ShareButtonsConfig = {
     ProductDetailsComponent,
     SubsubComponent,
     LoaderComponent,
+    FilterNavBarComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -62,7 +65,8 @@ const customConfig: ShareButtonsConfig = {
       { path: 'events' , component: EventsComponent},
       { path: 'event/:id' , component: EventComponent},
       { path: 'product-details/:id' , component: ProductDetailsComponent},
-      { path: 'subsub' , component: SubsubComponent}
+      { path: 'subsub/:id' , component: SubsubComponent},
+      { path: 'filternav' , component: FilterNavBarComponent}
     ])
   ]
 })
