@@ -1,3 +1,26 @@
+<div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09 mt-0 ">
+    <div class="container">
+        <div class="text-center">
+
+            <h2 class="h1-style">Our Associate Brands</h2>
+
+            <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
+        </div>
+        <div class="testimonials seller">
+          <ngx-slick-carousel class="carousel" 
+                    #slickModal="slick-carousel" 
+                    [config]="slideConfig" >
+          <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide embed-responsive embed-responsive-16by9">
+          <img src="{{ baseUrl + slide.logo }}"  class="embed-responsive-item"  alt="" width="100%">
+          <div class="overlay-effect">
+              <div >
+                <h2>{{ slide.company_name }}</h2>
+              </div>
+          </div>
+          </div>
+          </ngx-slick-carousel>
+        </div>
+</div>
 <div class="subsub-listing-page">
     <div class="container">
         <div class="subsub-product-listing">
@@ -5,56 +28,11 @@
                 <h2>Subsub Produxt-listing</h2>
             </div>
             <div class="row">
-                <div class="col-lg-2 col-md-3">
-                    <div class="each-listing-product" style="background-image:url('assets/images/ring-demo.jpg')">
+                <div class="col-lg-2 col-md-3" *ngFor="let s of data">
+                        <div class="each-listing-product" (click)="gofilter(s.id) " [style.background-image]="getlink(s.image)">
                         <div class="contant-box">
                             <div class="product-content">
-                                <p>Demo Ring 1</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3">
-                    <div class="each-listing-product" style="background-image:url('assets/images/ring-demo.jpg')">
-                        <div class="contant-box">
-                            <div class="product-content">
-                                <p>Demo Ring 1</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3">
-                    <div class="each-listing-product" style="background-image:url('assets/images/ring-demo.jpg')">
-                        <div class="contant-box">
-                            <div class="product-content">
-                                <p>Demo Ring 1</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3">
-                    <div class="each-listing-product" style="background-image:url('assets/images/ring-demo.jpg')">
-                        <div class="contant-box">
-                            <div class="product-content">
-                                <p>Demo Ring 1</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3">
-                    <div class="each-listing-product" style="background-image:url('assets/images/ring-demo.jpg')">
-                        <div class="contant-box">
-                            <div class="product-content">
-                                <p>Demo Ring 1</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3">
-                    <div class="each-listing-product" style="background-image:url('assets/images/ring-demo.jpg')">
-                        <div class="contant-box">
-                            <div class="product-content">
-                                <p>Demo Ring 1</p>
+                                <p >{{s.title}}</p>
                             </div>
                         </div>
                     </div>
