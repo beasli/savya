@@ -31,12 +31,19 @@ export class ApiService {
     console.log(this.uid);
    }
     // console.log("userid"+this.uid);
+    if(this.uid)
+    {
+      this.updateCart();
+      this.updateWishlist();
+
+    }
     
     if (localStorage.getItem('drop')) {
       this.drop =  +this.decrypt((localStorage.getItem('drop')));
     } else {
       this.drop = 0;
     }
+
 
  }
 

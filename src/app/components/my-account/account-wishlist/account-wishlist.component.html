@@ -18,7 +18,7 @@
                         <div  *ngIf="div">
                             <h2>My Wishlist</h2>
                             <div  class="cart-table cart-table--wishlist" *ngFor="let r of results">
-                                <div class="cart-table-prd" *ngIf="checkProductInCart(r.product_id)" >
+                                <div class="cart-table-prd" >
                                     <div class="cart-table-prd-image"><a href="#"><img src="{{baseurl + r.image}}" alt=""></a></div>
                                     <div class="cart-table-prd-name">
                                         <h5><a href="#">{{r.size}}</a></h5>
