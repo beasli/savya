@@ -37,7 +37,6 @@ export class ApiService {
     } else {
       this.drop = 0;
     }
-
  }
 
   public Get(api) {
