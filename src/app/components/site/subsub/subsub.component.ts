@@ -10,6 +10,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
   styleUrls: ['./subsub.component.css']
 })
 export class SubsubComponent implements OnInit {
+slider_imgs: any;
 subid:any;
 data:any;
 baseUrl:any;
@@ -56,6 +57,9 @@ slideConfig = {
     this.api.Post(CRAUSEL, {}).then(data => {
       console.log(data);
       data['body'].forEach(childObj => {
+        if (childObj.category === 'app_banners') {
+          this.slider_imgs = childObj['app_banners'].filter(slide => slide.place === 'Website');
+        }
        if (childObj.category === 'manufacture') {
           this.manufacturer = childObj['manufacture'];
         }
