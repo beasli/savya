@@ -167,6 +167,8 @@ loading:boolean;
     this.api.addToCart(s);
   }
    getproduct() {
+     this.loader=true;
+     this.page=false;
     this.api.Post(PRICELIST, {} ).then(data  => {
       if  (data['data']) {
       this.pricelist = data['data'];

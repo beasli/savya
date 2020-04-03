@@ -11,6 +11,7 @@ import { ManufactureComponent } from '../manufacture/manufacture.component';
 import { PrivacyComponent } from '../privacy/privacy.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { SiteModule } from '../../site/site/site.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
   imports: [
     CommonModule,
     NgbModule,
+    SiteModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
     RouterModule.forChild([

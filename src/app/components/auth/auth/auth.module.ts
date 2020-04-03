@@ -14,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap' ;
 import { KycComponent } from '../kyc/kyc.component';
 import { ChangeProfileComponent } from '../change-profile/change-profile.component';
 import { OtpGuardService } from '../../auth-guard/otp-guard.service';
+import { SiteModule } from '../../site/site/site.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { OtpGuardService } from '../../auth-guard/otp-guard.service';
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule ,
+    SiteModule,
     RouterModule.forChild([
       { path: 'login', component: LoginComponent},
       { path: 'register', component: RegisterComponent},
