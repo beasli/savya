@@ -12,7 +12,7 @@
                    <ul  class="mmenu mmenu-js">
                        
                        <ul class="mmenu mmenu-js">
-                           <li *ngFor='let s of data' class="mmenu-item--simple"><a (click)="getProduct(s.id)" href="javascript:void(0)" title="">{{s.title}}</a>
+                           <li *ngFor='let s of data' class="mmenu-item--simple"><a (click)="getProduct(s.id)" (click)='go(r.product_id)' title="">{{s.title}}</a>
 
                            </li>
                        </ul>
