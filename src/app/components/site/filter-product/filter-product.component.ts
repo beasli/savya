@@ -35,7 +35,7 @@ export class FilterProductComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.subid = params.id;
       this.getProduct(this.subid);
-       this.getsubsub();
+   //    this.getsubsub();
         //filter update sub category
               let f=this.getfilter();
               f.menu.subcategory= +this.subid;
@@ -59,18 +59,18 @@ export class FilterProductComponent implements OnInit {
      
   }
  
-  getsubsub() {
-    this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subid } ).then(data  => {
-      this.data = data['data'];
+  // getsubsub() {
+  //   this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subid } ).then(data  => {
+  //     this.data = data['data'];
 
-      console.log(data);
-     }).catch(d=>{
-      console.log(d);
-    });
-  }
+  //     console.log(data);
+  //    }).catch(d=>{
+  //     console.log(d);
+  //   });
+  // }
   getProduct(value)
   {
-     this.loader=true;
+    // this.loader=true;
     this.page=false;
     this.api.Post(PRODUCTLIST, {subsubcategory_id: value } ).then(data  => {
       this.page=true;
