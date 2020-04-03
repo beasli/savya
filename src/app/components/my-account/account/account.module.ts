@@ -11,6 +11,8 @@ import { AuthGuardService } from '../../auth-guard/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventHistoryComponent } from '../event-history/event-history.component';
 import { OrderDetailComponent } from '../order-detail/order-detail.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AccountDetailsComponent,
@@ -25,6 +27,8 @@ import { OrderDetailComponent } from '../order-detail/order-detail.component';
     CommonModule,
     FormsModule,
     NgbModule,
+    BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot(),
     ReactiveFormsModule,
     RouterModule.forChild([
       { path: 'account-details', component: AccountDetailsComponent,  canActivate: [AuthGuardService]},

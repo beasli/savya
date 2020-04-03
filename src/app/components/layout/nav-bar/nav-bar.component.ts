@@ -82,7 +82,7 @@ ProductsInCart()
 
   gofilter(value) {
     console.log(value);
-    this.router.navigate(['/filter', value]);
+    this.router.navigate(['/subsub', value]);
   }
 
   checkCart(pid)

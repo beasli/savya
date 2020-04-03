@@ -57,10 +57,12 @@ export class ProductDetailsComponent implements OnInit {
 page:boolean;
 scroll:boolean;
 drop:any;
+loading:boolean;
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
     this.drop=this.api.drop; 
     this.route.params.subscribe(params => {
       this.pid = params.id;
+      this.ngOnInit();
       this.getproduct();
       });
 
@@ -231,6 +233,7 @@ drop:any;
 }
 
    createjson() {
+     this.loading=true;
     if(this.drop==0)
     {
        if(confirm('Please Login first'))
@@ -336,6 +339,16 @@ drop:any;
     j = {};
     j['data'] = temparray;
     this.api.addToCart(j);
+    console.log(this.loading);
+    let check=this. checkCart(this.pid);
+    if(check==true)
+    {
+      this.loading=false;
+    }
+    else if(check==false)
+    {
+      this.loading=false;
+    }
    }
 
     
