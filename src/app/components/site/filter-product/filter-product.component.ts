@@ -35,7 +35,7 @@ export class FilterProductComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.subid = params.id;
       this.getProduct(this.subid);
-      // this.getsubsub();
+   //    this.getsubsub();
         //filter update sub category
               let f=this.getfilter();
               f.menu.subcategory= +this.subid;

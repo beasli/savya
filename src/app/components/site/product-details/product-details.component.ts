@@ -62,6 +62,7 @@ loading:boolean;
     this.drop=this.api.drop; 
     this.route.params.subscribe(params => {
       this.pid = params.id;
+      this.ngOnInit();
       this.getproduct();
       });
 
