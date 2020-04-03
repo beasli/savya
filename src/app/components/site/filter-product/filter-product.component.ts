@@ -70,7 +70,7 @@ export class FilterProductComponent implements OnInit {
   // }
   getProduct(value)
   {
-    // this.loader=true;
+    this.loader=true;
     this.page=false;
     this.api.Post(PRODUCTLIST, {subsubcategory_id: value } ).then(data  => {
       this.page=true;

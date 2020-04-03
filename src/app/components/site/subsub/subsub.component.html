@@ -2,7 +2,7 @@
  <!-- BN Slider 1 -->
  <app-slider [slider_imgs] = 'slider_imgs' [url] = 'baseUrl'></app-slider>
  <!-- //BN Slider 1 -->
-<div class="subsub-listing-page">
+<div class="subsub-listing-page" *ngIf="page">
     <div class="container">
         <div class="subsub-product-listing">
             <div class="subsub-product-listing-heading text-center">
@@ -22,3 +22,4 @@
         </div>
     </div>
 </div>
+<div style="padding: 200px;"><app-loader  *ngIf="loader"></app-loader></div>
