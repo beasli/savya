@@ -14,6 +14,8 @@ slider_imgs: any;
 subid:any;
 data:any;
 baseUrl:any;
+loader:boolean;
+page:boolean;
 slideConfig = {
   "slidesToShow": 4,
   "slidesToScroll": 1,
@@ -71,6 +73,8 @@ slideConfig = {
    }
    getsubsub() {
     this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subid } ).then(data  => {
+      this.page=true;
+      this.loader=false;
       this.data = data['data'];
       console.log(data);
      }).catch(d=>{
@@ -88,6 +92,8 @@ slideConfig = {
   }
 
   ngOnInit(): void {
+    this.loader=true;
+    this.page=false;
   }
 
 }

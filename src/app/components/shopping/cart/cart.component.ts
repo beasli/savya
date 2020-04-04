@@ -22,6 +22,9 @@ page:boolean;
 
         this.view();
    }
+   go(value) {
+    this.api.godetail(value);
+  }
    deleteCart(pid)
    {
      this.api.deleteCart(pid);

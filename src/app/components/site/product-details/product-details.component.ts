@@ -62,6 +62,7 @@ loading:boolean;
     this.drop=this.api.drop; 
     this.route.params.subscribe(params => {
       this.pid = params.id;
+      this.ngOnInit();
       this.getproduct();
       });
 
@@ -167,6 +168,8 @@ loading:boolean;
     this.api.addToCart(s);
   }
    getproduct() {
+     this.loader=true;
+     this.page=false;
     this.api.Post(PRICELIST, {} ).then(data  => {
       if  (data['data']) {
       this.pricelist = data['data'];
@@ -235,11 +238,7 @@ loading:boolean;
      this.loading=true;
     if(this.drop==0)
     {
-       if(confirm('Please Login first'))
-       {
-           this.router.navigate(['/login']);
-           return false;
-       }
+      document.getElementById("openModalButton").click();
     }
     else if(this.drop==1)
    {

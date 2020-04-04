@@ -12,7 +12,7 @@
                    <ul  class="mmenu mmenu-js">
                        
                        <ul class="mmenu mmenu-js">
-                           <li *ngFor='let s of data' class="mmenu-item--simple"><a (click)="getProduct(s.id)" href="javascript:void(0)" title="">{{s.title}}</a>
+                           <li *ngFor='let s of data' class="mmenu-item--simple"><a (click)="getProduct(s.id)" (click)='go(r.product_id)' title="">{{s.title}}</a>
 
                            </li>
                        </ul>
@@ -24,7 +24,29 @@
        </div>
    </div>
 </div> -->
+ <!-- modal start -->
+ <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+           <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button> -->
+         </div>
+         <div class="modal-body">
+             <h3>You are not logged in.</h3><br><h5>(Please Login first)</h5>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <!-- <button type="button" class="btn btn-primary" (click)="goLogin()">Go</button> -->
+         </div>
+       </div>
+     </div>
+   </div>
+   <!-- modal end -->
 <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09">
    <div class="container">
        <div class="text-center">
@@ -253,7 +275,7 @@
                                         <div class="prd" *ngFor="let s of products"  >
                                                 <div class="prd-inside" >
                                                     <div class="prd-img-area"><a (click)='go(s.product_id)' class="prd-img"><img [src]="url + s.image" alt="Tyssot 1853"></a>
-                                                        <div class="label-new">NEW</div><a href="javascript:void(0)" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)" class="label-wishlist icon-heart js-label-wishlist"></a>
+                                                        <a href="javascript:void(0)" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)" class="label-wishlist icon-heart js-label-wishlist"></a>
                                                         <a href="javascript:void(0)" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a>
                                                         <div class="gdw-loader"></div>
                                                     </div>

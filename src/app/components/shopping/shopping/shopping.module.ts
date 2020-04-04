@@ -9,6 +9,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutService } from '../../auth-guard/checkout.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { SiteModule } from '../../site/site/site.module';
 
 
 
@@ -22,6 +23,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
   imports: [
     CommonModule,
     NgbModule,
+    SiteModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
     RouterModule.forChild([
