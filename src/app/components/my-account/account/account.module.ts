@@ -13,6 +13,9 @@ import { EventHistoryComponent } from '../event-history/event-history.component'
 import { OrderDetailComponent } from '../order-detail/order-detail.component';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SiteModule } from '../../site/site/site.module';
+
+
 @NgModule({
   declarations: [
     AccountDetailsComponent,
@@ -30,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
     ReactiveFormsModule,
+    SiteModule,
     RouterModule.forChild([
       { path: 'account-details', component: AccountDetailsComponent,  canActivate: [AuthGuardService]},
       { path: 'account-addresses', component: AccountAddressesComponent,  canActivate: [AuthGuardService]},

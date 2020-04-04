@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
         console.log(data);
         data['body'].forEach(childObj => {
           if (childObj.category === 'app_banners') {
-            this.slider_imgs = childObj['app_banners'];
+            this.slider_imgs = childObj['app_banners'].filter(slide => slide.place === 'Website');
           }
           else if (childObj.category === 'exclusive_banners') {
             this.exclusive = childObj['exclusive_banners'];

@@ -58,9 +58,9 @@
                                 <div class="color-text d-table-cell"><p>Choose Color:</p></div>
                                 <div class="sample-box">
                                     <ul>
-                                        <li><a href="javascript:void(0)" (click)="colormetal('rose')" [ngClass]="{focus: colvalue=='rose'}" class="btn-danger">Rose</a></li>
-                                        <li><a href="javascript:void(0)" (click)="colormetal('yellow')" [ngClass]="{focus: colvalue=='yellow'}" class="btn-warning">Yellow</a></li>
-                                        <li><a href="javascript:void(0)" (click)="colormetal('white')" [ngClass]="{focus: colvalue=='white'}" class="btn-outline-secondary">White</a></li>
+                                        <li><a href="javascript:void(0)" (click)="colormetal('Rose')" [ngClass]="{focus: colvalue=='Rose'}" class="btn-danger">Rose</a></li>
+                                        <li><a href="javascript:void(0)" (click)="colormetal('Yellow')" [ngClass]="{focus: colvalue=='Yellow'}" class="btn-warning">Yellow</a></li>
+                                        <li><a href="javascript:void(0)" (click)="colormetal('White')" [ngClass]="{focus: colvalue=='White'}" class="btn-outline-secondary">White</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -324,31 +324,5 @@
         <app-product-holder [heading] = '"Related Product"' [url3] = 'url' [mostselling] = 'recents'></app-product-holder>
         <simple-notifications></simple-notifications>
 </div>
-
-<div class="text-center" *ngIf="loader" style="padding:200px" >
-    <div class="spinner-grow text-primary" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-      <div class="spinner-grow text-secondary" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-      <div class="spinner-grow text-success" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-      <div class="spinner-grow text-danger" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-      <div class="spinner-grow text-warning" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-      <div class="spinner-grow text-info" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-      <div class="spinner-grow text-light" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-      <div class="spinner-grow text-dark" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-</div>
+<div style="padding:200px" >  <app-loader  *ngIf="loader"></app-loader></div>
 

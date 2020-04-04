@@ -12,11 +12,11 @@
         <div class="container" *ngIf="page">
             <h1 class="text-center">Shopping Cart</h1>
             <div class="cart-table" *ngIf="div">
-                <div class="cart-table-prd"  *ngFor="let r of results">
-                    <div class="cart-table-prd-image"><a href="#"><img src="{{baseurl + r.image}}" alt=""></a></div>
+                <div class="cart-table-prd"  *ngFor="let r of results;let i=index">
+                    <div class="cart-table-prd-image"><a  (click)='go(r.product_id)'><img src="{{baseurl + r.image}}" alt=""></a></div>
                     <div class="cart-table-prd-name">
-                        <h5><a href="#">Ring</a></h5>
-                        <h2><a href="#">{{r.productName}}</a></h2>
+                        <h5><a href="javascript:void(0)" (click)='go(r.product_id)'>Ring</a></h5>
+                        <h2><a  href="javascript:void(0)" (click)='go(r.product_id)'>{{r.productName}}</a></h2>
                     </div>
                     <div   *ngIf= "checkCart(r.product_id)" class="row no=gutters" >
                         <div class="row">
@@ -69,7 +69,7 @@
                 </ngb-alert>
             </div>
         </div>
-        <div class="text-center" *ngIf="loader" style="padding: 200px;">
+        <!-- <div class="text-center" *ngIf="loader" style="padding: 200px;">
             <div class="spinner-grow text-primary" role="status">
                 <span class="sr-only">Loading...</span>
               </div>
@@ -94,7 +94,8 @@
               <div class="spinner-grow text-dark" role="status">
                 <span class="sr-only">Loading...</span>
               </div>
-        </div>
+        </div> -->
+       <div style="padding: 200px;"> <app-loader  *ngIf="loader" ></app-loader> </div>
     </div>
 </div>
 <simple-notifications></simple-notifications>

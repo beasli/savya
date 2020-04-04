@@ -1,5 +1,6 @@
-<div class="hdr-content hide-mobile">
+<!-- <div class="hdr-content hide-mobile">
     
+<<<<<<< HEAD
     <div class="container">
         <div class="row">
             <div class="col-auto"><h2>SUBCATEGORY</h2></div>
@@ -58,6 +59,56 @@
                                         <li><a href="javascript:void(0)">{{m}}</a></li>
                                     </ul>
                                </div>
+=======
+   <div class="container">
+       <div class="row">
+           <div class="col-auto"><h2>SUBCATEGORY</h2></div>
+           
+           
+           <div class="nav-holder">
+               
+               <div class="hdr-nav">
+                
+                   <ul  class="mmenu mmenu-js">
+                       
+                       <ul class="mmenu mmenu-js">
+                           <li *ngFor='let s of data' class="mmenu-item--simple"><a (click)="getProduct(s.id)" (click)='go(r.product_id)' title="">{{s.title}}</a>
+
+                           </li>
+                       </ul>
+                   </ul>  
+                
+               </div>
+           </div>
+           
+       </div>
+   </div>
+</div> -->
+
+<div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09">
+   <div class="container">
+       <div class="text-center">
+           <h2 class="h1-style">Product with side filter</h2>
+       </div>
+       
+       <div class="row" >
+           <!-- Left column -->
+           <div class="col-lg-3 aside aside--left fixed-col js-filter-col">
+               <div class="fixed-col_container">
+                   <div class="filter-close">CLOSE</div>
+                   <div class="sidebar-block sidebar-block--mobile d-block d-lg-none">
+                       <div class="d-flex align-items-center">
+                           <div class="selected-label">(6) FILTER</div>
+                           <div class="selected-count ml-auto">SELECTED <span><b>25 items</b></span></div>
+                       </div>
+                   </div>
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Current Selection</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           <div class="selected-filters-wrap">
+>>>>>>> 270c23d69da2b0231d87e9c6461863eeab26803e
                                <div class="row">
                                         <ul class="selected-filters" *ngFor="let m of  f.menu.jewelery_type">
                                             <li><a href="javascript:void(0)">{{m}}</a></li>
@@ -121,6 +172,7 @@
                         </div>
                     </div>
                     
+<<<<<<< HEAD
                     <div class="sidebar-block filter-group-block open">
                         <div class="sidebar-block_title"><span>Colors</span>
                             <div class="toggle-arrow"></div>
@@ -133,6 +185,26 @@
                             </ul>
                         </div>
                     </div>
+=======
+                    <!-- Products Grid -->
+                    <div *ngIf="page">
+                            <div class="prd-grid product-listing data-to-show-3 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div" >
+                                
+                                        <div class="prd" *ngFor="let s of products"  >
+                                                <div class="prd-inside" >
+                                                    <div class="prd-img-area"><a (click)='go(s.product_id)' class="prd-img"><img [src]="url + s.image" alt="Tyssot 1853"></a>
+                                                        <div class="label-new">NEW</div><a href="javascript:void(0)" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)" class="label-wishlist icon-heart js-label-wishlist"></a>
+                                                        <a href="javascript:void(0)" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a>
+                                                        <div class="gdw-loader"></div>
+                                                    </div>
+                                                    <div class="prd-info">
+                            
+                                                        <h2 class="prd-title"><a *ngIf="s.gold!=null" (click)='go(s.product_id)'>{{s.gold.goldweight}}g / {{s.gold.goldquality}}</a></h2>
+
+                       
+                                                <div class="prd-hover">
+                                                    <div class="prd-action">
+>>>>>>> 270c23d69da2b0231d87e9c6461863eeab26803e
                     
                     <div class="sidebar-block filter-group-block open">
                         <div class="sidebar-block_title"><span>Metal</span>

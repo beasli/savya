@@ -43,32 +43,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="text-center" *ngIf="loader">
-                        <div class="spinner-grow text-primary" role="status">
-                            <span class="sr-only">Loading...</span>
-                          </div>
-                          <div class="spinner-grow text-secondary" role="status">
-                            <span class="sr-only">Loading...</span>
-                          </div>
-                          <div class="spinner-grow text-success" role="status">
-                            <span class="sr-only">Loading...</span>
-                          </div>
-                          <div class="spinner-grow text-danger" role="status">
-                            <span class="sr-only">Loading...</span>
-                          </div>
-                          <div class="spinner-grow text-warning" role="status">
-                            <span class="sr-only">Loading...</span>
-                          </div>
-                          <div class="spinner-grow text-info" role="status">
-                            <span class="sr-only">Loading...</span>
-                          </div>
-                          <div class="spinner-grow text-light" role="status">
-                            <span class="sr-only">Loading...</span>
-                          </div>
-                          <div class="spinner-grow text-dark" role="status">
-                            <span class="sr-only">Loading...</span>
-                          </div>
-                    </div>
+                    <app-loader *ngIf="loader" ></app-loader>
                     <!-- <div class="text-right mt-2"><a href="javascript:void(0)" class="btn btn--alt">Clear History</a></div> -->
                 </div>
             </div>
