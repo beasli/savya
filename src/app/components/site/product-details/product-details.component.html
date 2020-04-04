@@ -2,13 +2,35 @@
         <div class="holder mt-0">
             <div class="container">
                 <ul class="breadcrumbs">
-                    <li><a>Home</a></li>
-                    <li *ngIf='subcategory'><a>{{subcategory}}</a></li>
-                    <li *ngIf='subsubcategory'><a>{{subsubcategory}}</a></li>
+                    <li><a  routerLink="/">Home</a></li>
+                    <li *ngIf='subcategory'><a  routerLink="/subsub/{{data['subcategory']}}">{{subcategory}}</a></li>
+                    <li *ngIf='subsubcategory'><a routerLink="/filter/{{data['subcategorytype']}}">{{subsubcategory}}</a></li>
                 </ul>
             </div>
         </div>
-        
+              <!-- modal start -->
+ <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+           <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button> -->
+         </div>
+         <div class="modal-body">
+             <h3>You are not logged in.</h3><br><h5>(Please Login first)</h5>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <!-- <button type="button" class="btn btn-primary" (click)="goLogin()">Go</button> -->
+         </div>
+       </div>
+     </div>
+   </div>
+   <!-- modal end -->
         <div *ngIf='data && pricelist' class="holder mt-0">
             <div class="container">
                 <div class="row prd-block prd-block--mobile-image-first js-prd-gallery" id="prdGallery100">
@@ -34,7 +56,6 @@
                             <div class="js-prd-d-holder prd-holder product-name-details">
                                 <div class="prd-block_title-wrap">
                                     <h1 class="prd-block_title product-details-item-heading">{{data.productname}}</h1>
-                                    <div class="prd-block__labels"><span class="prd-label--new">NEW</span></div>
                                 </div>
                                 <div class="prd-block_info-top">
                                     <div *ngIf='value>0' class="product-sku product-price">Rs: {{totalprice * value}}<span *ngIf=(assets.gold.length) class="product-size">( {{gold.goldquality}} )</span></div>
@@ -177,7 +198,7 @@
                                             </div> -->
                                         </div>
                                         <input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="createjson()"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
-                                          <button  *ngIf="loading==true"  class="btn">Loading...</button>
+                                          <!-- <button  *ngIf="loading==true"  class="btn">Loading...</button> -->
                                         <div style="padding-left:15px;" class="prd-links hide-mobile"><a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
                                     </div>
                                 </div>

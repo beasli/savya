@@ -99,18 +99,17 @@ drop:any;
    
      if(this.drop==0)
      {
-        if(confirm('Please Login first'))
-        {
-            this.router.navigate(['/login']);
-            return false;
-        }
+        document.getElementById("openModalButton").click();
      }
      else if(this.drop==1)
     {
       this.api.checkWishlist(pid);
     }
   }
-
+  // goLogin()
+  // {
+  //   this.router.navigate(['/login']);
+  // }
   checkHeart(pid)
   {
 
