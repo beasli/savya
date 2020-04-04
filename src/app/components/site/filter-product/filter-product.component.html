@@ -1,65 +1,5 @@
 <!-- <div class="hdr-content hide-mobile">
     
-<<<<<<< HEAD
-    <div class="container">
-        <div class="row">
-            <div class="col-auto"><h2>SUBCATEGORY</h2></div>
-            
-            <!--navigation-->
-            <div class="nav-holder">
-                
-                <div class="hdr-nav">
-                    <!--mmenu-->
-                    <ul  class="mmenu mmenu-js">
-                        
-                        <ul class="mmenu mmenu-js">
-                            <li *ngFor='let s of data' class="mmenu-item--simple"><a (click)="getProduct(s.id)" href="javascript:void(0)" title="">{{s.title}}</a>
- 
-                            </li>
-                        </ul>
-                    </ul>  
-                    <!--/mmenu-->
-                </div>
-            </div>
-            <!--//navigation-->
-        </div>
-    </div>
- </div>
- 
- <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09">
-    <div class="container">
-        <div class="text-center">
-            <h2 class="h1-style">Product with side filter</h2>
-        </div>
-        
-        <div class="row" >
-            <!-- Left column -->
-            <div class="col-lg-3 aside aside--left fixed-col js-filter-col">
-                <div class="fixed-col_container">
-                    <div class="filter-close">CLOSE</div>
-                    <div class="sidebar-block sidebar-block--mobile d-block d-lg-none">
-                        <div class="d-flex align-items-center">
-                            <div class="selected-label">(6) FILTER</div>
-                            <div class="selected-count ml-auto">SELECTED <span><b>25 items</b></span></div>
-                        </div>
-                    </div>
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Current Selection</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <div class="selected-filters-wrap">
-                                <div class="row">
-                                    <ul class="selected-filters" *ngFor="let m of f.menu.jewelery_for">
-                                        <li><a href="javascript:void(0)">{{m}}</a></li>
-                                    </ul>
-                               </div>
-                               <div class="row">
-                                    <ul class="selected-filters" *ngFor="let m of  f.menu.material">
-                                        <li><a href="javascript:void(0)">{{m}}</a></li>
-                                    </ul>
-                               </div>
-=======
    <div class="container">
        <div class="row">
            <div class="col-auto"><h2>SUBCATEGORY</h2></div>
@@ -73,7 +13,6 @@
                        
                        <ul class="mmenu mmenu-js">
                            <li *ngFor='let s of data' class="mmenu-item--simple"><a (click)="getProduct(s.id)" (click)='go(r.product_id)' title="">{{s.title}}</a>
-
                            </li>
                        </ul>
                    </ul>  
@@ -130,84 +69,204 @@
                        </div>
                        <div class="sidebar-block_content">
                            <div class="selected-filters-wrap">
->>>>>>> 270c23d69da2b0231d87e9c6461863eeab26803e
                                <div class="row">
-                                        <ul class="selected-filters" *ngFor="let m of  f.menu.jewelery_type">
-                                            <li><a href="javascript:void(0)">{{m}}</a></li>
-                                        </ul>
+                                   <ul class="selected-filters" *ngFor="let m of f.menu.jewelery_for">
+                                       <li><a href="javascript:void(0)">{{m}}</a></li>
+                                   </ul>
                               </div>
                               <div class="row">
-                                    <ul class="selected-filters" *ngFor="let m of f.menu.purity">
-                                        <li><a href="javascript:void(0)">{{m}}</a></li>
-                                    </ul>
+                                   <ul class="selected-filters" *ngFor="let m of  f.menu.material">
+                                       <li><a href="javascript:void(0)">{{m}}</a></li>
+                                   </ul>
                               </div>
-                              <div class="row" *ngIf="f.menu.price.min">
-                                <ul class="selected-filters" >
-                                    <li><a href="javascript:void(0)">₹{{f.menu.price.min}}-₹{{f.menu.price.max}}</a></li>
-                                </ul>
-                              </div>
-                                <div class="d-flex align-items-center"><a href="javascript:void(0)" class="clear-filters" (click)="clearFilter()"><span>Clear All</span></a>
-                                    <!-- <div class="selected-count ml-auto d-none d-lg-block">SELECTED<span><b>25 items</b></span></div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                              <div class="row">
+                                       <ul class="selected-filters" *ngFor="let m of  f.menu.jewelery_type">
+                                           <li><a href="javascript:void(0)">{{m}}</a></li>
+                                       </ul>
+                             </div>
+                             <div class="row">
+                                   <ul class="selected-filters" *ngFor="let m of f.menu.purity">
+                                       <li><a href="javascript:void(0)">{{m}}</a></li>
+                                   </ul>
+                             </div>
+                             <div class="row" *ngIf="f.menu.price.min">
+                               <ul class="selected-filters" >
+                                   <li><a href="javascript:void(0)">₹{{f.menu.price.min}}-₹{{f.menu.price.max}}</a></li>
+                               </ul>
+                             </div>
+                               <div class="d-flex align-items-center"><a href="javascript:void(0)" class="clear-filters" (click)="clearFilter()"><span>Clear All</span></a>
+                                   <!-- <div class="selected-count ml-auto d-none d-lg-block">SELECTED<span><b>25 items</b></span></div> -->
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Price</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           <div class="radio-group">
+                               <!-- value="{min:{{price[0]}},max:{{price[1]}}}" -->
+                               <!-- [checked]="checkedprice($event)" -->
+                               <ng-container > <input type="radio" value="{{price[0]}}-{{price[1]}}" [checked]="checkedprice(price[0])"  (change)="getprice($event)"  id="price" name="price"><label for="price">₹{{price[0]}}-₹{{price[1]}}</label></ng-container>
+                               <ng-container > <input type="radio" value="{{price[1]}}-{{price[2]}}" [checked]="checkedprice(price[1])" (change)="getprice($event)"  id="price1" name="price"><label for="price1">₹{{price[1]}}-₹{{price[2]}}</label></ng-container>
+                               <ng-container > <input type="radio" value="{{price[2]}}-{{price[3]}}" [checked]="checkedprice(price[2])"  (change)="getprice($event)"  id="price2" name="price"><label for="price2">₹{{price[2]}}-₹{{price[3]}}</label></ng-container>
+                               <ng-container > <input type="radio" value="{{price[3]}}-{{price[4]}}" [checked]="checkedprice(price[3])" (change)="getprice($event)"  id="price3" name="price"><label for="price3">₹{{price[3]}}-₹{{price[4]}}</label></ng-container>
+                               <ng-container > <input type="radio" value="{{price[4]}}-1000000" id="price4"  [checked]="checkedprice(price[4])" (change)="getprice($event)"  name="price"><label for="price4">Above ₹{{price[4]}}</label></ng-container>
+                           </div>
+                       </div>
+                   </div>
+                   
+                   
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Categories</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           
+                               <div class="radio-group">
+                               <ng-container  *ngFor='let j of jewelery_for' > <input type="checkbox"  [checked]="checkedjewelery_for(j)" (change)="changefilter($event,j)"  id="{{j}}" name="jewelery_for"><label for="{{j}}">{{j}}</label></ng-container>
+                               </div>
+                       </div>
+                   </div>
+
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Product</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           <div class="radio-group">
+                               <ng-container  *ngFor='let jt of jewelery_type' > <input type="radio" [checked]="checkedjewelery_type(jt)" (change)="changefilter($event,jt)" id="{{jt}}" name="jewelery_type"><label for="{{jt}}">{{jt}}</label></ng-container>
+                           </div>
+                       </div>
+                   </div>
+                   
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Colors</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           <ul class="color-list two-column">
+                               <li><a href="javascript:void(0)" data-tooltip="Yellow" title="Yellow"><span class="value"><img src="../../../../assets/images/colorswatch/color-yellow.png" alt=""></span><span class="colorname">Yellow (125)</span></a></li>
+
+                               <li><a href="javascript:void(0)" data-tooltip="Silver" title="Silver"><span class="value"><img src="../../../../assets/images/colorswatch/color-white.png" alt=""></span><span class="colorname">Silver (125)</span></a></li>
+                           </ul>
+                       </div>
+                   </div>
+                   
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Metal</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           <div class="radio-group">
+                               <ng-container  *ngFor='let m of material' > <input type="checkbox" [checked]="checkedmaterial(m)" (change)="changefilter($event,m)" id="{{m}}" name="material"><label for="{{m}}">{{m}}</label></ng-container>
+                           </div>
+                       </div>
+                   </div>
+                   
+                   <div class="sidebar-block filter-group-block open">
+                       <div class="sidebar-block_title"><span>Gold Purity</span>
+                           <div class="toggle-arrow"></div>
+                       </div>
+                       <div class="sidebar-block_content">
+                           <div class="radio-group">
+                               <ng-container  *ngFor='let p of purity' > <input type="checkbox" [checked]="checkedpurity(p)" (change)="changefilter($event,p)" id="{{p}}" name="purity"><label for="{{p}}">{{p}}</label></ng-container>
+                           </div>
+                       </div>
+                   </div>
+
                     
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Price</span>
+                    <!-- <div class="sidebar-block filter-group-block open">
+                        <div class="sidebar-block_title"><span>Size 2 Column</span>
                             <div class="toggle-arrow"></div>
                         </div>
                         <div class="sidebar-block_content">
-                            <div class="radio-group">
-                                <!-- value="{min:{{price[0]}},max:{{price[1]}}}" -->
-                                <!-- [checked]="checkedprice($event)" -->
-                                <ng-container > <input type="radio" value="{{price[0]}}-{{price[1]}}" [checked]="checkedprice(price[0])"  (change)="getprice($event)"  id="price" name="price"><label for="price">₹{{price[0]}}-₹{{price[1]}}</label></ng-container>
-                                <ng-container > <input type="radio" value="{{price[1]}}-{{price[2]}}" [checked]="checkedprice(price[1])" (change)="getprice($event)"  id="price1" name="price"><label for="price1">₹{{price[1]}}-₹{{price[2]}}</label></ng-container>
-                                <ng-container > <input type="radio" value="{{price[2]}}-{{price[3]}}" [checked]="checkedprice(price[2])"  (change)="getprice($event)"  id="price2" name="price"><label for="price2">₹{{price[2]}}-₹{{price[3]}}</label></ng-container>
-                                <ng-container > <input type="radio" value="{{price[3]}}-{{price[4]}}" [checked]="checkedprice(price[3])" (change)="getprice($event)"  id="price3" name="price"><label for="price3">₹{{price[3]}}-₹{{price[4]}}</label></ng-container>
-                                <ng-container > <input type="radio" value="{{price[4]}}-1000000" id="price4"  [checked]="checkedprice(price[4])" (change)="getprice($event)"  name="price"><label for="price4">Above ₹{{price[4]}}</label></ng-container>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Categories</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            
-                                <div class="radio-group">
-                                <ng-container  *ngFor='let j of jewelery_for' > <input type="checkbox"  [checked]="checkedjewelery_for(j)" (change)="changefilter($event,j)"  id="{{j}}" name="jewelery_for"><label for="{{j}}">{{j}}</label></ng-container>
-                                </div>
-                        </div>
-                    </div>
- 
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Product</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <div class="radio-group">
-                                <ng-container  *ngFor='let jt of jewelery_type' > <input type="radio" [checked]="checkedjewelery_type(jt)" (change)="changefilter($event,jt)" id="{{jt}}" name="jewelery_type"><label for="{{jt}}">{{jt}}</label></ng-container>
-                            </div>
-                        </div>
-                    </div>
-                    
-<<<<<<< HEAD
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Colors</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <ul class="color-list two-column">
-                                <li><a href="javascript:void(0)" data-tooltip="Yellow" title="Yellow"><span class="value"><img src="../../../../assets/images/colorswatch/color-yellow.png" alt=""></span><span class="colorname">Yellow (125)</span></a></li>
- 
-                                <li><a href="javascript:void(0)" data-tooltip="Silver" title="Silver"><span class="value"><img src="../../../../assets/images/colorswatch/color-white.png" alt=""></span><span class="colorname">Silver (125)</span></a></li>
+                            <ul class="size-list two-column" data-sort='["XXS","XS","S","M","L","XL","XXL","XXXL"]'>
+                                <li data-value="L" class="active"><a href="#">L</a></li>
+                                <li data-value="M"><a href="#">M</a></li>
+                                <li data-value="S"><a href="#">S</a></li>
+                                <li data-value="XL"><a href="#">XL</a></li>
+                                <li data-value="XS"><a href="#">XS</a></li>
                             </ul>
                         </div>
+                    </div> -->
+                    
+                    <!-- <div class="sidebar-block filter-group-block open">
+                        <div class="sidebar-block_title"><span>Size 1 Column</span>
+                            <div class="toggle-arrow"></div>
+                        </div>
+                        <div class="sidebar-block_content">
+                            <ul class="size-list" data-sort='["XXS","XS","S","M","L","XL","XXL","XXXL"]'>
+                                <li data-value="L" class="active"><a href="#">L</a></li>
+                                <li data-value="XL"><a href="#">XL</a></li>
+                                <li data-value="XXS"><a href="#">XXS</a></li>
+                                <li data-value="XS"><a href="#">XS</a></li>
+                                <li data-value="S"><a href="#">S</a></li>
+                                <li data-value="XXL"><a href="#">XXL</a></li>
+                                <li data-value="XXXL"><a href="#">XXXL</a></li>
+                            </ul>
+                        </div>
+                    </div> -->
+                    
+                </div>
+               
+                 
+            </div>
+            <!-- /Left column -->
+            
+            <!-- Center column -->
+            <div class="col-lg aside">
+                <div class="prd-grid-wrap">
+                    <!-- Filter Row -->
+                    <div class="filter-row invisible">
+                        <div class="row row-1 d-lg-none align-items-center">
+                            <div class="col">
+                                <h1 class="category-title">WOMEN’S</h1>
+                            </div>
+                            <div class="col-auto ml-auto">
+                                <div class="view-in-row d-md-none"><span data-view="data-to-show-sm-1"><i class="icon icon-view-1"></i></span> <span data-view="data-to-show-sm-2"><i class="icon icon-view-2"></i></span></div>
+                                <div class="view-in-row d-none d-md-inline"><span data-view="data-to-show-md-2"><i class="icon icon-view-2"></i></span> <span data-view="data-to-show-md-3"><i class="icon icon-view-3"></i></span></div>
+                            </div>
+                        </div>
+                        <div class="row row-2">
+                            <div class="col-left d-flex align-items-center">
+                                <div class="sort-by-holder">
+                                    <div class="select-label d-none d-lg-inline">Sort by:</div>
+                                    <div class="select-wrapper-sm d-none d-lg-inline-block"><select (change)="orderBy($event)" class="form-control input-sm">
+                                            <option value="ASC" >ASC</option>
+                                            <option value="DSC" >DSC</option>
+                                        </select></div>
+                                    <div class="select-directions d-none d-lg-inline"><span><i class="icon icon-arrow-down"  (click)="orderBy(1)" ></i></span> <span><i (click)="orderBy(2)" class="icon icon-arrow-up"></i></span></div>
+                                    <div class="dropdown d-flex d-lg-none align-items-center justify-content-center"><span class="select-label">Sort By</span>
+                                        <div class="select-wrapper-sm"><select (change)="orderBy($event)" class="form-control input-sm">
+                                            <option value="ASC" >ASC</option>
+                                            <option value="DSC" >DSC</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="filter-button d-lg-none"><a href="#" class="fixed-col-toggle">FILTER</a></div>
+                            </div>
+                            <div class="col col-center d-none d-lg-flex align-items-center justify-content-center">
+                                <div class="view-label">View:</div>
+                                <div class="view-in-row"><span data-view="data-to-show-3"><i class="icon icon-view-3"></i></span> <span data-view="data-to-show-4"><i class="icon icon-view-4"></i></span></div>
+                            </div>
+                            <div class="col-right ml-auto d-none d-lg-flex align-items-center">
+                                <div class="items-count">35 item(s)</div>
+                                <div class="show-count-holder">
+                                    <div class="select-label">Show:</div>
+                                    <div class="select-wrapper-sm"><select class="form-control input-sm">
+                                            <option value="featured">12</option>
+                                            <option value="rating">36</option>
+                                            <option value="price">100</option>
+                                        </select></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-=======
+                    <!-- /Filter Row -->
+                    
                     <!-- Products Grid -->
                     <div *ngIf="page">
                             <div class="prd-grid product-listing data-to-show-3 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div" >
@@ -226,185 +285,53 @@
                        
                                                 <div class="prd-hover">
                                                     <div class="prd-action">
->>>>>>> 270c23d69da2b0231d87e9c6461863eeab26803e
                     
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Metal</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <div class="radio-group">
-                                <ng-container  *ngFor='let m of material' > <input type="checkbox" [checked]="checkedmaterial(m)" (change)="changefilter($event,m)" id="{{m}}" name="material"><label for="{{m}}">{{m}}</label></ng-container>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Gold Purity</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <div class="radio-group">
-                                <ng-container  *ngFor='let p of purity' > <input type="checkbox" [checked]="checkedpurity(p)" (change)="changefilter($event,p)" id="{{p}}" name="purity"><label for="{{p}}">{{p}}</label></ng-container>
-                            </div>
-                        </div>
-                    </div>
- 
-                     
-                     <!-- <div class="sidebar-block filter-group-block open">
-                         <div class="sidebar-block_title"><span>Size 2 Column</span>
-                             <div class="toggle-arrow"></div>
-                         </div>
-                         <div class="sidebar-block_content">
-                             <ul class="size-list two-column" data-sort='["XXS","XS","S","M","L","XL","XXL","XXXL"]'>
-                                 <li data-value="L" class="active"><a href="#">L</a></li>
-                                 <li data-value="M"><a href="#">M</a></li>
-                                 <li data-value="S"><a href="#">S</a></li>
-                                 <li data-value="XL"><a href="#">XL</a></li>
-                                 <li data-value="XS"><a href="#">XS</a></li>
-                             </ul>
-                         </div>
-                     </div> -->
-                     
-                     <!-- <div class="sidebar-block filter-group-block open">
-                         <div class="sidebar-block_title"><span>Size 1 Column</span>
-                             <div class="toggle-arrow"></div>
-                         </div>
-                         <div class="sidebar-block_content">
-                             <ul class="size-list" data-sort='["XXS","XS","S","M","L","XL","XXL","XXXL"]'>
-                                 <li data-value="L" class="active"><a href="#">L</a></li>
-                                 <li data-value="XL"><a href="#">XL</a></li>
-                                 <li data-value="XXS"><a href="#">XXS</a></li>
-                                 <li data-value="XS"><a href="#">XS</a></li>
-                                 <li data-value="S"><a href="#">S</a></li>
-                                 <li data-value="XXL"><a href="#">XXL</a></li>
-                                 <li data-value="XXXL"><a href="#">XXXL</a></li>
-                             </ul>
-                         </div>
-                     </div> -->
-                     
-                 </div>
-                
-                  
-             </div>
-             <!-- /Left column -->
-             
-             <!-- Center column -->
-             <div class="col-lg aside">
-                 <div class="prd-grid-wrap">
-                     <!-- Filter Row -->
-                     <div class="filter-row invisible">
-                         <div class="row row-1 d-lg-none align-items-center">
-                             <div class="col">
-                                 <h1 class="category-title">WOMEN’S</h1>
-                             </div>
-                             <div class="col-auto ml-auto">
-                                 <div class="view-in-row d-md-none"><span data-view="data-to-show-sm-1"><i class="icon icon-view-1"></i></span> <span data-view="data-to-show-sm-2"><i class="icon icon-view-2"></i></span></div>
-                                 <div class="view-in-row d-none d-md-inline"><span data-view="data-to-show-md-2"><i class="icon icon-view-2"></i></span> <span data-view="data-to-show-md-3"><i class="icon icon-view-3"></i></span></div>
-                             </div>
-                         </div>
-                         <div class="row row-2">
-                             <div class="col-left d-flex align-items-center">
-                                 <div class="sort-by-holder">
-                                     <div class="select-label d-none d-lg-inline">Sort by:</div>
-                                     <div class="select-wrapper-sm d-none d-lg-inline-block"><select (change)="orderBy($event)" class="form-control input-sm">
-                                             <option value="ASC" >ASC</option>
-                                             <option value="DSC" >DSC</option>
-                                         </select></div>
-                                     <div class="select-directions d-none d-lg-inline"><span><i class="icon icon-arrow-down"  (click)="orderBy(1)" ></i></span> <span><i (click)="orderBy(2)" class="icon icon-arrow-up"></i></span></div>
-                                     <div class="dropdown d-flex d-lg-none align-items-center justify-content-center"><span class="select-label">Sort By</span>
-                                         <div class="select-wrapper-sm"><select (change)="orderBy($event)" class="form-control input-sm">
-                                             <option value="ASC" >ASC</option>
-                                             <option value="DSC" >DSC</option>
-                                             </select></div>
-                                     </div>
-                                 </div>
-                                 <div class="filter-button d-lg-none"><a href="#" class="fixed-col-toggle">FILTER</a></div>
-                             </div>
-                             <div class="col col-center d-none d-lg-flex align-items-center justify-content-center">
-                                 <div class="view-label">View:</div>
-                                 <div class="view-in-row"><span data-view="data-to-show-3"><i class="icon icon-view-3"></i></span> <span data-view="data-to-show-4"><i class="icon icon-view-4"></i></span></div>
-                             </div>
-                             <div class="col-right ml-auto d-none d-lg-flex align-items-center">
-                                 <div class="items-count">35 item(s)</div>
-                                 <div class="show-count-holder">
-                                     <div class="select-label">Show:</div>
-                                     <div class="select-wrapper-sm"><select class="form-control input-sm">
-                                             <option value="featured">12</option>
-                                             <option value="rating">36</option>
-                                             <option value="price">100</option>
-                                         </select></div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <!-- /Filter Row -->
-                     
-                     <!-- Products Grid -->
-                     <div *ngIf="page">
-                             <div class="prd-grid product-listing data-to-show-3 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div" >
-                                 
-                                         <div class="prd" *ngFor="let s of products"  >
-                                                 <div class="prd-inside" >
-                                                     <div class="prd-img-area"><a (click)='go(s.product_id)' class="prd-img"><img [src]="url + s.image" alt="Tyssot 1853"></a>
-                                                         <div class="label-new">NEW</div><a href="javascript:void(0)" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)" class="label-wishlist icon-heart js-label-wishlist"></a>
-                                                         <a href="javascript:void(0)" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a>
-                                                         <div class="gdw-loader"></div>
-                                                     </div>
-                                                     <div class="prd-info">
-                             
-                                                         <h2 class="prd-title"><a (click)='go(s.product_id)'>{{s.gold.goldweight}}g / {{s.gold.goldquality}}</a></h2>
- 
-                        
-                                                 <div class="prd-hover">
-                                                     <div class="prd-action">
-                     
-                                                         <div   *ngIf= "checkCart(s.product_id)" class="row no=gutters" >
-                                                             <button routerLink="/cart" class="btn"><i class="icon icon-handbag"></i><span>Go to Cart</span></button>
-                                                             <!-- <div class="col-2">
-                                                                 <button  (click)="qtyUpdate(s.product_id,-1)" class="btn btn-secondary btn-block">-</button>
-                                                             </div>
-                             
-                                                             <div class="col-4 text-right">{{quantity(s.product_id)}}</div>
-                             
-                                                             <div class="col-2">
-                                                                 <button  (click)="qtyUpdate(s.product_id,+1)" class="btn btn-secondary btn-block">+</button>
-                                                             </div> -->
+                                                        <div   *ngIf= "checkCart(s.product_id)" class="row no=gutters" >
+                                                            <button routerLink="/cart" class="btn"><i class="icon icon-handbag"></i><span>Go to Cart</span></button>
+                                                            <!-- <div class="col-2">
+                                                                <button  (click)="qtyUpdate(s.product_id,-1)" class="btn btn-secondary btn-block">-</button>
                                                             </div>
-                                                            <input type="hidden"> <button class="btn" *ngIf= "!checkCart(s.product_id)"  (click)="go(s.product_id)" ><i class="icon icon-handbag"></i><span>View Detail</span></button>
-                                                            <!-- <div class="prd-links hide-mobile"><a  (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a  (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)"  class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>     -->
-                 
-                                                    
-                                                             </div>
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                         </div>
-                                 
-                                 
-                             </div>
-                             <div *ngIf="alert"   style="padding:200px">
-                                     <ngb-alert [dismissible]="false" >
-                                         <strong>{{message}}</strong> 
-                                     </ngb-alert>
-                             </div>
- 
-                             <div class="loader-wrap">
-                                 <div class="dots">
-                                     <div class="dot one"></div>
-                                     <div class="dot two"></div>
-                                     <div class="dot three"></div>
-                                 </div>
-                             </div>
-                     </div>
-                     <app-loader  *ngIf="loader"></app-loader>
-                     <!-- /Products Grid -->
-                     <!-- <div class="show-more d-flex mt-4 mt-md-6 justify-content-center align-items-start"><a href="#" class="btn btn--alt js-product-show-more" data-load="ajax-products-load.html">show more</a>
-                     </div> -->
-                 </div>
-             </div>
-             <!-- /Center column -->
-         </div>
-         <simple-notifications></simple-notifications>
-         <!-- /Two columns -->
-     </div>
+                            
+                                                            <div class="col-4 text-right">{{quantity(s.product_id)}}</div>
+                            
+                                                            <div class="col-2">
+                                                                <button  (click)="qtyUpdate(s.product_id,+1)" class="btn btn-secondary btn-block">+</button>
+                                                            </div> -->
+                                                           </div>
+                                                           <input type="hidden"> <button class="btn" *ngIf= "!checkCart(s.product_id)"  (click)="go(s.product_id)" ><i class="icon icon-handbag"></i><span>View Detail</span></button>
+                                                           <!-- <div class="prd-links hide-mobile"><a  (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a  (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)"  class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>     -->
+                
+                                                   
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                
+                                
+                            </div>
+                            <div *ngIf="alert"   style="padding:200px">
+                                    <ngb-alert [dismissible]="false" >
+                                        <strong>{{message}}</strong> 
+                                    </ngb-alert>
+                            </div>
+
+                            <div class="loader-wrap">
+                                <div class="dots">
+                                    <div class="dot one"></div>
+                                    <div class="dot two"></div>
+                                    <div class="dot three"></div>
+                                </div>
+                            </div>
+                    </div>
+                    <app-loader  *ngIf="loader"></app-loader>
+                    <!-- /Products Grid -->
+                    <!-- <div class="show-more d-flex mt-4 mt-md-6 justify-content-center align-items-start"><a href="#" class="btn btn--alt js-product-show-more" data-load="ajax-products-load.html">show more</a>
+                    </div> -->
+                </div>
+            </div>
+            <!-- /Center column -->
+        </div>
+        <simple-notifications></simple-notifications>
+        <!-- /Two columns -->
+    </div>

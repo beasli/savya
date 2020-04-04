@@ -145,3 +145,23 @@
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
 }
+.filter-listing .subfilter li .each-filter-listing .filter-text{
+    position:relative;
+}
+.filter-listing ul.subfilter li .each-filter-listing .filter-text:after{
+    position:absolute;
+    width:14px;
+    height:10px;
+    top:50%;
+    transform:translateY(-50%);
+    background-image: url(/assets/images/tick.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    content:'';
+    right:12px;
+    opacity: 0;
+}
+.filter-listing ul.subfilter li.active .each-filter-listing .filter-text:after{
+    opacity: 1;
+}
