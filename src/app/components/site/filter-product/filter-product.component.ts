@@ -186,11 +186,7 @@ export class FilterProductComponent implements OnInit {
      //console.log(pid);
      if(this.drop==0)
      {
-        if(confirm('Please Login first'))
-        {
-            this.router.navigate(['/login']);
-            return false;
-        }
+      document.getElementById("openModalButton").click();
      }
      else if(this.drop==1)
     {
