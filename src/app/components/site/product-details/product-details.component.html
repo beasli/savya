@@ -2,9 +2,9 @@
         <div class="holder mt-0">
             <div class="container">
                 <ul class="breadcrumbs">
-                    <li><a>Home</a></li>
-                    <li *ngIf='subcategory'><a>{{subcategory}}</a></li>
-                    <li *ngIf='subsubcategory'><a>{{subsubcategory}}</a></li>
+                    <li><a  routerLink="/">Home</a></li>
+                    <li *ngIf='subcategory'><a  routerLink="/subsub/{{data['subcategory']}}">{{subcategory}}</a></li>
+                    <li *ngIf='subsubcategory'><a routerLink="/filter/{{data['subcategorytype']}}">{{subsubcategory}}</a></li>
                 </ul>
             </div>
         </div>
@@ -34,7 +34,6 @@
                             <div class="js-prd-d-holder prd-holder product-name-details">
                                 <div class="prd-block_title-wrap">
                                     <h1 class="prd-block_title product-details-item-heading">{{data.productname}}</h1>
-                                    <div class="prd-block__labels"><span class="prd-label--new">NEW</span></div>
                                 </div>
                                 <div class="prd-block_info-top">
                                     <div *ngIf='value>0' class="product-sku product-price">Rs: {{totalprice * value}}<span *ngIf=(assets.gold.length) class="product-size">( {{gold.goldquality}} )</span></div>
