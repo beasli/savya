@@ -12,6 +12,7 @@ export class AccountHistoryComponent implements OnInit {
  orders:any;
  loader:boolean;
 page:boolean;
+alert:boolean;
   constructor(private api:ApiService,private router:Router) { }
   orderDetail(id)
   {
@@ -20,7 +21,7 @@ page:boolean;
   ngOnInit() {
     this.loader=true;
     this.page=false;
-    this.api.Post(ORDERHISTORY,{user_id:3 }).then(data=>{
+    this.api.Post(ORDERHISTORY,{user_id:this.api.uid }).then(data=>{
       this.page=true;
       this.loader=false;
       this.orders=data['data'];
@@ -28,6 +29,9 @@ page:boolean;
       console.log( data['data']);
      
     }).catch(d=>{
+      this.alert=true;
+      this.loader=false;
+      this.page=false;
       console.log(d);
       
     })

@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 aside aside--left">
-                    <div class="list-group"><a routerLink="/account-details" class="list-group-item active">Account Details</a> <a routerLink="/account-addresses" class="list-group-item">My Addresses</a> <a routerLink="/account-wishlist" class="list-group-item">My Wishlist</a> <a routerLink="/account-history" class="list-group-item">My Order History</a><a routerLink="/event-history" class="list-group-item">My Event History</a></div>
+                    <div class="list-group"><a routerLink="/account-details" class="list-group-item active">Account Details</a> <a routerLink="/account-addresses" class="list-group-item">My Addresses</a> <a routerLink="/account-wishlist" class="list-group-item">My Wishlist</a> <a routerLink="/account-history" class="list-group-item">My Order History</a><a routerLink="/event-history" class="list-group-item">My Event History</a><a routerLink="/kyc" class="list-group-item">KYC</a></div>
                 </div>
                 <div class="col-md-9 aside">
                     <h2>Account Details</h2>
@@ -26,7 +26,7 @@
                                         <br><b>Company Name:</b>{{data.company_name}}<br><b>Gst No:</b>{{data.gst_no}}<br><b>Pan No:</b>{{data.pan_no}}</p>
                                     <div class="mt-2 clearfix"><a routerLink="/changeProfile" class="link-icn js-show-form" data-form="#updateDetails"><i class="icon-pencil"></i>Edit</a></div>
                                 </div>
-                                <app-loader *ngIf="loader" ></app-loader>
+                                <div  style="padding: 200px;" *ngIf="loader"><app-loader  ></app-loader></div>
                                 <!-- <div class="text-center" *ngIf="loader">
                                     <div class="spinner-grow text-primary" role="status">
                                         <span class="sr-only">Loading...</span>
