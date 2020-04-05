@@ -10,7 +10,7 @@
                     <ul  class="mmenu mmenu-js">
                         
                         <ul class="mmenu mmenu-js">
-                            <li *ngFor='let s of catwithsub' class="mmenu-item--simple"><a href="javascript:void(0)" title="">{{s.category}}<span class="menu-label menu-label--color1">NEW</span></a>
+                            <li *ngFor='let s of catwithsub' class="mmenu-item--simple"><a href="javascript:void(0)" title="">{{s.category}}</a>
                                 <div class="mmenu-submenu">
                                     <ul class="submenu-list">
                                         <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" (click)='gofilter(p.subcategory_id)'>{{p.subcategory}}</a>
@@ -19,7 +19,7 @@
                                 </div>
                             </li>
 
-                            <li class="mmenu-item--simple"><a href="javascript:void(0)" title="">More<span class="menu-label menu-label--color1">NEW</span></a>
+                            <li class="mmenu-item--simple"><a href="javascript:void(0)" title="">More</a>
                                 <div class="mmenu-submenu">
                                     <ul class="submenu-list">
                                         <li *ngFor='let s of catwithoutsub'><a href="javascript:void(0)" title="">{{s.category}}</a></li>
