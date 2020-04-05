@@ -14,6 +14,7 @@ export class ProductHolderComponent implements OnInit {
   @Input() mostselling;
   @Input() url3;
   @Input() heading;
+  @Input() redirect;
   value:boolean;
   slideConfig = {
     "slidesToShow": 4,
