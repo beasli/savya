@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, CARTDELETE, CARTUPDATE } from '../../config';
+import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, CARTDELETE, CARTUPDATE, ORDERHISTORY } from '../../config';
 import * as CryptoJS from 'crypto-ts';
 import { JsonPipe } from '@angular/common';
 import { NotificationsService } from 'angular2-notifications';
@@ -35,7 +35,7 @@ export class ApiService {
     {
       this.updateCart();
       this.updateWishlist();
-
+      this.updateOrderHistory();
     }
     
     if (localStorage.getItem('drop')) {
@@ -68,7 +68,18 @@ export class ApiService {
         });
     });
   }
-    
+  
+  updateOrderHistory()
+  {
+    this.Post(ORDERHISTORY,{user_id:this.uid}).then(data=>{
+      console.log( data);
+      localStorage.setItem('orders',JSON.stringify(data['data']));  
+    }).catch(d=>{
+      console.log(d);
+      localStorage.removeItem('orders');
+    })
+  }
+
   onSuccess(message){
     console.log('im called');
     this.service.success('Success',message,{
@@ -361,6 +372,7 @@ checkWishlist(pid)
       localStorage.removeItem('token');
       localStorage.removeItem('wishlist');
       localStorage.removeItem('cart');
+      localStorage.removeItem('orders');
   }
 setOtp(value)
 {
