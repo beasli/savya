@@ -54,10 +54,26 @@ export class ProductDetailsComponent implements OnInit {
   pricesilver:any;
   totalsilver:any;
   loader:boolean;
-page:boolean;
-scroll:boolean;
-drop:any;
-loading:boolean;
+  page:boolean;
+  scroll:boolean;
+  drop:any;
+  loading:boolean;
+  slideConfig = {
+    "slidesToShow": 1,
+    "slidesToScroll": 1,
+    "dots": false,
+    "infinite": true,
+    "autoplay": true,
+    "arrows": false,
+    responsive: [
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      }]
+  };
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
     this.drop=this.api.drop; 
     this.route.params.subscribe(params => {

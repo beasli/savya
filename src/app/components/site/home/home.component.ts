@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
   url3: any;
   manufacturerurl:any;
   manufacturer: any;
+  loader:boolean;
+  page:boolean;
   slideConfig = {
     "slidesToShow": 4,
     "slidesToScroll": 1,
@@ -55,6 +57,8 @@ export class HomeComponent implements OnInit {
   
   constructor(private api: ApiService ) {
       this.api.Post(CRAUSEL, {}).then(data => {
+        this.page=true;
+      this.loader=false;
         console.log(data);
         data['body'].forEach(childObj => {
           if (childObj.category === 'app_banners') {
@@ -82,7 +86,8 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit() {
-
+    this.loader=true;
+    this.page=false;
   }
 
 }

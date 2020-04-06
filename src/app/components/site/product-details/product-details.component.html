@@ -35,12 +35,26 @@
             <div class="container">
                 <div class="row prd-block prd-block--mobile-image-first js-prd-gallery" id="prdGallery100">
                     <div class="col-md-6 col-xl-5">
-                        
                         <div class="prd-block_main-image main-image--slide js-main-image--slide">
                             <div class="prd-block_main-image-holder js-main-image-zoom" data-zoomtype="inner">
-                                <app-slider [slider_imgs] = 'prd_img' [url] = 'url'></app-slider>
+                                <ngx-slick-carousel class="carousel" 
+                                            #slickModal="slick-carousel" 
+                                            [config]="slideConfig" >
+                                <div ngxSlickItem *ngFor="let slide of prd_img;let i = index"  class="slide">
+                                <lib-ngx-image-zoom
+                                        [thumbImage]="url + '/' + slide.image"
+                                        [magnification]=2
+                                    ></lib-ngx-image-zoom>
+                                </div>
+                                </ngx-slick-carousel>
+                                <span *ngFor="let slide of prd_img;let i = index">
+                                    <img (click)="slickModal.slickGoTo(i)" src="{{ url + slide.image }}" class="thumbnail"  alt="" width="100px">
+                                </span>
+                                
+
                             </div>
                         </div>
+                       
                         <!-- /Product Gallery -->
                         <div class="prd-safecheckout topline slider-bottom-support-image">
                         <div *ngIf='certificate && certificate.length>0' > 

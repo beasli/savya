@@ -1,9 +1,9 @@
 <div class="page-content">
 	<div class="floating-whatsaap-btn">
-        <a href=""><img src="assets/images/WhatsApp.svg"/></a>
+        <a href="javascript:void(0)"><img src="assets/images/WhatsApp.svg"/></a>
     </div>
     <!-- BN Slider 1 -->
-    <app-slider [slider_imgs] = 'slider_imgs' [url] = 'url'></app-slider>
+    <app-slider [slider_imgs] = 'slider_imgs' [url] = 'url' *ngIf="page"></app-slider>
     <!-- //BN Slider 1 -->
     <!-- <app-testimonials [input] = 'events'  [url] = 'url2'></app-testimonials> -->
      <!-- Product Holder -->
@@ -11,14 +11,15 @@
      <!--/Product Holder -->
 
     <!-- live rates area-->
-    <app-liverates></app-liverates>
+    <app-liverates *ngIf="page"></app-liverates>
     <!-- live rates area-->
     <!-- <app-manufacture  [heading] = '""' [isShowAll] = 'false' [input] = 'logo' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = 'url2'></app-manufacture> -->
     <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09 mt-0 ">
       <div class="container">
-          <div class="text-center">
+            <div class="text-center">
 
-              <h2 class="h1-style">Our Associate Brands</h2>
+                <h2 class="h1-style">Our Associate Brands</h2>
+
 
               <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
           </div>
@@ -32,11 +33,24 @@
                 <div class="overlay-effect-content">
                   <h2>{{ slide.company_name }}</h2>
                 </div>
+
+                <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
             </div>
+            <div class="testimonials seller">
+                  <ngx-slick-carousel class="carousel" 
+                            #slickModal="slick-carousel" 
+                            [config]="slideConfig" >
+                  <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide embed-responsive embed-responsive-16by9">
+                  <img src="{{ url2 + slide.logo }}"  class="embed-responsive-item"  alt="" width="100%">
+                  <div class="overlay-effect">
+                      <div class="overlay-effect-content">
+                        <h2>{{ slide.company_name }}</h2>
+                      </div>
+                  </div>
+                  </div>
+                  </ngx-slick-carousel>
             </div>
-            </ngx-slick-carousel>
-          </div>
-  </div>
+       </div>
     <!--Company name slider-->
     <!--<app-testimonials [slides]="4" [heading] = '"Company Logo"' [redirect] = '"N"' [input] = 'company_slider'  [url] = '"assets/images/"'></app-testimonials>-->
    
@@ -61,7 +75,7 @@
     <!--Company name slider-->
 
     <!--youtube-video-->
-    <section class="youtube-video py-3 py-md-6">
+    <section class="youtube-video py-3 py-md-6" *ngIf="page">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -86,22 +100,22 @@
     <!--/Product Holder -->
     
     
-    <app-testimonials [heading] = '""' [isShowAll] = 'true' [input] = 'models' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = '"assets/images/model/"'></app-testimonials>
+    <app-testimonials [heading] = '""' [isShowAll] = 'true' [input] = 'models' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = '"assets/images/model/"' *ngIf="page"></app-testimonials>
 
     <!--youtube-video-->
 
 
     <!-- Promotional Section -->
-    <app-exclusive-banner [url2] = 'url2' [exclusive] = 'exclusive'></app-exclusive-banner>
+    <app-exclusive-banner [url2] = 'url2' [exclusive] = 'exclusive' *ngIf="page"></app-exclusive-banner>
     <!--/Promotional section -->
    
     <!-- Mostselling Product -->
-    <app-product-holder [redirect] = '0' [heading] = '"Mostselling Product"' [url3] = 'url3' [mostselling] = 'mostselling'></app-product-holder>
+    <app-product-holder [redirect] = '0' [heading] = '"Mostselling Product"' [url3] = 'url3' [mostselling] = 'mostselling' *ngIf="page"></app-product-holder>
     <!-- Mostselling Product -->
 
 
     <!-- Testimonials -->
-    <app-testimonials [heading] = '"Events"' [isShowAll] = 'true' [redirect] = '"Y"' [slidetoshow] = '"2"' [input] = 'events'  [url] = 'url2'></app-testimonials>
+    <app-testimonials [heading] = '"Events"' [isShowAll] = 'true' [redirect] = '"Y"' [slidetoshow] = '"2"' [input] = 'events'  [url] = 'url2' *ngIf="page"></app-testimonials>
     <!--/Testimonial -->
 
 
@@ -110,33 +124,31 @@
      <!--/Testimonial -->
 
 
-     <div class="holder py-3 py-md-6 fullboxed aside--bg-none  mt-0">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="h1-style">Partners</h2>
-                <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
-            </div>
-            <div class="testimonials">
-              <ngx-slick-carousel class="carousel" 
-                        #slickModal="slick-carousel" 
-                        [config]="slideConfig" >
-              <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
-                <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="assets/images/IGI_Expo.jpg" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+     <div class="holder py-3 py-md-6 fullboxed aside--bg-none  mt-0" *ngIf="page">
+          <div class="container">
+              <div class="text-center">
+                  <h2 class="h1-style">Partners</h2>
+                  <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
               </div>
-              <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
-                <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="assets/images/download.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+              <div class="testimonials">
+                  <ngx-slick-carousel class="carousel" 
+                            #slickModal="slick-carousel" 
+                            [config]="slideConfig" >
+                  <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
+                    <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="assets/images/IGI_Expo.jpg" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+                  </div>
+                  <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
+                    <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="assets/images/download.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+                  </div>
+                  <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
+                    <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="assets/images/bvclogo.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+                  </div>
+                  <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
+                    <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="assets/images/mtv_live_stream.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+                  </div>
+                  </ngx-slick-carousel>
               </div>
-              <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
-                <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="assets/images/bvclogo.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
-              </div>
-              <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
-                <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="assets/images/mtv_live_stream.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
-              </div>
-              </ngx-slick-carousel>
-        </div>
-        
+          </div>
     </div>
-    
-
-</div>
+    <div style="padding: 200px;" *ngIf="loader"> <app-loader   ></app-loader> </div>
 <simple-notifications></simple-notifications>
