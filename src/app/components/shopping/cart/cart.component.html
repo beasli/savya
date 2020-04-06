@@ -9,7 +9,7 @@
     </div>
     
     <div class="holder mt-0">
-        <div class="container" *ngIf="page">
+        <div class="container shopping-cart-item-details" *ngIf="page">
             <h1 class="text-center">Shopping Cart</h1>
             <div class="cart-table" *ngIf="div">
                 <div class="cart-table-prd"  *ngFor="let r of results;let i=index">
@@ -20,16 +20,16 @@
                         <h2><a  href="javascript:void(0)" (click)='go(r.product_id)'>{{r.productName}}</a></h2>
                     </div>
                     <div   *ngIf= "checkCart(r.product_id)" class="row no=gutters" >
-                        <div class="row">
-                        <div class="col-1">
-                            <button  (click)="qtyUpdate(r.product_id,-1)" class="btn btn-secondary btn-block">-</button>
-                        </div>
-
-                        <div class="col-2 text-right">{{quantity(r.product_id)}}</div>
-
-                        <div class="col-1 ">
-                            <button  (click)="qtyUpdate(r.product_id,+1)" class="btn btn-secondary btn-block">+</button>
-                        </div>
+                       
+                        <div class="item-plus-minus">
+                            <table>
+                                <tr>
+                                    <td><button  (click)="qtyUpdate(r.product_id,-1)" class="btn btn-secondary btn-block">-</button></td>
+                                    <td>{{quantity(r.product_id)}}</td>
+                                    <td><button  (click)="qtyUpdate(r.product_id,+1)" class="btn btn-secondary btn-block">+</button></td>
+                                </tr>
+                            </table>
+                        
                     </div>
                 </div>
                     <!-- <div class="cart-table-prd-qty"><span>qty:</span> <b>{{r.count}}</b></div> -->
