@@ -342,8 +342,8 @@
             </div>
         </div>
             <!-- Recent Products -->
-        <app-product-holder [heading] = '"Related Product"' [url3] = 'url' [mostselling] = 'recents'></app-product-holder>
+        <app-product-holder [redirect] = "data['subcategorytype']" [heading] = '"Related Product"' [url3] = 'url' [mostselling] = 'recents'></app-product-holder>
         <simple-notifications></simple-notifications>
 </div>
-<div style="padding:200px" >  <app-loader  *ngIf="loader"></app-loader></div>
+<div style="padding:200px" *ngIf="loader">  <app-loader  ></app-loader></div>
 
