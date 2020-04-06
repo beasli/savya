@@ -13,8 +13,8 @@
             <h1 class="text-center">Shopping Cart</h1>
             <div class="cart-table" *ngIf="div">
                 <div class="cart-table-prd"  *ngFor="let r of results;let i=index">
-                     <div class="cart-table-prd-qty"><span></span> <b>{{i+1}}</b></div>
-                    <div class="cart-table-prd-image"><a  (click)='go(r.product_id)'><img src="{{baseurl + r.image}}" alt=""></a></div>
+                   <div class="cart-table-prd-qty"><span></span> <b>{{i+1}}</b></div>
+                    <div class="cart-table-prd-image"><a  (click)='go(r.product_id)'><img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="{{baseurl + r.image}}" alt=""></a></div>
                     <div class="cart-table-prd-name">
                         <h5><a href="javascript:void(0)" (click)='go(r.product_id)'>Ring</a></h5>
                         <h2><a  href="javascript:void(0)" (click)='go(r.product_id)'>{{r.productName}}</a></h2>

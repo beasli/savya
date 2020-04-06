@@ -82,6 +82,9 @@ export class HomeComponent implements OnInit {
         this.url = data['url'];
         this.url2 = this.url + '/';
         this.url3 = data['product_url'] + '/';
+      }).catch(d=>{
+        console.log(d);
+        document.getElementById("openModalButton").click();
       });
    }
 
