@@ -4,7 +4,7 @@
   <div class="col-sm">
     
 <div class="card border" style="width: 50rem;" *ngIf="event">
-    <img src="{{ event.url + event.image }}" class="card-img-top" alt="...">
+    <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="{{ event.url + event.image }}" class="card-img-top" alt="...">
     <div class="card-body text-center">
       <h3 class="card-title">{{event.title}}</h3>
       <p class="card-text">{{event.description}}<br><br>{{event.address}}<br><br>Event Fees: <span *ngIf="event.amount">₹</span><span *ngIf="!event.amount">Free</span> {{event.amount}}</p>

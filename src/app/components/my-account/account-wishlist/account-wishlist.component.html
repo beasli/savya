@@ -19,7 +19,7 @@
                             <h2>My Wishlist</h2>
                             <div  class="cart-table cart-table--wishlist" *ngFor="let r of results">
                                 <div class="cart-table-prd" >
-                                    <div class="cart-table-prd-image"><a href="javascript:void(0)" (click)="go(r.product_id)"><img src="{{baseurl + r.image}}" alt=""></a></div>
+                                    <div class="cart-table-prd-image"><a href="javascript:void(0)" (click)="go(r.product_id)"><img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="{{baseurl + r.image}}" alt=""></a></div>
                                     <div class="cart-table-prd-name">
                                         <h5><a href="javascript:void(0)" (click)="go(r.product_id)">{{r.size}}</a></h5>
                                         <h2><a href="javascript:void(0)" (click)="go(r.product_id)">{{r.productname}}</a></h2>
