@@ -1,4 +1,4 @@
-import { MYEVENTS, EVENTS } from './../../../../config';
+import { MYEVENTS, EVENTS, RAZORPAYKEY } from './../../../../config';
 import { ApiService } from 'src/app/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -56,7 +56,7 @@ shareservice() {
 
   payWithRazor(amt) {
     const options: any = {
-      key: 'rzp_test_Dmzimsnc9gzT7E',
+      key: RAZORPAYKEY,
       amount: amt, // amount should be in paise format to display Rs 1255 without decimal point
       currency: 'INR',
       name: 'Savya Jewels Business', // company name or product name
