@@ -25,6 +25,9 @@ import { FilterNavBarComponent } from '../filter-nav-bar/filter-nav-bar.componen
 import { LoaderComponent } from '../loader/loader.component';
 
 
+// Import the library
+import { NgxImageZoomModule } from 'ngx-image-zoom';
+
 
 const customConfig: ShareButtonsConfig = {
   autoSetMeta: true,
@@ -58,6 +61,7 @@ const customConfig: ShareButtonsConfig = {
     NgbModule,
     SlickCarouselModule,
     BrowserAnimationsModule,
+    NgxImageZoomModule,
     SimpleNotificationsModule.forRoot(),
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
