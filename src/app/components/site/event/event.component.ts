@@ -5,20 +5,23 @@ import { ActivatedRoute } from '@angular/router';
 
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { iconpack } from 'src/icons';
+import { WindowRefService } from '../../../window-ref/window-ref.service';
 
 import { ShareService } from '@ngx-share/core';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css']
+  styleUrls: ['./event.component.css'],
+  providers: [WindowRefService]
 })
 export class EventComponent implements OnInit {
 event: any;
 uid: any;
 eid: any;
 url: any;
-constructor(private api: ApiService, private route: ActivatedRoute, public share: ShareService, library: FaIconLibrary) {
+constructor(private api: ApiService, private route: ActivatedRoute, public share: ShareService, library: FaIconLibrary, private winRef: WindowRefService) {
         library.addIcons(...iconpack);
         this.uid = this.api.uid;
 
@@ -45,6 +48,47 @@ shareservice() {
 
 }
   ngOnInit(): void {
+  }
+
+  createRzpayOrder() {
+    console.log('createRzpayOrder');
+    // call api to create order_id
+    var order_id = 'order_EbHNWHadq9BHcF';
+    this.payWithRazor(order_id);
+  }
+
+  payWithRazor(val) {
+    const options: any = {
+      key: 'rzp_test_Dmzimsnc9gzT7E',
+      amount: 125500, // amount should be in paise format to display Rs 1255 without decimal point
+      currency: 'INR',
+      name: 'Savya Jewels Business', // company name or product name
+      description: '',  // product description
+      image: 'assets/images/savyalogoblack.png', // company logo or product image
+    //  order_id: val, // order_id created by you in backend
+      modal: {
+        // We should prevent closing of the form when esc key is pressed.
+        escape: false,
+      },
+      notes: {
+        // include notes if any
+      },
+      theme: {
+        color: '#c59f59'
+      }
+    };
+    options.handler = ((response, error) => {
+      options.response = response;
+      console.log(response);
+      console.log(options);
+      // call your backend api to verify payment signature & capture transaction
+    });
+    options.modal.ondismiss = (() => {
+      // handle the case when user closes the form while transaction is in progress
+      console.log('Transaction cancelled.');
+    });
+    const rzp = new this.winRef.nativeWindow.Razorpay(options);
+    rzp.open();
   }
 
 }
