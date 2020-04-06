@@ -37,8 +37,10 @@
             <ngx-slick-carousel class="carousel"  #slickModal="slick-carousel"  [config]="slideConfig" >
 
                 <div ngxSlickItem  class="prd prd-new prd-popular" *ngFor="let s of mostselling">
-                    <div class="prd-inside" >
-                        <div class="prd-img-area"><a (click)='go(s.product_id)' class="prd-img"><img [src]="url3 + s.image" onerror="this.src='../../../../assets/images/ring-demo2.png'" alt="Tyssot 1853"></a>
+
+                    <div class="prd-inside product-border" >
+                        <div class="prd-img-area"><a (click)='go(s.product_id)' class="prd-img"><img [src]="url3 + s.image" alt="Tyssot 1853"></a>
+
                             <a href="javascript:void(0)" (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)" class="label-wishlist icon-heart js-label-wishlist"></a>
                             <a href="javascript:void(0)" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a>
                             <div class="gdw-loader"></div>
