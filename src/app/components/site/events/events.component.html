@@ -3,7 +3,9 @@
 <div class="card-columns  p-2">
     <div *ngFor="let slide of events" (click)='detail(slide)' class="card border">
         <div class="embed-responsive embed-responsive-16by9">
-            <img alt="Card image cap" class="card-img-top w-100 embed-responsive-item" src="{{ url + slide.image }}" />
+
+            <img alt="Card image cap" onerror="this.src='../../../../assets/images/ring-demo2.png'" class="card-img-top w-100 embed-responsive-item" src="{{ url + slide.image }}" />
+
          </div>
       <div class="card-body">
         <h5 class="card-title">{{slide.title}}</h5>

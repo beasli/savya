@@ -59,7 +59,8 @@
                         <div class="prd-safecheckout topline slider-bottom-support-image">
                         <div *ngIf='certificate && certificate.length>0' > 
                             <h3 class="h2-style">certified by:</h3>
-                            <img [src]="certificateurl + certificate[0]['image']" onerror="this.src='../../../../assets/images/ring-demo2.png'"> </div>
+                            <img [src]="certificateurl + certificate[0]['image']" 
+                            > </div>
                         
                             <h3 class="h2-style">Manufactured by:</h3>
                             <img [src]="url + data['image']" onerror="this.src='../../../../assets/images/ring-demo2.png'"><h3 class="h2-style">{{data.company_name}}</h3>
