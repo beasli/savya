@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SUBCATEGORYTYPE, CRAUSEL } from 'src/config';
+import { SUBCATEGORYTYPE, CRAUSEL, CATEGORY, SUBCATEGORY } from 'src/config';
 import { ApiService } from 'src/app/api/api.service';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
@@ -47,6 +47,8 @@ slideConfig = {
 };
 // baseUrl:any="http://admin.savyajewelsbusiness.com/admin/";
   manufacturer: any;
+  category: any;
+  subcategory: any;
   constructor(private route:ActivatedRoute,private api:ApiService,
     private sanitizer: DomSanitizer,
     private router:Router) {
@@ -54,6 +56,7 @@ slideConfig = {
       this.subid = params.id;
       this.getsubsub();
     });
+
 
 
     this.api.Post(CRAUSEL, {}).then(data => {
@@ -77,6 +80,21 @@ slideConfig = {
       this.loader=false;
       this.data = data['data'];
       console.log(data);
+
+      this.api.Post(CATEGORY, {} ).then(data  => {
+        let result = data['data'].find(x => x.id == this.data[0]['category']);
+        this.category = result['category'];
+        console.log(this.category);
+     }).catch(d=>{console.log(d);});
+
+     this.api.Post(SUBCATEGORY, {category_id: this.data[0]['category']} ).then(data  => {
+  
+      let result = data['data'].find(x => x.id == this.data[0]['subcategory']);
+      this.subcategory = result['subcategory'];
+      console.log(this.subcategory);
+    }).catch(d=>{
+        console.log(d);
+      });
      }).catch(d=>{
       console.log(d);
     });
