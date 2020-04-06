@@ -22,7 +22,7 @@ import { OtpGuardService } from './components/auth-guard/otp-guard.service';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    NavBarComponent,
+    NavBarComponent
 
   ],
   imports: [

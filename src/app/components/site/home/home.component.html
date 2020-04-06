@@ -20,10 +20,11 @@
 
                 <h2 class="h1-style">Our Associate Brands</h2>
 
-                <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
-            </div>
-            <div class="testimonials seller">
-                  <ngx-slick-carousel class="carousel" 
+
+              <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
+          </div>
+          <div class="testimonials seller">
+            <ngx-slick-carousel class="carousel" 
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
                   <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide embed-responsive embed-responsive-16by9">
@@ -121,20 +122,43 @@
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
                   <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
-                    <img src="assets/images/IGI_Expo.jpg" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+                    <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="assets/images/IGI_Expo.jpg" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
                   </div>
                   <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
-                    <img src="assets/images/download.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+                    <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="assets/images/download.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
                   </div>
                   <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
-                    <img src="assets/images/bvclogo.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+                    <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="assets/images/bvclogo.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
                   </div>
                   <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
-                    <img src="assets/images/mtv_live_stream.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+                    <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="assets/images/mtv_live_stream.png" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
                   </div>
                   </ngx-slick-carousel>
               </div>
           </div>
     </div>
     <div style="padding: 200px;" *ngIf="loader"> <app-loader   ></app-loader> </div>
+    <!-- modal start -->
+    <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="exampleModalLongTitle">Network Issue</h2>
+              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button> -->
+            </div>
+            <div class="modal-body">
+              <h5>Check Your Internet Connection</h5>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <!-- <button type="button" class="btn btn-primary" (click)="goLogin()">Go</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- modal end -->
 <simple-notifications></simple-notifications>
