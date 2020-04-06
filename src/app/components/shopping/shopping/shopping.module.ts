@@ -28,7 +28,7 @@ import { SiteModule } from '../../site/site/site.module';
     SimpleNotificationsModule.forRoot(),
     RouterModule.forChild([
       { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService,CheckoutService]},
-      { path: 'cart', component: CartComponent},
+      { path: 'cart', component: CartComponent, canActivate: [AuthGuardService]},
       { path: 'product', component: ProductComponent},
     ])
   ]
