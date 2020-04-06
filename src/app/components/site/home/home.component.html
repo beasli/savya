@@ -25,19 +25,6 @@
           </div>
           <div class="testimonials seller">
             <ngx-slick-carousel class="carousel" 
-                      #slickModal="slick-carousel" 
-                      [config]="slideConfig" >
-            <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide embed-responsive embed-responsive-16by9">
-            <img onerror="this.src='../../../../assets/images/ring-demo2.png'" src="{{ url2 + slide.logo }}"  class="embed-responsive-item"  alt="" width="100%">
-            <div class="overlay-effect">
-                <div class="overlay-effect-content">
-                  <h2>{{ slide.company_name }}</h2>
-                </div>
-
-                <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
-            </div>
-            <div class="testimonials seller">
-                  <ngx-slick-carousel class="carousel" 
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
                   <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide embed-responsive embed-responsive-16by9">
