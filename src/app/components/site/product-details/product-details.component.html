@@ -40,7 +40,7 @@
                                 <ngx-slick-carousel class="carousel" 
                                             #slickModal="slick-carousel" 
                                             [config]="slideConfig" >
-                                <div ngxSlickItem *ngFor="let slide of prd_img;let i = index" (click)='detail(slide)' [ngClass]="{'overlay-wrapper':redirect=='Y'}" class="slide">
+                                <div ngxSlickItem *ngFor="let slide of prd_img;let i = index"  class="slide">
                                 <lib-ngx-image-zoom
                                         [thumbImage]="url + '/' + slide.image"
                                         [magnification]=2
@@ -48,7 +48,7 @@
                                 </div>
                                 </ngx-slick-carousel>
                                 <span *ngFor="let slide of prd_img;let i = index">
-                                    <img (click)="slickModal.slickGoTo(i)" src="{{ url + slide.image }}" (mouseover)="text(slide)" class="thumbnail"  alt="" width="100px">
+                                    <img (click)="slickModal.slickGoTo(i)" src="{{ url + slide.image }}" class="thumbnail"  alt="" width="100px">
                                 </span>
                                 
 
