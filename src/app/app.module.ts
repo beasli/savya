@@ -15,7 +15,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutService } from './components/auth-guard/checkout.service';
 import { OtpGuardService } from './components/auth-guard/otp-guard.service';
-import { KycPendingComponent } from './components/auth/kyc-pending/kyc-pending.component';
 
 
 @NgModule({
@@ -23,8 +22,7 @@ import { KycPendingComponent } from './components/auth/kyc-pending/kyc-pending.c
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    NavBarComponent,
-    KycPendingComponent,
+    NavBarComponent
 
   ],
   imports: [

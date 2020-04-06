@@ -1,3 +1,4 @@
+import { KycPendingComponent } from './../kyc-pending/kyc-pending.component';
 import { AuthGuardService } from './../../auth-guard/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,7 +21,8 @@ import { SiteModule } from '../../site/site/site.module';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    OtpComponent, 
+    OtpComponent,
+    KycPendingComponent,
     ForgetPasswordComponent,
     ForgetOtpComponent,
     ChangePasswordComponent,
@@ -43,6 +45,7 @@ import { SiteModule } from '../../site/site/site.module';
       { path: 'change/:no' , component: ChangePasswordComponent, canActivate: [OtpGuardService]},
       { path: 'kyc' , component: KycComponent, canActivate: [AuthGuardService]},
       { path: 'changeProfile' , component: ChangeProfileComponent,  canActivate: [AuthGuardService]},
+      { path: 'kycpending' , component: KycPendingComponent}
     ])
   ]
 })
