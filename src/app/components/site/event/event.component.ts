@@ -40,6 +40,8 @@ register() {
    this.api.Post(MYEVENTS, {uid:this.uid.toString(), amount:'0' , event_type:'free', event_id:this.event.id.toString(), transaction_no:"000000"}).then(data => {
         console.log(data);
     }).catch(data=>{console.log(data)});
+  } else {
+    this.payWithRazor(this.event.amount*100);
   }
 }
 
@@ -50,21 +52,16 @@ shareservice() {
   ngOnInit(): void {
   }
 
-  createRzpayOrder() {
-    console.log('createRzpayOrder');
-    // call api to create order_id
-    var order_id = 'order_EbHNWHadq9BHcF';
-    this.payWithRazor(order_id);
-  }
+  
 
-  payWithRazor(val) {
+  payWithRazor(amt) {
     const options: any = {
       key: 'rzp_test_Dmzimsnc9gzT7E',
-      amount: 125500, // amount should be in paise format to display Rs 1255 without decimal point
+      amount: amt, // amount should be in paise format to display Rs 1255 without decimal point
       currency: 'INR',
       name: 'Savya Jewels Business', // company name or product name
       description: '',  // product description
-      image: 'assets/images/savyalogoblack.png', // company logo or product image
+      image: 'http://savyajewelsbusiness.com/assets/images/savyalogoblack.png', // company logo or product image
     //  order_id: val, // order_id created by you in backend
       modal: {
         // We should prevent closing of the form when esc key is pressed.
@@ -79,6 +76,16 @@ shareservice() {
     };
     options.handler = ((response, error) => {
       options.response = response;
+      const formData = new FormData();
+      formData.append('uid', this.uid.toString());
+      formData.append('amount', amt);
+      formData.append('event_type', this.event.event_type);
+      formData.append('event_id', this.event.id.toString());
+      formData.append('transaction_no', response.razorpay_payment_id);
+
+      this.api.Post(MYEVENTS, formData).then(data => {
+        console.log(data);
+      }).catch(data=>{console.log(data)});
       console.log(response);
       console.log(options);
       // call your backend api to verify payment signature & capture transaction
