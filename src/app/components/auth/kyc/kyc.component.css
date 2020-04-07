@@ -1,0 +1,69 @@
+.select-feild label{
+    font-size: 17px;
+    font-family: 'Domine', serif;
+    font-weight:700;
+    padding-left: 40px;
+}
+.photop-upload-area{
+    width:100%;
+    height: 250px;
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+}
+.photop-upload-area img{
+    width:100%;
+}
+.photo-upload-text h4{
+    font-size:16px;
+    margin-bottom:10px;
+}
+.photo-upload-text ul{
+    padding-left:17px;
+}
+.photo-upload-text ul li{
+    font-size:16px;
+    line-height: 30px;;
+}
+.select-feild{
+    margin-bottom:15px;
+}
+.photo-upload-text{
+    padding-top: 30px;;
+}
+.each-photo-upload-wpapper{
+    border:1px solid #e5e5e5;
+    padding:30px;
+    background:#f2debc;
+    -webkit-box-shadow: 0px -1px 26px -13px rgba(0,0,0,0.50);
+    -moz-box-shadow: 0px -1px 26px -13px rgba(0,0,0,0.50);
+    box-shadow: 0px -1px 26px -13px rgba(0,0,0,0.50);
+    margin-bottom:30px;
+}
+.photo-upload-btn{
+    margin-top:20px;
+}
+.kyc-second-skin form{
+    margin-top:30px;
+}
+@media(max-width:767px){
+    .each-photo-upload-wpapper{
+        padding:15px;
+    }
+    .select-feild label{
+        font-size: 15px;
+    }
+    .photo-upload-text{
+        padding-top: 0px;;
+    }
+    .photo-upload-text h4{
+        font-size:14px;
+    }
+    .photo-upload-text ul li{
+        font-size:13px;
+        line-height: 24px;;
+    }
+    .photop-upload-area{
+        width:100%;
+        height: 215px;
+    }
+}
