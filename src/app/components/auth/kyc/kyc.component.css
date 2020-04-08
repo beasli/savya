@@ -45,6 +45,20 @@
 .kyc-second-skin form{
     margin-top:30px;
 }
+.photo-requirment-list ul{
+    padding-left:0px;
+}
+.photo-requirment-list ul li{
+    display: inline-block;
+    margin-right: 17px;
+    font-size: 15px;
+}
+.photo-requirment-list ul li span{
+    color:red;
+}
+.photo-requirment-list{
+    margin-top:30px;
+}
 @media(max-width:767px){
     .each-photo-upload-wpapper{
         padding:15px;
