@@ -6,7 +6,12 @@ declare var Tesseract;
 @Component({
   selector: 'app-kyc',
   templateUrl: './kyc.component.html',
-  styleUrls: ['./kyc.component.css']
+  styleUrls: ['./kyc.component.css'],
+  styles: [`
+  .preview img{
+    max-height: 500px;
+  }
+`]
 })
 export class KycComponent implements OnInit {
 
@@ -22,9 +27,25 @@ export class KycComponent implements OnInit {
   userinfo:any;
   fName:any;
   lName:any;
+  yourName: string = '';
   constructor(private api:ApiService,private router:Router) { 
     // this.test() 
    }
+   fileChange(event) {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+      let file: File = fileList[0];
+      var img = document.querySelector("#preview img");
+      img.file = file;
+      console.log(file);
+      console.log(img);
+      this.test(file);
+      var reader = new FileReader();
+      reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+      let result=reader.readAsDataURL(file);
+      console.log(result);
+    }
+  }
     test(value){
       
       console.log("in test function");

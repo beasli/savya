@@ -17,7 +17,13 @@
                     <h2 class="text-center">CHANGE PROFILE</h2>
                   
                     <div class="form-wrapper">
-                        <form #f="ngForm" (ngSubmit)="kyc(f.value)">
+                        <div id="preview" class="preview">
+                            <img src="">
+                          </div>
+                          <form>
+                            <input type="file" (change)="fileChange($event)" placeholder="Upload file">
+                          </form>
+                        <!-- <form #f="ngForm" (ngSubmit)="kyc(f.value)">
                             <div class="form-group">
                                 <label for='gstno'>Gst No</label>
                                 <input type="text"  #gst_no="ngModel" ngModel  name="gst_no" class="form-control" (ngModelChange)="changeGst($event)" placeholder="GST No.*" required>
@@ -44,7 +50,7 @@
                             </div>
                             <div class="form-group">
                                 <label for='gst_doc'>Gst Document</label>
-                                <input type="file"  #gst_doc="ngModel"  ngModel name="gst_doc" class="form-control" placeholder="Gst Document" multiple required>
+                                <input type="file"  #gst_doc="ngModel"   ngModel name="gst_doc" class="form-control" placeholder="Gst Document" multiple required>
                                 <div class="alert alert-danger" *ngIf="gst_doc.touched && gst_doc.invalid">
                                     Gst Document is required.
                                 </div>
@@ -86,14 +92,12 @@
                                   </ngb-alert>
                                 </p>
                           </div>
-                            <!-- <p *ngIf="!f.valid" class="text-center"><strong>All details are required for update</strong></p>
-                            <p *ngIf="f.valid" class="text-center"><strong>You can update</strong></p> -->
                             <div class="text-center" ><input  class="btn"  *ngIf="sign" type="submit" value="Submit" ></div>
                             <div class="text-center"><input  class="btn"   *ngIf="loading" type="submit" value="Loading..."  disabled></div>
                             <div *ngIf="alert">
                                 <a routerLink="/home"><strong>Click to go Home</strong></a>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
             </div>
