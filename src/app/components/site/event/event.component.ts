@@ -62,7 +62,6 @@ shareservice() {
       name: 'Savya Jewels Business', // company name or product name
       description: '',  // product description
       image: 'http://savyajewelsbusiness.com/assets/images/savyalogoblack.png', // company logo or product image
-    //  order_id: val, // order_id created by you in backend
       modal: {
         // We should prevent closing of the form when esc key is pressed.
         escape: false,
