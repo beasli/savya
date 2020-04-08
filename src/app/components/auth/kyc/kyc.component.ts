@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { Router } from '@angular/router';
 import { USERKYC } from 'src/config';
-
+declare var Tesseract;
 @Component({
   selector: 'app-kyc',
   templateUrl: './kyc.component.html',
@@ -22,7 +22,18 @@ export class KycComponent implements OnInit {
   userinfo:any;
   fName:any;
   lName:any;
-  constructor(private api:ApiService,private router:Router) {}
+  constructor(private api:ApiService,private router:Router) { 
+    // this.test() 
+   }
+    test(value){
+      
+      console.log("in test function");
+      console.log(value);
+      Tesseract.recognize(value).then(function(result){   
+        console.log(result.text);     
+        // alert(result.text);      
+        });    
+    }  
   changeAadhar(e)
   {
    // console.log(e.length);
@@ -118,26 +129,29 @@ checkPan()
         }
   }
   kyc(value){
-    
-    this.loading=true;
-    this.sign=false;
     console.log(value);
+    this.test(value.gst_doc);
+   // console.log(value.gst_doc);
+    
+    // this.loading=true;
+    // this.sign=false;
+    // console.log(value);
      
-    this.api.Post(USERKYC,value).then(data=>{
+    // this.api.Post(USERKYC,value).then(data=>{
       
-              console.log(data);
-              this.alert=true;
-              this.message="Successful "
-              this.type="success";
-              this.router.navigate(['/registerOtp',this.mobile_no]);
-      }).catch(d=>{
-              this.type="danger";
-              this.message="Sorry !  Something Went Wrong Please Recheck";
-              this.loading=false;
-              this.sign=true;
-              this.alert=true;
-              console.log(d);
-      });
+    //           console.log(data);
+    //           this.alert=true;
+    //           this.message="Successful "
+    //           this.type="success";
+    //           this.router.navigate(['/registerOtp',this.mobile_no]);
+    //   }).catch(d=>{
+    //           this.type="danger";
+    //           this.message="Sorry !  Something Went Wrong Please Recheck";
+    //           this.loading=false;
+    //           this.sign=true;
+    //           this.alert=true;
+    //           console.log(d);
+    //   });
   
 }
 
