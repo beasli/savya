@@ -1,4 +1,8 @@
 export const apiUrl =  'http://admin.savyajewelsbusiness.com/api/';
+
+// RazorPay Key
+export const RAZORPAYKEY = "rzp_test_Dmzimsnc9gzT7E";
+
 // authentication
 export const LOGIN = 'user/login';
 export const REGISTER = 'user/register';
