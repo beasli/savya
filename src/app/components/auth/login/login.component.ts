@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
-import { LOGIN } from 'src/config';
+import { LOGIN, OTPREQUEST } from 'src/config';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,66 +16,61 @@ export class LoginComponent implements OnInit {
   }
 d:any;
 sign:boolean=true;
-loading:boolean=false;
+loading:boolean;
 message:any;
 alert:boolean;
 otpcheck: boolean;
-password:boolean;  
-mobile:boolean;
+mobile:boolean=true;
+mobile_no:any;
 otp:any;
-login(value)
+otpGenerate(value)
+{
+  this.sign=false;
+  this.loading=true;
+  console.log(value);
+  if(value.mobile_no)
   {
-    this.loading=true;
-    this.sign=false;
-    //console.log(value);
-    if(value.mobile_no)
-    {
-            this.api.Post(LOGIN,{mobile_no:value.mobile_no,imei:"web",mobile_type:"web",one_singnal:"web"}).then(data=>{
-              //console.log(data);
-              this.alert=false;
-              this.password=true;
-              this.loading=false;
-              this.sign=false;
-              this.otpcheck=true;
-              this.mobile=false;
-              this.otp=data['otp'];
-              this.d=data['data'][0];
-            }).catch(d=>{
-              this.message="Something Went Wrong Please Try Again";
-              this.alert=true;
-              this.loading=false;
-              this.sign=true;
-              this.password=false;
-              this.otpcheck=false;
-              this.mobile=true;
-                // console.log(d);
-                  });
-        }
-        else if(value.password)
-        {
-            this.loading=false;
-            this.verifyOtp(value.password);
-        }
+    this.mobile_no=value.mobile_no;
+        this.api.Post(OTPREQUEST,{mobile_no:value.mobile_no}).then(data=>{
+          this.mobile=false;
+          this.loading=false;
+          this.otpcheck=true;
+         console.log(data);
+      }).catch(d=>{
+        console.log(d);
+        this.loading=false;
+        this.message="Something Went Wrong Please Try Again";
+        this.alert=true;
+        this.sign=true;
+      });
   }
-  verifyOtp(value)
+  else if(value.password)
   {
-    if(value==this.otp)
-    {
-      //console.log("logged in");
-      this.alert=false;
-      this.api.updateWishlist();
-      this.api.updateCart();
-      this.api.setUserInfo(this.d);
-      this.api.setlogin(1);
-      this.router.navigate(['/home']);
+      this.loading=true;
+      this.otpcheck=false;
+      this.login(value.password);
+  }
+}
 
-    }
-    else{
-      //console.log("not logged in");
-      this.message="INVALID OTP";
-      this.alert=true;
-    }
-  }
+login(otpvalue)
+{
+      this.api.Post(LOGIN,{mobile_no:this.mobile_no, otp:otpvalue,one_singnal:11}).then(data=>{
+        this.loading=false;
+        console.log(data['success'].token);
+        // this.api.updateWishlist();
+        // this.api.updateCart();
+        // this.api.setUserInfo(this.d);
+        this.api.setlogin(1);
+        this.api.setMobileNo(data['success'].token);
+        this.router.navigate(['/home']);
+      }).catch(d=>{
+        console.log(d);
+        this.loading=false;
+        this.message="INVALID OTP";
+        this.alert=true;
+        this.otpcheck=true;
+      });
+}
   ngOnInit() {
   }
 

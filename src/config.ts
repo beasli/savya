@@ -1,15 +1,19 @@
-export const apiUrl =  'http://admin.savyajewelsbusiness.com/api/';
+// export const apiUrl =  'http://admin.savyajewelsbusiness.com/api/';
+export const apiUrl='http://newtest.savyajewelsbusiness.com/api/';
 // authentication
-export const LOGIN = 'user/login';
-export const REGISTER = 'user/register';
+export const OTPREQUEST='otp/request';
+// export const LOGIN = 'user/login';
+export const LOGIN='login';
+//export const REGISTER = 'user/register';
+export const REGISTER='register';
 export const OTPVERIFIED = 'user/register/otpverified';
 export const OTPRESEND = 'user/register/otpresend';
 export const FORGETPASSWORD = 'user/forgetpassword';
 export const CHANGEPASSWORD = 'user/update/password';
 export const USERKYC = 'user/kyc';
 export const PROFILEUPDATE = 'user/profile/update';
-export const PROFILEVIEW = 'user/profile/view';
-
+//export const PROFILEVIEW = 'user/profile/view';
+export const PROFILEVIEW='details';
 
  // pages
 export const CONTACT = 'user/contact';
