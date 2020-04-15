@@ -179,11 +179,11 @@ changeNumber(e)
     
         this.loading=true;
         this.sign=false;
-        this.mobile_no=value.mobile_no;
-        console.log(this.mobile_no);
+     //   console.log(this.mobile_no);
          if(value.name&&value.email&&value.mobile_no)
          {
-           //console.log("if condition");
+              this.mobile_no=value.mobile_no;
+              //console.log("if condition");
                 this.api.Post(REGISTER,{name:value.name,mobile_no:value.mobile_no,email:value.email}).then(data=>{
                   this.mobile=false;
                   this.loading=false;
