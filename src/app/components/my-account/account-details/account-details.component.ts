@@ -14,12 +14,7 @@ loader:boolean;
 page:boolean;
   constructor(private api: ApiService) { 
     
-    let token=this.api.getMobileNo();
-    let headers=new HttpHeaders({
-      'Authorization':'Bearer'+" "+token 
-    });
-    console.log(headers);
-    this.api.Post(PROFILEVIEW,{headers}).then(data=>{
+    this.api.Post(PROFILEVIEW, {}).then(data=>{
       this.page=true;
       this.loader=false;
       console.log(data);

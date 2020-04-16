@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, CARTDELETE, CARTUPDATE, ORDERHISTORY } from '../../config';
 import * as CryptoJS from 'crypto-ts';
 import { JsonPipe } from '@angular/common';
@@ -21,6 +21,7 @@ export class ApiService {
   uid:any;
   wish:any[];
   event:any;
+  header:any;
   
   
   constructor(public http: HttpClient,private service: NotificationsService, private router: Router) {
@@ -44,12 +45,18 @@ export class ApiService {
       this.drop = 0;
     }
 
+    this.header = new HttpHeaders().set(
+      "Authorization",
+       'Bearer'+" "+this.getMobileNo()
+    );
+    console.log({headers:this.header});
+
 
  }
 
   public Get(api) {
     return new Promise((resolve, reject) => {
-      this.http.get(apiUrl + api)
+      this.http.get(apiUrl + api,  {headers:this.header})
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -60,7 +67,7 @@ export class ApiService {
 
   public Post(api, formData) {
     return new Promise((resolve, reject) => {
-      this.http.post(apiUrl + api, formData)
+      this.http.post(apiUrl + api, formData,  {headers:this.header})
         .subscribe(res => {
           resolve(res);
         }, (err) => {
