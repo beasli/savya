@@ -26,7 +26,7 @@ export class ChangeProfileComponent implements OnInit {
       this.page=true;
       this.loader=false;
       console.log(data);
-      this.data=data['data'][0];
+      this.data=data['user'];
       //this.router.navigate(['/registerOtp']);
     }).catch(d=>{
           console.log(d);
@@ -50,10 +50,10 @@ export class ChangeProfileComponent implements OnInit {
               this.type="success";
               this.loading=false;
               this.sign=true;
-              this.d=data['data'][0];
-              console.log(this.d); 
+              // this.d=data['data'][0];
+              // console.log(this.d); 
             
-             this.api.setUserInfo(this.d);
+            // this.api.setUserInfo(this.d);
               //this.router.navigate(['/registerOtp']);
       }).catch(d=>{
         this.page=true;

@@ -12,7 +12,8 @@ export const OTPRESEND = 'user/register/otpresend';
 export const FORGETPASSWORD = 'user/forgetpassword';
 export const CHANGEPASSWORD = 'user/update/password';
 export const USERKYC = 'user/kyc';
-export const PROFILEUPDATE = 'user/profile/update';
+//export const PROFILEUPDATE = 'user/profile/update';
+export const PROFILEUPDATE='edit';
 //export const PROFILEVIEW = 'user/profile/view';
 export const PROFILEVIEW='details';
 

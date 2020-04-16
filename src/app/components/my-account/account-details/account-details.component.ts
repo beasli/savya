@@ -18,7 +18,7 @@ page:boolean;
       this.page=true;
       this.loader=false;
       console.log(data);
-      this.data=data['data'][0];
+      this.data=data['user'];
       //this.router.navigate(['/registerOtp']);
 }).catch(d=>{
       console.log(d);
