@@ -45,7 +45,7 @@ export class FilterProductComponent implements OnInit {
     //  console.log(params);
       });
 
-      this.api.Post(PRODUCTFILTERMENU, {} ).then(data  => {
+      this.api.Get(PRODUCTFILTERMENU).then(data  => {
        this.jewelery_for=data['menu'].jewelery_for;
        console.log(data);
         this.material=data['menu'].material;
