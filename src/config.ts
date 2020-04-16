@@ -1,4 +1,5 @@
-export const apiUrl =  'http://admin.savyajewelsbusiness.com/api/';
+//export const apiUrl =  'http://admin.savyajewelsbusiness.com/api/';
+export const apiUrl =  'http://newtest.savyajewelsbusiness.com/api/';
 // authentication
 export const LOGIN = 'user/login';
 export const REGISTER = 'user/register';
@@ -12,7 +13,7 @@ export const PROFILEVIEW = 'user/profile/view';
 
 
  // pages
-export const CONTACT = 'user/contact';
+export const CONTACT = 'contact'; //same
 export const ABOUT = 'user/about';
 export const TERMSANDCONDITION = 'user/terms';
 export const PAYMENT = 'user/payment';
@@ -31,8 +32,10 @@ export const CARTUPDATE = 'user/cart/qty';
 
 
 // Dashboard
-export const CRAUSEL = 'user/dashboard/home';
-export const NAVIGATION = 'admin/app/navigation' ;
+// export const CRAUSEL = 'user/dashboard/home';
+export const CRAUSEL = 'home';
+//export const NAVIGATION = 'admin/app/navigation' ;
+export const NAVIGATION = 'home/navigation' ;
 export const LIVERATE = 'https://skymcx.in/NKChainsJSON.php';
 
 // Address
