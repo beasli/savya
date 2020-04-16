@@ -59,7 +59,7 @@ slideConfig = {
 
 
 
-    this.api.Post(CRAUSEL, {}).then(data => {
+    this.api.Get(CRAUSEL).then(data => {
       console.log(data);
       data['body'].forEach(childObj => {
         if (childObj.category === 'app_banners') {
@@ -69,7 +69,8 @@ slideConfig = {
           this.manufacturer = childObj['manufacture'];
         }
      });
-       this.baseUrl = data['url']+'/';
+
+       this.baseUrl = data['url']+'/img/banner/';
       // this.url2 = this.url + '/';
       // this.url3 = data['product_url'] + '/';
     });

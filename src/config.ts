@@ -56,13 +56,15 @@ export const MYEVENTS = 'events/';
 export const PRODUCTDETAILS = 'single/product/details';
 export const CATEGORY = 'user/category/all';
 export const SUBCATEGORY = 'user/subcategory/single';
-export const SUBCATEGORYTYPE = 'user/subsubcategory/single';
+//export const SUBCATEGORYTYPE = 'user/subsubcategory/single';
+export const SUBCATEGORYTYPE='subsubcategory';
 export const PRODUCTLIST = 'product/list';
 export const PRODUCTFILTERMENU = 'search/filter/menu';
 export const PRODUCTFILTER = 'search/filter';
 export const ORDERBY = 'product/list?subsubcategory_id=';
 export const PRICELIST = 'product/list/price';
-export const SEARCH = 'search';
+//export const SEARCH = 'search';
+export const SEARCH='product';
 
 // order
 export const ORDERHISTORY = 'order/history';
