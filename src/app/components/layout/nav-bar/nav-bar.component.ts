@@ -30,7 +30,7 @@ export class NavBarComponent implements OnInit {
                   this.view();
                   //cart work end//
           
-            this.api.Post(NAVIGATION, {}).then(data => {
+            this.api.Get(NAVIGATION).then(data => {
               this.catall = data['data'];
               console.log(data);
               this.catall.forEach(element => {

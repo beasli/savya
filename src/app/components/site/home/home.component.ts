@@ -54,9 +54,11 @@ export class HomeComponent implements OnInit {
       // instead of a settings object
     ]
   };
+  event: any;
+  product: string;
   
   constructor(private api: ApiService ) {
-      this.api.Post(CRAUSEL, {}).then(data => {
+      this.api.Get(CRAUSEL).then(data => {
         this.page=true;
       this.loader=false;
         console.log(data);
@@ -65,7 +67,7 @@ export class HomeComponent implements OnInit {
             this.slider_imgs = childObj['app_banners'].filter(slide => slide.place === 'Website');
           }
           else if (childObj.category === 'exclusive_banners') {
-            this.exclusive = childObj['exclusive_banners'];
+            this.exclusive = childObj['exclusive_banners'].filter(slide => slide.place === 'Website');
           }
           else if (childObj.category === 'product') {
             this.mostselling = childObj['product'];
@@ -79,9 +81,11 @@ export class HomeComponent implements OnInit {
             console.log(this.logo);
           }
        });
-        this.url = data['url'];
+        this.url = data['url']+"/img/banner/";
         this.url2 = this.url + '/';
-        this.url3 = data['product_url'] + '/';
+        this.event = data['url']+"/img/events/";
+        console.log(this.event)
+        this.product = data['url']+"/img/product/";
       }).catch(d=>{
         console.log(d);
         document.getElementById("openModalButton").click();

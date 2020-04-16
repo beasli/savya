@@ -34,7 +34,7 @@ export class TestimonialsComponent implements OnInit {
       }]
   };
   constructor(private api: ApiService, private router: Router) {
-    console.log(this.heading);
+    
    }
    text(value) {
     if  (this.redirect == 'Y')  {
@@ -52,6 +52,8 @@ export class TestimonialsComponent implements OnInit {
   
   ngOnInit() {
     this.slideConfig.slidesToShow = this.slidetoshow;
+    console.log(this.url);
+    console.log(this.heading);
   }
 
 }
