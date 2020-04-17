@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountAddressesComponent implements OnInit {
   addresses:any;
-  uid:any;
   loader:boolean;
   page:boolean; 
   constructor(private api: ApiService, private router: Router) {
@@ -17,12 +16,12 @@ export class AccountAddressesComponent implements OnInit {
    }
 
    getaddress() {
-    this.uid = this.api.getUserInfo();
-    this.uid = this.uid['uid'];
-    this.api.Post(GETADDRESS, {uid: this.uid}).then(data => {
+    this.api.Get(GETADDRESS).then(data => {
       this.page=true;
       this.loader=false;
-      this.addresses = data['data']; });
+      this.addresses = data['data'];
+      console.log(this.addresses);
+    });
    }
 
    edit(value) {
