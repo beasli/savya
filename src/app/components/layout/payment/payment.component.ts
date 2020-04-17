@@ -14,10 +14,10 @@ export class PaymentComponent implements OnInit {
   constructor(private api:ApiService) {
     this.im=true;
     this.val=false;
-    this.api.Post(PAYMENT,{}).then(data=>{
+    this.api.Get(PAYMENT).then(data=>{
       this.im=false;
   this.val=true;
-      this.values=data['data'][0].description;
+      this.values=data['data'];
      // console.log(this.values);
     }).catch(d=>{
       console.log(d);

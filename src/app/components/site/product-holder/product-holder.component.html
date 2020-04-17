@@ -46,6 +46,7 @@
                         <div class="prd-info text-center">
                             <h2 class="prd-title"><a (click)='go(s.product_id)'>{{s.product_name}}</a></h2>
                             <div class="prd-tag prd-hidemobile" *ngIf="s.weight || s.quality"><a (click)='go(s.product_id)'>{{s.weight}}g / {{s.quality}}</a></div>
+                            <div class="prd-tag prd-hidemobile" *ngIf="!s.weight || !s.quality"><br></div>
                             <div class="prd-hover">
                                 <div class="prd-action">
                                     <!-- <div   *ngIf= "checkCart(s.product_id)"  >

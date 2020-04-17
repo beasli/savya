@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
   };
   event: any;
   product: string;
+  manufacture: string;
   
   constructor(private api: ApiService ) {
       this.api.Get(CRAUSEL).then(data => {
@@ -84,8 +85,9 @@ export class HomeComponent implements OnInit {
         this.url = data['url']+"/img/banner/";
         this.url2 = this.url + '/';
         this.event = data['url']+"/img/events/";
-        console.log(this.event)
+        console.log(this.event);
         this.product = data['url']+"/img/product/";
+        this.manufacture = data['url']+"/img/manufacture/";
       }).catch(d=>{
         console.log(d);
         document.getElementById("openModalButton").click();

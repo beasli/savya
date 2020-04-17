@@ -18,10 +18,10 @@ export const PROFILEUPDATE='edit';
 export const PROFILEVIEW='details';
 
  // pages
-export const CONTACT = 'contact'; //same
-export const ABOUT = 'user/about';
-export const TERMSANDCONDITION = 'user/terms';
-export const PAYMENT = 'user/payment';
+export const CONTACT = 'contact'; //done
+export const ABOUT = 'pages/2'; //done
+export const TERMSANDCONDITION = 'pages/3';//done
+export const PAYMENT = 'pages/1';//done
 
  // wishlist
 export const WISHLISTVIEW = 'user/wishlist/view';
@@ -54,7 +54,7 @@ export const EVENTS = 'user/events/all';
 export const MYEVENTS = 'events/';
 
 // Products
-export const PRODUCTDETAILS = 'single/product/details';
+export const PRODUCTDETAILS = 'product/'; //done
 export const CATEGORY = 'user/category/all';
 export const SUBCATEGORY = 'user/subcategory/single';
 //export const SUBCATEGORYTYPE = 'user/subsubcategory/single';
