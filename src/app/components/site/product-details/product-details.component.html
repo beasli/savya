@@ -42,13 +42,13 @@
                                             [config]="slideConfig" >
                                 <div ngxSlickItem *ngFor="let slide of prd_img;let i = index"  class="slide">
                                 <lib-ngx-image-zoom
-                                        [thumbImage]="url + '/' + slide.image"
+                                        [thumbImage]="url+'product'+'/'+slide.image"
                                         [magnification]=2
                                     ></lib-ngx-image-zoom>
                                 </div>
                                 </ngx-slick-carousel>
                                 <span *ngFor="let slide of prd_img;let i = index">
-                                    <img (click)="slickModal.slickGoTo(i)" src="{{ url + slide.image }}" class="thumbnail"  alt="" width="100px">
+                                    <img (click)="slickModal.slickGoTo(i)" src="{{ url+'product'+'/' + slide.image }}" class="thumbnail"  alt="" width="100px">
                                 </span>
                                 
 
@@ -63,7 +63,7 @@
                             > </div>
                         
                             <h3 class="h2-style">Manufactured by:</h3>
-                            <img [src]="url + data['image']" onerror="this.src='../../../../assets/images/logo-bw.png'"><h3 class="h2-style">{{data.company_name}}</h3>
+                            <img [src]="url+ 'manufacture/' + data['image']" onerror="this.src='../../../../assets/images/logo-bw.png'"><h3 class="h2-style">{{data.company_name}}</h3>
                         </div>
                     </div>
                     <div class="col-md">
@@ -90,13 +90,11 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="color-chose-box d-table">
+                            <div  *ngIf=(metalcolour.length) class="color-chose-box d-table">
                                 <div class="color-text d-table-cell"><p>Choose Color:</p></div>
                                 <div class="sample-box">
                                     <ul>
-                                        <li><a href="javascript:void(0)" (click)="colormetal('Rose')" [ngClass]="{focus: colvalue=='Rose'}" class="btn-danger">Rose</a></li>
-                                        <li><a href="javascript:void(0)" (click)="colormetal('Yellow')" [ngClass]="{focus: colvalue=='Yellow'}" class="btn-warning">Yellow</a></li>
-                                        <li><a href="javascript:void(0)" (click)="colormetal('White')" [ngClass]="{focus: colvalue=='White'}" class="btn-outline-secondary">White</a></li>
+                                        <li *ngFor="let option of metalcolour"><a href="javascript:void(0)" (click)="colormetal(option)" [ngClass]="{focus: colvalue==option}" class="btn-danger">option</a></li>                                       
                                     </ul>
                                 </div>
                             </div>

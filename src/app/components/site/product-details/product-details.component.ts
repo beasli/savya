@@ -74,6 +74,7 @@ export class ProductDetailsComponent implements OnInit {
         }
       }]
   };
+  metalcolour: any;
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
     this.drop=this.api.drop; 
     this.route.params.subscribe(params => {
@@ -186,22 +187,26 @@ export class ProductDetailsComponent implements OnInit {
    getproduct() {
      this.loader=true;
      this.page=false;
-    this.api.Post(PRICELIST, {} ).then(data  => {
-      if  (data['data']) {
-      this.pricelist = data['data'];
-      this.api.Post(PRODUCTDETAILS, {product_id: this.pid} ).then(data  => {
+    
+      this.api.Put(PRODUCTDETAILS, this.pid ).then(data  => {
         this.page=true;
         this.loader=false;
         if(data['data'])  {
           this.data = data['data'];
+          this.pricelist = data['price'];
         }
-        this.data.color ? this.colvalue = this.data.color : this.colvalue = "";
+        if(this.data.color)
+        {
+        this.metalcolour = this.data.color.split(',');
+        this.colvalue = this.metalcolour[0];
+        console.log(this.metalcolour);
+        }
         this.assets = data['assets'];
-        this.prd_img = this.assets['image'];
+        this.prd_img =data['files'];
         this.certificate = data['Certification'];
         this.certificateurl = data['certificte_url']+'/';
         this.recents = data['recentproduct'];
-        this.url = data['url'] + '/';
+        this.url ="http://newtest.savyajewelsbusiness.com/img/";
         if (this.data.size) {
           this.defaultsize = this.data.default_size;
           this.sizes = this.data.size_type.split(',');
@@ -239,8 +244,6 @@ export class ProductDetailsComponent implements OnInit {
               }).catch(d=>{console.log(d);});
        }).catch(d=>{console.log(d);});
     }).catch(d=>{console.log(d);});
-      }
-    });
 
     
 

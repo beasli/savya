@@ -68,6 +68,17 @@ export class ApiService {
         });
     });
   }
+
+  public Put(api, formData) {
+    return new Promise((resolve, reject) => {
+      this.http.put(apiUrl + api+formData,formData)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
   
   updateOrderHistory()
   {

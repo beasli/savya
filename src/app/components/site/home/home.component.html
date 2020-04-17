@@ -28,10 +28,10 @@
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
                   <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide embed-responsive embed-responsive-16by9">
-                  <img src="{{ url2 + slide.logo }}"  class="embed-responsive-item"  alt="" width="100%">
+                  <img src="{{ manufacture + slide.logo }}"  class="embed-responsive-item"  alt="" width="100%">
                   <div class="overlay-effect">
-                      <div *ngIf="slide.company_name" class="overlay-effect-content">
-                        <h2>{{ slide.company_name }}</h2>
+                      <div *ngIf="slide.name" class="overlay-effect-content">
+                        <h2>{{ slide.name }}</h2>
                       </div>
                   </div>
                   </div>
@@ -97,7 +97,7 @@
     <!--/Promotional section -->
    
     <!-- Mostselling Product -->
-    <app-product-holder [redirect] = '0' [heading] = '"Mostselling Product"' [url3] = 'productS' [mostselling] = 'mostselling' *ngIf="page"></app-product-holder>
+    <app-product-holder [redirect] = '0' [heading] = '"Mostselling Product"' [url3] = 'product' [mostselling] = 'mostselling' *ngIf="page"></app-product-holder>
     <!-- Mostselling Product -->
 
 

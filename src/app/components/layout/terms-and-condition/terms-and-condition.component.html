@@ -2,9 +2,9 @@
 <div class="container">
     <div class="about-details">
         <div class="card" class="text-center">
-            <div class="about-heading terms-heading text-left"><h2>Terms And Condition</h2></div>
+            <div class="about-heading terms-heading text-left"><h2>{{values.title}}</h2></div>
             <app-loader *ngIf="im" ></app-loader>
-            <div [innerHTML]="values" *ngIf="val" class="card-body text-left">
+            <div [innerHTML]="values.description" *ngIf="val" class="card-body text-left">
        
             </div>
         </div>
