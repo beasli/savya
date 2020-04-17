@@ -44,7 +44,7 @@ export const NAVIGATION = 'home/navigation' ;
 export const LIVERATE = 'https://skymcx.in/NKChainsJSON.php';
 
 // Address
-export const GETADDRESS = 'user/address/view';
+export const GETADDRESS = 'address'; //done
 export const ADDADDRESS = 'user/address/add';
 export const DELADDRESS = 'user/address/delete';
 export const EDITADDRESS = 'user/address/edit';
