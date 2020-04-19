@@ -36,7 +36,7 @@ export class AccountAddressesComponent implements OnInit {
    delete(value) {
     
     if (confirm ("Are you sure you want to delete this address?"))  {
-      this.api.Post(DELADDRESS, {address_id: value}).then(data => {this.addresses = data['data']; 
+      this.api.delete(DELADDRESS,value).then(data => {this.addresses = data['data']; 
       this.getaddress();
     });
      }

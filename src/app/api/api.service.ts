@@ -76,9 +76,12 @@ export class ApiService {
     });
   }
 
-  public Put(api, formData) {
+  public Put(api, formData,parameters={}) {
     return new Promise((resolve, reject) => {
-      this.http.put(apiUrl + api+formData,formData)
+
+      let options = { headers: this.header ,params:parameters};
+
+      this.http.put(apiUrl + api+'/'+formData,formData,options)
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -86,7 +89,21 @@ export class ApiService {
         });
     });
   }
-  
+
+  public delete(api, formData) {
+    return new Promise((resolve, reject) => {
+
+      let options = { headers: this.header};
+
+      this.http.delete(apiUrl + api+'/'+formData,options)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
   updateOrderHistory()
   {
     this.Post(ORDERHISTORY,{user_id:this.uid}).then(data=>{

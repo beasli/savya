@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-address.component.css']
 })
 export class EditAddressComponent implements OnInit {
-uid: any;
 index: any;
 heading: any;
 addresses:[];
@@ -17,13 +16,12 @@ mob:boolean;
 pin:boolean;
 loading: boolean;
   constructor(private api: ApiService, private router: Router, private route: ActivatedRoute) {
-    this.uid = this.api.getUserInfo();
-    this.uid = this.uid['uid'];
+    
     this.index = this.route.snapshot.paramMap.get('id');
     if(this.index >= 0) {
       this.heading = "  Edit Address"
-      this.api.Post(GETADDRESS, {uid: this.uid}).then(data => {
-        this.addresses = data['data'][this.index];
+      this.api.Get(GETADDRESS,).then(data => {
+        this.addresses = data['data'].find(x => x.id == this.index);
       });
     }
     else{
@@ -69,11 +67,9 @@ changeNumber(e)
 }
 
    add(value) {
-    value['uid'] = this.uid;
     if(this.index >= 0)
     {
-      value['address_id'] = this.addresses['id'];
-      this.api.Post(EDITADDRESS, value).then(data => {
+      this.api.Put(EDITADDRESS,this.index,value).then(data => {
       if (confirm(data['message'])) {
         this.router.navigate(['/account-addresses']);
       }
