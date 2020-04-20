@@ -334,19 +334,19 @@ checkWishlist(pid)
         })
       }    
 }
-  getWishlist()
+getWishlist()
+{
+  let m=localStorage.getItem('wishlist');
+  if(m)
   {
-    let m=localStorage.getItem('wishlist');
-    if(m)
-    {
-      let n=JSON.parse(localStorage.getItem('wishlist'));
-      return n['data'];
-    }
-    else{
-      return null;
-    }
-   
+    let n=JSON.parse(localStorage.getItem('wishlist'));
+    return n['data'];
   }
+  else{
+    return null;
+  }
+  
+}
 
 
 

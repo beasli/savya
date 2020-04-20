@@ -42,12 +42,7 @@
                                     Address is required.
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <input type="text"  #city="ngModel"  [(ngModel)]="addresses['city']"  name="city" class="form-control" placeholder="City*" required>
-                                <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
-                                    City is required.
-                                </div>
-                            </div>
+                            
                             <div class="form-group">
                                 <input type="number"  #pincode="ngModel"  [(ngModel)]="addresses['pincode']" (ngModelChange)="changePin($event)"  name="pincode" class="form-control" placeholder="Pin Code" required>
                                 <div *ngIf="pin" class="alert alert-danger">Pin code should be atleast 6 digits  </div>
@@ -62,17 +57,25 @@
                                 </div>
                             </div>
                             <div class="form-group"> <label for='region'>Select region</label>
-                                <select id="register" #region="ngModel"  [(ngModel)]="addresses['region']"  name="region"  class="form-control" required >
+                                <select id="register" #region="ngModel" [(ngModel)]="addresses['region']"  name="region"  class="form-control" required >
                                     <option value=""></option>
-                                    <option >Rajasthan</option>
-                                    <option >Haryana</option>
-                                    <option >Gujrat</option>
-                                    <option >Himachal Pradesh</option>
+                                    <option *ngFor='let s of state' (click)='statechange(s.id)' [selected]="s.name == addresses['region']">{{s.name}}</option>
                                 </select>
                                 <div class="alert alert-danger" *ngIf="region.touched && region.invalid">
                                     region is required.
                                 </div>
                             </div>
+
+                            <div class="form-group"><label for='region'>Select City</label>
+                                <select #city="ngModel"  [(ngModel)]="addresses['city']"  name="city"  class="form-control" required >
+                                    <option value=""></option>
+                                    <option *ngFor='let s of cities' [selected]="s.name == addresses['city']">{{s.city}}</option>
+                                </select>
+                                <div class="alert alert-danger"  *ngIf="city.touched && city.invalid">
+                                    City is required.
+                                </div>
+                            </div>
+
                             <div class="text-center" ><input  class="btn" type="submit" value="Done" [disabled]="!f.valid || mob || pin" ></div>
                             <div class="text-center"><input  class="btn"   *ngIf="loading" type="submit" value="Loading..."  disabled></div>
                             

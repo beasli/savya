@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { GETADDRESS, DELADDRESS } from './../../../../config';
+import { GETADDRESS, DELADDRESS} from './../../../../config';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
 @Component({
