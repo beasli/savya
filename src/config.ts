@@ -46,8 +46,10 @@ export const LIVERATE = 'https://skymcx.in/NKChainsJSON.php';
 // Address
 export const GETADDRESS = 'address'; //done
 export const ADDADDRESS = 'address'; //done
-export const DELADDRESS = 'address';
+export const DELADDRESS = 'address'; //done
 export const EDITADDRESS = 'address';//done
+export const STATE = 'state';//done
+export const CITY = 'cities';//done
 
 // Events
 export const EVENTS = 'user/events/all';
