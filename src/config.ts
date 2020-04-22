@@ -52,17 +52,15 @@ export const STATE = 'state';//done
 export const CITY = 'cities';//done
 
 // Events
-export const EVENTS = 'user/events/all';
+export const EVENTS = 'events'; //done
 export const MYEVENTS = 'events/';
 
 // Products
-export const PRODUCTDETAILS = 'product/'; //done
-export const CATEGORY = 'user/category/all';
-export const SUBCATEGORY = 'user/subcategory/single';
-//export const SUBCATEGORYTYPE = 'user/subsubcategory/single';
-export const SUBCATEGORYTYPE='subsubcategory';
+export const PRODUCTDETAILS = 'product'; //done
+export const CATEGORY = 'category'; //done
+export const SUBCATEGORY = 'subcategory'; //done
+export const SUBCATEGORYTYPE='subsubcategory'; //done
 export const PRODUCTLIST = 'product/list';
-//export const PRODUCTFILTERMENU = 'search/filter/menu';
 export const PRODUCTFILTERMENU='product/menu/edit';
 export const PRODUCTFILTER = 'search/filter';
 export const ORDERBY = 'product/list?subsubcategory_id=';

@@ -83,14 +83,14 @@ slideConfig = {
       console.log(data);
 
       this.api.Post(CATEGORY, {} ).then(data  => {
-        let result = data['data'].find(x => x.id == this.data[0]['category']);
+        let result = data['data'].find(x => x.id == this.data[0]['category_id']);
         this.category = result['category'];
         console.log(this.category);
      }).catch(d=>{console.log(d);});
 
-     this.api.Post(SUBCATEGORY, {category_id: this.data[0]['category']} ).then(data  => {
+     this.api.Post(SUBCATEGORY, {category_id: this.data[0]['category_id']} ).then(data  => {
   
-      let result = data['data'].find(x => x.id == this.data[0]['subcategory']);
+      let result = data['data'].find(x => x.id == this.data[0]['subcategory_id']);
       this.subcategory = result['subcategory'];
       console.log(this.subcategory);
     }).catch(d=>{
