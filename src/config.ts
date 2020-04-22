@@ -24,9 +24,12 @@ export const TERMSANDCONDITION = 'pages/3';//done
 export const PAYMENT = 'pages/1';//done
 
  // wishlist
-export const WISHLISTVIEW = 'user/wishlist/view';
-export const WISHLISTADD = 'user/wishlist/store';
-export const WISHLISTDELETE = 'user/wishlist/delete';
+//export const WISHLISTVIEW = 'user/wishlist/view';
+export const WISHLISTVIEW='wishlist';
+// export const WISHLISTADD = 'user/wishlist/store';
+export const WISHLISTADD = 'wishlist';
+// export const WISHLISTDELETE = 'user/wishlist/delete';
+export const WISHLISTDELETE='wishlist';
 
 
 // cart
