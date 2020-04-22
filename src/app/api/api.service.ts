@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, CARTDELETE, CARTUPDATE, ORDERHISTORY } from '../../config';
+import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, CARTDELETE, CARTUPDATE, ORDERHISTORY, PROFILEVIEW } from '../../config';
 import * as CryptoJS from 'crypto-ts';
 import { JsonPipe } from '@angular/common';
 import { NotificationsService } from 'angular2-notifications';
@@ -25,15 +25,16 @@ export class ApiService {
   
   
   constructor(public http: HttpClient,private service: NotificationsService, private router: Router) {
-    if(localStorage.getItem('savya_userInfo'))
-    {
-     let u=this.getUserInfo();
-    this.uid=u.uid;
-    console.log(this.uid);
-   }
+  //   if(localStorage.getItem('savya_userInfo'))
+  //   {
+  //    let u=this.getUserInfo();
+  //   this.uid=u.uid;
+  //   console.log(this.uid);
+  //  }
     // console.log("userid"+this.uid);
-    if(this.uid)
+    if(this.getMobileNo())
     {
+      console.log("if condition");
       this.updateCart();
       this.updateWishlist();
       this.updateOrderHistory();
@@ -64,7 +65,16 @@ export class ApiService {
         });
     });
   }
-
+  public Delete(api){
+    return new Promise((resolve, reject) => {
+      this.http.delete(apiUrl + api,  {headers:this.header})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
   public Post(api, formData) {
     return new Promise((resolve, reject) => {
       this.http.post(apiUrl + api, formData,  {headers:this.header})
@@ -244,7 +254,7 @@ qtyUpdate(pid,value)
             }
   updateWishlist()
   {
-    this.Post(WISHLISTVIEW,{uid:this.uid}).then(data=>{
+    this.Get(WISHLISTVIEW).then(data=>{
       console.log(data);
       localStorage.setItem('wishlist',JSON.stringify(data));
      
@@ -258,9 +268,9 @@ qtyUpdate(pid,value)
 
   deleteWishlist(pid)
   {
-      
+      console.log("wishlistdeletefunction")
     
-      this.Post(WISHLISTDELETE,{uid:this.uid,product_id:pid}).then(data=>{
+      this.Delete(WISHLISTDELETE+"/"+pid).then(data=>{
         console.log(data);
        this.updateWishlist();
        this.onSuccess('Product Successfully Removed from the Wishlist');
@@ -287,7 +297,7 @@ checkWishlist(pid)
             }
             else
             {
-              this.Post(WISHLISTADD,{uid:this.uid,product_id:pid}).then(data=>{
+              this.Post(WISHLISTADD,{product_id:pid}).then(data=>{
                 console.log(data);
                    this.updateWishlist();
                    this.onSuccess('Product Successfully added to the Wishlist');
@@ -297,7 +307,7 @@ checkWishlist(pid)
             } 
       }
       else{
-        this.Post(WISHLISTADD,{uid:this.uid,product_id:pid}).then(data=>{
+        this.Post(WISHLISTADD,{product_id:pid}).then(data=>{
           console.log(data);
              this.updateWishlist();
              this.onSuccess('Product Successfully added to the Wishlist');
@@ -336,7 +346,6 @@ checkWishlist(pid)
   setUserInfo(value)
   {
    let e=this.encrypt(value);
-   this.setMobileNo(value.mobile_no);
     localStorage.setItem('savya_userInfo',e);
    
   }

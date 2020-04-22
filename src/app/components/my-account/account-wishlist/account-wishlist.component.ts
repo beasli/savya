@@ -19,9 +19,9 @@ message:any;
 loader:boolean;
 page:boolean;
   constructor(private api:ApiService) {
-    this.data=this.api. getUserInfo();
-    this.uid=this.data.uid;
-     console.log("uid"+this.uid);
+    // this.data=this.api. getUserInfo();
+    // this.uid=this.data.uid;
+    //  console.log("uid"+this.uid);
     this.view();
      //console.log(this.data);
     this.value=localStorage.getItem('wish');
@@ -29,7 +29,7 @@ page:boolean;
   view()
   {
     
-    this.api.Post(WISHLISTVIEW,{uid:this.uid}).then(data=>{
+    this.api.Get(WISHLISTVIEW).then(data=>{
     console.log(data);
      this.page=true;
       this.loader=false;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
-import { LOGIN, OTPREQUEST } from 'src/config';
+import { LOGIN, OTPREQUEST, PROFILEVIEW } from 'src/config';
 import { Router } from '@angular/router';
 
 @Component({
@@ -57,9 +57,14 @@ login(otpvalue)
       this.api.Post(LOGIN,{mobile_no:this.mobile_no, otp:otpvalue,one_singnal:11}).then(data=>{
         this.loading=false;
         console.log(data['success'].token);
-        // this.api.updateWishlist();
-        // this.api.updateCart();
-        // this.api.setUserInfo(this.d);
+        this.api.updateWishlist();
+        this.api.updateCart();
+        this.api.Post(PROFILEVIEW, {}).then(data=>{
+          console.log(data);
+          this.api.setUserInfo(data['user']);
+          }).catch(d=>{
+                console.log(d);
+          });
         this.api.setlogin(1);
         this.api.setMobileNo(data['success'].token);
         this.router.navigate(['/home']);
