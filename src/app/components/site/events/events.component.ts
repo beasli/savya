@@ -12,10 +12,9 @@ export class EventsComponent implements OnInit {
 events: [];
 url: any;
   constructor(private api: ApiService,private router: Router) {
-    this.api.Post(EVENTS, {}).then(data => {
+    this.api.Get(EVENTS).then(data => {
       this.events = data['data']['data'];
-      this.events['url'] = data['url'] + "/";
-      this.url = this.events['url'];
+      this.url = "http://newtest.savyajewelsbusiness.com/img/events/";
     });
   }
 

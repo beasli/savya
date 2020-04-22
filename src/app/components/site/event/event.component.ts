@@ -28,10 +28,10 @@ constructor(private api: ApiService, private route: ActivatedRoute, public share
        // this.event = JSON.parse(this.api.getEvent());
         this.route.params.subscribe(params => {
           this.eid = params.id;
-          this.api.Post(EVENTS, {}).then(data => {
+          this.api.Get(EVENTS).then(data => {
             this.event = data['data']['data'];
             this.event = this.event.find(x => x.id == this.eid);
-            this.event['url'] = data['url'] + "/";
+            this.event['url'] = "http://newtest.savyajewelsbusiness.com/img/events/";
           });
           });
    }

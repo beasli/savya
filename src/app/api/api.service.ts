@@ -440,12 +440,12 @@ getOtpGuard()
 
 price(weight, rate, option, makingcharge, wastage = 0, value = 0) {
   let metalprice = 0;
-  if  (option == "pergram") {
+  if  (option == "PerGram") {
       metalprice  =  (Number(rate) + Number(makingcharge)) * Number(weight);
-  } else if (option == "percentage") {
+  } else if (option == "Percentage") {
   weight = ((Number(makingcharge) + Number(value)) / 100) * Number(weight);
   metalprice = Number(rate) * weight;
-  } else if (option == "fixed") {
+  } else if (option == "Fixed") {
       metalprice = Number(weight) * Number(rate) + Number(makingcharge);
   }
   if (wastage != 0) {
