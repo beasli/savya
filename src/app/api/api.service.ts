@@ -25,12 +25,12 @@ export class ApiService {
   
   
   constructor(public http: HttpClient,private service: NotificationsService, private router: Router) {
-  //   if(localStorage.getItem('savya_userInfo'))
-  //   {
-  //    let u=this.getUserInfo();
-  //   this.uid=u.uid;
-  //   console.log(this.uid);
-  //  }
+    if(localStorage.getItem('savya_userInfo'))
+    {
+     let u=this.getUserInfo();
+    this.uid=u.id;
+    console.log(this.uid);
+   }
     // console.log("userid"+this.uid);
     if(this.getMobileNo())
     {
@@ -75,6 +75,16 @@ export class ApiService {
         });
     });
   }
+  public Put2(api){
+    return new Promise((resolve, reject) => {
+      this.http.put(apiUrl + api,  {headers:this.header})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
   public Post(api, formData) {
     return new Promise((resolve, reject) => {
       this.http.post(apiUrl + api, formData,  {headers:this.header})
@@ -99,7 +109,7 @@ export class ApiService {
         });
     });
   }
-
+  
   public delete(api, formData) {
     return new Promise((resolve, reject) => {
 
@@ -142,7 +152,7 @@ export class ApiService {
   updateCart()
   {
     //console.log("in update cart function")
-    this.Post(CARTVIEW,{user_id:this.uid}).then(data=>{
+    this.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
       //console.log(data['data'][0].cart_id);
       console.log( data);
       localStorage.setItem('cart',JSON.stringify(data));  
@@ -213,7 +223,7 @@ qtyUpdate(pid,value)
                 else
                 {
                       c=c+value;
-                    this.Post(CARTUPDATE,{user_id:this.uid,cart_id:cartId,count:c}).then(data=>{
+                    this.Put2(CARTUPDATE+"?cart_id="+cartId+"&user_id="+this.uid+"&count="+c).then(data=>{
                       console.log(data);
                       this.updateCart(); 
                       this.Cart.emit("cartUpdate"+Date.now()); 
@@ -239,7 +249,7 @@ qtyUpdate(pid,value)
     delete prd_sizes[pid];
     localStorage.setItem("prd_sizes",JSON.stringify(prd_sizes));
    }
-    this.Post(CARTDELETE,{user_id:this.uid,product_id:pid}).then(data=>{
+    this.Delete(CARTDELETE+"?product_id="+pid+"&user_id="+this.uid).then(data=>{
       //console.log("deletecart"+data)
       this.updateCart();
       this.Cart.emit("cartUpdated"+Date.now());

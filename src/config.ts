@@ -33,10 +33,14 @@ export const WISHLISTDELETE='wishlist';
 
 
 // cart
-export const CARTVIEW = 'user/cart/view';
-export const CARTDELETE = 'user/cart/delete';
-export const CARTADD = 'user/cart';
-export const CARTUPDATE = 'user/cart/qty';
+//export const CARTVIEW = 'user/cart/view';
+export const CARTVIEW='cart/show';
+// export const CARTDELETE = 'user/cart/delete';
+export const CARTDELETE = 'cart/Delete';
+// export const CARTADD = 'user/cart';
+export const CARTADD = 'cart'
+// export const CARTUPDATE = 'user/cart/qty';
+export const CARTUPDATE = 'cart/update';
 
 
 // Dashboard
