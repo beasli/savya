@@ -72,7 +72,8 @@ export class FilterProductComponent implements OnInit {
   {
     this.loader=true;
     this.page=false;
-    this.api.Post(PRODUCTLIST, {subsubcategory_id: value } ).then(data  => {
+    //{subsubcategory_id: value } 
+    this.api.Get(PRODUCTLIST+"?subsubcategory_id="+value).then(data  => {
       this.page=true;
       this.loader=false;
       this.div=true;
