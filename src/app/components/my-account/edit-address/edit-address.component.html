@@ -57,9 +57,9 @@
                                 </div>
                             </div>
                             <div class="form-group"> <label for='region'>Select region</label>
-                                <select id="register" #region="ngModel" [(ngModel)]="addresses['region']"  name="region"  class="form-control" required >
-                                    <option value=""></option>
-                                    <option *ngFor='let s of state' (click)='statechange(s.id)' [selected]="s.name == addresses['region']">{{s.name}}</option>
+                                <select id="register" #region="ngModel" [(ngModel)]="statecode.id" (change)="statechange($event.target.value)"  name="region"  class="form-control" required >
+                                    <option value="-1"></option>
+                                    <option *ngFor='let s of state' [value]="s.id" [selected]="s.id == statecode.id">{{s.name}}</option>
                                 </select>
                                 <div class="alert alert-danger" *ngIf="region.touched && region.invalid">
                                     region is required.
@@ -69,7 +69,7 @@
                             <div class="form-group"><label for='region'>Select City</label>
                                 <select #city="ngModel"  [(ngModel)]="addresses['city']"  name="city"  class="form-control" required >
                                     <option value=""></option>
-                                    <option *ngFor='let s of cities' [selected]="s.name == addresses['city']">{{s.city}}</option>
+                                    <option *ngFor='let s of cities'  [selected]="s.city == addresses['city']">{{s.city}}</option>
                                 </select>
                                 <div class="alert alert-danger"  *ngIf="city.touched && city.invalid">
                                     City is required.

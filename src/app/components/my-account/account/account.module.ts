@@ -40,7 +40,7 @@ import { SiteModule } from '../../site/site/site.module';
       { path: 'account-wishlist', component: AccountWishlistComponent,  canActivate: [AuthGuardService]},
       { path: 'account-history', component: AccountHistoryComponent,  canActivate: [AuthGuardService]},
       { path: 'edit-address/:id', component: EditAddressComponent,  canActivate: [AuthGuardService]},
-      { path: 'add-address/:id', component: EditAddressComponent,  canActivate: [AuthGuardService]},
+      { path: 'add-address', component: EditAddressComponent,  canActivate: [AuthGuardService]},
       { path: 'event-history', component: EventHistoryComponent,  canActivate: [AuthGuardService]},
       { path: 'order-detail/:id', component: OrderDetailComponent,  canActivate: [AuthGuardService]},
     ])

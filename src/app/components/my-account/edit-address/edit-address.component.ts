@@ -20,7 +20,7 @@ statecode:any;
 loading: boolean;
   constructor(private api: ApiService, private router: Router, private route: ActivatedRoute) {
   this.index = this.route.snapshot.paramMap.get('id');
-  if  (this.index >= 0) {
+  if  (this.index) {
     this.heading = "  Edit Address"
     this.api.Get(GETADDRESS).then(data => {
     this.addresses = data['data'].find(x => x.id == this.index);
@@ -28,16 +28,18 @@ loading: boolean;
     this.api.Get(STATE).then(data => {
       this.state = data['other'];
       if(this.addresses.length!=0){
-      this.statecode = this.state.find(x => x.name == this.addresses['region']);}
+      this.statecode = this.state.find(x => x.name == this.addresses['region']);
+    }
       this.api.Get(CITY+'/'+this.statecode.id).then(data => {
         this.cities = data['data'];
-        console.log(data);
         });
     });
 
     });
     }
     else  {
+      this.statecode = {};
+      this.statecode['id'] = -1;
       this.heading = "  Add New Address";
       this.addresses = [];
       this.api.Get(STATE).then(data => {
@@ -91,7 +93,9 @@ changeNumber(e)
 }
 
    add(value) {
-    if(this.index >= 0)
+    value['region'] = this.state.find(x => x.id == value['region']);
+    value['region'] = value['region']['name'];
+    if(this.index)
     {
       this.api.Put(EDITADDRESS,this.index,value).then(data => {
       if (confirm(data['message'])) {
@@ -99,6 +103,7 @@ changeNumber(e)
       }
     }); }
     else {
+          console.log(value);
           this.api.Post(ADDADDRESS, value).then(data => {
           if (confirm(data['message'])) {
           this.router.navigate(['/account-addresses']);
