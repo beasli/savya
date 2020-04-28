@@ -330,6 +330,7 @@ export class ProductDetailsComponent implements OnInit {
     j['assests'] = temparray;
     j['category'] = this.data['category_id'];
     j['count'] = this.value;
+    j['jwellery_type'] = this.data.jwellery_type;
     j['defaultColor'] = this.colvalue;
     j['description'] = this.data.description;
     j['productCode'] = this.data.productcode;
