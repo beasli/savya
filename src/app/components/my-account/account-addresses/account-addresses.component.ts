@@ -29,7 +29,7 @@ export class AccountAddressesComponent implements OnInit {
         this.router.navigate(['/edit-address', value]);
               }
     else {
-      this.router.navigate(['/add-address', value]);
+      this.router.navigate(['/add-address']);
     }
    }
 
