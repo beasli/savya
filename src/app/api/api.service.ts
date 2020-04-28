@@ -56,6 +56,11 @@ export class ApiService {
  }
 
   public Get(api) {
+    this.header = new HttpHeaders().set(
+      "Authorization",
+       'Bearer'+" "+this.getMobileNo()
+    );
+   // console.log(this.header);
     return new Promise((resolve, reject) => {
       this.http.get(apiUrl + api,  {headers:this.header})
         .subscribe(res => {

@@ -66,7 +66,7 @@ ProductsInCart()
   }
   view()
   {
-      this.api.Post(CARTVIEW,{user_id:this.uid}).then(data=>{
+      this.api.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
         console.log(data);  
         this.baseurl=data['url']+"/";
         this.results=data['data'];

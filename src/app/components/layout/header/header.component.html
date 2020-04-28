@@ -140,6 +140,7 @@
                                 <div class="container">
                                         <button class="search-button"><i class="icon-search2"></i></button>
                                     <div class="form-group"><input type="text" (keyup.enter)="search()" (keyup)="change($event)" class="form-control" class="search-input" placeholder="search keyword"></div> 
+                                    <div class="form-group"><button class="btn" (click)="search()">search</button></div>
                                     <div class="search-popular js-search-autofill"><span class="search-popular-label">popular searches:</span><a href="javascript:void(0)" (click)="popularSearch('RINGS')">RINGS</a><a href="javascript:void(0)" (click)="popularSearch('DIAMOND')">Diamond</a><a href="javascript:void(0)" (click)="popularSearch('GOLD')">GOLD</a></div>
                                     <ngb-alert [dismissible]="false" *ngIf="alert()" >
                                         <strong>{{message}}</strong> 
