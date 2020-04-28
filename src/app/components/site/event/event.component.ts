@@ -21,6 +21,8 @@ event: any;
 uid: any;
 eid: any;
 url: any;
+loader:boolean;
+page:boolean;
 constructor(private api: ApiService, private route: ActivatedRoute, public share: ShareService, library: FaIconLibrary, private winRef: WindowRefService) {
         library.addIcons(...iconpack);
         this.uid = this.api.uid;
@@ -29,6 +31,8 @@ constructor(private api: ApiService, private route: ActivatedRoute, public share
         this.route.params.subscribe(params => {
           this.eid = params.id;
           this.api.Get(EVENTS).then(data => {
+            this.page=true;
+            this.loader=false;
             this.event = data['data']['data'];
             this.event = this.event.find(x => x.id == this.eid);
             this.event['url'] = "http://newtest.savyajewelsbusiness.com/img/events/";
@@ -49,7 +53,9 @@ shareservice() {
   console.log("share method called");
 
 }
-  ngOnInit(): void {
+  ngOnInit(){
+    this.loader=true;
+    this.page=false;
   }
 
   

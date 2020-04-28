@@ -4,7 +4,7 @@
   </div>
   <div class="col-sm">-->
     
-<div class="container events-details-section">
+<div class="container events-details-section" *ngIf="page">
   <div class="row">
     <div class="col-md-6">
       <div class="events-details-image-wrapper">
@@ -79,3 +79,4 @@
     </div>
   </div>
 </div>
+<div  style="padding: 200px;" *ngIf="loader"><app-loader  ></app-loader></div>
