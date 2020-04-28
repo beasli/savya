@@ -418,6 +418,7 @@ getWishlist()
   getUserInfo()
   {
     let d =this.decrypt(localStorage.getItem('savya_userInfo'));
+    console.log(d);
     return d;
   }
   logout()

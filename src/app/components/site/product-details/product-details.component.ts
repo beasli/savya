@@ -264,11 +264,11 @@ export class ProductDetailsComponent implements OnInit {
     let temparray = [];
     let waste = {};
     if (this.gold!=null) {
-        j['option'] = this.gold.charges_type;
+        j['option'] = this.gold.charges_option;
         j['weight'] = this.gold.weight;
         j['wastage'] = this.gold.wastage;
         j['product_size'] = this.selectedsize;
-        j['materialType'] = this.pricegold.gold_type;
+        j['materialType'] = this.pricegold.type;
         j['productId'] = this.pid;
         j['metal'] = 'Gold';
         j['makingCharge'] = this.gold.making_charge;
@@ -276,19 +276,19 @@ export class ProductDetailsComponent implements OnInit {
         j = {};
       }
     if (this.diamond!=null) {
-      j['option'] = this.diamond.charges_type;
-      j['weight'] = this.diamond.weight;
-      j['wastage'] = this.diamond.wastage;
+      j['option'] = this.diamond[0].charges_option;
+      j['weight'] = this.diamond[0].weight;
+      j['wastage'] = this.diamond[0].wastage;
         j['product_size'] = this.selectedsize;
       j['materialType'] = this.defaultdiamond[0] + '/' + this.defaultdiamond[1];
       j['productId'] = this.pid;
       j['metal'] = 'Diamond';
-      j['makingCharge'] = this.diamond.making_charge;
+      j['makingCharge'] = this.diamond[0].making_charge;
       temparray.push(j);
       j = {};
     }
     if (this.platinum!=null) {
-      j['option'] = this.platinum.charges_type;
+      j['option'] = this.platinum.charges_option;
       j['weight'] = this.platinum.weight;
       j['materialType'] = "Platinum";
       j['wastage'] = this.platinum.wastage;
@@ -300,9 +300,9 @@ export class ProductDetailsComponent implements OnInit {
       j = {};
     }
     if (this.stone!=null) {
-      j['option'] = this.stone.charges_type;
+      j['option'] = this.stone.charges_option;
       j['weight'] = this.stone.weight;
-      j['materialType'] = this.stone.stonetype;
+      j['materialType'] = this.stone.jwellery_size;
       j['productId'] = this.pid;
       j['metal'] = 'Stone';
       j['wastage'] = this.stone.wastage;
@@ -313,32 +313,31 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     if (this.silver!=null) {
-      j['option'] = this.silver.charges_type;
+      j['option'] = this.silver.charges_option;
       j['weight'] = this.silver.weight;
       j['materialType'] = 'Silver';
       j['productId'] = this.pid;
       j['wastage'] = this.silver.wastage;
-        j['product_size'] = this.selectedsize;
+      j['product_size'] = this.selectedsize;
       j['metal'] = 'Silver';
       j['makingCharge'] = this.silver.making_charge;
       temparray.push(j);
       j = {};
     }
-    let uid = this.api.uid;
+    let uid = this.api.getUserInfo();
+    uid = uid.id;
+    console.log(uid);
     j['assests'] = temparray;
-    j['category'] = this.data['category'];
+    j['category'] = this.data['category_id'];
     j['count'] = this.value;
     j['defaultColor'] = this.colvalue;
     j['description'] = this.data.description;
     j['productCode'] = this.data.productcode;
     j['productId'] = Number(this.pid);
     j['productName'] = this.data.productname;
-    j['productType'] = this.data.size;
-    let size = {'size': this.selectedsize,'type': this.data.size };
-    let prd_sizes = {};
-    prd_sizes[this.pid] = size;
-    j['subCategory'] = this.data['subcategory'];
-    j['subSubCategory'] = this.data['subcategorytype'];
+    j['productType'] = this.data.jwellery_type;
+    j['subCategory'] = this.data['subcategory_id'];
+    j['subSubCategory'] = this.data['subsubcategory_id'];
     j['userid'] = (uid).toString();
     temparray = [];
     temparray.push(j);
