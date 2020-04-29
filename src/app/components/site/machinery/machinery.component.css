@@ -1,0 +1,18 @@
+.seller .embed-responsive{
+    text-align:center;
+}
+.seller .embed-responsive .embed-responsive-item{
+    width:40vh;
+    height: auto;
+    margin:0px auto;
+    left:20vh;
+    transform:translateX(-50%);
+}
+@media screen and (max-width: 767px){
+    .seller .testimonials h2 {
+        font-size: 14px;
+    }
+    .seller .embed-responsive .embed-responsive-item{
+        width:70px;
+    }
+}

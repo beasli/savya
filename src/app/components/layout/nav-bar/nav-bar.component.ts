@@ -14,13 +14,14 @@ export class NavBarComponent implements OnInit {
   catall = [];
   catwithsub = [];
   catwithoutsub = [];
-
+  logochange:number = 0;
   uid:any;
   results:any[];
   alert:boolean=false;
   div:boolean=false;
   baseurl:any;
   message:any="CART IS EMPTY";
+  newurl:any;
   constructor(private api: ApiService, private router: Router) {
     
                   //cart work start //
@@ -32,7 +33,7 @@ export class NavBarComponent implements OnInit {
           
             this.api.Get(NAVIGATION).then(data => {
               this.catall = data['data'];
-              console.log(data);
+            
               this.catall.forEach(element => {
                 if (element['subcategory'].length){
                   this.catwithsub.push(element);
@@ -42,10 +43,13 @@ export class NavBarComponent implements OnInit {
                 }
                 }
               );
-              // console.log(this.catwithsub[0].subcategory);
-              console.log(this.catwithoutsub);
-              
-              console.log(this.catwithsub);
+             
+            });
+            this.api.changelogo.subscribe(data=>{this.logochange = data
+              console.log(this.logochange);
+              if(data == 1){
+                this.newurl = this.router.url;
+              }
             });
 }
 ProductsInCart()

@@ -1,7 +1,8 @@
 <div class="hdr-content hide-mobile">
     <div class="container">
         <div class="row">
-            <div class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
+            <div *ngIf='logochange != 1' class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
+            <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png" alt=""></a></div>
             <!--navigation-->
             <div class="prev-menu-scroll icon-angle-left prev-menu-js"></div>
             <div class="nav-holder">
@@ -10,7 +11,9 @@
                     <ul  class="mmenu mmenu-js">
                         
                         <ul class="mmenu mmenu-js">
-                            <li *ngFor='let s of catwithsub' class="mmenu-item--simple"><a href="javascript:void(0)" title="">{{s.category}}</a>
+                            <li *ngFor='let s of catwithsub' class="mmenu-item--simple">
+                                <ng-container *ngIf="s.category != 'MACHINERY'"><a href="javascript:void(0)" title="">{{s.category}}</a></ng-container>
+                                <ng-container *ngIf="s.category == 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/machinery/', s.category_id]" title="">{{s.category}}</a></ng-container>
                                 <div class="mmenu-submenu">
                                     <ul class="submenu-list">
                                         <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" (click)='gofilter(p.subcategory_id)'>{{p.subcategory}}</a>
