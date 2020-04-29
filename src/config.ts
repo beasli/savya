@@ -60,7 +60,7 @@ export const CITY = 'cities';//done
 
 // Events
 export const EVENTS = 'events'; //done
-export const MYEVENTS = 'events/';
+export const MYEVENTS = 'events'; //done
 
 // Products
 export const PRODUCTDETAILS = 'product'; //done
