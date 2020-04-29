@@ -25,8 +25,8 @@ loader:boolean;
 page:boolean;
 constructor(private api: ApiService, private route: ActivatedRoute, public share: ShareService, library: FaIconLibrary, private winRef: WindowRefService) {
         library.addIcons(...iconpack);
-        this.uid = this.api.uid;
-
+        this.uid = this.api.getUserInfo();
+        this.uid = this.uid.id;
        // this.event = JSON.parse(this.api.getEvent());
         this.route.params.subscribe(params => {
           this.eid = params.id;
@@ -40,8 +40,8 @@ constructor(private api: ApiService, private route: ActivatedRoute, public share
           });
    }
 register() {
-  if (!this.event.amount) {
-   this.api.Post(MYEVENTS, {uid:this.uid.toString(), amount:'0' , event_type:'free', event_id:this.event.id.toString(), transaction_no:"000000"}).then(data => {
+  if (!this.event.amount || this.event.amount == 0) {
+   this.api.Post(MYEVENTS, {uid:this.uid, amount:'0' , event_type:'free', event_id:this.event.id.toString(), transaction_no:"000000"}).then(data => {
         console.log(data);
     }).catch(data=>{console.log(data)});
   } else {
