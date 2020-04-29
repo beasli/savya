@@ -15,6 +15,7 @@ export class ApiService {
   @Output() getWish:EventEmitter<string> = new EventEmitter();
   @Output() getUserData:EventEmitter<string> = new EventEmitter();
   @Output() Cart:EventEmitter<string> = new EventEmitter();
+  @Output() changelogo:EventEmitter<number> = new EventEmitter();
   drop:any;
   otp:any;
   otpGuard:any;
@@ -431,6 +432,10 @@ getWishlist()
     //  return d;
     return m;
 
+  }
+
+  changelg(number:number){
+    this.changelogo.emit(number);
   }
   setlogin(value)
 {
