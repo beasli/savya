@@ -80,9 +80,17 @@ export class ApiService {
         });
     });
   }
-  public Put2(api){
+  public Put2(api, formData,parameters={}){
+    this.header = new HttpHeaders().set(
+      "Authorization",
+       'Bearer'+" "+this.getMobileNo()
+    );
+    console.log(this.header);
     return new Promise((resolve, reject) => {
-      this.http.put(apiUrl + api,  {headers:this.header})
+
+      let options = { headers: this.header ,params:parameters};
+
+      this.http.put(apiUrl + api+formData,formData,options)
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -228,7 +236,8 @@ qtyUpdate(pid,value)
                 else
                 {
                       c=c+value;
-                    this.Put2(CARTUPDATE+"?cart_id="+cartId+"&user_id="+this.uid+"&count="+c).then(data=>{
+                   // this.Put2(CARTUPDATE+"?cart_id="+cartId+"&user_id="+this.uid+"&count="+c).then(data=>{
+                     this.Put2(CARTUPDATE,"",{cart_id:cartId,user_id:this.uid,count:c}).then(data=>{
                       console.log(data);
                       this.updateCart(); 
                       this.Cart.emit("cartUpdate"+Date.now()); 
@@ -242,6 +251,7 @@ qtyUpdate(pid,value)
 
   deleteCart(pid)
   {
+    console.log(pid)
     if(localStorage.getItem("waste")!=null)
     {
       let waste = JSON.parse(localStorage.getItem("waste"));
@@ -254,7 +264,7 @@ qtyUpdate(pid,value)
     delete prd_sizes[pid];
     localStorage.setItem("prd_sizes",JSON.stringify(prd_sizes));
    }
-    this.Delete(CARTDELETE+"?product_id="+pid+"&user_id="+this.uid).then(data=>{
+    this.Delete(CARTDELETE+"?cart_id="+pid.cart_id+"&user_id="+this.uid).then(data=>{
       //console.log("deletecart"+data)
       this.updateCart();
       this.Cart.emit("cartUpdated"+Date.now());

@@ -77,4 +77,5 @@ export const PRICELIST = 'product/list/price';
 export const SEARCH='product';
 
 // order
-export const ORDERHISTORY = 'order/history';
+// export const ORDERHISTORY = 'order/history';
+export const ORDERHISTORY = 'checkout';
