@@ -149,8 +149,17 @@ export class ApiService {
   }
 
   onSuccess(message){
-    console.log('im called');
     this.service.success('Success',message,{
+     position: ['bottom', 'right'],
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  onFail(message){
+    this.service.warn('Not Possible',message,{
      position: ['bottom', 'right'],
       timeOut: 3000,
       showProgressBar: true,
