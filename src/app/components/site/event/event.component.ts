@@ -43,7 +43,10 @@ register() {
   if (!this.event.amount || this.event.amount == 0) {
    this.api.Post(MYEVENTS, {uid:this.uid, amount:'0' , event_type:'free', event_id:this.event.id.toString(), transaction_no:"000000"}).then(data => {
         console.log(data);
-    }).catch(data=>{console.log(data)});
+        this.api.onSuccess('Your Registration is done for this Event');
+    }).catch(data=>{console.log(data);
+      this.api.onFail('Your account is not verified');}
+    );
   } else {
     this.payWithRazor(this.event.amount*100);
   }
