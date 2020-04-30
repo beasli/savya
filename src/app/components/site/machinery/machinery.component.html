@@ -2,7 +2,7 @@
 <div class="card-group" style="padding-top: 3vh;padding-bottom: 3vh;">
     <div class="row">
     <div *ngFor="let slide of data" class="card col-3 border shadow" style="width: 15rem;">
-        <img class="card-img-top" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
+        <img class="card-img-top" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{slide.subcategory}}</h5>
          </div>
