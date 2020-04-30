@@ -28,9 +28,9 @@
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
                   <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide embed-responsive embed-responsive-16by9">
-                  <img src="{{ manufacture + slide.logo }}"  class="embed-responsive-item"  alt="" width="100%">
+                  <img [routerLink]="['/category/', slide.manufacture_id]" src="{{ manufacture + slide.logo }}"  class="embed-responsive-item"  alt="" width="100%">
                   <div class="overlay-effect">
-                      <div *ngIf="slide.name" class="overlay-effect-content">
+                      <div [routerLink]="['/category/', slide.manufacture_id]" *ngIf="slide.name" class="overlay-effect-content">
                         <h2>{{ slide.name }}</h2>
                       </div>
                   </div>
@@ -93,7 +93,7 @@
 
 
     <!-- Promotional Section -->
-    <app-exclusive-banner [url2] = 'url2' [exclusive] = 'exclusive' *ngIf="page"></app-exclusive-banner>
+    <app-exclusive-banner [url2] = 'url' [exclusive] = 'exclusive' *ngIf="page"></app-exclusive-banner>
     <!--/Promotional section -->
    
     <!-- Mostselling Product -->

@@ -1,3 +1,5 @@
+import { ApiService } from 'src/app/api/api.service';
+import { CATEGORY, IMAGE } from './../../../config';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,13 +11,21 @@ import { Component, OnInit } from '@angular/core';
 export class CategoryComponent implements OnInit {
   slider_imgs = {};
   id:any;
-  constructor(private route: ActivatedRoute) { 
+  data: any;
+  img_url=IMAGE;
+  constructor(private route: ActivatedRoute,private api: ApiService) { 
     this.route.params.subscribe(
       params=>{
-        this.api.Post(SUBCATEGORY, {category_id: params.id} ).then(data  => {
+        if(params.id!=null) {
+        this.api.Post(CATEGORY, {manufacture_id: params.id} ).then(data  => {
           this.data = data['data'];
         });
+      } else{
+        this.api.Post(CATEGORY, {} ).then(data  => {
+          this.data = data['data'];
       });
+    }
+  });
   }
 
   ngOnInit(): void {

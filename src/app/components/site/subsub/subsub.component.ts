@@ -1,3 +1,4 @@
+import { IMAGE } from './../../../../config';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SUBCATEGORYTYPE, CRAUSEL, CATEGORY, SUBCATEGORY } from 'src/config';
@@ -70,7 +71,7 @@ slideConfig = {
         }
      });
 
-       this.baseUrl = data['url']+'/img/banner/';
+       this.baseUrl = IMAGE+'banner/';
       // this.url2 = this.url + '/';
       // this.url3 = data['product_url'] + '/';
     });
@@ -103,7 +104,7 @@ slideConfig = {
   getlink(s):SafeStyle {
     // console.log("in getlink function");
     // console.log(this.baseUrl);
-    return this.sanitizer.bypassSecurityTrustStyle('url('+ this.baseUrl+s + ')');
+    return this.sanitizer.bypassSecurityTrustStyle('url('+ IMAGE + 'subcategory_type' + s + ')');
   }
   gofilter(value) {
     console.log(value);
