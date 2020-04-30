@@ -50,13 +50,13 @@
    <app-filter-nav-bar></app-filter-nav-bar>
   <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09">
    <div class="container">
-       <div class="text-center">
+       <!-- <div class="text-center">
            <h2 class="h1-style">Product with side filter</h2>
-       </div>
+       </div> -->
        
        <div class="row" >
            <!-- Left column -->
-           <div class="col-lg-3 aside aside--left fixed-col js-filter-col">
+           <!-- <div class="col-lg-3 aside aside--left fixed-col js-filter-col">
                <div class="fixed-col_container">
                    <div class="filter-close">CLOSE</div>
                    <div class="sidebar-block sidebar-block--mobile d-block d-lg-none">
@@ -97,7 +97,7 @@
                                </ul>
                              </div>
                                <div class="d-flex align-items-center"><a href="javascript:void(0)" class="clear-filters" (click)="clearFilter()"><span>Clear All</span></a>
-                                   <!-- <div class="selected-count ml-auto d-none d-lg-block">SELECTED<span><b>25 items</b></span></div> -->
+                                   
                                </div>
                            </div>
                        </div>
@@ -109,8 +109,7 @@
                        </div>
                        <div class="sidebar-block_content">
                            <div class="radio-group">
-                               <!-- value="{min:{{price[0]}},max:{{price[1]}}}" -->
-                               <!-- [checked]="checkedprice($event)" -->
+                              
                                <ng-container > <input type="radio" value="{{price[0]}}-{{price[1]}}" [checked]="checkedprice(price[0])"  (change)="getprice($event)"  id="price" name="price"><label for="price">₹{{price[0]}}-₹{{price[1]}}</label></ng-container>
                                <ng-container > <input type="radio" value="{{price[1]}}-{{price[2]}}" [checked]="checkedprice(price[1])" (change)="getprice($event)"  id="price1" name="price"><label for="price1">₹{{price[1]}}-₹{{price[2]}}</label></ng-container>
                                <ng-container > <input type="radio" value="{{price[2]}}-{{price[3]}}" [checked]="checkedprice(price[2])"  (change)="getprice($event)"  id="price2" name="price"><label for="price2">₹{{price[2]}}-₹{{price[3]}}</label></ng-container>
@@ -180,49 +179,17 @@
                    </div>
 
                     
-                    <!-- <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Size 2 Column</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <ul class="size-list two-column" data-sort='["XXS","XS","S","M","L","XL","XXL","XXXL"]'>
-                                <li data-value="L" class="active"><a href="#">L</a></li>
-                                <li data-value="M"><a href="#">M</a></li>
-                                <li data-value="S"><a href="#">S</a></li>
-                                <li data-value="XL"><a href="#">XL</a></li>
-                                <li data-value="XS"><a href="#">XS</a></li>
-                            </ul>
-                        </div>
-                    </div> -->
-                    
-                    <!-- <div class="sidebar-block filter-group-block open">
-                        <div class="sidebar-block_title"><span>Size 1 Column</span>
-                            <div class="toggle-arrow"></div>
-                        </div>
-                        <div class="sidebar-block_content">
-                            <ul class="size-list" data-sort='["XXS","XS","S","M","L","XL","XXL","XXXL"]'>
-                                <li data-value="L" class="active"><a href="#">L</a></li>
-                                <li data-value="XL"><a href="#">XL</a></li>
-                                <li data-value="XXS"><a href="#">XXS</a></li>
-                                <li data-value="XS"><a href="#">XS</a></li>
-                                <li data-value="S"><a href="#">S</a></li>
-                                <li data-value="XXL"><a href="#">XXL</a></li>
-                                <li data-value="XXXL"><a href="#">XXXL</a></li>
-                            </ul>
-                        </div>
-                    </div> -->
-                    
                 </div>
                
                  
-            </div>
+            </div> -->
             <!-- /Left column -->
             
             <!-- Center column -->
             <div class="col-lg aside">
                 <div class="prd-grid-wrap">
                     <!-- Filter Row -->
-                    <div class="filter-row invisible">
+                    <!-- <div class="filter-row invisible">
                         <div class="row row-1 d-lg-none align-items-center">
                             <div class="col">
                                 <h1 class="category-title">WOMEN’S</h1>
@@ -266,7 +233,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- /Filter Row -->
                     
                     <!-- Products Grid -->
@@ -290,20 +257,8 @@
                     
                                                         <div   *ngIf= "checkCart(s.product_id)" class="row no=gutters" >
                                                             <button routerLink="/cart" class="btn"><i class="icon icon-handbag"></i><span>Go to Cart</span></button>
-                                                            <!-- <div class="col-2">
-                                                                <button  (click)="qtyUpdate(s.product_id,-1)" class="btn btn-secondary btn-block">-</button>
-                                                            </div>
-                            
-                                                            <div class="col-4 text-right">{{quantity(s.product_id)}}</div>
-                            
-                                                            <div class="col-2">
-                                                                <button  (click)="qtyUpdate(s.product_id,+1)" class="btn btn-secondary btn-block">+</button>
-                                                            </div> -->
                                                            </div>
                                                            <input type="hidden"> <button class="btn" *ngIf= "!checkCart(s.product_id)"  (click)="go(s.product_id)" ><i class="icon icon-handbag"></i><span>View Detail</span></button>
-                                                           <!-- <div class="prd-links hide-mobile"><a  (click)="wishlist(s.product_id)" *ngIf="!checkHeart(s.product_id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a  (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)"  class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>     -->
-                
-                                                   
                                                             </div>
                                                         </div>
                                                     </div>
