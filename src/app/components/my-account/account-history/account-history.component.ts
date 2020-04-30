@@ -21,18 +21,15 @@ alert:boolean;
   ngOnInit() {
     this.loader=true;
     this.page=false;
-    this.api.Post(ORDERHISTORY,{user_id:this.api.uid }).then(data=>{
+    this.api.Get(ORDERHISTORY).then(data=>{
       this.page=true;
       this.loader=false;
       this.orders=data['data'];
-      localStorage.setItem('orders',JSON.stringify(data['data']));
-      console.log( data['data']);
      
     }).catch(d=>{
       this.alert=true;
       this.loader=false;
       this.page=false;
-      console.log(d);
       
     })
   }
