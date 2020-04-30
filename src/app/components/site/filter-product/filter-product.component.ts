@@ -9,7 +9,7 @@ import { SUBCATEGORYTYPE, PRODUCTLIST, PRODUCTFILTERMENU, PRODUCTFILTER, ORDERBY
   styleUrls: ['./filter-product.component.css']
 })
 export class FilterProductComponent implements OnInit {
-  @Output() filterChange:EventEmitter<string> = new EventEmitter();
+  // @Output() filterChange:EventEmitter<string> = new EventEmitter();
   subid: any;
    url :any;
   data:any;
@@ -37,25 +37,25 @@ export class FilterProductComponent implements OnInit {
       this.getProduct(this.subid);
    //    this.getsubsub();
         //filter update sub category
-              let f=this.getfilter();
-              f.menu.subcategory= +this.subid;
-              this.setfilter(f);
+              // let f=this.getfilter();
+              // f.menu.subcategory= +this.subid;
+              // this.setfilter(f);
        //end filter update//
 
     //  console.log(params);
       });
 
-      this.api.Get(PRODUCTFILTERMENU).then(data  => {
-      this.jewelery_for=data['menu'].jewelery_for;
-       console.log(data);
-        this.material=data['menu'].material;
-        this.purity=data['menu'].purity;
-        this.price=data['menu'].price;
-        this.jewelery_type=data['menu'].jewelery_type;
-        console.log(this.price);
-       }).catch(d=>{
-        console.log(d);
-      });
+      // this.api.Get(PRODUCTFILTERMENU).then(data  => {
+      // this.jewelery_for=data['menu'].jewelery_for;
+      //  console.log(data);
+      //   this.material=data['menu'].material;
+      //   this.purity=data['menu'].purity;
+      //   this.price=data['menu'].price;
+      //   this.jewelery_type=data['menu'].jewelery_type;
+      //   console.log(this.price);
+      //  }).catch(d=>{
+      //   console.log(d);
+      // });
      
   }
  
@@ -72,8 +72,9 @@ export class FilterProductComponent implements OnInit {
   {
     this.loader=true;
     this.page=false;
+    this.f=this.api.getfilter();
     //{subsubcategory_id: value } 
-    this.api.Get(PRODUCTLIST+"?subsubcategory_id="+value).then(data  => {
+    this.api.Post(PRODUCTLIST+"?subsubcategory_id="+value,JSON.stringify(this.f)).then(data  => {
       this.page=true;
       this.loader=false;
       this.div=true;
@@ -99,63 +100,63 @@ export class FilterProductComponent implements OnInit {
      // console.log(check);
       return check;
  }
- filterApi(value)
- {
-  this.loader=true;
-  this.page=false;
-  this.api.Post(PRODUCTFILTER,  value  ).then(data  => {
-    this.page=true;
-    this.loader=false;
-    this.div=true;
-      this.alert=false
-    console.log(data);
-    this.products = data['data'];
-    console.log(this.products);
-   this.url = data['url'] + '/';
-   console.log(this.url);
-     }).catch(d=>{
-      this.page=true;
-      this.loader=false;
-      this.div=false;
-      this.alert=true;
-      console.log(d);
-    });
- }
- orderByAPI(value)
- {
-  this.api.Post(ORDERBY+this.subid,"orderby="+value).then(data  => {
-    this.div=true;
-      this.alert=false
-    console.log(data);
-    this.products = data['data'];
-    console.log(this.products);
-   this.url = data['url'] + '/';
-   console.log(this.url);
-     }).catch(d=>{
-      this.div=false;
-      this.alert=true;
-      console.log(d);
-    });
- }
- orderBy(event)
-  {
-    let s:any;
-    if(event==1)
-    {
-      s="DSC";
-      this.orderByAPI(s);
-    }
-    else if(event==2)
-    {
-      s="ASC";
-      this.orderByAPI(s);
-    }
-    else
-    {
-      s=event.target.value;
-      this.orderByAPI(s);
-    }
-  }
+//  filterApi(value)
+//  {
+//   this.loader=true;
+//   this.page=false;
+//   this.api.Post(PRODUCTFILTER,  value  ).then(data  => {
+//     this.page=true;
+//     this.loader=false;
+//     this.div=true;
+//       this.alert=false
+//     console.log(data);
+//     this.products = data['data'];
+//     console.log(this.products);
+//    this.url = data['url'] + '/';
+//    console.log(this.url);
+//      }).catch(d=>{
+//       this.page=true;
+//       this.loader=false;
+//       this.div=false;
+//       this.alert=true;
+//       console.log(d);
+//     });
+//  }
+//  orderByAPI(value)
+//  {
+//   this.api.Post(ORDERBY+this.subid,"orderby="+value).then(data  => {
+//     this.div=true;
+//       this.alert=false
+//     console.log(data);
+//     this.products = data['data'];
+//     console.log(this.products);
+//    this.url = data['url'] + '/';
+//    console.log(this.url);
+//      }).catch(d=>{
+//       this.div=false;
+//       this.alert=true;
+//       console.log(d);
+//     });
+//  }
+//  orderBy(event)
+//   {
+//     let s:any;
+//     if(event==1)
+//     {
+//       s="DSC";
+//       this.orderByAPI(s);
+//     }
+//     else if(event==2)
+//     {
+//       s="ASC";
+//       this.orderByAPI(s);
+//     }
+//     else
+//     {
+//       s=event.target.value;
+//       this.orderByAPI(s);
+//     }
+//   }
  qtyUpdate(pid,value)
  {
       this.api.qtyUpdate(pid,value);
@@ -224,227 +225,227 @@ export class FilterProductComponent implements OnInit {
         return false;
       }
   }
-getprice(event){
-  console.log(event);
-  let min;
-  let max;
-  let res:any;
-  let a=event['target']['value'];
-  let f= this.getfilter();
-    if(a.length<=5)
-    {
-       min=a;
-       max=1000000;
-       f.menu.price.min=Number(min);
-       f.menu.price.max=Number(max);
-       this.setfilter(f);
-    }
-    else
-    {
-       res = a.split("-");
-        min =res[0];
-        max  =res[1]
-        f.menu.price.min=Number(min);
-        f.menu.price.max=Number(max);
-        this.setfilter(f);
-    }
-}
-changefilter(event,value)
-{
-  let name=event.target.name;
-  console.log(name);
-  let f= this.getfilter();
-  console.log(event);
-  console.log(value);
-  if(name=="jewelery_for")
-  {
-            console.log("if condition");
-            console.log(f.menu.jewelery_for);
-            if(f.menu.jewelery_for.length>0)
-            {
-              let result=f.menu.jewelery_for.find(x => x == value);
-              if(result)
-              {
-                f.menu.jewelery_for.pop(value);
-                this.setfilter(f);
-              }
-              else
-              {
-                f.menu.jewelery_for.push(value);
-                this.setfilter(f);
-              }
-          }
-          else
-          {
-            f.menu.jewelery_for.push(value);
-            this.setfilter(f);
-          }
-  }
-  else if(name=="jewelery_type")
-  { 
-    f.menu.jewelery_type=[]
-    f.menu.jewelery_type.push(value);
-    this.setfilter(f);     
-  }
-  else if(name=="purity")
-  {
-            console.log("if condition");
-            console.log(f.menu.purity);
-            if(f.menu.purity.length>0)
-            {
-              let result=f.menu.purity.find(x => x == value);
-              if(result)
-              {
-                f.menu.purity.pop(value);
-                this.setfilter(f);
-              }
-              else
-              {
-                f.menu.purity.push(value);
-                this.setfilter(f);
-              }
-          }
-          else
-          {
-            f.menu.purity.push(value);
-            this.setfilter(f);
-          }
-  }
-  else if(name=="purity")
-  {
-            console.log("if condition");
-            console.log(f.menu.purity);
-            if(f.menu.purity.length>0)
-            {
-                  let result=f.menu.purity.find(x => x == value);
-                  if(result)
-                  {
-                    f.menu.purity.pop(value);
-                    this.setfilter(f);
-                  }
-                  else
-                  {
-                    f.menu.purity.push(value);
-                    this.setfilter(f);
-                  }
-          }
-          else
-          {
-            f.menu.purity.push(value);
-            this.setfilter(f);
-          }
-  }
-  else if(name=="material")
-  {
-            console.log("if condition");
-            console.log(f.menu.material);
-            if(f.menu.material.length>0)
-            {
-                  let result=f.menu.material.find(x => x == value);
-                  if(result)
-                  {
-                    f.menu.material.pop(value);
-                    this.setfilter(f);
-                  }
-                  else
-                  {
-                    f.menu.material.push(value);
-                    this.setfilter(f);
-                  }
-          }
-          else
-          {
-            f.menu.material.push(value);
-            this.setfilter(f);
-          }
-  }
+// getprice(event){
+//   console.log(event);
+//   let min;
+//   let max;
+//   let res:any;
+//   let a=event['target']['value'];
+//   let f= this.getfilter();
+//     if(a.length<=5)
+//     {
+//        min=a;
+//        max=1000000;
+//        f.menu.price.min=Number(min);
+//        f.menu.price.max=Number(max);
+//        this.setfilter(f);
+//     }
+//     else
+//     {
+//        res = a.split("-");
+//         min =res[0];
+//         max  =res[1]
+//         f.menu.price.min=Number(min);
+//         f.menu.price.max=Number(max);
+//         this.setfilter(f);
+//     }
+// }
+// changefilter(event,value)
+// {
+//   let name=event.target.name;
+//   console.log(name);
+//   let f= this.getfilter();
+//   console.log(event);
+//   console.log(value);
+//   if(name=="jewelery_for")
+//   {
+//             console.log("if condition");
+//             console.log(f.menu.jewelery_for);
+//             if(f.menu.jewelery_for.length>0)
+//             {
+//               let result=f.menu.jewelery_for.find(x => x == value);
+//               if(result)
+//               {
+//                 f.menu.jewelery_for.pop(value);
+//                 this.setfilter(f);
+//               }
+//               else
+//               {
+//                 f.menu.jewelery_for.push(value);
+//                 this.setfilter(f);
+//               }
+//           }
+//           else
+//           {
+//             f.menu.jewelery_for.push(value);
+//             this.setfilter(f);
+//           }
+//   }
+//   else if(name=="jewelery_type")
+//   { 
+//     f.menu.jewelery_type=[]
+//     f.menu.jewelery_type.push(value);
+//     this.setfilter(f);     
+//   }
+//   else if(name=="purity")
+//   {
+//             console.log("if condition");
+//             console.log(f.menu.purity);
+//             if(f.menu.purity.length>0)
+//             {
+//               let result=f.menu.purity.find(x => x == value);
+//               if(result)
+//               {
+//                 f.menu.purity.pop(value);
+//                 this.setfilter(f);
+//               }
+//               else
+//               {
+//                 f.menu.purity.push(value);
+//                 this.setfilter(f);
+//               }
+//           }
+//           else
+//           {
+//             f.menu.purity.push(value);
+//             this.setfilter(f);
+//           }
+//   }
+//   else if(name=="purity")
+//   {
+//             console.log("if condition");
+//             console.log(f.menu.purity);
+//             if(f.menu.purity.length>0)
+//             {
+//                   let result=f.menu.purity.find(x => x == value);
+//                   if(result)
+//                   {
+//                     f.menu.purity.pop(value);
+//                     this.setfilter(f);
+//                   }
+//                   else
+//                   {
+//                     f.menu.purity.push(value);
+//                     this.setfilter(f);
+//                   }
+//           }
+//           else
+//           {
+//             f.menu.purity.push(value);
+//             this.setfilter(f);
+//           }
+//   }
+//   else if(name=="material")
+//   {
+//             console.log("if condition");
+//             console.log(f.menu.material);
+//             if(f.menu.material.length>0)
+//             {
+//                   let result=f.menu.material.find(x => x == value);
+//                   if(result)
+//                   {
+//                     f.menu.material.pop(value);
+//                     this.setfilter(f);
+//                   }
+//                   else
+//                   {
+//                     f.menu.material.push(value);
+//                     this.setfilter(f);
+//                   }
+//           }
+//           else
+//           {
+//             f.menu.material.push(value);
+//             this.setfilter(f);
+//           }
+//   }
 
-}
-checkedjewelery_type(value)
-{
-    let f= this.getfilter();
-    if(f.menu.jewelery_type==value)
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-}
-checkedjewelery_for(value)
-{
-  let f= this.getfilter();
-  let result=f.menu.jewelery_for.find(x => x == value);
-  if(result)
-  {
-   return true;
-  }
-  else
-  {
-    return false;
-  }
+// }
+// checkedjewelery_type(value)
+// {
+//     let f= this.getfilter();
+//     if(f.menu.jewelery_type==value)
+//     {
+//       return true;
+//     }
+//     else
+//     {
+//       return false;
+//     }
+// }
+// checkedjewelery_for(value)
+// {
+//   let f= this.getfilter();
+//   let result=f.menu.jewelery_for.find(x => x == value);
+//   if(result)
+//   {
+//    return true;
+//   }
+//   else
+//   {
+//     return false;
+//   }
 
-}
-checkedmaterial(value)
-{
-  let f= this.getfilter();
-  let result=f.menu.material.find(x => x == value);
-  if(result)
-  {
-   return true;
-  }
-  else
-  {
-    return false;
-  }
-}
-checkedpurity(value)
-{
-  let f= this.getfilter();
-  let result=f.menu.purity.find(x => x == value);
-  if(result)
-  {
-   return true;
-  }
-  else
-  {
-    return false;
-  }
-}
-checkedprice(min)
-{
+// }
+// checkedmaterial(value)
+// {
+//   let f= this.getfilter();
+//   let result=f.menu.material.find(x => x == value);
+//   if(result)
+//   {
+//    return true;
+//   }
+//   else
+//   {
+//     return false;
+//   }
+// }
+// checkedpurity(value)
+// {
+//   let f= this.getfilter();
+//   let result=f.menu.purity.find(x => x == value);
+//   if(result)
+//   {
+//    return true;
+//   }
+//   else
+//   {
+//     return false;
+//   }
+// }
+// checkedprice(min)
+// {
     
-      let f= this.getfilter();
+//       let f= this.getfilter();
        
-                if(f.menu.price.min==min)
-                {
-                  return true;
-                }
-                else
-                {
-                    return false;
-                }
+//                 if(f.menu.price.min==min)
+//                 {
+//                   return true;
+//                 }
+//                 else
+//                 {
+//                     return false;
+//                 }
       
         
        
 
-}
-setfilter(value)
-{
-  this.filterApi(JSON.stringify(value));
-  localStorage.setItem('filter',JSON.stringify(value));
-  this.filterChange.emit("cartUpdate"+Date.now()); 
-}
-getfilter()
-{
-  return JSON.parse(localStorage.getItem('filter'));
-}
-clearFilter()
-{
-  localStorage.removeItem('filter');
-  this.filterChange.emit("cartUpdate"+Date.now());
-}
+// }
+// setfilter(value)
+// {
+//   this.filterApi(JSON.stringify(value));
+//   localStorage.setItem('filter',JSON.stringify(value));
+//   this.filterChange.emit("cartUpdate"+Date.now()); 
+// }
+// getfilter()
+// {
+//   return JSON.parse(localStorage.getItem('filter'));
+// }
+// clearFilter()
+// {
+//   localStorage.removeItem('filter');
+//   this.filterChange.emit("cartUpdate"+Date.now());
+// }
   ngOnInit() {
     this.loader=true;
     this.page=false;
@@ -454,30 +455,32 @@ clearFilter()
       console.log(this.drop);    
      });
 
-    this.f=this.getfilter();
-    if(this.f)
-    {
-          this.filterApi(JSON.stringify(this.f));
-    }
-    else if(!this.f)
+    this.f=this.api.getfilter();
+    // if(this.f)
+    // {
+    //       this.filterApi(JSON.stringify(this.f));
+    // }
+   if(!this.f)
     {
 
       let initial={"menu":{"jewelery_for":[],"jewelery_type":[],"material":[],"price":{},"purity":[]}};
-      this.setfilter(initial);
-      this.getProduct(this.subid,);
+      this.api.setfilter(initial);
+      // this.getProduct(this.subid);
     }
 
-        this.filterChange.subscribe(data=>{
-          this.f=this.getfilter();
+        this.api.filterChange.subscribe(data=>{
+          console.log("filter changed");
+             this.f=this.api.getfilter();
                       if(this.f)
                     {
-                          this.filterApi(JSON.stringify(this.f));
+                          // this.filterApi(JSON.stringify(this.f));
+                          this.getProduct(this.subid);
                     }
                     else if(!this.f)
                     {
 
-                      let initial={"menu":{"jewelery_for":[],"jewelery_type":[],"material":[],"price":{},"purity":[],"subcategory":this.subid}};
-                      this.setfilter(initial);
+                      let initial={"menu":{"jewelery_for":[],"jewelery_type":[],"material":[],"price":{},"purity":[]}};
+                      this.api.setfilter(initial);
                       this.getProduct(this.subid);
                     }
           })

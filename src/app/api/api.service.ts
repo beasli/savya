@@ -500,7 +500,7 @@ price(weight, rate, option, makingcharge, wastage = 0, value = 0) {
 setfilter(value)
 {
   localStorage.setItem('filter',JSON.stringify(value));
-  this.filterChange.emit("cartUpdate"+Date.now()); 
+  this.filterChange.emit("filterchanged"+Date.now()); 
 }
 getfilter()
 {
