@@ -1,6 +1,6 @@
 import { IMAGE } from 'src/config';
-import { MERCHANT, STATE } from './../../../../config';
-import { ActivatedRoute } from '@angular/router';
+import { MERCHANT} from './../../../../config';
+import { ActivatedRoute} from '@angular/router';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -19,6 +19,8 @@ export class BullianMerchantComponent implements OnInit {
       });
     });
   }
+
+ 
 
   ngOnInit(): void {
   }

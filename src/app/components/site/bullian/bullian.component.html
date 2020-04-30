@@ -41,7 +41,7 @@
         </div>
         <div *ngIf="statecities" class="modal-body">
             <div class="list-group">
-                <a href="javascript:void(0)" [routerLink]="['/bullion/', slide.id]" *ngFor="let slide of statecities" [ngClass]="{active:s == slide.id}" (mouseover)="s=slide.id" (mouseout)="s='a'" class="list-group-item list-group-item-action border">
+                <a href="javascript:void(0)" *ngFor="let slide of statecities"  (click) = 'goMerchant(slide.id)' [ngClass]="{active:s == slide.id}" (mouseover)="s=slide.id" (mouseout)="s='a'" class="list-group-item list-group-item-action border">
                   {{slide.city}}
                 </a>
             </div>
@@ -50,7 +50,7 @@
             <app-loader></app-loader>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" id='mClose' class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
