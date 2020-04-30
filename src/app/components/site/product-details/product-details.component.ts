@@ -1,4 +1,4 @@
-import { PRICELIST, CARTVIEW } from './../../../../config';
+import { PRICELIST, CARTVIEW, IMAGE } from './../../../../config';
 import { ApiService } from 'src/app/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -40,7 +40,6 @@ export class ProductDetailsComponent implements OnInit {
   selectedsize: any;
   totalprice: any;
   certificate:any;
-  certificateurl: any;
   value = 1;
   wish:any;
   cart:any;
@@ -202,8 +201,7 @@ export class ProductDetailsComponent implements OnInit {
         this.prd_img =data['files'];
         this.certificate = data['Certification'];
         this.recents = data['recent_product'];
-        this.url ="http://newtest.savyajewelsbusiness.com/img/";
-        this.certificateurl = data['certificte_url']+'/';
+        this.url =IMAGE;
         if (this.data.size_type) {
           this.defaultsize = this.data.default_size;
           this.sizes = this.data.size_type.split(',');

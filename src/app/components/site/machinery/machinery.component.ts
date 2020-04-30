@@ -1,3 +1,4 @@
+import { IMAGE } from './../../../../config';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Component, OnInit,Output,EventEmitter} from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
@@ -226,7 +227,7 @@ data2 = {
   "product_url": "http://newapp.savyajewels.net/img/product",
   "status": 200
 };
-img_url='http://newtest.savyajewelsbusiness.com/img/';
+img_url=IMAGE;
   videos = [];
   exclusive = [];
   categories: any;

@@ -80,6 +80,7 @@ const customConfig: ShareButtonsConfig = {
       { path: 'subsub/:id' , component: SubsubComponent},
       { path: 'filternav' , component: FilterNavBarComponent},
       { path: 'category/:id', component: CategoryComponent},
+      { path: 'category', component: CategoryComponent},
       { path: 'subcategory/:id', component: SubcategoryComponent},
     ])
   ],

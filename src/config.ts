@@ -1,5 +1,8 @@
 // export const apiUrl =  'http://admin.savyajewelsbusiness.com/api/';
-export const apiUrl='http://newtest.savyajewelsbusiness.com/api/';
+//export const apiUrl='http://newtest.savyajewelsbusiness.com/api/';
+export const apiUrl="http://api.savyajewelsbusiness.com/api/"
+export const IMAGE=apiUrl+'img/';
+
 
 // authentication
 export const OTPREQUEST='otp/request';

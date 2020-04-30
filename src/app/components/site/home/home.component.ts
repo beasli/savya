@@ -1,3 +1,4 @@
+import { IMAGE } from './../../../../config';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { CRAUSEL } from 'src/config';
@@ -19,8 +20,6 @@ export class HomeComponent implements OnInit {
   company_slider =[{image: "IGI_Expo.jpg"}, {image: "download.png"}, {image: "bvclogo.png"}, {image: "bvclogo.png"}];
   logo =[{image: "1583387862_000.jpg", title:"NK Chains Pvt. Ltd."}, {image: "1583410753_BT.png", title:"Bhatia & Company"}, {image: "1584361390_Chainganganew.jpg", title:"Chain Ganga"}, {image: "1584361460_Somya-Jeweller.jpg", title:"Somya Jeweller"}, {image: "1584363984_logo.jpg", title:"Raj & Sons Jewellers"}, {image: "1584516771_PT-Logo-1.jpg", title:"PURE PLATINUM JEWELLERY"}, {image: "1584623038_logo.png", title:"Jai Maa Brijeshwari Jewellers"}];
   url: any;
-  url2: any;
-  url3: any;
   manufacturerurl:any;
   manufacturer: any;
   loader:boolean;
@@ -78,16 +77,12 @@ export class HomeComponent implements OnInit {
           }
           else if (childObj.category === 'manufacture') {
             this.manufacturer = childObj['manufacture'];
-       
-            console.log(this.logo);
           }
        });
-        this.url = data['url']+"/img/banner/";
-        this.url2 = this.url + '/';
-        this.event = data['url']+"/img/events/";
-        console.log(this.event);
-        this.product = data['url']+"/img/product/";
-        this.manufacture = data['url']+"/img/manufacture/";
+        this.url = IMAGE+"banner/";
+        this.event = IMAGE+"events/";
+        this.product = IMAGE+"product/";
+        this.manufacture = IMAGE+"manufacture/";
       }).catch(d=>{
         console.log(d);
         document.getElementById("openModalButton").click();

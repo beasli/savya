@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
-import { CARTVIEW } from 'src/config';
+import { CARTVIEW, IMAGE } from 'src/config';
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +12,7 @@ uid:any;
 results:any[];
 alert:boolean;
 div:boolean;
-baseurl:any;
+baseurl= IMAGE+"/product/";
 message:any="CART IS EMPTY";
 loader:boolean;
 page:boolean;
@@ -35,7 +35,6 @@ page:boolean;
           console.log(data);
           this.page=true;
           this.loader=false;
-          this.baseurl=data['url']+"/";
           this.results=data['data'];
           this.alert=false;
           this.div=true;

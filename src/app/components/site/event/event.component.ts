@@ -1,4 +1,4 @@
-import { MYEVENTS, EVENTS } from './../../../../config';
+import { MYEVENTS, EVENTS, IMAGE } from './../../../../config';
 import { ApiService } from 'src/app/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -35,7 +35,7 @@ constructor(private api: ApiService, private route: ActivatedRoute, public share
             this.loader=false;
             this.event = data['data']['data'];
             this.event = this.event.find(x => x.id == this.eid);
-            this.event['url'] = "http://newtest.savyajewelsbusiness.com/img/events/";
+            this.event['url'] = IMAGE+"events/";
           });
           });
    }

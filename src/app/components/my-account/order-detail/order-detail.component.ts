@@ -1,3 +1,4 @@
+import { IMAGE } from './../../../../config';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +10,7 @@ import { ORDERHISTORY } from 'src/config';
   styleUrls: ['./order-detail.component.css']
 })
 export class OrderDetailComponent implements OnInit {
-baseurl:any="http://admin.savyajewelsbusiness.com/img/product/";
+baseurl:any=IMAGE+"/product/";
   constructor(private route:ActivatedRoute,private api: ApiService) { }
 products:any;
 orders:any;
