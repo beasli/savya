@@ -46,7 +46,7 @@ export class FilterProductComponent implements OnInit {
       });
 
       this.api.Get(PRODUCTFILTERMENU).then(data  => {
-       this.jewelery_for=data['menu'].jewelery_for;
+      this.jewelery_for=data['menu'].jewelery_for;
        console.log(data);
         this.material=data['menu'].material;
         this.purity=data['menu'].purity;
@@ -462,9 +462,9 @@ clearFilter()
     else if(!this.f)
     {
 
-      let initial={"menu":{"jewelery_for":[],"jewelery_type":[],"material":[],"price":{},"purity":[],"subcategory":this.subid}};
+      let initial={"menu":{"jewelery_for":[],"jewelery_type":[],"material":[],"price":{},"purity":[]}};
       this.setfilter(initial);
-      this.getProduct(this.subid);
+      this.getProduct(this.subid,);
     }
 
         this.filterChange.subscribe(data=>{

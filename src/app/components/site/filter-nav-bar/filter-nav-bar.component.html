@@ -6,12 +6,12 @@
         <li><a href="">PRICE</a>
             <div class="filter-listing price-listing">
                 <ul class="subfilter">
-                    <li class="active">
+                    <li >
                         <div class="each-filter-listing">
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
                             </span>
-                            <div class="filter-text">Under Rs.5000</div>
+                            <div class="filter-text"><input type="radio"  [checked]="checkedprice(price[0])"  value="{{price[0]}}-{{price[1]}}" (change)="getprice($event)" id="price" name="price"><label for="price">₹{{price[0]}}-₹{{price[1]}}</label></div>
                         </div>
                     </li>
                     <li>
@@ -19,7 +19,7 @@
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
                             </span>
-                            <div class="filter-text">Rs.5001 To Rs.10000</div>
+                            <div class="filter-text"><input type="radio"  [checked]="checkedprice(price[1])" value="{{price[1]}}-{{price[2]}}" (change)="getprice($event)" id="price1" name="price"><label for="price1">₹{{price[1]}}-₹{{price[2]}}</label></div>
                         </div>
                     </li>
                     <li>
@@ -27,7 +27,7 @@
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
                             </span>
-                            <div class="filter-text">Rs.10001 To Rs.15000</div>
+                            <div class="filter-text"><input type="radio" value="{{price[2]}}-{{price[3]}}"  [checked]="checkedprice(price[2])" (change)="getprice($event)" id="price2" name="price"><label for="price2">₹{{price[2]}}-₹{{price[3]}}</label></div>
                         </div>
                     </li>
                     <li>
@@ -35,7 +35,7 @@
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
                             </span>
-                            <div class="filter-text">Rs.15001 To Rs.20000</div>
+                            <div class="filter-text"><input type="radio" value="{{price[3]}}-{{price[4]}}"  [checked]="checkedprice(price[3])" (change)="getprice($event)" id="price3" name="price"><label for="price3">₹{{price[3]}}-₹{{price[4]}}</label></div>
                         </div>
                     </li>
                     <li>
@@ -43,10 +43,10 @@
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
                             </span>
-                            <div class="filter-text">Rs.20001 To Rs.25000</div>
+                            <div class="filter-text"><input type="radio" value="{{price[4]}}-1000000"  [checked]="checkedprice(price[4])"  (change)="getprice($event)" id="price4"  name="price"><label for="price4">Above ₹{{price[4]}}</label></div>
                         </div>
                     </li>
-                    <li>
+                    <!-- <li>
                         <div class="each-filter-listing">
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
@@ -68,22 +68,22 @@
                             </span>
                             <div class="filter-text">Rs.35001 To Rs.40000</div>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </li>
-        <li><a href="">Product Type</a>
+        <li><a href="">jewelery Type</a>
             <div class="filter-listing">
-                <ul class="subfilter">
-                    <li class="active">
+                <ul class="subfilter" *ngFor="let m of jewelery_type">
+                    <li >
                         <div class="each-filter-listing">
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
                             </span>
-                            <div class="filter-text">Earrings</div>
+                            <div class="filter-text"><input type="radio"  id="{{m}}" [checked]="checkedjewelery_type(m)" (change)="changefilter($event,m)" name="jewelery_type"><label for="{{m}}">{{m}}</label></div>
                         </div>
                     </li>
-                    <li>
+                    <!-- <li>
                         <div class="each-filter-listing">
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
@@ -137,44 +137,44 @@
                             </span>
                             <div class="filter-text">Sets</div>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </li>
-        <li><a href="">WEIGHT RANGES</a>
+        <li><a href="">purity</a>
             <div class="filter-listing">
-                <ul class="subfilter">
-                    <li class="active">
+                <ul class="subfilter" *ngFor="let m of purity">
+                    <li >
                         <div class="each-filter-listing">
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
                             </span>
-                            <div class="filter-text">0 - 2grms</div>
+                            <div class="filter-text"><input type="checkbox"  id="{{m}}" [checked]="checkedpurity(m)" (change)="changefilter($event,m)" name="purity"><label for="{{m}}">{{m}}</label></div>
                         </div>
                     </li>
-                    <li>
+                    <!-- <li>
                         <div class="each-filter-listing">
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
                             </span>
                             <div class="filter-text">2 -5 grms</div>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </li>
-        <li><a href="">MATERIAL</a>
+        <li><a href="">jewelery for</a>
             <div class="filter-listing">
-                <ul class="subfilter">
-                    <li class="active">
+                <ul class="subfilter" *ngFor="let m of jewelery_for">
+                    <li >
                         <div class="each-filter-listing">
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
                             </span>
-                            <div class="filter-text">Gold</div>
+                            <div class="filter-text"><input type="checkbox" [checked]="checkedjewelery_for(m)" id="{{m}}" (change)="changefilter($event,m)" name="jewelery_for"><label for="{{m}}">{{m}}</label></div>
                         </div>
                     </li>
-                    <li>
+                    <!-- <li>
                         <div class="each-filter-listing">
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
@@ -189,22 +189,22 @@
                             </span>
                             <div class="filter-text">Gemstone</div>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </li>
         <li><a href="">METAL</a>
             <div class="filter-listing">
-                <ul class="subfilter">
-                    <li class="active">
+                <ul class="subfilter" *ngFor="let m of material">
+                    <li>
                         <div class="each-filter-listing">
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
                             </span>
-                            <div class="filter-text">22kt Yellow</div>
+                            <div class="filter-text"><input type="checkbox"  id="{{m}}" [checked]="checkedmaterial(m)" (change)="changefilter($event,m)" name="material"><label for="{{m}}">{{m}}</label></div>
                         </div>
                     </li>
-                    <li>
+                    <!-- <li>
                         <div class="each-filter-listing">
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
@@ -227,7 +227,7 @@
                             </span>
                             <div class="filter-text">14Kt White</div>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </li>
