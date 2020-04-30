@@ -14,6 +14,7 @@ import { OrderDetailComponent } from '../order-detail/order-detail.component';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SiteModule } from '../../site/site/site.module';
+import { OffersComponent } from '../offers/offers.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { SiteModule } from '../../site/site/site.module';
     EditAddressComponent,
     EventHistoryComponent,
     OrderDetailComponent,
+    OffersComponent
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ import { SiteModule } from '../../site/site/site.module';
       { path: 'add-address', component: EditAddressComponent,  canActivate: [AuthGuardService]},
       { path: 'event-history', component: EventHistoryComponent,  canActivate: [AuthGuardService]},
       { path: 'order-detail/:id', component: OrderDetailComponent,  canActivate: [AuthGuardService]},
+      { path: 'offers', component: OffersComponent,  canActivate: [AuthGuardService]}
     ])
   ]
 })
