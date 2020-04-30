@@ -15,7 +15,9 @@ export class ApiService {
   @Output() getWish:EventEmitter<string> = new EventEmitter();
   @Output() getUserData:EventEmitter<string> = new EventEmitter();
   @Output() Cart:EventEmitter<string> = new EventEmitter();
+  @Output() filterChange:EventEmitter<string> = new EventEmitter();
   @Output() changelogo:EventEmitter<number> = new EventEmitter();
+
   drop:any;
   otp:any;
   otpGuard:any;
@@ -494,6 +496,15 @@ price(weight, rate, option, makingcharge, wastage = 0, value = 0) {
  }
   let data = {'weight': weight,'price': metalprice};
   return data;
+}
+setfilter(value)
+{
+  localStorage.setItem('filter',JSON.stringify(value));
+  this.filterChange.emit("cartUpdate"+Date.now()); 
+}
+getfilter()
+{
+  return JSON.parse(localStorage.getItem('filter'));
 }
 
 }
