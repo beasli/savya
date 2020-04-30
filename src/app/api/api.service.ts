@@ -25,7 +25,7 @@ export class ApiService {
   wish:any[];
   event:any;
   header:any;
-  
+    
   
   constructor(public http: HttpClient,private service: NotificationsService, private router: Router) {
     if(localStorage.getItem('savya_userInfo'))
