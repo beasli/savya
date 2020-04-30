@@ -6,7 +6,7 @@
     <div class="card-deck">
         <div class="row">
             <div *ngFor="let slide of data" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <div  [routerLink]="['/subcategory/', slide.id]" class="card  border shadow" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
+            <div  [routerLink]="['/subcategory/', slide.id]" class="card  border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
                 <img class="card-img-top" style="min-width: 100%;max-height:25vh;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'category/' + slide.image" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">{{slide.category}}</h5>

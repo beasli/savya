@@ -77,7 +77,7 @@ export const ORDERBY = 'product/list?subsubcategory_id=';
 export const PRICELIST = 'product/list/price';
 //export const SEARCH = 'search';
 export const SEARCH='product';
-
+export const MERCHANT = 'BulianMerchant';
 // order
 // export const ORDERHISTORY = 'order/history';
 export const ORDERHISTORY = 'checkout';
