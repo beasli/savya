@@ -30,6 +30,8 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { MachineryComponent } from '../machinery/machinery.component';
 import { CategoryComponent } from 'src/app/site/category/category.component';
 import { SubcategoryComponent } from 'src/app/site/subcategory/subcategory.component';
+import { BullianComponent } from '../bullian/bullian.component';
+import { BullianMerchantComponent } from '../bullian-merchant/bullian-merchant.component';
 
 
 const customConfig: ShareButtonsConfig = {
@@ -58,7 +60,9 @@ const customConfig: ShareButtonsConfig = {
     FilterNavBarComponent,
     MachineryComponent,
     CategoryComponent,
-    SubcategoryComponent
+    SubcategoryComponent,
+    BullianComponent,
+    BullianMerchantComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -82,6 +86,8 @@ const customConfig: ShareButtonsConfig = {
       { path: 'category/:id', component: CategoryComponent},
       { path: 'category', component: CategoryComponent},
       { path: 'subcategory/:id', component: SubcategoryComponent},
+      { path: 'bullion', component: BullianComponent},
+      { path: 'bullion/:id', component: BullianMerchantComponent},
     ])
   ],
   exports: [LoaderComponent]  ,

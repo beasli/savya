@@ -104,7 +104,7 @@ slideConfig = {
   getlink(s):SafeStyle {
     // console.log("in getlink function");
     // console.log(this.baseUrl);
-    return this.sanitizer.bypassSecurityTrustStyle('url('+ IMAGE + 'subcategory_type' + s + ')');
+    return this.sanitizer.bypassSecurityTrustStyle('url('+ IMAGE + 'subsubcategory/' + s + ')');
   }
   gofilter(value) {
     console.log(value);
