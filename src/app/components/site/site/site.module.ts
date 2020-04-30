@@ -27,6 +27,7 @@ import { LoaderComponent } from '../loader/loader.component';
 
 // Import the library
 import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { MachineryComponent } from '../machinery/machinery.component';
 
 
 const customConfig: ShareButtonsConfig = {
@@ -53,6 +54,7 @@ const customConfig: ShareButtonsConfig = {
     SubsubComponent,
     LoaderComponent,
     FilterNavBarComponent,
+    MachineryComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -66,6 +68,7 @@ const customConfig: ShareButtonsConfig = {
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
+      { path: 'machinery/:id' , component: MachineryComponent},
       { path: 'filter/:id' , component: FilterProductComponent},
       { path: 'events' , component: EventsComponent},
       { path: 'event/:id' , component: EventComponent},

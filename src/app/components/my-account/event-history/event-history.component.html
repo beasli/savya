@@ -40,8 +40,8 @@
                                     <td>{{i+1}}</td>
                                     <td><b>{{s.order_no}}</b></td>
                                     <td>{{s.created_at | date}}</td>
-                                    <td><span *ngIf="!s.amount">Free</span><span *ngIf="s.amount">Paid</span></td>
-                                    <td><span class="color"><span *ngIf="s.amount">₹</span><span *ngIf="!s.amount">Free</span> {{s.amount}}</span></td>
+                                    <td><span *ngIf="s.amount == 0">Free</span><span *ngIf="s.amount != 0">Paid</span></td>
+                                    <td><span class="color"><span *ngIf="s.amount != 0">₹ {{s.amount}}</span><span *ngIf="s.amount == 0">Free</span> </span></td>
                                     <td><a (click)="detail(s)" class="btn">View Details</a></td>
                                 </tr>
                             </tbody>

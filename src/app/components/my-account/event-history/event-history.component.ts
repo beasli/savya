@@ -11,19 +11,16 @@ import { Router } from '@angular/router';
 export class EventHistoryComponent implements OnInit {
   uid: any;
   event: [];
-  url: any;
   loader:boolean;
   page:boolean;
   constructor(private api: ApiService,private router:Router) {
 
     this.uid = this.api.getUserInfo();
-    this.uid = this.uid['uid'];
-    this.api.Get(MYEVENTS + this.uid).then(data => {
+    this.uid = this.uid['id'];
+    this.api.Get(MYEVENTS + '/' + this.uid).then(data => {
       this.page=true;
       this.loader=false;
-      this.event = data['data'];
-      this.event['url'] = data['url'] + "/";
-      this.url = this.event['url'];
+      this.event = data['data']['data'];
     });
   }
 

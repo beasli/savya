@@ -16,6 +16,8 @@ export class ApiService {
   @Output() getUserData:EventEmitter<string> = new EventEmitter();
   @Output() Cart:EventEmitter<string> = new EventEmitter();
   @Output() filterChange:EventEmitter<string> = new EventEmitter();
+  @Output() changelogo:EventEmitter<number> = new EventEmitter();
+
   drop:any;
   otp:any;
   otpGuard:any;
@@ -150,8 +152,17 @@ export class ApiService {
   }
 
   onSuccess(message){
-    console.log('im called');
     this.service.success('Success',message,{
+     position: ['bottom', 'right'],
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  onFail(message){
+    this.service.warn('Not Possible',message,{
      position: ['bottom', 'right'],
       timeOut: 3000,
       showProgressBar: true,
@@ -423,6 +434,10 @@ getWishlist()
     //  return d;
     return m;
 
+  }
+
+  changelg(number:number){
+    this.changelogo.emit(number);
   }
   setlogin(value)
 {
