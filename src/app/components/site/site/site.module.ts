@@ -28,6 +28,8 @@ import { LoaderComponent } from '../loader/loader.component';
 // Import the library
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { MachineryComponent } from '../machinery/machinery.component';
+import { CategoryComponent } from 'src/app/site/category/category.component';
+import { SubcategoryComponent } from 'src/app/site/subcategory/subcategory.component';
 
 
 const customConfig: ShareButtonsConfig = {
@@ -54,7 +56,9 @@ const customConfig: ShareButtonsConfig = {
     SubsubComponent,
     LoaderComponent,
     FilterNavBarComponent,
-    MachineryComponent
+    MachineryComponent,
+    CategoryComponent,
+    SubcategoryComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -74,7 +78,9 @@ const customConfig: ShareButtonsConfig = {
       { path: 'event/:id' , component: EventComponent},
       { path: 'product-details/:id' , component: ProductDetailsComponent},
       { path: 'subsub/:id' , component: SubsubComponent},
-      { path: 'filternav' , component: FilterNavBarComponent}
+      { path: 'filternav' , component: FilterNavBarComponent},
+      { path: 'category/:id', component: CategoryComponent},
+      { path: 'subcategory/:id', component: SubcategoryComponent},
     ])
   ],
   exports: [LoaderComponent]  ,
