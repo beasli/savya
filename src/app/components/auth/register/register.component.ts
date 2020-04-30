@@ -206,10 +206,12 @@ changeNumber(e)
   }
   login(otpvalue)
 {
+
   //console.log(this.mobile_no);
       this.api.Post(LOGIN,{mobile_no:this.mobile_no, otp:otpvalue,one_singnal:11}).then(data=>{
-        this.loading=false;
+      this.loading=false;
         console.log(data['success'].token);
+        this.api.setMobileNo(data['success'].token);
         this.api.updateWishlist();
         this.api.updateCart();
         this.api.Post(PROFILEVIEW, {}).then(data=>{
@@ -219,7 +221,7 @@ changeNumber(e)
                 console.log(d);
           });
         this.api.setlogin(1);
-        this.api.setMobileNo(data['success'].token);
+       
         this.router.navigate(['/home']);
       }).catch(d=>{
         console.log(d);
