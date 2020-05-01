@@ -53,7 +53,7 @@ export class ChangeProfileComponent implements OnInit {
               // this.d=data['data'][0];
               // console.log(this.d); 
             
-            // this.api.setUserInfo(this.d);
+            this.api.setUserInfo(data['data']);
               //this.router.navigate(['/registerOtp']);
       }).catch(d=>{
         this.page=true;

@@ -68,6 +68,27 @@ export class FilterProductComponent implements OnInit {
   //     console.log(d);
   //   });
   // }
+  temporaryfunction()
+  {
+    this.loader=true;
+    this.page=false;
+    this.api.Get(PRODUCTLIST+"?subsubcategory_id="+this.subid).then(data=>{
+      this.page=true;
+      this.loader=false;
+      this.div=true;
+      this.alert=false
+      this.products = data['data'];
+     // console.log(this.products);
+      this.url = data['url'] + '/';
+      console.log(this.url);
+    }).catch(d=>{
+      this.page=true;
+      this.loader=false;
+      this.div=false;
+       this.alert=true;
+      console.log(d);
+    });
+  }
   getProduct(value)
   {
     this.loader=true;
@@ -86,6 +107,7 @@ export class FilterProductComponent implements OnInit {
        }).catch(d=>{
         this.page=true;
         this.loader=false;
+      this.temporaryfunction();
          this.div=false;
          this.alert=true;
         console.log(d);

@@ -30,6 +30,7 @@
     "@ngx-share/button": "^7.1.4",
     "@ngx-share/buttons": "^7.1.4",
     "@ngx-share/core": "^7.1.4",
+    "@types/jquery": "^3.3.36",
     "angular2-notifications": "^3.0.0",
     "bootstrap": "^4.4.1",
     "crypto-ts": "^1.0.2",
