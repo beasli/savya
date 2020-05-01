@@ -52,7 +52,7 @@ export class KycComponent implements OnInit {
       console.log("in test function");
       console.log(value);
       Tesseract.recognize(value).then(function(result){   
-        console.log(result);     
+        console.log(result.text);     
         // alert(result.text);      
         });    
     }

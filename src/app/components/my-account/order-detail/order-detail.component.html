@@ -50,8 +50,40 @@
             <div class="cart-table-prd-qty"><b>{{slide.count}}</b></div>
             <div class="cart-table-prd-price"><b>₹ {{slide.productTotal}}</b></div>
         </div>
+        <div class="card-total-sm">
+          <div class="float-right">Total <span class="card-total-price">₹ {{current.totalamount}}</span></div>
+      </div>
         
     </div>
+    <div class="card-deck" style="margin:1vh;">
+      <div class="col-6 card">
+        <div class="card-body">
+            <h3>Your Bill </h3>
+            <p><strong>
+                  Payment mode: {{current.payment_mode}}<br>
+                  Total Amount: ₹ {{current.totalamount}}<br>
+              <ng-container *ngIf='current.payment_mode != "cod"'>
+                  Transaction ID:  {{current.transaction_id}}<br>
+              </ng-container>
+                  Sgst({{current.sgst_per}} %): ₹ {{current.sgst}}<br>
+                  Cgst({{current.cgst_per}} %): ₹ {{current.cgst}}<br>
+                  Igst({{current.igst_per}} %): ₹ {{current.igst}}<br>
+            </strong>
+              </p>
+              <div class="card-total-sm">
+                <div class="float-right">Final Total <span class="card-total-price">₹ {{current.final_total}}</span></div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="col-6 card">
+      <div *ngIf='addresses' class="card-body">
+          <h3>Shipping Address </h3>
+          <p>{{addresses.first}} {{addresses.last}}<br>{{addresses.address}}<br>{{addresses.city}}  {{addresses.pincode}}<br>{{addresses.region}}<br>{{addresses.country}}<br>{{addresses.mobileno}}</p>
+      </div>
+  </div>
+  </div>
     <app-loader *ngIf='!products'></app-loader>
   </div>
 </div>
