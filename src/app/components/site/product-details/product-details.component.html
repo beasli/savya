@@ -177,7 +177,7 @@
                                         <div class="option-label">Total Platinum Price: Rs. {{totalplat}}</div> 
                                     </div>
                                 
-                                <div *ngIf=(stonelist) class="prd-size swatches">
+                                <div *ngIf=(stonelist.length) class="prd-size swatches">
                                     <span class="option-label">Stone:</span>
                                     <div class="radio-group">
                                         <ng-container *ngFor='let s of stonelist;let i = index'><input [checked]='(i==0) ? true:false' class='radio-control' (change)='getstone(s)' type="radio" id="{{s.jwellery_size}}" name="stone"><label for="{{s.jwellery_size}}">{{s.jwellery_size}}</label></ng-container>

@@ -188,6 +188,7 @@ export class ProductDetailsComponent implements OnInit {
      this.api.Put(PRODUCTDETAILS, this.pid ).then(data  => {
         this.page=true;
         this.loader=false;
+        console.log(data);
         if(data['data'])  {
           this.data = data['data'];
           this.pricelist = data['price'];
@@ -380,7 +381,7 @@ export class ProductDetailsComponent implements OnInit {
        this.gold.weight = (Number(this.gold.weight) + increament).toFixed(3);
      }
      this.pricegold = this.pricelist.gold.find(x => x.type == this.gold.jwellery_size);
-     this.pricegold2 = this.pricelist.gold.find(x => x.type == '24K');
+     this.pricegold2 = this.pricelist.gold.find(x => x.type == '24KT');
      if (this.gold.charges_option == "PerGram" || this.gold.charges_option == "Fixed" ) {
       this.totalgold = this.api.price(this.gold.weight,this.pricegold.price,this.gold.charges_option,this.gold.making_charge);
       this.finegold = Number(this.totalgold.weight).toFixed(3);
