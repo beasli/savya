@@ -1,7 +1,7 @@
 import { IMAGE } from './../../../../config';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterStateSnapshot, Router } from '@angular/router';
 import { ORDERHISTORY } from 'src/config';
 
 @Component({
@@ -11,32 +11,32 @@ import { ORDERHISTORY } from 'src/config';
 })
 export class OrderDetailComponent implements OnInit {
 baseurl:any=IMAGE+"/product/";
-  constructor(private route:ActivatedRoute,private api: ApiService) { }
+  currentId: any;
+  constructor(private route:ActivatedRoute,private api: ApiService,private router: Router) { }
 products:any;
 orders:any;
-alert:boolean;
-loader:boolean;
-page:boolean;
+image = IMAGE+'product/';
   ngOnInit() {
-    this.loader=true;
-    this.page=false;
-    this.route.params.subscribe(params=>{
-        console.log(params.id);
-        this.api.Get(ORDERHISTORY).then(data => {
+    this.currentId=this.route.snapshot.paramMap.get('id');
+    this.api.Get(ORDERHISTORY).then(data => {
           this.orders = data['data'];
-          let result=this.orders.find(x => x.Order_id == params.id);
+          let result=this.orders.find(x => x.Order_id == this.currentId);
           if (result) {
-            this.page=true;
-            this.loader=false;
             this.products=result.product;
-            this.alert=false;
-          } else {
-            this.page=true;
-            this.loader=false;
-            this.alert=true;
           }
         });
-      });
+  }
+
+  changeSummary(id){
+    this.products = null;
+    this.router.navigate((['/order-detail', id]))
+    setTimeout(() => {
+      let result=this.orders.find(x => x.Order_id == id);
+      if (result) {
+        this.products=result.product;
+        this.currentId = result.orderid;
+      }},200);
+    
   }
 
 }

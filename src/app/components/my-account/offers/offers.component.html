@@ -27,7 +27,8 @@
                           <h3 class="card-title"><strong>{{slide.title}}</strong></h3>
                           <p class="card-text">{{slide.description}}</p>
                           <h5 class="card-title"><strong>Coupon Code:{{"  " + slide.coupan}}</strong></h5>
-                          <h5 class="card-title"><strong>Get {{slide.offertype}} {{slide.value}} off</strong></h5>
+                          <h5 class="card-title" *ngIf='slide.offertype=="Fixed"'><strong>Get {{slide.offertype}} {{slide.value}} off</strong></h5>
+                          <h5 class="card-title" *ngIf='slide.offertype=="Percentage"'><strong>Get  {{slide.value}} % off</strong></h5>
                         </div>
                       </div>
                     </div>

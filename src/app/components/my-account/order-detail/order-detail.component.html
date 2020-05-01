@@ -1,21 +1,57 @@
-<div *ngIf="page">
-      <div class="card-deck" style="padding: 3vh;" *ngIf="products">
-        <div class="row">
-          <div  class="card border col-sm-3" style="width: 15rem;" *ngFor="let r of products">
-            <img src="{{ baseurl + r.image }}" class="card-img-top" alt="...">
-            <div class="card-body text-center">
-              <h3 class="card-title">{{r.productName}}</h3>
-              <h4 class="card-title">qty:{{r.count}}</h4>
-              <h4 class="card-title">Total Price:<strong>{{r.productTotal}}</strong></h4>
-              <p class="card-text" *ngFor="let a of r.assests">METAL: {{a.metal}} <br><span >Purity:</span> {{a.materialType}}</p>
-            </div>
-          </div>
+<div class="row card-deck" style="min-height:80vh;margin:2vh;padding:1vh;">
+  <div class="col-6 border card">
+    <h2 class="text-center" style='padding:5px'>Order History</h2>
+                    
+    <app-loader *ngIf='!orders'></app-loader>
+                    <div class="table-responsive" *ngIf='orders'>
+                        <table class="table table-bordered table-striped table-order-history">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Order Number</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">Payment Mode</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Total Price</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr *ngFor="let o of orders ;let i=index">
+                                    <td>{{i+1}}</td>
+                                    <td><b>{{o.Order_id}}</b> <a href="javascript:void(0)" (click)='changeSummary(o.Order_id)' class="ml-1">View Details</a></td>
+                                    <td>{{o.created_at | date}}</td>
+                                    <td>{{o.payment_mode}}</td>
+                                    <td><span class="color">{{o.order_status}}</span></td>
+                                    <td>{{o.totalamount}}</td>
+                                    <td><a href="javascript:void(0)" class="btn">REORDER</a></td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </div>
+  </div>
+  <div class="col-6 border card">
+    <h2 class="text-center custom-color">ORDER SUMMARY</h2>
+    <div *ngIf='products' class="cart-table cart-table--sm">
+        <div class="cart-table-prd cart-table-prd-headings d-none d-lg-table">
+            <div class="cart-table-prd-image"></div>
+            <div class="cart-table-prd-image"></div>
+            <div class="cart-table-prd-name"><b>ITEM</b></div>
+            <div class="cart-table-prd-qty"><b>QTY</b></div>
+            <div class="cart-table-prd-price"><b>PRICE</b></div>
         </div>
-      </div>
-        <ngb-alert [dismissible]="false" *ngIf="alert">
-          <strong>No products to show</strong> 
-        </ngb-alert> 
-</div>
-<div class="text-center" *ngIf="loader">
-  <app-loader></app-loader>
+        <div *ngFor="let slide of products;let i = index" class="cart-table-prd">
+          <div class="cart-table-prd-image"><b>{{i+1}}</b></div>
+            <div class="cart-table-prd-image"><a [routerLink]="['/product-details/', slide.product_id]"><img [src]="image+slide.image" alt=""></a></div>
+            <div class="cart-table-prd-name">
+                <h2><a [routerLink]="['/product-details/', slide.product_id]">{{slide.productName}}</a></h2>
+            </div>
+            <div class="cart-table-prd-qty"><b>{{slide.count}}</b></div>
+            <div class="cart-table-prd-price"><b>₹ {{slide.productTotal}}</b></div>
+        </div>
+        
+    </div>
+    <app-loader *ngIf='!products'></app-loader>
+  </div>
 </div>
