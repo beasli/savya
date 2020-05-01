@@ -121,8 +121,9 @@
                         <div class="uplod-documents">
                             <div class="row">
                                 <div class="col-6">
-                                    <div class="photop-upload-area">
-                                        <img src="../../assets/images/GST_Front-1.jpg"/>
+                                    <div class="photop-upload-area preview" id="preview" >
+                                        <img id="blah" src="../../assets/images/GST_Front-1.jpg" >
+                                        <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -134,7 +135,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button class="btn">Uploaded</button>
+                                            <button (click)="modal(gst_doc1)" class="btn">Upload</button>
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +153,7 @@
                     <div class="each-photo-upload-wpapper">
                         <div class="select-feild">
                             <input type="radio" id="gst-reg-2">
-                            <label for="gst-reg-2">GST REG 01 (Registration Certificate)</label><br>
+                            <label for="gst-reg-2">GST REG 02 (Registration Certificate)</label><br>
                         </div>
                         <div class="uplod-documents">
                             <div class="row">
@@ -170,7 +171,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button class="btn">Uploaded</button>
+                                            <button (click)="modal(gst_doc2)" class="btn">Upload</button>
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +207,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button  class="btn">Uploaded</button>
+                                            <button (click)="modal(aadhar_doc1)" class="btn">upload</button>
                                         </div>
                                     </div>
                                 </div>
@@ -242,7 +243,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button class="btn">Uploaded</button>
+                                            <button (click)="modal(aadhar_doc2)"  class="btn">upload</button>
                                         </div>
                                     </div>
                                 </div>
@@ -278,7 +279,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button class="btn">Uploaded</button>
+                                            <button (click)="modal(pan_doc)" class="btn">upload</button>
                                         </div>
                                     </div>
                                 </div>
@@ -314,7 +315,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button class="btn">Uploaded</button>
+                                            <button (click)="modal(visiting_doc1)" class="btn">upload</button>
                                         </div>
                                     </div>
                                 </div>
@@ -350,7 +351,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button class="btn">Uploaded</button>
+                                            <button (click)="modal(visiting_doc2)" class="btn">Upload</button>
                                         </div>
                                     </div>
                                 </div>
@@ -378,7 +379,7 @@
         </div>
     </div>
     
-    <div class="holder mt-0">
+    <div class="holder mt-0" >
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-sm-8 col-md-6">
@@ -410,32 +411,53 @@
                                 </div>
                                 <div *ngIf=" checkAdhar()" class="alert alert-danger">Incorrect Aadhar no. </div>
                             </div>
-                            <div class="form-group">
-                                <label for='gst_doc'>Gst Document</label>
-                                <input type="file"  #gst_doc="ngModel"  ngModel name="gst_doc" class="form-control" placeholder="Gst Document" required>
-                                <div class="alert alert-danger" *ngIf="gst_doc.touched && gst_doc.invalid">
-                                    Gst Document is required.
+                            <div class="form-group" [hidden]="false">
+                                <label for='gst_doc1'>Gst Document Front</label>
+                                <input type="file"  #gst_doc1="ngModel" (change)="fileChange($event)" ngModel name="gst_doc1" id="gst_doc1" class="form-control" placeholder="Gst Document" required>
+                                <div class="alert alert-danger" *ngIf="gst_doc1.touched && gst_doc1.invalid">
+                                    Gst Document Front is required.
+                                </div>
+                            </div>
+                            <div class="form-group" [hidden]="false">
+                                <label for='gst_doc2'>Gst Document Back</label>
+                                <input type="file"  #gst_doc2="ngModel"  ngModel name="gst_doc2" id="gst_doc2" class="form-control" placeholder="Gst Document" required>
+                                <div class="alert alert-danger" *ngIf="gst_doc2.touched && gst_doc2.invalid">
+                                    Gst Document Back is required.
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for='aadhar_doc'>Aadhar Document</label>
-                                <input type="file"  #aadhar_doc="ngModel"  ngModel name="aadhar_doc" class="form-control" placeholder="Aadhar Document" required>
-                                <div class="alert alert-danger" *ngIf="aadhar_doc.touched && aadhar_doc.invalid">
-                                    Aadhar Document is required.
+                                <label for='aadhar_doc1'>Aadhar Document Front</label>
+                                <input type="file"  #aadhar_doc1="ngModel" id="aadhar_doc1" ngModel name="aadhar_doc1" class="form-control" placeholder="Aadhar Document" required>
+                                <div class="alert alert-danger" *ngIf="aadhar_doc1.touched && aadhar_doc1.invalid">
+                                    Aadhar Document Front is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='aadhar_doc2'>Aadhar Document Front</label>
+                                <input type="file"  #aadhar_doc2="ngModel" id="aadhar_doc2" ngModel name="aadhar_doc2" class="form-control" placeholder="Aadhar Document" required>
+                                <div class="alert alert-danger" *ngIf="aadhar_doc2.touched && aadhar_doc2.invalid">
+                                    Aadhar Document Back is required.
                                 </div>
                             </div>
 
 
                             <div class="form-group">
-                                <label for='visiting_doc'>Visiting Document</label>
-                                <input type="file"  #visiting_doc="ngModel"  ngModel name="visiting_doc" class="form-control" placeholder="Visiting Document" required>
-                                <div class="alert alert-danger" *ngIf="visiting_doc.touched && visiting_doc.invalid">
-                                    Visiting Document is required.
+                                <label for='visiting_doc1'>Visiting Document</label>
+                                <input type="file"  #visiting_doc1="ngModel" id="visiting_doc1" ngModel name="visiting_doc1" class="form-control" placeholder="Visiting Document" required>
+                                <div class="alert alert-danger" *ngIf="visiting_doc1.touched && visiting_doc1.invalid">
+                                    Visiting Document Front is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for='visiting_doc2'>Visiting Document</label>
+                                <input type="file"  #visiting_doc2="ngModel" id="visiting_doc2" ngModel name="visiting_doc2" class="form-control" placeholder="Visiting Document" required>
+                                <div class="alert alert-danger" *ngIf="visiting_doc2.touched && visiting_doc2.invalid">
+                                    Visiting Document Back is required.
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for='pan_doc'>Pan Document</label>
-                                <input type="file"  #pan_doc="ngModel"  ngModel name="pan_doc" class="form-control" placeholder="Pan Document" required>
+                                <input type="file"  #pan_doc="ngModel" id="pan_doc" ngModel name="pan_doc" class="form-control" placeholder="Pan Document" required>
                                 <div class="alert alert-danger" *ngIf="pan_doc.touched && pan_doc.invalid">
                                     Pan Document is required.
                                 </div>
@@ -454,8 +476,7 @@
                                   </ngb-alert>
                                 </p>
                           </div>
-                            <!-- <p *ngIf="!f.valid" class="text-center"><strong>All details are required for update</strong></p>
-                            <p *ngIf="f.valid" class="text-center"><strong>You can update</strong></p> -->
+                            
                             <div class="text-center" ><input  class="btn"  *ngIf="sign" type="submit" value="Submit" [disabled]="!f.valid"></div>
                             <div class="text-center"><input  class="btn"   *ngIf="loading" type="submit" value="Loading..."  disabled></div>
                             <div *ngIf="alert">

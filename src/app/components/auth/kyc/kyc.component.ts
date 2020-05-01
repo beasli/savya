@@ -2,11 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { Router } from '@angular/router';
 import { USERKYC } from 'src/config';
-
+declare var Tesseract;
+declare var $: any;
 @Component({
   selector: 'app-kyc',
   templateUrl: './kyc.component.html',
-  styleUrls: ['./kyc.component.css']
+  styleUrls: ['./kyc.component.css'],
+  styles: [`
+  .preview img{
+    max-height: 500px;
+  }
+`]
 })
 export class KycComponent implements OnInit {
 
@@ -23,6 +29,38 @@ export class KycComponent implements OnInit {
   fName:any;
   lName:any;
   constructor(private api:ApiService,private router:Router) {}
+  fileChange(event) {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+      let file: File = fileList[0];
+      var img = document.querySelector("#preview img");
+      // img.file = file;
+      console.log(file);
+      console.log(img);
+      this.test(file);
+      var reader = new FileReader();
+      // reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+      reader.onload = function(e) {
+        $('#blah').attr('src', e.target.result);
+      }
+      let result=reader.readAsDataURL(file);
+      console.log(result);
+    }
+  }
+    test(value){
+      
+      console.log("in test function");
+      console.log(value);
+      Tesseract.recognize(value).then(function(result){   
+        console.log(result);     
+        // alert(result.text);      
+        });    
+    }
+  modal(value)
+  {
+    console.log(value); 
+    document.getElementById(value.name).click();
+  }
   changeAadhar(e)
   {
    // console.log(e.length);

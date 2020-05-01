@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/api/api.service';
 
 @Component({
   selector: 'app-kyc-pending',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./kyc-pending.component.css']
 })
 export class KycPendingComponent implements OnInit {
-
-  constructor() { }
+user:any;
+  constructor(private api:ApiService) {
+    this.user=this.api.getUserInfo();
+    console.log(this.user);
+   }
 
   ngOnInit(): void {
   }
