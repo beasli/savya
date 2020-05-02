@@ -481,6 +481,12 @@ getOtpGuard()
 }
 
 price(weight, rate, option, makingcharge, wastage = 0, value = 0) {
+  console.log('weight -> '+weight);
+  console.log('rate -> '+rate);
+  console.log('option -> '+option);
+  console.log('makingcharge -> '+makingcharge);
+  console.log('wastage -> '+wastage);
+  console.log('value -> '+value);
   let metalprice = 0;
   if  (option == "PerGram") {
       metalprice  =  (Number(rate) + Number(makingcharge)) * Number(weight);

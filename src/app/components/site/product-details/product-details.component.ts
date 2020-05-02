@@ -96,13 +96,13 @@ export class ProductDetailsComponent implements OnInit {
    
    sizechange(value) {
     this.selectedsize = value;
-    if (this.assets)  {
+    if (this.gold)  {
     this.getgold(this.gold);
     }
-    if (this.assets)  {
+    if (this.platinum)  {
     this.getplatinum();
     }
-    if (this.assets) {
+    if (this.silver) {
         this.getsilver();
       }
 
@@ -387,7 +387,7 @@ export class ProductDetailsComponent implements OnInit {
       this.finegold = Number(this.totalgold.weight).toFixed(3);
       this.totalgold = Math.round(this.totalgold.price);
      }  else if (this.gold.charges_option == "Percentage") {
-      this.totalgold = this.api.price(this.gold.weight,this.pricegold2.price,this.gold.charges_option,this.gold.making_charge,0,this.pricegold.valuein);
+      this.totalgold = this.api.price(this.gold.weight,this.pricegold2.price,this.gold.charges_option,this.gold.making_charge,0,this.pricegold.value_in);
       this.finegold = Number(this.totalgold.weight).toFixed(3);
       this.totalgold = Math.round(this.totalgold.price);
     }
