@@ -3,7 +3,7 @@
 </div>
 <div class="filter-bar">
     <ul>
-        <li><a href="">PRICE</a>
+        <li><a href="javascript:void(0)">PRICE</a>
             <div class="filter-listing price-listing">
                 <ul class="subfilter">
                     <li >
@@ -72,7 +72,7 @@
                 </ul>
             </div>
         </li>
-        <li><a href="">jewelery Type</a>
+        <li><a href="javascript:void(0)">jewelery Type</a>
             <div class="filter-listing">
                 <ul class="subfilter" *ngFor="let m of jewelery_type">
                     <li >
@@ -141,7 +141,7 @@
                 </ul>
             </div>
         </li>
-        <li><a href="">purity</a>
+        <li><a href="javascript:void(0)">purity</a>
             <div class="filter-listing">
                 <ul class="subfilter" *ngFor="let m of purity">
                     <li >
@@ -163,7 +163,7 @@
                 </ul>
             </div>
         </li>
-        <li><a href="">jewelery for</a>
+        <li><a href="javascript:void(0)">jewelery for</a>
             <div class="filter-listing">
                 <ul class="subfilter" *ngFor="let m of jewelery_for">
                     <li >
@@ -193,7 +193,7 @@
                 </ul>
             </div>
         </li>
-        <li><a href="">METAL</a>
+        <li><a href="javascript:void(0)">METAL</a>
             <div class="filter-listing">
                 <ul class="subfilter" *ngFor="let m of material">
                     <li>
@@ -231,10 +231,13 @@
                 </ul>
             </div>
         </li>
-        <li><a href="">SEE MORE FILTERS</a>
+        <li>
+            <!-- <a href="">SEE MORE FILTERS</a> -->
+            <a href="javascript:void(0)">Clear filter</a>
             <div class="filter-listing sub-filter-listing">
                 <ul class="subfilter">
-                    <li>
+                    <li (click)="clear()">Clear Filter</li>
+                    <!-- <li>
                         <div class="each-filter-listing">
                             <span class="icon-container">
                                 <span class="icon blank-box"></span>
@@ -261,7 +264,7 @@
                                     <li><a href="#">Sub Sub Demo</a></li>
                                 </ul>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </li>

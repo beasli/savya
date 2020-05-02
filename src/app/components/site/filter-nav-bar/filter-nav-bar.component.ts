@@ -32,7 +32,10 @@ changefilter(event,value)
               let result=f.menu.jewelery_for.find(x => x == value);
               if(result)
               {
-                f.menu.jewelery_for.pop(value);
+                let i= f.menu.jewelery_for.indexOf(result);
+                if (i > -1) {
+                  f.menu.jewelery_for.splice(i, 1);
+                }
                 this.api.setfilter(f);
               }
               else
@@ -62,8 +65,11 @@ changefilter(event,value)
               let result=f.menu.purity.find(x => x == value);
               if(result)
               {
-                f.menu.purity.pop(value);
-                this.api.setfilter(f);
+                let i= f.menu.purity.indexOf(result);
+                if (i > -1) {
+                  f.menu.purity.splice(i, 1);
+                }
+                 this.api.setfilter(f);
               }
               else
               {
@@ -77,30 +83,7 @@ changefilter(event,value)
             this.api.setfilter(f);
           }
   }
-  else if(name=="purity")
-  {
-            console.log("if condition");
-            console.log(f.menu.purity);
-            if(f.menu.purity.length>0)
-            {
-                  let result=f.menu.purity.find(x => x == value);
-                  if(result)
-                  {
-                    f.menu.purity.pop(value);
-                    this.api.setfilter(f);
-                  }
-                  else
-                  {
-                    f.menu.purity.push(value);
-                    this.api.setfilter(f);
-                  }
-          }
-          else
-          {
-            f.menu.purity.push(value);
-            this.api.setfilter(f);
-          }
-  }
+ 
   else if(name=="material")
   {
             console.log("if condition");
@@ -110,7 +93,10 @@ changefilter(event,value)
                   let result=f.menu.material.find(x => x == value);
                   if(result)
                   {
-                    f.menu.material.pop(value);
+                    let i= f.menu.material.indexOf(result);
+                    if (i > -1) {
+                      f.menu.material.splice(i, 1);
+                    }
                     this.api.setfilter(f);
                   }
                   else
@@ -151,6 +137,11 @@ getprice(event){
         f.menu.price.max=Number(max);
         this.api.setfilter(f);
     }
+}
+clear()
+{
+  let initial={"menu":{"jewelery_for":[],"jewelery_type":[],"material":[],"price":{},"purity":[]}};
+  this.api.setfilter(initial);
 }
 checkedprice(min)
 {
