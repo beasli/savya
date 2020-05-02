@@ -25,7 +25,7 @@
                         <form #f="ngForm" (ngSubmit)="SignUp(f.value)">
                             <!-- <div class="row"> -->
                                 <!-- <div class="col-sm-6"> -->
-                                    <div class="form-group" *ngIf="mobile"><input type="text" #name="ngModel"  ngModel  name="name" class="form-control" (ngModelChange)="changeFname($event)" placeholder="First name" required>
+                                    <div class="form-group" *ngIf="mobile"><input type="text" #name="ngModel"  ngModel  name="name" class="form-control"  placeholder="First name" required>
                                         <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
                                             Name is required.
                                         </div>
