@@ -16,6 +16,8 @@ export class BullianComponent implements OnInit {
   selectedState:any;
   stateid: any;
   statecities:any;
+  s:any;
+  callshadow:any;
   constructor(private api: ApiService,private route: Router) {
     this.api.Get(STATE).then(data => {
       this.city = data['city'];

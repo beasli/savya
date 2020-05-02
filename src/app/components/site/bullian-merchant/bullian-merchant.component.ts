@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 export class BullianMerchantComponent implements OnInit {
   merchant: any;
   image = IMAGE+'bullian_merchant/';
+  callshadow:any;
   constructor(private api: ApiService,private router: ActivatedRoute) {
     this.router.params.subscribe(params=>{
       this.api.Get(MERCHANT+'/'+params.id).then(data=>{

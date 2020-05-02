@@ -231,6 +231,7 @@ img_url=IMAGE;
   videos = [];
   exclusive = [];
   categories: any;
+  callshadow:any;
   constructor(private api: ApiService, private route: ActivatedRoute, private DOM: DomSanitizer) { 
     this.route.params.subscribe(
       params=>{

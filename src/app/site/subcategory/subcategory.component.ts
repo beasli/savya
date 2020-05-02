@@ -13,6 +13,7 @@ export class SubcategoryComponent implements OnInit {
   data:any;
   category: any;
   img_url=IMAGE;
+  callshadow:any;
   constructor(private api: ApiService, private route: ActivatedRoute) { 
     this.route.params.subscribe(
       params=>{
