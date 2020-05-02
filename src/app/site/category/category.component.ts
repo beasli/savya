@@ -12,6 +12,7 @@ export class CategoryComponent implements OnInit {
   slider_imgs = {};
   id:any;
   data: any;
+  callshadow:any;
   img_url=IMAGE;
   constructor(private route: ActivatedRoute,private api: ApiService) { 
     this.route.params.subscribe(

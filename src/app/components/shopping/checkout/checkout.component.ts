@@ -13,6 +13,7 @@ export class CheckoutComponent implements OnInit {
   clicked:any;
   uid: string;
   products: any;
+  callshadow:any;
   baseurl= IMAGE+"/product/";
   priceWeight:any;
   total = {'weight':0,'price':0};

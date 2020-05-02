@@ -1,4 +1,4 @@
-<app-slider [slider_imgs] = 'slider_imgs' [url] = 'url'></app-slider>
+<app-slider [slider_imgs] = 'slider_imgs' [url] = '"url"'></app-slider>
 <div class="card-group" style="margin-top: 3vh;padding-bottom: 3vh;">
     <div class="row">
     <div *ngFor="let slide of data" class="card col-3 border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="width: 15rem;">
