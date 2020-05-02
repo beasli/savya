@@ -1,5 +1,5 @@
 <div class="row card-deck" style="min-height:80vh;margin:2vh;padding:1vh;">
-  <div class="col-6 border card">
+  <div class="col-6 border card d-none d-lg-block">
     <h2 class="text-center" style='padding:5px'>Order History</h2>
                     
     <app-loader *ngIf='!orders'></app-loader>
@@ -31,7 +31,7 @@
                         </table>
                     </div>
   </div>
-  <div class="col-6 border card">
+  <div class="col-lg-6 col-md-12 col-sm-12 border card">
     <h2 class="text-center custom-color">ORDER SUMMARY</h2>
     <div *ngIf='products' class="cart-table cart-table--sm">
         <div class="cart-table-prd cart-table-prd-headings d-none d-lg-table">
@@ -56,7 +56,7 @@
         
     </div>
     <div class="card-deck" style="margin:1vh;">
-      <div class="col-6 card">
+      <div class="col-lg-6 col-md-12 col-sm-12 card">
         <div class="card-body">
             <h3>Your Bill </h3>
             <p><strong>
@@ -77,7 +77,7 @@
         </div>
     </div>
 
-    <div class="col-6 card">
+    <div class="col-lg-6 col-md-12 col-sm-12 card">
       <div *ngIf='addresses' class="card-body">
           <h3>Shipping Address </h3>
           <p>{{addresses.first}} {{addresses.last}}<br>{{addresses.address}}<br>{{addresses.city}}  {{addresses.pincode}}<br>{{addresses.region}}<br>{{addresses.country}}<br>{{addresses.mobileno}}</p>
