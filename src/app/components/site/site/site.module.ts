@@ -32,6 +32,7 @@ import { CategoryComponent } from 'src/app/site/category/category.component';
 import { SubcategoryComponent } from 'src/app/site/subcategory/subcategory.component';
 import { BullianComponent } from '../bullian/bullian.component';
 import { BullianMerchantComponent } from '../bullian-merchant/bullian-merchant.component';
+import { KycguardService } from '../../auth-guard/kycguard.service';
 
 
 const customConfig: ShareButtonsConfig = {
@@ -80,6 +81,7 @@ const customConfig: ShareButtonsConfig = {
       { path: 'filter/:id' , component: FilterProductComponent},
       { path: 'events' , component: EventsComponent},
       { path: 'event/:id' , component: EventComponent},
+// , canActivate: [KycguardService]
       { path: 'product-details/:id' , component: ProductDetailsComponent},
       { path: 'subsub/:id' , component: SubsubComponent},
       { path: 'filternav' , component: FilterNavBarComponent},

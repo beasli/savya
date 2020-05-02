@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutService } from './components/auth-guard/checkout.service';
 import { OtpGuardService } from './components/auth-guard/otp-guard.service';
+import { KycguardService } from './components/auth-guard/kycguard.service';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { OtpGuardService } from './components/auth-guard/otp-guard.service';
     ReactiveFormsModule ,
     NgbModule,
   ],
-  providers: [AuthGuardService,CheckoutService,OtpGuardService],
+  providers: [AuthGuardService,CheckoutService,OtpGuardService,KycguardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
