@@ -36,7 +36,7 @@
                                 <div class="mt-2"></div>
                                 <div class="card card--grey">
                                     <div class="card-body">
-                                        <h3>ORDER COMMENT</h3><label class="text-uppercase">Write a comment here:</label> <textarea class="form-control textarea--height-200"></textarea>
+                                        <h3>ORDER COMMENT</h3><label class="text-uppercase">Write a comment here:</label> <textarea name='feedback' [(ngModel)]='feedback' class="form-control textarea--height-200"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -73,35 +73,45 @@
                         <div class="mt-2"></div>
                         <div class="card card--grey">
                             <div class="card-body">
+                                <form #f="ngForm" (ngSubmit)="check(f.value)">
                                 <h3>APPLY Voucher</h3><label class="text-uppercase">promo/voucher code:</label>
                                 <div class="form-flex">
-                                    <div class="form-group"><input type="text" class="form-control"></div><button type="submit" class="btn btn--form btn--alt">Apply</button>
+                                    <div class="form-group"><input #discoun="ngModel" name='discountname' [(ngModel)]='discount' type="text" class="form-control"></div><button type="submit" [disabled]='!discount' class="btn btn--form btn--alt">Apply</button>
                                 </div>
+                                </form>
                             </div>
                         </div>
                         <div class="card-body">
                             <h3>Your Bill </h3>
                             <p><strong>
                                 <div>Total Price <span class="card-total-price">₹ {{total.price}}</span></div>
+                                <div>Total Gross Weight <span class="card-total-price"> {{total.weight}} g</span></div>
                                   Sgst(1.5 %): ₹ {{total.price*0.015}}<br>
                                   Cgst(1.5 %): ₹ {{total.price*0.015}}<br>
                                   Igst(1.5 %): ₹ {{total.price*0.015}}<br>
+                                  <ng-container *ngIf='discountamount'>Total(after GST): ₹ {{final+disamt}}<br></ng-container>
+                                  <ng-container *ngIf='discountamount'>
+                                      DISCOUNT COUPAN :{{discountamount.coupan}} <br>
+                                      <ng-container *ngIf='discountamount.offertype == "Fixed"'>DISCOUNT :  ₹ {{discountamount.value}} off </ng-container>
+                                      <ng-container *ngIf='discountamount.offertype == "Percentage"'> DISCOUNT :{{discountamount.value}} % off</ng-container><br>
+                                      DISCOUNT AMOUNT : ₹ {{disamt}} off
+                                  </ng-container>
                                 </strong>
                               </p>
                               <div class="card-total-sm">
-                                <div class="float-right">Final Total <span class="card-total-price">₹ {{total.price + total.price*0.045}}</span></div>
+                                <div class="float-right">Final Total <span class="card-total-price">₹ {{final}}</span></div>
                             </div>
                             
                         </div>
                         <div class="mt-2"></div>
-                        <div class="clearfix"><button type="submit" class="btn btn--lg w-100">Place Order</button></div></ng-container>
+                        <div class="clearfix"><button type="submit" (click)="createjson()" class="btn btn--lg w-100">Place Order</button></div></ng-container>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
+<simple-notifications></simple-notifications>
 
 
   <!-- Modal -->

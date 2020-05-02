@@ -10,6 +10,7 @@ import { CheckoutService } from '../../auth-guard/checkout.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { SiteModule } from '../../site/site/site.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -23,6 +24,7 @@ import { SiteModule } from '../../site/site/site.module';
   imports: [
     CommonModule,
     NgbModule,
+    FormsModule,
     SiteModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
