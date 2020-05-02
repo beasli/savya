@@ -479,14 +479,68 @@ getOtpGuard()
     return this.otpGuard;
     
 }
+calculate(products){
+  let priceWeight = [];
+  products.forEach(childObj => {
+  let gold = childObj.assests.find(slide => slide.metal === 'Gold');
+  let silver = childObj.assests.find(slide => slide.metal === 'Silver');
+  let stone = childObj.assests.find(slide => slide.metal === 'Stone');
+  let diamond = childObj.assests.find(slide => slide.metal === 'Diamond');
+  let platinum = childObj.assests.find(slide => slide.metal === 'Platinum');
+  let price = childObj.price;
+  let weight = 0;
+  let priceProduct = 0;
+  let goldweight;
+
+  if(gold)  {
+      if(gold.options == 'Percentage'){
+        let pricegold = price.gold.find(x => x.type == '24KT');
+        let value = price.gold.find(x => x.type == gold.materialType);
+        value = value.value_in;
+        let outcome = this.price(gold.weight,pricegold.price,gold.options,gold.makingCharge,0,value);
+            weight += Number(outcome.weight);
+            goldweight = Number(outcome.weight);
+            price += outcome.price;
+      } else {
+        let pricegold = price.gold.find(x => x.type == gold.materialType);
+        let outcome = this.price(gold.weight,pricegold.price,gold.options,gold.makingCharge,gold.wastage);
+        weight += Number(outcome.weight);
+        goldweight = Number(outcome.weight);
+        priceProduct += outcome.price;
+      }
+  }
+  if(silver)  {
+    let pricesilver = price.silver.find(x => x.type == silver.materialType);
+    let outcome = this.price(silver.weight,pricesilver.price,silver.options,silver.makingCharge,silver.wastage);
+    weight += Number(outcome.weight);
+    priceProduct += outcome.price;
+  }
+  if(stone)  {
+    let pricestone = price.stone.find(x => x.type == stone.materialType);
+    let outcome = this.price(stone.weight,pricestone.price,stone.options,stone.makingCharge,stone.wastage);
+    weight += Number(outcome.weight)*0.2;
+    priceProduct += outcome.price;
+  }
+  if(diamond)  {
+    let pricediamond = price.diamond_master.find(x => x.type == diamond.materialType);
+    let outcome = this.price(diamond.weight,pricediamond.price,diamond.options,diamond.makingCharge,diamond.wastage);
+    weight += Number(outcome.weight)*0.2;
+    priceProduct += outcome.price;
+  }
+  if(platinum)  {
+    let priceplatinum = price.platinum.find(x => x.type == platinum.materialType);
+    let outcome = this.price(platinum.weight,priceplatinum.price,platinum.options,platinum.makingCharge,platinum.wastage);
+    weight += Number(outcome.weight);
+    priceProduct += outcome.price;
+  }
+   
+    let data = {'weight':weight,'price':priceProduct,'goldcat':gold.materialType,'goldweight':goldweight};
+    priceWeight.push(data);
+  });
+  return priceWeight;
+}
 
 price(weight, rate, option, makingcharge, wastage = 0, value = 0) {
-  console.log('weight -> '+weight);
-  console.log('rate -> '+rate);
-  console.log('option -> '+option);
-  console.log('makingcharge -> '+makingcharge);
-  console.log('wastage -> '+wastage);
-  console.log('value -> '+value);
   let metalprice = 0;
   if  (option == "PerGram") {
       metalprice  =  (Number(rate) + Number(makingcharge)) * Number(weight);

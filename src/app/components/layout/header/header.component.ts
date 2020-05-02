@@ -11,11 +11,19 @@ export class HeaderComponent implements OnInit {
   message:any="minimum 3 characters are required";
 
   searchValue= "";
+  logochange: any;
+  newurl: string;
 
   constructor(private api:ApiService ,private router:Router) {
     this.drop=this.api.drop; 
    console.log(this.drop);
   
+   this.api.changelogo.subscribe(data=>{this.logochange = data
+    console.log(this.logochange);
+    if(data == 1){
+      this.newurl = this.router.url;
+    }
+  });
   }
   change(value)
   {

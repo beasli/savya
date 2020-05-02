@@ -115,7 +115,8 @@
                 <!-- Menu Toggle -->
                 <div class="menu-toggle"><a routerLink="/" class="mobilemenu-toggle"><i class="icon icon-menu"></i></a></div>
                 <!-- /Menu Toggle -->
-                <div class="logo-holder"><a routerLink="/" class="logo"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
+                <div *ngIf='logochange != 1' class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
+            <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/SJB_Machinery-1.png" srcset="assets/images/SJB_Machinery-1.png" alt=""></a></div>
                 <div class="hdr-mobile-right">
                     <div class="hdr-topline-right links-holder"></div>
                     <div class="minicart-holder"></div>
@@ -184,7 +185,8 @@
     <div class="sticky-holder compensate-for-scrollbar">
         <div class="container">
             <div class="row"><a href="#" class="mobilemenu-toggle show-mobile"><i class="icon icon-menu"></i></a>
-                <div class="col-auto logo-holder-s"><a href="index.html" class="logo"><img src="assets/images/logo.png" srcset="assets/images/savyalogoblack.png" alt=""></a></div>
+                <div *ngIf='logochange != 1' class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
+            <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/SJB_Machinery-1.png" srcset="assets/images/SJB_Machinery-1.png" alt=""></a></div>
                 <!--navigation-->
                 <div class="prev-menu-scroll icon-angle-left prev-menu-js"></div>
                 <div class="nav-holder-s"></div>
