@@ -2,98 +2,25 @@
 <header class="hdr global_width hdr_sticky hdr-mobile-style2">
 
     <!-- Mobile Menu -->
-    <div class="mobilemenu js-push-mbmenu">
+    <div [ngClass]='{active:activ==1}' class="mobilemenu js-push-mbmenu">
         <div class="mobilemenu-content">
-            <div class="mobilemenu-close mobilemenu-toggle">CLOSE</div>
+            <div (click)='mobile()' class="mobilemenu-close mobilemenu-toggle">CLOSE</div>
             <div class="mobilemenu-scroll">
-                <div class="mobilemenu-search"></div>
+                <div class="mobilemenu-search">
+                    <form action="#" class="search">
+                        <button type="submit" class="search-button"><i class="icon-search2"></i></button> <input type="text" class="search-input" placeholder="search keyword">
+                            <div class="search-popular js-search-autofill"><span class="search-popular-label">popular searches:</span><a href="#">RINGS</a> <a href="#">Solitaries</a> <a href="#">Diamond</a> <a href="#">Discount</a> <a href="#">Valentine’s gift</a> <a href="#">Gift for Wife</a> <a href="#">Gold Coin</a><a href="#">New Design</a></div>
+                        </form>
+                </div>
                 <div class="nav-wrapper show-menu">
                     <div class="nav-toggle"><span class="nav-back"><i class="icon-arrow-left"></i></span> <span class="nav-title"></span></div>
                     <ul class="nav nav-level-1">
-                        <li><a href="index.html">Rings<span class="menu-label menu-label--color1">NEW</span></a><span class="arrow"></span>
+                        <li *ngFor='let s of catall;let i = index'>
+                            <ng-container *ngIf="s.category != 'MACHINERY'"><a id='{{i}}' href="javascript:void(0)">{{s.category}}</a></ng-container>
+                        <ng-container *ngIf="s.category == 'MACHINERY'"><a [routerLink]="['/machinery/', s.category_id]">{{s.category}}</a>
+                        </ng-container><span class="arrow"></span>
                             <ul class="nav-level-2">
-                                <li><a href="#" title="">New Rings</a></li>
-                               <li><a href="#" title="">New Rings</a></li>
-                               <li><a href="#" title="">New Rings</a></li>
-                               <li><a href="#" title="">New Rings</a></li>
-                               <li><a href="#" title="">New Rings</a></li>
-                               <li><a href="#" title="">New Rings</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" title="">dd</a><span class="arrow"></span>
-                            <ul class="col-md-6">
-                                <li><a href="product.html" title="">Product page variant 1</a></li>
-                                <li><a href="product-2.html" title="">Product page variant 2</a></li>
-                                <li><a href="product-3.html" title="">Product page variant 3</a></li>
-                                <li><a href="product-4.html" title="">Product page variant 4</a></li>
-                                <li><a href="product-5.html" title="">Product page variant 5</a></li>
-                            </ul>
-                            <ul class="col-md-6">
-                                <li><a href="product.html" title="">Product page variant 1</a></li>
-                                <li><a href="product-2.html" title="">Product page variant 2</a></li>
-                                <li><a href="product-3.html" title="">Product page variant 3</a></li>
-                                <li><a href="product-4.html" title="">Product page variant 4</a></li>
-                                <li><a href="product-5.html" title="">Product page variant 5</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" title="">Pendants</a><span class="arrow"></span>
-                            <ul class="nav-level-2">
-                                <li><a href="index.html" title="">Demo Text</a><span class="arrow"></span>
-                                    <ul class="nav-level-3">
-                                        <li><a href="index.html" title="">Menu 1</a></li>
-                                        <li><a href="index-fashion-2.html" title="">Menu 2</a></li>
-                                        <li><a href="index-electronics.html" title="">Menu 3</a></li>
-                                        <li><a href="index-sport.html" title="">Menu 4</a></li>
-                                        <li><a href="typography.html" title="">Menu 5</a></li>
-                                        <li><a href="index-tools.html" title="">Menu 6</a></li>
-                                        <li><a href="index-watches.html" title="">Menu 7</a></li>
-                                        <li><a href="index-toys-2.html" title="">Menu 8</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="index.html" title="">Demo Text 2</a><span class="arrow"></span>
-                                    <ul class="nav-level-3">
-                                        <li><a href="index.html" title="">Menu 1</a></li>
-                                        <li><a href="index-sport.html" title="">Menu 2</a></li>
-                                        <li><a href="index-tools.html" title="">Menu 3</a></li>
-                                        <li><a href="index-furniture.html" title="">Menu 4</a></li>
-                                        <li><a href="index-plumbing.html" title="">Menu 5</a></li>
-                                        <li><a href="index-electronics.html" title="">Menu 6</a></li>
-                                        <li><a href="index-watches.html" title="">Menu 7</a></li>
-                                        <li><a href="index-fashion-2.html" title="">Menu 8</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="category.html">All Jewelery</a><span class="arrow"></span>
-                            <ul class="nav-level-2">
-                                <li><a href="category.html" title="">Demo Text</a><span class="arrow"></span>
-                                    <ul class="nav-level-3">
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="category.html" title="">Demo Text 2</a><span class="arrow"></span>
-                                    <ul class="nav-level-3">
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="category.html" title="">Menu 3</a><span class="arrow"></span>
-                                    <ul class="nav-level-3">
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="category.html" title="">Menu 4</a><span class="arrow"></span>
-                                    <ul class="nav-level-3">
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                    </ul>
-                                </li>
+                                <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['/subsub/', p.subcategory_id]">{{p.subcategory}}</a></li>
                             </ul>
                         </li>
                         <li><a href="#" target="_blank">Next Day Delivery<span class="menu-label menu-label--color3">HOT!</span></a><span class="arrow"></span></li>
@@ -113,7 +40,7 @@
         <div class="hdr-content">
             <div class="container">
                 <!-- Menu Toggle -->
-                <div class="menu-toggle"><a routerLink="/" class="mobilemenu-toggle"><i class="icon icon-menu"></i></a></div>
+                <div class="menu-toggle"><a [ngClass]='{active:activ==1}'  class="mobilemenu-toggle"><i (click)='mobile()' class="icon icon-menu"></i></a></div>
                 <!-- /Menu Toggle -->
                 <div *ngIf='logochange != 1' class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
             <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/SJB_Machinery-1.png" srcset="assets/images/SJB_Machinery-1.png" alt=""></a></div>
@@ -189,7 +116,9 @@
             <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/SJB_Machinery-1.png" srcset="assets/images/SJB_Machinery-1.png" alt=""></a></div>
                 <!--navigation-->
                 <div class="prev-menu-scroll icon-angle-left prev-menu-js"></div>
-                <div class="nav-holder-s"></div>
+                <div class="nav-holder-s">
+                    
+                </div>
                 <div class="next-menu-scroll icon-angle-right next-menu-js"></div>
                 <!--//navigation-->
                 <div class="col-auto minicart-holder-s"></div>

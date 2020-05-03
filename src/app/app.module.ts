@@ -16,6 +16,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutService } from './components/auth-guard/checkout.service';
 import { OtpGuardService } from './components/auth-guard/otp-guard.service';
 import { KycguardService } from './components/auth-guard/kycguard.service';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { KycguardService } from './components/auth-guard/kycguard.service';
     FormsModule,
     ReactiveFormsModule ,
     NgbModule,
+    SimpleNotificationsModule.forRoot(),
   ],
   providers: [AuthGuardService,CheckoutService,OtpGuardService,KycguardService],
   bootstrap: [AppComponent]
