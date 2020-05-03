@@ -231,12 +231,12 @@
                 </ul>
             </div>
         </li>
-        <li>
+        <!-- <li> -->
             <!-- <a href="">SEE MORE FILTERS</a> -->
-            <a href="javascript:void(0)">Clear filter</a>
+            <!-- <a href="javascript:void(0)">Clear filter</a>
             <div class="filter-listing sub-filter-listing">
                 <ul class="subfilter">
-                    <li (click)="clear()">Clear Filter</li>
+                    <li (click)="clear()">Clear Filter</li> -->
                     <!-- <li>
                         <div class="each-filter-listing">
                             <span class="icon-container">
@@ -265,8 +265,30 @@
                                 </ul>
                         </div>
                     </li> -->
-                </ul>
+                <!-- </ul>
             </div>
-        </li>
+        </li> -->
     </ul>
+ 
 </div>
+<!-- *ngIf="Object.keys(this.filter.menu.price).length>0" -->
+<ul class="row nav">
+   <li class="nav-item" *ngIf="checkP()" >
+     <a class="nav-link"  href="javascript:void(0)"><h2><span  class=" badge badge-pill badge-secondary">₹{{filter.menu.price['min']}}-₹{{filter.menu.price['max']}}<i class="icon-cross"  (click)="deleteSelected('price',filter.menu.price['min'])"></i></span></h2></a>
+   </li>
+    <li class="nav-item" *ngFor="let m of filter.menu.jewelery_type">
+        <a class="nav-link" href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">{{m}}<i class="icon-cross" (click)="deleteSelected('jewelery_type',m)"></i></span></h2></a>
+    </li>
+    <li class="nav-item" *ngFor="let m of filter.menu.purity">
+        <a class="nav-link" href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">{{m}}<i class="icon-cross" (click)="deleteSelected('purity',m)"></i></span></h2></a>
+      </li>
+    <li class="nav-item" *ngFor="let m of filter.menu.jewelery_for">
+        <a class="nav-link " href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">{{m}}<i class="icon-cross" (click)="deleteSelected('jewelery_for',m)"></i></span></h2></a>
+    </li>
+    <li class="nav-item" *ngFor="let m of filter.menu.material">
+        <a class="nav-link" href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">{{m}}<i class="icon-cross" (click)="deleteSelected('material',m)"></i></span></h2></a>
+    </li>
+    <li class="nav-item" *ngIf="checkClear()">
+        <a class="nav-link" href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">Clear All<i class="icon-cross" (click)="clear()"></i></span></h2></a>
+    </li>
+  </ul>

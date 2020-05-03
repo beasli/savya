@@ -14,7 +14,94 @@ export class FilterNavBarComponent implements OnInit {
   purity:any;
   price:any;
   jewelery_type:any;
+  filter:any;
   constructor(private api:ApiService) { 
+    this.filter=this.api.getfilter();
+    }
+  deleteSelected(type,filterValue)
+    {
+      let f= this.api.getfilter();
+        console.log(type);
+        console.log(filterValue);
+        //console.log(Object.keys(this.filter.menu.price).length);
+        if(type=="jewelery_type")
+        {
+          // console.log("if condition");
+          f.menu.jewelery_type=[];
+          this.api.setfilter(f);     
+        }
+        else if(type=="jewelery_for")
+        {
+            if(f.menu.jewelery_for.length>0)
+            {
+                let result=f.menu.jewelery_for.find(x => x == filterValue);
+                if(result)
+                {
+                  let i= f.menu.jewelery_for.indexOf(result);
+                  if (i > -1) {
+                    f.menu.jewelery_for.splice(i, 1);
+                  }
+                  this.api.setfilter(f);
+                }
+            }
+        }
+        else if(type=="material")
+        {
+          if(f.menu.material.length>0)
+          {
+                let result=f.menu.material.find(x => x == filterValue);
+                if(result)
+                {
+                  let i= f.menu.material.indexOf(result);
+                  if (i > -1) {
+                    f.menu.material.splice(i, 1);
+                  }
+                  this.api.setfilter(f);
+                }
+            }
+        }
+        else if(type=="purity")
+        {
+          if(f.menu.purity.length>0)
+            {
+              let result=f.menu.purity.find(x => x == filterValue);
+              if(result)
+              {
+                let i= f.menu.purity.indexOf(result);
+                if (i > -1) {
+                  f.menu.purity.splice(i, 1);
+                }
+                 this.api.setfilter(f);
+              }
+            }  
+        }
+        else if(type=="price")
+        {
+          Object.keys(f.menu.price).forEach(k => delete f.menu.price[k]);
+          this.api.setfilter(f);
+        }
+    }
+    checkClear()
+    {
+      let f= this.api.getfilter();
+      if(f.menu.jewelery_type.length>0||f.menu.jewelery_for>0||f.menu.material.length>0||f.menu.purity.length>0||Object.keys(f.menu.price).length>0)
+      {
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    checkP()
+    {
+      let f= this.api.getfilter();
+      if(Object.keys(f.menu.price).length>0)
+      {
+        return true;
+      }
+      else{
+        return false;
+      }
     }
 changefilter(event,value)
 {
@@ -143,6 +230,7 @@ clear()
   let initial={"menu":{"jewelery_for":[],"jewelery_type":[],"material":[],"price":{},"purity":[]}};
   this.api.setfilter(initial);
 }
+
 checkedprice(min)
 {
     
@@ -213,7 +301,7 @@ checkedpurity(value)
     return false;
   }
 }
-  ngOnInit(): void {
+  ngOnInit(){
     this.api.Get(PRODUCTFILTERMENU).then(data  => {
       this.jewelery_for=data['menu'].jewelery_for;
       console.log(data);
@@ -225,8 +313,10 @@ checkedpurity(value)
       }).catch(d=>{
        console.log(d);
      });
-     //console.log(this.jewelery_for);
-
+     this.api.filterChange.subscribe(data=>{
+       this.filter=this.api.getfilter();
+       console.log(this.filter);
+     })
   }
-
+  
 }
