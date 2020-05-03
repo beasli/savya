@@ -84,3 +84,4 @@ export const VERIFY = 'offer/verify'; //done
 // export const ORDERHISTORY = 'order/history';
 export const ORDERHISTORY = 'checkout'; //done
 export const CHECKOUT = 'checkout'; //done
+export const BANNER = 'banner'; //done

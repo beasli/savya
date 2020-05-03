@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { VERIFY, CHECKOUT } from './../../../../config';
 import { Component, OnInit } from '@angular/core';
 import { GETADDRESS, CARTVIEW, IMAGE } from 'src/config';
@@ -24,7 +25,7 @@ export class CheckoutComponent implements OnInit {
   disamt: any;
   realFinal:any;
   feedback= '';
-  constructor(private api:ApiService) { 
+  constructor(private api:ApiService,private router:Router) { 
     this.uid=this.api.uid;
 
     this.api.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
@@ -71,6 +72,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   createjson(){
+    if(this.total.weight >= 100){
     let masterjson = {}
     let childjson = {};
     childjson['sgst'] = this.realFinal*0.015;
@@ -124,7 +126,11 @@ export class CheckoutComponent implements OnInit {
       console.log(data);
       
       this.api.onSuccess('Your Order is Successfully Placed');
+      this.router.navigate(['/account-history']);
     });
+        } else  {
+          this.api.onFail('Minimum Weight of order should be 100 g' + ' You need ' + (100 - this.total.weight) + 'g more');
+        }
   }
 
   setadd(){

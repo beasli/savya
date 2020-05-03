@@ -86,7 +86,7 @@ const customConfig: ShareButtonsConfig = {
       { path: 'subsub/:id' , component: SubsubComponent},
       { path: 'filternav' , component: FilterNavBarComponent},
       { path: 'category/:id', component: CategoryComponent},
-      { path: 'category', component: CategoryComponent},
+      // { path: 'category', component: CategoryComponent},
       { path: 'subcategory/:id', component: SubcategoryComponent},
       { path: 'bullion', component: BullianComponent},
       { path: 'bullion/:id', component: BullianMerchantComponent},

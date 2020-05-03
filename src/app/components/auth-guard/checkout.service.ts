@@ -9,30 +9,37 @@ import { RouterStateSnapshot, Router } from '@angular/router';
 export class CheckoutService {
 data:any;
 value:any;
+  priceWeight: any[];
+  total = {'weight':0,'price':0};
   constructor(private api:ApiService,private router:Router) { 
    this.data= this.api.getCart();
-   console.log(this.data);
  
   }
   canActivate(route, state: RouterStateSnapshot) {
     this.api.Cart.subscribe(data=>{
       this.data= this.api.getCart();
-
        }) 
-    
     
     if (this.data!=null) 
     {
+
+      this.priceWeight = this.api.calculate(this.data);
+      if(this.priceWeight){
+      this.priceWeight.forEach(element => {
+        this.total.price +=element.price;
+        this.total.weight +=element.weight;
+      });}
+      if(this.total.weight >= 100){
           return true;
+        }else{
+          this.api.onFail('Minimum order Should be of 100 gram'+' You need '+(100-this.total.weight)+' g more for Checkout');
+          return false;
+        }
     }
     else if(this.data==null)
     {
-          if(confirm(' sorry!your cart is empty.Go to home page'))
-          {
-              this.router.navigate(['/home']);
+              this.api.onFail("You don't have any Products for Checkout");
               return false;
-          }
-          
       }
       else
       {
