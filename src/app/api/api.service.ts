@@ -522,10 +522,16 @@ calculate(products){
         let pricegold = price.gold.find(x => x.type == '24KT');
         let value = price.gold.find(x => x.type == gold.materialType);
         value = value.value_in;
+        console.log(value);
+        console.log(pricegold.price);
+        console.log(gold.options);
+        console.log(gold.makingCharge);
+        console.log(gold.weight);
         let outcome = this.price(gold.weight,pricegold.price,gold.options,gold.makingCharge,0,value);
+        console.log(outcome);
             weight += Number(outcome.weight);
             goldweight = Number(outcome.weight);
-            price += outcome.price;
+            priceProduct += outcome.price;
       } else {
         let pricegold = price.gold.find(x => x.type == gold.materialType);
         let outcome = this.price(gold.weight,pricegold.price,gold.options,gold.makingCharge,gold.wastage);
