@@ -16,8 +16,8 @@
                                 <ng-container *ngIf="s.category == 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/machinery/', s.category_id]" title="">{{s.category}}</a></ng-container>
                                 <div class="mmenu-submenu">
                                     <ul class="submenu-list">
-                                        <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" (click)='gofilter(p.subcategory_id)'>{{p.subcategory}}</a>
-                                        </li>
+                                     <ng-container *ngIf="s.category != 'MACHINERY'"><li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" (click)='gofilter(p.subcategory_id)'>{{p.subcategory}}</a>
+                                        </li></ng-container>
                                     </ul>
                                 </div>
                             </li>

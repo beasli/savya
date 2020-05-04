@@ -20,7 +20,11 @@
                         <ng-container *ngIf="s.category == 'MACHINERY'"><a [routerLink]="['/machinery/', s.category_id]">{{s.category}}</a>
                         </ng-container><span class="arrow"></span>
                             <ul class="nav-level-2">
-                                <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['/subsub/', p.subcategory_id]">{{p.subcategory}}</a></li>
+                                <ng-container *ngIf="s.category != 'MACHINERY'">
+                                    <li *ngFor='let p of s.subcategory'>
+                                        <a href="javascript:void(0)" [routerLink]="['/subsub/', p.subcategory_id]">{{p.subcategory}}</a>
+                                    </li>
+                                </ng-container>
                             </ul>
                         </li>
                         <li><a href="#" target="_blank">Next Day Delivery<span class="menu-label menu-label--color3">HOT!</span></a><span class="arrow"></span></li>

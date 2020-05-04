@@ -30,12 +30,15 @@ export class CheckoutComponent implements OnInit {
 
     this.api.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
       this.products=data['data'];
+      console.log(this.products);
        this.priceWeight = this.api.calculate(this.products);
        if(this.priceWeight){
+         console.log(this.priceWeight);
        this.priceWeight.forEach(element => {
          this.total.price +=element.price;
          this.total.weight +=element.weight;
        });}
+       console.log(this.priceWeight);
         this.final = this.total.price + this.total.price*0.045;
         this.realFinal = this.final;
     });
