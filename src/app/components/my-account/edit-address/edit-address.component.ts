@@ -97,17 +97,20 @@ changeNumber(e)
     // value['region'] = value['region']['name'];
     if(this.index)
     {
-      this.api.Put(EDITADDRESS,this.index,value).then(data => {
-      if (confirm(data['message'])) {
+        this.api.Put(EDITADDRESS,this.index,value).then(data => {
+        this.api.onSuccess(data['message']);
         this.router.navigate(['/account-addresses']);
-      }
-    }); }
+        });
+    }
     else {
-          console.log(value);
           this.api.Post(ADDADDRESS, value).then(data => {
-          if (confirm(data['message'])) {
-          this.router.navigate(['/account-addresses']);
-        }
+            this.api.onSuccess(data['message']);
+            if(!this.api.goto)
+            {
+            this.router.navigate(['/account-addresses']);
+            } else{
+              this.api.getGoto();
+            }
       });
     }
   }

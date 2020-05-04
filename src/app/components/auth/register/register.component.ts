@@ -221,8 +221,10 @@ changeNumber(e)
         //         console.log(d);
         //   });
         this.api.setlogin(1);
-       
-        this.router.navigate(['/home']);
+        if(this.api.goto){
+          this.api.getGoto();
+        } else {
+         this.router.navigate(['/home']);}
       }).catch(d=>{
         console.log(d);
         this.loading=false;

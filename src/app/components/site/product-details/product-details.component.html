@@ -198,9 +198,9 @@
                                 <div class="prd-hover">
                                     <div class="prd-action button-margin-none">
 
-                                        <div   *ngIf= "checkCart(data.id)" class="row no=gutters" >
+                                        <!-- <div   *ngIf= "checkCart(data.id)" class="row no=gutters" >
                                             <button routerLink="/cart" class="btn"><i class="icon icon-handbag"></i><span>Go to Cart</span></button>
-                                            <!-- <div class="col-2">
+                                            <div class="col-2">
                                                 <button  (click)="qtyUpdate(data.id,-1)" class="btn btn-secondary btn-block">-</button>
                                             </div>
             
@@ -208,9 +208,9 @@
             
                                             <div class="col-2">
                                                 <button  (click)="qtyUpdate(data.id,+1)" class="btn btn-secondary btn-block">+</button>
-                                            </div> -->
-                                        </div>
-                                        <input type="hidden"> <button class="btn"  *ngIf= "!checkCart(data.id)"  (click)="createjson()"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
+                                            </div>
+                                        </div> -->
+                                        <input type="hidden"> <button class="btn" (click)="createjson()"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
                                           <!-- <button  *ngIf="loading==true"  class="btn">Loading...</button> -->
                                         <div style="padding-left:15px;" class="prd-links hide-mobile"><a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
                                     </div>

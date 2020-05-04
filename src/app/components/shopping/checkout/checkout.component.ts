@@ -31,14 +31,15 @@ export class CheckoutComponent implements OnInit {
     this.api.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
       this.products=data['data'];
       console.log(this.products);
-       this.priceWeight = this.api.calculate(this.products);
-       if(this.priceWeight){
+      this.priceWeight = this.api.calculate(this.products);
+      let i = 0;
+      if(this.priceWeight){
          console.log(this.priceWeight);
-       this.priceWeight.forEach(element => {
-         this.total.price +=element.price;
-         this.total.weight +=element.weight;
+         this.priceWeight.forEach(element => {
+         this.total.price +=element.price*this.products[i].count;
+         this.total.weight +=element.weight*this.products[i].count;
        });}
-       console.log(this.priceWeight);
+        console.log(this.priceWeight);
         this.final = this.total.price + this.total.price*0.045;
         this.realFinal = this.final;
     });
@@ -75,7 +76,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   createjson(){
-    if(this.total.weight >= 100){
+    if(this.total.weight >= 100 && this.currentAddress){
     let masterjson = {}
     let childjson = {};
     childjson['sgst'] = this.realFinal*0.015;
@@ -124,21 +125,30 @@ export class CheckoutComponent implements OnInit {
     });
     childjson['data'] = this.products;
     masterjson['calculation'] = childjson;
-    console.log(masterjson);
+    
     this.api.Post(CHECKOUT,masterjson).then(data=>{
-      console.log(data);
-      
+     
       this.api.onSuccess('Your Order is Successfully Placed');
       this.router.navigate(['/account-history']);
     });
         } else  {
+          if(this.total.weight <= 100)  {
           this.api.onFail('Minimum Weight of order should be 100 g' + ' You need ' + (100 - this.total.weight) + 'g more');
+          }
+          if(!this.currentAddress)  {
+            this.api.onFail('Please Add an Address First');
+            }
         }
   }
 
   setadd(){
     this.currentAddress = this.addresses.find(x => x.id == this.clicked);
     document.getElementById("mClose").click();
+  }
+
+  addAddress(){
+    this.api.setGoto();
+    this.router.navigate(['/add-address']);
   }
 
   ngOnInit() {
