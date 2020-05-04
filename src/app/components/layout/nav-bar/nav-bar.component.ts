@@ -27,8 +27,14 @@ export class NavBarComponent implements OnInit {
                   //cart work start //
                   this.uid=this.api.uid;
                   console.log("userid"+this.uid); 
-
-                  this.view();
+                  this.api.getlogin.subscribe(data=>{
+                    this.uid=this.api.uid;
+                  })
+                  if(localStorage.getItem('savya_userInfo'))
+                  {
+                    this.view();
+                  }
+                  
                   //cart work end//
           
             this.api.Get(NAVIGATION).then(data => {
@@ -70,7 +76,7 @@ ProductsInCart()
   }
   view()
   {
-      this.api.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
+      this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data=>{
         console.log(data);  
         this.baseurl=data['url']+"/";
         this.results=data['data'];

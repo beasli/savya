@@ -35,13 +35,13 @@ export class ApiService {
     console.log(this.uid);
    }
     // console.log("userid"+this.uid);
-    if(this.getMobileNo())
-    {
-      console.log("if condition");
-      this.updateCart();
-      this.updateWishlist();
-      this.updateOrderHistory();
-    }
+    // if(this.getMobileNo())
+    // {
+    //   console.log("if condition");
+    //   this.updateCart();
+    //   this.updateWishlist();
+    //   this.updateOrderHistory();
+    // }
     
     if (localStorage.getItem('drop')) {
       this.drop =  +this.decrypt((localStorage.getItem('drop')));
@@ -55,6 +55,24 @@ export class ApiService {
     );
     console.log({headers:this.header});
 
+
+      this.getlogin.subscribe(data=>{
+        if(this.drop==1)
+        {
+          if(localStorage.getItem('savya_userInfo'))
+          {
+            this.updateCart();
+            this.updateWishlist();
+            this.updateOrderHistory();
+          }
+          console.log("login emitter");
+        }
+        if(this.drop==0)
+        {
+          console.log("logout emitter");
+        }
+        
+      })
 
  }
 
@@ -176,7 +194,10 @@ export class ApiService {
 
   updateCart()
   {
-    //console.log("in update cart function")
+    if(localStorage.getItem('savya_userInfo'))
+    {
+     let u=this.getUserInfo();
+    this.uid=u.id;
     this.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
       //console.log(data['data'][0].cart_id);
       console.log( data);
@@ -186,6 +207,10 @@ export class ApiService {
       localStorage.removeItem('cart');
       this.Cart.emit("emptycart"+Date.now());
     })
+    console.log(this.uid);
+   }
+    //console.log("in update cart function")
+   
   }
   checkCart(pid)
   { 

@@ -57,12 +57,15 @@ drop:any;
     // console.log(this.mostselling);
     // console.log(this.url3);
     // console.log(this.heading);
-
-    this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data => {
+    if(localStorage.getItem('savya_userInfo'))
+    {
+      this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data => {
         this.cart = data['data'];
     }).catch(d => {
       console.log(d);
     })
+    }
+    
    }
    quantity(pid)
    {
