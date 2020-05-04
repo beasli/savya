@@ -86,7 +86,7 @@ export class ProductDetailsComponent implements OnInit {
 
     
 
-    this.api.Post(CARTVIEW,{user_id: this.api.uid}).then(data=>{
+    this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data=>{
         this.cart=data['data'];
     }).catch(d => {
       console.log(d);

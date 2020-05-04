@@ -58,14 +58,15 @@ login(otpvalue)
         this.loading=false;
         console.log(data['success'].token);
         this.api.setMobileNo(data['success'].token);
-        this.api.updateWishlist();
-        this.api.updateCart();
-        this.api.Post(PROFILEVIEW, {}).then(data=>{
-          console.log(data);
-          this.api.setUserInfo(data['user']);
-          }).catch(d=>{
-                console.log(d);
-          });
+       
+        // this.api.Post(PROFILEVIEW, {}).then(data=>{
+        //   console.log(data);
+        //   this.api.setUserInfo(data['user']);
+        //    this.api.updateWishlist();
+        // this.api.updateCart();
+        //   }).catch(d=>{
+        //         console.log(d);
+        //   });
         this.api.setlogin(1);
        
         this.router.navigate(['/home']);
@@ -78,6 +79,32 @@ login(otpvalue)
       });
 }
   ngOnInit() {
+    this.api.getlogin.subscribe(data=>{
+      if(this.api.drop==1)
+      {
+        this.api.Post(PROFILEVIEW, {}).then(data=>{
+          console.log(data);
+          this.api.setUserInfo(data['user']);
+        //    this.api.updateWishlist();
+        // this.api.updateCart();
+        if(localStorage.getItem('savya_userInfo'))
+        {
+          this.api.updateCart();
+          this.api.updateWishlist();
+          this.api.updateOrderHistory();
+        }
+          }).catch(d=>{
+                console.log(d);
+          });
+       
+        console.log("login emitter");
+      }
+      if(this.api.drop==0)
+      {
+        console.log("logout emitter");
+      }
+      
+    })
   }
 
 }
