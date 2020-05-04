@@ -25,7 +25,7 @@ export class ApiService {
   wish:any[];
   event:any;
   header:any;
-    
+  goto:any;
   
   constructor(public http: HttpClient,private service: NotificationsService, private router: Router) {
     if(localStorage.getItem('savya_userInfo'))
@@ -158,6 +158,17 @@ export class ApiService {
     });
   }
 
+  setGoto(){
+    this.goto = this.router.url;
+  }
+
+  getGoto(){
+    if(this.goto){
+      this.router.navigate([this.goto]);
+    }
+    this.goto = null;
+  }
+
   updateOrderHistory()
   {
     this.Post(ORDERHISTORY,{user_id:this.uid}).then(data=>{
@@ -171,7 +182,7 @@ export class ApiService {
 
   onSuccess(message){
     this.service.success('Success',message,{
-     position: ['bottom', 'right'],
+     position:["middle","center"],
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
@@ -181,7 +192,7 @@ export class ApiService {
 
   onFail(message){
     this.service.warn('Not Possible',message,{
-     position: ['bottom', 'right'],
+     position:  	["middle","center"],
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
@@ -275,7 +286,7 @@ qtyUpdate(pid,value)
                       c=c+value;
                    // this.Put2(CARTUPDATE+"?cart_id="+cartId+"&user_id="+this.uid+"&count="+c).then(data=>{
                      this.Put2(CARTUPDATE,"",{cart_id:cartId,user_id:this.uid,count:c}).then(data=>{
-                      console.log(data);
+                      
                       this.updateCart(); 
                       this.Cart.emit("cartUpdate"+Date.now()); 
                     }).catch(d=>{

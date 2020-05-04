@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
-import { CARTVIEW, IMAGE } from 'src/config';
+import { CARTVIEW, IMAGE, CARTUPDATE } from 'src/config';
 
 @Component({
   selector: 'app-cart',
@@ -71,11 +71,40 @@ page:boolean;
                 }
         }
    }
-   qtyUpdate(pid,value)
-   {
-        this.api.qtyUpdate(pid,value);
-   }
-  
+  //  qtyUpdate(pid,value)
+  //  {
+  //       this.api.qtyUpdate(pid,value);
+  //  }
+
+   qtyUpdate(pid,value) {
+    console.log("in qtyupdate function");
+    console.log("value="+value);
+    let cart = this.api.getCart();
+    if (cart) {
+      document.getElementById("openmodalbutton").click();
+           let result = cart.find(x => x.product_id == pid);
+           console.log(result);
+           if (result) {
+                let cartId = result.cart_id;
+                let c = Number(result.count);
+
+                if(c == 1 && value == -1) {
+                  this.api.deleteCart(pid);
+                } else {
+                      c = c + value;
+                      this.api.Put2(CARTUPDATE, "" , {cart_id: cartId, user_id: this.uid, count: c}).then(data => {
+                        
+                      this.api.updateCart();
+                      this.api.Cart.emit("cartUpdate" + Date.now());
+                      document.getElementById("mClose").click();
+                    }).catch(d => {
+                      console.log(d);
+                    });
+                }
+            }
+     }
+}
+
   ngOnInit() {
     this.loader=true;
     this.page=false;
