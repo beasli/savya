@@ -133,9 +133,15 @@ export class ProductDetailsComponent implements OnInit {
         }
    }
    wishlist(pid) {
-    // console.log("in wishlist");
-     //console.log(pid);
+    if(this.drop==0)
+    {
+      this.api.setGoto();
+      this.api.onSuccess('Please Login First to Continue');
+    }
+    else if(this.drop==1)
+   {
      this.api.checkWishlist(pid);
+   }
    }
    checkHeart(pid)
   {
@@ -179,7 +185,6 @@ export class ProductDetailsComponent implements OnInit {
   }
   addToCart(s)
   {
-    console.log('im called');
     this.api.addToCart(s);
   }
    getproduct() {
@@ -251,11 +256,15 @@ export class ProductDetailsComponent implements OnInit {
   }).catch(d=>{console.log(d);});
 }
 
+
+
    createjson() {
      this.loading=true;
     if(this.drop==0)
     {
-      document.getElementById("openModalButton").click();
+      // document.getElementById("openModalButton").click();
+      this.api.setGoto();
+      this.api.onSuccess('Please Login First to Continue');
     }
     else if(this.drop==1)
    {
@@ -374,7 +383,6 @@ export class ProductDetailsComponent implements OnInit {
 
    getgold(value) {
      this.gold = value;
-     console.log(value);
      if (this.sizes) {
        let increament = this.selectedsize - this.defaultsize;
        increament = increament * 0.2;
