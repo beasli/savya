@@ -78,7 +78,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.drop=this.api.drop;
+    this.api.getlogin.subscribe(data => {
+      console.log(+data);
+      this.drop=data;
       console.log(this.drop);
       this.mobile();
       setTimeout(() => {
@@ -88,6 +90,7 @@ export class HeaderComponent implements OnInit {
           document.getElementById('0').click();
           },250);
       this.mobile();
+     });
      
   }
 
