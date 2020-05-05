@@ -103,7 +103,10 @@ drop:any;
    
      if(this.drop==0)
      {
-        document.getElementById("openModalButton").click();
+        // document.getElementById("openModalButton").click();
+        
+       this.api.setGoto();
+       this.api.onSuccess('Please Login First to Continue');
      }
      else if(this.drop==1)
     {

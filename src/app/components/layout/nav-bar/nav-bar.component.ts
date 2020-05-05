@@ -22,6 +22,7 @@ export class NavBarComponent implements OnInit {
   baseurl:any;
   message:any="CART IS EMPTY";
   newurl:any;
+  drop: any;
   constructor(private api: ApiService, private router: Router) {
     
                   //cart work start //
@@ -128,8 +129,12 @@ ngOnInit() {
   this.api.Cart.subscribe(data => {
     this.view();
     console.log("changed");
-     console.log("getWishSubscribe"+data);
+    console.log("getWishSubscribe"+data);
      });
+  this.api.getlogin.subscribe(data => {
+     console.log(+data);
+     this.drop=data;
+    });
 }
 
 }

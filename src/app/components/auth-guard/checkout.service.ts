@@ -11,18 +11,18 @@ data:any;
 value:any;
   priceWeight: any[];
   total = {'weight':0,'price':0};
-  constructor(private api:ApiService,private router:Router) { 
-    this.api.Cart.subscribe(data=>{
-      this.total = {'weight':0,'price':0};
-      this.data= this.api.getCart();
-       }) 
- 
+  constructor(private api:ApiService,private router:Router) {
+    this.api.Cart.subscribe(data => {
+      this.total = {'weight': 0,'price': 0};
+      this.data = this.api.getCart();
+       });
+
   }
   canActivate(route, state: RouterStateSnapshot) {
-      this.total = {'weight':0,'price':0};
-      this.data= this.api.getCart();
+      this.total = {'weight': 0,'price': 0};
+      this.data = this.api.getCart();
 
-    
+
     if (this.data!=null) 
     {
       this.total = {'weight':0,'price':0};

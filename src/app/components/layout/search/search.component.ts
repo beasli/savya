@@ -87,7 +87,9 @@ wishlist(pid) {
    //console.log(pid);
    if(this.drop==0)
      {
-      document.getElementById("openModalButton").click();
+       this.api.setGoto();
+       this.api.onSuccess('Please Login First to Continue');
+      //document.getElementById("openModalButton").click();
      }
      else if(this.drop==1)
     {
