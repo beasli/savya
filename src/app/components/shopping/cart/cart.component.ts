@@ -53,12 +53,12 @@ page:boolean;
       // console.log(check);
        return check;
   }
-   quantity(pid)
+   quantity(cart_id)
    {
         let cart=this.api.getCart();
         if(cart)
       {
-              let result=cart.find(x => x.product_id == pid);
+              let result=cart.find(x => x.cart_id == cart_id);
               // console.log(result);
               if(result)
               { 
@@ -77,12 +77,14 @@ page:boolean;
   //  }
 
    qtyUpdate(pid,value) {
+     console.log(pid);
+     console.log(this.uid);
     console.log("in qtyupdate function");
     console.log("value="+value);
     let cart = this.api.getCart();
     if (cart) {
       document.getElementById("openmodalbutton").click();
-           let result = cart.find(x => x.product_id == pid);
+           let result = cart.find(x => x.cart_id == pid);
            console.log(result);
            if (result) {
                 let cartId = result.cart_id;
@@ -92,7 +94,7 @@ page:boolean;
                   this.api.deleteCart(pid);
                 } else {
                       c = c + value;
-                      this.api.Put2(CARTUPDATE, "" , {cart_id: cartId, user_id: this.uid, count: c}).then(data => {
+                      this.api.Put2(CARTUPDATE, "" , {cart_id: pid, user_id: this.uid, count: c}).then(data => {
                         
                       this.api.updateCart();
                       this.api.Cart.emit("cartUpdate" + Date.now());

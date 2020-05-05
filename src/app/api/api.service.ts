@@ -312,7 +312,7 @@ qtyUpdate(pid,value)
     delete prd_sizes[pid];
     localStorage.setItem("prd_sizes",JSON.stringify(prd_sizes));
    }
-    this.Delete(CARTDELETE+"?cart_id="+pid.cart_id+"&user_id="+this.uid).then(data=>{
+    this.Delete(CARTDELETE+"?cart_id="+pid+"&user_id="+this.uid).then(data=>{
       //console.log("deletecart"+data)
       this.updateCart();
       this.Cart.emit("cartUpdated"+Date.now());
