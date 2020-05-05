@@ -131,10 +131,7 @@ ngOnInit() {
     console.log("changed");
     console.log("getWishSubscribe"+data);
      });
-  this.api.getlogin.subscribe(data => {
-     console.log(+data);
-     this.drop=data;
-    });
+     this.drop=this.api.drop;
 }
 
 }
