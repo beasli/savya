@@ -77,7 +77,7 @@ export class ProductDetailsComponent implements OnInit {
   goldlist: any;
   stonelist: any;
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
-    this.drop=this.api.drop; 
+    this.drop=this.api.drop;
     this.route.params.subscribe(params => {
       this.pid = params.id;
       this.ngOnInit();
@@ -260,9 +260,9 @@ export class ProductDetailsComponent implements OnInit {
 
    createjson() {
      this.loading=true;
+     this.drop=this.api.drop;
     if(this.drop==0)
     {
-      // document.getElementById("openModalButton").click();
       this.api.setGoto();
       this.api.onSuccess('Please Login First to Continue');
     }
@@ -270,7 +270,6 @@ export class ProductDetailsComponent implements OnInit {
    {
     let j = {};
     let temparray = [];
-    let waste = {};
     if (this.gold!=null) {
         j['option'] = this.gold.charges_option;
         j['weight'] = this.gold.weight;
@@ -336,17 +335,17 @@ export class ProductDetailsComponent implements OnInit {
     uid = uid.id;
     console.log(uid);
     j['assests'] = temparray;
-    j['category'] = this.data['category_id'];
+  //  j['category'] = this.data['category_id'];
     j['count'] = this.value;
     j['jwellery_type'] = this.data.jwellery_type;
-    j['defaultColor'] = this.colvalue;
+    j['selectedColor'] = this.colvalue;
     j['description'] = this.data.description;
     j['productCode'] = this.data.productcode;
     j['productId'] = Number(this.pid);
     j['productName'] = this.data.productname;
     j['productType'] = this.data.jwellery_type;
-    j['subCategory'] = this.data['subcategory_id'];
-    j['subSubCategory'] = this.data['subsubcategory_id'];
+  //  j['subCategory'] = this.data['subcategory_id'];
+  //  j['subSubCategory'] = this.data['subsubcategory_id'];
     j['userid'] = (uid).toString();
     temparray = [];
     temparray.push(j);
