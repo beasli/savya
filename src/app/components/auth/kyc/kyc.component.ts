@@ -50,7 +50,7 @@ export class KycComponent implements OnInit {
       console.log(img);
       if(event.target.name=="gst_doc1")
       {
-              this.gst_front=selectedfile;
+              this.gst_front=event.target.value;
               var reader = new FileReader();
               reader.onload = function(e) {
                 $('#gst_front').attr('src', e.target.result);
@@ -159,15 +159,18 @@ export class KycComponent implements OnInit {
     this.loading=true;
     this.sign=false;
     this.api.Post(USERKYC,{
+                        aadhar:this.aadhar,
+                        adhar_back:this.adhar_back,
+                        gst_back:this.gst_back,
                         gst_no:this.gst,
                         pan_no:this.pan,
-                        aadhar:this.aadhar,
+                        
                         mobile_no:this.mob,
-                        gst_front:this.gst_front,
-                        adhar_fornt:this.adhar_front,
-                        pan_doc:this.pan_doc,
-                        gst_back:this.gst_back,
-                        adhar_back:this.adhar_back,
+                         gst_front:this.gst_front,
+                         adhar_fornt:this.adhar_front,
+                         pan_doc:this.pan_doc,
+                        
+                        
                         visiting_doc:this.visiting_front}).then(data=>{
               console.log(data);
               this.alert=true;
