@@ -126,6 +126,10 @@ ProductsInCart()
   }
  
 ngOnInit() {
+  this.api.getlogin.subscribe(data => {
+    console.log(+data);
+    this.drop=data;
+   })
   this.api.Cart.subscribe(data => {
     this.view();
     console.log("changed");

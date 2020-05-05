@@ -482,8 +482,11 @@ export class ProductDetailsComponent implements OnInit {
     }
     this.totalprice = price;
   }
-  ngOnInit(): void {
-
+  ngOnInit() {
+    this.api.getlogin.subscribe(data => {
+      console.log(+data);
+      this.drop=data;
+     })
     this.loader=true;
     this.page=false;
     this.api.getlogin.subscribe(data => {

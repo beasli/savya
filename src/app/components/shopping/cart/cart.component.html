@@ -24,15 +24,15 @@
                         <div class="item-plus-minus">
                             <table>
                                 <tr>
-                                    <td><button  (click)="qtyUpdate(r.product_id,-1)" class="btn btn-secondary btn-block">-</button></td>
-                                    <td>{{quantity(r.product_id)}}</td>
-                                    <td><button  (click)="qtyUpdate(r.product_id,+1)" class="btn btn-secondary btn-block">+</button></td>
+                                    <td><button  (click)="qtyUpdate(r.cart_id,-1)" class="btn btn-secondary btn-block">-</button></td>
+                                    <td>{{quantity(r.cart_id)}}</td>
+                                    <td><button  (click)="qtyUpdate(r.cart_id,+1)" class="btn btn-secondary btn-block">+</button></td>
                                 </tr>
                             </table>
                         
                     </div>
                 </div>
-                    <div class="cart-table-prd-action"><a  (click)="deleteCart(r)" class="icon-cross"></a></div>
+                    <div class="cart-table-prd-action"><a  (click)="deleteCart(r.cart_id)" class="icon-cross"></a></div>
                 </div>
                 <div class="cart-table-total">
                     <div class="row">
