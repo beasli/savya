@@ -26,11 +26,31 @@ image = IMAGE+'product/';
           this.current = result;
           this.api.Get(GETADDRESS).then(data => {
             this.addresses = data['data'].find(x => x.id == result.address_id);
+          }).catch(d=>{
+            if(d.error.message == 'Unauthenticated.' && d.status == 401){
+              this.api.onFail('Your session is expired please login again');
+              this.api.setGoto();
+              this.api.setlogin(0);
+              this.api.logout();
+              setTimeout(() => {
+              this.router.navigate(['/login']);
+              },1000);
+            } else{console.log(d)}
           });
 
           if (result) {
             this.products=result.product;
           }
+        }).catch(d=>{
+          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+            this.api.onFail('Your session is expired please login again');
+            this.api.setGoto();
+            this.api.setlogin(0);
+            this.api.logout();
+            setTimeout(() => {
+            this.router.navigate(['/login']);
+            },1000);
+          } else{console.log(d)}
         });
   }
 
@@ -42,7 +62,17 @@ image = IMAGE+'product/';
       this.current = result;
       this.addresses = null;
       this.api.Get(GETADDRESS).then(data => {
-        this.addresses = data['data'].find(x => x.id == result.address_id);});
+        this.addresses = data['data'].find(x => x.id == result.address_id);}).catch(d=>{
+          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+            this.api.onFail('Your session is expired please login again');
+            this.api.setGoto();
+            this.api.setlogin(0);
+            this.api.logout();
+            setTimeout(() => {
+            this.router.navigate(['/login']);
+            },1000);
+          } else{console.log(d)}
+        });
 
       if (result) {
         this.products=result.product;

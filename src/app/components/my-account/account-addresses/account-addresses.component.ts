@@ -21,6 +21,16 @@ export class AccountAddressesComponent implements OnInit {
       this.loader=false;
       this.addresses = data['data'];
       console.log(this.addresses);
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{console.log(d)}
     });
    }
 
@@ -38,6 +48,16 @@ export class AccountAddressesComponent implements OnInit {
     if (confirm ("Are you sure you want to delete this address?"))  {
       this.api.delete(DELADDRESS,value).then(data => {this.addresses = data['data']; 
       this.getaddress();
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{console.log(d)}
     });
      }
    }

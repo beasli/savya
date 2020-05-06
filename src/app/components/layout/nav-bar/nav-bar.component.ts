@@ -85,11 +85,22 @@ ProductsInCart()
         this.div=true;
       
       }).catch(d=>{
+        if(d.error.message == 'Unauthenticated.' && d.status == 401){
+          this.api.onFail('Your session is expired please login again');
+          this.api.setGoto();
+          this.api.setlogin(0);
+          this.api.logout();
+          setTimeout(() => {
+          this.router.navigate(['/login']);
+          },1000);
+        } else{
         this.div=false;
         this.alert=true;
-        console.log(d);
-      })
+        console.log(d);}
+      });
   }
+
+
 
   gofilter(value) {
     console.log(value);

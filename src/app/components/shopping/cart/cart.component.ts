@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { CARTVIEW, IMAGE, CARTUPDATE } from 'src/config';
@@ -16,7 +17,7 @@ baseurl= IMAGE+"/product/";
 message:any="CART IS EMPTY";
 loader:boolean;
 page:boolean;
-  constructor(private api:ApiService) {
+  constructor(private api:ApiService,private router:Router) {
         this.uid=this.api.uid;
         console.log("userid"+this.uid); 
 
@@ -40,11 +41,20 @@ page:boolean;
           this.div=true;
         
         }).catch(d=>{
+          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+            this.api.onFail('Your session is expired please login again');
+            this.api.setGoto();
+            this.api.setlogin(0);
+            this.api.logout();
+            setTimeout(() => {
+            this.router.navigate(['/login']);
+            },1000);
+          } else{
           this.page=true;
          this.loader=false;
           this.div=false;
           this.alert=true;
-          console.log(d);
+          console.log(d);}
         })
    }
    checkCart(pid)
@@ -99,8 +109,16 @@ page:boolean;
                       this.api.updateCart();
                       this.api.Cart.emit("cartUpdate" + Date.now());
                       document.getElementById("mClose").click();
-                    }).catch(d => {
-                      console.log(d);
+                    }).catch(d=>{
+                      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+                        this.api.onFail('Your session is expired please login again');
+                        this.api.setGoto();
+                        this.api.setlogin(0);
+                        this.api.logout();
+                        setTimeout(() => {
+                        this.router.navigate(['/login']);
+                        },1000);
+                      } else{console.log(d)}
                     });
                 }
             }

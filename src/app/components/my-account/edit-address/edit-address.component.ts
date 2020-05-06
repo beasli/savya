@@ -35,6 +35,16 @@ loading: boolean;
     //     });
     // });
 
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{console.log(d)}
     });
     }
     else  {
@@ -100,6 +110,16 @@ changeNumber(e)
         this.api.Put(EDITADDRESS,this.index,value).then(data => {
         this.api.onSuccess(data['message']);
         this.router.navigate(['/account-addresses']);
+        }).catch(d=>{
+          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+            this.api.onFail('Your session is expired please login again');
+            this.api.setGoto();
+            this.api.setlogin(0);
+            this.api.logout();
+            setTimeout(() => {
+            this.router.navigate(['/login']);
+            },1000);
+          } else{console.log(d)}
         });
     }
     else {
@@ -111,6 +131,16 @@ changeNumber(e)
             } else{
               this.api.getGoto();
             }
+      }).catch(d=>{
+        if(d.error.message == 'Unauthenticated.' && d.status == 401){
+          this.api.onFail('Your session is expired please login again');
+          this.api.setGoto();
+          this.api.setlogin(0);
+          this.api.logout();
+          setTimeout(() => {
+          this.router.navigate(['/login']);
+          },1000);
+        } else{console.log(d)}
       });
     }
   }

@@ -175,8 +175,17 @@ export class ApiService {
       console.log( data);
       localStorage.setItem('orders',JSON.stringify(data['data']));  
     }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.onFail('Your session is expired please login again');
+        this.setGoto();
+        this.setlogin(0);
+        this.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
       console.log(d);
-      localStorage.removeItem('orders');
+      localStorage.removeItem('orders');}
     })
   }
 
@@ -214,12 +223,24 @@ export class ApiService {
       console.log( data);
       localStorage.setItem('cart',JSON.stringify(data));  
     }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.onFail('Your session is expired please login again');
+        this.setGoto();
+        this.setlogin(0);
+        this.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
       console.log(d);
       localStorage.removeItem('cart');
-      this.Cart.emit("emptycart"+Date.now());
+      this.Cart.emit("emptycart"+Date.now());}
     })
     console.log(this.uid);
    }
+
+   
+
     //console.log("in update cart function")
    
   }
@@ -290,8 +311,16 @@ qtyUpdate(pid,value)
                       this.updateCart(); 
                       this.Cart.emit("cartUpdate"+Date.now()); 
                     }).catch(d=>{
-                      console.log(d);
-                    })
+                      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+                        this.onFail('Your session is expired please login again');
+                        this.setGoto();
+                        this.setlogin(0);
+                        this.logout();
+                        setTimeout(() => {
+                        this.router.navigate(['/login']);
+                        },1000);
+                      } else{console.log(d)}
+                    });
                 }
             } 
      }
@@ -319,11 +348,20 @@ qtyUpdate(pid,value)
       this.onSuccess('Product Successfully Removed from the cart');
      
     }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.onFail('Your session is expired please login again');
+        this.setGoto();
+        this.setlogin(0);
+        this.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
       this.updateCart();
       console.log(d);
-      this.Cart.emit("cartUpdated"+Date.now());
+      this.Cart.emit("cartUpdated"+Date.now());}
      
-    })
+    });
     
   }
   addToCart(product)
@@ -337,10 +375,19 @@ qtyUpdate(pid,value)
     this.onSuccess('Product Successfully added to the cart');
     //  localStorage.setItem('cart',JSON.stringify(data));  
     }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.onFail('Your session is expired please login again');
+        this.setGoto();
+        this.setlogin(0);
+        this.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
       console.log(d);
       this.Cart.emit("cartUpdated"+Date.now());
-      
-    })
+      }      
+    });
   }
 
 
@@ -360,10 +407,22 @@ qtyUpdate(pid,value)
       localStorage.setItem('wishlist',JSON.stringify(data));
      
     }).catch(d=>{
-      console.log(d);
-      //console.log("deleteWishllist"+d.error.data);
+
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.onFail('Your session is expired please login again');
+        this.setGoto();
+        this.setlogin(0);
+        this.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
+        console.log(d);
+        //console.log("deleteWishllist"+d.error.data);
       localStorage.removeItem('wishlist');
-      this.getWish.emit("emptyWishlist"+Date.now());
+      this.getWish.emit("emptyWishlist"+Date.now())
+      }
+      ;
     })
   }
 
@@ -377,9 +436,17 @@ qtyUpdate(pid,value)
        this.onSuccess('Product Successfully Removed from the Wishlist');
        this.getWish.emit("wishlist updated"+Date.now());
       }).catch(d=>{
-        console.log(d);
-      
-      })
+        if(d.error.message == 'Unauthenticated.' && d.status == 401){
+          this.onFail('Your session is expired please login again');
+          this.setGoto();
+          this.setlogin(0);
+          this.logout();
+          setTimeout(() => {
+          this.router.navigate(['/login']);
+          },1000);
+        } else{
+         console.log(d);}
+       });
      
   }
  
@@ -403,8 +470,17 @@ checkWishlist(pid)
                    this.updateWishlist();
                    this.onSuccess('Product Successfully added to the Wishlist');
               }).catch(d=>{
-                console.log(d);
-              })
+                if(d.error.message == 'Unauthenticated.' && d.status == 401){
+                  this.onFail('Your session is expired please login again');
+                  this.setGoto();
+                  this.setlogin(0);
+                  this.logout();
+                  setTimeout(() => {
+                  this.router.navigate(['/login']);
+                  },1000);
+                } else{
+                 console.log(d);}
+               });
             } 
       }
       else{
@@ -413,9 +489,18 @@ checkWishlist(pid)
              this.updateWishlist();
              this.onSuccess('Product Successfully added to the Wishlist');
         }).catch(d=>{
-          console.log(d);
-        })
-      }    
+          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+            this.onFail('Your session is expired please login again');
+            this.setGoto();
+            this.setlogin(0);
+            this.logout();
+            setTimeout(() => {
+            this.router.navigate(['/login']);
+            },1000);
+          } else{
+           console.log(d);}
+         });
+      }
 }
 getWishlist()
 {

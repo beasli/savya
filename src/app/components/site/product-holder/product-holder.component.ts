@@ -62,8 +62,18 @@ drop:any;
       this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data => {
         this.cart = data['data'];
     }).catch(d => {
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
       console.log(d);
-    })
+      }
+    });
     }
     
    }

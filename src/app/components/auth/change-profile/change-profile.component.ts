@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { PROFILEUPDATE, PROFILEVIEW } from 'src/config';
@@ -17,7 +18,7 @@ export class ChangeProfileComponent implements OnInit {
   d:any;
   loader:boolean;
   page:boolean;
-  constructor(private api:ApiService) {
+  constructor(private api:ApiService,private router:Router) {
     let mobile=this.api.getMobileNo();
     console.log(mobile);
     this.api.Post(PROFILEVIEW, {
@@ -29,8 +30,18 @@ export class ChangeProfileComponent implements OnInit {
       this.data=data['user'];
       //this.router.navigate(['/registerOtp']);
     }).catch(d=>{
-          console.log(d);
-    });
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
+        console.log(d);
+      }
+});
 
   }
    
@@ -56,18 +67,28 @@ export class ChangeProfileComponent implements OnInit {
             this.api.setUserInfo(data['data']);
               //this.router.navigate(['/registerOtp']);
       }).catch(d=>{
-        this.page=true;
-        this.loader=false;
-              console.log(d);
-              this.type="danger";
-              this.loading=false;
-              this.sign=true;
-              this.alert=true;
-              this.message="Enter your all detail";
-              console.log(d);
+
+        if(d.error.message == 'Unauthenticated.' && d.status == 401){
+          this.api.onFail('Your session is expired please login again');
+          this.api.setGoto();
+          this.api.setlogin(0);
+          this.api.logout();
+          setTimeout(() => {
+          this.router.navigate(['/login']);
+          },1000);
+        } else{
+          this.page=true;
+          this.loader=false;
+                console.log(d);
+                this.type="danger";
+                this.loading=false;
+                this.sign=true;
+                this.alert=true;
+                this.message="Enter your all detail";
+                console.log(d);
+        }
       });
 }
-
   ngOnInit(): void {
     this.loader=true;
     this.page=false;

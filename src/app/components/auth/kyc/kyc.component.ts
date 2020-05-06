@@ -177,15 +177,28 @@ export class KycComponent implements OnInit {
               this.message="Successful "
               this.type="success";
       }).catch(d=>{
+
+        if(d.error.message == 'Unauthenticated.' && d.status == 401){
+          this.api.onFail('Your session is expired please login again');
+          this.api.setGoto();
+          this.api.setlogin(0);
+          this.api.logout();
+          setTimeout(() => {
+          this.router.navigate(['/login']);
+          },1000);
+        }else{
               this.type="danger";
               this.message="Sorry !  Something Went Wrong Please Recheck";
               this.loading=false;
               this.sign=true;
               this.alert=true;
-              console.log(d);
+              console.log(d);}
       });
   
 }
+
+
+
 
 
 
