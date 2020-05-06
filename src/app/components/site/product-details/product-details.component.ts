@@ -398,7 +398,7 @@ export class ProductDetailsComponent implements OnInit {
       this.finegold = Number(this.totalgold.weight).toFixed(3);
       this.totalgold = Math.round(this.totalgold.price);
     }
-    this.total();
+     this.total();
      this.grossweight();
    }
 
@@ -445,55 +445,51 @@ export class ProductDetailsComponent implements OnInit {
 
   grossweight() {
     let weight = 0;
-    if(this.gold){
-      weight = weight+Number(this.gold.weight);
+    if (this.gold) {
+      weight = weight + Number(this.gold.weight);
     }
-    if(this.platinum){
-      weight = weight+Number(this.platinum.weight);
+    if (this.platinum) {
+      weight = weight + Number(this.platinum.weight);
     }
-    if(this.diamond){
-      weight = weight+Number(this.diamond[0].weight*0.2);
+    if (this.diamond) {
+      weight = weight + Number(this.diamond[0].weight * 0.2);
     }
-    if(this.stone){
-      weight = weight+Number(this.stone.weight*0.2);
+    if (this.stone) {
+      weight = weight + Number(this.stone.weight * 0.2);
     }
-    if(this.silver){
-      weight = weight+Number(this.silver.weight);
+    if (this.silver) {
+      weight = weight + Number(this.silver.weight);
     }
     this.gross = weight.toFixed(3);
   }
 
   total() {
     let price = 0;
-    if(this.gold){
-      price = price+this.totalgold;
+    if (this.gold) {
+      price = price + this.totalgold;
     }
-    if(this.platinum){
-      price = price+this.totalplat;
+    if (this.platinum) {
+      price = price + this.totalplat;
     }
-    if(this.diamond){
-      price = price+this.totaldiamond;
+    if (this.diamond) {
+      price = price + this.totaldiamond;
     }
-    if(this.stone){
-      price = price+this.totalstone;
-    } 
-    if(this.silver){
-      price = price+this.totalsilver;
+    if (this.stone) {
+      price = price + this.totalstone;
+    }
+    if (this.silver) {
+      price = price + this.totalsilver;
     }
     this.totalprice = price;
   }
   ngOnInit() {
+    this.loader = true;
+    this.page = false;
     this.api.getlogin.subscribe(data => {
       console.log(+data);
-      this.drop=data;
-     })
-    this.loader=true;
-    this.page=false;
-    this.api.getlogin.subscribe(data => {
-      console.log(+data);
-      this.drop=data;
-      console.log(this.drop);    
-     });  
+      this.drop = data;
+      console.log(this.drop);
+     });
   }
 
 }
