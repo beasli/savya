@@ -16,7 +16,7 @@
                    <div class="cart-table-prd-qty"><span></span> <b>{{i+1}}</b></div>
                     <div class="cart-table-prd-image"><a  (click)='go(r.product_id)'><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl + r.image}}" alt=""></a></div>
                     <div class="cart-table-prd-name">
-                        <h5><a href="javascript:void(0)" (click)='go(r.product_id)'>Ring</a></h5>
+                        <h5><a href="javascript:void(0)" (click)='go(r.product_id)'>{{r.jwellery_type}} &nbsp;&nbsp; size:&nbsp;{{r.product_size}}</a></h5>
                         <h2><a  href="javascript:void(0)" (click)='go(r.product_id)'>{{r.productName}}</a></h2>
                     </div>
                     <div   *ngIf= "checkCart(r.product_id)" class="row no=gutters" >

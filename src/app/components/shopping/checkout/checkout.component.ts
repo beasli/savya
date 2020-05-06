@@ -76,52 +76,56 @@ export class CheckoutComponent implements OnInit {
   }
 
   createjson(){
-    if(this.total.weight >= 100 && this.currentAddress){
+    if(this.total.weight <= 100 && this.currentAddress){
     let masterjson = {}
     let childjson = {};
-    childjson['sgst'] = this.realFinal*0.015;
-    childjson['igst'] = this.realFinal*0.015;
-    childjson['cgst'] = this.realFinal*0.015;
-    childjson['sgst_per'] = 1.5;
-    childjson['cgst_per'] = 1.5;
-    childjson['igst_per'] = 1.5;
+    childjson['sgst'] = (this.realFinal*0.015).toFixed(2);
+    childjson['igst'] = (this.realFinal*0.015).toFixed(2);
+    childjson['cgst'] = (this.realFinal*0.015).toFixed(2);
+    childjson['sgst_per'] = 1.5.toFixed(1);
+    childjson['cgst_per'] = 1.5.toFixed(1);
+    childjson['igst_per'] = 1.5.toFixed(1);
     this.feedback ? childjson['feedback'] = this.feedback : childjson['feedback'] = '';
     childjson['transaction_id'] = '';
     childjson['paymentMode'] = 'cod';
-    this.disamt ? childjson['discount_amount'] = this.disamt : childjson['discount_amount'] = '' ;
+    this.disamt ? childjson['discount_amount'] = this.disamt.toFixed(2) : childjson['discount_amount'] = '' ;
     this.discountamount ? childjson['coupanCode'] = this.discountamount.coupan : childjson['coupanCode'] = '';
-    childjson['userid'] = this.api.uid;
-    childjson['address_id'] = this.clicked;
-    childjson['final_total'] = this.final;
-    childjson['total'] = this.realFinal;
+    childjson['userid'] = this.api.uid.toString();
+    childjson['address_id'] = this.clicked.toString();
+    childjson['final_total'] = this.final.toFixed(2);
+    childjson['total'] = this.realFinal.toFixed(2);
     let i = 0;
     this.products.forEach(element => {
       delete element['cart_id'];
       delete element['image'];
       delete element['price'];
       element['userid'] = element['user_id'];
-      
       element['productId'] = element['product_id'];
-      
-      //element['productType'] = element['jwellery_type'];
-      element['productType'] = 'RING';
-      
+      element['productType'] = element['jwellery_type'];
       element['size'] = element['product_size'];
-      
-      //element['defaultColor'] = element['color'];
-      element['defaultColor'] = 'Yellow';
+      element['defaultColor'] = element['selectedColor'];
       element['totalMakingCharge'] = '500';
       element['productTotal'] = element['count'] * this.priceWeight[i].price;
-      i += 1; 
+      
       element.assests.forEach(element2 => {
           element2['option'] = element2['options'];
+          element2['productId'] = element2['product_id'];
           delete element2['options'];
+          delete element2['product_size'];
+          delete element2['wastage'];
+          delete element2['cart_id'];
+          delete element2['id'];
+          delete element2['selectedColor'];
+          delete element2['product_id'];
       });
+      delete element['selectedColor'];
       delete element['color'];
       delete element['product_size'];
+      delete element['default_size'];
       delete element['jwellery_type'];
       delete element['product_id'];
       delete element['user_id'];
+      i += 1; 
     });
     childjson['data'] = this.products;
     masterjson['calculation'] = childjson;
@@ -141,7 +145,7 @@ export class CheckoutComponent implements OnInit {
         }
   }
 
-  setadd(){
+  setadd()  {
     this.currentAddress = this.addresses.find(x => x.id == this.clicked);
     document.getElementById("mClose").click();
   }
