@@ -42,12 +42,34 @@ export class CheckoutComponent implements OnInit {
         console.log(this.priceWeight);
         this.final = this.total.price + this.total.price*0.045;
         this.realFinal = this.final;
-    });
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
+        console.log(d);
+      }
+});
     this.api.Get(GETADDRESS).then(data => {
       this.addresses = data['data'];
       this.currentAddress = this.addresses[0];
       this.clicked = this.currentAddress.id;
-    });
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      }
+});
   }
   check(value){
     this.final = this.realFinal;
@@ -66,9 +88,18 @@ export class CheckoutComponent implements OnInit {
           this.final = this.final - this.disamt;
         }
        }
-    }).catch(data=>{
-      console.log(data);
-    })
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
+        console.log(d);
+      }});
   }
 
   getadd(id){
@@ -76,7 +107,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   createjson(){
-    if(this.total.weight <= 100 && this.currentAddress){
+    if(this.total.weight >= 100 && this.currentAddress){
     let masterjson = {}
     let childjson = {};
     childjson['sgst'] = (this.realFinal*0.015).toFixed(2);
@@ -134,7 +165,17 @@ export class CheckoutComponent implements OnInit {
      
       this.api.onSuccess('Your Order is Successfully Placed');
       this.router.navigate(['/account-history']);
-    });
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      }
+});
         } else  {
           if(this.total.weight <= 100)  {
           this.api.onFail('Minimum Weight of order should be 100 g' + ' You need ' + (100 - this.total.weight) + 'g more');
