@@ -84,10 +84,12 @@ const customConfig: ShareButtonsConfig = {
 // , canActivate: [KycguardService]
       { path: 'product-details/:id' , component: ProductDetailsComponent},
       { path: 'subsub/:id' , component: SubsubComponent},
+      { path: 'manufacture/:idm/subsub/:id' , component: SubsubComponent},
       { path: 'filternav' , component: FilterNavBarComponent},
-      { path: 'category/:id', component: CategoryComponent},
-      // { path: 'category', component: CategoryComponent},
+      { path: 'manufacture/:id', component: CategoryComponent},
+      { path: 'category', component: CategoryComponent},
       { path: 'subcategory/:id', component: SubcategoryComponent},
+      { path: 'manufacture/:idm/subcategory/:id', component: SubcategoryComponent},
       { path: 'bullion', component: BullianComponent},
       { path: 'bullion/:id', component: BullianMerchantComponent},
     ])

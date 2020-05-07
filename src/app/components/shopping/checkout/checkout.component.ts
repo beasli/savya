@@ -20,7 +20,7 @@ export class CheckoutComponent implements OnInit {
   callshadow:any;
   baseurl= IMAGE+"/product/";
   priceWeight:any;
-  total = {'weight':0,'price':0};
+  total = {'weight':0,'price':0,'making_charges':0};
   final:any;
   disamt: any;
   realFinal:any;
@@ -38,6 +38,7 @@ export class CheckoutComponent implements OnInit {
          this.priceWeight.forEach(element => {
          this.total.price +=element.price*this.products[i].count;
          this.total.weight +=element.weight*this.products[i].count;
+         this.total.making_charges +=element.making*this.products[i].count;
        });}
         console.log(this.priceWeight);
         this.final = this.total.price + this.total.price*0.045;
@@ -135,7 +136,7 @@ export class CheckoutComponent implements OnInit {
       element['productType'] = element['jwellery_type'];
       element['size'] = element['product_size'];
       element['defaultColor'] = element['selectedColor'];
-      element['totalMakingCharge'] = '500';
+      element['totalMakingCharge'] = element['count'] * this.priceWeight[i].making;
       element['productTotal'] = element['count'] * this.priceWeight[i].price;
       
       element.assests.forEach(element2 => {

@@ -611,6 +611,7 @@ calculate(products){
   let price = childObj.price;
   let weight = 0;
   let priceProduct = 0;
+  let making = 0;
   let goldweight;
 
   if(gold)  {
@@ -641,27 +642,31 @@ calculate(products){
     let outcome = this.price(silver.weight,pricesilver.price,silver.options,silver.makingCharge,silver.wastage);
     weight += Number(outcome.weight);
     priceProduct += outcome.price;
+    making += Number(outcome.making_charge);
   }
   if(stone)  {
     let pricestone = price.stone.find(x => x.type == stone.materialType);
     let outcome = this.price(stone.weight,pricestone.price,stone.options,stone.makingCharge,stone.wastage);
     weight += Number(outcome.weight)*0.2;
     priceProduct += outcome.price;
+    making += Number(outcome.making_charge);
   }
   if(diamond)  {
     let pricediamond = price.diamond_master.find(x => x.type == diamond.materialType);
     let outcome = this.price(diamond.weight,pricediamond.price,diamond.options,diamond.makingCharge,diamond.wastage);
     weight += Number(outcome.weight)*0.2;
     priceProduct += outcome.price;
+    making += Number(outcome.making_charge);
   }
   if(platinum)  {
     let priceplatinum = price.platinum.find(x => x.type == platinum.materialType);
     let outcome = this.price(platinum.weight,priceplatinum.price,platinum.options,platinum.makingCharge,platinum.wastage);
     weight += Number(outcome.weight);
     priceProduct += outcome.price;
+    making += Number(outcome.making_charge);
   }
    
-    let data = {'weight':weight,'price':priceProduct,'goldcat':gold.materialType,'goldweight':goldweight};
+    let data = {'weight':weight,'price':priceProduct,'goldcat':gold.materialType,'goldweight':goldweight,'making':making};
     priceWeight.push(data);
   });
   return priceWeight;
@@ -669,19 +674,22 @@ calculate(products){
 
 price(weight, rate, option, makingcharge, wastage = 0, value = 0) {
   let metalprice = 0;
+  let making = 0;
   if  (option == "PerGram") {
       metalprice  =  (Number(rate) + Number(makingcharge)) * Number(weight);
+      making = Number(makingcharge) * Number(weight);
   } else if (option == "Percentage") {
   weight = ((Number(makingcharge) + Number(value)) / 100) * Number(weight);
   metalprice = Number(rate) * weight;
   } else if (option == "Fixed") {
       metalprice = Number(weight) * Number(rate) + Number(makingcharge);
+      making = Number(makingcharge);
   }
   if (wastage != 0) {
     let wasteprice = ((Number(weight) / 100) *  Number(wastage)) * Number(rate);
     metalprice = metalprice + wasteprice;
  }
-  let data = {'weight': weight,'price': metalprice};
+  let data = {'weight': weight,'price': metalprice,'making_charge':making};
   return data;
 }
 setfilter(value)

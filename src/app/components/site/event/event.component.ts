@@ -25,8 +25,7 @@ loader:boolean;
 page:boolean;
 constructor(private api: ApiService, private route: ActivatedRoute,private router:Router, public share: ShareService, library: FaIconLibrary, private winRef: WindowRefService) {
         library.addIcons(...iconpack);
-        this.uid = this.api.getUserInfo();
-        this.uid = this.uid.id;
+        this.uid = this.api.uid;
        // this.event = JSON.parse(this.api.getEvent());
         this.route.params.subscribe(params => {
           this.eid = params.id;

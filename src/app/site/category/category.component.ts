@@ -1,6 +1,6 @@
 import { ApiService } from 'src/app/api/api.service';
 import { CATEGORY, IMAGE, BANNER } from './../../../config';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -15,9 +15,10 @@ export class CategoryComponent implements OnInit {
   callshadow:any;
   img_url=IMAGE;
   Banner:any;
-  constructor(private route: ActivatedRoute,private api: ApiService) { 
+  constructor(private route: ActivatedRoute,private api: ApiService,private router:Router) { 
     this.route.params.subscribe(
       params=>{
+        this.id = params.id;
         if(params.id!=null) {
         this.api.Post(CATEGORY, {manufacture_id: params.id} ).then(data  => {
           this.data = data['data'];
@@ -29,6 +30,15 @@ export class CategoryComponent implements OnInit {
       });
     }
   });
+  }
+
+  go(value){
+    if(this.id){
+      this.router.navigate(['manufacture', this.id, 'subcategory', value]);
+    }
+    else{
+      this.router.navigate(['subcategory', value]);
+    }
   }
 
   ngOnInit(): void {

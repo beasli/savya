@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SUBCATEGORY, CATEGORY, IMAGE } from 'src/config';
-import { ActivatedRoute } from '@angular/router';
+import { SUBCATEGORY, CATEGORY, IMAGE, BANNER } from 'src/config';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api/api.service';
 
 @Component({
@@ -9,12 +9,14 @@ import { ApiService } from 'src/app/api/api.service';
   styleUrls: ['./subcategory.component.css']
 })
 export class SubcategoryComponent implements OnInit {
-  slider_imgs = {};
   data:any;
   category: any;
   img_url=IMAGE;
   callshadow:any;
-  constructor(private api: ApiService, private route: ActivatedRoute) { 
+  id:any;
+  mid:any
+  Banner: any;
+  constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) { 
     this.route.params.subscribe(
       params=>{
         this.api.Post(SUBCATEGORY, {category_id: params.id} ).then(data  => {
@@ -25,8 +27,24 @@ export class SubcategoryComponent implements OnInit {
             this.category = result['category'];
             console.log(this.category);
          }).catch(d=>{console.log(d);});
+
+          if (params.idm) {
+           this.mid = params.idm;
+           this.api.Post(BANNER, {user_id:params.idm, type: 4}).then( data =>
+            {this.Banner = data['data'].filter(slide => slide.place === 'Website');
+          });
+         }
         });
       });
+  }
+
+  go(value){
+    if(this.mid){
+      this.router.navigate(['manufacture', this.mid, 'subsub', value]);
+    }
+    else{
+      this.router.navigate(['subsub', value]);
+    }
   }
 
   ngOnInit(): void {
