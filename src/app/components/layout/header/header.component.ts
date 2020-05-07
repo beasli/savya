@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { Router } from '@angular/router';
-import { NAVIGATION } from 'src/config';
+import { NAVIGATION, IMAGE } from 'src/config';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,7 +10,7 @@ import { NAVIGATION } from 'src/config';
 export class HeaderComponent implements OnInit {
   drop:any;
   message:any="minimum 3 characters are required";
-
+  baseurl = IMAGE;
   searchValue= "";
   logochange: any;
   newurl: string;
@@ -77,6 +77,23 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  close(){
+    this.activ = 0;
+    document.getElementById('close').click();
+  }
+
+  ProductsInCart()
+{
+  let cart=this.api.getCart();
+  if(cart)
+  {
+    return (cart.length);
+  }
+  else
+  {
+    return (0);
+  }
+}
   ngOnInit() {
     this.api.getlogin.subscribe(data => {
       console.log(+data);
