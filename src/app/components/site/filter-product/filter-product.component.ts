@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/cor
 import { ApiService } from 'src/app/api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SUBCATEGORYTYPE, PRODUCTLIST, PRODUCTFILTERMENU, PRODUCTFILTER, ORDERBY } from 'src/config';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-filter-product',
@@ -30,7 +31,7 @@ export class FilterProductComponent implements OnInit {
   drop:any;
   @ViewChild('addclosebutton') addclosebutton;
 @ViewChild('deleteclosebutton') deleteclosebutton;
-  constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
+  constructor(private api: ApiService, private route: ActivatedRoute,private router:Router,private http:HttpClient) {
     this.drop=this.api.drop; 
     this.route.params.subscribe(params => {
       this.subid = params.id;
@@ -68,27 +69,7 @@ export class FilterProductComponent implements OnInit {
   //     console.log(d);
   //   });
   // }
-  temporaryfunction()
-  {
-    this.loader=true;
-    this.page=false;
-    this.api.Get(PRODUCTLIST+"?subsubcategory_id="+this.subid).then(data=>{
-      this.page=true;
-      this.loader=false;
-      this.div=true;
-      this.alert=false
-      this.products = data['data'];
-     // console.log(this.products);
-      this.url = data['url'] + '/';
-      console.log(this.url);
-    }).catch(d=>{
-      this.page=true;
-      this.loader=false;
-      this.div=false;
-       this.alert=true;
-      console.log(d);
-    });
-  }
+  
   getProduct(value)
   {
     this.loader=true;
@@ -107,7 +88,6 @@ export class FilterProductComponent implements OnInit {
        }).catch(d=>{
         this.page=true;
         this.loader=false;
-      this.temporaryfunction();
          this.div=false;
          this.alert=true;
         console.log(d);
