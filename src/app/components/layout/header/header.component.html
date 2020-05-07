@@ -20,18 +20,41 @@
                     <div class="nav-toggle"><span class="nav-back"><i class="icon-arrow-left"></i></span> <span class="nav-title"></span></div>
                     <ul class="nav nav-level-1">
                         <li *ngFor='let s of catall;let i = index'>
-                            <ng-container *ngIf="s.category != 'MACHINERY'"><a id='{{i}}' href="javascript:void(0)">{{s.category}}</a></ng-container>
-                        <ng-container *ngIf="s.category == 'MACHINERY'"><a [routerLink]="['/machinery/', s.category_id]">{{s.category}}</a>
-                        </ng-container><span class="arrow"></span>
+                            <ng-container *ngIf="s.category != 'MACHINERY'">
+                                <a id='{{i}}' href="javascript:void(0)">
+                                    <div class="cart-table-prd-image"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl+'category/' + s.image}}"  alt=""></div>
+                                    {{s.category}}</a></ng-container>
+                        <ng-container *ngIf="s.category == 'MACHINERY'">
+                            <a [routerLink]="['/machinery/', s.category_id]">
+                                <div class="cart-table-prd-image"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl+'category/' + s.image}}"  alt=""></div>
+                                {{s.category}}</a>
+                        </ng-container>
+
+                        <span class="arrow"></span>
                             <ul class="nav-level-2">
                                 <ng-container *ngIf="s.category != 'MACHINERY'">
                                     <li *ngFor='let p of s.subcategory'>
-                                        <a href="javascript:void(0)" [routerLink]="['/subsub/', p.subcategory_id]">{{p.subcategory}}</a>
+                                        <a href="javascript:void(0)" [routerLink]="['/subsub/', p.subcategory_id]">
+                                        <!-- <div class="cart-table-prd-image"><img  src="{{baseurl+'subcategory/' + s.image}}"  alt=""></div> -->
+                                        {{p.subcategory}}</a>
                                     </li>
                                 </ng-container>
                             </ul>
                         </li>
-                        <li><a href="#" target="_blank">Next Day Delivery<span class="menu-label menu-label--color3">HOT!</span></a><span class="arrow"></span></li>
+                        <li class="text-center"><a [routerLink]="['/events/']">Events</a></li>
+                        <li>
+                            <div class="row text-center">
+                                <div class="col-6  border">
+                                    <a [routerLink]="['/about/']">About Us</a>
+                                </div>
+                                <div class="col-6  border">
+                                    <a [routerLink]="['/contact/']">Contact Us</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="text-center">
+                                    <a [routerLink]="['/privacy/']">Our Privacy Policy</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="mobilemenu-bottom">
@@ -53,8 +76,35 @@
                 <div *ngIf='logochange != 1' class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
             <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/SJB_Machinery-1.png" srcset="assets/images/SJB_Machinery-1.png" alt=""></a></div>
                 <div class="hdr-mobile-right">
-                    <div class="hdr-topline-right links-holder"></div>
-                    <div class="minicart-holder"></div>
+                    <div class="hdr-topline-right links-holder">
+
+                        <div class="dropdn dropdn_wishlist @@classes"><a routerLink="/account-wishlist" class="dropdn-link"><i class="icon icon-clock"></i><span>Recently viewed</span></a></div>
+                        <!-- /Header Wishlist -->
+                        
+                        <!-- Header Account -->
+                        <div class="dropdn dropdn_account @@classes"><a  class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
+
+                            
+                      
+                            <div class="dropdn-content">
+                                <div class="container">
+                                    <div id='close' class="dropdn-close">CLOSE</div>
+                                    <ul>
+                                        <li><a routerLink="/account-details" *ngIf="drop"><i class="icon icon-person-fill"></i><span>Profile</span></a></li>
+                                        <li><a routerLink="/kycpending" *ngIf="drop"><span>KYC</span></a></li>
+                                        <li><a routerLink="/login"  *ngIf="!drop"><i class="icon icon-lock"></i><span>Log In</span></a></li>
+                                        <li><a *ngIf="drop"><i class=" icon-signout"></i><span (click)="logout()">Log Out</span></a></li>
+                                        <li><a routerLink="/register" *ngIf="!drop"><i class="icon icon-person-fill-add"></i><span>Register</span></a></li>
+                                        <li><a routerLink="/checkout" *ngIf="drop"><i class="icon icon-check-box"></i><span>Checkout</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Header Account -->
+                    </div>
+                    <div class="minicart-holder">
+                        <div class="minicart"><a routerLink="/cart" class="minicart-link"><i class="icon icon-handbag"></i> <span class="minicart-qty">{{ProductsInCart()}}</span></a></div>
+                    </div>
                 </div>
             </div>
         </div>
