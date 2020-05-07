@@ -90,12 +90,12 @@ export class ProductDetailsComponent implements OnInit {
         this.cart=data['data'];
     }).catch(d => {
       if(d.error.message == 'Unauthenticated.' && d.status == 401){
-        this.api.onFail('Your session is expired please login again');
+       // this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
         this.api.logout();
         setTimeout(() => {
-        this.router.navigate(['/login']);
+      //  this.router.navigate(['/login']);
         },1000);
       } else{
       console.log(d);
@@ -147,6 +147,10 @@ export class ProductDetailsComponent implements OnInit {
     {
       this.api.setGoto();
       this.api.onSuccess('Please Login First to Continue');
+      setTimeout(() => {
+          this.router.navigate(['/login']);
+          },1000);
+        
     }
     else if(this.drop==1)
    {
@@ -275,6 +279,9 @@ export class ProductDetailsComponent implements OnInit {
     {
       this.api.setGoto();
       this.api.onSuccess('Please Login First to Continue');
+      setTimeout(() => {
+          this.router.navigate(['/login']);
+          },1000);
     }
     else if(this.drop==1)
    {

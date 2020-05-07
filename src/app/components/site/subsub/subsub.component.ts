@@ -1,4 +1,4 @@
-import { IMAGE } from './../../../../config';
+import { IMAGE, BANNER } from './../../../../config';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SUBCATEGORYTYPE, CRAUSEL, CATEGORY, SUBCATEGORY } from 'src/config';
@@ -11,7 +11,6 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
   styleUrls: ['./subsub.component.css']
 })
 export class SubsubComponent implements OnInit {
-slider_imgs: any;
 subid:any;
 data:any;
 baseUrl:any;
@@ -50,32 +49,25 @@ slideConfig = {
   manufacturer: any;
   category: any;
   subcategory: any;
+  Banner: any;
   constructor(private route:ActivatedRoute,private api:ApiService,
     private sanitizer: DomSanitizer,
     private router:Router) {
     this.route.params.subscribe(params => {
       this.subid = params.id;
       this.getsubsub();
+      if(params.idm){
+        console.log('idm');
+        this.baseUrl = IMAGE+'banner/';
+        this.api.Post(BANNER, {user_id:params.idm, type: 5}).then( data =>
+          {this.Banner = data['data'].filter(slide => slide.place === 'Website');
+        });
+      }
     });
 
-
-
-    this.api.Get(CRAUSEL).then(data => {
-      console.log(data);
-      data['body'].forEach(childObj => {
-        if (childObj.category === 'app_banners') {
-          this.slider_imgs = childObj['app_banners'].filter(slide => slide.place === 'Website');
-        }
-       if (childObj.category === 'manufacture') {
-          this.manufacturer = childObj['manufacture'];
-        }
-     });
-
-       this.baseUrl = IMAGE+'banner/';
-      // this.url2 = this.url + '/';
-      // this.url3 = data['product_url'] + '/';
-    });
+  
    }
+
    getsubsub() {
     this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subid } ).then(data  => {
       this.page=true;

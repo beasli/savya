@@ -28,9 +28,9 @@
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
                   <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide embed-responsive embed-responsive-16by9">
-                  <img [routerLink]="['/category/', slide.manufacture_id]" src="{{ manufacture + slide.logo }}"  onerror="this.src='../../../../assets/images/logo-bw.png'"  class="embed-responsive-item"  alt="" width="100%">
+                  <img [routerLink]="['/manufacture/', slide.manufacture_id]" src="{{ manufacture + slide.logo }}"  onerror="this.src='../../../../assets/images/logo-bw.png'"  class="embed-responsive-item"  alt="" width="100%">
                   <div class="overlay-effect">
-                      <div [routerLink]="['/category/', slide.manufacture_id]" *ngIf="slide.name" class="overlay-effect-content">
+                      <div [routerLink]="['/manufacture/', slide.manufacture_id]" *ngIf="slide.name" class="overlay-effect-content">
                         <h2>{{ slide.name }}</h2>
                       </div>
                   </div>
