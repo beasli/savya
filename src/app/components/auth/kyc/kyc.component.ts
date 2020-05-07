@@ -159,19 +159,15 @@ export class KycComponent implements OnInit {
     this.loading=true;
     this.sign=false;
     this.api.Post(USERKYC,{
-                        aadhar:this.aadhar,
+                        adhar_fornt:this.adhar_front,
                         adhar_back:this.adhar_back,
-                        gst_back:this.gst_back,
-                        gst_no:this.gst,
-                        pan_no:this.pan,
-                        
-                        mobile_no:this.mob,
-                         gst_front:this.gst_front,
-                         adhar_fornt:this.adhar_front,
-                         pan_doc:this.pan_doc,
-                        
-                        
-                        visiting_doc:this.visiting_front}).then(data=>{
+                      //  visiting_front:this.visiting_front,
+                      //    visiting_back:this.visiting_back,
+                        pan_front:this.pan_doc,
+                        gst_front:this.gst_front,
+                         gst_back:this.gst_back,
+                          mobile_no:Number(this.mob)
+                      }).then(data=>{
               console.log(data);
               this.alert=true;
               this.message="Successful "
