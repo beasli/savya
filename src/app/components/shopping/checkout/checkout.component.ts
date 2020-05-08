@@ -3,7 +3,10 @@ import { VERIFY, CHECKOUT } from './../../../../config';
 import { Component, OnInit } from '@angular/core';
 import { GETADDRESS, CARTVIEW, IMAGE } from 'src/config';
 import { ApiService } from 'src/app/api/api.service';
-
+import { ShareService } from '@ngx-share/core';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { WindowRefService } from 'src/app/window-ref/window-ref.service';
+import { iconpack } from 'src/icons';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -25,8 +28,12 @@ export class CheckoutComponent implements OnInit {
   disamt: any;
   realFinal:any;
   feedback= '';
-  constructor(private api:ApiService,private router:Router) { 
-    this.uid=this.api.uid;
+  paymnetmode:any;
+  transaction: any;
+  constructor(private api:ApiService,private router:Router,
+    public share: ShareService, library: FaIconLibrary, private winRef: WindowRefService) { 
+      library.addIcons(...iconpack);
+      this.uid=this.api.uid;
 
     this.api.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
       this.products=data['data'];
@@ -107,8 +114,7 @@ export class CheckoutComponent implements OnInit {
     this.clicked = id;
   }
 
-  createjson(){
-    if(this.total.weight >= 100 && this.currentAddress){
+  createjson(payment='cod',transaction=''){
     let masterjson = {}
     let childjson = {};
     childjson['sgst'] = (this.realFinal*0.015).toFixed(2);
@@ -118,8 +124,8 @@ export class CheckoutComponent implements OnInit {
     childjson['cgst_per'] = 1.5.toFixed(1);
     childjson['igst_per'] = 1.5.toFixed(1);
     this.feedback ? childjson['feedback'] = this.feedback : childjson['feedback'] = '';
-    childjson['transaction_id'] = '';
-    childjson['paymentMode'] = 'cod';
+    childjson['transaction_id'] = transaction;
+    childjson['paymentMode'] = payment;
     this.disamt ? childjson['discount_amount'] = this.disamt.toFixed(2) : childjson['discount_amount'] = '' ;
     this.discountamount ? childjson['coupanCode'] = this.discountamount.coupan : childjson['coupanCode'] = '';
     childjson['userid'] = this.api.uid.toString();
@@ -166,6 +172,7 @@ export class CheckoutComponent implements OnInit {
      
       this.api.onSuccess('Your Order is Successfully Placed');
       this.router.navigate(['/account-history']);
+      this.api.Cart.emit("cartUpdate"+Date.now());
     }).catch(d=>{
       if(d.error.message == 'Unauthenticated.' && d.status == 401){
         this.api.onFail('Your session is expired please login again');
@@ -175,16 +182,10 @@ export class CheckoutComponent implements OnInit {
         setTimeout(() => {
         this.router.navigate(['/login']);
         },1000);
+      } else{
+        document.getElementById('openmodalbutton2').click();
       }
 });
-        } else  {
-          if(this.total.weight <= 100)  {
-          this.api.onFail('Minimum Weight of order should be 100 g' + ' You need ' + (100 - this.total.weight) + 'g more');
-          }
-          if(!this.currentAddress)  {
-            this.api.onFail('Please Add an Address First');
-            }
-        }
   }
 
   setadd()  {
@@ -195,6 +196,71 @@ export class CheckoutComponent implements OnInit {
   addAddress(){
     this.api.setGoto();
     this.router.navigate(['/add-address']);
+  }
+
+  register(){
+    if(this.total.weight >= 100 && this.currentAddress){
+      if(this.paymnetmode=='cod'){
+        this.createjson();
+      } else if(this.paymnetmode=='online'){
+        this.payWithRazor();
+      } else{
+        this.api.onFail('Please Choose a Proper Payment method');
+      }
+    } else  {
+          if(this.total.weight <= 100)  {
+          this.api.onFail('Minimum Weight of order should be 100 g' + ' You need ' + (100 - this.total.weight) + 'g more');
+          }
+          if(!this.currentAddress)  {
+            this.api.onFail('Please Add an Address First');
+            }
+        }
+  }
+
+  payment(value){
+    if(value=='no'){
+      console.log('No payment MODE');
+    } else{
+      console.log(value);
+      this.paymnetmode = value;
+    }
+
+  }
+
+  payWithRazor() {
+    const options: any = {
+      key: 'rzp_test_Dmzimsnc9gzT7E',
+      amount: (this.final.toFixed(2))*100, // amount should be in paise format to display Rs 1255 without decimal point
+      currency: 'INR',
+      name: 'Savya Jewels Business', // company name or product name
+      description: '',  // product description
+      image: 'http://savyajewelsbusiness.com/assets/images/savyalogoblack.png', // company logo or product image
+    //  order_id: val, // order_id created by you in backend
+      modal: {
+        // We should prevent closing of the form when esc key is pressed.
+        escape: false,
+      },
+      notes: {
+        // include notes if any
+      },
+      theme: {
+        color: '#c59f59'
+      }
+    };
+    options.handler = ((response, error) => {
+      options.response = response;
+      this.transaction = response.razorpay_payment_id;
+       this.createjson('online',response.razorpay_payment_id)
+      console.log(response);
+      console.log(options);
+      // call your backend api to verify payment signature & capture transaction
+    });
+    options.modal.ondismiss = (() => {
+      // handle the case when user closes the form while transaction is in progress
+      console.log('Transaction cancelled.');
+    });
+    const rzp = new this.winRef.nativeWindow.Razorpay(options);
+    rzp.open();
   }
 
   ngOnInit() {

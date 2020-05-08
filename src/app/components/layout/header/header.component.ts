@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NAVIGATION, IMAGE } from 'src/config';
 @Component({
   selector: 'app-header',
@@ -16,10 +16,13 @@ export class HeaderComponent implements OnInit {
   newurl: string;
   activ = 0;
   catall: any;
-  constructor(private api:ApiService ,private router:Router) {
+  constructor(private api:ApiService ,private router:Router,private route:ActivatedRoute) {
     this.drop=this.api.drop; 
    console.log(this.drop);
 
+   router.events.subscribe((val) => {
+     this.close();
+   });
    
   this.api.Get(NAVIGATION).then(data => {
     this.catall = data['data'];});
@@ -79,6 +82,7 @@ export class HeaderComponent implements OnInit {
 
   close(){
     this.activ = 0;
+    
     document.getElementById('close').click();
   }
 
@@ -99,14 +103,6 @@ export class HeaderComponent implements OnInit {
       console.log(+data);
       this.drop=data;
       console.log(this.drop);
-      this.mobile();
-      setTimeout(() => {
-        document.getElementById('0').click();
-        },250);
-        setTimeout(() => {
-          document.getElementById('0').click();
-          },250);
-      this.mobile();
      });
      
   }

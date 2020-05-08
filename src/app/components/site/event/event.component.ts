@@ -23,6 +23,7 @@ eid: any;
 url: any;
 loader:boolean;
 page:boolean;
+  transaction: any;
 constructor(private api: ApiService, private route: ActivatedRoute,private router:Router, public share: ShareService, library: FaIconLibrary, private winRef: WindowRefService) {
         library.addIcons(...iconpack);
         this.uid = this.api.uid;
@@ -62,17 +63,17 @@ register() {
         setTimeout(() => {
         this.router.navigate(['/login']);
         },1000);
-      } else{console.log(d)}
+      } else{
+        console.log(d);
+        document.getElementById('openmodalbutton2').click();;
+        
+      }
     });
   } else {
     this.payWithRazor(this.event.amount*100);
   }
 }
 
-shareservice() {
-  console.log("share method called");
-
-}
   ngOnInit(){
     this.loader=true;
     this.page=false;
@@ -108,7 +109,7 @@ shareservice() {
       formData.append('event_type', this.event.event_type);
       formData.append('event_id', this.event.id.toString());
       formData.append('transaction_no', response.razorpay_payment_id);
-
+      this.transaction = response.razorpay_payment_id;
       this.api.Post(MYEVENTS, formData).then(data => {
         console.log(data);
       }).catch(d=>{
@@ -120,7 +121,7 @@ shareservice() {
           setTimeout(() => {
           this.router.navigate(['/login']);
           },1000);
-        } else{console.log(d)}
+        } else{document.getElementById('openmodalbutton2').click();}
       });
       console.log(response);
       console.log(options);
