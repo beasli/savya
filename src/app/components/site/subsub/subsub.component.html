@@ -1,6 +1,9 @@
 
  <!-- BN Slider 1 -->
+ <ng-container *ngIf='Banner'>
  <app-slider [slider_imgs] = 'Banner' [url] = 'baseUrl'></app-slider>
+</ng-container>
+
  <!-- //BN Slider 1 -->
 <div class="subsub-listing-page" *ngIf="page">
     <div class="container">
