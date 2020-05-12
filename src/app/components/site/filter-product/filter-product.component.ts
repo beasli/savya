@@ -77,14 +77,22 @@ export class FilterProductComponent implements OnInit {
     this.f=this.api.getfilter();
     //{subsubcategory_id: value } 
     this.api.Post(PRODUCTLIST+"?subsubcategory_id="+value,JSON.stringify(this.f)).then(data  => {
+      console.log(data);
       this.page=true;
       this.loader=false;
       this.div=true;
-      this.alert=false
-      this.products = data['data'];
-     // console.log(this.products);
-      this.url = data['url'] + '/';
-      console.log(this.url);
+      if(data['data'].length>0)
+      {
+        this.alert=false
+        this.products = data['data'];
+        this.url = data['url'] + '/';
+      }
+     
+     else if(data['data'].length==0)
+     {
+       this.alert=true;
+     }
+      //console.log(this.url);
        }).catch(d=>{
         this.page=true;
         this.loader=false;

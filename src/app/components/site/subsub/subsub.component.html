@@ -24,5 +24,10 @@
             </div>
         </div>
     </div>
+    <div *ngIf="!data.length">
+        <ngb-alert [dismissible]="false" >
+            <strong>No subsubcategory found</strong> 
+        </ngb-alert>
+    </div>
 </div>
 <div style="padding: 200px;" *ngIf="loader"><app-loader  ></app-loader></div>
