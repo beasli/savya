@@ -121,7 +121,7 @@
                                         <div class="option-label">Total Silver Price: Rs. {{totalsilver}}</div>
                                     </div>
 
-                                    <div *ngIf=(diamond) class="choose-diamond">
+                                    <div *ngIf=(diamond.length) class="choose-diamond">
                                         <label for="id_select"> Diamond: </label>
                                         <div class="diamond-selectbox">
                                             <select class="product-size-select">
@@ -129,7 +129,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div *ngIf=(diamond)  class="prd-size">
+                                    <div *ngIf=(diamond.length)  class="prd-size">
                                         <span class="option-label">Diamond Color:</span>
                                             <div class="radio-group">
                                                 <ng-container *ngFor='let s of diamondcolour;let i = index'>
@@ -138,7 +138,7 @@
                                                 </ng-container>
                                             </div>
                                     </div>
-                                    <div *ngIf=(diamond)  class="prd-size">
+                                    <div *ngIf=(diamond.length)  class="prd-size">
                                         <label for="id_select"> Diamond Clarity:</label>
                                             <div class="radio-group">
                                                 <ng-container *ngFor='let s of diamondclarity;let i = index'>

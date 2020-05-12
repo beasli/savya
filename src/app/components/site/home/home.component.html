@@ -3,12 +3,9 @@
         <a href="javascript:void(0)"><img src="assets/images/WhatsApp.svg"/></a>
     </div>
     <!-- BN Slider 1 -->
-    <app-slider [slider_imgs] = 'slider_imgs' [url] = 'url' *ngIf="page"></app-slider>
+    <app-slider [slider_imgs] = 'slider_imgs' [url] = 'url'></app-slider>
     <!-- //BN Slider 1 -->
-    <!-- <app-testimonials [input] = 'events'  [url] = 'url2'></app-testimonials> -->
-     <!-- Product Holder -->
-     <!-- <app-best-seller-product [url3] = 'url3' [mostselling] = 'mostselling'></app-best-seller-product> -->
-     <!--/Product Holder -->
+   
 
     <!-- live rates area-->
     <app-liverates *ngIf="page"></app-liverates>
@@ -37,30 +34,6 @@
                   </div>
                   </ngx-slick-carousel>
             </div>
-       </div>
-    <!--Company name slider-->
-    <!--<app-testimonials [slides]="4" [heading] = '"Company Logo"' [redirect] = '"N"' [input] = 'company_slider'  [url] = '"assets/images/"'></app-testimonials>-->
-   
-   <!-- <section class="company-name-slider py-3 py-md-6">
-        <div class="company-logo">
-            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel">
-            <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
-              <img src="assets/images/IGI_Expo.jpg" class="embed-responsive-item"  alt="" width="100%" >
-            </div>
-            <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
-              <img src="assets/images/download.png" class="embed-responsive-item"  alt="" width="100%">
-            </div>
-            <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
-              <img src="assets/images/bvclogo.png" class="embed-responsive-item"  alt="" width="100%" >
-            </div>
-            <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9">
-              <img src="assets/images/mtv_live_stream.png" class="embed-responsive-item"  alt="" width="100%">
-            </div>
-            </ngx-slick-carousel>
-      </div>
-    </section> -->
-    <!--Company name slider-->
-
     <!--youtube-video-->
     <section class="youtube-video py-3 py-md-6" *ngIf="page">
         <div class="container">

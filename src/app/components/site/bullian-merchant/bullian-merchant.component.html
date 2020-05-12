@@ -3,7 +3,7 @@
     <div class="text-center" style='padding:3vh;'>
         <h2>Our Bullion Merchant</h2>
     </div>
-    <div class="card-group">
+    <div *ngIf='merchant' class="card-group">
         <div class="row">
             <div *ngFor="let slide of merchant" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div class="card  border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
@@ -23,5 +23,10 @@
             </div>
         </div>
         </div>
+    </div>
+    <div  *ngIf="!merchant.length">
+        <ngb-alert [dismissible]="false" >
+            <strong>No Bullian merchant in this city</strong> 
+        </ngb-alert>
     </div>
 </div>
