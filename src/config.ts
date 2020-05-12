@@ -70,7 +70,7 @@ export const CATEGORY = 'category'; //done
 export const SUBCATEGORY = 'subcategory'; //done
 export const SUBCATEGORYTYPE='subsubcategory'; //done
 // export const PRODUCTLIST = 'product/list';
-export const PRODUCTLIST = 'product';
+export const PRODUCTLIST = 'productlist';
 export const PRODUCTFILTERMENU='product/menu/edit';
 export const PRODUCTFILTER = 'search/filter';
 export const ORDERBY = 'product/list?subsubcategory_id=';

@@ -18,4 +18,9 @@
         </div>
         </div>
     </div>
+    <div *ngIf="!data.length">
+        <ngb-alert [dismissible]="false" >
+            <strong>No category found</strong> 
+        </ngb-alert>
+    </div>
 </div>

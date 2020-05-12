@@ -7,13 +7,20 @@
     <div class="card-deck">
         <div class="row">
             <div *ngFor="let slide of data" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <div (click)='go(slide.id)' class="card border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
-                <img class="card-img-top" style="min-width: 100%;max-height:25vh;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">{{slide.subcategory}}</h5>
-                  <p [innerHtml]='slide.description' class="card-text"></p>
-                 </div>
-              </div>
-        </div>
+                <div (click)='go(slide.id)' class="card border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
+                    <img class="card-img-top" style="min-width: 100%;max-height:25vh;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">{{slide.subcategory}}</h5>
+                    <p [innerHtml]='slide.description' class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+        
+         </div>
     </div>
-</div>
+    <div *ngIf="!data.length">
+        <ngb-alert [dismissible]="false" >
+            <strong>No subcategory found</strong> 
+        </ngb-alert>
+    </div>
+ </div>   
