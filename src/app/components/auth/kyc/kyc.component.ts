@@ -167,6 +167,7 @@ export class KycComponent implements OnInit {
       this.loader=false;
        console.log(data);
        this.api.onSuccess("successfully done KYC");
+       this.router.navigate(['/home']);
      }).catch(d=>{
       this.page=true;
       this.loader=false;
