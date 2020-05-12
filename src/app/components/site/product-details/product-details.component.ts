@@ -1,4 +1,4 @@
-import { PRICELIST, CARTVIEW, IMAGE } from './../../../../config';
+import { PRICELIST, CARTVIEW, IMAGE, CARTADD } from './../../../../config';
 import { ApiService } from 'src/app/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -199,7 +199,28 @@ export class ProductDetailsComponent implements OnInit {
   }
   addToCart(s)
   {
-    this.api.addToCart(s);
+    document.getElementById("openModalButton").click();
+    this.api.Post(CARTADD, s).then(data=>{
+      console.log(data);
+      this.api.updateCart();
+      this.api.Cart.emit("cartUpdated"+Date.now());
+      document.getElementById("mClose").click();
+    this.api.onSuccess('Product Successfully added to the cart');
+    //  localStorage.setItem('cart',JSON.stringify(data));  
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
+      console.log(d);
+      this.api.Cart.emit("cartUpdated"+Date.now());
+      }      
+    });
   }
    getproduct() {
      this.loader=true;
@@ -233,14 +254,15 @@ export class ProductDetailsComponent implements OnInit {
         }
         if (this.assets) {
           this.stonelist = this.assets.filter(x => x.metrial_type == "Stone");
-          this.getstone(this.stonelist[0]);
+         this.stonelist.length ? this.getstone(this.stonelist[0]):false;
         }
         if (this.assets) {
           this.diamond = this.assets.filter(x => x.metrial_type == "Diamond");
-          this.diamondcolour = this.diamond[0].color.split(',');
+          if(this.diamond.length){
+           this.diamondcolour = this.diamond[0].color.split(',');
           this.diamondclarity = this.diamond[0].clarity.split(',');
           this.defaultdiamond = this.diamond[0].default_color_clarity.split('/');
-          this.diamondprice();
+          this.diamondprice();}
         }
         if (this.assets) {
           this.getplatinum();
@@ -252,12 +274,13 @@ export class ProductDetailsComponent implements OnInit {
   
               let result = data['data'].find(x => x.id == this.data['subcategory_id']);
               this.subcategory = result['subcategory'];
-  
+              console.log(data);
+              console.log(this.subcategory);
               this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.data['subcategory_id']} ).then(data  => {
-  
+                console.log(data);
                   let result = data['data'].find(x => x.id == this.data['subsubcategory_id']);
                   this.subsubcategory = result['title'];
-  
+                  console.log(this.subsubcategory);
               }).catch(d=>{console.log(d);});
        }).catch(d=>{console.log(d);});
     }).catch(d=>{console.log(d);});
@@ -265,7 +288,7 @@ export class ProductDetailsComponent implements OnInit {
     
 
     this.api.Post(CATEGORY, {} ).then(data  => {
-     let result = data['data'].find(x => x.id == this.data['category']);
+     let result = data['data'].find(x => x.id == this.data['category_id']);
      this.category = result['category'];
   }).catch(d=>{console.log(d);});
 }
@@ -368,7 +391,7 @@ export class ProductDetailsComponent implements OnInit {
     temparray.push(j);
     j = {};
     j['data'] = temparray;
-    this.api.addToCart(j);
+    this.addToCart(j);
     console.log(this.loading);
     let check=this.checkCart(this.pid);
     if(check==true)
@@ -421,7 +444,7 @@ export class ProductDetailsComponent implements OnInit {
 
    getplatinum() {
     this.platinum = this.assets.find(x => x.metrial_type == "Platinum");
-    if (this.sizes) {
+   if(this.platinum) {if (this.sizes) {
       let increament = this.selectedsize - this.defaultsize;
       increament = increament * 0.2;
       this.platinum.weight = (Number(this.platinum.weight) + increament).toFixed(2);
@@ -430,12 +453,12 @@ export class ProductDetailsComponent implements OnInit {
     this.totalplat = this.api.price(this.platinum.weight,this.priceplat.price,this.platinum.charges_option,this.platinum.making_charge,this.platinum.wastage);
     this.totalplat = Math.round(this.totalplat.price);
     this.total();
-    this.grossweight();
+    this.grossweight();}
   }
 
   getsilver() {
     this.silver = this.assets.find(x => x.metrial_type == "Silver");
-    if (this.sizes) {
+    if (this.silver) {if (this.sizes) {
       let increament = this.selectedsize - this.defaultsize;
       increament = increament * 0.2;
       this.silver.weight = (Number(this.silver.weight) + increament).toFixed(2);
@@ -444,7 +467,7 @@ export class ProductDetailsComponent implements OnInit {
     this.totalsilver = this.api.price(this.silver.weight,this.pricesilver.price,this.silver.charges_option,this.silver.making_charge,this.silver.wastage);
     this.totalsilver = Math.round(this.totalsilver.price);
     this.total();
-    this.grossweight();
+    this.grossweight();}
   }
    colorClarity(value0, value1) {
      value0 ? this.defaultdiamond[0] = value0 : this.defaultdiamond[1] = value1;

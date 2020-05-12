@@ -28,11 +28,12 @@ export class ApiService {
   goto:any;
   
   constructor(public http: HttpClient,private service: NotificationsService, private router: Router) {
+    console.log('I AM CONSTRUCTOR');
     if(localStorage.getItem('savya_userInfo'))
     {
      let u=this.getUserInfo();
     this.uid=u.id;
-    console.log(this.uid);
+    console.log("userid"+this.uid);
    }
     // console.log("userid"+this.uid);
     // if(this.getMobileNo())
@@ -186,7 +187,7 @@ export class ApiService {
       } else{
       console.log(d);
       localStorage.removeItem('orders');}
-    })
+    });
   }
 
   onSuccess(message){

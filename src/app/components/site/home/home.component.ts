@@ -82,7 +82,8 @@ export class HomeComponent implements OnInit {
         this.url = IMAGE+"banner/";
         this.event = IMAGE+"events/";
         this.product = IMAGE+"product/";
-        this.manufacture = IMAGE+"manufacture/";
+        this.manufacture = IMAGE+"users/";
+        console.log(this.manufacture);
       }).catch(d=>{
         console.log(d);
         document.getElementById("openModalButton").click();
