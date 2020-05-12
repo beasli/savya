@@ -187,7 +187,7 @@ export class ApiService {
       } else{
       console.log(d);
       localStorage.removeItem('orders');}
-    })
+    });
   }
 
   onSuccess(message){
