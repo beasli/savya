@@ -73,7 +73,13 @@ const customConfig: ShareButtonsConfig = {
     SlickCarouselModule,
     BrowserAnimationsModule,
     NgxImageZoomModule,
-    SimpleNotificationsModule.forRoot(),
+    SimpleNotificationsModule.forRoot({
+      position:["middle","center"],
+       timeOut: 3000,
+       showProgressBar: true,
+       pauseOnHover: true,
+       clickToClose: true
+     }),
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},

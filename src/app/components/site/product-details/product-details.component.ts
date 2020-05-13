@@ -76,6 +76,7 @@ export class ProductDetailsComponent implements OnInit {
   metalcolour: any;
   goldlist: any;
   stonelist: any;
+  diamondlist: any;
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
     this.drop=this.api.drop;
     this.route.params.subscribe(params => {
@@ -257,11 +258,12 @@ export class ProductDetailsComponent implements OnInit {
          this.stonelist.length ? this.getstone(this.stonelist[0]):false;
         }
         if (this.assets) {
-          this.diamond = this.assets.filter(x => x.metrial_type == "Diamond");
-          if(this.diamond.length){
-           this.diamondcolour = this.diamond[0].color.split(',');
-          this.diamondclarity = this.diamond[0].clarity.split(',');
-          this.defaultdiamond = this.diamond[0].default_color_clarity.split('/');
+          this.diamondlist = this.assets.filter(x => x.metrial_type == "Diamond");
+          if(this.diamondlist.length){
+            this.diamond = this.diamondlist[0]
+           this.diamondcolour = this.diamond.color.split(',');
+          this.diamondclarity = this.diamond.clarity.split(',');
+          this.defaultdiamond = this.diamond.default_color_clarity.split('/');
           this.diamondprice();}
         }
         if (this.assets) {
@@ -310,7 +312,7 @@ export class ProductDetailsComponent implements OnInit {
    {
     let j = {};
     let temparray = [];
-    if (this.gold!=null) {
+    if (this.gold) {
         j['option'] = this.gold.charges_option;
         j['weight'] = this.gold.weight;
         j['wastage'] = this.gold.wastage;
@@ -322,15 +324,15 @@ export class ProductDetailsComponent implements OnInit {
         temparray.push(j);
         j = {};
       }
-    if (this.diamond!=null) {
-      j['option'] = this.diamond[0].charges_option;
-      j['weight'] = this.diamond[0].weight;
-      j['wastage'] = this.diamond[0].wastage;
+    if (this.diamond) {
+      j['option'] = this.diamond.charges_option;
+      j['weight'] = this.diamond.weight;
+      j['wastage'] = this.diamond.wastage;
         j['product_size'] = this.selectedsize;
       j['materialType'] = this.defaultdiamond[0] + '/' + this.defaultdiamond[1];
       j['productId'] = this.pid;
       j['metal'] = 'Diamond';
-      j['makingCharge'] = this.diamond[0].making_charge;
+      j['makingCharge'] = this.diamond.making_charge;
       temparray.push(j);
       j = {};
     }
@@ -346,7 +348,7 @@ export class ProductDetailsComponent implements OnInit {
       temparray.push(j);
       j = {};
     }
-    if (this.stone!=null) {
+    if (this.stone) {
       j['option'] = this.stone.charges_option;
       j['weight'] = this.stone.weight;
       j['materialType'] = this.stone.jwellery_size;
@@ -477,7 +479,7 @@ export class ProductDetailsComponent implements OnInit {
   diamondprice()  {
     let name = this.defaultdiamond[0] + '/' + this.defaultdiamond[1];
     this.pricediamond = this.pricelist.diamond_master.find(x => x.type == name);
-    this.totaldiamond = this.api.price(this.diamond[0].weight,this.pricediamond.price,this.diamond[0].charges_option,this.diamond[0].making_charge);
+    this.totaldiamond = this.api.price(this.diamond.weight,this.pricediamond.price,this.diamond.charges_option,this.diamond.making_charge);
     this.totaldiamond = Math.round(this.totaldiamond.price);
     this.total();
     this.grossweight();
@@ -492,7 +494,7 @@ export class ProductDetailsComponent implements OnInit {
       weight = weight + Number(this.platinum.weight);
     }
     if (this.diamond) {
-      weight = weight + Number(this.diamond[0].weight * 0.2);
+      weight = weight + Number(this.diamond.weight * 0.2);
     }
     if (this.stone) {
       weight = weight + Number(this.stone.weight * 0.2);

@@ -121,7 +121,7 @@
                                         <div class="option-label">Total Silver Price: Rs. {{totalsilver}}</div>
                                     </div>
 
-                                    <div *ngIf=(diamond.length) class="choose-diamond">
+                                    <div *ngIf=(diamond) class="choose-diamond">
                                         <label for="id_select"> Diamond: </label>
                                         <div class="diamond-selectbox">
                                             <select class="product-size-select">
@@ -129,7 +129,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div *ngIf=(diamond.length)  class="prd-size">
+                                    <div *ngIf=(diamond)  class="prd-size">
                                         <span class="option-label">Diamond Color:</span>
                                             <div class="radio-group">
                                                 <ng-container *ngFor='let s of diamondcolour;let i = index'>
@@ -138,7 +138,7 @@
                                                 </ng-container>
                                             </div>
                                     </div>
-                                    <div *ngIf=(diamond.length)  class="prd-size">
+                                    <div *ngIf=(diamond)  class="prd-size">
                                         <label for="id_select"> Diamond Clarity:</label>
                                             <div class="radio-group">
                                                 <ng-container *ngFor='let s of diamondclarity;let i = index'>
@@ -149,12 +149,12 @@
                                     </div>
 
                                     <div *ngIf='defaultdiamond' class="about-product">
-                                        <div>Name: {{diamond[0].jwellery_size}}</div>
-                                        <div *ngIf=(diamond[0].weight)>Weight:  {{diamond[0].weight}} ct</div>
-                                        <div *ngIf=(diamond[0].weight) class="option-label">Diamond Price:Rs. {{pricediamond.price}}/ct</div>
-                                        <div *ngIf=(diamond[0].quantity) class="option-label">No of Diamond:  {{diamond[0].quantity}} pc</div>
-                                        <div *ngIf=(diamond[0].making_charge) class="option-label">Making Charges: Rs. {{diamond[0].making_charge}}</div>
-                                        <div *ngIf=(diamond[0].charges_option) class="option-label">Charges Type:  {{diamond[0].charges_option}}</div> 
+                                        <div>Name: {{diamond.jwellery_size}}</div>
+                                        <div *ngIf=(diamond.weight)>Weight:  {{diamond.weight}} ct</div>
+                                        <div *ngIf=(diamond.weight) class="option-label">Diamond Price:Rs. {{pricediamond.price}}/ct</div>
+                                        <div *ngIf=(diamond.quantity) class="option-label">No of Diamond:  {{diamond.quantity}} pc</div>
+                                        <div *ngIf=(diamond.making_charge) class="option-label">Making Charges: Rs. {{diamond.making_charge}}</div>
+                                        <div *ngIf=(diamond.charges_option) class="option-label">Charges Type:  {{diamond.charges_option}}</div> 
                                         <div>Diamond Total:Rs. {{totaldiamond}} </div>
                                         <div>Diamond Color/Clarity: {{this.defaultdiamond[0] + '/' + this.defaultdiamond[1]}}</div>
                                     </div>

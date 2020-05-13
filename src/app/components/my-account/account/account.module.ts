@@ -33,7 +33,13 @@ import { OffersComponent } from '../offers/offers.component';
     FormsModule,
     NgbModule,
     BrowserAnimationsModule,
-    SimpleNotificationsModule.forRoot(),
+    SimpleNotificationsModule.forRoot({
+      position:["middle","center"],
+       timeOut: 3000,
+       showProgressBar: true,
+       pauseOnHover: true,
+       clickToClose: true
+     }),
     ReactiveFormsModule,
     SiteModule,
     RouterModule.forChild([

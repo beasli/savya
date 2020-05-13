@@ -30,6 +30,7 @@ export class CheckoutComponent implements OnInit {
   feedback= '';
   paymnetmode:any;
   transaction: any;
+  totalw:any;
   constructor(private api:ApiService,private router:Router,
     public share: ShareService, library: FaIconLibrary, private winRef: WindowRefService) { 
       library.addIcons(...iconpack);
@@ -47,6 +48,7 @@ export class CheckoutComponent implements OnInit {
          this.total.weight +=element.weight*this.products[i].count;
          this.total.making_charges +=element.making*this.products[i].count;
        });}
+       this.totalw = this.total.weight.toFixed(2); 
         console.log(this.priceWeight);
         this.final = this.total.price + this.total.price*0.045;
         this.realFinal = this.final;

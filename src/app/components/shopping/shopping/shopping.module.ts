@@ -27,7 +27,13 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     SiteModule,
     BrowserAnimationsModule,
-    SimpleNotificationsModule.forRoot(),
+    SimpleNotificationsModule.forRoot({
+      position:["middle","center"],
+       timeOut: 3000,
+       showProgressBar: true,
+       pauseOnHover: true,
+       clickToClose: true
+     }),
     RouterModule.forChild([
       { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService,CheckoutService]},
       { path: 'cart', component: CartComponent, canActivate: [AuthGuardService]},
