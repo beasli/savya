@@ -17,7 +17,24 @@
         <button type="hidden" id='mClose' class="close" data-dismiss="modal" aria-label="Close"></button>
         <div class="modal-body text-center">
             <app-loader></app-loader>
-           <h3><strong>Please wait...</strong></h3> 
+           <h3><strong>{{message}}</strong></h3> 
+        </div> 
+      </div>
+    </div>
+</div>
+
+
+<button id="openModalButton2" [hidden]="true" data-toggle="modal" data-target="#exampleModal2">Open Modal</button>
+
+ <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <button id='mClose' class="close" data-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-body text-center">
+           <h3><strong>{{message}}</strong></h3> 
+           <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="close">Close</button>
+          </div>
         </div> 
       </div>
     </div>
@@ -101,8 +118,8 @@
                                     <div *ngIf='gold'>
                                         <div *ngIf=(gold.weight)>Gold (weight):  {{gold.weight}} gram</div>
 
-                                        <div *ngIf="gold.charges_option != 'Percentage'" class="option-label">Gold Rate: Rs. {{pricegold.price}} Per gram</div>
-                                        <div *ngIf="gold.charges_option == 'Percentage'" class="option-label">Gold Rate: Rs. {{pricegold2.price}} Per gram</div>
+                                        <div *ngIf="gold.charges_option != 'Percentage' && pricegold" class="option-label">Gold Rate: Rs. {{pricegold.price}} Per gram</div>
+                                        <div *ngIf="gold.charges_option == 'Percentage' && pricegold2" class="option-label">Gold Rate: Rs. {{pricegold2.price}} Per gram</div>
                                         <div *ngIf=(gold.wastage) class="option-label">Gold wastage:  {{gold.wastage}} %</div>
                                         <div *ngIf="gold.charges_option == 'Percentage'" class="option-label">Gold wastage:  {{gold.making_charge}} %</div>
                                         <div *ngIf="gold.charges_option != 'Percentage'" class="option-label">Making Charges: Rs.  {{gold.making_charge}}</div>
