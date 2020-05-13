@@ -17,7 +17,7 @@
         <button type="hidden" id='mClose' class="close" data-dismiss="modal" aria-label="Close"></button>
         <div class="modal-body text-center">
             <app-loader></app-loader>
-           <h3><strong>{{message}}</strong></h3> 
+           <h3><strong>Please Wait...</strong></h3> 
         </div> 
       </div>
     </div>
@@ -71,7 +71,7 @@
                             <img [src]="url+ 'certificate/' + certificate[0].image" onerror="this.src='../../../../assets/images/logo-bw.png'"> </div>
                         
                             <h3 class="h2-style">Manufactured by:</h3>
-                            <img [src]="url+ 'manufacture/' + data['image']" onerror="this.src='../../../../assets/images/logo-bw.png'"><h3 class="h2-style">{{data.company_name}}</h3>
+                            <img [src]="url+ 'users/' + data['image']" onerror="this.src='../../../../assets/images/logo-bw.png'"><h3 class="h2-style">{{data.company_name}}</h3>
                         </div>
                     </div>
                     <div class="col-md">
