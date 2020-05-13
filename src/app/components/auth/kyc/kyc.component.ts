@@ -118,7 +118,15 @@ export class KycComponent implements OnInit {
     }
     else if(e.length==15)
     {
-      this.gst_check=false;
+      var pattern = new RegExp("([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})");
+      if(pattern.test(e)){
+        this.gst_check=false;
+        console.log(true);
+      }
+      else{
+        this.gst_check=true;
+      }
+      
     }
     else{
       this.gst_check=true;
@@ -128,13 +136,23 @@ export class KycComponent implements OnInit {
   {
     
     this.aadhar=e;
+    console.log(e.length);
     if(e.length==0)
     {
         this.adhar_check=false;
     }
-    else if(e.length==12)
+    else if(e.length==14)
     {
-      this.adhar_check=false;
+      
+      var pattern = new RegExp("\\d{4}\\s\\d{4}\\s\\d{4}");
+      if(pattern.test(e)){
+        this.adhar_check=false;
+        console.log(true);
+      }
+      else{
+        this.adhar_check=true;
+      }
+     
     }
     else{
       this.adhar_check=true;
@@ -149,7 +167,16 @@ export class KycComponent implements OnInit {
     }
     else if(e.length==10)
     {
-      this.pan_check=false;
+      var pattern = new RegExp("[A-Z]{5}[0-9]{4}[A-Z]{1}");
+      if(pattern.test(e))
+      {
+        this.pan_check=false;
+        console.log("true");
+      }
+      else{
+        this.pan_check=true;
+      }
+     
     }
     else{
       this.pan_check=true;

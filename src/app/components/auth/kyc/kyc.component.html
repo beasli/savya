@@ -226,7 +226,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <input type="text"  #aadhar="ngModel"  ngModel  name="aadhar" class="form-control" (ngModelChange)="changeAadhar($event)" placeholder="Aadhar No." required>
-                                        <div *ngIf="adhar_check" class="alert alert-danger">Invalid Aadhaar</div>
+                                        <div *ngIf="adhar_check" class="alert alert-danger">Invalid Aadhaar Enter with proper spaces</div>
                                         <div class="alert alert-danger" *ngIf="aadhar.touched && aadhar.invalid">
                                             Aadhaar no. is required.
                                         </div>
