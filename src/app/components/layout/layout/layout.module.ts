@@ -28,7 +28,13 @@ import { SiteModule } from '../../site/site/site.module';
     NgbModule,
     SiteModule,
     BrowserAnimationsModule,
-    SimpleNotificationsModule.forRoot(),
+    SimpleNotificationsModule.forRoot({
+      position:["middle","center"],
+       timeOut: 3000,
+       showProgressBar: true,
+       pauseOnHover: true,
+       clickToClose: true
+     }),
     RouterModule.forChild([
       { path: 'contact', component: ContactComponent},
       { path: 'about', component: AboutComponent},

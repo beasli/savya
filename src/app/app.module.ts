@@ -38,7 +38,13 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     FormsModule,
     ReactiveFormsModule ,
     NgbModule,
-    SimpleNotificationsModule.forRoot(),
+    SimpleNotificationsModule.forRoot({
+      position:["middle","center"],
+       timeOut: 3000,
+       showProgressBar: true,
+       pauseOnHover: true,
+       clickToClose: true
+     }),
   ],
   providers: [AuthGuardService,CheckoutService,OtpGuardService,KycguardService],
   bootstrap: [AppComponent]

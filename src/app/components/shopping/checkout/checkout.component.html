@@ -2,7 +2,7 @@
     <div class="holder mt-0">
         <div class="container">
             <ul class="breadcrumbs">
-                <li><a href="index.html">Home</a></li>
+                <li><a routerLink="/">Home</a></li>
                 <li><span>Checkout</span></li>
             </ul>
         </div>
@@ -64,7 +64,7 @@
                         <h2 class="custom-color">ORDER SUMMARY</h2>
                         <app-loader *ngIf="!priceWeight"></app-loader>
                         <ng-container *ngIf="priceWeight">
-                        <div class="cart-table cart-table--sm" style='min-height:45vh;max-height:45vh'>
+                        <div class="cart-table cart-table--sm" style='min-height:45vh;max-height:45vh; overflow-y:auto;'>
                             <div class="cart-table-prd cart-table-prd-headings d-none d-lg-table">
                                 <div class="cart-table-prd-image"></div>
                                 <div class="cart-table-prd-image"></div>
@@ -91,7 +91,7 @@
                             <h3>Your Bill </h3>
                             <p><strong>
                                 <div>Total Price <span class="card-total-price"> {{total.price | currency:'INR'}}</span></div>
-                                <div>Total Gross Weight <span class="card-total-price"> {{total.weight}} g</span></div>
+                                <div>Total Gross Weight <span class="card-total-price"> {{totalw}} g</span></div>
                                   Sgst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>
                                   Cgst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>
                                   Igst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>
