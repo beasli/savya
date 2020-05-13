@@ -260,7 +260,7 @@ export class ProductDetailsComponent implements OnInit {
         if (this.assets) {
           this.diamondlist = this.assets.filter(x => x.metrial_type == "Diamond");
           if(this.diamondlist.length){
-            this.diamond = this.diamondlist[0]
+            this.diamond = this.diamondlist[0];
            this.diamondcolour = this.diamond.color.split(',');
           this.diamondclarity = this.diamond.clarity.split(',');
           this.defaultdiamond = this.diamond.default_color_clarity.split('/');
@@ -295,7 +295,13 @@ export class ProductDetailsComponent implements OnInit {
   }).catch(d=>{console.log(d);});
 }
 
-
+diamondchange(diamond){
+  this.diamond = this.diamondlist.find(x => x.jwellery_size == diamond);
+  this.diamondcolour = this.diamond.color.split(',');
+  this.diamondclarity = this.diamond.clarity.split(',');
+  this.defaultdiamond = this.diamond.default_color_clarity.split('/');
+  this.diamondprice();
+}
 
    createjson() {
      this.loading=true;
