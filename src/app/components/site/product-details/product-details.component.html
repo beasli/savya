@@ -124,8 +124,8 @@
                                     <div *ngIf=(diamond) class="choose-diamond">
                                         <label for="id_select"> Diamond: </label>
                                         <div class="diamond-selectbox">
-                                            <select class="product-size-select">
-                                                <option *ngFor='let s of diamond;let i = index' [value]="s.jwellery_size" [selected]="(i==0) ? true:false">{{s.jwellery_size}}</option>
+                                            <select class="product-size-select" (change)="diamondchange($event.target.value)">
+                                                <option *ngFor='let s of diamondlist;let i = index' [value]="s.jwellery_size" [selected]="(i==0) ? true:false">{{s.jwellery_size}}</option>
                                             </select>
                                         </div>
                                     </div>
