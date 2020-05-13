@@ -12,5 +12,10 @@
         <p class="card-text">{{slide.eventtime}}<br>{{slide.date}}<br>{{slide.address}}</p>
       </div>
     </div>
+    <div class="col-md-9 aside" *ngIf="events.length">
+      <ngb-alert [dismissible]="false" >
+          <strong>No events for Now</strong> 
+      </ngb-alert>
+  </div>
 </div>
 </div>
