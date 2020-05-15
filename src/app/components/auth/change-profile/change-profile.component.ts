@@ -1,7 +1,8 @@
+import { IMAGE } from './../../../../config';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
-import { PROFILEUPDATE, PROFILEVIEW, IMAGE } from 'src/config';
+import { PROFILEUPDATE, PROFILEVIEW} from 'src/config';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 declare var $: any;
 const formData: FormData = new FormData();
@@ -16,6 +17,8 @@ export class ChangeProfileComponent implements OnInit {
   loader:boolean;
   page:boolean;
   name:any;
+  photo:any;
+  
   constructor(private api:ApiService,private router:Router,private sanitizer: DomSanitizer) {
     let mobile=this.api.getMobileNo();
     console.log(mobile);
@@ -26,6 +29,7 @@ export class ChangeProfileComponent implements OnInit {
       this.loader=false;
       console.log(data);
       this.data=data['user'];
+      this.photo = data['url'];
       this.name=this.data.name;
       //this.router.navigate(['/registerOtp']);
     }).catch(d=>{
