@@ -72,7 +72,7 @@ export const SUBCATEGORYTYPE='subsubcategory'; //done
 // export const PRODUCTLIST = 'product/list';
 export const PRODUCTLIST = 'productlist';
 export const PRODUCTFILTERMENU='product/menu/edit';
-export const PRODUCTFILTER = 'search/filter';
+export const PRODUCTFILTER = 'productlist';
 export const ORDERBY = 'product/list?subsubcategory_id=';
 export const PRICELIST = 'product/list/price';
 //export const SEARCH = 'search';
