@@ -16,6 +16,8 @@ import { KycComponent } from '../kyc/kyc.component';
 import { ChangeProfileComponent } from '../change-profile/change-profile.component';
 import { OtpGuardService } from '../../auth-guard/otp-guard.service';
 import { SiteModule } from '../../site/site/site.module';
+import { LoginGuardService } from '../../auth-guard/login-guard.service';
+import { KycDoneService } from '../../auth-guard/kyc-done.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { SiteModule } from '../../site/site/site.module';
     ReactiveFormsModule ,
     SiteModule,
     RouterModule.forChild([
-      { path: 'login', component: LoginComponent},
+      { path: 'login', component: LoginComponent,canActivate: [LoginGuardService]},
       { path: 'register', component: RegisterComponent},
       { path: 'registerOtp/:no' , component: OtpComponent,canActivate: [OtpGuardService]},
       { path: 'forget' , component: ForgetPasswordComponent},
@@ -45,7 +47,7 @@ import { SiteModule } from '../../site/site/site.module';
       { path: 'change/:no' , component: ChangePasswordComponent, canActivate: [OtpGuardService]},
       { path: 'kyc' , component: KycComponent, canActivate: [AuthGuardService]},
       { path: 'changeProfile' , component: ChangeProfileComponent,  canActivate: [AuthGuardService]},
-      { path: 'kycpending' , component: KycPendingComponent}
+      { path: 'kycpending' , component: KycPendingComponent, canActivate: [AuthGuardService]}
     ])
   ]
 })
