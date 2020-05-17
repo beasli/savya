@@ -86,6 +86,7 @@ changeImage(event)
         this.loader=false;
           console.log(data);
           this.api.setUserInfo(data['data']);
+          this.data=data['data'];
           this.api.onSuccess("Profile successfully updated");
         }).catch(d=>{
           if(d.error.message == 'Unauthenticated.' && d.status == 401){

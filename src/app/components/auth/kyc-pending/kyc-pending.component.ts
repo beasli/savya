@@ -14,15 +14,16 @@ user:any;
 name:any;
 loader:boolean;
 page:boolean=true;
+photo:any;
   constructor(private api:ApiService,private router:Router) {
     // this.user=this.api.getUserInfo();
     // this.name=this.user.name;
-    console.log(this.user);
     this.api.Post(PROFILEVIEW, {}).then(data=>{
       this.page=true;
       this.loader=false;
       console.log(data);
       this.user=data['user'];
+      this.photo = data['url'];
       this.name=this.user.name;
       //this.router.navigate(['/registerOtp']);
     }).catch(d=>{
@@ -75,6 +76,7 @@ page:boolean=true;
         this.loader=false;
           console.log(data);
           this.api.setUserInfo(data['data']);
+          this.user=data['data'];
           this.api.onSuccess("Profile successfully updated");
         }).catch(d=>{
           if(d.error.message == 'Unauthenticated.' && d.status == 401){

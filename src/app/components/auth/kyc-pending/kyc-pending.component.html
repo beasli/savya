@@ -5,7 +5,7 @@
                 <div class="client-details text-center">
                     <div class="profile-image-wrapper">
                         <div class="profile-image">
-                            <img id="image_preview" [src]="IMAGE  + user.logo"/>
+                            <img id="image_preview" [src]="photo+'/'+ user.logo"/>
                             <div class="edit-pic">
                                 <a href="javascript:void(0)" (click)="modal()"><img src="assets/images/edit.svg"/></a>
                                 <input type="file" id="image" [hidden]="true" (change)=" changeImage($event)">

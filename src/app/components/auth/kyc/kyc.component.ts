@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { Router } from '@angular/router';
-import { USERKYC } from 'src/config';
+import { USERKYC, PROFILEVIEW } from 'src/config';
 declare var Tesseract;
 declare var $: any;
 const formData: FormData = new FormData();
@@ -31,7 +31,34 @@ export class KycComponent implements OnInit {
   mob:any;
   loader:boolean;
   page:boolean=true;
-  constructor(private api:ApiService,private router:Router) {}
+  user:any;
+  photo:any;
+  name:any;
+  kycValue:any;
+  constructor(private api:ApiService,private router:Router) {
+    this.api.Post(PROFILEVIEW, {}).then(data=>{
+      this.page=true;
+      this.loader=false;
+      console.log(data);
+      this.user=data['user'];
+      this.photo = data['url'];
+      this.kycValue=data['kyc'];
+      this.name=this.user.name;
+      //this.router.navigate(['/registerOtp']);
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
+        console.log(d);
+      }
+});
+  }
   fileChange(event) {
     let files:FileList=event.target.files;
     let fileList: FileList = event.target.files;
@@ -203,6 +230,8 @@ export class KycComponent implements OnInit {
      })
 }
   ngOnInit() {
+    this.loader=true;
+    this.page=false;
      this.userinfo=  this.api. getUserInfo();
      this.mob=this.userinfo.mobile_no;
   }

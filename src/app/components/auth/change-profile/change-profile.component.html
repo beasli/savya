@@ -16,11 +16,18 @@
                   
                     <div class="form-wrapper" *ngIf="page">
                         <form>
-                            <div class="col-6">
-                                    <div class="photop-upload-area preview"  id="preview" >
-                                        <img id="image_preview" [src]=" photo+'/'+ data.logo " >
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="profile-image-wrapper">
+                                        <div class="profile-image">
+                                            <img id="image_preview" [src]="photo+'/'+ data.logo"/>
+                                        </div>
                                     </div>
-                            </div>
+                                    <!-- <div class="photop-upload-area preview"  id="preview" >
+                                        <img id="image_preview" [src]=" photo+'/'+ data.logo " >
+                                    </div> -->
+                                </div>
+                            </div>  
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group"><label for='name'>Name</label><input type="text" #name="ngModel" (ngModelChange)=" changename($event)"  [(ngModel)]="data.name" name="name" class="form-control" placeholder="Name" required>
