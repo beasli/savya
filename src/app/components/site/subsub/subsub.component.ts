@@ -50,6 +50,7 @@ slideConfig = {
   category: any;
   subcategory: any;
   Banner: any;
+  idm:any;
   constructor(private route:ActivatedRoute,private api:ApiService,
     private sanitizer: DomSanitizer,
     private router:Router) {
@@ -57,6 +58,7 @@ slideConfig = {
       this.subid = params.id;
       this.getsubsub();
       if(params.idm){
+        this.idm = params.idm;
         console.log('idm');
         this.baseUrl = IMAGE+'banner/';
         this.api.Post(BANNER, {user_id:params.idm, type: 5}).then( data =>
@@ -100,7 +102,11 @@ slideConfig = {
   }
   gofilter(value) {
     console.log(value);
-    this.router.navigate(['/filter', value]);
+    if(!this.idm){
+    this.router.navigate(['/filter', value],{queryParams:{'page':1}});}
+    else{
+      this.router.navigate(['/filter', value],{queryParams:{'page':1,'manufacturer':this.idm}});
+    }
   }
 
   ngOnInit(): void {

@@ -26,7 +26,7 @@ page:boolean=true;
       this.name=this.user.name;
       //this.router.navigate(['/registerOtp']);
     }).catch(d=>{
-      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+      if(d.status == 401 || d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
@@ -77,7 +77,7 @@ page:boolean=true;
           this.api.setUserInfo(data['data']);
           this.api.onSuccess("Profile successfully updated");
         }).catch(d=>{
-          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+          if(d.status == 401 || d.status == 503){
             this.api.onFail('Your session is expired please login again');
             this.api.setGoto();
             this.api.setlogin(0);

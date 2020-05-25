@@ -31,19 +31,20 @@ export class FilterProductComponent implements OnInit {
   drop:any;
   @ViewChild('addclosebutton') addclosebutton;
 @ViewChild('deleteclosebutton') deleteclosebutton;
+  current_page: any;
+  pages: any;
+  manufacture: string;
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router,private http:HttpClient) {
     this.drop=this.api.drop; 
     this.route.params.subscribe(params => {
       this.subid = params.id;
-      this.getProduct(this.subid);
-   //    this.getsubsub();
-        //filter update sub category
-              // let f=this.getfilter();
-              // f.menu.subcategory= +this.subid;
-              // this.setfilter(f);
-       //end filter update//
-
-    //  console.log(params);
+      this.route.queryParamMap.subscribe(params =>{
+        this.current_page = params.get('page');
+        this.manufacture = params.get('manufacturer');
+        console.log("manufacturer"+this.manufacture);
+        this.current_page = Number(this.current_page);
+        this.getProduct(this.subid,this.current_page);
+      });
       });
 
       // this.api.Get(PRODUCTFILTERMENU).then(data  => {
@@ -70,36 +71,73 @@ export class FilterProductComponent implements OnInit {
   //   });
   // }
   
-  getProduct(value)
+  getProduct(value,page=1)
   {
     this.loader=true;
     this.page=false;
     this.f=this.api.getfilter();
     //{subsubcategory_id: value } 
-    this.api.Post(PRODUCTLIST+"?subsubcategory_id="+value,JSON.stringify(this.f)).then(data  => {
-      console.log(data);
+    if(!this.manufacture){
+    this.api.Post2(PRODUCTLIST,JSON.stringify(this.f),{'subsubcategory_id':value,'page':page}).then(data  => {
       this.page=true;
       this.loader=false;
       this.div=true;
-      if(data['data'].length>0)
-      {
-        this.alert=false
-        this.products = data['data'];
-        this.url = data['url'] + '/';
-      }
-     
-     else if(data['data'].length==0)
-     {
-       this.alert=true;
-     }
-      //console.log(this.url);
+      this.alert=false
+      this.products = data['data'];
+      this.pages = Math.ceil(data['pagination']/16)
+      console.log(this.pages);
+     // console.log(this.products);
+      this.url = data['url'] + '/';
+      console.log(this.url);
        }).catch(d=>{
+
+        this.api.Post2(PRODUCTLIST+"?subsubcategory_id="+value,{},{'subsubcategory_id':value,'page':page}).then(data  => {
+          this.page=true;
+          this.loader=false;
+          this.div=true;
+          this.alert=false
+          this.products = data['data'];
+         // console.log(this.products);
+          this.url = data['url'] + '/';
+          console.log(this.url);
+           });
         this.page=true;
         this.loader=false;
          this.div=false;
          this.alert=true;
         console.log(d);
-      });
+      });}
+      else{
+        this.api.Post2(PRODUCTLIST,JSON.stringify(this.f),{'subsubcategory_id':value,'page':page,'manufacture_id':this.manufacture}).then(data  => {
+          this.page=true;
+          this.loader=false;
+          this.div=true;
+          this.alert=false
+          this.products = data['data'];
+          this.pages = Math.ceil(data['pagination']/16)
+          console.log(this.pages);
+         // console.log(this.products);
+          this.url = data['url'] + '/';
+          console.log(this.url);
+           }).catch(d=>{
+    
+            this.api.Post2(PRODUCTLIST+"?subsubcategory_id="+value,{},{'subsubcategory_id':value,'page':page,'manufacture_id':this.manufacture}).then(data  => {
+              this.page=true;
+              this.loader=false;
+              this.div=true;
+              this.alert=false
+              this.products = data['data'];
+             // console.log(this.products);
+              this.url = data['url'] + '/';
+              console.log(this.url);
+               });
+            this.page=true;
+            this.loader=false;
+             this.div=false;
+             this.alert=true;
+            console.log(d);
+          });
+      }
   }
   go(value) {
     this.api.godetail(value);

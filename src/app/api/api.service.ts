@@ -66,16 +66,27 @@ export class ApiService {
             this.updateWishlist();
             this.updateOrderHistory();
           }
-          console.log("login emitter");
+        // console.log("login emitter");
         }
         if(this.drop==0)
         {
-          console.log("logout emitter");
+        //  console.log("logout emitter");
         }
         
       })
 
  }
+
+ public Post2(api, formData,parameters?) {
+  return new Promise((resolve, reject) => {
+    this.http.post(apiUrl + api, formData,  {headers:this.header,params:parameters})
+      .subscribe(res => {
+        resolve(res);
+      }, (err) => {
+        reject(err);
+      });
+  });
+}
 
   public Get(api) {
     this.header = new HttpHeaders().set(
@@ -176,7 +187,7 @@ export class ApiService {
       console.log( data);
       localStorage.setItem('orders',JSON.stringify(data['data']));  
     }).catch(d=>{
-      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+      if(d.status == 401 || d.status == 503){
         this.onFail('Your session is expired please login again');
         this.setGoto();
         this.setlogin(0);
@@ -221,23 +232,23 @@ export class ApiService {
     this.uid=u.id;
     this.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
       //console.log(data['data'][0].cart_id);
-      console.log( data);
+      // console.log( data);
       localStorage.setItem('cart',JSON.stringify(data));  
     }).catch(d=>{
-      if(d.error.message == 'Unauthenticated.' && d.status == 401){
-        this.onFail('Your session is expired please login again');
-        this.setGoto();
-        this.setlogin(0);
-        this.logout();
-        setTimeout(() => {
-        this.router.navigate(['/login']);
-        },1000);
+      if(d.status == 401 || d.status == 503){
+        // this.onFail('Your session is expired please login again');
+        // this.setGoto();
+        // this.setlogin(0);
+        // this.logout();
+        // setTimeout(() => {
+        // this.router.navigate(['/login']);
+        // },1000);
       } else{
       console.log(d);
       localStorage.removeItem('cart');
       this.Cart.emit("emptycart"+Date.now());}
-    })
-    console.log(this.uid);
+     })
+    // console.log(this.uid);
    }
 
    
@@ -312,7 +323,7 @@ qtyUpdate(pid,value)
                       this.updateCart(); 
                       this.Cart.emit("cartUpdate"+Date.now()); 
                     }).catch(d=>{
-                      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+                      if(d.status == 401 || d.status == 503){
                         this.onFail('Your session is expired please login again');
                         this.setGoto();
                         this.setlogin(0);
@@ -349,7 +360,7 @@ qtyUpdate(pid,value)
       this.onSuccess('Product Successfully Removed from the cart');
      
     }).catch(d=>{
-      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+      if(d.status == 401 || d.status == 503){
         this.onFail('Your session is expired please login again');
         this.setGoto();
         this.setlogin(0);
@@ -376,7 +387,7 @@ qtyUpdate(pid,value)
     this.onSuccess('Product Successfully added to the cart');
     //  localStorage.setItem('cart',JSON.stringify(data));  
     }).catch(d=>{
-      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+      if(d.status == 401 || d.status == 503){
         this.onFail('Your session is expired please login again');
         this.setGoto();
         this.setlogin(0);
@@ -409,7 +420,7 @@ qtyUpdate(pid,value)
      
     }).catch(d=>{
 
-      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+      if(d.status == 401 || d.status == 503){
         this.onFail('Your session is expired please login again');
         this.setGoto();
         this.setlogin(0);
@@ -437,7 +448,7 @@ qtyUpdate(pid,value)
        this.onSuccess('Product Successfully Removed from the Wishlist');
        this.getWish.emit("wishlist updated"+Date.now());
       }).catch(d=>{
-        if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        if(d.status == 401 || d.status == 503){
           this.onFail('Your session is expired please login again');
           this.setGoto();
           this.setlogin(0);
@@ -471,7 +482,7 @@ checkWishlist(pid)
                    this.updateWishlist();
                    this.onSuccess('Product Successfully added to the Wishlist');
               }).catch(d=>{
-                if(d.error.message == 'Unauthenticated.' && d.status == 401){
+                if(d.status == 401 || d.status == 503){
                   this.onFail('Your session is expired please login again');
                   this.setGoto();
                   this.setlogin(0);
@@ -490,7 +501,7 @@ checkWishlist(pid)
              this.updateWishlist();
              this.onSuccess('Product Successfully added to the Wishlist');
         }).catch(d=>{
-          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+          if(d.status == 401 || d.status == 503){
             this.onFail('Your session is expired please login again');
             this.setGoto();
             this.setlogin(0);
@@ -571,7 +582,7 @@ getWishlist()
   getUserInfo()
   {
     let d =this.decrypt(localStorage.getItem('savya_userInfo'));
-    console.log(d);
+    // console.log(d);
     return d;
   }
   logout()
