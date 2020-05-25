@@ -2,101 +2,62 @@
 <header class="hdr global_width hdr_sticky hdr-mobile-style2">
 
     <!-- Mobile Menu -->
-    <div class="mobilemenu js-push-mbmenu">
+    <div [ngClass]='{active:activ==1}' class="mobilemenu js-push-mbmenu">
         <div class="mobilemenu-content">
-            <div class="mobilemenu-close mobilemenu-toggle">CLOSE</div>
+            <div (click)='mobile()' class="mobilemenu-close mobilemenu-toggle">CLOSE</div>
             <div class="mobilemenu-scroll">
-                <div class="mobilemenu-search"></div>
-                <div class="nav-wrapper show-menu">
+                <div class="mobilemenu-search">
+                    <form action="javascript:void(0)" class="search">
+                        <button type="submit" class="search-button" ><i class="icon-search2"></i></button> <input type="text" (keyup.enter)="search()" (keyup)="change($event)" class="search-input" placeholder="search keyword">
+                           
+                        <div class="search-popular js-search-autofill"><span class="search-popular-label">popular searches:</span><a href="javascript:void(0)" (click)="popularSearch('RINGS')">RINGS</a><a href="javascript:void(0)" (click)="popularSearch('DIAMOND')">Diamond</a><a href="javascript:void(0)" (click)="popularSearch('GOLD')">GOLD</a></div>
+                        </form>
+                        <div class="col-sm-6">
+                            <ngb-alert [dismissible]="false" *ngIf="alert()" >
+                                <strong>{{message}}</strong> 
+                            </ngb-alert>
+                        </div>
+                        
+                </div>
+                <div class="nav-wrapper show-menu" style="min-height:200vh;">
                     <div class="nav-toggle"><span class="nav-back"><i class="icon-arrow-left"></i></span> <span class="nav-title"></span></div>
                     <ul class="nav nav-level-1">
-                        <li><a href="index.html">Rings<span class="menu-label menu-label--color1">NEW</span></a><span class="arrow"></span>
+                        <li *ngFor='let s of catall;let i = index'>
+                            <ng-container *ngIf="s.category != 'MACHINERY'">
+                                <a id='{{i}}' href="javascript:void(0)">
+                                    <div class="cart-table-prd-image"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl+'category/' + s.image}}"  alt=""></div>
+                                    {{s.category}}</a></ng-container>
+                        <ng-container *ngIf="s.category == 'MACHINERY'">
+                            <a [routerLink]="['/machinery/', s.category_id]">
+                                <div class="cart-table-prd-image"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl+'category/' + s.image}}"  alt=""></div>
+                                {{s.category}}</a>
+                        </ng-container>
+
+                        <span class="arrow"></span>
                             <ul class="nav-level-2">
-                                <li><a href="#" title="">New Rings</a></li>
-                               <li><a href="#" title="">New Rings</a></li>
-                               <li><a href="#" title="">New Rings</a></li>
-                               <li><a href="#" title="">New Rings</a></li>
-                               <li><a href="#" title="">New Rings</a></li>
-                               <li><a href="#" title="">New Rings</a></li>
+                                <ng-container *ngIf="s.category != 'MACHINERY'">
+                                    <li *ngFor='let p of s.subcategory'>
+                                        <a href="javascript:void(0)" [routerLink]="['/subsub/', p.subcategory_id]">
+                                        <!-- <div class="cart-table-prd-image"><img  src="{{baseurl+'subcategory/' + s.image}}"  alt=""></div> -->
+                                        {{p.subcategory}}</a>
+                                    </li>
+                                </ng-container>
                             </ul>
                         </li>
-                        <li><a href="#" title="">dd</a><span class="arrow"></span>
-                            <ul class="col-md-6">
-                                <li><a href="product.html" title="">Product page variant 1</a></li>
-                                <li><a href="product-2.html" title="">Product page variant 2</a></li>
-                                <li><a href="product-3.html" title="">Product page variant 3</a></li>
-                                <li><a href="product-4.html" title="">Product page variant 4</a></li>
-                                <li><a href="product-5.html" title="">Product page variant 5</a></li>
-                            </ul>
-                            <ul class="col-md-6">
-                                <li><a href="product.html" title="">Product page variant 1</a></li>
-                                <li><a href="product-2.html" title="">Product page variant 2</a></li>
-                                <li><a href="product-3.html" title="">Product page variant 3</a></li>
-                                <li><a href="product-4.html" title="">Product page variant 4</a></li>
-                                <li><a href="product-5.html" title="">Product page variant 5</a></li>
-                            </ul>
+                        <li class="text-center"><a [routerLink]="['/events/']">Events</a></li>
+                        <li>
+                            <div class="row text-center">
+                                <div class="col-6  border">
+                                    <a [routerLink]="['/about/']">About Us</a>
+                                </div>
+                                <div class="col-6  border">
+                                    <a [routerLink]="['/contact/']">Contact Us</a>
+                                </div>
+                            </div>
                         </li>
-                        <li><a href="#" title="">Pendants</a><span class="arrow"></span>
-                            <ul class="nav-level-2">
-                                <li><a href="index.html" title="">Demo Text</a><span class="arrow"></span>
-                                    <ul class="nav-level-3">
-                                        <li><a href="index.html" title="">Menu 1</a></li>
-                                        <li><a href="index-fashion-2.html" title="">Menu 2</a></li>
-                                        <li><a href="index-electronics.html" title="">Menu 3</a></li>
-                                        <li><a href="index-sport.html" title="">Menu 4</a></li>
-                                        <li><a href="typography.html" title="">Menu 5</a></li>
-                                        <li><a href="index-tools.html" title="">Menu 6</a></li>
-                                        <li><a href="index-watches.html" title="">Menu 7</a></li>
-                                        <li><a href="index-toys-2.html" title="">Menu 8</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="index.html" title="">Demo Text 2</a><span class="arrow"></span>
-                                    <ul class="nav-level-3">
-                                        <li><a href="index.html" title="">Menu 1</a></li>
-                                        <li><a href="index-sport.html" title="">Menu 2</a></li>
-                                        <li><a href="index-tools.html" title="">Menu 3</a></li>
-                                        <li><a href="index-furniture.html" title="">Menu 4</a></li>
-                                        <li><a href="index-plumbing.html" title="">Menu 5</a></li>
-                                        <li><a href="index-electronics.html" title="">Menu 6</a></li>
-                                        <li><a href="index-watches.html" title="">Menu 7</a></li>
-                                        <li><a href="index-fashion-2.html" title="">Menu 8</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <li class="text-center">
+                                    <a [routerLink]="['/privacy/']">Our Privacy Policy</a>
                         </li>
-                        <li><a href="category.html">All Jewelery</a><span class="arrow"></span>
-                            <ul class="nav-level-2">
-                                <li><a href="category.html" title="">Demo Text</a><span class="arrow"></span>
-                                    <ul class="nav-level-3">
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="category.html" title="">Demo Text 2</a><span class="arrow"></span>
-                                    <ul class="nav-level-3">
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="category.html" title="">Menu 3</a><span class="arrow"></span>
-                                    <ul class="nav-level-3">
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="category.html" title="">Menu 4</a><span class="arrow"></span>
-                                    <ul class="nav-level-3">
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                        <li><a href="category.html">Menu</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#" target="_blank">Next Day Delivery<span class="menu-label menu-label--color3">HOT!</span></a><span class="arrow"></span></li>
                     </ul>
                 </div>
                 <div class="mobilemenu-bottom">
@@ -113,12 +74,40 @@
         <div class="hdr-content">
             <div class="container">
                 <!-- Menu Toggle -->
-                <div class="menu-toggle"><a routerLink="/" class="mobilemenu-toggle"><i class="icon icon-menu"></i></a></div>
+                <div class="menu-toggle"><a [ngClass]='{active:activ==1}'  class="mobilemenu-toggle"><i (click)='mobile()' class="icon icon-menu"></i></a></div>
                 <!-- /Menu Toggle -->
-                <div class="logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
+                <div *ngIf='logochange != 1' class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
+            <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/SJB_Machinery-1.png" srcset="assets/images/SJB_Machinery-1.png" alt=""></a></div>
                 <div class="hdr-mobile-right">
-                    <div class="hdr-topline-right links-holder"></div>
-                    <div class="minicart-holder"></div>
+                    <div class="hdr-topline-right links-holder">
+
+                        <div class="dropdn dropdn_wishlist @@classes"><a routerLink="/account-wishlist" class="dropdn-link"><i class="icon icon-clock"></i><span>Recently viewed</span></a></div>
+                        <!-- /Header Wishlist -->
+                        
+                        <!-- Header Account -->
+                        <div class="dropdn dropdn_account @@classes"><a  class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
+
+                            
+                      
+                            <div class="dropdn-content">
+                                <div class="container">
+                                    <div id='close' class="dropdn-close">CLOSE</div>
+                                    <ul>
+                                        <li><a routerLink="/account-details" *ngIf="drop"><i class="icon icon-person-fill"></i><span>Profile</span></a></li>
+                                        <li><a routerLink="/kycpending" *ngIf="drop"><span>KYC</span></a></li>
+                                        <li><a routerLink="/login"  *ngIf="!drop"><i class="icon icon-lock"></i><span>Log In</span></a></li>
+                                        <li><a *ngIf="drop"><i class=" icon-signout"></i><span (click)="logout()">Log Out</span></a></li>
+                                        <li><a routerLink="/register" *ngIf="!drop"><i class="icon icon-person-fill-add"></i><span>Register</span></a></li>
+                                        <li><a routerLink="/checkout" *ngIf="drop"><i class="icon icon-check-box"></i><span>Checkout</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Header Account -->
+                    </div>
+                    <div class="minicart-holder">
+                        <div class="minicart"><a routerLink="/cart" class="minicart-link"><i class="icon icon-handbag"></i> <span class="minicart-qty">{{ProductsInCart()}}</span></a></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,15 +124,22 @@
                     <div class="col-auto hdr-topline-right links-holder">
                         <!-- Header Search -->
                  
-                        <div class="dropdn dropdn_search hide-mobile @@classes"><a href="#" class="dropdn-link"><i class="icon icon-search2"></i><span>Search</span></a>
+                        <div class="dropdn dropdn_search hide-mobile @@classes"><a href="javascript:void(0)" class="dropdn-link"><i class="icon icon-search2"></i><span>Search</span></a>
                             <div class="dropdn-content">
                                 <div class="container">
                                         <button class="search-button"><i class="icon-search2"></i></button>
                                     <div class="form-group"><input type="text" (keyup.enter)="search()" (keyup)="change($event)" class="form-control" class="search-input" placeholder="search keyword"></div> 
+                                    <div class="form-group"><button class="btn" (click)="search()">search</button></div>
+                                    <div class="col-lg-12" >
+                                        <div class="col-lg-4"></div>
+                                        <div class="col-lg-6" >
+                                        <ngb-alert [dismissible]="false" *ngIf="alert()" >
+                                            <strong>{{message}}</strong> 
+                                        </ngb-alert>
+                                        </div>
+                                    </div>
                                     <div class="search-popular js-search-autofill"><span class="search-popular-label">popular searches:</span><a href="javascript:void(0)" (click)="popularSearch('RINGS')">RINGS</a><a href="javascript:void(0)" (click)="popularSearch('DIAMOND')">Diamond</a><a href="javascript:void(0)" (click)="popularSearch('GOLD')">GOLD</a></div>
-                                    <ngb-alert [dismissible]="false" *ngIf="alert()" >
-                                        <strong>{{message}}</strong> 
-                                    </ngb-alert>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -163,7 +159,7 @@
                                     <div class="dropdn-close">CLOSE</div>
                                     <ul>
                                         <li><a routerLink="/account-details"*ngIf="drop"><i class="icon icon-person-fill"></i><span>Profile</span></a></li>
-                                        <li><a routerLink="/kyc"*ngIf="drop"><span>KYC</span></a></li>
+                                        <li><a routerLink="/kycpending"*ngIf="drop"><span>KYC</span></a></li>
                                         <li><a routerLink="/login" *ngIf="!drop"><i class="icon icon-lock"></i><span>Log In</span></a></li>
                                         <li><a *ngIf="drop"><i class=" icon-signout"></i><span (click)="logout()">Log Out</span></a></li>
                                         <li><a routerLink="/register" *ngIf="!drop"><i class="icon icon-person-fill-add"></i><span>Register</span></a></li>
@@ -183,10 +179,13 @@
     <div class="sticky-holder compensate-for-scrollbar">
         <div class="container">
             <div class="row"><a href="#" class="mobilemenu-toggle show-mobile"><i class="icon icon-menu"></i></a>
-                <div class="col-auto logo-holder-s"><a href="index.html" class="logo"><img src="assets/images/logo.png" srcset="assets/images/savyalogoblack.png" alt=""></a></div>
+                <div *ngIf='logochange != 1' class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
+            <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/SJB_Machinery-1.png" srcset="assets/images/SJB_Machinery-1.png" alt=""></a></div>
                 <!--navigation-->
                 <div class="prev-menu-scroll icon-angle-left prev-menu-js"></div>
-                <div class="nav-holder-s"></div>
+                <div class="nav-holder-s">
+                    
+                </div>
                 <div class="next-menu-scroll icon-angle-right next-menu-js"></div>
                 <!--//navigation-->
                 <div class="col-auto minicart-holder-s"></div>

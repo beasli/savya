@@ -1,0 +1,36 @@
+<app-slider [slider_imgs] = 'slider_imgs' [url] = '"url"'></app-slider>
+<div class="card-group" style="margin-top: 3vh;padding-bottom: 3vh;">
+    <div class="row">
+    <div *ngFor="let slide of data" class="card col-3 border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="width: 15rem;">
+        <img class="card-img-top" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{slide.subcategory}}</h5>
+         </div>
+      </div>
+    </div>
+</div>
+
+<div class="testimonials seller border">
+    <ngx-slick-carousel class="carousel" 
+                    #slickModal="slick-carousel" 
+                    [config]="slideConfig" >
+          <div ngxSlickItem *ngFor="let slide of categories;let i = index" class="slide embed-responsive embed-responsive-16by9">
+          <img [src]="bypass(slide.image)"  class="embed-responsive-item"  alt="" width="100%">
+          <div class="overlay-effect">
+              <div *ngIf="slide.name" class="overlay-effect-content">
+                <h2>{{ slide.name }}</h2>
+              </div>
+          </div>
+          </div>
+          </ngx-slick-carousel>
+</div>
+
+<div class="row">
+    <div class="col-6" *ngFor="let slide of videos">
+        <video width="100%" poster="{{slide.imagePreview}}" style="padding:3vh;" controls>
+            <source [src]="bypass(slide.image)" type="video/mp4">
+        </video>
+    </div>
+</div>
+<app-exclusive-banner [url2] = '""' [exclusive] = 'exclusive'></app-exclusive-banner>
+  

@@ -18,6 +18,22 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { EventComponent } from '../event/event.component';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { ShareButtonsConfig, ShareModule } from '@ngx-share/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+
+import { FilterNavBarComponent } from '../filter-nav-bar/filter-nav-bar.component';
+import { LoaderComponent } from '../loader/loader.component';
+
+
+// Import the library
+import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { MachineryComponent } from '../machinery/machinery.component';
+import { CategoryComponent } from 'src/app/site/category/category.component';
+import { SubcategoryComponent } from 'src/app/site/subcategory/subcategory.component';
+import { BullianComponent } from '../bullian/bullian.component';
+import { BullianMerchantComponent } from '../bullian-merchant/bullian-merchant.component';
+import { KycguardService } from '../../auth-guard/kycguard.service';
+
 
 const customConfig: ShareButtonsConfig = {
   autoSetMeta: true,
@@ -40,7 +56,14 @@ const customConfig: ShareButtonsConfig = {
     EventsComponent,
     EventComponent,
     ProductDetailsComponent,
-    SubsubComponent
+    SubsubComponent,
+    LoaderComponent,
+    FilterNavBarComponent,
+    MachineryComponent,
+    CategoryComponent,
+    SubcategoryComponent,
+    BullianComponent,
+    BullianMerchantComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -48,15 +71,35 @@ const customConfig: ShareButtonsConfig = {
     HttpClientModule,
     NgbModule,
     SlickCarouselModule,
+    BrowserAnimationsModule,
+    NgxImageZoomModule,
+    SimpleNotificationsModule.forRoot({
+      position:["middle","center"],
+       timeOut: 3000,
+       showProgressBar: true,
+       pauseOnHover: true,
+       clickToClose: true
+     }),
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
+      { path: 'machinery/:id' , component: MachineryComponent},
       { path: 'filter/:id' , component: FilterProductComponent},
       { path: 'events' , component: EventsComponent},
       { path: 'event/:id' , component: EventComponent},
+// , canActivate: [KycguardService]
       { path: 'product-details/:id' , component: ProductDetailsComponent},
-      { path: 'subsub' , component: SubsubComponent}
+      { path: 'subsub/:id' , component: SubsubComponent},
+      { path: 'manufacture/:idm/subsub/:id' , component: SubsubComponent},
+      { path: 'filternav' , component: FilterNavBarComponent},
+      { path: 'manufacture/:id', component: CategoryComponent},
+      { path: 'category', component: CategoryComponent},
+      { path: 'subcategory/:id', component: SubcategoryComponent},
+      { path: 'manufacture/:idm/subcategory/:id', component: SubcategoryComponent},
+      { path: 'bullion', component: BullianComponent},
+      { path: 'bullion/:id', component: BullianMerchantComponent},
     ])
-  ]
+  ],
+  exports: [LoaderComponent]  ,
 })
 export class SiteModule { }

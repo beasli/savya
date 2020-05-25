@@ -1,13 +1,8 @@
-<ngb-carousel *ngIf="slider_imgs.length">
+<ngb-carousel *ngIf="slider_imgs">
     <ng-template *ngFor="let slide of slider_imgs" ngbSlide>
       <div class="picsum-img-wrapper">
-        <img [src]="url + '/' + slide.image" alt="Random first slide" >
+       <img routerLink='/subsub/{{slide.subcategory_id}}' onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
       </div>
-      <!-- <div class="carousel-caption">
-        <h3>First slide label</h3>
-        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-      </div> -->
     </ng-template>
-    
-  </ngb-carousel>
+</ngb-carousel>
   

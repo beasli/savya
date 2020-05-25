@@ -15,10 +15,10 @@ val:boolean;
   constructor(private api:ApiService) { 
   this.im=true;
   this.val=false;
-    this.api.Post(CONTACT,{}).then(data=>{
+    this.api.Get(CONTACT).then(data=>{
       this.im=false;
   this.val=true;
-      this.values=data['data'][0];
+      this.values=data['data'];
       console.log(this.values);
     }).catch(d=>{
       console.log(d);

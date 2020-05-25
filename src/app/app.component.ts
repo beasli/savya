@@ -15,9 +15,9 @@ export class AppComponent {
   constructor(private api:ApiService)
   {
 
-      this.api.Post(CONTACT,{}).then(data=>{
+      this.api.Get(CONTACT).then(data=>{
         //console.log(data['data'][0]);
-        this.values=data['data'][0];
+        this.values=data['data'];
        // console.log(this.values);
        // console.log("values"+JSON.stringify(this.values));
       }).catch(d=>{

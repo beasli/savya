@@ -11,6 +11,12 @@ import { AuthGuardService } from '../../auth-guard/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventHistoryComponent } from '../event-history/event-history.component';
 import { OrderDetailComponent } from '../order-detail/order-detail.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SiteModule } from '../../site/site/site.module';
+import { OffersComponent } from '../offers/offers.component';
+
+
 @NgModule({
   declarations: [
     AccountDetailsComponent,
@@ -20,21 +26,32 @@ import { OrderDetailComponent } from '../order-detail/order-detail.component';
     EditAddressComponent,
     EventHistoryComponent,
     OrderDetailComponent,
+    OffersComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     NgbModule,
+    BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot({
+      position:["middle","center"],
+       timeOut: 3000,
+       showProgressBar: true,
+       pauseOnHover: true,
+       clickToClose: true
+     }),
     ReactiveFormsModule,
+    SiteModule,
     RouterModule.forChild([
       { path: 'account-details', component: AccountDetailsComponent,  canActivate: [AuthGuardService]},
       { path: 'account-addresses', component: AccountAddressesComponent,  canActivate: [AuthGuardService]},
       { path: 'account-wishlist', component: AccountWishlistComponent,  canActivate: [AuthGuardService]},
       { path: 'account-history', component: AccountHistoryComponent,  canActivate: [AuthGuardService]},
       { path: 'edit-address/:id', component: EditAddressComponent,  canActivate: [AuthGuardService]},
-      { path: 'add-address/:id', component: EditAddressComponent,  canActivate: [AuthGuardService]},
+      { path: 'add-address', component: EditAddressComponent,  canActivate: [AuthGuardService]},
       { path: 'event-history', component: EventHistoryComponent,  canActivate: [AuthGuardService]},
       { path: 'order-detail/:id', component: OrderDetailComponent,  canActivate: [AuthGuardService]},
+      { path: 'offers', component: OffersComponent,  canActivate: [AuthGuardService]}
     ])
   ]
 })

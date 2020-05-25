@@ -17,7 +17,12 @@ export class AuthGuardService  implements CanActivate {
     if (this.drop == 1 ) {
           return true;
          } else {
-           this.router.navigate(['/login']); }
+           this.api.onSuccess('You have to Login to Proceed');
+           this.api.setGoto();
+           console.log(this.api.goto);
+
+           this.router.navigate(['/login']);
+          }
     return false;
         }
 }

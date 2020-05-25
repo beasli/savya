@@ -14,25 +14,33 @@ export class NavBarComponent implements OnInit {
   catall = [];
   catwithsub = [];
   catwithoutsub = [];
-
+  logochange:number = 0;
   uid:any;
   results:any[];
   alert:boolean=false;
   div:boolean=false;
   baseurl:any;
   message:any="CART IS EMPTY";
+  newurl:any;
+  drop: any;
   constructor(private api: ApiService, private router: Router) {
     
                   //cart work start //
                   this.uid=this.api.uid;
                   console.log("userid"+this.uid); 
-
-                  this.view();
+                  this.api.getlogin.subscribe(data=>{
+                    this.uid=this.api.uid;
+                  })
+                  if(localStorage.getItem('savya_userInfo'))
+                  {
+                    this.view();
+                  }
+                  
                   //cart work end//
           
-            this.api.Post(NAVIGATION, {}).then(data => {
+            this.api.Get(NAVIGATION).then(data => {
               this.catall = data['data'];
-              console.log(data);
+            
               this.catall.forEach(element => {
                 if (element['subcategory'].length){
                   this.catwithsub.push(element);
@@ -42,10 +50,13 @@ export class NavBarComponent implements OnInit {
                 }
                 }
               );
-              // console.log(this.catwithsub[0].subcategory);
-              console.log(this.catwithoutsub);
-              
-              console.log(this.catwithsub);
+             
+            });
+            this.api.changelogo.subscribe(data=>{this.logochange = data
+              console.log(this.logochange);
+              if(data == 1){
+                this.newurl = this.router.url;
+              }
             });
 }
 ProductsInCart()
@@ -66,7 +77,7 @@ ProductsInCart()
   }
   view()
   {
-      this.api.Post(CARTVIEW,{user_id:this.uid}).then(data=>{
+      this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data=>{
         console.log(data);  
         this.baseurl=data['url']+"/";
         this.results=data['data'];
@@ -74,15 +85,26 @@ ProductsInCart()
         this.div=true;
       
       }).catch(d=>{
+        if(d.error.message == 'Unauthenticated.' && d.status == 401){
+          this.api.onFail('Your session is expired please login again');
+          this.api.setGoto();
+          this.api.setlogin(0);
+          this.api.logout();
+          setTimeout(() => {
+          this.router.navigate(['/login']);
+          },1000);
+        } else{
         this.div=false;
         this.alert=true;
-        console.log(d);
-      })
+        console.log(d);}
+      });
   }
+
+
 
   gofilter(value) {
     console.log(value);
-    this.router.navigate(['/filter', value]);
+    this.router.navigate(['/subsub', value]);
   }
 
   checkCart(pid)
@@ -115,11 +137,16 @@ ProductsInCart()
   }
  
 ngOnInit() {
+  this.api.getlogin.subscribe(data => {
+    console.log(+data);
+    this.drop=data;
+   })
   this.api.Cart.subscribe(data => {
     this.view();
     console.log("changed");
-     console.log("getWishSubscribe"+data);
+    console.log("getWishSubscribe"+data);
      });
+     this.drop=this.api.drop;
 }
 
 }

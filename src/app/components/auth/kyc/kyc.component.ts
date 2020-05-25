@@ -1,17 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { Router } from '@angular/router';
-import { USERKYC } from 'src/config';
-
+import { USERKYC, PROFILEVIEW } from 'src/config';
+declare var Tesseract;
+declare var $: any;
+const formData: FormData = new FormData();
 @Component({
   selector: 'app-kyc',
   templateUrl: './kyc.component.html',
-  styleUrls: ['./kyc.component.css']
+  styleUrls: ['./kyc.component.css'],
+  styles: [`
+  .preview img{
+    max-height: 500px;
+  }
+`]
 })
-export class KycComponent implements OnInit {
 
-  sign:boolean=true;
-  loading:boolean=false;
+export class KycComponent implements OnInit {
+  pan_check:boolean;
+  gst_check:boolean;
+  adhar_check:boolean;
   message:any;
   alert:boolean;
   type:any;
@@ -20,133 +28,212 @@ export class KycComponent implements OnInit {
   pan:any;
   aadhar:any;
   userinfo:any;
-  fName:any;
-  lName:any;
-  constructor(private api:ApiService,private router:Router) {}
-  changeAadhar(e)
-  {
-   // console.log(e.length);
-    this.aadhar=e;
+  mob:any;
+  loader:boolean;
+  page:boolean=true;
+  user:any;
+  photo:any;
+  name:any;
+  kycValue:any;
+  constructor(private api:ApiService,private router:Router) {
+    this.api.Post(PROFILEVIEW, {}).then(data=>{
+      this.page=true;
+      this.loader=false;
+      console.log(data);
+      this.user=data['user'];
+      this.photo = data['url'];
+      this.kycValue=data['kyc'];
+      this.name=this.user.name;
+      //this.router.navigate(['/registerOtp']);
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
+        console.log(d);
+      }
+});
   }
-  checkAdhar()
-  {
-    if(this.aadhar==null)
-    {
-      return false;
-    }
-    else if(this.aadhar>0)
-    {
-        var response=this.AadharValidate()
-        if(response==false)
-        {
-          return false;
-        }
-        else if(response==true){
-          return true;
-        }
+  fileChange(event) {
+    let files:FileList=event.target.files;
+    let fileList: FileList = event.target.files;
+    let selectedfile=event.target.files[0];
+    if(fileList.length > 0) {
+      let file: File = fileList[0];
+      var img = document.querySelector("#preview img");
+      if(event.target.name=="gst_doc1")
+      {
+              formData.append('gst_front', files.item(0), files.item(0).name);
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                $('#gst_front').attr('src', e.target.result);
+              }
+             reader.readAsDataURL(file); 
+      }
+      else if(event.target.name=="gst_doc2")
+      {
+              formData.append('gst_back', files.item(0), files.item(0).name);
+              var reader = new FileReader();           
+              reader.onload = function(e) {
+                $('#gst_back').attr('src', e.target.result);
+              }
+            reader.readAsDataURL(file);
+      }
+      else if(event.target.name=="aadhar_doc1")
+      {
+             formData.append('adhar_fornt', files.item(0), files.item(0).name);
+              var reader = new FileReader();
+               reader.onload = function(e) {
+                $('#adhar_front').attr('src', e.target.result);
+              }
+            reader.readAsDataURL(file);
+      }
+      else if(event.target.name=="aadhar_doc2")
+      {
+              formData.append('adhar_back', files.item(0), files.item(0).name);
+              var reader = new FileReader();
+               reader.onload = function(e) {
+                $('#adhar_back').attr('src', e.target.result);
+              }
+            reader.readAsDataURL(file);
+      }
+      else if(event.target.name=="pan_doc")
+      {
+             formData.append('pan_front', files.item(0), files.item(0).name);
+              var reader = new FileReader();
+               reader.onload = function(e) {
+                $('#pan_front').attr('src', e.target.result);
+              }
+            reader.readAsDataURL(file);
+      }
+      else if(event.target.name=="visiting_doc1")
+      {
+             formData.append('visiting_front', files.item(0), files.item(0).name);
+              var reader = new FileReader();
+               reader.onload = function(e) {
+                $('#visiting_front').attr('src', e.target.result);
+              }
+            reader.readAsDataURL(file);
+      }
+      else if(event.target.name=="visiting_doc2")
+      {
+              formData.append('visiting_back', files.item(0), files.item(0).name);;
+              var reader = new FileReader();
+               reader.onload = function(e) {
+                $('#visiting_back').attr('src', e.target.result);
+              }
+            reader.readAsDataURL(file);
+      }
     }
   }
-   AadharValidate() {
-    var adharcardTwelveDigit = /^\d{12}$/;
-    var adharSixteenDigit = /^\d{16}$/;
-    if (this.aadhar.match(adharcardTwelveDigit)) {
-      return false;
-    }
-    else if (this.aadhar.match(adharSixteenDigit)) {
-        return false;
-    }
-    else {
-        return true;
-    }
-    
-}
-  changePan(e)
-{
-  this.pan=e; 
-}
-checkPan()
+  modal(value)
   {
-    //console.log(this.pan);
-    if(this.pan==undefined||this.pan=="")
-    {
-      return false;
-    }
-    else if(this.pan.length>0)
-    {
-        if(this.pan=="[A-Z]{3}([CHFATBLJGP])(?:(?<=P)" + this.fName+ "|(?<!P)" + this.lName + ")[0-9]{4}[A-Z]")
-        {
-          return false;
-        }
-        else if(this.pan!="[A-Z]{3}([CHFATBLJGP])(?:(?<=P)" + this.fName+ "|(?<!P)" + this.lName + ")[0-9]{4}[A-Z]")
-        {
-          return true;
-        }
-    }
-    else
-    {
-      return false;
-    }
+    document.getElementById(value.name).click();
   }
-
   changeGst(e)
   {
-    this.gst=e;
-  }
-  checkGst()
-  {
-
-        // console.log(this.gst);
-         if(this.gst==undefined||this.gst=="")
-         {
-           return false;
-         }
-        else if(this.gst.length>0)
-        {
-            if(this.gst=="d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}")
-            {
-              return false;
-            }
-            else if(this.gst!="d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}")
-            {
-              return true;
-            }
-        }
-          
-        else
-        {
-          return false;
-        }
-  }
-  kyc(value){
     
-    this.loading=true;
-    this.sign=false;
-    console.log(value);
-     
-    this.api.Post(USERKYC,value).then(data=>{
+    this.gst=e;
+    if(e.length==0)
+    {
+        this.gst_check=false;
+    }
+    else if(e.length==15)
+    {
+      var pattern = new RegExp("([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})");
+      if(pattern.test(e)){
+        this.gst_check=false;
+        console.log(true);
+      }
+      else{
+        this.gst_check=true;
+      }
       
-              console.log(data);
-              this.alert=true;
-              this.message="Successful "
-              this.type="success";
-              this.router.navigate(['/registerOtp',this.mobile_no]);
-      }).catch(d=>{
-              this.type="danger";
-              this.message="Sorry !  Something Went Wrong Please Recheck";
-              this.loading=false;
-              this.sign=true;
-              this.alert=true;
-              console.log(d);
-      });
-  
+    }
+    else{
+      this.gst_check=true;
+    }
+  }
+  changeAadhar(e)
+  {
+    
+    this.aadhar=e;
+    console.log(e.length);
+    if(e.length==0)
+    {
+        this.adhar_check=false;
+    }
+    else if(e.length==14)
+    {
+      
+      var pattern = new RegExp("\\d{4}\\s\\d{4}\\s\\d{4}");
+      if(pattern.test(e)){
+        this.adhar_check=false;
+        console.log(true);
+      }
+      else{
+        this.adhar_check=true;
+      }
+     
+    }
+    else{
+      this.adhar_check=true;
+    }
+  }
+  changePan(e)
+  {
+    this.pan=e;
+    if(e.length==0)
+    {
+        this.pan_check=false;
+    }
+    else if(e.length==10)
+    {
+      var pattern = new RegExp("[A-Z]{5}[0-9]{4}[A-Z]{1}");
+      if(pattern.test(e))
+      {
+        this.pan_check=false;
+        console.log("true");
+      }
+      else{
+        this.pan_check=true;
+      }
+     
+    }
+    else{
+      this.pan_check=true;
+    }
+  }
+  kyc(){
+    this.loader=true;
+    this.page=false;
+     formData.append('mobile_no', this.mob);
+     formData.append('pan_no', this.aadhar);
+     formData.append('gst_no', this.gst);
+     formData.append('aadhar', this.pan);
+     this.api.Post(USERKYC,formData).then(data=>{
+      this.page=true;
+      this.loader=false;
+       console.log(data);
+       this.api.onSuccess("successfully done KYC");
+       this.router.navigate(['/home']);
+     }).catch(d=>{
+      this.page=true;
+      this.loader=false;
+      this.api.onFail("upload all the details and try again");
+       console.log(d);
+     })
 }
-
   ngOnInit() {
-    this.userinfo=  this.api. getUserInfo()
-    console.log(this.userinfo);
-    this.fName=this.userinfo.name.charAt(0);
-    console.log(this.fName);
-    this.lName=this.userinfo.lastname.charAt0(0);
+    this.loader=true;
+    this.page=false;
+     this.userinfo=  this.api. getUserInfo();
+     this.mob=this.userinfo.mobile_no;
   }
 
 }

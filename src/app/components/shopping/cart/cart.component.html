@@ -2,63 +2,41 @@
     <div class="holder mt-0">
         <div class="container">
             <ul class="breadcrumbs">
-                <li><a href="index.html">Home</a></li>
+                <li><a routerLink="/">Home</a></li>
                 <li><span>Shopping Cart</span></li>
             </ul>
         </div>
     </div>
     
     <div class="holder mt-0">
-        <div class="container">
+        <div class="container shopping-cart-item-details" *ngIf="page">
             <h1 class="text-center">Shopping Cart</h1>
             <div class="cart-table" *ngIf="div">
-                <div class="cart-table-prd"  *ngFor="let r of results">
-                    <div class="cart-table-prd-image"><a href="#"><img src="{{baseurl + r.image}}" alt=""></a></div>
+                <div class="cart-table-prd"  *ngFor="let r of results;let i=index">
+                   <div class="cart-table-prd-qty"><span></span> <b>{{i+1}}</b></div>
+                    <div class="cart-table-prd-image"><a  (click)='go(r.product_id)'><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl + r.image}}" alt=""></a></div>
                     <div class="cart-table-prd-name">
-                        <h5><a href="#">Ring</a></h5>
-                        <h2><a href="#">{{r.productName}}</a></h2>
+                        <h5><a href="javascript:void(0)" (click)='go(r.product_id)'>{{r.jwellery_type}} &nbsp;&nbsp; size:&nbsp;{{r.product_size}}</a></h5>
+                        <h2><a  href="javascript:void(0)" (click)='go(r.product_id)'>{{r.productName}}</a></h2>
                     </div>
                     <div   *ngIf= "checkCart(r.product_id)" class="row no=gutters" >
-                        <div class="row">
-                        <div class="col-1">
-                            <button  (click)="qtyUpdate(r.product_id,-1)" class="btn btn-secondary btn-block">-</button>
-                        </div>
-
-                        <div class="col-2 text-right">{{quantity(r.product_id)}}</div>
-
-                        <div class="col-1 ">
-                            <button  (click)="qtyUpdate(r.product_id,+1)" class="btn btn-secondary btn-block">+</button>
-                        </div>
+                       
+                        <div class="item-plus-minus">
+                            <table>
+                                <tr>
+                                    <td><button  (click)="qtyUpdate(r.cart_id,-1)" class="btn btn-secondary btn-block">-</button></td>
+                                    <td>{{quantity(r.cart_id)}}</td>
+                                    <td><button  (click)="qtyUpdate(r.cart_id,+1)" class="btn btn-secondary btn-block">+</button></td>
+                                </tr>
+                            </table>
+                        
                     </div>
                 </div>
-                    <!-- <div class="cart-table-prd-qty"><span>qty:</span> <b>{{r.count}}</b></div> -->
-                    <!-- <div class="cart-table-prd-price"><span>price:</span> <b>₹ 75.00</b></div> -->
-                    <div class="cart-table-prd-action"><a  (click)="deleteCart(r.product_id)" class="icon-cross"></a></div>
+                    <div class="cart-table-prd-action"><a  (click)="deleteCart(r.cart_id)" class="icon-cross"></a></div>
                 </div>
-               
-                <!-- <div class="cart-table-prd">
-                    <div class="cart-table-prd-image"><a href="#"><img src="../../../../assets/images/products/xsmall/product-02.jpg" alt=""></a></div>
-                    <div class="cart-table-prd-name">
-                        <h5><a href="#">Pendants</a></h5>
-                        <h2><a href="#">Lorem product</a></h2>
-                    </div>
-                    <div class="cart-table-prd-qty"><span>qty:</span> <b>1</b></div>
-                    <div class="cart-table-prd-price"><span>price:</span> <b>₹ 20.00</b></div>
-                    <div class="cart-table-prd-action"><a href="#" class="icon-heart"></a> <a href="#" class="icon-pencil"></a> <a href="#" class="icon-cross"></a></div>
-                </div>
-                <div class="cart-table-prd">
-                    <div class="cart-table-prd-image"><a href="#"><img src="../../../../assets/images/products/xsmall/product-01.jpg" alt=""></a></div>
-                    <div class="cart-table-prd-name">
-                        <h5><a href="#">Gift</a></h5>
-                        <h2><a href="#">Knitted Gold</a></h2>
-                    </div>
-                    <div class="cart-table-prd-qty"><span>qty:</span> <b>1</b></div>
-                    <div class="cart-table-prd-price"><span>price:</span> <b>₹ 199.00</b></div>
-                    <div class="cart-table-prd-action"><a href="#" class="icon-heart"></a> <a href="#" class="icon-pencil"></a> <a href="#" class="icon-cross"></a></div>
-                </div> -->
                 <div class="cart-table-total">
                     <div class="row">
-                        <div class="col-sm"><a routerLink="/home" class="btn btn--alt"><i class="icon-angle-left"></i><span>continue shopping</span></a> <a href="#" class="btn btn--grey"><i class="icon-repeat"></i><span>update cart</span></a></div>
+                        <div class="col-sm"><a routerLink="/home" class="btn btn--alt"><i class="icon-angle-left"></i><span>continue shopping</span></a></div>
                         <div class="col-sm-auto"><a routerLink="/checkout" class="btn"><span>continue checkout</span> <i class="icon-angle-right"></i></a></div>
                     </div>
                 </div>
@@ -68,8 +46,21 @@
                     <strong>{{message}}</strong> 
                 </ngb-alert>
             </div>
-            
         </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <button type="hidden" id='mClose' class="close" data-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body text-center">
+                    <app-loader></app-loader>
+                   <h3><strong>Please wait...</strong></h3> 
+                </div> 
+              </div>
+            </div>
+        </div>
+       <div style="padding: 200px;" *ngIf="loader"> <app-loader   ></app-loader> </div>
     </div>
-    
 </div>
+<simple-notifications></simple-notifications>
+<button [hidden]="true" id='openmodalbutton' class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+</button>

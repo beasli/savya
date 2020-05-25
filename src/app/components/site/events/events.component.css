@@ -1,0 +1,7 @@
+.events-listing .embed-responsive .embed-responsive-item{
+    position:relative !important;
+    border-radius: 0px !important;
+}
+.events-listing .embed-responsive:before{
+    padding: 0px !important;
+}

@@ -9,7 +9,7 @@
                     #slickModal="slick-carousel" 
                     [config]="slideConfig" >
           <div ngxSlickItem *ngFor="let slide of input;let i = index" (click)='detail(slide)' [ngClass]="{'overlay-wrapper':redirect=='Y'}" class="slide embed-responsive embed-responsive-16by9">
-          <img src="{{ url + slide.image }}" (mouseover)="text(slide)" class="embed-responsive-item"  alt="" width="100%">
+          <img src="{{ url + slide.image }}" onerror="this.src='../../../../assets/images/logo-bw.png'" (mouseover)="text(slide)" class="embed-responsive-item"  alt="" width="100%">
           <div class="overlay-effect">
               <div class="overlay-effect-content">
                 <h2>{{title}}</h2>
@@ -20,4 +20,5 @@
           </ngx-slick-carousel>
     </div>
     <div *ngIf='isShowAll' class="more-link-wrapper text-center mt-2"><a routerLink="/events" class="btn-decor">show me all</a></div>
+</div>
 </div>

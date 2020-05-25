@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SEARCH } from 'src/config';
+
 
 @Component({
   selector: 'app-search',
@@ -18,9 +19,11 @@ div:boolean;
 loader:boolean;
 page:boolean;
 message:any="Nothing To Show";
+drop:any;
 @ViewChild('addclosebutton') addclosebutton;
 @ViewChild('deleteclosebutton') deleteclosebutton;
-  constructor(private api:ApiService,private route:ActivatedRoute) { 
+  constructor(private api:ApiService,private route:ActivatedRoute,private router:Router) { 
+    this.drop=this.api.drop; 
     this.route.params.subscribe(params => {
       console.log(params.value);
       this.data=params.value;
@@ -31,7 +34,7 @@ searchApi()
 {
   this.loader=true;
     this.page=false;
-  this.api.Post(SEARCH,{name:this.data}).then(data=>{
+  this.api.Post(SEARCH,{search:this.data}).then(data=>{
     this.page=true;
       this.loader=false;
     this.alert=false;
@@ -82,7 +85,16 @@ quantity(pid)
 wishlist(pid) {
   // console.log("in wishlist");
    //console.log(pid);
-   this.api.checkWishlist(pid);
+   if(this.drop==0)
+     {
+       this.api.setGoto();
+       this.api.onSuccess('Please Login First to Continue');
+      //document.getElementById("openModalButton").click();
+     }
+     else if(this.drop==1)
+    {
+      this.api.checkWishlist(pid);
+    }
  }
  deleteWishlist(pid)
  {
@@ -114,16 +126,16 @@ wishlist(pid) {
       return false;
     }
 }
-addmodal() {
-  this.addclosebutton.nativeElement.click();
-}
-deletemodal()
-{
-  this.deleteclosebutton.nativeElement.click();
-}
+
   ngOnInit() {
     this.loader=true;
     this.page=false;
+    this.api.getlogin.subscribe(data => {
+      console.log(+data);
+      this.drop=data;
+      console.log(this.drop);    
+     });
+
   }
 
 }

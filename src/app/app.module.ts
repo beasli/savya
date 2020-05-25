@@ -15,6 +15,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutService } from './components/auth-guard/checkout.service';
 import { OtpGuardService } from './components/auth-guard/otp-guard.service';
+import { KycguardService } from './components/auth-guard/kycguard.service';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { LoginGuardService } from './components/auth-guard/login-guard.service';
+import { KycDoneService } from './components/auth-guard/kyc-done.service';
 
 
 @NgModule({
@@ -22,7 +26,8 @@ import { OtpGuardService } from './components/auth-guard/otp-guard.service';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    NavBarComponent,
+    NavBarComponent
+
   ],
   imports: [
     BrowserModule,
@@ -34,9 +39,16 @@ import { OtpGuardService } from './components/auth-guard/otp-guard.service';
     SiteModule,
     FormsModule,
     ReactiveFormsModule ,
-    NgbModule
+    NgbModule,
+    SimpleNotificationsModule.forRoot({
+      position:["middle","center"],
+       timeOut: 3000,
+       showProgressBar: true,
+       pauseOnHover: true,
+       clickToClose: true
+     }),
   ],
-  providers: [AuthGuardService,CheckoutService,OtpGuardService],
+  providers: [AuthGuardService,CheckoutService,OtpGuardService,KycguardService,LoginGuardService,KycDoneService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,8 @@
+import { IMAGE, GETADDRESS } from './../../../../config';
+import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterStateSnapshot, Router } from '@angular/router';
+import { ORDERHISTORY } from 'src/config';
 
 @Component({
   selector: 'app-order-detail',
@@ -7,35 +10,75 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./order-detail.component.css']
 })
 export class OrderDetailComponent implements OnInit {
-baseurl:any="http://admin.savyajewelsbusiness.com/img/product/";
-  constructor(private route:ActivatedRoute) { }
+baseurl:any=IMAGE+"/product/";
+  currentId: any;
+  addresses: any;
+  constructor(private route:ActivatedRoute,private api: ApiService,private router: Router) { }
 products:any;
 orders:any;
-alert:boolean;
-loader:boolean;
-page:boolean;
+current:any;
+image = IMAGE+'product/';
   ngOnInit() {
-    this.loader=true;
-    this.page=false;
-       this.orders=JSON.parse(localStorage.getItem('orders'));
-      this.route.params.subscribe(params=>{
-        console.log(params.id);
-        let result=this.orders.find(x => x.Order_id == params.id);
-        if(result)
-        { 
-          this.page=true;
-          this.loader=false;
-          this.products=result.product;
-          this.alert=false;
-        }
-        else
-        {
-          this.page=true;
-          this.loader=false;
-          this.alert=true;
-        }
-      
-      })
+    this.currentId=this.route.snapshot.paramMap.get('id');
+    this.api.Get(ORDERHISTORY).then(data => {
+          this.orders = data['data'];
+          let result=this.orders.find(x => x.Order_id == this.currentId);
+          this.current = result;
+          this.api.Get(GETADDRESS).then(data => {
+            this.addresses = data['data'].find(x => x.id == result.address_id);
+          }).catch(d=>{
+            if(d.error.message == 'Unauthenticated.' && d.status == 401){
+              this.api.onFail('Your session is expired please login again');
+              this.api.setGoto();
+              this.api.setlogin(0);
+              this.api.logout();
+              setTimeout(() => {
+              this.router.navigate(['/login']);
+              },1000);
+            } else{console.log(d)}
+          });
+
+          if (result) {
+            this.products=result.product;
+          }
+        }).catch(d=>{
+          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+            this.api.onFail('Your session is expired please login again');
+            this.api.setGoto();
+            this.api.setlogin(0);
+            this.api.logout();
+            setTimeout(() => {
+            this.router.navigate(['/login']);
+            },1000);
+          } else{console.log(d)}
+        });
+  }
+
+  changeSummary(id){
+    this.products = null;
+    this.router.navigate((['/order-detail', id]))
+    setTimeout(() => {
+      let result=this.orders.find(x => x.Order_id == id);
+      this.current = result;
+      this.addresses = null;
+      this.api.Get(GETADDRESS).then(data => {
+        this.addresses = data['data'].find(x => x.id == result.address_id);}).catch(d=>{
+          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+            this.api.onFail('Your session is expired please login again');
+            this.api.setGoto();
+            this.api.setlogin(0);
+            this.api.logout();
+            setTimeout(() => {
+            this.router.navigate(['/login']);
+            },1000);
+          } else{console.log(d)}
+        });
+
+      if (result) {
+        this.products=result.product;
+        this.currentId = result.orderid;
+      }},200);
+    
   }
 
 }

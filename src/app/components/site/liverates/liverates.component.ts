@@ -20,7 +20,7 @@ rates: [];
   ngOnInit(): void {
     this.timer = setInterval(() => {
       this.getRates();
-    }, 3000);
+    }, 20000);
   }
 
   ngOnDestroy() {

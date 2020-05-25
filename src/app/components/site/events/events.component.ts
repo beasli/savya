@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { EVENTS } from './../../../../config';
+import { EVENTS, IMAGE } from './../../../../config';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,10 +12,19 @@ export class EventsComponent implements OnInit {
 events: [];
 url: any;
   constructor(private api: ApiService,private router: Router) {
-    this.api.Post(EVENTS, {}).then(data => {
+    this.api.Get(EVENTS).then(data => {
       this.events = data['data']['data'];
-      this.events['url'] = data['url'] + "/";
-      this.url = this.events['url'];
+      this.url = IMAGE+"events/";
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{console.log(d)}
     });
   }
 

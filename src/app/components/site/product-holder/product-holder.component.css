@@ -14,6 +14,12 @@
 .products-love-icon{
     margin-left: 15px;
 }
+.middle-button{
+    margin: 0px auto;;
+}
+.product-border{
+    border:1px solid #e7e7e7;
+}
 @media(max-width:767px){
     .size-swatch li > * {
         margin: 0 4px 0 0;

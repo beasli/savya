@@ -1,0 +1,39 @@
+<div class="page-content" style="margin-bottom: 65px;">
+    <div class="holder mt-0">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li><a routerLink="/home">Home</a></li>
+                <li><span>My Offers</span></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="holder mt-0">
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-3 aside aside--left">
+                    <div class="list-group"><a routerLink="/account-details" class="list-group-item">Account Details</a> <a routerLink="/account-addresses" class="list-group-item">My Addresses</a> <a routerLink="/account-wishlist" class="list-group-item">My Wishlist</a><a routerLink="/offers" class="list-group-item active">My Offers</a> <a routerLink="/account-history" class="list-group-item">My Order History</a><a routerLink="/event-history" class="list-group-item">My Event History</a><a routerLink="/kycpending" class="list-group-item">KYC</a></div>
+                </div>
+                <div class="col-md-9 aside">
+                    <h2>Offer Details</h2>
+                <br>
+                <div class="card mb-3 border"  *ngFor="let slide of data" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                      <div class="col-md-4">
+                        <img [src]="image+slide.image" class="card-img" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h3 class="card-title"><strong>{{slide.title}}</strong></h3>
+                          <p class="card-text">{{slide.description}}</p>
+                          <h5 class="card-title"><strong>Coupon Code:{{"  " + slide.coupan}}</strong></h5>
+                          <h5 class="card-title" *ngIf='slide.offertype=="Fixed"'><strong>Get {{slide.offertype}} {{slide.value}} off</strong></h5>
+                          <h5 class="card-title" *ngIf='slide.offertype=="Percentage"'><strong>Get  {{slide.value}} % off</strong></h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

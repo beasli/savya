@@ -7,6 +7,10 @@ import { RouterModule } from '@angular/router';
 import { AuthGuardService } from '../../auth-guard/auth-guard.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutService } from '../../auth-guard/checkout.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { SiteModule } from '../../site/site/site.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -20,9 +24,19 @@ import { CheckoutService } from '../../auth-guard/checkout.service';
   imports: [
     CommonModule,
     NgbModule,
+    FormsModule,
+    SiteModule,
+    BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot({
+      position:["middle","center"],
+       timeOut: 3000,
+       showProgressBar: true,
+       pauseOnHover: true,
+       clickToClose: true
+     }),
     RouterModule.forChild([
       { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService,CheckoutService]},
-      { path: 'cart', component: CartComponent},
+      { path: 'cart', component: CartComponent, canActivate: [AuthGuardService]},
       { path: 'product', component: ProductComponent},
     ])
   ]

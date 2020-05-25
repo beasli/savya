@@ -1,0 +1,32 @@
+<app-liverates></app-liverates>
+<div class="container">
+    <div class="text-center" style='padding:3vh;'>
+        <h2>Our Bullion Merchant</h2>
+    </div>
+    <div *ngIf='merchant' class="card-group">
+        <div class="row">
+            <div *ngFor="let slide of merchant" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="card  border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
+                <div class="image-container" [ngStyle]="{'background-image': 'url(' + image + slide.cover_image + ')'}" style="padding-right:25%;padding-left:25%;padding-top:5%;">
+                    <img class="card-img-top justify-center" class="rounded-circle"  style="max-width: 100%;max-height:25vh;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="image + slide.image" alt="Card image cap">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center"><strong> {{slide.name}}</strong></h5>
+                    <h5 class="card-title text-center"> {{slide.mobile}}</h5>
+                    <h5 class="card-title text-center"> {{slide.telephone}}</h5>
+                    <h5 class="card-title text-center"> {{slide.email}}</h5>
+                    <h5 class="card-title text-center"> {{slide.facebook_link}}</h5>
+                    <h5 class="card-title text-center"> {{slide.instagram_link}}</h5>
+                    <h5 class="card-title text-center"> {{slide.shop_name}}</h5>
+                    <h5 class="card-title text-center"> {{slide.address}}</h5>
+                 </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div  *ngIf="!merchant.length">
+        <ngb-alert [dismissible]="false" >
+            <strong>No Bullian merchant in this city</strong> 
+        </ngb-alert>
+    </div>
+</div>

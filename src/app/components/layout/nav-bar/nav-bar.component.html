@@ -1,7 +1,8 @@
 <div class="hdr-content hide-mobile">
     <div class="container">
         <div class="row">
-            <div class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
+            <div *ngIf='logochange != 1' class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
+            <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/SJB_Machinery-1.png" srcset="assets/images/SJB_Machinery-1.png" alt=""></a></div>
             <!--navigation-->
             <div class="prev-menu-scroll icon-angle-left prev-menu-js"></div>
             <div class="nav-holder">
@@ -10,16 +11,18 @@
                     <ul  class="mmenu mmenu-js">
                         
                         <ul class="mmenu mmenu-js">
-                            <li *ngFor='let s of catwithsub' class="mmenu-item--simple"><a href="javascript:void(0)" title="">{{s.category}}<span class="menu-label menu-label--color1">NEW</span></a>
+                            <li *ngFor='let s of catwithsub' class="mmenu-item--simple">
+                                <ng-container *ngIf="s.category != 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/subcategory/', s.category_id]" title="">{{s.category}}</a></ng-container>
+                                <ng-container *ngIf="s.category == 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/machinery/', s.category_id]" title="">{{s.category}}</a></ng-container>
                                 <div class="mmenu-submenu">
                                     <ul class="submenu-list">
-                                        <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" (click)='gofilter(p.subcategory_id)'>{{p.subcategory}}</a>
-                                        </li>
+                                     <ng-container *ngIf="s.category != 'MACHINERY'"><li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" (click)='gofilter(p.subcategory_id)'>{{p.subcategory}}</a>
+                                        </li></ng-container>
                                     </ul>
                                 </div>
                             </li>
 
-                            <li class="mmenu-item--simple"><a href="javascript:void(0)" title="">More<span class="menu-label menu-label--color1">NEW</span></a>
+                            <li class="mmenu-item--simple"><a href="javascript:void(0)" title="">More</a>
                                 <div class="mmenu-submenu">
                                     <ul class="submenu-list">
                                         <li *ngFor='let s of catwithoutsub'><a href="javascript:void(0)" title="">{{s.category}}</a></li>
@@ -34,7 +37,7 @@
             </div>
             <div class="next-menu-scroll icon-angle-right next-menu-js"></div>
             <!--//navigation-->
-            <div class="col-auto minicart-holder">
+            <div *ngIf="drop" class="col-auto minicart-holder">
                 <div class="minicart"><a routerLink="/cart" class="minicart-link"><i class="icon icon-handbag"></i> <span class="minicart-qty">{{ProductsInCart()}}</span> <span class="minicart-title">Shopping Cart</span></a>
                     <div class="minicart-drop">
                         <div class="container">
@@ -91,7 +94,7 @@
                                     <div class="minicart-prd-price"><span>price:</span> <b>₹19900</b></div>
                                     <div class="minicart-prd-action"><a href="#" class="icon-heart js-label-wishlist"></a> <a routerLink="/product" class="icon-pencil"></a> <a href="#" class="icon-cross js-product-remove"></a></div>
                                 </div> -->
-                                <div class="minicart-drop-total">
+                                <div  class="minicart-drop-total">
                                     <div class="float-right">
                                         <div class="minicart-drop-btns-wrap"><a routerLink="/checkout" class="btn"><i class="icon-check-box"></i><span>checkout</span></a> <a routerLink="/cart" class="btn btn--alt is-hovered"><i class="icon-handbag"></i><span>view cart</span></a></div>
                                     </div>

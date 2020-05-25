@@ -1,5 +1,5 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { ADDADDRESS, GETADDRESS, EDITADDRESS } from './../../../../config';
+import { ADDADDRESS, GETADDRESS, EDITADDRESS, STATE, CITY } from './../../../../config';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,28 +9,62 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-address.component.css']
 })
 export class EditAddressComponent implements OnInit {
-uid: any;
 index: any;
 heading: any;
 addresses:[];
 mob:boolean;
 pin:boolean;
+// state:any;
+// cities:any;
+// statecode:any;
 loading: boolean;
   constructor(private api: ApiService, private router: Router, private route: ActivatedRoute) {
-    this.uid = this.api.getUserInfo();
-    this.uid = this.uid['uid'];
-    this.index = this.route.snapshot.paramMap.get('id');
-    if(this.index >= 0) {
-      this.heading = "  Edit Address"
-      this.api.Post(GETADDRESS, {uid: this.uid}).then(data => {
-        this.addresses = data['data'][this.index];
-      });
+  this.index = this.route.snapshot.paramMap.get('id');
+  if  (this.index) {
+    this.heading = "  Edit Address"
+    this.api.Get(GETADDRESS).then(data => {
+    this.addresses = data['data'].find(x => x.id == this.index);
+
+    // this.api.Get(STATE).then(data => {
+    //   this.state = data['other'];
+    //   if(this.addresses.length!=0){
+    //   this.statecode = this.state.find(x => x.name == this.addresses['region']);
+    // }
+    //   this.api.Get(CITY+'/'+this.statecode.id).then(data => {
+    //     this.cities = data['data'];
+    //     });
+    // });
+
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{console.log(d)}
+    });
     }
-    else{
+    else  {
+    //  this.statecode = {};
+      //this.statecode['id'] = -1;
       this.heading = "  Add New Address";
       this.addresses = [];
+      // this.api.Get(STATE).then(data => {
+      //   this.state = data['other'];
+      //     });
     }
    }
+
+  //  statechange(value) {
+  //    console.log(value);
+  //   this.api.Get(CITY+'/'+value).then(data => {
+  //     this.cities = data['data'];
+  //     console.log(data);
+  //     });
+  //  }
 
    changePin(e)
 {
@@ -69,20 +103,44 @@ changeNumber(e)
 }
 
    add(value) {
-    value['uid'] = this.uid;
-    if(this.index >= 0)
+    // value['region'] = this.state.find(x => x.id == value['region']);
+    // value['region'] = value['region']['name'];
+    if(this.index)
     {
-      value['address_id'] = this.addresses['id'];
-      this.api.Post(EDITADDRESS, value).then(data => {
-      if (confirm(data['message'])) {
+        this.api.Put(EDITADDRESS,this.index,value).then(data => {
+        this.api.onSuccess(data['message']);
         this.router.navigate(['/account-addresses']);
-      }
-    }); }
+        }).catch(d=>{
+          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+            this.api.onFail('Your session is expired please login again');
+            this.api.setGoto();
+            this.api.setlogin(0);
+            this.api.logout();
+            setTimeout(() => {
+            this.router.navigate(['/login']);
+            },1000);
+          } else{console.log(d)}
+        });
+    }
     else {
           this.api.Post(ADDADDRESS, value).then(data => {
-          if (confirm(data['message'])) {
-          this.router.navigate(['/account-addresses']);
-        }
+            this.api.onSuccess(data['message']);
+            if(!this.api.goto)
+            {
+            this.router.navigate(['/account-addresses']);
+            } else{
+              this.api.getGoto();
+            }
+      }).catch(d=>{
+        if(d.error.message == 'Unauthenticated.' && d.status == 401){
+          this.api.onFail('Your session is expired please login again');
+          this.api.setGoto();
+          this.api.setlogin(0);
+          this.api.logout();
+          setTimeout(() => {
+          this.router.navigate(['/login']);
+          },1000);
+        } else{console.log(d)}
       });
     }
   }

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { CARTVIEW, CRAUSEL } from 'src/config';
 import { Router } from '@angular/router';
+import { $ } from 'protractor';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class ProductHolderComponent implements OnInit {
   @Input() mostselling;
   @Input() url3;
   @Input() heading;
+  @Input() redirect;
   value:boolean;
   slideConfig = {
     "slidesToShow": 4,
@@ -47,20 +49,33 @@ export class ProductHolderComponent implements OnInit {
 
  wish:any;
  cart:any[];
-
+drop:any;
 @ViewChild('addclosebutton') addclosebutton;
 @ViewChild('deleteclosebutton') deleteclosebutton;
-  constructor(private api:ApiService) {
-  
+  constructor(private api:ApiService,private router:Router) {
+    this.drop=this.api.drop; 
     // console.log(this.mostselling);
     // console.log(this.url3);
     // console.log(this.heading);
-
-    this.api.Post(CARTVIEW, {user_id: this.api.uid}).then(data => {
+    if(localStorage.getItem('savya_userInfo'))
+    {
+      this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data => {
         this.cart = data['data'];
     }).catch(d => {
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
       console.log(d);
-    })
+      }
+    });
+    }
+    
    }
    quantity(pid)
    {
@@ -93,12 +108,25 @@ export class ProductHolderComponent implements OnInit {
     this.api.godetail(value);
   }
   wishlist(pid) {
-   // console.log("in wishlist");
+    // console.log("in wishlist");
     //console.log(pid);
-    this.api.checkWishlist(pid);
-  
+   
+     if(this.drop==0)
+     {
+        // document.getElementById("openModalButton").click();
+        
+       this.api.setGoto();
+       this.api.onSuccess('Please Login First to Continue');
+     }
+     else if(this.drop==1)
+    {
+      this.api.checkWishlist(pid);
+    }
   }
-
+  // goLogin()
+  // {
+  //   this.router.navigate(['/login']);
+  // }
   checkHeart(pid)
   {
 
@@ -140,14 +168,13 @@ export class ProductHolderComponent implements OnInit {
   {
     this.api.addToCart(s);
   }
-  addmodal() {
-    this.addclosebutton.nativeElement.click();
-  }
-  deletemodal()
-  {
-    this.deleteclosebutton.nativeElement.click();
-  }
+
   ngOnInit() {
+    this.api.getlogin.subscribe(data => {
+      console.log(+data);
+      this.drop=data;
+      console.log(this.drop);    
+     });
 
   }
 

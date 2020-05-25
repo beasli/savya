@@ -1,23 +1,25 @@
+import { IMAGE } from './../../../../config';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
-import { PROFILEUPDATE, PROFILEVIEW } from 'src/config';
-
+import { PROFILEUPDATE, PROFILEVIEW} from 'src/config';
+import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
+declare var $: any;
+const formData: FormData = new FormData();
 @Component({
   selector: 'app-change-profile',
   templateUrl: './change-profile.component.html',
   styleUrls: ['./change-profile.component.css']
 })
 export class ChangeProfileComponent implements OnInit {
-  loading:boolean;
-  sign:boolean=true;
   data:any;
-  alert:boolean;
-  message:any;
-  type:any;
   d:any;
   loader:boolean;
   page:boolean;
-  constructor(private api:ApiService) {
+  name:any;
+  photo:any;
+  
+  constructor(private api:ApiService,private router:Router,private sanitizer: DomSanitizer) {
     let mobile=this.api.getMobileNo();
     console.log(mobile);
     this.api.Post(PROFILEVIEW, {
@@ -26,48 +28,92 @@ export class ChangeProfileComponent implements OnInit {
       this.page=true;
       this.loader=false;
       console.log(data);
-      this.data=data['data'][0];
+      this.data=data['user'];
+      this.photo = data['url'];
+      this.name=this.data.name;
       //this.router.navigate(['/registerOtp']);
     }).catch(d=>{
-          console.log(d);
-    });
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
+        console.log(d);
+      }
+});
 
+}
+changename(e)
+{
+  this.name=e;
+  
+}
+changeImage(event)
+{
+  let files:FileList=event.target.files;
+  formData.append('image', files.item(0), files.item(0).name);
+  if(files.length > 0)
+  {
+    let file: File = files[0];
+    var img = document.querySelector("#preview img");
+    var reader = new FileReader();
+              reader.onload = function(e) {
+                $('#image_preview').attr('src', e.target.result);
+                console.log(e.target.result)
+              }
+             reader.readAsDataURL(file); 
   }
-   
-   update(value){
+}
+  setvalues(event)
+  {
+    console.log(event);
+  }
+  modal()
+  {
+    document.getElementById("image").click();
+  }
+   update(){
     this.loader=true;
     this.page=false;
-    this.alert=false
-    this.loading=true;
-    this.sign=false;
-    // console.log(value);
-    this.api.Post(PROFILEUPDATE, value).then(data => {
-      this.page=true;
-      this.loader=false;
-              console.log(data);
-              this.alert=true;
-              this.message="Successful Updated "
-              this.type="success";
-              this.loading=false;
-              this.sign=true;
-              this.d=data['data'][0];
-              console.log(this.d); 
-            
-             this.api.setUserInfo(this.d);
-              //this.router.navigate(['/registerOtp']);
-      }).catch(d=>{
+    formData.append('name',this.name);
+    if(this.name.length>0){
+      this.api.Post(PROFILEUPDATE, formData).then(data => {
         this.page=true;
         this.loader=false;
-              console.log(d);
-              this.type="danger";
-              this.loading=false;
-              this.sign=true;
-              this.alert=true;
-              this.message="Enter your all detail";
-              console.log(d);
-      });
+          console.log(data);
+          this.api.setUserInfo(data['data']);
+          this.data=data['data'];
+          this.api.onSuccess("Profile successfully updated");
+        }).catch(d=>{
+          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+            this.api.onFail('Your session is expired please login again');
+            this.api.setGoto();
+            this.api.setlogin(0);
+            this.api.logout();
+            setTimeout(() => {
+            this.router.navigate(['/login']);
+            },1000);
+          } else{
+            this.page=true;
+            this.loader=false;
+            this.api.onFail("Please try again");
+          }
+        });
+    }
+    else if(this.name.length==0){
+      this.page=true;
+        this.loader=false;
+      this.api.onFail("Name field can't be empty");
+    }
+    
 }
-
+getlink(s):SafeStyle {
+  return this.sanitizer.bypassSecurityTrustStyle('url('+ IMAGE + 'app_user/' + s + ')');
+}
   ngOnInit(): void {
     this.loader=true;
     this.page=false;

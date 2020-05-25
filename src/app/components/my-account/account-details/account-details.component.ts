@@ -1,7 +1,8 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { PROFILEVIEW } from 'src/config';
-
+import { HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-account-details',
   templateUrl: './account-details.component.html',
@@ -12,19 +13,25 @@ data:any;
 mobile:any;
 loader:boolean;
 page:boolean;
-  constructor(private api: ApiService) { 
-    let mobile=this.api.getMobileNo();
-    console.log(mobile);
-    this.api.Post(PROFILEVIEW,{
-      mobile:mobile
-    }).then(data=>{
+  constructor(private api: ApiService,private router: Router) { 
+    
+    this.api.Post(PROFILEVIEW, {}).then(data=>{
       this.page=true;
       this.loader=false;
-      console.log(data);
-      this.data=data['data'][0];
+      this.data=data['user'];
       //this.router.navigate(['/registerOtp']);
 }).catch(d=>{
-      console.log(d);
+  if(d.error.message == 'Unauthenticated.' && d.status == 401){
+    this.api.onFail('Your session is expired please login again');
+    this.api.setGoto();
+    this.api.setlogin(0);
+    this.api.logout();
+    setTimeout(() => {
+    this.router.navigate(['/login']);
+    },1000);
+  } else{
+    console.log(d);
+  }
 });
 
   }

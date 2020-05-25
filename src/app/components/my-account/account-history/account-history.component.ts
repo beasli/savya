@@ -12,6 +12,7 @@ export class AccountHistoryComponent implements OnInit {
  orders:any;
  loader:boolean;
 page:boolean;
+alert:boolean;
   constructor(private api:ApiService,private router:Router) { }
   orderDetail(id)
   {
@@ -20,17 +21,28 @@ page:boolean;
   ngOnInit() {
     this.loader=true;
     this.page=false;
-    this.api.Post(ORDERHISTORY,{user_id:3 }).then(data=>{
+    this.api.Get(ORDERHISTORY).then(data=>{
       this.page=true;
       this.loader=false;
       this.orders=data['data'];
-      localStorage.setItem('orders',JSON.stringify(data['data']));
-      console.log( data['data']);
      
     }).catch(d=>{
-      console.log(d);
-      
-    })
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
+      this.alert=true;
+      this.loader=false;
+      this.page=false;
+      }
+    });
   }
+
+  
 
 }

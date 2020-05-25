@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { WISHLISTVIEW } from 'src/config';
@@ -18,10 +19,10 @@ alert:boolean;
 message:any;
 loader:boolean;
 page:boolean;
-  constructor(private api:ApiService) {
-    this.data=this.api. getUserInfo();
-    this.uid=this.data.uid;
-     console.log("uid"+this.uid);
+  constructor(private api:ApiService,private router:Router) {
+    // this.data=this.api. getUserInfo();
+    // this.uid=this.data.uid;
+    //  console.log("uid"+this.uid);
     this.view();
      //console.log(this.data);
     this.value=localStorage.getItem('wish');
@@ -29,7 +30,7 @@ page:boolean;
   view()
   {
     
-    this.api.Post(WISHLISTVIEW,{uid:this.uid}).then(data=>{
+    this.api.Get(WISHLISTVIEW).then(data=>{
     console.log(data);
      this.page=true;
       this.loader=false;
@@ -43,13 +44,27 @@ page:boolean;
       //   console.log(this.results);
       //  console.log(this.baseurl);
      }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.api.onFail('Your session is expired please login again');
+        this.api.setGoto();
+        this.api.setlogin(0);
+        this.api.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
       this.page=true;
       this.loader=false;
        this.alert=true;
        this.div=false;
        this.message=d.error.data; 
-       console.log(d);
-     })
+       console.log(d);}
+     });
+
+
+    
+
+
     
   }
   deleteWishlist(pid)

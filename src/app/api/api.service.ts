@@ -1,9 +1,10 @@
 import { Router } from '@angular/router';
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, CARTDELETE, CARTUPDATE } from '../../config';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, CARTDELETE, CARTUPDATE, ORDERHISTORY, PROFILEVIEW } from '../../config';
 import * as CryptoJS from 'crypto-ts';
 import { JsonPipe } from '@angular/common';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Injectable({
@@ -14,22 +15,34 @@ export class ApiService {
   @Output() getWish:EventEmitter<string> = new EventEmitter();
   @Output() getUserData:EventEmitter<string> = new EventEmitter();
   @Output() Cart:EventEmitter<string> = new EventEmitter();
+  @Output() filterChange:EventEmitter<string> = new EventEmitter();
+  @Output() changelogo:EventEmitter<number> = new EventEmitter();
+
   drop:any;
   otp:any;
   otpGuard:any;
   uid:any;
   wish:any[];
   event:any;
+  header:any;
+  goto:any;
   
-  
-  constructor(public http: HttpClient, private router: Router) {
+  constructor(public http: HttpClient,private service: NotificationsService, private router: Router) {
+    console.log('I AM CONSTRUCTOR');
     if(localStorage.getItem('savya_userInfo'))
     {
      let u=this.getUserInfo();
-    this.uid=u.uid;
-    console.log(this.uid);
+    this.uid=u.id;
+    console.log("userid"+this.uid);
    }
     // console.log("userid"+this.uid);
+    // if(this.getMobileNo())
+    // {
+    //   console.log("if condition");
+    //   this.updateCart();
+    //   this.updateWishlist();
+    //   this.updateOrderHistory();
+    // }
     
     if (localStorage.getItem('drop')) {
       this.drop =  +this.decrypt((localStorage.getItem('drop')));
@@ -37,11 +50,41 @@ export class ApiService {
       this.drop = 0;
     }
 
+    this.header = new HttpHeaders().set(
+      "Authorization",
+       'Bearer'+" "+this.getMobileNo()
+    );
+    console.log({headers:this.header});
+
+
+      this.getlogin.subscribe(data=>{
+        if(this.drop==1)
+        {
+          if(localStorage.getItem('savya_userInfo'))
+          {
+            this.updateCart();
+            this.updateWishlist();
+            this.updateOrderHistory();
+          }
+          console.log("login emitter");
+        }
+        if(this.drop==0)
+        {
+          console.log("logout emitter");
+        }
+        
+      })
+
  }
 
   public Get(api) {
+    this.header = new HttpHeaders().set(
+      "Authorization",
+       'Bearer'+" "+this.getMobileNo()
+    );
+   // console.log(this.header);
     return new Promise((resolve, reject) => {
-      this.http.get(apiUrl + api)
+      this.http.get(apiUrl + api,  {headers:this.header})
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -49,10 +92,37 @@ export class ApiService {
         });
     });
   }
+  public Delete(api){
+    return new Promise((resolve, reject) => {
+      this.http.delete(apiUrl + api,  {headers:this.header})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+  public Put2(api, formData,parameters={}){
+    this.header = new HttpHeaders().set(
+      "Authorization",
+       'Bearer'+" "+this.getMobileNo()
+    );
+    console.log(this.header);
+    return new Promise((resolve, reject) => {
 
+      let options = { headers: this.header ,params:parameters};
+
+      this.http.put(apiUrl + api+formData,formData,options)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
   public Post(api, formData) {
     return new Promise((resolve, reject) => {
-      this.http.post(apiUrl + api, formData)
+      this.http.post(apiUrl + api, formData,  {headers:this.header})
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -60,24 +130,120 @@ export class ApiService {
         });
     });
   }
-    
 
+  public Put(api, formData,parameters={}) {
+    return new Promise((resolve, reject) => {
+
+      let options = { headers: this.header ,params:parameters};
+
+      this.http.put(apiUrl + api+'/'+formData,formData,options)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+  
+  public delete(api, formData) {
+    return new Promise((resolve, reject) => {
+
+      let options = { headers: this.header};
+
+      this.http.delete(apiUrl + api+'/'+formData,options)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  setGoto(){
+    this.goto = this.router.url;
+  }
+
+  getGoto(){
+    if(this.goto){
+      this.router.navigate([this.goto]);
+    }
+    this.goto = null;
+  }
+
+  updateOrderHistory()
+  {
+    this.Post(ORDERHISTORY,{user_id:this.uid}).then(data=>{
+      console.log( data);
+      localStorage.setItem('orders',JSON.stringify(data['data']));  
+    }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.onFail('Your session is expired please login again');
+        this.setGoto();
+        this.setlogin(0);
+        this.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
+      console.log(d);
+      localStorage.removeItem('orders');}
+    });
+  }
+
+  onSuccess(message){
+    this.service.success('Success',message,{
+     position:["middle","center"],
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  onFail(message){
+    this.service.warn('Not Possible',message,{
+     position:  	["middle","center"],
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
  
   
 //cart functions
 
   updateCart()
   {
-    //console.log("in update cart function")
-    this.Post(CARTVIEW,{user_id:this.uid}).then(data=>{
+    if(localStorage.getItem('savya_userInfo'))
+    {
+     let u=this.getUserInfo();
+    this.uid=u.id;
+    this.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
       //console.log(data['data'][0].cart_id);
       console.log( data);
       localStorage.setItem('cart',JSON.stringify(data));  
     }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.onFail('Your session is expired please login again');
+        this.setGoto();
+        this.setlogin(0);
+        this.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
       console.log(d);
       localStorage.removeItem('cart');
-      this.Cart.emit("emptycart"+Date.now());
+      this.Cart.emit("emptycart"+Date.now());}
     })
+    console.log(this.uid);
+   }
+
+   
+
+    //console.log("in update cart function")
+   
   }
   checkCart(pid)
   { 
@@ -140,13 +306,22 @@ qtyUpdate(pid,value)
                 else
                 {
                       c=c+value;
-                    this.Post(CARTUPDATE,{user_id:this.uid,cart_id:cartId,count:c}).then(data=>{
-                      console.log(data);
+                   // this.Put2(CARTUPDATE+"?cart_id="+cartId+"&user_id="+this.uid+"&count="+c).then(data=>{
+                     this.Put2(CARTUPDATE,"",{cart_id:cartId,user_id:this.uid,count:c}).then(data=>{
+                      
                       this.updateCart(); 
                       this.Cart.emit("cartUpdate"+Date.now()); 
                     }).catch(d=>{
-                      console.log(d);
-                    })
+                      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+                        this.onFail('Your session is expired please login again');
+                        this.setGoto();
+                        this.setlogin(0);
+                        this.logout();
+                        setTimeout(() => {
+                        this.router.navigate(['/login']);
+                        },1000);
+                      } else{console.log(d)}
+                    });
                 }
             } 
      }
@@ -154,6 +329,7 @@ qtyUpdate(pid,value)
 
   deleteCart(pid)
   {
+    console.log(pid)
     if(localStorage.getItem("waste")!=null)
     {
       let waste = JSON.parse(localStorage.getItem("waste"));
@@ -166,17 +342,27 @@ qtyUpdate(pid,value)
     delete prd_sizes[pid];
     localStorage.setItem("prd_sizes",JSON.stringify(prd_sizes));
    }
-    this.Post(CARTDELETE,{user_id:this.uid,product_id:pid}).then(data=>{
+    this.Delete(CARTDELETE+"?cart_id="+pid+"&user_id="+this.uid).then(data=>{
       //console.log("deletecart"+data)
       this.updateCart();
       this.Cart.emit("cartUpdated"+Date.now());
+      this.onSuccess('Product Successfully Removed from the cart');
      
     }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.onFail('Your session is expired please login again');
+        this.setGoto();
+        this.setlogin(0);
+        this.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
       this.updateCart();
       console.log(d);
-      this.Cart.emit("cartUpdated"+Date.now());
+      this.Cart.emit("cartUpdated"+Date.now());}
      
-    })
+    });
     
   }
   addToCart(product)
@@ -186,12 +372,23 @@ qtyUpdate(pid,value)
       console.log(data);
       this.updateCart();
       this.Cart.emit("cartUpdated"+Date.now());
+      
+    this.onSuccess('Product Successfully added to the cart');
     //  localStorage.setItem('cart',JSON.stringify(data));  
     }).catch(d=>{
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.onFail('Your session is expired please login again');
+        this.setGoto();
+        this.setlogin(0);
+        this.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
       console.log(d);
       this.Cart.emit("cartUpdated"+Date.now());
-      
-    })
+      }      
+    });
   }
 
 
@@ -206,28 +403,51 @@ qtyUpdate(pid,value)
             }
   updateWishlist()
   {
-    this.Post(WISHLISTVIEW,{uid:this.uid}).then(data=>{
+    this.Get(WISHLISTVIEW).then(data=>{
       console.log(data);
       localStorage.setItem('wishlist',JSON.stringify(data));
      
     }).catch(d=>{
-      console.log(d);
-      //console.log("deleteWishllist"+d.error.data);
+
+      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        this.onFail('Your session is expired please login again');
+        this.setGoto();
+        this.setlogin(0);
+        this.logout();
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+        },1000);
+      } else{
+        console.log(d);
+        //console.log("deleteWishllist"+d.error.data);
       localStorage.removeItem('wishlist');
-      this.getWish.emit("emptyWishlist"+Date.now());
+      this.getWish.emit("emptyWishlist"+Date.now())
+      }
+      ;
     })
   }
 
   deleteWishlist(pid)
   {
-      this.Post(WISHLISTDELETE,{uid:this.uid,product_id:pid}).then(data=>{
+      console.log("wishlistdeletefunction")
+    
+      this.Delete(WISHLISTDELETE+"/"+pid).then(data=>{
         console.log(data);
        this.updateWishlist();
+       this.onSuccess('Product Successfully Removed from the Wishlist');
        this.getWish.emit("wishlist updated"+Date.now());
       }).catch(d=>{
-        console.log(d);
-      
-      })
+        if(d.error.message == 'Unauthenticated.' && d.status == 401){
+          this.onFail('Your session is expired please login again');
+          this.setGoto();
+          this.setlogin(0);
+          this.logout();
+          setTimeout(() => {
+          this.router.navigate(['/login']);
+          },1000);
+        } else{
+         console.log(d);}
+       });
      
   }
  
@@ -246,36 +466,56 @@ checkWishlist(pid)
             }
             else
             {
-              this.Post(WISHLISTADD,{uid:this.uid,product_id:pid}).then(data=>{
+              this.Post(WISHLISTADD,{product_id:pid}).then(data=>{
                 console.log(data);
                    this.updateWishlist();
+                   this.onSuccess('Product Successfully added to the Wishlist');
               }).catch(d=>{
-                console.log(d);
-              })
+                if(d.error.message == 'Unauthenticated.' && d.status == 401){
+                  this.onFail('Your session is expired please login again');
+                  this.setGoto();
+                  this.setlogin(0);
+                  this.logout();
+                  setTimeout(() => {
+                  this.router.navigate(['/login']);
+                  },1000);
+                } else{
+                 console.log(d);}
+               });
             } 
       }
       else{
-        this.Post(WISHLISTADD,{uid:this.uid,product_id:pid}).then(data=>{
+        this.Post(WISHLISTADD,{product_id:pid}).then(data=>{
           console.log(data);
              this.updateWishlist();
+             this.onSuccess('Product Successfully added to the Wishlist');
         }).catch(d=>{
-          console.log(d);
-        })
-      }    
+          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+            this.onFail('Your session is expired please login again');
+            this.setGoto();
+            this.setlogin(0);
+            this.logout();
+            setTimeout(() => {
+            this.router.navigate(['/login']);
+            },1000);
+          } else{
+           console.log(d);}
+         });
+      }
 }
-  getWishlist()
+getWishlist()
+{
+  let m=localStorage.getItem('wishlist');
+  if(m)
   {
-    let m=localStorage.getItem('wishlist');
-    if(m)
-    {
-      let n=JSON.parse(localStorage.getItem('wishlist'));
-      return n['data'];
-    }
-    else{
-      return null;
-    }
-   
+    let n=JSON.parse(localStorage.getItem('wishlist'));
+    return n['data'];
   }
+  else{
+    return null;
+  }
+  
+}
 
 
 
@@ -293,7 +533,6 @@ checkWishlist(pid)
   setUserInfo(value)
   {
    let e=this.encrypt(value);
-   this.setMobileNo(value.mobile_no);
     localStorage.setItem('savya_userInfo',e);
    
   }
@@ -318,6 +557,10 @@ checkWishlist(pid)
     return m;
 
   }
+
+  changelg(number:number){
+    this.changelogo.emit(number);
+  }
   setlogin(value)
 {
         let e=this.encrypt(value);
@@ -328,6 +571,7 @@ checkWishlist(pid)
   getUserInfo()
   {
     let d =this.decrypt(localStorage.getItem('savya_userInfo'));
+    console.log(d);
     return d;
   }
   logout()
@@ -336,6 +580,7 @@ checkWishlist(pid)
       localStorage.removeItem('token');
       localStorage.removeItem('wishlist');
       localStorage.removeItem('cart');
+      localStorage.removeItem('orders');
   }
 setOtp(value)
 {
@@ -356,23 +601,106 @@ getOtpGuard()
     return this.otpGuard;
     
 }
+calculate(products){
+  let priceWeight = [];
+  products.forEach(childObj => {
+  let gold = childObj.assests.find(slide => slide.metal === 'Gold');
+  let silver = childObj.assests.find(slide => slide.metal === 'Silver');
+  let stone = childObj.assests.find(slide => slide.metal === 'Stone');
+  let diamond = childObj.assests.find(slide => slide.metal === 'Diamond');
+  let platinum = childObj.assests.find(slide => slide.metal === 'Platinum');
+  let price = childObj.price;
+  let weight = 0;
+  let priceProduct = 0;
+  let making = 0;
+  let goldweight;
+
+  if(gold)  {
+      if(gold.options == 'Percentage'){
+        let pricegold = price.gold.find(x => x.type == '24KT');
+        let value = price.gold.find(x => x.type == gold.materialType);
+        value = value.value_in;
+        console.log(value);
+        console.log(pricegold.price);
+        console.log(gold.options);
+        console.log(gold.makingCharge);
+        console.log(gold.weight);
+        let outcome = this.price(gold.weight,pricegold.price,gold.options,gold.makingCharge,0,value);
+        console.log(outcome);
+            weight += Number(outcome.weight);
+            goldweight = Number(outcome.weight);
+            priceProduct += outcome.price;
+      } else {
+        let pricegold = price.gold.find(x => x.type == gold.materialType);
+        let outcome = this.price(gold.weight,pricegold.price,gold.options,gold.makingCharge,gold.wastage);
+        weight += Number(outcome.weight);
+        goldweight = Number(outcome.weight);
+        priceProduct += outcome.price;
+      }
+  }
+  if(silver)  {
+    let pricesilver = price.silver.find(x => x.type == silver.materialType);
+    let outcome = this.price(silver.weight,pricesilver.price,silver.options,silver.makingCharge,silver.wastage);
+    weight += Number(outcome.weight);
+    priceProduct += outcome.price;
+    making += Number(outcome.making_charge);
+  }
+  if(stone)  {
+    let pricestone = price.stone.find(x => x.type == stone.materialType);
+    let outcome = this.price(stone.weight,pricestone.price,stone.options,stone.makingCharge,stone.wastage);
+    weight += Number(outcome.weight)*0.2;
+    priceProduct += outcome.price;
+    making += Number(outcome.making_charge);
+  }
+  if(diamond)  {
+    let pricediamond = price.diamond_master.find(x => x.type == diamond.materialType);
+    let outcome = this.price(diamond.weight,pricediamond.price,diamond.options,diamond.makingCharge,diamond.wastage);
+    weight += Number(outcome.weight)*0.2;
+    priceProduct += outcome.price;
+    making += Number(outcome.making_charge);
+  }
+  if(platinum)  {
+    let priceplatinum = price.platinum.find(x => x.type == platinum.materialType);
+    let outcome = this.price(platinum.weight,priceplatinum.price,platinum.options,platinum.makingCharge,platinum.wastage);
+    weight += Number(outcome.weight);
+    priceProduct += outcome.price;
+    making += Number(outcome.making_charge);
+  }
+   
+    let data = {'weight':weight,'price':priceProduct,'goldcat':gold.materialType,'goldweight':goldweight,'making':making};
+    priceWeight.push(data);
+  });
+  return priceWeight;
+}
 
 price(weight, rate, option, makingcharge, wastage = 0, value = 0) {
   let metalprice = 0;
-  if  (option == "pergram") {
+  let making = 0;
+  if  (option == "PerGram") {
       metalprice  =  (Number(rate) + Number(makingcharge)) * Number(weight);
-  } else if (option == "percentage") {
+      making = Number(makingcharge) * Number(weight);
+  } else if (option == "Percentage") {
   weight = ((Number(makingcharge) + Number(value)) / 100) * Number(weight);
   metalprice = Number(rate) * weight;
-  } else if (option == "fixed") {
+  } else if (option == "Fixed") {
       metalprice = Number(weight) * Number(rate) + Number(makingcharge);
+      making = Number(makingcharge);
   }
   if (wastage != 0) {
     let wasteprice = ((Number(weight) / 100) *  Number(wastage)) * Number(rate);
     metalprice = metalprice + wasteprice;
  }
-  let data = {'weight': weight,'price': metalprice};
+  let data = {'weight': weight,'price': metalprice,'making_charge':making};
   return data;
+}
+setfilter(value)
+{
+  localStorage.setItem('filter',JSON.stringify(value));
+  this.filterChange.emit("filterchanged"+Date.now()); 
+}
+getfilter()
+{
+  return JSON.parse(localStorage.getItem('filter'));
 }
 
 }

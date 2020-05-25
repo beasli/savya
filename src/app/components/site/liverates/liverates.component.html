@@ -1,4 +1,4 @@
-<div class="table-box-wrapper  for-desktop hide-mobile" style="padding:5% 0% 0%;" *ngIf="rates" >
+<div routerLink='/bullion' class="table-box-wrapper  for-desktop hide-mobile" style="padding:5% 0% 0%;" *ngIf="rates" >
   <div class="each-table-box padding" *ngFor="let rate of rates">
     <h2 class='text-center '>{{ (rate.Symbol === 'GLD') ? 'Gold [₹]' : (rate.Symbol === 'SLR') ? 'Silver [₹]' : (rate.Symbol === 'XAUUSD') ? 'Gold [$]' : (rate.Symbol === 'XAGUSD') ? 'Silver [$]' : (rate.Symbol === 'INRSpot') ? 'INR [₹]' : ''}}</h2>
       <table class="table table-striped">

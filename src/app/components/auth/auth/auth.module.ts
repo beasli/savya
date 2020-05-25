@@ -1,3 +1,4 @@
+import { KycPendingComponent } from './../kyc-pending/kyc-pending.component';
 import { AuthGuardService } from './../../auth-guard/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,12 +15,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap' ;
 import { KycComponent } from '../kyc/kyc.component';
 import { ChangeProfileComponent } from '../change-profile/change-profile.component';
 import { OtpGuardService } from '../../auth-guard/otp-guard.service';
+import { SiteModule } from '../../site/site/site.module';
+import { LoginGuardService } from '../../auth-guard/login-guard.service';
+import { KycDoneService } from '../../auth-guard/kyc-done.service';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    OtpComponent, 
+    OtpComponent,
+    KycPendingComponent,
     ForgetPasswordComponent,
     ForgetOtpComponent,
     ChangePasswordComponent,
@@ -32,8 +37,9 @@ import { OtpGuardService } from '../../auth-guard/otp-guard.service';
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule ,
+    SiteModule,
     RouterModule.forChild([
-      { path: 'login', component: LoginComponent},
+      { path: 'login', component: LoginComponent,canActivate: [LoginGuardService]},
       { path: 'register', component: RegisterComponent},
       { path: 'registerOtp/:no' , component: OtpComponent,canActivate: [OtpGuardService]},
       { path: 'forget' , component: ForgetPasswordComponent},
@@ -41,6 +47,7 @@ import { OtpGuardService } from '../../auth-guard/otp-guard.service';
       { path: 'change/:no' , component: ChangePasswordComponent, canActivate: [OtpGuardService]},
       { path: 'kyc' , component: KycComponent, canActivate: [AuthGuardService]},
       { path: 'changeProfile' , component: ChangeProfileComponent,  canActivate: [AuthGuardService]},
+      { path: 'kycpending' , component: KycPendingComponent, canActivate: [AuthGuardService]}
     ])
   ]
 })

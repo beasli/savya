@@ -1,74 +1,105 @@
+<!--
 <div class="row">
   <div class="col-sm">
   </div>
-  <div class="col-sm">
+  <div class="col-sm">-->
     
-<div class="card border" style="width: 50rem;" *ngIf="event">
-    <img src="{{ event.url + event.image }}" class="card-img-top" alt="...">
-    <div class="card-body text-center">
-      <h3 class="card-title">{{event.title}}</h3>
-      <p class="card-text">{{event.description}}<br><br>{{event.address}}<br><br>Event Fees: <span *ngIf="event.amount">₹</span><span *ngIf="!event.amount">Free</span> {{event.amount}}</p>
-      <!-- <a href="javascript:void(0)" (click)='shareservice()' class="btn btn-primary">SHARE EVENT</a> -->
+<div class="container events-details-section" *ngIf="page">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="events-details-image-wrapper">
+        <div class="events-image-area">
+          <img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{ event.url + event.image }}" class="card-img-top" alt="...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="events-details">
+        <h3 class="card-title">{{event.title}}</h3>
+        <p class="card-text">{{event.description}}<br><br>{{event.address}}<br><br>Event Fees: <span *ngIf="event.amount">₹</span><span *ngIf="!event.amount">Free</span> {{event.amount}}</p>
+        <!-- <a href="javascript:void(0)" (click)='shareservice()' class="btn btn-primary">SHARE EVENT</a> -->
+        <button mat-fab shareButton="facebook" [style.backgroundColor]="share.prop.facebook.color"
+        [title]="event.title"
+        [description]="event.description"
+        [image]="event.url + event.image">
 
-      <button mat-fab shareButton="facebook" [style.backgroundColor]="share.prop.facebook.color"
-      [title]="event.title"
-      [description]="event.description"
-      [image]="event.url + event.image">
         <fa-icon [icon]="share.prop.facebook.icon" size="lg"></fa-icon>
-    </button>
-    <button mat-fab shareButton="twitter" [style.backgroundColor]="share.prop.twitter.color"
-    [title]="event.title"
-    [description]="event.description"
-    [image]="event.url + event.image">
+        </button>
+        <button mat-fab shareButton="twitter" [style.backgroundColor]="share.prop.twitter.color"
+        [title]="event.title"
+        [description]="event.description"
+        [image]="event.url + event.image">
         <fa-icon [icon]="share.prop.twitter.icon" size="lg"></fa-icon>
-    </button>
-    <button mat-fab shareButton="linkedin" [style.backgroundColor]="share.prop.linkedin.color"
-    [title]="event.title"
-    [description]="event.description"
-    [image]="event.url + event.image">
+        </button>
+        <button mat-fab shareButton="linkedin" [style.backgroundColor]="share.prop.linkedin.color"
+        [title]="event.title"
+        [description]="event.description"
+        [image]="event.url + event.image">
         <fa-icon [icon]="share.prop.linkedin.icon" size="lg"></fa-icon>
-    </button>
-    <button mat-fab shareButton="reddit" [style.backgroundColor]="share.prop.reddit.color"
-    [title]="event.title"
-    [description]="event.description"
-    [image]="event.url + event.image">
+        </button>
+        <button mat-fab shareButton="reddit" [style.backgroundColor]="share.prop.reddit.color"
+        [title]="event.title"
+        [description]="event.description"
+        [image]="event.url + event.image">
         <fa-icon [icon]="share.prop.reddit.icon" size="lg"></fa-icon>
-    </button>
-    <button mat-fab shareButton="whatsapp" [style.backgroundColor]="share.prop.whatsapp.color"
-    [title]="event.title"
-    [description]="event.description"
-    [image]="event.url + event.image">
+        </button>
+        <button mat-fab shareButton="whatsapp" [style.backgroundColor]="share.prop.whatsapp.color"
+        [title]="event.title"
+        [description]="event.description"
+        [image]="event.url + event.image">
         <fa-icon [icon]="share.prop.whatsapp.icon" size="lg"></fa-icon>
-    </button>
-    <button mat-fab shareButton="telegram" [style.backgroundColor]="share.prop.telegram.color"
-    [title]="event.title"
-    [description]="event.description"
-    [image]="event.url + event.image">
+        </button>
+        <button mat-fab shareButton="telegram" [style.backgroundColor]="share.prop.telegram.color"
+        [title]="event.title"
+        [description]="event.description"
+        [image]="event.url + event.image">
         <fa-icon [icon]="share.prop.telegram.icon" size="lg"></fa-icon>
-    </button>
-    <button mat-fab shareButton="print" [style.backgroundColor]="share.prop.print.color"
-    [title]="event.title"
-    [description]="event.description"
-    [image]="event.url + event.image">
+        </button>
+        <button mat-fab shareButton="print" [style.backgroundColor]="share.prop.print.color"
+        [title]="event.title"
+        [description]="event.description"
+        [image]="event.url + event.image">
         <fa-icon [icon]="share.prop.print.icon" size="lg"></fa-icon>
-    </button>
-    <button mat-fab shareButton="sms" [style.backgroundColor]="share.prop.sms.color" 
-    [title]="event.title"
-    [description]="event.description"
-    [image]="event.url + event.image">
-      <fa-icon [icon]="'sms'" size="lg"></fa-icon>
-  </button>
-    <button mat-fab shareButton="email" [style.backgroundColor]="share.prop.email.color" 
-    [title]="event.title"
-    [description]="event.description"
-    [image]="event.url + event.image">
+        </button>
+        <button mat-fab shareButton="sms" [style.backgroundColor]="share.prop.sms.color" 
+        [title]="event.title"
+        [description]="event.description"
+        [image]="event.url + event.image">
+        <fa-icon [icon]="'sms'" size="lg"></fa-icon>
+        </button>
+        <button mat-fab shareButton="email" [style.backgroundColor]="share.prop.email.color" 
+        [title]="event.title"
+        [description]="event.description"
+        [image]="event.url + event.image">
         <fa-icon [icon]="share.prop.email.icon" size="lg"></fa-icon>
-    </button>
-      <br><br>
-      <a href="javascript:void(0)" (click)='register()' class="btn btn--alt">REGISTER</a>
+        </button>
+        <br><br>
+        <a href="javascript:void(0)" (click)='register()' class="btn btn--alt">REGISTER</a>
+      </div>
     </div>
   </div>
-  </div>
-  <div class="col-sm">
+</div>
+<div  style="padding: 200px;" *ngIf="loader"><app-loader></app-loader></div>
+<simple-notifications></simple-notifications>
+<button  type="button" id='openmodalbutton2' [hidden]='true' class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+  OPEN
+</button>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" id='mClose' class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <strong>Your Order is not Placed due to some issues</strong><br>
+       <strong>Your Transaction id is {{transaction}}</strong><br>
+       <strong>Kindly Contact Customer Support</strong><br>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="close">Close</button>
+      </div>
+    </div>
   </div>
 </div>
