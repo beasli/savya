@@ -33,7 +33,7 @@ export class ChangeProfileComponent implements OnInit {
       this.name=this.data.name;
       //this.router.navigate(['/registerOtp']);
     }).catch(d=>{
-      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+      if(d.status == 401 || d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
@@ -89,7 +89,7 @@ changeImage(event)
           this.data=data['data'];
           this.api.onSuccess("Profile successfully updated");
         }).catch(d=>{
-          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+          if(d.status == 401 || d.status == 503){
             this.api.onFail('Your session is expired please login again');
             this.api.setGoto();
             this.api.setlogin(0);

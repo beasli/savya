@@ -50,10 +50,17 @@
                                             #slickModal="slick-carousel" 
                                             [config]="slideConfig" >
                                 <div ngxSlickItem *ngFor="let slide of prd_img;let i = index"  class="slide">
+                                <ng-container *ngIf='slide.type == 1'>
                                 <lib-ngx-image-zoom
                                         [thumbImage]="url+'product'+'/'+slide.image"
                                         [magnification]=2
                                     ></lib-ngx-image-zoom>
+                                </ng-container>
+                                <ng-container *ngIf='slide.type == 2'>
+                                    <video width="100%" controls>
+                                        <source [src]="url+'product'+'/'+slide.image" type="video/mp4">
+                                    </video>
+                                </ng-container>
                                 </div>
                                 </ngx-slick-carousel>
                                 <span *ngFor="let slide of prd_img;let i = index">
@@ -86,7 +93,7 @@
                                 </div>
                             </div>   
                             <div *ngIf="data.default_size" class="product-size-box">
-                                <label for="id_select"> Select Size </label>
+                                <label for="id_select" class="option-label"> Select Size </label>
                                 <select *ngIf="data.size_type != ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
                                     <option *ngFor="let option of sizes" [value]="option" [selected]="option === defaultsize">
                                     {{option}}
@@ -99,8 +106,8 @@
                                 </select>
                             </div>
                             <div  *ngIf=(metalcolour.length) class="color-chose-box d-table">
-                                <div class="color-text d-table-cell"><p>Choose Color:</p></div>
-                                <div class="sample-box">
+                                <div class="color-text d-table-cell option-label"><p>Choose Color:</p></div>
+                                <div class="sample-box"> 
                                     <ul>
                                         <li *ngFor="let option of metalcolour"><a href="javascript:void(0)" (click)="colormetal(option)" [ngClass]="{focus: colvalue==option,'btn-danger': 'Rose'==option, 'btn-warning': 'Yellow'==option, 'btn-outline-secondary': 'White'==option}" >{{option}}</a></li>                                       
                                     </ul>
@@ -114,17 +121,17 @@
                                         </div>
                                     </div>
                                         
-                                    <div class="product-code">Product Code: {{data.productcode}}</div>
-                                    <div *ngIf='gold'>
-                                        <div *ngIf=(gold.weight)>Gold (weight):  {{gold.weight}} gram</div>
+                                    <div class="product-code" class="option-label">Product Code: {{data.productcode}}</div>
+                                    <div *ngIf='gold && pricegold'>
+                                        <div *ngIf=(gold.weight) class="option-label">Gold (weight):  {{gold.weight}} gram</div>
 
                                         <div *ngIf="gold.charges_option != 'Percentage' && pricegold" class="option-label">Gold Rate: Rs. {{pricegold.price}} Per gram</div>
                                         <div *ngIf="gold.charges_option == 'Percentage' && pricegold2" class="option-label">Gold Rate: Rs. {{pricegold2.price}} Per gram</div>
-                                        <div *ngIf=(gold.wastage) class="option-label">Gold wastage:  {{gold.wastage}} %</div>
-                                        <div *ngIf="gold.charges_option == 'Percentage'" class="option-label">Gold wastage:  {{gold.making_charge}} %</div>
-                                        <div *ngIf="gold.charges_option != 'Percentage'" class="option-label">Making Charges: Rs.  {{gold.making_charge}}</div>
-                                        <div *ngIf="gold.charges_option == 'Percentage'" class="option-label">Fine Gold Weight:  {{finegold}} gram</div>
-                                        <div *ngIf="gold.charges_option!= 'Percentage'" class="option-label">Gold Charges Type:  {{gold.charges_option}}</div>
+                                        <div *ngIf="gold.wastage && pricegold" class="option-label">Gold wastage:  {{gold.wastage}} %</div>
+                                        <div *ngIf="gold.charges_option == 'Percentage' && pricegold" class="option-label">Gold wastage:  {{gold.making_charge}} %</div>
+                                        <div *ngIf="gold.charges_option != 'Percentage' && pricegold" class="option-label">Making Charges: Rs.  {{gold.making_charge}}</div>
+                                        <div *ngIf="gold.charges_option == 'Percentage' && pricegold" class="option-label">Fine Gold Weight:  {{finegold}} gram</div>
+                                        <div *ngIf="gold.charges_option!= 'Percentage' && pricegold" class="option-label">Gold Charges Type:  {{gold.charges_option}}</div>
                                         <div class="option-label">Total Gold Price: Rs. {{totalgold}}</div>
 
                                     </div>
@@ -139,7 +146,7 @@
                                     </div>
 
                                     <div *ngIf=(diamond) class="choose-diamond">
-                                        <label for="id_select"> Diamond: </label>
+                                        <label for="id_select" class="option-label"> Diamond: </label>
                                         <div class="diamond-selectbox">
                                             <select class="product-size-select" (change)="diamondchange($event.target.value)">
                                                 <option *ngFor='let s of diamondlist;let i = index' [value]="s.jwellery_size" [selected]="(i==0) ? true:false">{{s.jwellery_size}}</option>
@@ -156,7 +163,7 @@
                                             </div>
                                     </div>
                                     <div *ngIf=(diamond)  class="prd-size">
-                                        <label for="id_select"> Diamond Clarity:</label>
+                                        <span for="id_select" class="option-label"> Diamond Clarity:</span>
                                             <div class="radio-group">
                                                 <ng-container *ngFor='let s of diamondclarity;let i = index'>
                                                     <input [checked]='(s==defaultdiamond[1]) ? true:false' class='radio-control' (change)='colorClarity(0,s)' type="radio" id="{{s}}" name="diamondclarity">
@@ -165,19 +172,19 @@
                                             </div>
                                     </div>
 
-                                    <div *ngIf='defaultdiamond' class="about-product">
-                                        <div>Name: {{diamond.jwellery_size}}</div>
-                                        <div *ngIf=(diamond.weight)>Weight:  {{diamond.weight}} ct</div>
-                                        <div *ngIf=(diamond.weight) class="option-label">Diamond Price:Rs. {{pricediamond.price}}/ct</div>
+                                    <div *ngIf='diamond && pricediamond'>
+                                        <div class="option-label">Name: {{diamond.jwellery_size}}</div>
+                                        <div *ngIf=(diamond.weight) class="option-label">Weight:  {{diamond.weight}} ct</div>
+                                        <div *ngIf=(pricediamond) class="option-label">Diamond Price:Rs. {{pricediamond.price}}/ct</div>
                                         <div *ngIf=(diamond.quantity) class="option-label">No of Diamond:  {{diamond.quantity}} pc</div>
                                         <div *ngIf=(diamond.making_charge) class="option-label">Making Charges: Rs. {{diamond.making_charge}}</div>
                                         <div *ngIf=(diamond.charges_option) class="option-label">Charges Type:  {{diamond.charges_option}}</div> 
-                                        <div>Diamond Total:Rs. {{totaldiamond}} </div>
-                                        <div>Diamond Color/Clarity: {{this.defaultdiamond[0] + '/' + this.defaultdiamond[1]}}</div>
+                                        <div class="option-label">Diamond Total:Rs. {{totaldiamond}} </div>
+                                        <div class="option-label">Diamond Color/Clarity: {{this.defaultdiamond[0] + '/' + this.defaultdiamond[1]}}</div>
                                     </div>
 
                                     <div *ngIf=(platinum) >
-                                        <div *ngIf=(platinum.weight)>Platinum (weight):  {{platinum.weight}} gram</div>
+                                        <div *ngIf=(platinum.weight) class="option-label">Platinum (weight):  {{platinum.weight}} gram</div>
                                         <div *ngIf=(platinum.weight) class="option-label">Platinum Rate:  {{this.pricelist.platinum[0].price}} Per gram</div>
                                         <div *ngIf=(platinum.wastage) class="option-label">Planitum wastage:  {{platinum.wastage}} %</div>
                                         <div *ngIf=(!platinum.wastage) class="option-label">Planitum wastage:  0 %</div>
@@ -193,8 +200,8 @@
                                         </div>
                                 </div>
 
-                                <div *ngIf=(stone)  class="about-product">
-                                    <div>Stone (weight):  {{stone.weight}} ct</div>
+                                <div *ngIf=(stone)>
+                                    <div class="option-label">Stone (weight):  {{stone.weight}} ct</div>
                                     <div class="option-label">Fine Stone Rate:Rs. {{pricestone.price}}/ct</div>
                                     <div class="option-label">No Stone:  {{stone.quantity}} pc</div>
                                     <div class="option-label">Making Charges: Rs. {{stone.making_charge}}</div>
@@ -219,7 +226,7 @@
                                                 <button  (click)="qtyUpdate(data.id,+1)" class="btn btn-secondary btn-block">+</button>
                                             </div>
                                         </div> -->
-                                        <input type="hidden"> <button class="btn" (click)="createjson()"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
+                                        <input type="hidden"> <button class="btn" [disabled]="btn==0" (click)="createjson()"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
                                           <!-- <button  *ngIf="loading==true"  class="btn">Loading...</button> -->
                                         <div style="padding-left:15px;" class="prd-links hide-mobile"><a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
                                     </div>

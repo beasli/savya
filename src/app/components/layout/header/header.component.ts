@@ -22,6 +22,11 @@ export class HeaderComponent implements OnInit {
 
    router.events.subscribe((val) => {
      this.close();
+     if(this.drop==1)
+        {
+          console.log('I am in')
+         this.api.updateCart();
+        }
    });
    
   this.api.Get(NAVIGATION).then(data => {

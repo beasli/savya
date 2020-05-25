@@ -1,4 +1,4 @@
-import { IMAGE } from 'src/config';
+import { IMAGE, BANNER } from 'src/config';
 import { STATE, CITY } from './../../../../config';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
@@ -18,12 +18,18 @@ export class BullianComponent implements OnInit {
   statecities:any;
   s:any;
   callshadow:any;
+  Banner: any;
+  img_url:any;
   constructor(private api: ApiService,private route: Router) {
     this.api.Get(STATE).then(data => {
       this.city = data['city'];
       this.state = data['other'];
       this.image = IMAGE+'city/';
+      this.img_url = IMAGE;
     });
+    this.api.Post(BANNER,{user_id:0,type:6}).then(data=>{this.Banner=data['data'].filter(slide => slide.place === 'Website');
+      //  console.log(this.Banner);
+  });
    }
 
    goMerchant(id){

@@ -17,6 +17,13 @@ baseurl= IMAGE+"/product/";
 message:any="CART IS EMPTY";
 loader:boolean;
 page:boolean;
+priceWeight:any;
+final:any;
+disamt: any;
+realFinal:any;
+totalw:any;
+total = {'weight':0,'price':0,'making_charges':0};
+products: any;
   constructor(private api:ApiService,private router:Router) {
         this.uid=this.api.uid;
         console.log("userid"+this.uid); 
@@ -32,8 +39,29 @@ page:boolean;
    }
    view()
    {
+          this.total['weight'] = 0;
+          this.total['price'] = 0;
+          this.total['making_charges'] = 0;
           this.api.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
-          console.log(data);
+          // console.log(this.total);
+          // this.products=data['data'];
+          // this.priceWeight = this.api.calculate(this.products);
+          // let i = 0;
+          // if(this.priceWeight){
+          //   this.total = {'weight':0,'price':0,'making_charges':0};
+          //    console.log(this.total);
+          //    this.priceWeight.forEach(element => {
+          //      console.log(this.products[i].count);
+
+          //    this.total.price +=element.price*this.products[i].count;
+          //    this.total.weight +=element.weight*this.products[i].count;
+          //    this.total.making_charges +=element.making*this.products[i].count;
+          //    i +=1;
+          //  });}
+          //  this.totalw = this.total.weight.toFixed(2); 
+          //   console.log(this.total);
+          //   this.final = this.total.price + this.total.price*0.045;
+          //   this.realFinal = this.final;
           this.page=true;
           this.loader=false;
           this.results=data['data'];
@@ -41,7 +69,7 @@ page:boolean;
           this.div=true;
         
         }).catch(d=>{
-          if(d.error.message == 'Unauthenticated.' && d.status == 401){
+          if(d.status == 401 || d.status == 503){
             this.api.onFail('Your session is expired please login again');
             this.api.setGoto();
             this.api.setlogin(0);
@@ -102,15 +130,18 @@ page:boolean;
 
                 if(c == 1 && value == -1) {
                   this.api.deleteCart(pid);
+                  this.view();
+                  document.getElementById("openmodalbutton").click();
                 } else {
                       c = c + value;
                       this.api.Put2(CARTUPDATE, "" , {cart_id: pid, user_id: this.uid, count: c}).then(data => {
                         
                       this.api.updateCart();
                       this.api.Cart.emit("cartUpdate" + Date.now());
+                      this.view();
                       document.getElementById("mClose").click();
                     }).catch(d=>{
-                      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+                      if(d.status == 401 || d.status == 503){
                         this.api.onFail('Your session is expired please login again');
                         this.api.setGoto();
                         this.api.setlogin(0);

@@ -37,7 +37,7 @@ constructor(private api: ApiService, private route: ActivatedRoute,private route
             this.event = this.event.find(x => x.id == this.eid);
             this.event['url'] = IMAGE+"events/";
           }).catch(d=>{
-            if(d.error.message == 'Unauthenticated.' && d.status == 401){
+            if(d.status == 401 || d.status == 503){
               this.api.onFail('Your session is expired please login again');
               this.api.setGoto();
               this.api.setlogin(0);
@@ -55,7 +55,7 @@ register() {
         console.log(data);
         this.api.onSuccess('Your Registration is done for this Event');
     }).catch(d=>{
-      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+      if(d.status == 401 || d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
@@ -113,7 +113,7 @@ register() {
       this.api.Post(MYEVENTS, formData).then(data => {
         console.log(data);
       }).catch(d=>{
-        if(d.error.message == 'Unauthenticated.' && d.status == 401){
+        if(d.status == 401 || d.status == 503){
           this.api.onFail('Your session is expired please login again');
           this.api.setGoto();
           this.api.setlogin(0);

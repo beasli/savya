@@ -18,6 +18,7 @@
                     <div class="cart-table-prd-name">
                         <h5><a href="javascript:void(0)" (click)='go(r.product_id)'>{{r.jwellery_type}} &nbsp;&nbsp; size:&nbsp;{{r.product_size}}</a></h5>
                         <h2><a  href="javascript:void(0)" (click)='go(r.product_id)'>{{r.productName}}</a></h2>
+                        <!-- <h2><a  href="javascript:void(0)">Price:&nbsp;</a>{{priceWeight[i].price * r.count | currency:'INR'}}</h2> -->
                     </div>
                     <div   *ngIf= "checkCart(r.product_id)" class="row no=gutters" >
                        
@@ -34,6 +35,27 @@
                 </div>
                     <div class="cart-table-prd-action"><a  (click)="deleteCart(r.cart_id)" class="icon-cross"></a></div>
                 </div>
+                <!-- <div class="card-body">
+                    <h3>Your Bill </h3>
+                    <p><strong>
+                        <div>Total Price <span class="card-total-price"> {{total.price | currency:'INR'}}</span></div>
+                        <div>Total Gross Weight <span class="card-total-price"> {{totalw}} g</span></div>
+                          Sgst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>
+                          Cgst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>
+                          Igst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>
+                          <ng-container *ngIf='discountamount'>Total(after GST):  {{final+disamt | currency:'INR'}}<br></ng-container>
+                          <ng-container *ngIf='discountamount'>
+                              DISCOUNT COUPAN :{{discountamount.coupan}} <br>
+                              <ng-container *ngIf='discountamount.offertype == "Fixed"'>DISCOUNT :   {{discountamount.value | currency:'INR'}} off </ng-container>
+                              <ng-container *ngIf='discountamount.offertype == "Percentage"'> DISCOUNT :{{discountamount.value}} % off</ng-container><br>
+                              DISCOUNT AMOUNT :  {{disamt | currency:'INR'}} off
+                          </ng-container>
+                        </strong>
+                      </p>
+                      <div class="card-total-sm">
+                        <div class="float-right">Final Total <span class="card-total-price"> {{final | currency:'INR'}}</span></div>
+                    </div>
+                </div> -->
                 <div class="cart-table-total">
                     <div class="row">
                         <div class="col-sm"><a routerLink="/home" class="btn btn--alt"><i class="icon-angle-left"></i><span>continue shopping</span></a></div>

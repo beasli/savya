@@ -22,7 +22,7 @@ export class AccountAddressesComponent implements OnInit {
       this.addresses = data['data'];
       console.log(this.addresses);
     }).catch(d=>{
-      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+      if(d.status == 401 || d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
@@ -49,7 +49,7 @@ export class AccountAddressesComponent implements OnInit {
       this.api.delete(DELADDRESS,value).then(data => {this.addresses = data['data']; 
       this.getaddress();
     }).catch(d=>{
-      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+      if(d.status == 401 || d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);

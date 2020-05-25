@@ -52,6 +52,9 @@ export class ProductDetailsComponent implements OnInit {
   silver:any;
   pricesilver:any;
   totalsilver:any;
+  defgold:any;
+  defsilver:any;
+  defplat:any;
   loader:boolean;
   page:boolean;
   scroll:boolean;
@@ -80,6 +83,7 @@ export class ProductDetailsComponent implements OnInit {
   diamondlist: any;
   message: string;
   btn = 1;
+  privious: any;
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
     this.drop=this.api.drop;
     this.route.params.subscribe(params => {
@@ -93,7 +97,7 @@ export class ProductDetailsComponent implements OnInit {
     this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data=>{
         this.cart=data['data'];
     }).catch(d => {
-      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+      if(d.status != 401 || d.status != 503){
        // this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
@@ -109,22 +113,21 @@ export class ProductDetailsComponent implements OnInit {
    }
    
    sizechange(value) {
+    this.privious = this.selectedsize;
     this.selectedsize = value;
-    if (this.gold)  {
-    this.getgold(this.gold);
-    }
-    if (this.platinum)  {
-    this.getplatinum();
-    }
-    if (this.silver) {
-        this.getsilver();
-      }
-
-    this.total();
-    let increament = this.selectedsize - this.defaultsize;
-    if  (increament !=0 ) {
-        this.defaultsize = this.selectedsize;
-      }
+    
+      if (this.gold)  {
+        this.getgold(this.gold);
+        }
+        if (this.platinum)  {
+        this.getplatinum();
+        }
+        if (this.silver) {
+            this.getsilver();
+          }
+    
+        this.total();
+      
    }
    quantity(pid)
    {
@@ -213,7 +216,7 @@ export class ProductDetailsComponent implements OnInit {
     this.api.onSuccess('Product Successfully added to the cart');
     //  localStorage.setItem('cart',JSON.stringify(data));  
     }).catch(d=>{
-      if(d.error.message == 'Unauthenticated.' && d.status == 401){
+      if(d.status != 401 || d.status != 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
@@ -273,10 +276,16 @@ export class ProductDetailsComponent implements OnInit {
         }
         }
         if (this.assets) {
-          this.getplatinum();
+          this.platinum = this.assets.find(x => x.metrial_type == "Platinum");
+          this.defplat = Object.assign({},this.platinum)
+          if(this.platinum){
+            this.getplatinum();}
         }
         if (this.assets) {
-          this.getsilver();
+          this.silver = this.assets.find(x => x.metrial_type == "Silver");
+          this.defsilver = Object.assign({},this.silver);
+         if(this.silver){
+          this.getsilver();}
         }
         this.api.Post(SUBCATEGORY, {category_id: this.data['category_id']} ).then(data  => {
   
@@ -329,7 +338,7 @@ diamondchange(diamond){
         j['option'] = this.gold.charges_option;
         j['weight'] = this.gold.weight;
         j['wastage'] = this.gold.wastage;
-        j['product_size'] = this.selectedsize;
+        //j['product_size'] = this.selectedsize;
         j['materialType'] = this.pricegold.type;
         j['productId'] = this.pid;
         j['metal'] = 'Gold';
@@ -341,7 +350,7 @@ diamondchange(diamond){
       j['option'] = this.diamond.charges_option;
       j['weight'] = this.diamond.weight;
       j['wastage'] = this.diamond.wastage;
-        j['product_size'] = this.selectedsize;
+        //j['product_size'] = this.selectedsize;
       j['materialType'] = this.defaultdiamond[0] + '/' + this.defaultdiamond[1];
       j['productId'] = this.pid;
       j['metal'] = 'Diamond';
@@ -354,7 +363,7 @@ diamondchange(diamond){
       j['weight'] = this.platinum.weight;
       j['materialType'] = "Platinum";
       j['wastage'] = this.platinum.wastage;
-        j['product_size'] = this.selectedsize;
+        //j['product_size'] = this.selectedsize;
       j['productId'] = this.pid;
       j['metal'] = 'Platinum';
       j['makingCharge'] = this.platinum.making_charge;
@@ -368,7 +377,7 @@ diamondchange(diamond){
       j['productId'] = this.pid;
       j['metal'] = 'Stone';
       j['wastage'] = this.stone.wastage;
-        j['product_size'] = this.selectedsize;
+        //j['product_size'] = this.selectedsize;
       j['makingCharge'] = this.stone.making_charge;
       temparray.push(j);
       j = {};
@@ -380,7 +389,7 @@ diamondchange(diamond){
       j['materialType'] = 'Silver';
       j['productId'] = this.pid;
       j['wastage'] = this.silver.wastage;
-      j['product_size'] = this.selectedsize;
+      //j['product_size'] = this.selectedsize;
       j['metal'] = 'Silver';
       j['makingCharge'] = this.silver.making_charge;
       temparray.push(j);
@@ -393,6 +402,7 @@ diamondchange(diamond){
   //  j['category'] = this.data['category_id'];
     j['count'] = this.value;
     j['jwellery_type'] = this.data.jwellery_type;
+   this.selectedsize ? j['product_size'] = this.selectedsize:j['product_size'] = 0;
     j['selectedColor'] = this.colvalue;
     j['description'] = this.data.description;
     j['productCode'] = this.data.productcode;
@@ -441,13 +451,26 @@ diamondchange(diamond){
    }
 
    getgold(value) {
-     this.gold = value;
-     if (this.sizes) {
+     this.gold = Object.assign({},this.goldlist.find(x => x.jwellery_size == value.jwellery_size));
+    console.log(this.gold);
+     if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Ring') {
+        
        let increament = this.selectedsize - this.defaultsize;
        increament = increament * 0.2;
        this.gold.weight = (Number(this.gold.weight) + increament).toFixed(3);
-     }
+     } else if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Bangel') {
+      
+      let increament = this.selectedsize - this.defaultsize;
+      increament = increament * 0.2;
+      this.gold.weight = (Number(this.gold.weight) + increament).toFixed(3);
+    } else if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Chain') {
+      
+      let increament = this.selectedsize - this.defaultsize;
+      increament = (Number(this.gold.weight)/Number(this.defaultsize)) * increament;
+      this.gold.weight = (Number(this.gold.weight) + increament).toFixed(3);
+    }
      this.pricegold = this.pricelist.gold.find(x => x.type == this.gold.jwellery_size);
+     //this.pricegold = {"id":1,"metrial_type":"Gold","user_id":"5","type":"14KT","price":"2700","value_in":"60","created_at":"2020-04-21 15:53:56","updated_at":"2020-04-21 15:53:56"};
     if(this.pricegold) {
      this.pricegold2 = this.pricelist.gold.find(x => x.type == '24KT');
      if (this.gold.charges_option == "PerGram" || this.gold.charges_option == "Fixed" ) {
@@ -502,13 +525,26 @@ diamondchange(diamond){
     }}
    }
    getplatinum() {
-    this.platinum = this.assets.find(x => x.metrial_type == "Platinum");
+    this.platinum = Object.assign({},this.defplat);
    if(this.platinum)
-    {if (this.sizes) {
+    {
+      if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Ring') {
+        
       let increament = this.selectedsize - this.defaultsize;
       increament = increament * 0.2;
       this.platinum.weight = (Number(this.platinum.weight) + increament).toFixed(2);
+    } else if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Bangel') {
+      
+      let increament = this.selectedsize - this.defaultsize;
+      increament = increament * 0.2;
+      this.platinum.weight = (Number(this.platinum.weight) + increament).toFixed(2);
+    } else if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Chain') {
+      
+      let increament = this.selectedsize - this.defaultsize;
+      increament = (Number(this.platinum.weight)/Number(this.defaultsize)) * increament;
+      this.platinum.weight = (Number(this.platinum.weight) + increament).toFixed(2);
     }
+
     this.priceplat = this.pricelist.platinum.find(x => x.type == "Platinum");
       if(this.priceplat){
     this.totalplat = this.api.price(this.platinum.weight,this.priceplat.price,this.platinum.charges_option,this.platinum.making_charge,this.platinum.wastage);
@@ -523,12 +559,29 @@ diamondchange(diamond){
   }
 
   getsilver() {
-    this.silver = this.assets.find(x => x.metrial_type == "Silver");
-    if (this.silver) {if (this.sizes) {
+    console.log('In silver');
+    this.silver = Object.assign({},this.defsilver);
+    if (this.silver)
+     {
+       if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Ring') {
+        
       let increament = this.selectedsize - this.defaultsize;
       increament = increament * 0.2;
       this.silver.weight = (Number(this.silver.weight) + increament).toFixed(2);
+    } else if (this.sizes && this.privious != this.selectedsize &&  this.data.jwellery_type == 'Bangel') {
+      
+      let increament = this.selectedsize - this.defaultsize;
+      increament = increament * 0.2;
+
+      this.silver.weight = (Number(this.silver.weight) + increament).toFixed(2);
+    }else if (this.sizes && this.privious != this.selectedsize  && this.data.jwellery_type == 'Chain') {
+      
+      let increament = this.selectedsize - this.defaultsize;
+      increament = (Number(this.silver.weight)/Number(this.defaultsize)) * increament;
+      this.silver.weight = (Number(this.silver.weight) + increament).toFixed(2);
     }
+
+
     this.pricesilver = this.pricelist.silver.find(x => x.type == "Silver");
      if(this.pricesilver) {
     this.totalsilver = this.api.price(this.silver.weight,this.pricesilver.price,this.silver.charges_option,this.silver.making_charge,this.silver.wastage);
@@ -626,12 +679,18 @@ diamondchange(diamond){
     }
     }
     if (this.assets) {
-      this.getplatinum();
+      if(this.platinum){
+        console.log('In plat')
+        this.getplatinum();}
+    
     }
     if (this.assets) {
-      this.getsilver();
+      if(this.silver){
+        console.log('In plat')
+        this.getsilver();}
+    
     }
-    },2000);
+    },4000);
     }
   
   ngOnInit() {
