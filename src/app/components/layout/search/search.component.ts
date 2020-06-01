@@ -34,7 +34,7 @@ searchApi()
 {
   this.loader=true;
     this.page=false;
-  this.api.Post(SEARCH,{search:this.data}).then(data=>{
+  this.api.Post(SEARCH,{'name':this.data}).then(data=>{
     this.page=true;
       this.loader=false;
     this.alert=false;

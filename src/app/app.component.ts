@@ -33,4 +33,8 @@ this.api.getlogin.subscribe(data=>{
   }
 })
   }
+  changeOfRoutes(){
+    console.log('hi im here');
+    this.api.updateCart()
+  }
 }

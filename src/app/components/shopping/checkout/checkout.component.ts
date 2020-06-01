@@ -53,7 +53,7 @@ export class CheckoutComponent implements OnInit {
         this.final = this.total.price + this.total.price*0.045;
         this.realFinal = this.final;
     }).catch(d=>{
-      if(d.status == 401 || d.status == 503){
+      if(d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
@@ -70,7 +70,7 @@ export class CheckoutComponent implements OnInit {
       this.currentAddress = this.addresses[0];
       this.clicked = this.currentAddress.id;
     }).catch(d=>{
-      if(d.status == 401 || d.status == 503){
+      if(d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
@@ -99,7 +99,7 @@ export class CheckoutComponent implements OnInit {
         }
        }
     }).catch(d=>{
-      if(d.status == 401 || d.status == 503){
+      if(d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
@@ -176,7 +176,7 @@ export class CheckoutComponent implements OnInit {
       this.router.navigate(['/account-history']);
       this.api.Cart.emit("cartUpdate"+Date.now());
     }).catch(d=>{
-      if(d.status == 401 || d.status == 503){
+      if(d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);

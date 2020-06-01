@@ -187,7 +187,7 @@ export class ApiService {
       console.log( data);
       localStorage.setItem('orders',JSON.stringify(data['data']));  
     }).catch(d=>{
-      if(d.status == 401 || d.status == 503){
+      if(d.status == 503){
         this.onFail('Your session is expired please login again');
         this.setGoto();
         this.setlogin(0);
@@ -235,7 +235,7 @@ export class ApiService {
       // console.log( data);
       localStorage.setItem('cart',JSON.stringify(data));  
     }).catch(d=>{
-      if(d.status == 401 || d.status == 503){
+      if(d.status == 503){
         // this.onFail('Your session is expired please login again');
         // this.setGoto();
         // this.setlogin(0);
@@ -323,7 +323,7 @@ qtyUpdate(pid,value)
                       this.updateCart(); 
                       this.Cart.emit("cartUpdate"+Date.now()); 
                     }).catch(d=>{
-                      if(d.status == 401 || d.status == 503){
+                      if(d.status == 503){
                         this.onFail('Your session is expired please login again');
                         this.setGoto();
                         this.setlogin(0);
@@ -360,7 +360,7 @@ qtyUpdate(pid,value)
       this.onSuccess('Product Successfully Removed from the cart');
      
     }).catch(d=>{
-      if(d.status == 401 || d.status == 503){
+      if(d.status == 503){
         this.onFail('Your session is expired please login again');
         this.setGoto();
         this.setlogin(0);
@@ -387,7 +387,7 @@ qtyUpdate(pid,value)
     this.onSuccess('Product Successfully added to the cart');
     //  localStorage.setItem('cart',JSON.stringify(data));  
     }).catch(d=>{
-      if(d.status == 401 || d.status == 503){
+      if(d.status == 503){
         this.onFail('Your session is expired please login again');
         this.setGoto();
         this.setlogin(0);
@@ -420,7 +420,7 @@ qtyUpdate(pid,value)
      
     }).catch(d=>{
 
-      if(d.status == 401 || d.status == 503){
+      if(d.status == 503){
         this.onFail('Your session is expired please login again');
         this.setGoto();
         this.setlogin(0);
@@ -448,7 +448,7 @@ qtyUpdate(pid,value)
        this.onSuccess('Product Successfully Removed from the Wishlist');
        this.getWish.emit("wishlist updated"+Date.now());
       }).catch(d=>{
-        if(d.status == 401 || d.status == 503){
+        if(d.status == 503){
           this.onFail('Your session is expired please login again');
           this.setGoto();
           this.setlogin(0);
@@ -482,7 +482,7 @@ checkWishlist(pid)
                    this.updateWishlist();
                    this.onSuccess('Product Successfully added to the Wishlist');
               }).catch(d=>{
-                if(d.status == 401 || d.status == 503){
+                if(d.status == 503){
                   this.onFail('Your session is expired please login again');
                   this.setGoto();
                   this.setlogin(0);
@@ -501,7 +501,7 @@ checkWishlist(pid)
              this.updateWishlist();
              this.onSuccess('Product Successfully added to the Wishlist');
         }).catch(d=>{
-          if(d.status == 401 || d.status == 503){
+          if(d.status == 503){
             this.onFail('Your session is expired please login again');
             this.setGoto();
             this.setlogin(0);
@@ -678,7 +678,7 @@ calculate(products){
     making += Number(outcome.making_charge);
   }
    
-    let data = {'weight':weight,'price':priceProduct,'goldcat':gold.materialType,'goldweight':goldweight,'making':making};
+    let data = {'weight':weight.toFixed(3),'price':priceProduct,'goldcat':gold.materialType,'goldweight':goldweight,'making':making};
     priceWeight.push(data);
   });
   return priceWeight;
