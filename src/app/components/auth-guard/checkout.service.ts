@@ -31,7 +31,7 @@ value:any;
         let i = 0;
         this.priceWeight.forEach(element => {
         this.total.price +=element.price;
-        this.total.weight +=element.weight;
+        this.total.weight +=Number(element.weight);
         this.total.weight = this.total.weight*this.data[i].count;
         i = i+1;
       });

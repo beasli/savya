@@ -19,6 +19,7 @@
           </div>
           </ngx-slick-carousel>
     </div>
-    <div *ngIf='isShowAll' class="more-link-wrapper text-center mt-2"><a routerLink="/events" class="btn-decor">show me all</a></div>
+    <div *ngIf='isShowAll && heading !="Events"' class="more-link-wrapper text-center mt-2"><a routerLink="/events" class="btn-decor">show me all</a></div>
+    <div *ngIf='isShowAll && heading =="Events"' class="more-link-wrapper text-center mt-2"><a routerLink="/events" [queryParams]="{page: 1}" class="btn-decor">show me all</a></div>
 </div>
 </div>

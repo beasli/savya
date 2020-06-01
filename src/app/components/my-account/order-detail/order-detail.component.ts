@@ -27,7 +27,7 @@ image = IMAGE+'product/';
           this.api.Get(GETADDRESS).then(data => {
             this.addresses = data['data'].find(x => x.id == result.address_id);
           }).catch(d=>{
-            if(d.status == 401 || d.status == 503){
+            if(d.status == 503){
               this.api.onFail('Your session is expired please login again');
               this.api.setGoto();
               this.api.setlogin(0);
@@ -42,7 +42,7 @@ image = IMAGE+'product/';
             this.products=result.product;
           }
         }).catch(d=>{
-          if(d.status == 401 || d.status == 503){
+          if(d.status == 503){
             this.api.onFail('Your session is expired please login again');
             this.api.setGoto();
             this.api.setlogin(0);
@@ -63,7 +63,7 @@ image = IMAGE+'product/';
       this.addresses = null;
       this.api.Get(GETADDRESS).then(data => {
         this.addresses = data['data'].find(x => x.id == result.address_id);}).catch(d=>{
-          if(d.status == 401 || d.status == 503){
+          if(d.status == 503){
             this.api.onFail('Your session is expired please login again');
             this.api.setGoto();
             this.api.setlogin(0);

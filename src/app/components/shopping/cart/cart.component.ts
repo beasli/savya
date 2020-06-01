@@ -69,7 +69,7 @@ products: any;
           this.div=true;
         
         }).catch(d=>{
-          if(d.status == 401 || d.status == 503){
+          if(d.status == 503){
             this.api.onFail('Your session is expired please login again');
             this.api.setGoto();
             this.api.setlogin(0);
@@ -141,7 +141,7 @@ products: any;
                       this.view();
                       document.getElementById("mClose").click();
                     }).catch(d=>{
-                      if(d.status == 401 || d.status == 503){
+                      if(d.status == 503){
                         this.api.onFail('Your session is expired please login again');
                         this.api.setGoto();
                         this.api.setlogin(0);

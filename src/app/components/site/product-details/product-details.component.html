@@ -49,22 +49,32 @@
                                 <ngx-slick-carousel class="carousel" 
                                             #slickModal="slick-carousel" 
                                             [config]="slideConfig" >
+                                            <div ngxSlickItem class="slide">
+                                                <lib-ngx-image-zoom
+                                                            [thumbImage]="url+'product'+'/'+data.image"
+                                                            [magnification]=2
+                                                ></lib-ngx-image-zoom>
+                                            </div>
                                 <div ngxSlickItem *ngFor="let slide of prd_img;let i = index"  class="slide">
-                                <ng-container *ngIf='slide.type == 1'>
-                                <lib-ngx-image-zoom
-                                        [thumbImage]="url+'product'+'/'+slide.image"
-                                        [magnification]=2
-                                    ></lib-ngx-image-zoom>
-                                </ng-container>
-                                <ng-container *ngIf='slide.type == 2'>
-                                    <video width="100%" controls>
-                                        <source [src]="url+'product'+'/'+slide.image" type="video/mp4">
-                                    </video>
-                                </ng-container>
+                                    <ng-container *ngIf='slide.type == 1'>
+                                        <lib-ngx-image-zoom
+                                                [thumbImage]="url+'product'+'/'+slide.image"
+                                                [magnification]=2
+                                            ></lib-ngx-image-zoom>
+                                        </ng-container>
+                                        <ng-container *ngIf='slide.type == 2'>
+                                            <video width="100%" controls>
+                                                <source [src]="url+'product'+'/'+slide.image" type="video/mp4">
+                                            </video>
+                                        </ng-container>
                                 </div>
                                 </ngx-slick-carousel>
+                                <span>
+                                    <img (click)="slickModal.slickGoTo(0)" src="{{ url+'product'+'/' + data.image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
+                                </span>
                                 <span *ngFor="let slide of prd_img;let i = index">
-                                    <img (click)="slickModal.slickGoTo(i)" src="{{ url+'product'+'/' + slide.image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
+                                   
+                                    <img (click)="slickModal.slickGoTo(i+1)" src="{{ url+'product'+'/' + slide.image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
                                 </span>
                                 
 
@@ -88,23 +98,25 @@
                                     <h1 class="prd-block_title product-details-item-heading">{{data.productname}}</h1>
                                 </div>
                                 <div class="prd-block_info-top">
-                                    <div *ngIf='value>0' class="product-sku product-price">Rs: {{totalprice * value}}<span *ngIf=(goldlist) class="product-size">( {{gold.jwellery_size}} )</span></div>
+                                    <div *ngIf='value>0' class="product-sku product-price">Rs: {{totalprice * value}}<span *ngIf='goldlist.length' class="product-size">( {{gold.jwellery_size}} )</span></div>
                                     <div class="product-weight">Gross Weight: &nbsp;&nbsp; {{gross}}</div>
                                 </div>
                             </div>   
-                            <div *ngIf="data.default_size" class="product-size-box">
-                                <label for="id_select" class="option-label"> Select Size </label>
-                                <select *ngIf="data.size_type != ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
-                                    <option *ngFor="let option of sizes" [value]="option" [selected]="option === defaultsize">
-                                    {{option}}
-                                    </option>
-                                </select>
-                                <select *ngIf="data.size_type == ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
-                                    <option [value]="defaultsize" [selected]>
-                                    {{defaultsize}}
-                                    </option>
-                                </select>
-                            </div>
+                            <ng-container   *ngIf='data.jwellery_type == "Ring" || data.jwellery_type == "Chain" || data.jwellery_type == "Bangel"'>
+                                <div *ngIf="data.default_size != 'None'" class="product-size-box">
+                                    <label for="id_select" class="option-label"> Select Size </label>
+                                    <select *ngIf="data.size_type != '' && data.size_type != 'None' " id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                                        <option *ngFor="let option of sizes" [value]="option" [selected]="option === defaultsize">
+                                        {{option}}
+                                        </option>
+                                    </select>
+                                    <select *ngIf="data.size_type == ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                                        <option [value]="defaultsize" [selected]>
+                                        {{defaultsize}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </ng-container>
                             <div  *ngIf=(metalcolour.length) class="color-chose-box d-table">
                                 <div class="color-text d-table-cell option-label"><p>Choose Color:</p></div>
                                 <div class="sample-box"> 
@@ -114,7 +126,7 @@
                                 </div>
                             </div>
                             <div  class="prd-block_options topline ">
-                                <div *ngIf=(goldlist) class="prd-size swatches">
+                                <div *ngIf='gold && goldlist.length' class="prd-size swatches">
                                     <span class="option-label">Gold:</span>
                                     <div class="radio-group">
                                         <ng-container *ngFor='let s of goldlist;let i = index'><input [checked]='(i==0) ? true:false' class='radio-control' (change)='getgold(s)' type="radio" id="{{s.jwellery_size}}" name="gold"><label for="{{s.jwellery_size}}">{{s.jwellery_size}}</label></ng-container>
@@ -193,7 +205,7 @@
                                         <div class="option-label">Total Platinum Price: Rs. {{totalplat}}</div> 
                                     </div>
                                 
-                                <div *ngIf=(stonelist.length) class="prd-size swatches">
+                                <div *ngIf='stone && stonelist.length' class="prd-size swatches">
                                     <span class="option-label">Stone:</span>
                                     <div class="radio-group">
                                         <ng-container *ngFor='let s of stonelist;let i = index'><input [checked]='(i==0) ? true:false' class='radio-control' (change)='getstone(s)' type="radio" id="{{s.jwellery_size}}" name="stone"><label for="{{s.jwellery_size}}">{{s.jwellery_size}}</label></ng-container>
@@ -202,11 +214,11 @@
 
                                 <div *ngIf=(stone)>
                                     <div class="option-label">Stone (weight):  {{stone.weight}} ct</div>
-                                    <div class="option-label">Fine Stone Rate:Rs. {{pricestone.price}}/ct</div>
+                                    <div *ngIf=(pricestone) class="option-label">Fine Stone Rate:Rs. {{pricestone.price}}/ct</div>
                                     <div class="option-label">No Stone:  {{stone.quantity}} pc</div>
                                     <div class="option-label">Making Charges: Rs. {{stone.making_charge}}</div>
                                     <div class="option-label">Charges Type:  {{stone.charges_option}}</div> 
-                                    <div>Stone Total:Rs. {{totalstone}} </div>
+                                    <div *ngIf=(pricestone)>Stone Total:Rs. {{totalstone}} </div>
                                 </div>
 
                             </div>

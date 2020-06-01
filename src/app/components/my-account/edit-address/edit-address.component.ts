@@ -36,7 +36,7 @@ loading: boolean;
     // });
 
     }).catch(d=>{
-      if(d.status == 401 || d.status == 503){
+      if(d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
@@ -111,7 +111,7 @@ changeNumber(e)
         this.api.onSuccess(data['message']);
         this.router.navigate(['/account-addresses']);
         }).catch(d=>{
-          if(d.status == 401 || d.status == 503){
+          if(d.status == 503){
             this.api.onFail('Your session is expired please login again');
             this.api.setGoto();
             this.api.setlogin(0);
@@ -132,7 +132,7 @@ changeNumber(e)
               this.api.getGoto();
             }
       }).catch(d=>{
-        if(d.status == 401 || d.status == 503){
+        if(d.status == 503){
           this.api.onFail('Your session is expired please login again');
           this.api.setGoto();
           this.api.setlogin(0);

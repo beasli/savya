@@ -250,7 +250,7 @@ changeNumber(e)
           this.api.updateOrderHistory();
         }
           }).catch(d=>{
-            if(d.status == 401 || d.status == 503){
+            if(d.status == 503){
               this.api.onFail('Your session is expired please login again');
               this.api.setGoto();
               this.api.setlogin(0);

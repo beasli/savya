@@ -5,3 +5,16 @@
 .events-listing .embed-responsive:before{
     padding: 0px !important;
 }
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #c59f59;
+    border-color: #c59f59;
+}
+.page-link:hover{
+    z-index: 1;
+    color: #fff;
+    background-color: #0e0d0c;
+    border-color: #111110;
+}

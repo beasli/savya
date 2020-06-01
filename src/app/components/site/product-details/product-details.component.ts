@@ -97,17 +97,17 @@ export class ProductDetailsComponent implements OnInit {
     this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data=>{
         this.cart=data['data'];
     }).catch(d => {
-      if(d.status != 401 || d.status != 503){
-       // this.api.onFail('Your session is expired please login again');
-        this.api.setGoto();
-        this.api.setlogin(0);
-        this.api.logout();
-        setTimeout(() => {
-      //  this.router.navigate(['/login']);
-        },1000);
-      } else{
-      console.log(d);
-      }
+      // if(d.status != 401 || d.status != 503){
+      //  // this.api.onFail('Your session is expired please login again');
+      //   this.api.setGoto();
+      //   this.api.setlogin(0);
+      //   this.api.logout();
+      //   setTimeout(() => {
+      // //  this.router.navigate(['/login']);
+      //   },1000);
+      // } else{
+      // console.log(d);
+      // }
     })
     this.total();
    }
@@ -216,16 +216,21 @@ export class ProductDetailsComponent implements OnInit {
     this.api.onSuccess('Product Successfully added to the cart');
     //  localStorage.setItem('cart',JSON.stringify(data));  
     }).catch(d=>{
-      if(d.status != 401 || d.status != 503){
+      document.getElementById("mClose").click();
+      if(d.status == 503){
         this.api.onFail('Your session is expired please login again');
+
         this.api.setGoto();
         this.api.setlogin(0);
         this.api.logout();
         setTimeout(() => {
         this.router.navigate(['/login']);
         },1000);
+      }else if(d.status == 401){
+        this.api.onFail('Product already in cart');
       } else{
       console.log(d);
+      console.log
       this.api.Cart.emit("cartUpdated"+Date.now());
       }      
     });
@@ -257,36 +262,30 @@ export class ProductDetailsComponent implements OnInit {
           this.sizes = this.data.size_type.split(',');
           this.selectedsize = this.defaultsize;
         }
-        if (this.assets) {
-          this.goldlist = this.assets.filter(x => x.metrial_type == "Gold");
-          this.getgold(this.goldlist[0]);
-        }
-        if (this.assets) {
-          this.stonelist = this.assets.filter(x => x.metrial_type == "Stone");
-         this.stonelist.length ? this.getstone(this.stonelist[0]):false;
-        }
-        if (this.assets) {
-          this.diamondlist = this.assets.filter(x => x.metrial_type == "Diamond");
-          if(this.diamondlist.length){
-            this.diamond = this.diamondlist[0];
-           this.diamondcolour = this.diamond.color.split(',');
-          this.diamondclarity = this.diamond.clarity.split(',');
-          this.defaultdiamond = this.diamond.default_color_clarity.split('/');
-          this.diamondprice();
-        }
-        }
-        if (this.assets) {
-          this.platinum = this.assets.find(x => x.metrial_type == "Platinum");
-          this.defplat = Object.assign({},this.platinum)
-          if(this.platinum){
-            this.getplatinum();}
-        }
-        if (this.assets) {
-          this.silver = this.assets.find(x => x.metrial_type == "Silver");
-          this.defsilver = Object.assign({},this.silver);
-         if(this.silver){
-          this.getsilver();}
-        }
+        setTimeout(() => {
+          this.viewdone =1;
+          if (this.assets) {
+      
+            this.goldlist = this.assets.filter(x => x.metrial_type == "Gold");
+           if(this.goldlist.length) {this.getgold(this.goldlist[0])};
+         
+            this.stonelist = this.assets.filter(x => x.metrial_type == "Stone");
+           this.stonelist.length ? this.getstone(this.stonelist[0]):false;
+         
+            this.diamondlist = this.assets.filter(x => x.metrial_type == "Diamond");
+            if(this.diamondlist.length){
+              this.diamond = this.diamondlist[0];
+             this.diamondcolour = this.diamond.color.split(',');
+            this.diamondclarity = this.diamond.clarity.split(',');
+            this.defaultdiamond = this.diamond.default_color_clarity.split('/');
+            this.diamondprice();
+          }
+            if(this.platinum){
+              this.getplatinum();}
+            if(this.silver){
+              this.getsilver();}
+          }
+                          },4000);
         this.api.Post(SUBCATEGORY, {category_id: this.data['category_id']} ).then(data  => {
   
               let result = data['data'].find(x => x.id == this.data['subcategory_id']);
@@ -658,39 +657,7 @@ diamondchange(diamond){
 
 
   ngAfterViewInit(){
-    setTimeout(() => {
-    this.viewdone =1;
-    if (this.assets) {
-      this.goldlist = this.assets.filter(x => x.metrial_type == "Gold");
-      this.getgold(this.goldlist[0]);
-    }
-    if (this.assets) {
-      this.stonelist = this.assets.filter(x => x.metrial_type == "Stone");
-     this.stonelist.length ? this.getstone(this.stonelist[0]):false;
-    }
-    if (this.assets) {
-      this.diamondlist = this.assets.filter(x => x.metrial_type == "Diamond");
-      if(this.diamondlist.length){
-        this.diamond = this.diamondlist[0];
-       this.diamondcolour = this.diamond.color.split(',');
-      this.diamondclarity = this.diamond.clarity.split(',');
-      this.defaultdiamond = this.diamond.default_color_clarity.split('/');
-      this.diamondprice();
-    }
-    }
-    if (this.assets) {
-      if(this.platinum){
-        console.log('In plat')
-        this.getplatinum();}
     
-    }
-    if (this.assets) {
-      if(this.silver){
-        console.log('In plat')
-        this.getsilver();}
-    
-    }
-    },4000);
     }
   
   ngOnInit() {

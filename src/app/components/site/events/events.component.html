@@ -17,5 +17,26 @@
           <strong>No events for Now</strong> 
       </ngb-alert>
   </div>
+ 
+  
+</div>
+<div *ngIf='pages'  class="col-4 mx-auto" style="padding-top:2vh;">
+  <nav aria-label="...">
+   <ul class="pagination">
+     <li class="page-item" *ngIf='current_page !== 1'>
+       <a class="page-link" [routerLink]='["/events"]' [queryParams]='{"page":current_page-1}'>Previous</a>
+     </li>
+     
+
+ <ng-container *ngFor="let i of [].constructor(pages),let j = index">
+     <li [value]='j+1' [ngClass]='{active:current_page == j+1}' class="page-item">
+       <a class="page-link" [routerLink]='["/events"]' [queryParams]='{"page":j+1}'>{{j+1}}</a>
+     </li>
+ </ng-container>
+     <li *ngIf='current_page !== pages'>
+       <a class="page-link" [routerLink]='["/events"]' [queryParams]='{"page":current_page+1}'>Next</a>
+     </li>
+   </ul>
+ </nav>
 </div>
 </div>

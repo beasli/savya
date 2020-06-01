@@ -27,7 +27,7 @@ photo:any;
       this.name=this.user.name;
       //this.router.navigate(['/registerOtp']);
     }).catch(d=>{
-      if(d.status == 401 || d.status == 503){
+      if(d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
@@ -79,7 +79,7 @@ photo:any;
           this.user=data['data'];
           this.api.onSuccess("Profile successfully updated");
         }).catch(d=>{
-          if(d.status == 401 || d.status == 503){
+          if(d.status == 503){
             this.api.onFail('Your session is expired please login again');
             this.api.setGoto();
             this.api.setlogin(0);

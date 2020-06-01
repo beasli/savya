@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { EVENTS, IMAGE } from './../../../../config';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,12 +11,24 @@ import { Component, OnInit } from '@angular/core';
 export class EventsComponent implements OnInit {
 events: [];
 url: any;
-  constructor(private api: ApiService,private router: Router) {
-    this.api.Get(EVENTS).then(data => {
+  current_page: any;
+  pages: number;
+  constructor(private api: ApiService,private router: Router,private route: ActivatedRoute) {
+      this.route.queryParamMap.subscribe(params =>{
+        this.current_page = params.get('page');
+        this.current_page = Number(this.current_page);
+        this.getEvent(this.current_page);
+      });
+
+  }
+
+  getEvent(page){
+    this.api.Get(EVENTS+'?page='+page).then(data => {
       this.events = data['data']['data'];
       this.url = IMAGE+"events/";
+      this.pages = Math.ceil(data['data']['total']/16);
     }).catch(d=>{
-      if(d.status == 401 || d.status == 503){
+      if(d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();
         this.api.setlogin(0);
