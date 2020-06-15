@@ -139,18 +139,18 @@
                                             <li>Legel Number</li>
                                             <li>Trade Name</li>
                                         </ul>
-                                        <div *ngIf="kycValue==null">
+                                        <div *ngIf="kycValue==null||kycValue.gst_doc==null">
                                             <input type="text"  #gst_no="ngModel" ngModel  name="gst_no" class="form-control" (ngModelChange)="changeGst($event)" placeholder="GST No.*" required>
                                             <div *ngIf="gst_check" class="alert alert-danger">Invalid Gst no.</div>
                                             <div class="alert alert-danger" *ngIf="gst_no.touched && gst_no.invalid">
                                                 Gst no. is required.
                                             </div>
                                         </div>
-                                        <div *ngIf="kycValue!=null">
+                                        <div *ngIf="kycValue!=null && kycValue.gst_no!=null">
                                             <input type="text"  #gst_no="ngModel" [(ngModel)]="kycValue.gst_no"  name="gst_no" class="form-control" placeholder="GST No.*" readonly>
                                         </div>
                                          <div class="photo-upload-btn" >
-                                            <button (click)="modal(gst_doc1)" *ngIf="kycValue==null" class="btn">Upload Image</button>
+                                            <button (click)="modal(gst_doc1)" *ngIf="kycValue==null || kycValue.gst_doc == null" class="btn">Upload Image</button>
                                             <div class="form-group" [hidden]="true"  >
                                                 <label for='gst_doc1'>Gst Document Front</label>
                                                 <input type="file"  #gst_doc1="ngModel" (change)="fileChange($event)" ngModel name="gst_doc1" id="gst_doc1" class="form-control" placeholder="Gst Document" required>
@@ -200,7 +200,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button (click)="modal(gst_doc2)" class="btn" *ngIf="kycValue==null">Upload Image</button>
+                                            <button (click)="modal(gst_doc2)" class="btn" *ngIf="kycValue==null || kycValue.gst_back == null">Upload Image</button>
                                             <div class="form-group" [hidden]="true">
                                                 <label for='gst_doc2'>Gst Document Back</label>
                                                 <input type="file"  #gst_doc2="ngModel" (change)="fileChange($event)" ngModel name="gst_doc2" id="gst_doc2" class="form-control" placeholder="Gst Document" required>
@@ -248,18 +248,18 @@
                                             <li>Legel Number</li>
                                             <li>Trade Name</li>
                                         </ul>
-                                        <div *ngIf="kycValue==null">
+                                        <div *ngIf="kycValue==null || kycValue.aadhar==null">
                                             <input type="text"  #aadhar="ngModel"  ngModel  name="aadhar" class="form-control" (ngModelChange)="changeAadhar($event)" placeholder="Aadhar No." required>
                                             <div *ngIf="adhar_check" class="alert alert-danger">Invalid Aadhaar Enter with proper spaces</div>
                                             <div class="alert alert-danger" *ngIf="aadhar.touched && aadhar.invalid">
                                                 Aadhaar no. is required.
                                             </div>
                                         </div>
-                                        <div *ngIf="kycValue!=null">
+                                        <div *ngIf="kycValue!=null && kycValue.aadhar !=null">
                                             <input type="text"  #aadhar="ngModel"  [(ngModel)]="kycValue.aadhar"  name="aadhar" class="form-control" placeholder="Aadhar No." readonly>
                                         </div>
                                         <div class="photo-upload-btn">
-                                            <button (click)="modal(aadhar_doc1)" *ngIf="kycValue==null" class="btn">upload Image</button>
+                                            <button (click)="modal(aadhar_doc1)" *ngIf="kycValue==null || kycValue.aadhar_doc == null" class="btn">upload Image</button>
                                             <div class="form-group" [hidden]="true">
                                                 <label for='aadhar_doc1'>Aadhar Document Front</label>
                                                 <input type="file"  #aadhar_doc1="ngModel" (change)="fileChange($event)" id="aadhar_doc1" ngModel name="aadhar_doc1" class="form-control" placeholder="Aadhar Document" required>
@@ -289,7 +289,7 @@
                         </div>
                         <div class="uplod-documents">
                             <div class="row">
-                                <div class="col-6" *ngIf="kycValue==null||kycValue.aadhar_back==null">
+                                <div class="col-6" *ngIf="kycValue == null || kycValue.aadhar_back == null">
                                     <div class="photop-upload-area preview"  id="preview" >
                                         <img id="adhar_back" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/4+Aadhar+(2)/Aadhar_Back-0.jpg" >
                                         <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
@@ -358,18 +358,18 @@
                                             <li>Legel Number</li>
                                             <li>Trade Name</li>
                                         </ul>
-                                        <div *ngIf="kycValue==null">
+                                        <div *ngIf="kycValue==null || kycValue.pan_no == null">
                                             <input type="text"  #pan_no="ngModel"  ngModel  name="pan_no" (ngModelChange)="changePan($event)" class="form-control" placeholder="Pan Card No.*" required>
                                             <div *ngIf="pan_check" class="alert alert-danger">Invalid pan no.</div>
                                             <div class="alert alert-danger" *ngIf="pan_no.touched && pan_no.invalid">
                                                 Pan no. is required.
                                             </div>
                                         </div>
-                                        <div *ngIf="kycValue!=null">
+                                        <div *ngIf="kycValue!=null && kycValue.pan_no != null">
                                             <input type="text"  #pan_no="ngModel"  [(ngModel)]="kycValue.pan_no"  name="pan_no"  class="form-control" placeholder="Pan Card No.*" readonly>
                                         </div>
                                         <div class="photo-upload-btn">
-                                            <button (click)="modal(pan_doc)" *ngIf="kycValue==null" class="btn">upload Image</button>
+                                            <button (click)="modal(pan_doc)" *ngIf="kycValue == null || kycValue.pan_no == null" class="btn">upload Image</button>
                                             <div class="form-group" [hidden]="true">
                                                 <label for='pan_doc'>Pan Document</label>
                                                 <input type="file"  #pan_doc="ngModel" (change)="fileChange($event)" id="pan_doc" ngModel name="pan_doc" class="form-control" placeholder="Pan Document" required>
@@ -420,7 +420,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button (click)="modal(visiting_doc1)" *ngIf="kycValue==null" class="btn">upload Image</button>
+                                            <button (click)="modal(visiting_doc1)" *ngIf="kycValue==null || kycValue.visiting_doc == null" class="btn">upload Image</button>
                                             <div class="form-group" [hidden]="true">
                                                 <label for='visiting_doc1'>Visiting Document</label>
                                                 <input type="file"  #visiting_doc1="ngModel" (change)="fileChange($event)" id="visiting_doc1" ngModel name="visiting_doc1" class="form-control" placeholder="Visiting Document" required>
@@ -444,7 +444,7 @@
                 <div class="col-md-6">
                     <div class="each-photo-upload-wpapper">
                         <div class="select-feild">
-                            <input type="radio" *ngIf="kycValue==null" [checked]="visiting_doc2.valid" id="visiting-card-2">
+                            <input type="radio" *ngIf="kycValue==null || kycValue.visiting_back == null" [checked]="visiting_doc2.valid" id="visiting-card-2">
                             <label for="visiting-card-2">Visiting ( Business Card Back)</label><br>
                         </div>
                         <div class="uplod-documents">
@@ -469,7 +469,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button (click)="modal(visiting_doc2)" *ngIf="kycValue==null" class="btn">Upload Image</button>
+                                            <button (click)="modal(visiting_doc2)" *ngIf="kycValue==null || kycValue.visiting_back == null" class="btn">Upload Image</button>
                                             <div class="form-group" [hidden]="true">
                                                 <label for='visiting_doc2'>Visiting Document</label>
                                                 <input type="file"  #visiting_doc2="ngModel" (change)="fileChange($event)" id="visiting_doc2" ngModel name="visiting_doc2" class="form-control" placeholder="Visiting Document" required>
@@ -491,7 +491,7 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center"><button class="btn " *ngIf="kycValue==null" (click)="kyc()">SUBMIT</button></div>
+            <div class="text-center" *ngIf="submit==0"><button class="btn" (click)="kyc()">SUBMIT</button></div>
         </form>
     </div>
     <div  style="padding: 100px;" *ngIf="loader"><app-loader></app-loader></div>

@@ -61,6 +61,7 @@ export class ProductDetailsComponent implements OnInit {
   drop:any;
   loading:boolean;
   viewdone=0;
+  manufacture;
   slideConfig = {
     "slidesToShow": 1,
     "slidesToScroll": 1,
@@ -84,6 +85,7 @@ export class ProductDetailsComponent implements OnInit {
   message: string;
   btn = 1;
   privious: any;
+  sizelist: any[];
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
     this.drop=this.api.drop;
     this.route.params.subscribe(params => {
@@ -247,6 +249,10 @@ export class ProductDetailsComponent implements OnInit {
           this.data = data['data'];
           this.pricelist = data['price'];
         }
+        if(this.data.jwellery_type == 'Bangles')
+            {
+              this.sizelist = this.pricelist.bangle;
+            }
         if(this.data.color)
         {
         this.metalcolour = this.data.color.split(',');
@@ -256,11 +262,21 @@ export class ProductDetailsComponent implements OnInit {
         this.prd_img =data['files'];
         this.certificate = data['Certification'];
         this.recents = data['recent_product'];
+        this.manufacture = data['manufacture'];
         this.url =IMAGE;
-        if (this.data.size_type) {
+        if (this.data.size_type && this.data.size_type != 'None' ) {
           this.defaultsize = this.data.default_size;
           this.sizes = this.data.size_type.split(',');
           this.selectedsize = this.defaultsize;
+          let temp = [];
+          if(this.sizelist){
+          this.sizes.forEach(childObj => {
+            console.log(childObj);
+             let s = this.sizelist.find(x => x.sizes == childObj);
+            temp.push(s);
+          });
+          this.sizelist = temp;
+          console.log(this.sizelist);}
         }
         setTimeout(() => {
           this.viewdone =1;
@@ -280,9 +296,11 @@ export class ProductDetailsComponent implements OnInit {
             this.defaultdiamond = this.diamond.default_color_clarity.split('/');
             this.diamondprice();
           }
-            if(this.platinum){
+          this.defplat = this.assets.find(x => x.metrial_type == "Platinum");
+            if(this.defplat){
               this.getplatinum();}
-            if(this.silver){
+              this.defsilver = this.assets.find(x => x.metrial_type == "Silver");
+            if(this.defsilver){
               this.getsilver();}
           }
                           },4000);
@@ -401,7 +419,20 @@ diamondchange(diamond){
   //  j['category'] = this.data['category_id'];
     j['count'] = this.value;
     j['jwellery_type'] = this.data.jwellery_type;
+
+
    this.selectedsize ? j['product_size'] = this.selectedsize:j['product_size'] = 0;
+
+   if(this.data.jwellery_type == 'Ring' || this.data.jwellery_type == 'Bangles' || this.data.jwellery_type == 'Chain'){
+    if(this.data.jwellery_type == 'Bangles'){
+      let si = this.sizelist.find(x => x.sizes == this.selectedsize);
+       j['product_size'] = si.bangle_size;
+    }else{
+    j['product_size'] = this.selectedsize;
+   }
+   }
+   else { j['product_size'] = 0};
+
     j['selectedColor'] = this.colvalue;
     j['description'] = this.data.description;
     j['productCode'] = this.data.productcode;
@@ -454,14 +485,40 @@ diamondchange(diamond){
     console.log(this.gold);
      if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Ring') {
         
-       let increament = this.selectedsize - this.defaultsize;
-       increament = increament * 0.2;
-       this.gold.weight = (Number(this.gold.weight) + increament).toFixed(3);
-     } else if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Bangel') {
+      if(this.data.gender == 'FeMale'){
+        if(this.selectedsize >= 6 && this.selectedsize <= 10){
+          this.gold.weight = (Number(this.gold.weight)*0.95).toFixed(2);
+        } else if(this.selectedsize >= 15 && this.selectedsize <= 18){
+          this.gold.weight = (Number(this.gold.weight)*1.07).toFixed(2);
+        } else if(this.selectedsize >= 19 && this.selectedsize <= 22){
+          this.gold.weight = (Number(this.gold.weight)*1.1).toFixed(2);
+        }
+      }else if(this.data.gender == 'Male'){
+        if(this.selectedsize >= 14 && this.selectedsize <= 17){
+          this.gold.weight = (Number(this.gold.weight)*0.95).toFixed(2);
+        } else if(this.selectedsize >= 22 && this.selectedsize <= 25){
+          this.gold.weight = (Number(this.gold.weight)*1.08).toFixed(2);
+        } else if(this.selectedsize >= 26 && this.selectedsize <= 30){
+          this.gold.weight = (Number(this.gold.weight)*1.12).toFixed(2);
+        }  else if(this.selectedsize >= 31 && this.selectedsize <= 34){
+          this.gold.weight = (Number(this.gold.weight)*1.15).toFixed(2);
+        }
+      }
+     } else if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Bangles') {
       
-      let increament = this.selectedsize - this.defaultsize;
-      increament = increament * 0.2;
-      this.gold.weight = (Number(this.gold.weight) + increament).toFixed(3);
+      let a = 1;
+     let increament = this.selectedsize - this.defaultsize;
+     if(increament > 0){
+     for(let i = 0;i < increament;i++){
+       a += a*0.05;
+     }
+    }else if(increament < 0){
+      for(let i = 0;i > increament;i--){
+        a -= a*0.05;
+      }
+     }
+    //  increament = increament * 0.2;
+     this.gold.weight = (Number(this.gold.weight) * a).toFixed(3);
     } else if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Chain') {
       
       let increament = this.selectedsize - this.defaultsize;
@@ -525,18 +582,45 @@ diamondchange(diamond){
    }
    getplatinum() {
     this.platinum = Object.assign({},this.defplat);
+    console.log(this.platinum);
    if(this.platinum)
     {
       if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Ring') {
         
-      let increament = this.selectedsize - this.defaultsize;
-      increament = increament * 0.2;
-      this.platinum.weight = (Number(this.platinum.weight) + increament).toFixed(2);
-    } else if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Bangel') {
+        if(this.data.gender == 'FeMale'){
+          if(this.selectedsize >= 6 && this.selectedsize <= 10){
+            this.platinum.weight = (Number(this.platinum.weight)*0.95).toFixed(2);
+          } else if(this.selectedsize >= 15 && this.selectedsize <= 18){
+            this.platinum.weight = (Number(this.platinum.weight)*1.07).toFixed(2);
+          } else if(this.selectedsize >= 19 && this.selectedsize <= 22){
+            this.platinum.weight = (Number(this.platinum.weight)*1.1).toFixed(2);
+          }
+        }else if(this.data.gender == 'Male'){
+          if(this.selectedsize >= 14 && this.selectedsize <= 17){
+            this.platinum.weight = (Number(this.platinum.weight)*0.95).toFixed(2);
+          } else if(this.selectedsize >= 22 && this.selectedsize <= 25){
+            this.platinum.weight = (Number(this.platinum.weight)*1.08).toFixed(2);
+          } else if(this.selectedsize >= 26 && this.selectedsize <= 30){
+            this.platinum.weight = (Number(this.platinum.weight)*1.12).toFixed(2);
+          }  else if(this.selectedsize >= 31 && this.selectedsize <= 34){
+            this.platinum.weight = (Number(this.platinum.weight)*1.15).toFixed(2);
+          }
+        }
+    } else if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Bangles') {
       
-      let increament = this.selectedsize - this.defaultsize;
-      increament = increament * 0.2;
-      this.platinum.weight = (Number(this.platinum.weight) + increament).toFixed(2);
+      let a = 1;
+     let increament = this.selectedsize - this.defaultsize;
+     if(increament > 0){
+     for(let i = 0;i < increament;i++){
+       a += a*0.05;
+     }
+    }else if(increament < 0){
+      for(let i = 0;i > increament;i--){
+        a -= a*0.05;
+      }
+     }
+    //  increament = increament * 0.2;
+      this.platinum.weight = (Number(this.platinum.weight) * a).toFixed(2);
     } else if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Chain') {
       
       let increament = this.selectedsize - this.defaultsize;
@@ -544,7 +628,7 @@ diamondchange(diamond){
       this.platinum.weight = (Number(this.platinum.weight) + increament).toFixed(2);
     }
 
-    this.priceplat = this.pricelist.platinum.find(x => x.type == "Platinum");
+    this.priceplat = this.pricelist.platinum.find(x => x.metrial_type == "Platinum");
       if(this.priceplat){
     this.totalplat = this.api.price(this.platinum.weight,this.priceplat.price,this.platinum.charges_option,this.platinum.making_charge,this.platinum.wastage);
     this.totalplat = Math.round(this.totalplat.price);
@@ -564,15 +648,41 @@ diamondchange(diamond){
      {
        if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Ring') {
         
-      let increament = this.selectedsize - this.defaultsize;
-      increament = increament * 0.2;
-      this.silver.weight = (Number(this.silver.weight) + increament).toFixed(2);
-    } else if (this.sizes && this.privious != this.selectedsize &&  this.data.jwellery_type == 'Bangel') {
-      
-      let increament = this.selectedsize - this.defaultsize;
-      increament = increament * 0.2;
+        if(this.data.gender == 'FeMale'){
+          if(this.selectedsize >= 6 && this.selectedsize <= 10){
+            this.silver.weight = (Number(this.silver.weight)*0.95).toFixed(2);
+          } else if(this.selectedsize >= 15 && this.selectedsize <= 18){
+            this.silver.weight = (Number(this.silver.weight)*1.07).toFixed(2);
+          } else if(this.selectedsize >= 19 && this.selectedsize <= 22){
+            this.silver.weight = (Number(this.silver.weight)*1.1).toFixed(2);
+          }
+        }else if(this.data.gender == 'Male'){
+          if(this.selectedsize >= 14 && this.selectedsize <= 17){
+            this.silver.weight = (Number(this.silver.weight)*0.95).toFixed(2);
+          } else if(this.selectedsize >= 22 && this.selectedsize <= 25){
+            this.silver.weight = (Number(this.silver.weight)*1.08).toFixed(2);
+          } else if(this.selectedsize >= 26 && this.selectedsize <= 30){
+            this.silver.weight = (Number(this.silver.weight)*1.12).toFixed(2);
+          }  else if(this.selectedsize >= 31 && this.selectedsize <= 34){
+            this.silver.weight = (Number(this.silver.weight)*1.15).toFixed(2);
+          }
+        }
 
-      this.silver.weight = (Number(this.silver.weight) + increament).toFixed(2);
+    } else if (this.sizes && this.privious != this.selectedsize &&  this.data.jwellery_type == 'Bangles') {
+      
+      let a = 1;
+     let increament = this.selectedsize - this.defaultsize;
+     if(increament > 0){
+     for(let i = 0;i < increament;i++){
+       a += a*0.05;
+     }
+    }else if(increament < 0){
+      for(let i = 0;i > increament;i--){
+        a -= a*0.05;
+      }
+     }
+    //  increament = increament * 0.2;
+      this.silver.weight = (Number(this.silver.weight)*a).toFixed(2);
     }else if (this.sizes && this.privious != this.selectedsize  && this.data.jwellery_type == 'Chain') {
       
       let increament = this.selectedsize - this.defaultsize;

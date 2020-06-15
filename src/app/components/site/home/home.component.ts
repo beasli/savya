@@ -79,6 +79,12 @@ export class HomeComponent implements OnInit {
             this.manufacturer = childObj['manufacture'];
           }
        });
+       this.exclusive.forEach(element => {
+        element.image = element.image.replace(/ /g, "%20");
+        element.image = element.image.replace(/\(/g, "%28");
+        element.image = element.image.replace(/\)/g, "%29");
+        console.log(element.image);
+      });
         this.url = IMAGE+"banner/";
         this.event = IMAGE+"events/";
         this.product = IMAGE+"product/";

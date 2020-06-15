@@ -4,7 +4,11 @@ import { Router } from '@angular/router';
 import { USERKYC, PROFILEVIEW } from 'src/config';
 declare var Tesseract;
 declare var $: any;
-const formData: FormData = new FormData();
+const mobile: FormData = new FormData();
+const pan: FormData = new FormData();
+const aadhar: FormData = new FormData();
+const gst: FormData = new FormData();
+const visiting: FormData = new FormData();
 @Component({
   selector: 'app-kyc',
   templateUrl: './kyc.component.html',
@@ -35,6 +39,7 @@ export class KycComponent implements OnInit {
   photo:any;
   name:any;
   kycValue:any;
+  submit=1;
   constructor(private api:ApiService,private router:Router) {
     this.api.Post(PROFILEVIEW, {}).then(data=>{
       this.page=true;
@@ -43,6 +48,24 @@ export class KycComponent implements OnInit {
       this.user=data['user'];
       this.photo = data['url'];
       this.kycValue=data['kyc'];
+      console.log(this.kycValue.aadhar_back);
+      console.log(this.kycValue.aadhar_doc);
+      console.log(this.kycValue.gst_back);
+      console.log(this.kycValue.aadhar);
+      console.log(this.kycValue.gst_doc);
+      console.log(this.kycValue.pan_no);
+      console.log(this.kycValue.gst_no);
+      console.log(this.kycValue.visiting_doc);
+      console.log(this.kycValue.visiting_back);
+      console.log(this.kycValue.pan_doc);
+
+      if (this.kycValue == null || this.kycValue.aadhar_back == null || this.kycValue.aadhar_doc == null 
+        || this.kycValue.gst_back == null || this.kycValue.gst_doc == null 
+        || this.kycValue.aadhar == null || this.kycValue.pan_no == null 
+        || this.kycValue.gst_no == null || this.kycValue.visiting_doc == null
+        || this.kycValue.visiting_back == null || this.kycValue.pan_doc == null ) {
+            this.submit = 0;
+        }
       this.name=this.user.name;
       //this.router.navigate(['/registerOtp']);
     }).catch(d=>{
@@ -66,9 +89,11 @@ export class KycComponent implements OnInit {
     if(fileList.length > 0) {
       let file: File = fileList[0];
       var img = document.querySelector("#preview img");
+      console.log(event.target.name);
       if(event.target.name=="gst_doc1")
-      {
-              formData.append('gst_front', files.item(0), files.item(0).name);
+      {       
+              gst.append('gst_front', files.item(0), files.item(0).name);
+              
               var reader = new FileReader();
               reader.onload = function(e) {
                 $('#gst_front').attr('src', e.target.result);
@@ -77,7 +102,8 @@ export class KycComponent implements OnInit {
       }
       else if(event.target.name=="gst_doc2")
       {
-              formData.append('gst_back', files.item(0), files.item(0).name);
+              gst.append('gst_back', files.item(0), files.item(0).name);
+              
               var reader = new FileReader();           
               reader.onload = function(e) {
                 $('#gst_back').attr('src', e.target.result);
@@ -86,7 +112,7 @@ export class KycComponent implements OnInit {
       }
       else if(event.target.name=="aadhar_doc1")
       {
-             formData.append('adhar_fornt', files.item(0), files.item(0).name);
+             aadhar.append('adhar_fornt', files.item(0), files.item(0).name);
               var reader = new FileReader();
                reader.onload = function(e) {
                 $('#adhar_front').attr('src', e.target.result);
@@ -95,7 +121,7 @@ export class KycComponent implements OnInit {
       }
       else if(event.target.name=="aadhar_doc2")
       {
-              formData.append('adhar_back', files.item(0), files.item(0).name);
+              aadhar.append('adhar_back', files.item(0), files.item(0).name);
               var reader = new FileReader();
                reader.onload = function(e) {
                 $('#adhar_back').attr('src', e.target.result);
@@ -104,7 +130,7 @@ export class KycComponent implements OnInit {
       }
       else if(event.target.name=="pan_doc")
       {
-             formData.append('pan_front', files.item(0), files.item(0).name);
+             pan.append('pan_front', files.item(0), files.item(0).name);
               var reader = new FileReader();
                reader.onload = function(e) {
                 $('#pan_front').attr('src', e.target.result);
@@ -113,7 +139,7 @@ export class KycComponent implements OnInit {
       }
       else if(event.target.name=="visiting_doc1")
       {
-             formData.append('visiting_front', files.item(0), files.item(0).name);
+             visiting.append('visiting_front', files.item(0), files.item(0).name);
               var reader = new FileReader();
                reader.onload = function(e) {
                 $('#visiting_front').attr('src', e.target.result);
@@ -122,7 +148,8 @@ export class KycComponent implements OnInit {
       }
       else if(event.target.name=="visiting_doc2")
       {
-              formData.append('visiting_back', files.item(0), files.item(0).name);;
+              visiting.append('visiting_back', files.item(0), files.item(0).name);
+
               var reader = new FileReader();
                reader.onload = function(e) {
                 $('#visiting_back').attr('src', e.target.result);
@@ -212,27 +239,78 @@ export class KycComponent implements OnInit {
   kyc(){
     this.loader=true;
     this.page=false;
-     formData.append('mobile_no', this.mob);
-     formData.append('pan_no', this.aadhar);
-     formData.append('gst_no', this.gst);
-     formData.append('aadhar', this.pan);
-     this.api.Post(USERKYC,formData).then(data=>{
+
+     
+     pan.append('mobile_no', this.mob);
+     gst.append('mobile_no', this.mob);
+     aadhar.append('mobile_no', this.mob);
+     pan.append('pan_no', this.pan);
+     gst.append('gst_no', this.gst);
+     aadhar.append('aadhar', this.aadhar);
+     visiting.append('mobile_no', this.mob);
+
+
+     this.api.Post(USERKYC,gst)
+     .then(data=>{
       this.page=true;
       this.loader=false;
-       console.log(data);
+
        this.api.onSuccess("successfully done KYC");
-       this.router.navigate(['/home']);
+       //this.router.navigate(['/home']);
      }).catch(d=>{
       this.page=true;
       this.loader=false;
-      this.api.onFail("upload all the details and try again");
+      this.api.onFail("upload remaining details and try again");
        console.log(d);
-     })
+     });
+
+     this.api.Post(USERKYC,pan)
+     .then(data=>{
+      this.page=true;
+      this.loader=false;
+
+       this.api.onSuccess("successfully done KYC");
+      // this.router.navigate(['/home']);
+     }).catch(d=>{
+      this.page=true;
+      this.loader=false;
+      this.api.onFail("upload remaining details and try again");
+       console.log(d);
+     });
+
+     this.api.Post(USERKYC,aadhar)
+     .then(data=>{
+      this.page=true;
+      this.loader=false;
+
+       this.api.onSuccess("successfully done KYC");
+      // this.router.navigate(['/home']);
+     }).catch(d=>{
+      this.page=true;
+      this.loader=false;
+      this.api.onFail("upload remaining details and try again");
+       console.log(d);
+     });
+
+     this.api.Post(USERKYC,visiting)
+     .then(data=>{
+      this.page=true;
+      this.loader=false;
+
+       this.api.onSuccess("successfully done KYC");
+      // this.router.navigate(['/home']);
+     }).catch(d=>{
+      this.page=true;
+      this.loader=false;
+      this.api.onFail("upload remaining details and try again");
+       console.log(d);
+     });
+
 }
   ngOnInit() {
     this.loader=true;
     this.page=false;
-     this.userinfo=  this.api. getUserInfo();
+     this.userinfo=  this.api.getUserInfo();
      this.mob=this.userinfo.mobile_no;
   }
 
