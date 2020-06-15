@@ -131,6 +131,10 @@ export class ApiService {
         });
     });
   }
+
+  
+
+
   public Post(api, formData) {
     return new Promise((resolve, reject) => {
       this.http.post(apiUrl + api, formData,  {headers:this.header})
@@ -671,7 +675,7 @@ calculate(products){
     making += Number(outcome.making_charge);
   }
   if(platinum)  {
-    let priceplatinum = price.platinum.find(x => x.type == platinum.materialType);
+    let priceplatinum = price.platinum.find(x => x.metrial_type == platinum.materialType);
     let outcome = this.price(platinum.weight,priceplatinum.price,platinum.options,platinum.makingCharge,platinum.wastage);
     weight += Number(outcome.weight);
     priceProduct += outcome.price;

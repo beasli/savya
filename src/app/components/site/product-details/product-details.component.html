@@ -40,7 +40,8 @@
     </div>
 </div>
    <!-- modal end -->
-        <div *ngIf='data && pricelist' class="holder mt-0">
+   <ng-container *ngIf='data && pricelist && viewdone == 1'>
+        <div class="holder mt-0">
             <div class="container">
                 <div class="row prd-block prd-block--mobile-image-first js-prd-gallery" id="prdGallery100">
                     <div class="col-md-6 col-xl-5">
@@ -88,7 +89,7 @@
                             <img [src]="url+ 'certificate/' + certificate[0].image" onerror="this.src='../../../../assets/images/logo-bw.png'"> </div>
                         
                             <h3 class="h2-style">Manufactured by:</h3>
-                            <img [src]="url+ 'users/' + data['image']" onerror="this.src='../../../../assets/images/logo-bw.png'"><h3 class="h2-style">{{data.company_name}}</h3>
+                            <img [src]="url+ 'users/' + manufacture.logo" onerror="this.src='../../../../assets/images/logo-bw.png'"><h3 class="h2-style">{{data.company_name}}</h3>
                         </div>
                     </div>
                     <div class="col-md">
@@ -98,16 +99,31 @@
                                     <h1 class="prd-block_title product-details-item-heading">{{data.productname}}</h1>
                                 </div>
                                 <div class="prd-block_info-top">
-                                    <div *ngIf='value>0' class="product-sku product-price">Rs: {{totalprice * value}}<span *ngIf='goldlist.length' class="product-size">( {{gold.jwellery_size}} )</span></div>
+                                    <div *ngIf='value>0' class="product-sku product-price">Rs: {{totalprice * value}}<span *ngIf='gold && goldlist.length' class="product-size">( {{gold.jwellery_size}} )</span></div>
                                     <div class="product-weight">Gross Weight: &nbsp;&nbsp; {{gross}}</div>
                                 </div>
                             </div>   
-                            <ng-container   *ngIf='data.jwellery_type == "Ring" || data.jwellery_type == "Chain" || data.jwellery_type == "Bangel"'>
+                            <ng-container   *ngIf='data.jwellery_type == "Ring" || data.jwellery_type == "Chain"'>
                                 <div *ngIf="data.default_size != 'None'" class="product-size-box">
-                                    <label for="id_select" class="option-label"> Select Size </label>
+                                    <label for="id_select" class="option-label"> Select {{data.jwellery_type}} Size </label>
                                     <select *ngIf="data.size_type != '' && data.size_type != 'None' " id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
                                         <option *ngFor="let option of sizes" [value]="option" [selected]="option === defaultsize">
                                         {{option}}
+                                        </option>
+                                    </select>
+                                    <select *ngIf="data.size_type == ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                                        <option [value]="defaultsize" [selected]>
+                                        {{defaultsize}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </ng-container>
+                            <ng-container   *ngIf='data.jwellery_type == "Bangles"'>
+                                <div *ngIf="data.default_size != 'None'" class="product-size-box">
+                                    <label for="id_select" class="option-label"> Select {{data.jwellery_type}} Size </label>
+                                    <select *ngIf="data.size_type != '' && data.size_type != 'None' " id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                                        <option *ngFor="let option of sizelist" [value]="option.sizes" [selected]="option.sizes === defaultsize">
+                                        {{option.bangle_size}}
                                         </option>
                                     </select>
                                     <select *ngIf="data.size_type == ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
@@ -130,8 +146,8 @@
                                     <span class="option-label">Gold:</span>
                                     <div class="radio-group">
                                         <ng-container *ngFor='let s of goldlist;let i = index'><input [checked]='(i==0) ? true:false' class='radio-control' (change)='getgold(s)' type="radio" id="{{s.jwellery_size}}" name="gold"><label for="{{s.jwellery_size}}">{{s.jwellery_size}}</label></ng-container>
-                                        </div>
                                     </div>
+                                </div>
                                         
                                     <div class="product-code" class="option-label">Product Code: {{data.productcode}}</div>
                                     <div *ngIf='gold && pricegold'>
@@ -385,6 +401,7 @@
             <!-- Recent Products -->
         <app-product-holder [redirect] = "data['subsubcategory_id']" [heading] = '"Related Product"' [url3] = 'url+"product/"' [mostselling] = 'recents'></app-product-holder>
         <simple-notifications></simple-notifications>
+    </ng-container>
 </div>
-<div style="padding:200px" *ngIf="loader">  <app-loader  ></app-loader></div>
+<div style="padding:200px" *ngIf="loader || viewdone == 0">  <app-loader  ></app-loader></div>
 

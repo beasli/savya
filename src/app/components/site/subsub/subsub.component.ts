@@ -98,6 +98,9 @@ slideConfig = {
   getlink(s):SafeStyle {
     // console.log("in getlink function");
     // console.log(this.baseUrl);
+    s = s.replace(/ /g, "%20");
+    s = s.replace(/\(/g, "%28");
+    s = s.replace(/\)/g, "%29");
     return this.sanitizer.bypassSecurityTrustStyle('url('+ IMAGE + 'subsubcategory/' + s + ')');
   }
   gofilter(value) {
