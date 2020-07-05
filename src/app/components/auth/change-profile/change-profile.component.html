@@ -20,8 +20,28 @@
                                 <div class="col-6">
                                     <div class="profile-image-wrapper">
                                         <div class="profile-image">
-                                            <img id="image_preview" [src]="photo+'/'+ data.logo"/>
+                                            <img id="image_preview" [src]="photo+'/'+ data.logo" onerror="this.src='../../../../assets/images/user.png'"/>
                                         </div>
+                                        <ng-container *ngIf='kyc!=null && kyc.document_verified == 2'>
+                                            <div class="verified-icon">
+                                                <img src="assets/images/green.png"/>
+                                            </div>
+                                            <span>Account Verified</span>
+                                        </ng-container>
+                    
+                                        <ng-container *ngIf='kyc==null || kyc.document_verified == 0'>
+                                            <div class="verified-icon">
+                                                <img src="assets/images/red.png"/>
+                                            </div>
+                                            <span>Account not verified upload Documents</span>
+                                        </ng-container>
+                    
+                                        <ng-container *ngIf='kyc!=null && kyc.document_verified == 1'>
+                                            <div class="verified-icon">
+                                                <img src="assets/images/yellow.png"/>
+                                            </div>
+                                            <span>Documents under verification process</span>
+                                        </ng-container>
                                     </div>
                                     <!-- <div class="photop-upload-area preview"  id="preview" >
                                         <img id="image_preview" [src]=" photo+'/'+ data.logo " >

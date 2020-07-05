@@ -1,23 +1,93 @@
 <ng-container *ngIf='slider_imgs'>
-<app-slider [slider_imgs] = 'slider_imgs' [url] = '"url"'></app-slider>
+    <ngb-carousel *ngIf="slider_imgs">
+        <ng-template *ngFor="let slide of slider_imgs" ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img routerLink='/products/machinery' [queryParams]="{'page' :1 ,'subcategory_id': slide.category_id}" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
+          </div>
+        </ng-template>
+    </ngb-carousel>
 </ng-container>
-<div class="card-group" style="margin-top: 3vh;padding-bottom: 3vh;">
+
+<div class="card-deck" style="margin-top: 3vh;padding: 2vh;">
     <div class="row">
-    <div *ngFor="let slide of data" class="card col-3 border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="width: 15rem;">
+
+        <div class="row">
+            <div *ngFor="let slide of categories" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div (click)='go(slide.id,1)' class="card border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
+                    <img class="card-img-top" style="min-width: 100%;max-height:25vh;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">{{slide.subcategory}}</h5>
+                    </div>
+                </div>
+            </div>
+         </div>
+
+
+         <!-- <ngx-slick-carousel class="carousel"  #slickModal="slick-carousel"  [config]="slideConfig" >
+             <div class="row">
+                <div ngxSlickItem  class="prd prd-new prd-popular" *ngFor="let slide of manufacturer">
+                    <div class="prd-inside product-border" >
+                        <div class="prd-img-area"><a [routerLink]="['/manufacture/', slide.manufacture_id]" class="prd-img"><img src="{{ manufacture + slide.logo }}" onerror="this.src='../../../../assets/images/logo-bw.png'" alt="Tyssot 1853"></a>
+                        </div>
+                        <div class="prd-info text-center">
+                            <h2 class="prd-title"><a [routerLink]="['/manufacture/', slide.manufacture_id]">{{slide.name}}</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ngx-slick-carousel> -->
+
+
+         <div class="testimonials seller">
+            <ngx-slick-carousel class="carousel" 
+                            #slickModal="slick-carousel" 
+                            [config]="slideConfig" >
+                  <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide embed-responsive embed-responsive-16by9">
+                  <img (click)="go(slide.manufacture_id,0)" src="{{ manufacture + slide.logo }}"  onerror="this.src='../../../../assets/images/logo-bw.png'"  class="embed-responsive-item"  alt="" width="100%">
+                  
+                  <div class="overlay-effect">
+                      <div (click)="go(slide.manufacture_id,0)" *ngIf="slide.name" class="overlay-effect-content">
+                        <h2>{{ slide.name }}</h2>
+                      </div>
+                  </div>
+                  </div>
+              </ngx-slick-carousel>
+           </div>
+
+
+         
+
+
+    <!-- <div *ngFor="let slide of data" class="card col-3 border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="width: 15rem;">
         <img class="card-img-top" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{slide.subcategory}}</h5>
          </div>
-      </div>
+      </div> -->
     </div>
 </div>
+<div class="testimonials">
+    <ngx-slick-carousel class="carousel" 
+              #slickModal="slick-carousel" 
+              [config]="slideConfig3" >
+    <div ngxSlickItem *ngFor="let slide of models;let i = index"class="slide embed-responsive embed-responsive-4by3">
+    <img src="{{ imagemodel + slide.file_name }}" onerror="this.src='../../../../assets/images/logo-bw.png'" class="embed-responsive-item"  alt="" width="100%">
+    <div class="overlay-effect">
+        <div class="overlay-effect-content">
+          
+        </div>
+    </div>
+    </div>
+    </ngx-slick-carousel>
+</div>
 
-<div class="testimonials seller border">
+
+<div class="testimonials seller">
     <ngx-slick-carousel class="carousel" 
                     #slickModal="slick-carousel" 
                     [config]="slideConfig" >
-          <div ngxSlickItem *ngFor="let slide of categories;let i = index" class="slide embed-responsive embed-responsive-16by9">
-          <img [src]="bypass(slide.image)"  class="embed-responsive-item"  alt="" width="100%">
+          <div ngxSlickItem *ngFor="let slide of categories;let i = index" class="slide">
+          <img [src]="bypass(slide.image)" alt="" width="50%">
           <div class="overlay-effect">
               <div *ngIf="slide.name" class="overlay-effect-content">
                 <h2>{{ slide.name }}</h2>
@@ -35,4 +105,5 @@
     </div>
 </div>
 <app-exclusive-banner [url2] = '""' [exclusive] = 'exclusive'></app-exclusive-banner>
+<app-machinery-holder [heading]="'Most Selling'" [mostselling] = 'mostselling' ></app-machinery-holder>
   

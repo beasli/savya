@@ -13,3 +13,8 @@
     /* height: 611.25px;
     min-height: 611.25px; */
 }
+img {
+    max-width:100%;
+    height:auto;
+    max-height:100%;
+ }

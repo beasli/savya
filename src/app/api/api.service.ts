@@ -5,7 +5,8 @@ import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, C
 import * as CryptoJS from 'crypto-ts';
 import { JsonPipe } from '@angular/common';
 import { NotificationsService } from 'angular2-notifications';
-
+// import { MapsAPILoader } from '@agm/core';
+declare var google: any;
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class ApiService {
   event:any;
   header:any;
   goto:any;
-  
+  // geocoder = new google.maps.Geocoder();
   constructor(public http: HttpClient,private service: NotificationsService, private router: Router) {
     console.log('I AM CONSTRUCTOR');
     if(localStorage.getItem('savya_userInfo'))
@@ -76,6 +77,29 @@ export class ApiService {
       })
 
  }
+
+//  geocodeAddress(location: string){
+//   console.log('Start geocoding!');
+  
+//       return (observer => {
+//         this.geocoder.geocode({'address': location}, (results, status) => {
+//           if (status == google.maps.GeocoderStatus.OK) {
+//             console.log('Geocoding complete!');
+//             observer.next({
+//               lat: results[0].geometry.location.lat(), 
+//               lng: results[0].geometry.location.lng()
+//             });
+//           } else {
+//               console.log('Error - ', results, ' & Status - ', status);
+//               observer.next({ lat: 0, lng: 0 });
+//           }
+//           observer.complete();     
+//     })
+//    })
+// }
+
+
+
 
  public Post2(api, formData,parameters?) {
   return new Promise((resolve, reject) => {
@@ -205,9 +229,24 @@ export class ApiService {
     });
   }
 
+  getPosition(): Promise<any>
+  {
+    return new Promise((resolve, reject) => {
+
+      navigator.geolocation.getCurrentPosition(resp => {
+
+          resolve({lng: resp.coords.longitude, lat: resp.coords.latitude});
+        },
+        err => {
+          reject(err);
+        });
+    });
+
+  }
+
   onSuccess(message){
     this.service.success('Success',message,{
-     position:["middle","center"],
+      position:["bottom","left"],
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
@@ -217,7 +256,7 @@ export class ApiService {
 
   onFail(message){
     this.service.warn('Not Possible',message,{
-     position:  	["middle","center"],
+      position:["bottom","left"],
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
@@ -413,7 +452,9 @@ qtyUpdate(pid,value)
 
   godetail(value) {
     if (value >= 0) {
-       this.router.navigate(['/product-details', value]);
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/product-details', value]);
+        });
              }
             }
   updateWishlist()
@@ -591,6 +632,7 @@ getWishlist()
   }
   logout()
   {
+    this.header = null;
       localStorage.removeItem('savya_userInfo');
       localStorage.removeItem('token');
       localStorage.removeItem('wishlist');
@@ -661,7 +703,7 @@ calculate(products){
     making += Number(outcome.making_charge);
   }
   if(stone)  {
-    let pricestone = price.stone.find(x => x.type == stone.materialType);
+    let pricestone = price.stone.find(x => x.type.toUpperCase() == stone.materialType.toUpperCase());
     let outcome = this.price(stone.weight,pricestone.price,stone.options,stone.makingCharge,stone.wastage);
     weight += Number(outcome.weight)*0.2;
     priceProduct += outcome.price;

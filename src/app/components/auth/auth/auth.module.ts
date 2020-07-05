@@ -40,7 +40,7 @@ import { KycDoneService } from '../../auth-guard/kyc-done.service';
     SiteModule,
     RouterModule.forChild([
       { path: 'login', component: LoginComponent,canActivate: [LoginGuardService]},
-      { path: 'register', component: RegisterComponent},
+      { path: 'register', component: RegisterComponent,canActivate: [LoginGuardService]},
       { path: 'registerOtp/:no' , component: OtpComponent,canActivate: [OtpGuardService]},
       { path: 'forget' , component: ForgetPasswordComponent},
       { path: 'forgetOtp/:no' , component: ForgetOtpComponent},

@@ -15,7 +15,14 @@
     position:relative;
 }
 .profile-image img{
-    width:100%;
+    width: auto;
+    height: 100%;
+    /* height: 124px;
+    min-height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    object-fit: cover;
+    object-position: center; */
 }
 .profile-business-name{
     text-transform: uppercase;
@@ -152,4 +159,14 @@
 }
 .edit-icon img{
     width:11px;
+}
+.verified-icon{
+    width:30px;
+    height:30px;
+    position:absolute;
+    right:83px;
+    bottom:20px
+}
+.verified-icon img{
+    width:100%
 }

@@ -5,16 +5,40 @@
                 <div class="client-details text-center">
                     <div class="profile-image-wrapper">
                         <div class="profile-image">
-                            <img id="image_preview" [src]="photo+'/'+ user.logo"/>
+                            <img id="image_preview" [src]="photo+'/'+ user.logo" onerror="this.src='../../../../assets/images/user.png'"/>
                             <div class="edit-pic">
-                                <a href="javascript:void(0)" (click)="modal()"><img src="assets/images/edit.svg"/></a>
+                                <a href="javascript:void(0)" (click)="modal()"><img src="assets/images/edit.svg" onerror="this.src='../../../../assets/images/user.png'"/></a>
                                 <input type="file" id="image" [hidden]="true" (change)=" changeImage($event)">
                             </div>
                         </div>
+                    
+                        <ng-container *ngIf='kyc!=null && kyc.document_verified == 2'>
+                            <div class="verified-icon">
+                                <img src="assets/images/green.png"/>
+                            </div>
+                            <span>Account Verified</span>
+                        </ng-container>
+    
+                        <ng-container *ngIf='kyc==null || kyc.document_verified == 0'>
+                            <div class="verified-icon">
+                                <img src="assets/images/red.png"/>
+                            </div>
+                            <span>Account not verified upload Documents</span>
+                        </ng-container>
+    
+                        <ng-container *ngIf='kyc!=null && kyc.document_verified == 1'>
+                            <div class="verified-icon">
+                                <img src="assets/images/yellow.png"/>
+                            </div>
+                            <span>Documents under verification process</span>
+                        </ng-container>
+
                     </div>
                     <div class="profile-business-name">
                         <h3>Savya jewellery <br>business</h3>
                     </div>
+                    
+
                     <div class="profile-name">
                         <h3>NAME :</h3>
                         <input type="text"  [(ngModel)]="user.name" (ngModelChange)=" changename($event)" class="input-style"/>
@@ -62,7 +86,12 @@
                         <h3>Exclushive Price</h3>
                         <p>Exclusive access to schemes and programe to unlock the best prices on Savya Jewels Business</p>
                     </div>
-                    <div class="link-button">
+                    
+                    <div *ngIf='kyc!=null && kyc.document_verified == 2' class="link-button">
+                        <a routerLink="/kyc" class="btn">Your Documents are Verified</a>
+                    </div>
+
+                    <div *ngIf='kyc==null || kyc.document_verified != 2' class="link-button">
                         <a routerLink="/kyc" class="btn">verify now</a>
                     </div>
                 </div>

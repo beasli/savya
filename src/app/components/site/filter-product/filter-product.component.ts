@@ -84,14 +84,14 @@ export class FilterProductComponent implements OnInit {
       this.div=true;
       this.alert=false
       this.products = data['data'];
-      this.pages = Math.ceil(data['pagination']/16)
+      this.pages = Math.ceil(data['pagination']/16);
       console.log(this.pages);
      // console.log(this.products);
       this.url = data['url'] + '/';
       console.log(this.url);
        }).catch(d=>{
 
-        this.api.Post2(PRODUCTLIST+"?subsubcategory_id="+value,{},{'subsubcategory_id':value,'page':page}).then(data  => {
+        this.api.Post2(PRODUCTLIST,{},{'subsubcategory_id':value,'page':page}).then(data  => {
           this.page=true;
           this.loader=false;
           this.div=true;
@@ -138,6 +138,13 @@ export class FilterProductComponent implements OnInit {
             console.log(d);
           });
       }
+  }
+  pagechanged(){
+    if(!this.manufacture){
+    this.router.navigate(['filter',this.subid], { queryParams: { page: this.current_page}});
+    } else{
+      this.router.navigate(['filter',this.subid], { queryParams: { page: this.current_page,manufacturer:this.manufacture}});
+    }
   }
   go(value) {
     this.api.godetail(value);

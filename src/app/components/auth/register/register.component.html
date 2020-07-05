@@ -137,6 +137,16 @@
                                <div *ngIf="mob" class="alert alert-danger">Mobile no. should be atleast 10 digits  </div>
                                 
                             </div>
+                            <div class="form-group" *ngIf="mobile">
+                                <textarea #address="ngModel"  ngModel  name="address" class="form-control" placeholder="Address" required ></textarea>
+                                <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
+                                    <div *ngIf="address.errors.required">address is required.</div>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="mobile">
+                                <input type="text"  #referal="ngModel"  ngModel  name="referal" class="form-control" placeholder="Referral Code">
+                                
+                            </div>  
                             <div class="form-group" *ngIf="!mobile">
                                 <input type="password"  #password="ngModel"  name="password" ngModel class="form-control" placeholder="Enter Otp" required>
                                 <div class="alert alert-danger" *ngIf="password.touched && password.invalid">

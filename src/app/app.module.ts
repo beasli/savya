@@ -19,15 +19,16 @@ import { KycguardService } from './components/auth-guard/kycguard.service';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { LoginGuardService } from './components/auth-guard/login-guard.service';
 import { KycDoneService } from './components/auth-guard/kyc-done.service';
-
-
+import { ModalComponent } from './components/layout/modal/modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    NavBarComponent
-
+    NavBarComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -47,8 +48,9 @@ import { KycDoneService } from './components/auth-guard/kyc-done.service';
        pauseOnHover: true,
        clickToClose: true
      }),
+    BrowserAnimationsModule,
   ],
-  providers: [AuthGuardService,CheckoutService,OtpGuardService,KycguardService,LoginGuardService,KycDoneService],
+  providers: [AuthGuardService,CheckoutService,OtpGuardService,KycguardService,LoginGuardService,KycDoneService,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,8 +15,12 @@
     max-width:50px;
     height: auto;;
 }
+
 .seller .embed-responsive{
     text-align:center;
+}
+/deep/.slick-track{
+    min-width: 500px !important;
 }
 .seller .embed-responsive .embed-responsive-item{
     width:100px;

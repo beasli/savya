@@ -18,6 +18,7 @@ export class ChangeProfileComponent implements OnInit {
   page:boolean;
   name:any;
   photo:any;
+  kyc: any;
   
   constructor(private api:ApiService,private router:Router,private sanitizer: DomSanitizer) {
     let mobile=this.api.getMobileNo();
@@ -29,6 +30,7 @@ export class ChangeProfileComponent implements OnInit {
       this.loader=false;
       console.log(data);
       this.data=data['user'];
+      this.kyc = data['kyc'];
       this.photo = data['url'];
       this.name=this.data.name;
       //this.router.navigate(['/registerOtp']);

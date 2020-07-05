@@ -111,7 +111,7 @@
         <form>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="each-photo-upload-wpapper">
+                    <div [ngClass]="{'glowing-border':rejcted.gst,'each-photo-upload-wpapper':true}">
                         <div class="select-feild">
                             
                               <!-- <input type="radio" *ngIf="kycValue==null" [checked]="gst_doc1.valid&&gst_no.valid" id="gst-reg-front"> -->
@@ -120,15 +120,15 @@
                         </div>
                         <div class="uplod-documents">
                             <div class="row">
-                                <div class="col-6" *ngIf="kycValue==null||kycValue.gst_doc==null">
+                                <div class="col-6" *ngIf="kycValue==null||kycValue.gst_doc==null || why[0]=='1'">
                                     <div class="photop-upload-area preview" id="preview"  >
                                         <img id="gst_front" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/1.+GST+(1)/GST_Front-0.jpg" >
                                         <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
                                     </div>
                                 </div>
-                                <div class="col-6" *ngIf="kycValue!=null&&kycValue.gst_doc!=null">
+                                <div class="col-6" *ngIf="kycValue!=null&&kycValue.gst_doc!=null && why[0]=='0'">
                                     <div class="photop-upload-area">
-                                        <img   [src]="photo+'/'+ kycValue.gst_doc" >
+                                        <img  [src]="photo+'/'+ kycValue.gst_doc" >
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -139,18 +139,20 @@
                                             <li>Legel Number</li>
                                             <li>Trade Name</li>
                                         </ul>
-                                        <div *ngIf="kycValue==null||kycValue.gst_doc==null">
-                                            <input type="text"  #gst_no="ngModel" ngModel  name="gst_no" class="form-control" (ngModelChange)="changeGst($event)" placeholder="GST No.*" required>
+                                        <!-- <div *ngIf="kycValue==null||kycValue.gst_doc==null"> -->
+                                        <div>
+                                            <input type="text"  #gst_no="ngModel" [(ngModel)]="kycValue.gst_no"  name="gst_no" class="form-control" (ngModelChange)="changeGst($event)" placeholder="GST No.*" required>
                                             <div *ngIf="gst_check" class="alert alert-danger">Invalid Gst no.</div>
                                             <div class="alert alert-danger" *ngIf="gst_no.touched && gst_no.invalid">
                                                 Gst no. is required.
                                             </div>
                                         </div>
-                                        <div *ngIf="kycValue!=null && kycValue.gst_no!=null">
+                                        <!-- <div *ngIf="kycValue!=null && kycValue.gst_no!=null">
                                             <input type="text"  #gst_no="ngModel" [(ngModel)]="kycValue.gst_no"  name="gst_no" class="form-control" placeholder="GST No.*" readonly>
-                                        </div>
+                                        </div> -->
                                          <div class="photo-upload-btn" >
-                                            <button (click)="modal(gst_doc1)" *ngIf="kycValue==null || kycValue.gst_doc == null" class="btn">Upload Image</button>
+                                            <!-- <button (click)="modal(gst_doc1)" *ngIf="kycValue==null || kycValue.gst_doc == null" class="btn">Upload Image</button> -->
+                                            <button (click)="modal(gst_doc1)" class="btn">Upload Image</button>
                                             <div class="form-group" [hidden]="true"  >
                                                 <label for='gst_doc1'>Gst Document Front</label>
                                                 <input type="file"  #gst_doc1="ngModel" (change)="fileChange($event)" ngModel name="gst_doc1" id="gst_doc1" class="form-control" placeholder="Gst Document" required>
@@ -172,20 +174,20 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="each-photo-upload-wpapper">
+                    <div [ngClass]="{'glowing-border':rejcted.gst,'each-photo-upload-wpapper':true}">
                         <div class="select-feild">
                             <!-- <input type="radio" *ngIf="kycValue==null" [checked]="gst_doc2.valid" id="gst-reg-2"> -->
                             <label for="gst-reg-2">GST REG 02 (Registration Certificate)</label><br>
                         </div>
                         <div class="uplod-documents">
                             <div class="row">
-                                <div class="col-6" *ngIf="kycValue==null||kycValue.gst_back==null">
+                                <div class="col-6" *ngIf="kycValue==null||kycValue.gst_back==null  || why[1]=='1'">
                                     <div class="photop-upload-area preview" id="preview">
                                         <img id="gst_back" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/2.+GST+(2)/GST_Back-0.jpg" >
                                         <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
                                     </div>
                                 </div>
-                                <div class="col-6" *ngIf="kycValue!=null&&kycValue.gst_back!=null">
+                                <div class="col-6" *ngIf="kycValue!=null&&kycValue.gst_back!=null  && why[1]=='0'">
                                     <div class="photop-upload-area">
                                         <img   [src]="photo+'/'+ kycValue.gst_back" >
                                     </div>
@@ -200,7 +202,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button (click)="modal(gst_doc2)" class="btn" *ngIf="kycValue==null || kycValue.gst_back == null">Upload Image</button>
+                                            <button (click)="modal(gst_doc2)" class="btn">Upload Image</button>
                                             <div class="form-group" [hidden]="true">
                                                 <label for='gst_doc2'>Gst Document Back</label>
                                                 <input type="file"  #gst_doc2="ngModel" (change)="fileChange($event)" ngModel name="gst_doc2" id="gst_doc2" class="form-control" placeholder="Gst Document" required>
@@ -222,20 +224,20 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="each-photo-upload-wpapper">
+                    <div [ngClass]="{'glowing-border':rejcted.adhar,'each-photo-upload-wpapper':true}">
                         <div class="select-feild">
                             <!-- <input type="radio" *ngIf="kycValue==null" [checked]="aadhar_doc1.valid&&aadhar.valid" id="adhar-1"> -->
                             <label for="adhar-1">Aadhaar REG (Front)</label><br>
                         </div>
                         <div class="uplod-documents">
                             <div class="row">
-                                <div class="col-6" *ngIf="kycValue==null||kycValue.aadhar_doc==null">
+                                <div class="col-6" *ngIf="kycValue==null||kycValue.aadhar_doc==null || why[2]=='1'">
                                     <div class="photop-upload-area preview" id="preview" >
                                         <img id="adhar_front" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/3.+Aadhar+(1)/Aadhar_Front-0.jpg" >
                                         <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
                                     </div>
                                 </div>
-                                <div class="col-6" *ngIf="kycValue!=null&&kycValue.aadhar_doc!=null">
+                                <div class="col-6" *ngIf="kycValue!=null&&kycValue.aadhar_doc!=null  && why[2]=='0'">
                                     <div class="photop-upload-area">
                                         <img   [src]="photo+'/'+ kycValue.aadhar_doc" >
                                     </div>
@@ -244,22 +246,24 @@
                                     <div class="photo-upload-text">
                                         <h4>Certificate must show</h4>
                                         <ul>
-                                            <li>Registration Number</li>
-                                            <li>Legel Number</li>
-                                            <li>Trade Name</li>
+                                            <li>Aadhaar no</li>
+                                            <li>Legal Name</li>
+                                            <li>Date of birth</li>
+                                            <li>Photo</li>
                                         </ul>
-                                        <div *ngIf="kycValue==null || kycValue.aadhar==null">
-                                            <input type="text"  #aadhar="ngModel"  ngModel  name="aadhar" class="form-control" (ngModelChange)="changeAadhar($event)" placeholder="Aadhar No." required>
+                                        <!-- <div *ngIf="kycValue==null || kycValue.aadhar==null"> -->
+                                        <div>
+                                            <input type="text"  #aadhar="ngModel"  [(ngModel)]="kycValue.aadhar"  name="aadhar" class="form-control" (ngModelChange)="changeAadhar($event)" placeholder="Aadhar No." required>
                                             <div *ngIf="adhar_check" class="alert alert-danger">Invalid Aadhaar Enter with proper spaces</div>
                                             <div class="alert alert-danger" *ngIf="aadhar.touched && aadhar.invalid">
                                                 Aadhaar no. is required.
                                             </div>
                                         </div>
-                                        <div *ngIf="kycValue!=null && kycValue.aadhar !=null">
+                                        <!-- <div *ngIf="kycValue!=null && kycValue.aadhar !=null">
                                             <input type="text"  #aadhar="ngModel"  [(ngModel)]="kycValue.aadhar"  name="aadhar" class="form-control" placeholder="Aadhar No." readonly>
-                                        </div>
+                                        </div> -->
                                         <div class="photo-upload-btn">
-                                            <button (click)="modal(aadhar_doc1)" *ngIf="kycValue==null || kycValue.aadhar_doc == null" class="btn">upload Image</button>
+                                            <button (click)="modal(aadhar_doc1)" class="btn">upload Image</button>
                                             <div class="form-group" [hidden]="true">
                                                 <label for='aadhar_doc1'>Aadhar Document Front</label>
                                                 <input type="file"  #aadhar_doc1="ngModel" (change)="fileChange($event)" id="aadhar_doc1" ngModel name="aadhar_doc1" class="form-control" placeholder="Aadhar Document" required>
@@ -282,20 +286,20 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="each-photo-upload-wpapper">
+                    <div [ngClass]="{'glowing-border':rejcted.adhar,'each-photo-upload-wpapper':true}">
                         <div class="select-feild">
                             <!-- <input type="radio" *ngIf="kycValue==null" [checked]="aadhar_doc2.valid" id="adhar-2"> -->
                             <label for="adhar-2">Aadhaar REG (Back)</label><br>
                         </div>
                         <div class="uplod-documents">
                             <div class="row">
-                                <div class="col-6" *ngIf="kycValue == null || kycValue.aadhar_back == null">
+                                <div class="col-6" *ngIf="kycValue == null || kycValue.aadhar_back == null || why[3]=='1'">
                                     <div class="photop-upload-area preview"  id="preview" >
                                         <img id="adhar_back" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/4+Aadhar+(2)/Aadhar_Back-0.jpg" >
                                         <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
                                     </div>
                                 </div>
-                                <div class="col-6" *ngIf="kycValue!=null&&kycValue.aadhar_back!=null">
+                                <div class="col-6" *ngIf="kycValue!=null&&kycValue.aadhar_back!=null && why[3]=='0'">
                                     <div class="photop-upload-area">
                                         <img   [src]="photo+'/'+ kycValue.aadhar_back" >
                                     </div>
@@ -304,12 +308,11 @@
                                     <div class="photo-upload-text">
                                         <h4>Certificate must show</h4>
                                         <ul>
-                                            <li>Registration Number</li>
-                                            <li>Legel Number</li>
-                                            <li>Trade Name</li>
+                                            <li>Address</li>
+                                            <li>Aadhaar Number</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button (click)="modal(aadhar_doc2)"  *ngIf="kycValue==null" class="btn">upload Image</button>
+                                            <button (click)="modal(aadhar_doc2)"  class="btn">upload Image</button>
                                             <div class="form-group" [hidden]="true">
                                                 <label for='aadhar_doc2'>Aadhar Document Front</label>
                                                 <input type="file"  #aadhar_doc2="ngModel" (change)="fileChange($event)" id="aadhar_doc2" ngModel name="aadhar_doc2" class="form-control" placeholder="Aadhar Document" required>
@@ -331,20 +334,20 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="each-photo-upload-wpapper">
+                    <div [ngClass]="{'glowing-border':rejcted.pan,'each-photo-upload-wpapper':true}">
                         <div class="select-feild">
                             <!-- <input type="radio" *ngIf="kycValue==null" [checked]="pan_doc.valid&&pan_no.valid" id="pan"> -->
                             <label for="pan">PAN REG </label><br>
                         </div>
                         <div class="uplod-documents">
                             <div class="row">
-                                <div class="col-6" *ngIf="kycValue==null||kycValue.pan_doc==null">
+                                <div class="col-6" *ngIf="kycValue==null||kycValue.pan_doc==null|| why[4]=='1'">
                                     <div class="photop-upload-area preview" id="preview" >
                                         <img id="pan_front" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/5.+PAN/PANCARD-0.jpg" >
                                         <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
                                     </div>
                                 </div>
-                                <div class="col-6" *ngIf=" kycValue!=null&&kycValue.pan_doc!=null">
+                                <div class="col-6" *ngIf=" kycValue!=null&&kycValue.pan_doc!=null && why[4]=='0'">
                                     <div class="photop-upload-area">
                                         <img   [src]="photo+'/'+ kycValue.pan_doc" >
                                     </div>
@@ -354,22 +357,22 @@
                                     <div class="photo-upload-text">
                                         <h4>Certificate must show</h4>
                                         <ul>
-                                            <li>Registration Number</li>
-                                            <li>Legel Number</li>
-                                            <li>Trade Name</li>
+                                            <li>Pan Number</li>
+                                            <li>Pan Name</li>
+                                            <li>Photo</li>
                                         </ul>
-                                        <div *ngIf="kycValue==null || kycValue.pan_no == null">
-                                            <input type="text"  #pan_no="ngModel"  ngModel  name="pan_no" (ngModelChange)="changePan($event)" class="form-control" placeholder="Pan Card No.*" required>
+                                        <div>
+                                            <input type="text"  #pan_no="ngModel"  [(ngModel)]="kycValue.pan_no"  name="pan_no" (ngModelChange)="changePan($event)" class="form-control" placeholder="Pan Card No.*" required>
                                             <div *ngIf="pan_check" class="alert alert-danger">Invalid pan no.</div>
                                             <div class="alert alert-danger" *ngIf="pan_no.touched && pan_no.invalid">
                                                 Pan no. is required.
                                             </div>
                                         </div>
-                                        <div *ngIf="kycValue!=null && kycValue.pan_no != null">
+                                        <!-- <div *ngIf="kycValue!=null && kycValue.pan_no != null">
                                             <input type="text"  #pan_no="ngModel"  [(ngModel)]="kycValue.pan_no"  name="pan_no"  class="form-control" placeholder="Pan Card No.*" readonly>
-                                        </div>
+                                        </div> -->
                                         <div class="photo-upload-btn">
-                                            <button (click)="modal(pan_doc)" *ngIf="kycValue == null || kycValue.pan_no == null" class="btn">upload Image</button>
+                                            <button (click)="modal(pan_doc)" class="btn">upload Image</button>
                                             <div class="form-group" [hidden]="true">
                                                 <label for='pan_doc'>Pan Document</label>
                                                 <input type="file"  #pan_doc="ngModel" (change)="fileChange($event)" id="pan_doc" ngModel name="pan_doc" class="form-control" placeholder="Pan Document" required>
@@ -392,20 +395,20 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="each-photo-upload-wpapper">
+                    <div [ngClass]="{'glowing-border':rejcted.visiting,'each-photo-upload-wpapper':true}">
                         <div class="select-feild">
                             <!-- <input type="radio" *ngIf="kycValue==null" [checked]="visiting_doc1.valid" id="visiting-card-1"> -->
                             <label for="visiting-card-1">Visiting ( Business Card Front)</label><br>
                         </div>
                         <div class="uplod-documents">
                             <div class="row">
-                                <div class="col-6" *ngIf="kycValue==null||kycValue.visiting_doc==null">
+                                <div class="col-6" *ngIf="kycValue==null||kycValue.visiting_doc==null || why[5]=='1'">
                                     <div class="photop-upload-area preview" id="preview"  >
                                         <img id="visiting_front" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/6.+Visiting+Card/VisitingCard_Front-0.jpg" >
                                         <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
                                     </div>
                                 </div>
-                                <div class="col-6" *ngIf="kycValue!=null&&kycValue.visiting_doc!=null">
+                                <div class="col-6" *ngIf="kycValue!=null&&kycValue.visiting_doc!=null && why[5]=='0'">
                                     <div class="photop-upload-area">
                                         <img   [src]="photo+'/'+ kycValue.visiting_doc" >
                                     </div>
@@ -415,12 +418,12 @@
                                     <div class="photo-upload-text">
                                         <h4>Certificate must show</h4>
                                         <ul>
-                                            <li>Registration Number</li>
-                                            <li>Legel Number</li>
-                                            <li>Trade Name</li>
+                                            <li>Business Name</li>
+                                            <li>Address</li>
+                                            <li>Phone No</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button (click)="modal(visiting_doc1)" *ngIf="kycValue==null || kycValue.visiting_doc == null" class="btn">upload Image</button>
+                                            <button (click)="modal(visiting_doc1)" class="btn">upload Image</button>
                                             <div class="form-group" [hidden]="true">
                                                 <label for='visiting_doc1'>Visiting Document</label>
                                                 <input type="file"  #visiting_doc1="ngModel" (change)="fileChange($event)" id="visiting_doc1" ngModel name="visiting_doc1" class="form-control" placeholder="Visiting Document" required>
@@ -444,18 +447,18 @@
                 <div class="col-md-6">
                     <div class="each-photo-upload-wpapper">
                         <div class="select-feild">
-                            <input type="radio" *ngIf="kycValue==null || kycValue.visiting_back == null" [checked]="visiting_doc2.valid" id="visiting-card-2">
-                            <label for="visiting-card-2">Visiting ( Business Card Back)</label><br>
+                            
+                            <label for="visiting-card-2">Visiting ( Optional-Back)</label><br>
                         </div>
                         <div class="uplod-documents">
                             <div class="row">
-                                <div class="col-6" *ngIf="kycValue==null||kycValue.visiting_back==null">
+                                <div class="col-6" *ngIf="kycValue==null||kycValue.visiting_back==null || why[6]=='1'">
                                     <div class="photop-upload-area preview" id="preview" >
                                         <img id="visiting_back" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/7.+Visiting+Card/VisitingCard_Back-0.jpg" >
                                         <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
                                     </div>
                                 </div>
-                                <div class="col-6" *ngIf="kycValue!=null&&kycValue.visiting_back!=null">
+                                <div class="col-6" *ngIf="kycValue!=null&&kycValue.visiting_back!=null && why[6]=='0'">
                                     <div class="photop-upload-area">
                                         <img   [src]="photo+'/'+ kycValue.visiting_back" >
                                     </div>
@@ -469,7 +472,7 @@
                                             <li>Trade Name</li>
                                         </ul>
                                         <div class="photo-upload-btn">
-                                            <button (click)="modal(visiting_doc2)" *ngIf="kycValue==null || kycValue.visiting_back == null" class="btn">Upload Image</button>
+                                            <button (click)="modal(visiting_doc2)" class="btn">Upload Image</button>
                                             <div class="form-group" [hidden]="true">
                                                 <label for='visiting_doc2'>Visiting Document</label>
                                                 <input type="file"  #visiting_doc2="ngModel" (change)="fileChange($event)" id="visiting_doc2" ngModel name="visiting_doc2" class="form-control" placeholder="Visiting Document" required>
@@ -492,6 +495,7 @@
                 </div>
             </div>
             <div class="text-center" *ngIf="submit==0"><button class="btn" (click)="kyc()">SUBMIT</button></div>
+            <div class="text-center" *ngIf="submit==1"><button class="btn" (click)="kyc()">REUPLOAD</button></div>
         </form>
     </div>
     <div  style="padding: 100px;" *ngIf="loader"><app-loader></app-loader></div>

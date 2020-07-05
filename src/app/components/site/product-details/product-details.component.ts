@@ -89,6 +89,7 @@ export class ProductDetailsComponent implements OnInit {
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
     this.drop=this.api.drop;
     this.route.params.subscribe(params => {
+      this.clean();
       this.pid = params.id;
       this.ngOnInit();
       this.getproduct();
@@ -468,7 +469,7 @@ diamondchange(diamond){
    getstone(value)  {
       this.stone = value;
       let name = this.stone.jwellery_size;
-      this.pricestone = this.pricelist.stone.find(x => x.type == name);
+      this.pricestone = this.pricelist.stone.find(x => x.type.toUpperCase() == name.toUpperCase());
       if(this.pricestone){
       this.totalstone = this.api.price(this.stone.weight,this.pricestone.price,this.stone.charges_option,this.stone.making_charge);
       this.totalstone = Math.round(this.totalstone.price);
@@ -479,6 +480,68 @@ diamondchange(diamond){
         this.button();
       }
    }
+
+   clean(){
+    this.pid= null;
+    this.data= null;
+    this.assets= null;
+    this.recents= null;
+    this.category= null;
+    this.subcategory= null;
+    this.subsubcategory= null;
+    this.url= null;
+    this.prd_img= null;
+    this.goldquality= null;
+    this.gold= null;
+    this.pricelist= null;
+    this.pricegold= null;
+    this.diamond= null;
+    this.diamondclarity= null;
+    this.diamondcolour= null;
+    this.defaultdiamond= null;
+    this.pricediamond= null;
+    this.totaldiamond= null;
+    this.totalgold= null;
+    this.finegold= null;
+    this.platinum= null;
+    this.priceplat= null;
+    this.fineplat= null;
+    this.totalplat= null;
+    this.defaultsize= null;
+    this.sizes= null;
+    this.selectedsize= null;
+    this.totalprice= null;
+    this.certificate= null;
+    this.value = 1;
+    this.wish= null;
+    this.cart= null;
+    this.stone= null;
+    this.totalstone= null;
+    this.pricestone= null;
+    this.pricegold2= null;
+    this.gross= null;
+    this.colvalue= null;
+    this.silver= null;
+    this.pricesilver= null;
+    this.totalsilver= null;
+    this.loader= null;
+    this.page= null;
+    this.scroll= null;
+    this.drop= this.api.drop;;
+    this.loading= null;
+    this.viewdone=0;
+    this.metalcolour= null;
+    this.goldlist= null;
+    this.stonelist= null;
+    this.diamondlist= null;
+    this.message= null;
+    this.btn = 1;
+    this.privious= null;
+    this.defsilver= null;
+    this.defplat= null;
+    this.manufacture= null;
+    this.sizelist= null;
+  }
 
    getgold(value) {
      this.gold = Object.assign({},this.goldlist.find(x => x.jwellery_size == value.jwellery_size));
