@@ -34,7 +34,7 @@ import { OffersComponent } from '../offers/offers.component';
     NgbModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot({
-      position:["middle","center"],
+      position:["bottom","left"],
        timeOut: 3000,
        showProgressBar: true,
        pauseOnHover: true,

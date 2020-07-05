@@ -39,8 +39,14 @@ export class KycComponent implements OnInit {
   photo:any;
   name:any;
   kycValue:any;
+  rejcted = {'visiting':0,'adhar':0,'gst':0,'pan':0,}
   submit=1;
+  why = {0:'0',1:'0',2:'0',3:'0',4:'0',5:'0',6:'0'};
   constructor(private api:ApiService,private router:Router) {
+
+    
+  
+    console.log(this.kycValue);
     this.api.Post(PROFILEVIEW, {}).then(data=>{
       this.page=true;
       this.loader=false;
@@ -48,24 +54,70 @@ export class KycComponent implements OnInit {
       this.user=data['user'];
       this.photo = data['url'];
       this.kycValue=data['kyc'];
-      console.log(this.kycValue.aadhar_back);
-      console.log(this.kycValue.aadhar_doc);
-      console.log(this.kycValue.gst_back);
-      console.log(this.kycValue.aadhar);
-      console.log(this.kycValue.gst_doc);
-      console.log(this.kycValue.pan_no);
-      console.log(this.kycValue.gst_no);
-      console.log(this.kycValue.visiting_doc);
-      console.log(this.kycValue.visiting_back);
-      console.log(this.kycValue.pan_doc);
 
-      if (this.kycValue == null || this.kycValue.aadhar_back == null || this.kycValue.aadhar_doc == null 
+      if(this.kycValue){
+
+        if(this.kycValue.pan_no){
+        this.pan = this.kycValue.pan_no;}
+        if(this.kycValue.gst_no){
+        this.gst = this.kycValue.gst_no;}
+        if(this.kycValue.aadhar){
+        this.aadhar = this.kycValue.aadhar;} 
+      }else{
+        this.kycValue={"id":null,"uid":null,"agent_code":null,"gst_no":null,"pan_no":null,"aadhar":null,"gst_doc":null,"gst_back":null,
+        "aadhar_doc":null,"aadhar_back":null,"visiting_doc":null,"visiting_back":null,"pan_doc":null,"gst_doc_status":null,
+        "gst_back_status":null,"aadhar_doc_status":null,"aadhar_back_status":null,"visiting_doc_status":null,
+        "visiting_back_status":null,"pan_doc_status":null,"document_verified":null,
+        "status":null,"created_at":null,"updated_at":null};
+      }
+
+      if (this.kycValue.aadhar_back == null || this.kycValue.aadhar_doc == null 
         || this.kycValue.gst_back == null || this.kycValue.gst_doc == null 
         || this.kycValue.aadhar == null || this.kycValue.pan_no == null 
         || this.kycValue.gst_no == null || this.kycValue.visiting_doc == null
         || this.kycValue.visiting_back == null || this.kycValue.pan_doc == null ) {
             this.submit = 0;
         }
+
+      if(this.kycValue.aadhar_doc_status == 1 || this.kycValue.aadhar_doc_status ==  1){
+          this.api.onFail('Your Aadhar Documents are Pending Please Upload them');
+      }else if(this.kycValue.aadhar_doc_status == 0 || this.kycValue.aadhar_doc_status == 0){
+        this.api.onFail('Your Aadhar Documents are gone for Verification');
+      }else if(this.kycValue.aadhar_doc_status == 3|| this.kycValue.aadhar_doc_status == 3){
+        this.api.onFail('Your Aadhar Documents are Rejected Please Reupload them');
+        this.rejcted.adhar = 1;
+        
+      }
+
+      if(this.kycValue.pan_doc_status == 1){
+        this.api.onFail('Your Pan Documents are Pending Please Upload them');
+      }else if(this.kycValue.pan_doc_status == 0){
+        this.api.onFail('Your Pan Documents are gone for Verification');
+      }else if(this.kycValue.pan_doc_status == 3){
+        this.api.onFail('Your Pan Documents are Rejected Please Reupload them');
+        this.rejcted.pan = 1;
+      }
+
+      if(this.kycValue.visiting_doc_status == 1|| this.kycValue.visiting_back_status == 1){
+        this.api.onFail('Your Visiting Card is Pending Please Upload them');
+      }else if(this.kycValue.visiting_doc_status == 0 || this.kycValue.visiting_back_status == 0){
+        this.api.onFail('Your Visiting Card is gone for Verification');
+      }else if(this.kycValue.visiting_doc_status == 3|| this.kycValue.visiting_back_status == 3){
+        this.api.onFail('Your Visiting Card is Rejected Please Reupload it');
+        this.rejcted.visiting = 1;
+      }
+
+      if(this.kycValue.gst_doc_status == 1|| this.kycValue.gst_back_status == 1){
+        this.api.onFail('Your Gst Documents are Pending Please Upload them');
+      }else if(this.kycValue.gst_doc_status == 0 || this.kycValue.gst_back_status == 0){
+        this.api.onFail('Your Gst Documents are gone for Verification');
+      }else if(this.kycValue.gst_doc_status == 3|| this.kycValue.gst_back_status ==  3){
+        this.api.onFail('Your Gst Documents are Rejected Please Reupload them');
+        this.rejcted.gst = 1;
+      }
+
+
+
       this.name=this.user.name;
       //this.router.navigate(['/registerOtp']);
     }).catch(d=>{
@@ -81,6 +133,11 @@ export class KycComponent implements OnInit {
         console.log(d);
       }
 });
+
+// this.api.getPosition().then(pos=>
+//   {
+//      console.log(`Positon: ${pos.lng} ${pos.lat}`);
+//   });
   }
   fileChange(event) {
     let files:FileList=event.target.files;
@@ -91,7 +148,7 @@ export class KycComponent implements OnInit {
       var img = document.querySelector("#preview img");
       console.log(event.target.name);
       if(event.target.name=="gst_doc1")
-      {       
+      {       this.why[0] ='1';
               gst.append('gst_front', files.item(0), files.item(0).name);
               
               var reader = new FileReader();
@@ -102,6 +159,7 @@ export class KycComponent implements OnInit {
       }
       else if(event.target.name=="gst_doc2")
       {
+        this.why[1] ='1';
               gst.append('gst_back', files.item(0), files.item(0).name);
               
               var reader = new FileReader();           
@@ -112,6 +170,7 @@ export class KycComponent implements OnInit {
       }
       else if(event.target.name=="aadhar_doc1")
       {
+        this.why[2] ='1';
              aadhar.append('adhar_fornt', files.item(0), files.item(0).name);
               var reader = new FileReader();
                reader.onload = function(e) {
@@ -121,6 +180,7 @@ export class KycComponent implements OnInit {
       }
       else if(event.target.name=="aadhar_doc2")
       {
+        this.why[3] ='1';
               aadhar.append('adhar_back', files.item(0), files.item(0).name);
               var reader = new FileReader();
                reader.onload = function(e) {
@@ -130,6 +190,7 @@ export class KycComponent implements OnInit {
       }
       else if(event.target.name=="pan_doc")
       {
+        this.why[4] ='1';
              pan.append('pan_front', files.item(0), files.item(0).name);
               var reader = new FileReader();
                reader.onload = function(e) {
@@ -139,6 +200,7 @@ export class KycComponent implements OnInit {
       }
       else if(event.target.name=="visiting_doc1")
       {
+        this.why[5] ='1';
              visiting.append('visiting_front', files.item(0), files.item(0).name);
               var reader = new FileReader();
                reader.onload = function(e) {
@@ -148,6 +210,7 @@ export class KycComponent implements OnInit {
       }
       else if(event.target.name=="visiting_doc2")
       {
+        this.why[6] ='1';
               visiting.append('visiting_back', files.item(0), files.item(0).name);
 
               var reader = new FileReader();
@@ -156,6 +219,69 @@ export class KycComponent implements OnInit {
               }
             reader.readAsDataURL(file);
       }
+    }
+
+    if(gst.get('gst_back') && gst.get('gst_front') && this.gst){
+      gst.append('mobile_no', this.mob);
+      gst.append('gst_no', this.gst);
+      this.api.Post(USERKYC,gst)
+     .then(data=>{
+      this.page=true;
+      this.loader=false;
+     }).catch(d=>{
+      this.page=true;
+      this.loader=false;
+      this.api.onFail("upload remaining details of gst and try again");
+       console.log(d);
+     });
+
+    }
+
+    if(aadhar.get('adhar_fornt') && aadhar.get('adhar_back') && this.aadhar){
+      aadhar.append('mobile_no', this.mob);
+      aadhar.append('aadhar', this.aadhar);
+      this.api.Post(USERKYC,aadhar)
+     .then(data=>{
+      this.page=true;
+      this.loader=false;
+     }).catch(d=>{
+      this.page=true;
+      this.loader=false;
+      this.api.onFail("upload remaining details of aadhar and try again");
+       console.log(d);
+     });
+
+    }
+
+    if(pan.get('pan_front') && this.pan){
+      pan.append('mobile_no', this.mob);
+      pan.append('pan_no', this.pan);
+      this.api.Post(USERKYC,pan)
+     .then(data=>{
+      this.page=true;
+      this.loader=false;
+     }).catch(d=>{
+      this.page=true;
+      this.loader=false;
+      this.api.onFail("upload remaining details of pan and try again");
+       console.log(d);
+     });
+
+    }
+
+    if(visiting.get('visiting_front') || visiting.get('visiting_back')){
+      visiting.append('mobile_no', this.mob);
+      this.api.Post(USERKYC,visiting)
+     .then(data=>{
+      this.page=true;
+      this.loader=false;
+     }).catch(d=>{
+      this.page=true;
+      this.loader=false;
+      this.api.onFail("upload remaining details of visitng and try again");
+       console.log(d);
+     });
+
     }
   }
   modal(value)
@@ -240,71 +366,17 @@ export class KycComponent implements OnInit {
     this.loader=true;
     this.page=false;
 
-     
-     pan.append('mobile_no', this.mob);
-     gst.append('mobile_no', this.mob);
-     aadhar.append('mobile_no', this.mob);
-     pan.append('pan_no', this.pan);
-     gst.append('gst_no', this.gst);
-     aadhar.append('aadhar', this.aadhar);
-     visiting.append('mobile_no', this.mob);
-
-
-     this.api.Post(USERKYC,gst)
-     .then(data=>{
-      this.page=true;
+    if((visiting.get('visiting_front') && visiting.get('visiting_back'))
+     || (pan.get('pan_front') && this.pan) ||
+     (aadhar.get('adhar_fornt') && aadhar.get('adhar_back') && this.aadhar) || (gst.get('gst_back') && gst.get('gst_front') && this.gst)){
+       this.api.onSuccess('Your Documents are submitted Successfully')
+       this.router.navigate(['/']);
+     } else{
       this.loader=false;
-
-       this.api.onSuccess("successfully done KYC");
-       //this.router.navigate(['/home']);
-     }).catch(d=>{
       this.page=true;
-      this.loader=false;
-      this.api.onFail("upload remaining details and try again");
-       console.log(d);
-     });
 
-     this.api.Post(USERKYC,pan)
-     .then(data=>{
-      this.page=true;
-      this.loader=false;
-
-       this.api.onSuccess("successfully done KYC");
-      // this.router.navigate(['/home']);
-     }).catch(d=>{
-      this.page=true;
-      this.loader=false;
-      this.api.onFail("upload remaining details and try again");
-       console.log(d);
-     });
-
-     this.api.Post(USERKYC,aadhar)
-     .then(data=>{
-      this.page=true;
-      this.loader=false;
-
-       this.api.onSuccess("successfully done KYC");
-      // this.router.navigate(['/home']);
-     }).catch(d=>{
-      this.page=true;
-      this.loader=false;
-      this.api.onFail("upload remaining details and try again");
-       console.log(d);
-     });
-
-     this.api.Post(USERKYC,visiting)
-     .then(data=>{
-      this.page=true;
-      this.loader=false;
-
-       this.api.onSuccess("successfully done KYC");
-      // this.router.navigate(['/home']);
-     }).catch(d=>{
-      this.page=true;
-      this.loader=false;
-      this.api.onFail("upload remaining details and try again");
-       console.log(d);
-     });
+       this.api.onFail('Please upload Documents');
+     }
 
 }
   ngOnInit() {

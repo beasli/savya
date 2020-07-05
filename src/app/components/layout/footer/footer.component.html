@@ -43,7 +43,7 @@
                             <li><a routerLink="/contact">Contact Info</a></li>
                             <li><a routerLink="/about">About Us</a></li>
                             <li><a routerLink="/payment">Payment & Refunds</a></li>
-                            <li><a routerLink="/register" class="js-back-to-top">Create Account</a></li>
+                            <li><a *ngIf="drop!=1" routerLink="/register" class="js-back-to-top">Create Account</a></li>
                         </ul>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
     </div>
 </footer>
 
-<a class="back-to-top js-back-to-top" href="#" title="Scroll To Top"><i class="icon icon-angle-up"></i></a>
+<a id='top' class="back-to-top js-back-to-top" href="javascript:void(0)" title="Scroll To Top"><i class="icon icon-angle-up"></i></a>
 
 <div class="modal--quickview" id="modalQuickView" style="display: none;">
     <div class="modal-header">
@@ -280,4 +280,4 @@
         </div>
     </div>
 </div>
-<simple-notifications></simple-notifications>
+<simple-notifications [options]="{position: ['top', 'right']}"></simple-notifications>

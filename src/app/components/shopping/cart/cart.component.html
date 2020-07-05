@@ -83,6 +83,6 @@
        <div style="padding: 200px;" *ngIf="loader"> <app-loader   ></app-loader> </div>
     </div>
 </div>
-<simple-notifications></simple-notifications>
+<simple-notifications [options]="{position: ['top', 'right']}"></simple-notifications>
 <button [hidden]="true" id='openmodalbutton' class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 </button>

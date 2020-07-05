@@ -33,6 +33,8 @@ import { SubcategoryComponent } from 'src/app/site/subcategory/subcategory.compo
 import { BullianComponent } from '../bullian/bullian.component';
 import { BullianMerchantComponent } from '../bullian-merchant/bullian-merchant.component';
 import { KycguardService } from '../../auth-guard/kycguard.service';
+import { MachineryProductComponent } from '../../layout/machinery-product/machinery-product.component';
+import { MachineryHolderComponent } from '../../layout/machinery-holder/machinery-holder.component';
 
 
 const customConfig: ShareButtonsConfig = {
@@ -63,7 +65,9 @@ const customConfig: ShareButtonsConfig = {
     CategoryComponent,
     SubcategoryComponent,
     BullianComponent,
-    BullianMerchantComponent
+    BullianMerchantComponent,
+    MachineryProductComponent,
+    MachineryHolderComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -74,7 +78,7 @@ const customConfig: ShareButtonsConfig = {
     BrowserAnimationsModule,
     NgxImageZoomModule,
     SimpleNotificationsModule.forRoot({
-      position:["middle","center"],
+      position:["bottom","left"],
        timeOut: 3000,
        showProgressBar: true,
        pauseOnHover: true,
@@ -86,9 +90,9 @@ const customConfig: ShareButtonsConfig = {
       { path: 'machinery/:id' , component: MachineryComponent},
       { path: 'filter/:id' , component: FilterProductComponent},
       { path: 'events' , component: EventsComponent},
-      { path: 'event/:id' , component: EventComponent},
-// , canActivate: [KycguardService]
-      { path: 'product-details/:id' , component: ProductDetailsComponent},
+      { path: 'event/:id' , component: EventComponent, canActivate: [KycguardService]},
+      { path: 'products/machinery/:id', component: MachineryProductComponent, canActivate: [KycguardService]},
+      { path: 'product-details/:id' , component: ProductDetailsComponent, canActivate: [KycguardService]},
       { path: 'subsub/:id' , component: SubsubComponent},
       { path: 'manufacture/:idm/subsub/:id' , component: SubsubComponent},
       { path: 'filternav' , component: FilterNavBarComponent},
@@ -100,6 +104,9 @@ const customConfig: ShareButtonsConfig = {
       { path: 'bullion/:id', component: BullianMerchantComponent},
     ])
   ],
-  exports: [LoaderComponent]  ,
+  exports: [LoaderComponent,NgbModule,
+    SlickCarouselModule,
+    BrowserAnimationsModule,
+    NgxImageZoomModule,]  ,
 })
 export class SiteModule { }

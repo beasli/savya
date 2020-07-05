@@ -29,5 +29,16 @@
     position:relative;
 }
 .profile-image img{
-    width:100%;
+    width: auto;
+    height: 100%;
+}
+.verified-icon{
+    width:30px;
+    height:30px;
+    position:absolute;
+    right:75px;
+    bottom:40px
+}
+.verified-icon img{
+    width:100%
 }

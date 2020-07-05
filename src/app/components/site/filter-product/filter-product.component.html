@@ -237,6 +237,7 @@
                     <!-- /Filter Row -->
                     
                     <!-- Products Grid -->
+                    <app-loader  *ngIf="loader"></app-loader>
                     <div *ngIf="page">
                             <div  class="prd-grid product-listing data-to-show-4 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div" >
                                 
@@ -248,8 +249,51 @@
                                                         <div class="gdw-loader"></div>
                                                     </div>
                                                     <div class="prd-info text-center">
-                                                        <h2 class="prd-title"><a (click)='go(s.product_id)'>{{s.product_name}}</a></h2>
-                                                        <div class="prd-tag prd-hidemobile" *ngIf="s.weight || s.quality"><a (click)='go(s.product_id)'>{{s.weight}}g / {{s.quality}}</a></div>
+                                                        <!-- <h2 class="prd-title"><a (click)='go(s.product_id)'>{{s.product_name}}</a></h2> -->
+                                                        <div class="prd-tag prd-hidemobile" *ngIf="s.weight.Gold && s.product_category == 'GOLD'">
+                                                            <ng-container *ngIf='s.weight.Diamond'>
+                                                                <p style="text-align: left; width:49%; display: inline-block;">
+                                                                   <a (click)='go(s.product_id)'>{{s.weight.Diamond}} ct</a></p>
+                                                           </ng-container>
+                                                           <ng-container *ngIf='s.weight.Diamond'>
+                                                            <p style="text-align: right; width:50%; display: inline-block;">
+                                                                <a (click)='go(s.product_id)'>{{s.weight.Gold}}g / {{s.quality.Gold}}</a>
+                                                            </p>
+                                                        </ng-container>
+                                                        <ng-container *ngIf='!s.weight.Diamond'>
+                                                            <a (click)='go(s.product_id)'>{{s.weight.Gold}}g / {{s.quality.Gold}}</a>
+                                                        </ng-container>
+                                                        </div>
+
+                                                        <div class="prd-tag prd-hidemobile" *ngIf="s.weight.Gold && s.product_category == 'DIAMOND'">
+                                                            <ng-container *ngIf='s.weight.Diamond'>
+                                                                    <p style="text-align: left; width:49%; display: inline-block;">
+                                                                    <a (click)='go(s.product_id)'>{{s.weight.Diamond}} ct</a></p>
+                                                            </ng-container>
+                                                            <ng-container *ngIf='s.weight.Diamond'>
+                                                                <p style="text-align: right; width:50%; display: inline-block;">
+                                                                    <a (click)='go(s.product_id)'>{{s.weight.Gold}}g / {{s.quality.Gold}}</a>
+                                                                </p>
+                                                            </ng-container>
+                                                            <ng-container *ngIf='!s.weight.Diamond'>
+                                                                <a (click)='go(s.product_id)'>{{s.weight.Gold}}g / {{s.quality.Gold}}</a>
+                                                            </ng-container>
+                                                        </div>
+
+                                                        <div class="prd-tag prd-hidemobile" *ngIf="s.weight.Platinum && s.product_category == 'PLATINUM'">
+                                                            <ng-container *ngIf='s.weight.Diamond'>
+                                                                <p style="text-align: left; width:49%; display: inline-block;">
+                                                                   <a (click)='go(s.product_id)'>{{s.weight.Diamond}} ct</a></p>
+                                                           </ng-container>
+                                                           <ng-container *ngIf='s.weight.Diamond'>
+                                                            <p style="text-align: right; width:50%; display: inline-block;">
+                                                                <a (click)='go(s.product_id)'>{{s.weight.Platinum}}g</a>
+                                                            </p>
+                                                        </ng-container>
+                                                        <ng-container *ngIf='!s.weight.Diamond'>
+                                                            <a (click)='go(s.product_id)'>{{s.weight.Platinum}}g</a>
+                                                        </ng-container>
+                                                        </div>
                                                         <div class="prd-tag prd-hidemobile" *ngIf="!s.weight || !s.quality"><br></div>
                                                             <div class="prd-action">
                                                                 <input type="hidden">
@@ -272,61 +316,18 @@
                             </div>
                             <div *ngIf='pages'  class="col-4 mx-auto" style="padding-top:2vh;">
                             <ng-container *ngIf='!manufacture'>
-                                <nav aria-label="...">
-                                 <ul class="pagination">
-                                   <li class="page-item" *ngIf='current_page !== 1'>
-                                     <a class="page-link" [routerLink]='["/filter",subid]' [queryParams]='{"page":current_page-1}'>Previous</a>
-                                   </li>
-                                   
-     
-                               <ng-container *ngFor="let i of [].constructor(pages),let j = index">
-                                   <li [value]='j+1' [ngClass]='{active:current_page == j+1}' class="page-item">
-                                     <a class="page-link" [routerLink]='["/filter",subid]' [queryParams]='{"page":j+1}'>{{j+1}}</a>
-                                   </li>
-                               </ng-container>
-                                   <li *ngIf='current_page !== pages'>
-                                     <a class="page-link" [routerLink]='["/filter",subid]' [queryParams]='{"page":current_page+1}'>Next</a>
-                                   </li>
-                                 </ul>
-                               </nav>
+                                <ngb-pagination [collectionSize]="pages*10" [(page)]="current_page" (pageChange)='pagechanged()' [maxSize]="5" [rotate]="true"></ngb-pagination>
                             </ng-container>
                             <ng-container *ngIf='manufacture'>
-                                <nav aria-label="...">
-                                 <ul class="pagination">
-                                   <li class="page-item" *ngIf='current_page !== 1'>
-                                     <a class="page-link" [routerLink]='["/filter",subid]' [queryParams]='{"page":current_page-1,"manufacturer":manufacture}'>Previous</a>
-                                   </li>
-                                   
-     
-                               <ng-container *ngFor="let i of [].constructor(pages),let j = index">
-                                   <li [value]='j+1' [ngClass]='{active:current_page == j+1}' class="page-item">
-                                     <a class="page-link" [routerLink]='["/filter",subid]' [queryParams]='{"page":j+1,"manufacturer":manufacture}'>{{j+1}}</a>
-                                   </li>
-                               </ng-container>
-                                   <li *ngIf='current_page !== pages'>
-                                     <a class="page-link" [routerLink]='["/filter",subid]' [queryParams]='{"page":current_page+1,"manufacturer":manufacture}'>Next</a>
-                                   </li>
-                                 </ul>
-                               </nav>
+                                <ngb-pagination [collectionSize]="pages*10" [(page)]="current_page" (pageChange)='pagechanged()' [maxSize]="5" [rotate]="true"></ngb-pagination>
                             </ng-container>
                              </div>
-
-                            <div class="loader-wrap">
-                                <div class="dots">
-                                    <div class="dot one"></div>
-                                    <div class="dot two"></div>
-                                    <div class="dot three"></div>
-                                </div>
-                            </div>
                     </div>
-                    <app-loader  *ngIf="loader"></app-loader>
-                    <!-- /Products Grid -->
-                    <!-- <div class="show-more d-flex mt-4 mt-md-6 justify-content-center align-items-start"><a href="#" class="btn btn--alt js-product-show-more" data-load="ajax-products-load.html">show more</a>
-                    </div> -->
+                    
                 </div>
             </div>
             <!-- /Center column -->
         </div>
-        <simple-notifications></simple-notifications>
+        <simple-notifications [options]="{position: ['top', 'right']}"></simple-notifications>
         <!-- /Two columns -->
     </div>

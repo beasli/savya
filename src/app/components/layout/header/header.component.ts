@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
   catall: any;
   constructor(private api:ApiService ,private router:Router,private route:ActivatedRoute) {
     this.drop=this.api.drop; 
-   console.log(this.drop);
 
    router.events.subscribe((val) => {
      this.close();
@@ -28,7 +27,7 @@ export class HeaderComponent implements OnInit {
     this.catall = data['data'];});
   
    this.api.changelogo.subscribe(data=>{this.logochange = data
-    console.log(this.logochange);
+    
     if(data == 1){
       this.newurl = this.router.url;
     }
@@ -43,9 +42,12 @@ export class HeaderComponent implements OnInit {
   search()
   {
     console.log(this.searchValue);
-    if(this.searchValue.length>3)
+    if(this.searchValue.length>3 && this.logochange != 1)
     {
         this.router.navigate(['/search',this.searchValue]);
+    } else if(this.searchValue.length>3 && this.logochange == 1)
+    {
+      this.router.navigate(['machinery/search',this.searchValue]);
     }
   }
   popularSearch(value)
@@ -100,9 +102,8 @@ export class HeaderComponent implements OnInit {
 }
   ngOnInit() {
     this.api.getlogin.subscribe(data => {
-      console.log(+data);
+      
       this.drop=data;
-      console.log(this.drop);
      });
      
   }

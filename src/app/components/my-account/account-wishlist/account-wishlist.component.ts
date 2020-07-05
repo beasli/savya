@@ -27,6 +27,22 @@ page:boolean;
      //console.log(this.data);
     this.value=localStorage.getItem('wish');
   }
+
+
+  removeItemAll(arr, value) {
+    var i = 0;
+    while (i < arr.length) {
+      if (arr[i].product_type === value) {
+        arr.splice(i, 1);
+      } else {
+        ++i;
+      }
+    }
+    return arr;
+  }
+
+
+
   view()
   {
     
@@ -40,8 +56,9 @@ page:boolean;
        this.baseurl=data['url']+"/";
       // console.log("url"+this.baseurl);
        this.results=data['data'];
-      //  console.log("results");
-      //   console.log(this.results);
+       console.log(this.results);
+       this.results = this.removeItemAll(this.results,'Machinery')
+         console.log(this.results);
       //  console.log(this.baseurl);
      }).catch(d=>{
       if(d.status == 503){

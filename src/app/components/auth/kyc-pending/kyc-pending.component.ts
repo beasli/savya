@@ -15,6 +15,7 @@ name:any;
 loader:boolean;
 page:boolean=true;
 photo:any;
+kyc:any;
   constructor(private api:ApiService,private router:Router) {
     // this.user=this.api.getUserInfo();
     // this.name=this.user.name;
@@ -23,6 +24,7 @@ photo:any;
       this.loader=false;
       console.log(data);
       this.user=data['user'];
+      this.kyc=data['kyc'];
       this.photo = data['url'];
       this.name=this.user.name;
       //this.router.navigate(['/registerOtp']);
@@ -102,8 +104,8 @@ photo:any;
     
 }
   ngOnInit(): void {
-    this.loader=true;
-    this.page=false;
+   this.loader=true;
+   this.page=false;
   }
 
 }

@@ -1,7 +1,7 @@
 // export const apiUrl =  'http://admin.savyajewelsbusiness.com/api/';
 //export const apiUrl='http://newtest.savyajewelsbusiness.com/api/';
-export const apiUrl="http://api.savyajewelsbusiness.com/api/"
-export const IMAGE='http://api.savyajewelsbusiness.com/'+'img/';
+export const apiUrl="https://api.savyajewelsbusiness.com/api/"
+export const IMAGE='https://api.savyajewelsbusiness.com/'+'img/';
  
 // authentication
 export const OTPREQUEST='otp/request';
@@ -85,3 +85,8 @@ export const VERIFY = 'offer/verify'; //done
 export const ORDERHISTORY = 'checkout'; //done
 export const CHECKOUT = 'checkout'; //done
 export const BANNER = 'banner'; //done
+
+export const MACHINE = 'machinery';
+export const MACHINESEARCH = "machinarylist";
+export const MACHINEPRODUCT = "";
+//export const MACHINESEARCH = "";

@@ -22,11 +22,16 @@ url: any;
 
   }
 
+  pagechanged(){
+    this.router.navigate(['events'], { queryParams: { page: this.current_page}});
+  }
+
   getEvent(page){
     this.api.Get(EVENTS+'?page='+page).then(data => {
       this.events = data['data']['data'];
       this.url = IMAGE+"events/";
       this.pages = Math.ceil(data['data']['total']/16);
+    
     }).catch(d=>{
       if(d.status == 503){
         this.api.onFail('Your session is expired please login again');

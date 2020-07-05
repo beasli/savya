@@ -34,3 +34,15 @@
     font-weight: 600;
     unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
+  @media(max-width:767px){
+    .picsum-img-wrapper[_ngcontent-pgw-c38] img[_ngcontent-pgw-c38] {
+      flex-shrink: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: 100%;
+  }
+  }
+
+  .myCustomModalClass .modal-dialog {
+    max-width: 850px;
+  }

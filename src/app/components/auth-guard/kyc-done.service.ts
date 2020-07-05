@@ -12,18 +12,15 @@ export class KycDoneService {
   canActivate(route, state: RouterStateSnapshot) {
           this.api.Post(PROFILEVIEW, {}).then(data=>{
             let kyc=data['kyc'];
-            if(kyc==null)
+            if(kyc==null || kyc.document_verified != 2)
             {
-              return true
-             
               
+              return true
             }
             else{
               this.api.onFail('Your account is already verified');
               return false;
             }
-            console.log("guard api");
-          
       }).catch(d=>{
         if(d.error.message == 'Unauthenticated.' && d.status == 401){
           this.api.onFail('Your session is expired please login again');

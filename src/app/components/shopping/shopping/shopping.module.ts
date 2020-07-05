@@ -28,7 +28,7 @@ import { FormsModule } from '@angular/forms';
     SiteModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot({
-      position:["middle","center"],
+      position:["bottom","left"],
        timeOut: 3000,
        showProgressBar: true,
        pauseOnHover: true,
