@@ -1,5 +1,11 @@
 <ng-container *ngIf='slider_imgs'>
-<app-slider [slider_imgs] = 'slider_imgs' [url] = 'url'></app-slider>
+    <ngb-carousel *ngIf="slider_imgs">
+        <ng-template *ngFor="let slide of slider_imgs" ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img routerLink='/products/machinery' [queryParams]="{'page' :1 ,'subcategory_id': slide.category_id}" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
+          </div>
+        </ng-template>
+    </ngb-carousel>
 </ng-container>
 
 <div class="card-deck" style="margin-top: 3vh;padding: 2vh;">
@@ -64,7 +70,7 @@
     <ngx-slick-carousel class="carousel" 
               #slickModal="slick-carousel" 
               [config]="slideConfig3" >
-    <div ngxSlickItem *ngFor="let slide of models;let i = index"class="slide embed-responsive embed-responsive-16by9">
+    <div ngxSlickItem *ngFor="let slide of models;let i = index"class="slide embed-responsive embed-responsive-4by3">
     <img src="{{ imagemodel + slide.file_name }}" onerror="this.src='../../../../assets/images/logo-bw.png'" class="embed-responsive-item"  alt="" width="100%">
     <div class="overlay-effect">
         <div class="overlay-effect-content">

@@ -226,8 +226,8 @@ export class HomeComponent implements OnInit {
   loader:boolean;
   page:boolean;
   slideConfig2 = {
-    "slidesToShow": 1,
-    "slidesToScroll": 1,
+    "slidesToShow": 2,
+    "slidesToScroll": 2,
     "dots": false,
     "infinite": true,
     "autoplay": true,
@@ -236,10 +236,10 @@ export class HomeComponent implements OnInit {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           infinite: true,
-          dots: true
+          dots: false
         }
       },
       {
@@ -314,8 +314,8 @@ export class HomeComponent implements OnInit {
           }else if (childObj.category === 'video') {
             this.videos = childObj['video'];
             console.log(this.videos)
-          }else if (childObj.category === 'video') {
-            this.partner = childObj['video'];
+          }else if (childObj.category === 'partner') {
+            this.partner = childObj['partner'];
             console.log(this.videos)
           }
        });
