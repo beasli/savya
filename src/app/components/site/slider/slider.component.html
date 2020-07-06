@@ -1,6 +1,6 @@
 <ngb-carousel *ngIf="slider_imgs">
     <ng-template *ngFor="let slide of slider_imgs" ngbSlide>
-      <div class="picsum-img-wrapper">
+      <div class="picsum-img-wrapper" style="border-radius:8px;">
        <img routerLink='/subsub/{{slide.subcategory_id}}' onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
       </div>
     </ng-template>

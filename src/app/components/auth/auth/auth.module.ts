@@ -41,10 +41,6 @@ import { KycDoneService } from '../../auth-guard/kyc-done.service';
     RouterModule.forChild([
       { path: 'login', component: LoginComponent,canActivate: [LoginGuardService]},
       { path: 'register', component: RegisterComponent,canActivate: [LoginGuardService]},
-      { path: 'registerOtp/:no' , component: OtpComponent,canActivate: [OtpGuardService]},
-      { path: 'forget' , component: ForgetPasswordComponent},
-      { path: 'forgetOtp/:no' , component: ForgetOtpComponent},
-      { path: 'change/:no' , component: ChangePasswordComponent, canActivate: [OtpGuardService]},
       { path: 'kyc' , component: KycComponent, canActivate: [AuthGuardService]},
       { path: 'changeProfile' , component: ChangeProfileComponent,  canActivate: [AuthGuardService]},
       { path: 'kycpending' , component: KycPendingComponent, canActivate: [AuthGuardService]}
