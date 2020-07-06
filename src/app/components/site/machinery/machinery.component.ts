@@ -92,8 +92,8 @@ imagemodel=IMAGE+'machinerygallery/'
           data['body'].forEach(childObj => {
             if (childObj.category === 'machinery_banners') {
               this.slider_imgs = childObj['machinery_banners'].filter(slide => slide.place === 'Website');
-              console.log(this.slider_imgs);
-              console.log(IMAGE+"machinarybanner/"+this.slider_imgs[0].image)
+             // console.log(this.slider_imgs);
+             // console.log(IMAGE+"machinarybanner/"+this.slider_imgs[0].image)
             }
             else if (childObj.category === 'exclusive_banners') {
               this.exclusive = childObj['exclusive_banners'].filter(slide => slide.place === 'Website');

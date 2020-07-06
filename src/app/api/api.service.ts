@@ -383,19 +383,6 @@ qtyUpdate(pid,value)
 
   deleteCart(pid)
   {
-    console.log(pid)
-    if(localStorage.getItem("waste")!=null)
-    {
-      let waste = JSON.parse(localStorage.getItem("waste"));
-      delete waste[pid];
-      localStorage.setItem("waste",JSON.stringify(waste));
-   }
-   if(localStorage.getItem("prd_sizes")!=null)
-   {
-    let prd_sizes = JSON.parse(localStorage.getItem("prd_sizes"));
-    delete prd_sizes[pid];
-    localStorage.setItem("prd_sizes",JSON.stringify(prd_sizes));
-   }
     this.Delete(CARTDELETE+"?cart_id="+pid+"&user_id="+this.uid).then(data=>{
       //console.log("deletecart"+data)
       this.updateCart();
