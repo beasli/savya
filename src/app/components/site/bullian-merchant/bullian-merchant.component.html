@@ -1,10 +1,10 @@
 <app-liverates></app-liverates>
 <div class="container">
     <div class="text-center" style='padding:3vh;'>
-        <h2>Our Bullion Merchant</h2>
+        <h2 class="bullion-marchent-heading">Our Bullion Merchant</h2>
     </div>
-    <div *ngIf='merchant' class="card-group">
-        <div class="row">
+    <div *ngIf='merchant' class="card-group mb-5">
+        <div class="row" style="justify-content:center; align-items: center;">
             <div *ngFor="let slide of merchant" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div class="card  border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
                 <div class="image-container" [ngStyle]="{'background-image': 'url(' + image + slide.cover_image + ')'}" style="padding-right:25%;padding-left:25%;padding-top:5%;">

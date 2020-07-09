@@ -61,11 +61,17 @@
                     <h2>We are the most trusted Brand in India</h2>
                 </div>
             </div>
-          <div class="row">
-            <div *ngFor="let slide of videos;let i = index" class="col-6">
+          <div *ngFor="let slide of videos;let i = index" class="row" style="align-items:center">
+            <div  class="col-lg-6">
                 <video style="width:100%;max-height:100%;"  controls>
                     <source [src]="base+'gallery/' + slide.file_name" type="video/mp4">
                 </video>
+            </div>
+            <div class="col-lg-6">
+                <div [innerHTML]='slide.web_content' class="video-content">
+                  <!-- <h2>heading</h2>
+                  <p>demo text here</p> -->
+                </div>
             </div>
 
             <!-- <div *ngFor="let slide of videos;let i = index" class="col-6 mx-auto">
