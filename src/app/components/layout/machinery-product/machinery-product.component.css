@@ -26,6 +26,15 @@
     background-repeat:no-repeat;
     background-position:95% center;
 }
+.bordershadow2{
+    margin: 15px 15px!important;
+    border-radius:8px;
+    padding:5%;
+    width: 100%;
+    -webkit-box-shadow: 0px 0px 26px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 26px -8px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 17px -8px rgba(0,0,0,0.75);
+  }
 .slider-bottom-support-image img{
     width: 100px;
     height: auto;

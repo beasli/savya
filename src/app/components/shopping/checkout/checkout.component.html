@@ -77,7 +77,17 @@
                                 <div class="cart-table-prd-image"><a [routerLink]="['/product-details/', r.product_id]"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl + r.image}}"  alt=""></a></div>
                                 <div class="cart-table-prd-name">
                                     <h2><a [routerLink]="['/product-details/', r.product_id]">{{r.productName}}</a></h2><br>
-                                    Gold &ensp; {{priceWeight[i].goldcat}} &ensp; {{priceWeight[i].weight * r.count}}
+                                    <table>
+                            <tbody>
+                               <ng-container *ngFor="let a of r.assests;let i=index">
+                                <tr>
+                                    <td>{{a.metal}}</td>
+                                    <td> &nbsp;&nbsp; &nbsp;&nbsp;{{a.materialType}} &nbsp;&nbsp; &nbsp;&nbsp;</td>
+                                    <td>{{a.weight * r.count  | number : '1.2-3'}} &nbsp;<ng-container *ngIf='a.metal == "Diamond" || a.metal == "Stone"'>ct</ng-container><ng-container *ngIf='a.metal != "Diamond" && a.metal != "Stone"'>g</ng-container>&nbsp;</td>
+                                </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
                                 </div>
                                 <div class="cart-table-prd-qty"><b>{{r.count}}</b></div>
                                 <div class="cart-table-prd-price"><b> {{priceWeight[i].price * r.count | currency:'INR'}}</b></div>
@@ -87,14 +97,16 @@
                             <div class="float-right">Total Price <span class="card-total-price"> {{total.price | currency:'INR'}}</span></div>
                         </div>
                         <div class="mt-2"></div>
-                        <div class="card-body">
+                        <div class="card-body" *ngIf="total.price != '0'">
                             <h3>Your Bill </h3>
                             <p><strong>
                                 <div>Total Price <span class="card-total-price"> {{total.price | currency:'INR'}}</span></div>
                                 <div>Total Gross Weight <span class="card-total-price"> {{totalw}} g</span></div>
+                                  Surcharge : {{total.price*0.01 | currency:'INR'}}<br>
                                   Sgst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>
                                   Cgst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>
-                                  Igst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>
+                                  Delivery Charge:  {{ 800 | currency:'INR'}}<br>
+                                  <!-- Igst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br> -->
                                   <ng-container *ngIf='discountamount'>Total(after GST):  {{final+disamt | currency:'INR'}}<br></ng-container>
                                   <ng-container *ngIf='discountamount'>
                                       DISCOUNT COUPAN :{{discountamount.coupan}} <br>

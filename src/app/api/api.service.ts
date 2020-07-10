@@ -671,7 +671,7 @@ calculate(products){
         console.log(gold.weight);
         let outcome = this.price(gold.weight,pricegold.price,gold.options,gold.makingCharge,0,value);
         console.log(outcome);
-            weight += Number(outcome.weight);
+            weight += Number(gold.weight);
             goldweight = Number(outcome.weight);
             priceProduct += outcome.price;
       } else {

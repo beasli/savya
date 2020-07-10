@@ -11,8 +11,8 @@
     <app-liverates *ngIf="page"></app-liverates>
     <!-- live rates area-->
     <!-- <app-manufacture  [heading] = '""' [isShowAll] = 'false' [input] = 'logo' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = 'url2'></app-manufacture> -->
-    <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09 mt-0 ">
-      <div class="container">
+    <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09 mt-1 mb-1 ">
+      <div class="container-fluid">
             <div class="text-center">
 
                 <h2 class="h1-style">Our Associate Brands</h2>
@@ -20,7 +20,7 @@
 
               <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
           </div>
-          <div class="testimonials seller">
+          <div class="testimonials seller" style="background-color:#f9f9fa;">
             <ngx-slick-carousel class="carousel" 
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
@@ -42,11 +42,14 @@
 
 
 
-                  <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide embed-responsive embed-responsive-16by9">
-                  <img [routerLink]="['/manufacture/', slide.manufacture_id]" src="{{ manufacture + slide.logo }}"  onerror="this.src='../../../../assets/images/logo-bw.png'"  class="embed-responsive-item"  alt="" width="100%">
+                  <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" style="background-color:white;min-height:100%;max-height:26vh;" class="slide embed-responsive embed-responsive-16by9 border bordershadow">
+                  <img [routerLink]="['/manufacture/', slide.manufacture_id]" src="{{ manufacture + slide.logo }}"  onerror="this.src='../../../../assets/images/logo-bw.png'"  class="embed-responsive-item mt-1"  alt="" width="100%">
                   <div class="overlay-effect">
-                      <div [routerLink]="['/manufacture/', slide.manufacture_id]" *ngIf="slide.name" class="overlay-effect-content">
-                        <h2>{{ slide.name }}</h2>
+                      <div [routerLink]="['/manufacture/', slide.manufacture_id]" *ngIf="slide.name" class="overlay-effect-content for-desktop hide-mobile">
+                        <h4>{{ slide.name }}</h4>
+                      </div>
+                      <div [routerLink]="['/manufacture/', slide.manufacture_id]" *ngIf="slide.name" class="overlay-effect-content show-mobile">
+                        <h6>{{ slide.name }}</h6>
                       </div>
                   </div>
                   </div>
@@ -87,13 +90,13 @@
     <!--/Product Holder -->
     
     
-    <app-testimonials [heading] = '""' [isShowAll] = 'false' [input] = 'models' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = '"assets/images/model/"' *ngIf="page"></app-testimonials>
+    <!-- <app-testimonials [heading] = '""' [isShowAll] = 'false' [input] = 'models' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = '"assets/images/model/"' *ngIf="page"></app-testimonials> -->
 
     <!--youtube-video-->
     <ngx-slick-carousel class="carousel" 
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
-                  <div ngxSlickItem *ngFor="let slide of gallery;let i = index" class="slide">
+                  <div ngxSlickItem *ngFor="let slide of gallery;let i = index" class="slide bordershadow">
                   <img  src="{{ base+'gallery/' + slide.image }}"  onerror="this.src='../../../../assets/images/logo-bw.png'" alt="" width="100%">
                   </div>
     </ngx-slick-carousel>
