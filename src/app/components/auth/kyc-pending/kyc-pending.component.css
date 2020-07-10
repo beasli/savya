@@ -35,7 +35,6 @@
     letter-spacing: 2px;
     margin-bottom:0px;
     padding-bottom: 15px;
-    border-bottom: 1px solid #808080;
 }
 .client-details{
     border:1px solid #e7e7e7;
@@ -92,12 +91,13 @@
     right:0px;
 }
 .input-style{
-    border:1px solid #808080;
+    border:1px solid #000;
     background:transparent;
     box-shadow:none;
     width:100%;
     height: 35px;
     line-height: 35px;
+    padding: 0px 15px;
 }
 .input-documents-feild label{
     color: #000;
@@ -169,4 +169,7 @@
 }
 .verified-icon img{
     width:100%
+}
+.profile-name{
+    padding:0px 15px
 }
