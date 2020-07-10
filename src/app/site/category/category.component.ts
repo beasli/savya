@@ -2,6 +2,7 @@ import { ApiService } from 'src/app/api/api.service';
 import { CATEGORY, IMAGE, BANNER } from './../../../config';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer,SafeStyle } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-category',
@@ -15,7 +16,7 @@ export class CategoryComponent implements OnInit {
   callshadow:any;
   img_url=IMAGE;
   Banner:any;
-  constructor(private route: ActivatedRoute,private api: ApiService,private router:Router) { 
+  constructor(private route: ActivatedRoute,private api: ApiService,private router:Router,private sanitizer: DomSanitizer) { 
     this.route.params.subscribe(
       params=>{
         this.id = params.id;
@@ -30,6 +31,14 @@ export class CategoryComponent implements OnInit {
       });
     }
   });
+  }
+
+
+  getlink(s): SafeStyle {
+    s = s.replace(/ /g, "%20");
+    s = s.replace(/\(/g, "%28");
+    s = s.replace(/\)/g, "%29");
+    return this.sanitizer.bypassSecurityTrustStyle('url('+ IMAGE + 'category/' + s + ')');
   }
 
   go(value){

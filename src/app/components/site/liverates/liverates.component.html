@@ -1,6 +1,9 @@
-<div routerLink='/bullion' class="table-box-wrapper  for-desktop hide-mobile" style="padding:5% 0% 0%;" *ngIf="rates" >
-  <div class="each-table-box padding" *ngFor="let rate of rates">
-    <h2 class='text-center '>{{ (rate.Symbol === 'GLD') ? 'Gold [₹]' : (rate.Symbol === 'SLR') ? 'Silver [₹]' : (rate.Symbol === 'XAUUSD') ? 'Gold [$]' : (rate.Symbol === 'XAGUSD') ? 'Silver [$]' : (rate.Symbol === 'INRSpot') ? 'INR [₹]' : ''}}</h2>
+<div routerLink='/bullion' class="table-box-wrapper" style="padding:3% 0% 0%;" *ngIf="rates" >
+  <ngx-slick-carousel class="carousel" 
+                            #slickModal="slick-carousel" 
+                            [config]="slideConfig" >
+  <div ngxSlickItem class="slide each-table-box padding">
+    <h2 class='text-center '>Gold [₹]</h2>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -12,16 +15,101 @@
         </thead>
         <tbody>
           <tr>
-            <td>{{rate.Bid}}</td>
-            <td>{{rate.Ask}}</td>
-            <td>{{rate.High}}</td>
-            <td>{{rate.Low}}</td>
+            <td [ngClass]="{'colred': gold.Bid < pregold.Bid,'colgreen': gold.Bid> pregold.Bid}">{{gold.Bid}}</td>
+            <td [ngClass]="{'colred': gold.Ask < pregold.Ask,'colgreen': gold.Ask> pregold.Ask}">{{gold.Ask}}</td>
+            <td [ngClass]="{'colred': gold.High < pregold.High,'colgreen': gold.High> pregold.High}">{{gold.High}}</td>
+            <td [ngClass]="{'colred': gold.Low < pregold.Low,'colgreen': gold.Low> pregold.Low}">{{gold.Low}}</td>
           </tr>
         </tbody>
       </table>
   </div>
+  <div ngxSlickItem class="slide each-table-box padding">
+    <h2 class='text-center '>Silver [₹]</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><strong>Bid</strong></th>
+            <th><strong>Ask</strong></th>
+            <th><strong>High</strong></th>
+            <th><strong>Low</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td [ngClass]="{'colred': silver.Bid < presilver.Bid,'colgreen': silver.Bid> presilver.Bid}">{{silver.Bid}}</td>
+            <td [ngClass]="{'colred': silver.Ask < presilver.Ask,'colgreen': silver.Ask> presilver.Ask}">{{silver.Ask}}</td>
+            <td [ngClass]="{'colred': silver.High < presilver.High,'colgreen': silver.High> presilver.High}">{{silver.High}}</td>
+            <td [ngClass]="{'colred': silver.Low < presilver.Low,'colgreen': silver.Low> presilver.Low}">{{silver.Low}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div ngxSlickItem class="slide each-table-box padding">
+    <h2 class='text-center '>Gold [$]</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><strong>Bid</strong></th>
+            <th><strong>Ask</strong></th>
+            <th><strong>High</strong></th>
+            <th><strong>Low</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td [ngClass]="{'colred': xagold.Bid < prexagold.Bid,'colgreen': xagold.Bid> prexagold.Bid}">{{xagold.Bid}}</td>
+            <td [ngClass]="{'colred': xagold.Ask < prexagold.Ask,'colgreen': xagold.Ask> prexagold.Ask}">{{xagold.Ask}}</td>
+            <td [ngClass]="{'colred': xagold.High < prexagold.High,'colgreen': xagold.High> prexagold.High}">{{xagold.High}}</td>
+            <td [ngClass]="{'colred': xagold.Low < prexagold.Low,'colgreen': xagold.Low> prexagold.Low}">{{xagold.Low}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div ngxSlickItem class="slide each-table-box padding">
+    <h2 class='text-center '>Silver [$]</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><strong>Bid</strong></th>
+            <th><strong>Ask</strong></th>
+            <th><strong>High</strong></th>
+            <th><strong>Low</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td [ngClass]="{'colred': xasilver.Bid < prexasilver.Bid,'colgreen': xasilver.Bid> prexasilver.Bid}">{{xasilver.Bid}}</td>
+            <td [ngClass]="{'colred': xasilver.Ask < prexasilver.Ask,'colgreen': xagold.Ask> prexasilver.Ask}">{{xasilver.Ask}}</td>
+            <td [ngClass]="{'colred': xasilver.High < prexasilver.High,'colgreen': xagold.High> prexasilver.High}">{{xasilver.High}}</td>
+            <td [ngClass]="{'colred': xasilver.Low < prexasilver.Low,'colgreen': xagold.Low> prexasilver.Low}">{{xasilver.Low}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div ngxSlickItem class="slide each-table-box padding">
+    <h2 class='text-center '>INR [₹]</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><strong>Bid</strong></th>
+            <th><strong>Ask</strong></th>
+            <th><strong>High</strong></th>
+            <th><strong>Low</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td [ngClass]="{'colred': inr.Bid < preinr.Bid,'colgreen': inr.Bid> preinr.Bid}">{{inr.Bid}}</td>
+            <td [ngClass]="{'colred': inr.Ask < preinr.Ask,'colgreen': inr.Ask> preinr.Ask}">{{inr.Ask}}</td>
+            <td [ngClass]="{'colred': inr.High < preinr.High,'colgreen': inr.High> preinr.High}">{{inr.High}}</td>
+            <td [ngClass]="{'colred': inr.Low < preinr.Low,'colgreen': inr.Low> preinr.Low}">{{inr.Low}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</ngx-slick-carousel>
 </div>
-<div class="table-box-wrapper for-mobile" *ngIf="rates">
+<!-- <div class="table-box-wrapper for-mobile" *ngIf="rates">
 
 <table>
   <tr>
@@ -40,4 +128,4 @@
     <td>{{rate.Low}}</td>
   </tr>
 </table>
-</div>
+</div> -->

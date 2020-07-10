@@ -56,7 +56,7 @@
                 <div class="container">
                     <!-- Nav tabs -->
                     <div class="prd-block_info">
-                        <div class="js-prd-d-holder prd-holder product-name-details">
+                        <div class="js-prd-d-holder product-name-details">
                             <div class="prd-block_title-wrap">
                                 <h1 class="prd-block_title product-details-item-heading">{{data[0].product_name}}</h1>
                             </div>
@@ -66,26 +66,26 @@
                             </div>
                         </div>   
                         
-                        <div class="prd-block_actions topline">
-                            <div class="prd-hover">
-                                <div class="prd-action button-margin-none">
-
-                                    
-                                    <input type="hidden"> <button (click)="whislist()" class="btn" ><span>INTERESTED</span></button> 
-                                      <!-- <button  *ngIf="loading==true"  class="btn">Loading...</button> -->
-                                    
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <ul class="nav nav-tabs product-tab">
-                        <li class="nav-item"><a href="#Tab1" class="nav-link active show" data-toggle="tab">Description</a></li>
+                        <li ><a  class=" product-price">Description</a></li>
                     </ul><!-- Tab panes -->
-                    <div class="tab-content">
+                    <div class="tab-content"  [innerHTML]="data[0].description">
                     
-                        <div role="tabpanel" class="tab-pane fade active show" [innerHTML]="data[0].description" id="Tab1">
-                            
-                        </div>    
+                
+                               
+                    </div>
+                    <div class="prd-block_actions">
+                        <div class="prd-hover">
+                            <div class="prd-action button-margin-none">
+
+                                
+                                <input type="hidden"> <button (click)="whislist()" class="btn" ><span>INTERESTED</span></button> 
+                                  <!-- <button  *ngIf="loading==true"  class="btn">Loading...</button> -->
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

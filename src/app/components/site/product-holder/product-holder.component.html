@@ -22,7 +22,7 @@
         </div>
       </div>
       <!-- modal end -->
-    <div class="container" *ngIf='mostselling && mostselling.length'>
+    <div class="container-fluid" *ngIf='mostselling && mostselling.length'>
         <div class="title-with-center text-center">
             <h2 class="h1-style">{{heading}}</h2>
             <!-- <div class="prd-carousel-tabs js-filters-prd d-none d-md-flex" data-grid="tabCarousel-01">
@@ -43,53 +43,96 @@
                             <a href="javascript:void(0)" (click)="deleteWishlist(s.product_id)"  *ngIf="checkHeart(s.product_id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a>
                             <div class="gdw-loader"></div>
                         </div>
-                        <div class="prd-info text-center">
+                        <div class="prd-info">
                             <!-- <h2 class="prd-title"><a (click)='go(s.product_id)'>{{s.product_name}}</a></h2> -->
 
                            
                             <div class="prd-tag prd-hidemobile" *ngIf="s.weight.Gold && s.product_category == 'GOLD'">
-                                <ng-container *ngIf='s.weight.Diamond'>
+
+                                <table style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:25%;">
+                                            <ng-container *ngIf='s.weight.Diamond'>
+                                                    <a (click)='go(s.product_id)'>{{s.weight.Diamond}} ct</a>
+                                            </ng-container>
+                                            </th>
+                                            <th style="width:50%;"></th>
+                                            <th style="width:25%;">
+                                                <ng-container *ngIf='s.weight.Gold'>
+                                                    <a (click)='go(s.product_id)'>{{s.weight.Gold}}g</a>
+                                                </ng-container>
+                                            </th>  
+                                        </tr>
+                                    </thead>
+                                    <th></th>
+                                </table>
+                                <!-- <ng-container *ngIf='s.weight.Diamond'>
                                     <p style="text-align: left; width:49%; display: inline-block;">
                                        <a (click)='go(s.product_id)'>{{s.weight.Diamond}} ct</a></p>
                                </ng-container>
-                               <ng-container *ngIf='s.weight.Diamond'>
+                               <ng-container *ngIf='s.weight.Gold'>
                                 <p style="text-align: right; width:50%; display: inline-block;">
                                     <a (click)='go(s.product_id)'>{{s.weight.Gold}}g / {{s.quality.Gold}}</a>
                                 </p>
-                            </ng-container>
-                            <ng-container *ngIf='!s.weight.Diamond'>
-                                <a (click)='go(s.product_id)'>{{s.weight.Gold}}g / {{s.quality.Gold}}</a>
-                            </ng-container>
+                            </ng-container> -->
+
+
                             </div>
 
                             <div class="prd-tag prd-hidemobile" *ngIf="s.weight.Gold && s.product_category == 'DIAMOND'">
-                                <ng-container *ngIf='s.weight.Diamond'>
+                                <table style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:25%;">
+                                            <ng-container *ngIf='s.weight.Diamond'>
+                                                    <a (click)='go(s.product_id)'>{{s.weight.Diamond}} ct</a>
+                                            </ng-container>
+                                            </th>
+                                            <th style="width:50%;"></th>
+                                            <th style="width:25%;">
+                                                <ng-container *ngIf='s.weight.Gold'>
+                                                    <a (click)='go(s.product_id)'>{{s.weight.Gold}}g</a>
+                                                </ng-container>
+                                            </th>  
+                                        </tr>
+                                    </thead>
+                                    <th></th>
+                                </table>
+
+                                <!-- <ng-container *ngIf='s.weight.Diamond'>
                                         <p style="text-align: left; width:49%; display: inline-block;">
                                         <a (click)='go(s.product_id)'>{{s.weight.Diamond}} ct</a></p>
                                 </ng-container>
-                                <ng-container *ngIf='s.weight.Diamond'>
+                                <ng-container *ngIf='s.weight.Gold'>
                                     <p style="text-align: right; width:50%; display: inline-block;">
                                         <a (click)='go(s.product_id)'>{{s.weight.Gold}}g / {{s.quality.Gold}}</a>
                                     </p>
-                                </ng-container>
-                                <ng-container *ngIf='!s.weight.Diamond'>
-                                    <a (click)='go(s.product_id)'>{{s.weight.Gold}}g / {{s.quality.Gold}}</a>
-                                </ng-container>
+                                </ng-container> -->
                             </div>
 
                             <div class="prd-tag prd-hidemobile" *ngIf="s.weight.Platinum && s.product_category == 'PLATINUM'">
-                                <ng-container *ngIf='s.weight.Diamond'>
-                                    <p style="text-align: left; width:49%; display: inline-block;">
-                                       <a (click)='go(s.product_id)'>{{s.weight.Diamond}} ct</a></p>
-                               </ng-container>
-                               <ng-container *ngIf='s.weight.Diamond'>
-                                <p style="text-align: right; width:50%; display: inline-block;">
-                                    <a (click)='go(s.product_id)'>{{s.weight.Platinum}}g</a>
-                                </p>
-                            </ng-container>
-                            <ng-container *ngIf='!s.weight.Diamond'>
-                                <a (click)='go(s.product_id)'>{{s.weight.Platinum}}g</a>
-                            </ng-container>
+
+                                <table style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:25%;">
+                                            <ng-container *ngIf='s.weight.Diamond'>
+                                                    <a (click)='go(s.product_id)'>{{s.weight.Diamond}} ct</a>
+                                            </ng-container>
+                                            </th>
+                                            <th style="width:50%;"></th>
+                                            <th style="width:25%;">
+                                                <ng-container *ngIf='s.weight.Platinum'>
+                                                    <a (click)='go(s.product_id)'>{{s.weight.Platinum}}g</a>
+                                                </ng-container>
+                                            </th>  
+                                        </tr>
+                                    </thead>
+                                    <th></th>
+                                </table>
+                                
+                               
                             </div>
                             
                             <div class="prd-hover">

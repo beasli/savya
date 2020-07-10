@@ -43,25 +43,26 @@ products: any;
           this.total['price'] = 0;
           this.total['making_charges'] = 0;
           this.api.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
-          // console.log(this.total);
-          // this.products=data['data'];
-          // this.priceWeight = this.api.calculate(this.products);
-          // let i = 0;
-          // if(this.priceWeight){
-          //   this.total = {'weight':0,'price':0,'making_charges':0};
-          //    console.log(this.total);
-          //    this.priceWeight.forEach(element => {
-          //      console.log(this.products[i].count);
+          console.log(this.total);
+          this.products=data['data'];
+          this.priceWeight = this.api.calculate(this.products);
+          let i = 0;
+          if(this.priceWeight){
+            this.total = {'weight':0,'price':0,'making_charges':0};
+             console.log(this.total);
+             this.priceWeight.forEach(element => {
+               console.log(element.weight*this.products[i].count);
 
-          //    this.total.price +=element.price*this.products[i].count;
-          //    this.total.weight +=element.weight*this.products[i].count;
-          //    this.total.making_charges +=element.making*this.products[i].count;
-          //    i +=1;
-          //  });}
-          //  this.totalw = this.total.weight.toFixed(2); 
-          //   console.log(this.total);
-          //   this.final = this.total.price + this.total.price*0.045;
-          //   this.realFinal = this.final;
+             this.total.price +=element.price*this.products[i].count;
+             this.total.weight +=element.weight*this.products[i].count;
+             this.total.making_charges +=element.making*this.products[i].count;
+             i +=1;
+           });}
+           this.totalw = this.total.weight.toFixed(2); 
+            console.log(this.total);
+            this.final = this.total.price + this.total.price*0.01;
+           // this.final = this.final;
+            this.realFinal = this.final;
           this.page=true;
           this.loader=false;
           this.results=data['data'];

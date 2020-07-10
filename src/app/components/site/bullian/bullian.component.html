@@ -17,7 +17,61 @@
         </div>
     </div>
 </div>
-<div class="container border" style='padding:3vh;'>
+
+
+<div class="other-states-area" *ngIf="state">
+  <div class="container">
+    <div class="search-form-wrapper">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="other-states-heading">
+            <h2>Others states</h2>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="search-from-other-states">
+            <form>
+              <input type="text" (keyup)="search($event)" placeholder="search Here By State or City Name" class="form-control">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="listing-states">
+            <div class="row">
+              <ng-container *ngIf="newlist && newlist.length">
+              <div *ngFor='let p of newlist.slice(0, newlist.length/5 + 1);let i = index' class="col-lg-2 col-6">
+                <div class="each-list">
+                  <ul>
+                    <li *ngFor='let j of newlist.slice(i*5,i*5+5);'>
+                      <a href="javascript:void(0)" (click) = 'selectSta(j)'>{{j.name}}</a></li>
+                  </ul>
+                </div>
+              </div>
+            </ng-container>
+          <ng-container *ngIf="!newlist || !newlist.length">
+            <div class="col-6">
+              <div class="each-list">
+                <ul>
+                  <li>
+                    <a>Your Search does not match any state or city</a></li>
+                </ul>
+              </div>
+            </div>
+          </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- <div class="container border" style='padding:3vh;'>
     <div class="text-center" style='padding:3vh;'>
         <h2>Other States</h2>
     </div>
@@ -26,7 +80,7 @@
           {{slide.name}}
         </a>
     </div>
-</div>
+</div> -->
 
 <button type="button"[hidden]='true' id='openmodalbutton' class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Launch demo modal

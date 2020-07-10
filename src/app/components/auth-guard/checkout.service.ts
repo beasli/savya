@@ -40,7 +40,7 @@ value:any;
           return true;
         }else{
           this.api.onFail('Minimum order Should be of 100 gram'+' You need '+(100-this.total.weight)+' g more for Checkout');
-          return false;
+          return true;
         }
     }
     else if(this.data==null)

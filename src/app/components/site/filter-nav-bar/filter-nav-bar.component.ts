@@ -81,6 +81,17 @@ export class FilterNavBarComponent implements OnInit {
           this.api.setfilter(f);
         }
     }
+
+
+    filteropen(value){
+      if(value==1){
+        document.getElementById('filter').classList.add('filter-content-open');
+      } else{
+        document.getElementById('filter').classList.remove('filter-content-open');
+      }
+    }
+
+
     checkClear()
     {
       let f= this.api.getfilter();

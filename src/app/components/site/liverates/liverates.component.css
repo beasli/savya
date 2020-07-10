@@ -46,3 +46,25 @@
         display:block;
     }
 }
+
+.colred {
+    animation: background-fade 1s 1;
+ }
+ @keyframes background-fade {
+    
+    100% {
+        background:red;
+    }
+}
+.colgreen {
+    animation: background-fade2 1s 1;
+ }
+
+@keyframes background-fade2 {
+    
+    100% {
+        background:green;
+    }
+}
+
+

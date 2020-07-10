@@ -21,14 +21,15 @@ import { LoginGuardService } from './components/auth-guard/login-guard.service';
 import { KycDoneService } from './components/auth-guard/kyc-done.service';
 import { ModalComponent } from './components/layout/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { SearchFilterComponent } from './components/layout/search-filter/search-filter.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     NavBarComponent,
-    ModalComponent
+    ModalComponent,
+    SearchFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +51,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
      }),
     BrowserAnimationsModule,
   ],
-  providers: [AuthGuardService,CheckoutService,OtpGuardService,KycguardService,LoginGuardService,KycDoneService,{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [AuthGuardService,CheckoutService,OtpGuardService,KycguardService
+    ,LoginGuardService,KycDoneService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

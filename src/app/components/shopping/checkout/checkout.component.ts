@@ -45,12 +45,16 @@ export class CheckoutComponent implements OnInit {
          console.log(this.priceWeight);
          this.priceWeight.forEach(element => {
          this.total.price +=element.price*this.products[i].count;
+         console.log(this.total.price)
          this.total.weight +=element.weight*this.products[i].count;
          this.total.making_charges +=element.making*this.products[i].count;
+         i++;
        });}
        this.totalw = this.total.weight.toFixed(2); 
         console.log(this.priceWeight);
-        this.final = this.total.price + this.total.price*0.045;
+
+        this.final = this.total.price + this.total.price*0.01;
+        this.final = this.final + this.final*0.03+800;
         this.realFinal = this.final;
     }).catch(d=>{
       if(d.status == 503){
@@ -120,11 +124,13 @@ export class CheckoutComponent implements OnInit {
     let masterjson = {}
     let childjson = {};
     childjson['sgst'] = (this.realFinal*0.015).toFixed(2);
-    childjson['igst'] = (this.realFinal*0.015).toFixed(2);
+    // childjson['igst'] = (this.realFinal*0.015).toFixed(2);
+    childjson['igst'] = '0';
     childjson['cgst'] = (this.realFinal*0.015).toFixed(2);
     childjson['sgst_per'] = 1.5.toFixed(1);
     childjson['cgst_per'] = 1.5.toFixed(1);
-    childjson['igst_per'] = 1.5.toFixed(1);
+    // childjson['igst_per'] = 1.5.toFixed(1);
+    childjson['igst_per'] = '0';
     this.feedback ? childjson['feedback'] = this.feedback : childjson['feedback'] = '';
     childjson['transaction_id'] = transaction;
     childjson['paymentMode'] = payment;

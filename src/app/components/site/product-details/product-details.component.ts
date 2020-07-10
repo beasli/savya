@@ -15,6 +15,8 @@ export class ProductDetailsComponent implements OnInit {
   assets: any;
   recents: any;
   category: any;
+  discol=[];
+  discla=[];
   subcategory: any;
   subsubcategory: any;
   url: any;
@@ -294,6 +296,12 @@ export class ProductDetailsComponent implements OnInit {
               this.diamond = this.diamondlist[0];
              this.diamondcolour = this.diamond.color.split(',');
             this.diamondclarity = this.diamond.clarity.split(',');
+            this.diamondcolour.forEach(element => {
+              this.discol.push(0);
+            });
+            this.diamondclarity.forEach(element => {
+              this.discla.push(0)
+            });
             this.defaultdiamond = this.diamond.default_color_clarity.split('/');
             this.diamondprice();
           }
@@ -613,32 +621,32 @@ diamondchange(diamond){
      if(this.viewdone==1){
     if (this.gold && !this.pricegold) {
       this.btn = 0;
-      document.getElementById("openModalButton2").click();
-       this.message = 'Please Choose Another option in gold in this product \n as it is not available with current gold selection';
+      // document.getElementById("openModalButton2").click();
+      //  this.message = 'Please Choose Another option in gold in this product \n as it is not available with current gold selection';
     }
   else  if (this.platinum && !this.priceplat) {
     this.btn = 0;
     
-    document.getElementById("openModalButton2").click();
-    this.message = 'Please Choose Another option in platinum in this product \n as it is not available with current platinum selection';
+    // document.getElementById("openModalButton2").click();
+    // this.message = 'Please Choose Another option in platinum in this product \n as it is not available with current platinum selection';
     }
   else  if (this.diamond && !this.pricediamond) {
     this.btn = 0;
     
-    document.getElementById("openModalButton2").click();
-    this.message = 'Please Choose Another option in diamond in this product \n as it is not available with current diamond selection';
+    // document.getElementById("openModalButton2").click();
+    // this.message = 'Please Choose Another option in diamond in this product \n as it is not available with current diamond selection';
     }
  else   if (this.stone && !this.pricestone) {
   this.btn = 0;
   
-  document.getElementById("openModalButton2").click();
-  this.message = 'Please Choose Another option in stone in this product \n as it is not available with current stone selection';
+  // document.getElementById("openModalButton2").click();
+  // this.message = 'Please Choose Another option in stone in this product \n as it is not available with current stone selection';
     }
    else if (this.silver && !this.pricesilver) {
     this.btn = 0;
     
-    document.getElementById("openModalButton2").click();
-    this.message = 'Please Choose Another option in silver in this product \n as it is not available with current silver selection';
+    // document.getElementById("openModalButton2").click();
+    // this.message = 'Please Choose Another option in silver in this product \n as it is not available with current silver selection';
     } else{
       this.btn = 1;
     }}
@@ -767,13 +775,57 @@ diamondchange(diamond){
   }
   }
    colorClarity(value0, value1) {
-     value0 ? this.defaultdiamond[0] = value0 : this.defaultdiamond[1] = value1;
-    this.diamondprice();
+     if(value0 != 0)
+     {
+      this.defaultdiamond[0] = value0;
+      this.diamondprice();
+    }else if(value1 != 0){
+      this.defaultdiamond[1] = value1;
+      this.diamondprice();
+    }
   }
 
   diamondprice()  {
+   
+    for(let i=0;i < this.diamondclarity.length;i++){
+      let name = this.defaultdiamond[0] + '/' +this.diamondclarity[i];
+      if(this.diamondclarity[i] != this.defaultdiamond[1] ){
+      let p = this.pricelist.diamond_master.find(x => x.type == name);
+      console.log(name);
+      console.log("col");
+      console.log(p);
+      if(p){
+        this.discla[i] = 0;
+        console.log(this.discla[i]);
+      }else{
+        this.discla[i] = 1;
+        console.log(this.discla[i]);
+      }}
+    }
+
+    for(let i=0;i < this.diamondcolour.length;i++){
+
+      let name = this.diamondcolour[i] + '/' +this.defaultdiamond[1];
+
+      if(this.diamondcolour[i] != this.defaultdiamond[0] ){
+      let p = this.pricelist.diamond_master.find(x => x.type == name);
+      console.log(name);
+      console.log("cla");
+      console.log(p);
+      if(p){
+        this.discol[i] = 0;
+        console.log(this.discol[i]);
+      }else{
+        this.discol[i] = 1;
+        console.log(this.discol[i]);
+      }
+    }
+    }
+    console.log(this.discla);
+    console.log(this.discol);
+
+
     let name = this.defaultdiamond[0] + '/' + this.defaultdiamond[1];
-    console.log(name);
     this.pricediamond = this.pricelist.diamond_master.find(x => x.type == name);
     if (this.pricediamond)
     {
