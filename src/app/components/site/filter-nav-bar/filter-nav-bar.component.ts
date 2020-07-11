@@ -15,6 +15,7 @@ export class FilterNavBarComponent implements OnInit {
   price:any;
   jewelery_type:any;
   filter:any;
+  hide = 1;
   constructor(private api:ApiService) { 
     this.filter=this.api.getfilter();
     }
@@ -81,13 +82,15 @@ export class FilterNavBarComponent implements OnInit {
           this.api.setfilter(f);
         }
     }
+    ngOnDestroy(){
+      this.clear();
+    }
 
-
-    filteropen(value){
-      if(value==1){
-        document.getElementById('filter').classList.add('filter-content-open');
+    filteropen(){
+      if(this.hide==1){
+        this.hide=0;
       } else{
-        document.getElementById('filter').classList.remove('filter-content-open');
+        this.hide=1;
       }
     }
 

@@ -66,3 +66,15 @@
         width:70px;
     }
 }
+.he {
+    background-color:white;
+}
+/deep/.slick-track
+{
+    display: flex !important;
+}
+
+/deep/.slick-slide
+{
+    height: inherit !important;
+}

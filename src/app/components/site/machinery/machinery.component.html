@@ -13,7 +13,7 @@
 
         <div class="row">
             <div *ngFor="let slide of categories" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div (click)='go(slide.id,1)' class="card border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
+                <div (click)='go(slide.id,1)' class="card border bordershadow" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
                     <img class="card-img-top" style="min-width: 100%;max-height:25vh;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
                     <div class="card-body">
                     <h5 class="card-title">{{slide.subcategory}}</h5>
@@ -38,17 +38,17 @@
         </ngx-slick-carousel> -->
 
 
-         <div class="testimonials seller">
+         <div class="testimonials seller" style="background-color:#f9f9fa;">
             <ngx-slick-carousel class="carousel" 
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
-                  <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide embed-responsive embed-responsive-16by9">
-                  <img (click)="go(slide.manufacture_id,0)" src="{{ manufacture + slide.logo }}"  onerror="this.src='../../../../assets/images/logo-bw.png'"  class="embed-responsive-item"  alt="" width="100%">
-                  
-                  <div class="overlay-effect">
-                      <div (click)="go(slide.manufacture_id,0)" *ngIf="slide.name" class="overlay-effect-content">
-                        <h2>{{ slide.name }}</h2>
-                      </div>
+                  <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" style="background-color: white;" class="slide embed-responsive he embed-responsive-16by9 border bordershadow">
+                  <img (click)="go(slide.manufacture_id,0)" src="{{ manufacture + slide.logo }}"  onerror="this.src='../../../../assets/images/logo-bw.png'" class="embed-responsive-item child"  alt="" width="100%"><br>
+                  <div (click)="go(slide.manufacture_id,0)" *ngIf="slide.name" class="mt-1 for-desktop hide-mobile">
+                    <h4>{{ slide.name }}</h4>
+                  </div>
+                  <div (click)="go(slide.manufacture_id,0)" *ngIf="slide.name" class="mt-1 show-mobile">
+                    <h6>{{ slide.name }}</h6>
                   </div>
                   </div>
               </ngx-slick-carousel>
@@ -70,7 +70,7 @@
     <ngx-slick-carousel class="carousel" 
               #slickModal="slick-carousel" 
               [config]="slideConfig3" >
-    <div ngxSlickItem *ngFor="let slide of models;let i = index"class="slide embed-responsive embed-responsive-4by3">
+    <div ngxSlickItem *ngFor="let slide of models;let i = index"class="slide embed-responsive border bordershadow2 embed-responsive-4by3">
     <img src="{{ imagemodel + slide.file_name }}" onerror="this.src='../../../../assets/images/logo-bw.png'" class="embed-responsive-item"  alt="" width="100%">
     <div class="overlay-effect">
         <div class="overlay-effect-content">

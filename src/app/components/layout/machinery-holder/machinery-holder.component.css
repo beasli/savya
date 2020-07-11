@@ -25,3 +25,12 @@
         margin: 0 4px 0 0;
     }
 }
+/deep/.slick-track
+{
+    display: flex !important;
+}
+
+/deep/.slick-slide
+{
+    height: inherit !important;
+}

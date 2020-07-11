@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   gallery:any;
   loader:boolean;
   page:boolean;
+  height=175;
   slideConfig2 = {
     "slidesToShow": 2,
     "slidesToScroll": 2,
@@ -115,7 +116,6 @@ export class HomeComponent implements OnInit {
             this.gallery.forEach(element => {element.image = element.file_name});
           }else if (childObj.category === 'video') {
             this.videos = childObj['video'];
-            console.log(this.videos)
           }else if (childObj.category === 'partner') {
             this.partner = childObj['partner'];
             console.log(this.videos)
@@ -140,6 +140,7 @@ export class HomeComponent implements OnInit {
       }).catch(d=>{
         document.getElementById("openModalButton").click();
       });
+
    }
    bypass(url){
     return this.DOM.bypassSecurityTrustResourceUrl(url);

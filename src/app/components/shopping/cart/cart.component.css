@@ -54,10 +54,11 @@
 .shopping-cart-item-details .cart-table-prd-name{
     /* width: 65%; */
     width: auto;
+    padding:20px;
 }
 
 .shopping-cart-item-details .cart-table-prd-image {
-    width: 150px !important;
+    width: 200px !important;
     margin-right: 20px;
     margin-bottom: 10px;
 }
