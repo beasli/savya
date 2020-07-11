@@ -1,6 +1,6 @@
 <div class="page-content">
 	<div class="floating-whatsaap-btn">
-        <a href="javascript:void(0)"><img src="assets/images/WhatsApp.svg"/></a>
+        <a target="_blank" href="https://wa.me/9711022520/?text=Hi"><img src="assets/images/WhatsApp.svg"/></a>
     </div>
     <!-- BN Slider 1 -->
     <app-slider [slider_imgs] = 'slider_imgs' [url] = 'url'></app-slider>
@@ -15,7 +15,7 @@
       <div class="container-fluid">
             <div class="text-center">
 
-                <h2 class="h1-style">Our Associate Brands</h2>
+                <h2 class="h1-style">Our Associate Partners</h2>
 
 
               <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
@@ -42,9 +42,9 @@
 
 
 
-                  <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" style="background-color:white;min-height:100%;max-height:26vh;" class="slide embed-responsive embed-responsive-16by9 border bordershadow">
+                  <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide he embed-responsive embed-responsive-16by9 border bordershadow">
                   <img [routerLink]="['/manufacture/', slide.manufacture_id]" src="{{ manufacture + slide.logo }}"  onerror="this.src='../../../../assets/images/logo-bw.png'"  class="embed-responsive-item mt-1"  alt="" width="100%">
-                  <div class="overlay-effect">
+                  <div class="overlay-effect mt-1">
                       <div [routerLink]="['/manufacture/', slide.manufacture_id]" *ngIf="slide.name" class="overlay-effect-content for-desktop hide-mobile">
                         <h4>{{ slide.name }}</h4>
                       </div>
@@ -65,23 +65,28 @@
                 </div>
             </div>
           <div *ngFor="let slide of videos;let i = index" class="row" style="align-items:center">
+            <ng-container *ngIf="i%2==0">
             <div  class="col-lg-6">
-                <video style="width:100%;max-height:100%;"  controls>
+                <video style="width:100%;max-height:100%;" controls>
                     <source [src]="base+'gallery/' + slide.file_name" type="video/mp4">
                 </video>
             </div>
             <div class="col-lg-6">
                 <div [innerHTML]='slide.web_content' class="video-content">
-                  <!-- <h2>heading</h2>
-                  <p>demo text here</p> -->
                 </div>
             </div>
-
-            <!-- <div *ngFor="let slide of videos;let i = index" class="col-6 mx-auto">
-              <video style="width:100%;max-height:100%;"  controls>
-                  <source [src]="base+'gallery/' + slide.file_name" type="video/mp4">
-              </video>
-            </div> -->
+          </ng-container>
+          <ng-container *ngIf="i%2==1">
+            <div class="col-lg-6">
+              <div [innerHTML]='slide.web_content' class="video-content">
+              </div>
+            </div>
+            <div  class="col-lg-6">
+                <video style="width:100%;max-height:100%;" controls>
+                    <source [src]="base+'gallery/' + slide.file_name" type="video/mp4">
+                </video>
+            </div>
+          </ng-container>
           </div>
         </div>
       </div>

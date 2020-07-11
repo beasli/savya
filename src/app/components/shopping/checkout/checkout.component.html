@@ -83,7 +83,7 @@
                                 <tr>
                                     <td>{{a.metal}}</td>
                                     <td> &nbsp;&nbsp; &nbsp;&nbsp;{{a.materialType}} &nbsp;&nbsp; &nbsp;&nbsp;</td>
-                                    <td>{{a.weight * r.count  | number : '1.2-3'}} &nbsp;<ng-container *ngIf='a.metal == "Diamond" || a.metal == "Stone"'>ct</ng-container><ng-container *ngIf='a.metal != "Diamond" && a.metal != "Stone"'>g</ng-container>&nbsp;</td>
+                                    <td>{{a.weight * r.count  | number : '1.3-3'}} &nbsp;<ng-container *ngIf='a.metal == "Diamond" || a.metal == "Stone"'>ct</ng-container><ng-container *ngIf='a.metal != "Diamond" && a.metal != "Stone"'>g</ng-container>&nbsp;</td>
                                 </tr>
                                 </ng-container>
                             </tbody>
@@ -97,11 +97,11 @@
                             <div class="float-right">Total Price <span class="card-total-price"> {{total.price | currency:'INR'}}</span></div>
                         </div>
                         <div class="mt-2"></div>
-                        <div class="card-body" *ngIf="total.price != '0'">
+                        <div class="card-body" *ngIf="total.price != 0">
                             <h3>Your Bill </h3>
                             <p><strong>
                                 <div>Total Price <span class="card-total-price"> {{total.price | currency:'INR'}}</span></div>
-                                <div>Total Gross Weight <span class="card-total-price"> {{totalw}} g</span></div>
+                                <div>Total Gross Weight <span class="card-total-price"> {{totalw   | number : '1.3-3'}} g</span></div>
                                   Surcharge : {{total.price*0.01 | currency:'INR'}}<br>
                                   Sgst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>
                                   Cgst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>

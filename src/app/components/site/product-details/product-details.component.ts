@@ -281,8 +281,7 @@ export class ProductDetailsComponent implements OnInit {
           this.sizelist = temp;
           console.log(this.sizelist);}
         }
-        setTimeout(() => {
-          this.viewdone =1;
+        
           if (this.assets) {
       
             this.goldlist = this.assets.filter(x => x.metrial_type == "Gold");
@@ -312,7 +311,7 @@ export class ProductDetailsComponent implements OnInit {
             if(this.defsilver){
               this.getsilver();}
           }
-                          },4000);
+                         
         this.api.Post(SUBCATEGORY, {category_id: this.data['category_id']} ).then(data  => {
   
               let result = data['data'].find(x => x.id == this.data['subcategory_id']);
@@ -618,7 +617,6 @@ diamondchange(diamond){
    }
 
    button(){
-     if(this.viewdone==1){
     if (this.gold && !this.pricegold) {
       this.btn = 0;
       // document.getElementById("openModalButton2").click();
@@ -649,7 +647,7 @@ diamondchange(diamond){
     // this.message = 'Please Choose Another option in silver in this product \n as it is not available with current silver selection';
     } else{
       this.btn = 1;
-    }}
+    }
    }
    getplatinum() {
     this.platinum = Object.assign({},this.defplat);

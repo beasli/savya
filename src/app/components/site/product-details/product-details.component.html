@@ -40,7 +40,7 @@
     </div>
 </div>
    <!-- modal end -->
-   <ng-container *ngIf='data && pricelist && viewdone == 1'>
+   <ng-container *ngIf='data && pricelist'>
         <div class="holder mt-0">
             <div class="container">
                 <div class="row prd-block prd-block--mobile-image-first js-prd-gallery" id="prdGallery100">
@@ -89,7 +89,7 @@
                             <img [src]="url+ 'certificate/' + certificate[0].image" onerror="this.src='../../../../assets/images/logo-bw.png'"> </div>
                         
                             <h3 class="h2-style">Manufactured by:</h3>
-                            <img [src]="url+ 'users/' + manufacture.logo" onerror="this.src='../../../../assets/images/logo-bw.png'"><h3 class="h2-style">{{data.company_name}}</h3>
+                            <img [src]="url+ 'users/' + manufacture.logo" onerror="this.src='../../../../assets/images/logo-bw.png'"><h4>{{manufacture.company_name}}</h4>
                         </div>
                     </div>
                     <div class="col-md">
@@ -99,8 +99,8 @@
                                     <h1 class="prd-block_title product-details-item-heading">{{data.productname}}</h1>
                                 </div>
                                 <div class="prd-block_info-top">
-                                    <div *ngIf='value>0' class="product-sku product-price">Rs: {{totalprice * value}}<span *ngIf='gold && goldlist.length' class="product-size">( {{gold.jwellery_size}} )</span></div>
-                                    <div class="product-weight">Gross Weight: &nbsp;&nbsp; {{gross}}</div>
+                                    <div *ngIf='value>0' class="product-sku product-price">{{totalprice * value | currency:'INR'}}<span *ngIf='gold && goldlist.length' class="product-size">( {{gold.jwellery_size}} )</span></div>
+                                    <div class="product-weight">Gross Weight: &nbsp;&nbsp; {{gross  | number : '1.3-3'}} <span style="text-transform: initial;"> g</span></div>
                                 </div>
                             </div>   
                             <ng-container   *ngIf='data.jwellery_type == "Ring" || data.jwellery_type == "Chain"'>
@@ -153,26 +153,26 @@
                                         
                                     <div class="product-code" class="option-label">Product Code: {{data.productcode}}</div>
                                     <div *ngIf='gold && pricegold'>
-                                        <div *ngIf=(gold.weight) class="option-label">Gold (weight):  {{gold.weight}} gram</div>
+                                        <div *ngIf=(gold.weight) class="option-label">Gold (weight):  {{gold.weight| number : '1.3-3'}} <span style="text-transform: initial;"> g</span></div>
 
-                                        <div *ngIf="gold.charges_option != 'Percentage' && pricegold" class="option-label">Gold Rate: Rs. {{pricegold.price}} Per gram</div>
-                                        <div *ngIf="gold.charges_option == 'Percentage' && pricegold2" class="option-label">Gold Rate: Rs. {{pricegold2.price}} Per gram</div>
-                                        <div *ngIf="gold.wastage && pricegold" class="option-label">Gold wastage:  {{gold.wastage}} %</div>
+                                        <div *ngIf="gold.charges_option != 'Percentage' && pricegold" class="option-label">Gold Rate:  {{pricegold.price| currency:'INR'}} <span style="text-transform: initial;">/ g</span></div>
+                                        <div *ngIf="gold.charges_option == 'Percentage' && pricegold2" class="option-label">Gold Rate: {{pricegold2.price| currency:'INR'}} <span style="text-transform: initial;">/ g</span></div>
+                                        <div *ngIf="gold.wastage && gold.charges_option != 'Percentage'" class="option-label">Gold wastage:  {{gold.wastage}} %</div>
                                         <div *ngIf="gold.charges_option == 'Percentage' && pricegold" class="option-label">Gold wastage:  {{gold.making_charge}} %</div>
-                                        <div *ngIf="gold.charges_option != 'Percentage' && pricegold" class="option-label">Making Charges: Rs.  {{gold.making_charge}}</div>
-                                        <div *ngIf="gold.charges_option == 'Percentage' && pricegold" class="option-label">Fine Gold Weight:  {{finegold}} gram</div>
+                                        <div *ngIf="gold.charges_option != 'Percentage' && pricegold" class="option-label">Making Charges:  {{gold.making_charge| currency:'INR'}}</div>
+                                        <div *ngIf="gold.charges_option == 'Percentage' && pricegold" class="option-label">Fine Gold Weight:  {{finegold| number : '1.3-3'}} <span style="text-transform: initial;"> g</span></div>
                                         <div *ngIf="gold.charges_option!= 'Percentage' && pricegold" class="option-label">Gold Charges Type:  {{gold.charges_option}}</div>
-                                        <div class="option-label">Total Gold Price: Rs. {{totalgold}}</div>
+                                        <div class="option-label">Total Gold Price:  {{totalgold| currency:'INR'}}</div>
 
                                     </div>
 
                                     <div *ngIf=(silver)>
-                                        <div class="option-label">Silver(weight): {{silver.weight}} gram</div>
-                                        <div class="option-label">Silver Rate: {{pricelist.silver[0].price}} gram</div>
+                                        <div class="option-label">Silver(weight): {{silver.weight| number : '1.3-3'}} <span style="text-transform: initial;"> g</span></div>
+                                        <div class="option-label">Silver Rate: {{pricelist.silver[0].price | currency:'INR'}} <span style="text-transform: initial;">/ g</span></div>
                                         <div *ngIf=(silver.wastage) class="option-label">Silver wastage:  {{silver.wastage}} %</div>
                                         <div class="option-label">Making Charges: {{silver.making_charge}}</div>
                                         <div class="option-label">Charges Type: {{silver.charges_option}}</div>
-                                        <div class="option-label">Total Silver Price: Rs. {{totalsilver}}</div>
+                                        <div class="option-label">Total Silver Price: {{totalsilver | currency:'INR'}}</div>
                                     </div>
 
                                     <div *ngIf=(diamond) class="choose-diamond">
@@ -204,23 +204,23 @@
 
                                     <div *ngIf='diamond && pricediamond'>
                                         <div class="option-label">Name: {{diamond.jwellery_size}}</div>
-                                        <div *ngIf=(diamond.weight) class="option-label">Weight:  {{diamond.weight}} ct</div>
-                                        <div *ngIf=(pricediamond) class="option-label">Diamond Price:Rs. {{pricediamond.price}}/ct</div>
-                                        <div *ngIf=(diamond.quantity) class="option-label">No of Diamond:  {{diamond.quantity}} pc</div>
-                                        <div *ngIf=(diamond.making_charge) class="option-label">Making Charges: Rs. {{diamond.making_charge}}</div>
+                                        <div *ngIf=(diamond.weight) class="option-label">Weight:  {{diamond.weight | number : '1.3-3'}} <span style="text-transform: initial;"> ct</span></div>
+                                        <div *ngIf=(pricediamond) class="option-label">Diamond Price: {{pricediamond.price  | currency:'INR'}}/<span style="text-transform: initial;"> ct</span></div>
+                                        <div *ngIf=(diamond.quantity) class="option-label">No of Diamond:  {{diamond.quantity}} <span style="text-transform: initial;"> pc</span></div>
+                                        <div *ngIf=(diamond.making_charge) class="option-label">Making Charges: Rs. {{diamond.making_charge  | currency:'INR'}}</div>
                                         <div *ngIf=(diamond.charges_option) class="option-label">Charges Type:  {{diamond.charges_option}}</div> 
                                         <div class="option-label">Diamond Total:Rs. {{totaldiamond}} </div>
                                         <div class="option-label">Diamond Color/Clarity: {{this.defaultdiamond[0] + '/' + this.defaultdiamond[1]}}</div>
                                     </div>
 
                                     <div *ngIf=(platinum) >
-                                        <div *ngIf=(platinum.weight) class="option-label">Platinum (weight):  {{platinum.weight}} gram</div>
-                                        <div *ngIf=(platinum.weight) class="option-label">Platinum Rate:  {{this.pricelist.platinum[0].price}} Per gram</div>
+                                        <div *ngIf=(platinum.weight) class="option-label">Platinum (weight):  {{platinum.weight | number : '1.3-3'}} <span style="text-transform: initial;"> g</span></div>
+                                        <div *ngIf=(platinum.weight) class="option-label">Platinum Rate:  {{this.pricelist.platinum[0].price | currency:'INR'}} / <span style="text-transform: initial;"> g</span></div>
                                         <div *ngIf=(platinum.wastage) class="option-label">Planitum wastage:  {{platinum.wastage}} %</div>
                                         <div *ngIf=(!platinum.wastage) class="option-label">Planitum wastage:  0 %</div>
-                                        <div *ngIf="platinum.charges_option != 'Percentage'" class="option-label">Making Charges: Rs. {{platinum.making_charge}}</div>
+                                        <div *ngIf="platinum.charges_option != 'Percentage'" class="option-label">Making Charges: {{platinum.making_charge| currency:'INR'}}</div>
                                         <div *ngIf="platinum.charges_option != 'Percentage'" class="option-label">Charges Type:  {{platinum.charges_option}}</div>
-                                        <div class="option-label">Total Platinum Price: Rs. {{totalplat}}</div> 
+                                        <div class="option-label">Total Platinum Price: {{totalplat | currency:'INR'}}</div> 
                                     </div>
                                 
                                 <div *ngIf='stone && stonelist.length' class="prd-size swatches">
@@ -231,12 +231,12 @@
                                 </div>
 
                                 <div *ngIf=(stone)>
-                                    <div class="option-label">Stone (weight):  {{stone.weight}} ct</div>
-                                    <div *ngIf=(pricestone) class="option-label">Fine Stone Rate:Rs. {{pricestone.price}}/ct</div>
-                                    <div class="option-label">No Stone:  {{stone.quantity}} pc</div>
-                                    <div class="option-label">Making Charges: Rs. {{stone.making_charge}}</div>
+                                    <div class="option-label">Stone (weight):  {{stone.weight | number : '1.3-3'}} <span style="text-transform: initial;"> ct</span></div>
+                                    <div *ngIf=(pricestone) class="option-label">Fine Stone Rate:{{pricestone.price| currency:'INR'}}/<span style="text-transform: initial;"> ct</span></div>
+                                    <div class="option-label">No Stone:  {{stone.quantity}} <span style="text-transform: initial;"> ct</span></div>
+                                    <div class="option-label">Making Charges: {{stone.making_charge | currency:'INR'}}</div>
                                     <div class="option-label">Charges Type:  {{stone.charges_option}}</div> 
-                                    <div class="option-label" *ngIf=(pricestone)>Stone Total:Rs. {{totalstone}} </div>
+                                    <div class="option-label" *ngIf=(pricestone)>Stone Total: {{totalstone | currency:'INR'}} </div>
                                 </div>
 
                             </div>
@@ -312,85 +312,11 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs product-tab">
                         <li class="nav-item"><a href="#Tab1" class="nav-link active show" data-toggle="tab">Description</a></li>
-                        <li class="nav-item"><a href="#Tab4" class="nav-link" data-toggle="tab">Sizing Guide</a></li>
                     </ul><!-- Tab panes -->
                     <div class="tab-content">
                     
                         <div role="tabpanel" class="tab-pane fade active show" [innerHTML]="data.description" id="Tab1">
                             
-                        </div>
-                    
-                        <div role="tabpanel" class="tab-pane fade" id="Tab4">
-                            <h3>Single Size Conversion</h3>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table--size">
-                                    <tr>
-                                        <th scope="row">US Sizes</th>
-                                        <td>6</td>
-                                        <td>6,5</td>
-                                        <td>7</td>
-                                        <td>7,5</td>
-                                        <td>8</td>
-                                        <td>8,5</td>
-                                        <td>9</td>
-                                        <td>9,5</td>
-                                        <td>10</td>
-                                        <td>10,5</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Euro Sizes</th>
-                                        <td>39</td>
-                                        <td>39</td>
-                                        <td>40</td>
-                                        <td>40-41</td>
-                                        <td>41</td>
-                                        <td>41-42</td>
-                                        <td>42</td>
-                                        <td>42-43</td>
-                                        <td>43</td>
-                                        <td>43-44</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">UK Sizes</th>
-                                        <td>5,5</td>
-                                        <td>6</td>
-                                        <td>6,5</td>
-                                        <td>7</td>
-                                        <td>7,5</td>
-                                        <td>8</td>
-                                        <td>8,5</td>
-                                        <td>9</td>
-                                        <td>9,5</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Inches</th>
-                                        <td>9.25&quot;</td>
-                                        <td>9.5&quot;</td>
-                                        <td>9.625&quot;</td>
-                                        <td>9.75&quot;</td>
-                                        <td>9.9375&quot;</td>
-                                        <td>10.125&quot;</td>
-                                        <td>10.25&quot;</td>
-                                        <td>10.5&quot;</td>
-                                        <td>10.625&quot;</td>
-                                        <td>10.75&quot;</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">CM</th>
-                                        <td>23,5</td>
-                                        <td>24,1</td>
-                                        <td>24,4</td>
-                                        <td>24,8</td>
-                                        <td>25,4</td>
-                                        <td>25,7</td>
-                                        <td>26</td>
-                                        <td>26,7</td>
-                                        <td>27</td>
-                                        <td>27,3</td>
-                                    </tr>
-                                </table>
-                            </div>
                         </div>
                         
                     </div>
@@ -402,5 +328,5 @@
         <simple-notifications [options]="{position: ['top', 'right']}"></simple-notifications>
     </ng-container>
 </div>
-<div style="padding:200px" *ngIf="loader || viewdone == 0">  <app-loader  ></app-loader></div>
+<div style="padding:200px" *ngIf="loader">  <app-loader  ></app-loader></div>
 

@@ -17,7 +17,7 @@ manufacture = IMAGE+"users/";
 eventraiser:number;
 data:any;
 slideConfig = {
-  "slidesToShow": 4,
+  "slidesToShow": 5,
   "slidesToScroll": 1,
   "dots": false,
   "infinite": true,
@@ -30,7 +30,7 @@ slideConfig = {
         slidesToShow: 3,
         slidesToScroll: 3,
         infinite: true,
-        dots: true
+        dots: false
       }
     },
     {

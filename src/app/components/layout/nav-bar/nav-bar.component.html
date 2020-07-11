@@ -11,7 +11,11 @@
                     <ul  class="mmenu mmenu-js">
                         
                         <ul class="mmenu mmenu-js">
+                            <li class="mmenu-item--simple">
+                                <a href="javascript:void(0)" routerLink="/" title="">HOME</a>
+                            </li>
                             <li *ngFor='let s of catwithsub' class="mmenu-item--simple">
+                                
                                 <ng-container *ngIf="s.category != 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/subcategory/', s.category_id]" title="">{{s.category}}</a></ng-container>
                                 <ng-container *ngIf="s.category == 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/machinery/', s.category_id]" title="">{{s.category}}</a></ng-container>
                                 <div class="mmenu-submenu">

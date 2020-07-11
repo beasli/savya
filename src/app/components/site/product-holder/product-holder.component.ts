@@ -17,8 +17,8 @@ export class ProductHolderComponent implements OnInit {
   @Input() redirect;
   value:boolean;
   slideConfig = {
-    "slidesToShow": 4,
-    "slidesToScroll": 4,
+    "slidesToShow": 5,
+    "slidesToScroll": 5,
     "dots": false,
     "infinite": true,
     "autoplay": false,
