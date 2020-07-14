@@ -498,6 +498,6 @@
             <div class="text-center" *ngIf="submit==1"><button class="btn" (click)="kyc()">REUPLOAD</button></div>
         </form>
     </div>
-    <div  style="padding: 100px;" *ngIf="loader"><app-loader></app-loader></div>
+    <div *ngIf="loader"><app-loader></app-loader></div>
 </div>
 <app-loader  *ngIf="loader" ></app-loader>

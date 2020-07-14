@@ -154,3 +154,28 @@
     -moz-box-shadow: 0px 0px 26px -8px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 17px -8px rgba(0,0,0,0.75);
   }
+
+  .prd-block_qty .option-label, .prd-block_options .option-label, .product-options .option-label {
+    -webkit-box-flex: 0;
+    flex: 0 0 70px;
+    max-width: 70px;
+    color: #424242;
+    font-size: 12px;
+    line-height: 33px;
+    padding-right: 10px;
+    text-transform: initial;
+    white-space: nowrap;
+}
+.prd-block_info-top {
+    font-size: 11px;
+    line-height: 16px;
+    text-transform: initial;
+}
+label {
+    color: #424242;
+    font-size: 12px;
+    font-weight: inherit;
+    line-height: 20px;
+    margin-bottom: 6px;
+    text-transform: initial;
+}

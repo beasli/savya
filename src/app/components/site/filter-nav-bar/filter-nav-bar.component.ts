@@ -15,10 +15,73 @@ export class FilterNavBarComponent implements OnInit {
   price:any;
   jewelery_type:any;
   filter:any;
-  hide = 1;
+  hide = 0;
+  jfor = 0;
+  metf = 0;
+  prif = 0;
+  purf = 0;
+  jewt = 0;
   constructor(private api:ApiService) { 
     this.filter=this.api.getfilter();
     }
+    
+
+    openclose(value) {
+      if(value == 1) {
+        if (this.prif==1) {
+          this.prif = 0;
+        } else {
+          this.prif = 1;
+          this.jewt = 0;
+          this.purf = 0;
+          this.jfor = 0;
+          this.metf = 0;
+        }
+      } else if (value == 2) {
+        if (this.jewt == 1) {
+          this.jewt = 0;
+        } else {
+          this.jewt = 1;
+          this.purf = 0;
+          this.prif = 0;
+          this.jfor = 0;
+          this.metf = 0;
+        }
+
+      } else if (value == 3) {
+        if (this.purf == 1) {
+          this.purf = 0;
+        } else {
+          this.purf = 1;
+          this.prif = 0;
+          this.jewt = 0;
+          this.jfor = 0;
+          this.metf = 0;
+        }
+      } else if (value == 4) {
+        if (this.jfor == 1) {
+          this.jfor = 0;
+        } else {
+          this.jfor = 1;
+          this.prif = 0;
+          this.jewt = 0;
+          this.purf = 0;
+          this.metf = 0;
+        }
+      } else if (value == 5) {
+        if (this.metf == 1) {
+          this.metf = 0;
+        } else {
+          this.metf = 1;
+          this.prif = 0;
+          this.jewt = 0;
+          this.purf = 0;
+          this.jfor = 0;
+        }
+      }
+    }
+
+
   deleteSelected(type,filterValue)
     {
       let f= this.api.getfilter();
@@ -86,11 +149,11 @@ export class FilterNavBarComponent implements OnInit {
       this.clear();
     }
 
-    filteropen(){
-      if(this.hide==1){
-        this.hide=0;
-      } else{
+    filteropen(value){
+      if(value==1){
         this.hide=1;
+      } else{
+        this.hide=0;
       }
     }
 
@@ -151,7 +214,7 @@ changefilter(event,value)
             this.api.setfilter(f);
           }
   }
-  else if(name=="jewelery_type")
+  else if(name=="jewelery_typed" || name=="jewelery_typed")
   { 
     f.menu.jewelery_type=[]
     f.menu.jewelery_type.push(value);

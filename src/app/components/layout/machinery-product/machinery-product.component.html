@@ -10,10 +10,10 @@
     </div>
     
 <ng-container>
-    <div class="holder mt-0">
+    <div class="holder mt-0" style="padding:20px;">
         <div class="container">
             <div class="row prd-block prd-block--mobile-image-first js-prd-gallery" id="prdGallery100">
-                <div class="col-md-6 col-xl-4">
+                <div class="col-lg-6 col-xl-4">
                     <div class="prd-block_main-image main-image--slide js-main-image--slide">
                         <div class="prd-block_main-image-holder js-main-image-zoom" data-zoomtype="inner">
                             <ngx-slick-carousel class="carousel" 
@@ -52,7 +52,7 @@
                 </div>
                 
             </div>
-            <div class="col-6">
+            <div class="col-lg-6">
                 <div class="container">
                     <!-- Nav tabs -->
                     <div class="prd-block_info">
@@ -96,7 +96,7 @@
         <!-- Recent Products -->
     <simple-notifications [options]="{position: ['top', 'right']}"></simple-notifications>
 </div>
-<div style="padding:200px" *ngIf="loader">  <app-loader  ></app-loader></div>
+<div *ngIf="loader">  <app-loader  ></app-loader></div>
 
 <app-machinery-holder [heading]="'Similar items'" [mostselling] = 'recents' ></app-machinery-holder>
 

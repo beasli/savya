@@ -1,3 +1,5 @@
+
+import { SiteModule } from './components/site/site/site.module';
 import { AuthGuardService } from './components/auth-guard/auth-guard.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -9,7 +11,6 @@ import { AccountModule } from './components/my-account/account/account.module';
 import { AuthModule } from './components/auth/auth/auth.module';
 import { LayoutModule } from './components/layout/layout/layout.module';
 import { ShoppingModule } from './components/shopping/shopping/shopping.module';
-import { SiteModule } from './components/site/site/site.module';
 import { NavBarComponent } from './components/layout/nav-bar/nav-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -33,6 +34,7 @@ import { SearchFilterComponent } from './components/layout/search-filter/search-
   ],
   imports: [
     BrowserModule,
+    
     AppRoutingModule,
     AccountModule,
     AuthModule,

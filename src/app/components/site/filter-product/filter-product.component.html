@@ -1,28 +1,4 @@
-<!-- <div class="hdr-content hide-mobile">
-    
-   <div class="container">
-       <div class="row">
-           <div class="col-auto"><h2>SUBCATEGORY</h2></div>
-           
-           
-           <div class="nav-holder">
-               
-               <div class="hdr-nav">
-                
-                   <ul  class="mmenu mmenu-js">
-                       
-                       <ul class="mmenu mmenu-js">
-                           <li *ngFor='let s of data' class="mmenu-item--simple"><a (click)="getProduct(s.id)" (click)='go(r.product_id)' title="">{{s.title}}</a>
-                           </li>
-                       </ul>
-                   </ul>  
-                
-               </div>
-           </div>
-           
-       </div>
-   </div>
-</div> -->
+
  <!-- modal start -->
  <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
@@ -31,16 +7,13 @@
        <div class="modal-content">
          <div class="modal-header">
            <h2 class="modal-title" id="exampleModalLongTitle">You are not logged in.</h2>
-           <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-           </button> -->
+         
          </div>
          <div class="modal-body">
              <h5>Please Login first</h5>
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-           <!-- <button type="button" class="btn btn-primary" (click)="goLogin()">Go</button> -->
          </div>
        </div>
      </div>
@@ -50,193 +23,12 @@
    <app-filter-nav-bar></app-filter-nav-bar>
   <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09">
    <div class="container">
-       <!-- <div class="text-center">
-           <h2 class="h1-style">Product with side filter</h2>
-       </div> -->
+      
        
        <div class="row" >
-           <!-- Left column -->
-           <!-- <div class="col-lg-3 aside aside--left fixed-col js-filter-col">
-               <div class="fixed-col_container">
-                   <div class="filter-close">CLOSE</div>
-                   <div class="sidebar-block sidebar-block--mobile d-block d-lg-none">
-                       <div class="d-flex align-items-center">
-                           <div class="selected-label">(6) FILTER</div>
-                           <div class="selected-count ml-auto">SELECTED <span><b>25 items</b></span></div>
-                       </div>
-                   </div>
-                   <div class="sidebar-block filter-group-block open">
-                       <div class="sidebar-block_title"><span>Current Selection</span>
-                           <div class="toggle-arrow"></div>
-                       </div>
-                       <div class="sidebar-block_content">
-                           <div class="selected-filters-wrap">
-                               <div class="row">
-                                   <ul class="selected-filters" *ngFor="let m of f.menu.jewelery_for">
-                                       <li><a href="javascript:void(0)">{{m}}</a></li>
-                                   </ul>
-                              </div>
-                              <div class="row">
-                                   <ul class="selected-filters" *ngFor="let m of  f.menu.material">
-                                       <li><a href="javascript:void(0)">{{m}}</a></li>
-                                   </ul>
-                              </div>
-                              <div class="row">
-                                       <ul class="selected-filters" *ngFor="let m of  f.menu.jewelery_type">
-                                           <li><a href="javascript:void(0)">{{m}}</a></li>
-                                       </ul>
-                             </div>
-                             <div class="row">
-                                   <ul class="selected-filters" *ngFor="let m of f.menu.purity">
-                                       <li><a href="javascript:void(0)">{{m}}</a></li>
-                                   </ul>
-                             </div>
-                             <div class="row" *ngIf="f.menu.price.min">
-                               <ul class="selected-filters" >
-                                   <li><a href="javascript:void(0)">₹{{f.menu.price.min}}-₹{{f.menu.price.max}}</a></li>
-                               </ul>
-                             </div>
-                               <div class="d-flex align-items-center"><a href="javascript:void(0)" class="clear-filters" (click)="clearFilter()"><span>Clear All</span></a>
-                                   
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                   
-                   <div class="sidebar-block filter-group-block open">
-                       <div class="sidebar-block_title"><span>Price</span>
-                           <div class="toggle-arrow"></div>
-                       </div>
-                       <div class="sidebar-block_content">
-                           <div class="radio-group">
-                              
-                               <ng-container > <input type="radio" value="{{price[0]}}-{{price[1]}}" [checked]="checkedprice(price[0])"  (change)="getprice($event)"  id="price" name="price"><label for="price">₹{{price[0]}}-₹{{price[1]}}</label></ng-container>
-                               <ng-container > <input type="radio" value="{{price[1]}}-{{price[2]}}" [checked]="checkedprice(price[1])" (change)="getprice($event)"  id="price1" name="price"><label for="price1">₹{{price[1]}}-₹{{price[2]}}</label></ng-container>
-                               <ng-container > <input type="radio" value="{{price[2]}}-{{price[3]}}" [checked]="checkedprice(price[2])"  (change)="getprice($event)"  id="price2" name="price"><label for="price2">₹{{price[2]}}-₹{{price[3]}}</label></ng-container>
-                               <ng-container > <input type="radio" value="{{price[3]}}-{{price[4]}}" [checked]="checkedprice(price[3])" (change)="getprice($event)"  id="price3" name="price"><label for="price3">₹{{price[3]}}-₹{{price[4]}}</label></ng-container>
-                               <ng-container > <input type="radio" value="{{price[4]}}-1000000" id="price4"  [checked]="checkedprice(price[4])" (change)="getprice($event)"  name="price"><label for="price4">Above ₹{{price[4]}}</label></ng-container>
-                           </div>
-                       </div>
-                   </div>
-                   
-                   
-                   <div class="sidebar-block filter-group-block open">
-                       <div class="sidebar-block_title"><span>Categories</span>
-                           <div class="toggle-arrow"></div>
-                       </div>
-                       <div class="sidebar-block_content">
-                           
-                               <div class="radio-group">
-                               <ng-container  *ngFor='let j of jewelery_for' > <input type="checkbox"  [checked]="checkedjewelery_for(j)" (change)="changefilter($event,j)"  id="{{j}}" name="jewelery_for"><label for="{{j}}">{{j}}</label></ng-container>
-                               </div>
-                       </div>
-                   </div>
-
-                   <div class="sidebar-block filter-group-block open">
-                       <div class="sidebar-block_title"><span>Product</span>
-                           <div class="toggle-arrow"></div>
-                       </div>
-                       <div class="sidebar-block_content">
-                           <div class="radio-group">
-                               <ng-container  *ngFor='let jt of jewelery_type' > <input type="radio" [checked]="checkedjewelery_type(jt)" (change)="changefilter($event,jt)" id="{{jt}}" name="jewelery_type"><label for="{{jt}}">{{jt}}</label></ng-container>
-                           </div>
-                       </div>
-                   </div>
-                   
-                   <div class="sidebar-block filter-group-block open">
-                       <div class="sidebar-block_title"><span>Colors</span>
-                           <div class="toggle-arrow"></div>
-                       </div>
-                       <div class="sidebar-block_content">
-                           <ul class="color-list two-column">
-                               <li><a href="javascript:void(0)" data-tooltip="Yellow" title="Yellow"><span class="value"><img src="../../../../assets/images/colorswatch/color-yellow.png" alt=""></span><span class="colorname">Yellow (125)</span></a></li>
-
-                               <li><a href="javascript:void(0)" data-tooltip="Silver" title="Silver"><span class="value"><img src="../../../../assets/images/colorswatch/color-white.png" alt=""></span><span class="colorname">Silver (125)</span></a></li>
-                           </ul>
-                       </div>
-                   </div>
-                   
-                   <div class="sidebar-block filter-group-block open">
-                       <div class="sidebar-block_title"><span>Metal</span>
-                           <div class="toggle-arrow"></div>
-                       </div>
-                       <div class="sidebar-block_content">
-                           <div class="radio-group">
-                               <ng-container  *ngFor='let m of material' > <input type="checkbox" [checked]="checkedmaterial(m)" (change)="changefilter($event,m)" id="{{m}}" name="material"><label for="{{m}}">{{m}}</label></ng-container>
-                           </div>
-                       </div>
-                   </div>
-                   
-                   <div class="sidebar-block filter-group-block open">
-                       <div class="sidebar-block_title"><span>Gold Purity</span>
-                           <div class="toggle-arrow"></div>
-                       </div>
-                       <div class="sidebar-block_content">
-                           <div class="radio-group">
-                               <ng-container  *ngFor='let p of purity' > <input type="checkbox" [checked]="checkedpurity(p)" (change)="changefilter($event,p)" id="{{p}}" name="purity"><label for="{{p}}">{{p}}</label></ng-container>
-                           </div>
-                       </div>
-                   </div>
-
-                    
-                </div>
-               
-                 
-            </div> -->
-            <!-- /Left column -->
-            
-            <!-- Center column -->
+           
             <div class="col-lg aside">
                 <div class="prd-grid-wrap">
-                    <!-- Filter Row -->
-                    <!-- <div class="filter-row invisible">
-                        <div class="row row-1 d-lg-none align-items-center">
-                            <div class="col">
-                                <h1 class="category-title">WOMEN’S</h1>
-                            </div>
-                            <div class="col-auto ml-auto">
-                                <div class="view-in-row d-md-none"><span data-view="data-to-show-sm-1"><i class="icon icon-view-1"></i></span> <span data-view="data-to-show-sm-2"><i class="icon icon-view-2"></i></span></div>
-                                <div class="view-in-row d-none d-md-inline"><span data-view="data-to-show-md-2"><i class="icon icon-view-2"></i></span> <span data-view="data-to-show-md-3"><i class="icon icon-view-3"></i></span></div>
-                            </div>
-                        </div>
-                        <div class="row row-2">
-                            <div class="col-left d-flex align-items-center">
-                                <div class="sort-by-holder">
-                                    <div class="select-label d-none d-lg-inline">Sort by:</div>
-                                    <div class="select-wrapper-sm d-none d-lg-inline-block"><select (change)="orderBy($event)" class="form-control input-sm">
-                                            <option value="ASC" >ASC</option>
-                                            <option value="DSC" >DSC</option>
-                                        </select></div>
-                                    <div class="select-directions d-none d-lg-inline"><span><i class="icon icon-arrow-down"  (click)="orderBy(1)" ></i></span> <span><i (click)="orderBy(2)" class="icon icon-arrow-up"></i></span></div>
-                                    <div class="dropdown d-flex d-lg-none align-items-center justify-content-center"><span class="select-label">Sort By</span>
-                                        <div class="select-wrapper-sm"><select (change)="orderBy($event)" class="form-control input-sm">
-                                            <option value="ASC" >ASC</option>
-                                            <option value="DSC" >DSC</option>
-                                            </select></div>
-                                    </div>
-                                </div>
-                                <div class="filter-button d-lg-none"><a href="#" class="fixed-col-toggle">FILTER</a></div>
-                            </div>
-                            <div class="col col-center d-none d-lg-flex align-items-center justify-content-center">
-                                <div class="view-label">View:</div>
-                                <div class="view-in-row"><span data-view="data-to-show-3"><i class="icon icon-view-3"></i></span> <span data-view="data-to-show-4"><i class="icon icon-view-4"></i></span></div>
-                            </div>
-                            <div class="col-right ml-auto d-none d-lg-flex align-items-center">
-                                <div class="items-count">35 item(s)</div>
-                                <div class="show-count-holder">
-                                    <div class="select-label">Show:</div>
-                                    <div class="select-wrapper-sm"><select class="form-control input-sm">
-                                            <option value="featured">12</option>
-                                            <option value="rating">36</option>
-                                            <option value="price">100</option>
-                                        </select></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- /Filter Row -->
-                    
-                    <!-- Products Grid -->
                     <app-loader  *ngIf="loader"></app-loader>
                     <div *ngIf="page">
                             <div  class="prd-grid product-listing data-to-show-4 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div" >
@@ -249,7 +41,7 @@
                                                         <div class="gdw-loader"></div>
                                                     </div>
                                                     <div class="prd-info text-center">
-                                                        <!-- <h2 class="prd-title"><a (click)='go(s.product_id)'>{{s.product_name}}</a></h2> -->
+                                                     
                                                         <div class="prd-tag prd-hidemobile" *ngIf="s.weight.Gold && s.product_category == 'GOLD'">
 
                                                             <table style="width:100%;">
@@ -257,30 +49,19 @@
                                                                     <tr>
                                                                         <th style="width:25%;">
                                                                         <ng-container *ngIf='s.weight.Diamond'>
-                                                                                <a (click)='go(s.product_id)'>{{s.weight.Diamond}} <span style="text-transform: initial;"> ct</span></a>
+                                                                                <a (click)='go(s.product_id)'>{{s.weight.Diamond   | number : '1.3-3'}} <span style="text-transform: initial;"> ct</span></a>
                                                                         </ng-container>
                                                                         </th>
                                                                         <th style="width:50%;"></th>
                                                                         <th style="width:25%;">
                                                                             <ng-container *ngIf='s.weight.Gold'>
-                                                                                <a (click)='go(s.product_id)'>{{s.weight.Gold}} <span style="text-transform: initial;"> g</span></a>
+                                                                                <a (click)='go(s.product_id)'>{{s.weight.Gold   | number : '1.3-3'}} <span style="text-transform: initial;"> g</span></a>
                                                                             </ng-container>
                                                                         </th>  
                                                                     </tr>
                                                                 </thead>
                                                                 <th></th>
                                                             </table>
-                                                            <!-- <ng-container *ngIf='s.weight.Diamond'>
-                                                                <p style="text-align: left; width:49%; display: inline-block;">
-                                                                   <a (click)='go(s.product_id)'>{{s.weight.Diamond}} ct</a></p>
-                                                           </ng-container>
-                                                           <ng-container *ngIf='s.weight.Gold'>
-                                                            <p style="text-align: right; width:50%; display: inline-block;">
-                                                                <a (click)='go(s.product_id)'>{{s.weight.Gold}}g / {{s.quality.Gold}}</a>
-                                                            </p>
-                                                        </ng-container> -->
-                            
-                            
                                                         </div>
                             
                                                         <div class="prd-tag prd-hidemobile" *ngIf="s.weight.Gold && s.product_category == 'DIAMOND'">
@@ -289,29 +70,19 @@
                                                                     <tr>
                                                                         <th style="width:25%;">
                                                                         <ng-container *ngIf='s.weight.Diamond'>
-                                                                                <a (click)='go(s.product_id)'>{{s.weight.Diamond}} <span style="text-transform: initial;"> ct</span></a>
+                                                                                <a (click)='go(s.product_id)'>{{s.weight.Diamond   | number : '1.3-3'}} <span style="text-transform: initial;"> ct</span></a>
                                                                         </ng-container>
                                                                         </th>
                                                                         <th style="width:50%;"></th>
                                                                         <th style="width:25%;">
                                                                             <ng-container *ngIf='s.weight.Gold'>
-                                                                                <a (click)='go(s.product_id)'>{{s.weight.Gold}} <span style="text-transform: initial;"> g</span></a>
+                                                                                <a (click)='go(s.product_id)'>{{s.weight.Gold   | number : '1.3-3'}} <span style="text-transform: initial;"> g</span></a>
                                                                             </ng-container>
                                                                         </th>  
                                                                     </tr>
                                                                 </thead>
                                                                 <th></th>
                                                             </table>
-                            
-                                                            <!-- <ng-container *ngIf='s.weight.Diamond'>
-                                                                    <p style="text-align: left; width:49%; display: inline-block;">
-                                                                    <a (click)='go(s.product_id)'>{{s.weight.Diamond}} ct</a></p>
-                                                            </ng-container>
-                                                            <ng-container *ngIf='s.weight.Gold'>
-                                                                <p style="text-align: right; width:50%; display: inline-block;">
-                                                                    <a (click)='go(s.product_id)'>{{s.weight.Gold}}g / {{s.quality.Gold}}</a>
-                                                                </p>
-                                                            </ng-container> -->
                                                         </div>
                             
                                                         <div class="prd-tag prd-hidemobile" *ngIf="s.weight.Platinum && s.product_category == 'PLATINUM'">
@@ -321,13 +92,13 @@
                                                                     <tr>
                                                                         <th style="width:25%;">
                                                                         <ng-container *ngIf='s.weight.Diamond'>
-                                                                                <a (click)='go(s.product_id)'>{{s.weight.Diamond}} <span style="text-transform: initial;"> ct</span></a>
+                                                                                <a (click)='go(s.product_id)'>{{s.weight.Diamond   | number : '1.3-3'}} <span style="text-transform: initial;"> ct</span></a>
                                                                         </ng-container>
                                                                         </th>
                                                                         <th style="width:50%;"></th>
                                                                         <th style="width:25%;">
                                                                             <ng-container *ngIf='s.weight.Platinum'>
-                                                                                <a (click)='go(s.product_id)'>{{s.weight.Platinum}} <span style="text-transform: initial;"> g</span></a>
+                                                                                <a (click)='go(s.product_id)'>{{s.weight.Platinum   | number : '1.3-3'}} <span style="text-transform: initial;"> g</span></a>
                                                                             </ng-container>
                                                                         </th>  
                                                                     </tr>
@@ -339,12 +110,7 @@
                                                         </div>
                                                             <div class="prd-action">
                                                                 <input type="hidden">
-                                                                <!-- <button class="btn middle-button "  *ngIf= "checkCart(s.product_id)"  routerLink="/cart"><i class="icon icon-handbag"></i><span>Go to Cart</span></button>  -->
-                                                                <button class="btn middle-button"    (click)='go(s.product_id)'><i class="icon icon-handbag"></i><span>View Details</span></button> 
-                                                                <!-- <div   *ngIf= "checkCart(s.product_id)" class="row no=gutters" >
-                                                                    <button routerLink="/cart" class="btn"><i class="icon icon-handbag"></i><span>Go to Cart</span></button>      
-                                                                </div> -->
-                                                                    <!-- <button class="btn" *ngIf= "!checkCart(s.product_id)"  (click)="go(s.product_id)" ><i class="icon icon-handbag"></i><span>View Detail</span></button>  -->
+                                                                <button class="btn middle-button"    (click)='go(s.product_id)'><i class="icon icon-handbag"></i><span>View Details</span></button>
                                                              </div>
                                                      </div>
                                                     

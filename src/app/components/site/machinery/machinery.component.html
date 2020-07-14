@@ -1,7 +1,7 @@
 <ng-container *ngIf='slider_imgs'>
     <ngb-carousel *ngIf="slider_imgs">
         <ng-template *ngFor="let slide of slider_imgs" ngbSlide>
-          <div class="picsum-img-wrapper">
+          <div class="picsum-img-wrapper bordershadow">
             <img routerLink='/products/machinery' [queryParams]="{'page' :1 ,'subcategory_id': slide.category_id}" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
           </div>
         </ng-template>
@@ -15,8 +15,8 @@
             <div *ngFor="let slide of categories" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                 <div (click)='go(slide.id,1)' class="card border bordershadow" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
                     <img class="card-img-top" style="min-width: 100%;max-height:25vh;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
-                    <div class="card-body">
-                    <h5 class="card-title">{{slide.subcategory}}</h5>
+                    <div class="card-body text-center">
+                    <h4 class="card-title" style="margin-bottom: 0px;">{{slide.subcategory}}</h4>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
         </ngx-slick-carousel> -->
 
 
-         <div class="testimonials seller" style="background-color:#f9f9fa;">
+         <div class="testimonials seller bordershadow2" style="background-color:#f9f9fa;">
             <ngx-slick-carousel class="carousel" 
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
@@ -66,7 +66,7 @@
       </div> -->
     </div>
 </div>
-<div class="testimonials">
+<div class="testimonials bordershadow2" style="background-color:#f9f9fa;">
     <ngx-slick-carousel class="carousel" 
               #slickModal="slick-carousel" 
               [config]="slideConfig3" >
@@ -82,7 +82,7 @@
 </div>
 
 
-<div class="testimonials seller">
+<!-- <div class="testimonials seller">
     <ngx-slick-carousel class="carousel" 
                     #slickModal="slick-carousel" 
                     [config]="slideConfig" >
@@ -95,15 +95,17 @@
           </div>
           </div>
           </ngx-slick-carousel>
-</div>
+</div> -->
 
-<div class="row">
+<!-- <div class="row">
     <div class="col-6" *ngFor="let slide of videos">
         <video width="100%" poster="{{slide.imagePreview}}" style="padding:3vh;" controls>
             <source [src]="bypass(slide.image)" type="video/mp4">
         </video>
     </div>
-</div>
+</div> -->
+<ng-container *ngIf="exclusive && exclusive.length">
 <app-exclusive-banner [url2] = '""' [exclusive] = 'exclusive'></app-exclusive-banner>
+</ng-container>
 <app-machinery-holder [heading]="'Most Selling'" [mostselling] = 'mostselling' ></app-machinery-holder>
   

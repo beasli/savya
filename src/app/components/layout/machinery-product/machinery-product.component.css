@@ -154,3 +154,19 @@
     width: 100px;
     border: 1px solid #c59f59;
   } 
+  .tab-content {
+    position: relative;
+    z-index: 1;
+    padding-top: 15px;
+    text-align: justify;
+}
+.nav-tabs:not(.tab-category):not(:first-child) {
+    margin-top: 15px;
+    padding-bottom: 15px;
+}
+
+.prd-block_actions {
+    margin-top: 0px;
+
+    padding-top: 0px;
+}
