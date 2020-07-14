@@ -1,6 +1,10 @@
 .seller .embed-responsive{
     text-align:center;
 }
+.testimonials{
+    padding: 20px 0px;
+    margin: 15px 0px;
+}
 .seller .embed-responsive .embed-responsive-item{
     width:100px;
     height: auto;

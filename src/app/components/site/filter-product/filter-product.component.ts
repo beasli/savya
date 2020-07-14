@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SUBCATEGORYTYPE, PRODUCTLIST, PRODUCTFILTERMENU, PRODUCTFILTER, ORDERBY } from 'src/config';
+import { SUBCATEGORYTYPE, PRODUCTLIST, PRODUCTFILTERMENU, PRODUCTFILTER, ORDERBY, NAVIGATION } from 'src/config';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -26,6 +26,9 @@ export class FilterProductComponent implements OnInit {
   alert:boolean=false;
   loader:boolean;
   page:boolean;
+  subcategory:any;
+  subsubcategory:any;
+  category:any;
   message:string="NO PRODUCT AVAILABLE";
   f:any;
   drop:any;
@@ -36,16 +39,32 @@ export class FilterProductComponent implements OnInit {
   manufacture: string;
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router,private http:HttpClient) {
     this.drop=this.api.drop; 
+
+
+    this.api.Get(NAVIGATION).then(data => {
+
+      this.category = data['data'];
+
     this.route.params.subscribe(params => {
-      this.subid = params.id;
+
+      this.category = this.category.find(x => x.category == params.cat);
+      console.log(this.category);
+      this.subcategory = this.category.subcategory.find(x => x.subcategory == params.sub);
+      console.log(this.subcategory);
+      this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subcategory.id} ).then(data  => {
+        this.subsubcategory = data['data'];
+        this.subsubcategory = this.subsubcategory.find(x => x.title == params.subsub);
       this.route.queryParamMap.subscribe(params =>{
-        this.current_page = params.get('page');
-        this.manufacture = params.get('manufacturer');
-        console.log("manufacturer"+this.manufacture);
-        this.current_page = Number(this.current_page);
-        this.getProduct(this.subid,this.current_page);
+      this.current_page = params.get('page');
+      this.manufacture = params.get('manufacturer');
+      console.log("manufacturer"+this.manufacture);
+      this.current_page = Number(this.current_page);
+      this.getProduct(this.subsubcategory.id,this.current_page);
+      
+          });
+        });
       });
-      });
+    });
 
       // this.api.Get(PRODUCTFILTERMENU).then(data  => {
       // this.jewelery_for=data['menu'].jewelery_for;

@@ -111,7 +111,7 @@
     <!--/Promotional section -->
    
     <!-- Mostselling Product -->
-    <app-product-holder [redirect] = '0' [heading] = '"Mostselling Product"' [url3] = 'product' [mostselling] = 'mostselling' *ngIf="page"></app-product-holder>
+    <app-product-holder [redirect] = '0' [heading] = '"Most Selling Product"' [url3] = 'product' [mostselling] = 'mostselling' *ngIf="page"></app-product-holder>
     <!-- Mostselling Product -->
 
 
@@ -143,7 +143,7 @@
               </div>
           </div>
     </div>
-    <div style="padding: 200px;" *ngIf="loader"> <app-loader></app-loader> </div>
+    <div *ngIf="loader"> <app-loader></app-loader> </div>
     <!-- modal start -->
     <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
 

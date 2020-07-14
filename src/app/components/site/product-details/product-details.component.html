@@ -207,9 +207,9 @@
                                         <div *ngIf=(diamond.weight) class="option-label">Weight:  {{diamond.weight | number : '1.3-3'}} <span style="text-transform: initial;"> ct</span></div>
                                         <div *ngIf=(pricediamond) class="option-label">Diamond Price: {{pricediamond.price  | currency:'INR'}}/<span style="text-transform: initial;"> ct</span></div>
                                         <div *ngIf=(diamond.quantity) class="option-label">No of Diamond:  {{diamond.quantity}} <span style="text-transform: initial;"> pc</span></div>
-                                        <div *ngIf=(diamond.making_charge) class="option-label">Making Charges: Rs. {{diamond.making_charge  | currency:'INR'}}</div>
+                                        <div *ngIf=(diamond.making_charge) class="option-label">Making Charges: {{diamond.making_charge  | currency:'INR'}}</div>
                                         <div *ngIf=(diamond.charges_option) class="option-label">Charges Type:  {{diamond.charges_option}}</div> 
-                                        <div class="option-label">Diamond Total:Rs. {{totaldiamond}} </div>
+                                        <div class="option-label">Diamond Total:Rs. {{totaldiamond   | currency:'INR'}} </div>
                                         <div class="option-label">Diamond Color/Clarity: {{this.defaultdiamond[0] + '/' + this.defaultdiamond[1]}}</div>
                                     </div>
 
@@ -328,5 +328,5 @@
         <simple-notifications [options]="{position: ['top', 'right']}"></simple-notifications>
     </ng-container>
 </div>
-<div style="padding:200px" *ngIf="loader">  <app-loader  ></app-loader></div>
+<div *ngIf="loader"><app-loader></app-loader></div>
 

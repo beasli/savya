@@ -31,12 +31,6 @@ export class FooterComponent implements OnInit {
           }else{
             this.api.changelg(0);
           }
-    })
-
-    this.api.changelogo.subscribe(data  =>  {this.logochange = data
-    if(data == 1) {
-      this.newurl = this.router.url;
-    }
     });
   }
 

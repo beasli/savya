@@ -87,21 +87,26 @@ const customConfig: ShareButtonsConfig = {
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
       { path: 'home', component: HomeComponent},
-      { path: 'machinery/:id' , component: MachineryComponent},
-      { path: 'filter/:id' , component: FilterProductComponent},
+      { path: 'manufacture/:id', component: CategoryComponent},
       { path: 'events' , component: EventsComponent},
+      { path: 'MACHINERY' , component: MachineryComponent},
+     
+      
       { path: 'event/:id' , component: EventComponent, canActivate: [KycguardService]},
       { path: 'products/machinery/:id', component: MachineryProductComponent, canActivate: [KycguardService]},
       { path: 'product-details/:id' , component: ProductDetailsComponent, canActivate: [KycguardService]},
-      { path: 'subsub/:id' , component: SubsubComponent},
+      
       { path: 'manufacture/:idm/subsub/:id' , component: SubsubComponent},
       { path: 'filternav' , component: FilterNavBarComponent},
-      { path: 'manufacture/:id', component: CategoryComponent},
+      
       { path: 'category', component: CategoryComponent},
-      { path: 'subcategory/:id', component: SubcategoryComponent},
+      
       { path: 'manufacture/:idm/subcategory/:id', component: SubcategoryComponent},
       { path: 'bullion', component: BullianComponent},
       { path: 'bullion/:id', component: BullianMerchantComponent},
+      { path: ':subcategory', component: SubcategoryComponent},
+      { path: ':subcategory/:subsubcategory' , component: SubsubComponent},
+      { path: ':cat/:sub/:subsub' , component: FilterProductComponent},
     ])
   ],
   exports: [LoaderComponent,NgbModule,

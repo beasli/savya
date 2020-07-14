@@ -12,12 +12,13 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-sm-8 col-md-6">
+                    <div class="bordershadow2" style="padding:30px;background-color:#f4f4f4;">
                     <h2 class="text-center">CHANGE PROFILE</h2>
                   
                     <div class="form-wrapper" *ngIf="page">
                         <form>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-12 text-center">
                                     <div class="profile-image-wrapper">
                                         <div class="profile-image">
                                             <img id="image_preview" [src]="photo+'/'+ data.logo" onerror="this.src='../../../../assets/images/user.png'"/>
@@ -83,6 +84,8 @@
                                 <a routerLink="/account-details"><strong style="float: left;">My Profile</strong></a>
                             </div>
                         </form>
+                        <div class="clearfix"></div>
+                    </div>
                     </div>
                     <app-loader  *ngIf="loader" ></app-loader> 
                 </div>

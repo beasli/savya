@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, CARTDELETE, CARTUPDATE, ORDERHISTORY, PROFILEVIEW } from '../../config';
+import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, CARTDELETE, CARTUPDATE, ORDERHISTORY, PROFILEVIEW, NAVIGATION } from '../../config';
 import * as CryptoJS from 'crypto-ts';
 import { JsonPipe } from '@angular/common';
 import { NotificationsService } from 'angular2-notifications';
@@ -24,12 +24,17 @@ export class ApiService {
   otpGuard:any;
   uid:any;
   wish:any[];
+  filter:any;
   event:any;
   header:any;
+  machineurl:any;
   goto:any;
+  cat: any;
   // geocoder = new google.maps.Geocoder();
   constructor(public http: HttpClient,private service: NotificationsService, private router: Router) {
     console.log('I AM CONSTRUCTOR');
+    this.category();
+    this.filter = {"menu":{"jewelery_for":[],"jewelery_type":[],"material":[],"price":{},"purity":[]}};
     if(localStorage.getItem('savya_userInfo'))
     {
      let u=this.getUserInfo();
@@ -155,9 +160,6 @@ export class ApiService {
         });
     });
   }
-
-  
-
 
   public Post(api, formData) {
     return new Promise((resolve, reject) => {
@@ -439,9 +441,9 @@ qtyUpdate(pid,value)
 
   godetail(value) {
     if (value >= 0) {
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+     // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['/product-details', value]);
-        });
+     //   });
              }
             }
   updateWishlist()
@@ -739,12 +741,22 @@ price(weight, rate, option, makingcharge, wastage = 0, value = 0) {
 }
 setfilter(value)
 {
-  localStorage.setItem('filter',JSON.stringify(value));
+  //localStorage.setItem('filter',JSON.stringify(value));
+  this.filter = value;
   this.filterChange.emit("filterchanged"+Date.now()); 
 }
 getfilter()
 {
-  return JSON.parse(localStorage.getItem('filter'));
+  return this.filter;
+  //return JSON.parse(localStorage.getItem('filter'));
+}
+
+category(){
+  this.Get(NAVIGATION).then(data => {
+    this.cat = data['data'];
+    console.log(data['data']);
+  });
+
 }
 
 }

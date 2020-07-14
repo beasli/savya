@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
    this.api.changelogo.subscribe(data=>{this.logochange = data
     
     if(data == 1){
-      this.newurl = this.router.url;
+      this.newurl = this.api.machineurl;
     }
   });
   }

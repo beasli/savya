@@ -23,6 +23,7 @@ export class NavBarComponent implements OnInit {
   message:any="CART IS EMPTY";
   newurl:any;
   drop: any;
+  machine: any;
   constructor(private api: ApiService, private router: Router) {
     
                   //cart work start //
@@ -40,7 +41,11 @@ export class NavBarComponent implements OnInit {
           
             this.api.Get(NAVIGATION).then(data => {
               this.catall = data['data'];
-            
+              this.machine = this.catall.find(x => x.category == "MACHINERY");
+              console.log(this.machine);
+              this.machine = '/machinery' + '/'+ this.machine.category_id;
+              this.api.machineurl = this.machine;
+              console.log(this.api.machineurl);
               this.catall.forEach(element => {
                 if (element['subcategory'].length){
                   this.catwithsub.push(element);
@@ -55,7 +60,7 @@ export class NavBarComponent implements OnInit {
             this.api.changelogo.subscribe(data=>{this.logochange = data
               console.log(this.logochange);
               if(data == 1){
-                this.newurl = this.router.url;
+                this.newurl = this.api.machineurl;
               }
             });
 }

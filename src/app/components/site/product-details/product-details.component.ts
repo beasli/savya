@@ -270,6 +270,8 @@ export class ProductDetailsComponent implements OnInit {
         if (this.data.size_type && this.data.size_type != 'None' ) {
           this.defaultsize = this.data.default_size;
           this.sizes = this.data.size_type.split(',');
+          this.sizes = this.sizes.filter((v, i, a) => a.indexOf(v) === i); 
+          this.sizes = this.sizes.sort();
           this.selectedsize = this.defaultsize;
           let temp = [];
           if(this.sizelist){
@@ -789,15 +791,11 @@ diamondchange(diamond){
       let name = this.defaultdiamond[0] + '/' +this.diamondclarity[i];
       if(this.diamondclarity[i] != this.defaultdiamond[1] ){
       let p = this.pricelist.diamond_master.find(x => x.type == name);
-      console.log(name);
-      console.log("col");
-      console.log(p);
+      
       if(p){
         this.discla[i] = 0;
-        console.log(this.discla[i]);
       }else{
         this.discla[i] = 1;
-        console.log(this.discla[i]);
       }}
     }
 
@@ -879,9 +877,6 @@ diamondchange(diamond){
   }
 
 
-  ngAfterViewInit(){
-    
-    }
   
   ngOnInit() {
     this.loader = true;

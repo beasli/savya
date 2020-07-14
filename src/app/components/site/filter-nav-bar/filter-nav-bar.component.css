@@ -81,7 +81,7 @@
 .subfilter:before{
     display:none;
 }
-.filter-listing{
+.filter-listingd{
     position: absolute;
     left: 0;
     top: 100%;
@@ -98,10 +98,10 @@
     transition: visibility 0s,opacity 0.4s;
     box-shadow: 0 0 10px 1px rgba(153,152,163,0.8);
 }
-.filter-listing > ul{
+.filter-listingd > ul{
     padding-left:0px;
 }
-.filter-listing > ul > li{
+.filter-listingd > ul > li{
     display: block;
     cursor: pointer;
     list-style: none;
@@ -114,7 +114,7 @@
 .each-filter-listing{
     line-height:48px;
 }
-.filter-listing > ul > li:hover{
+.filter-listingd > ul > li:hover{
     background-color:#dbbf8d;
 }
 .icon-container {
@@ -131,7 +131,7 @@
     height: 26px;
     display:block;
 }
-.filter-bar > ul > li:hover .filter-listing {
+.filter-bar > ul > li:hover .filter-listingd {
     opacity: 1;
     visibility: visible;
     height: auto;
@@ -146,7 +146,7 @@
     transform: rotate(180deg);
 }
 
-.filter-listing ul.subfilter li .each-filter-listing .filter-text:after{
+.filter-listingd ul.subfilter li .each-filter-listing .filter-text:after{
     position:absolute;
     width:14px;
     height:10px;
@@ -160,10 +160,10 @@
     right:12px;
     opacity: 0;
 }
-.filter-listing ul.subfilter li.active .each-filter-listing .filter-text:after{
+.filter-listingd ul.subfilter li.active .each-filter-listing .filter-text:after{
     opacity: 1;
 }
-.filter-listing.sub-filter-listing{
+.filter-listingd.sub-filter-listing{
     overflow: visible;
 }
 .subsub-dropdown{
@@ -177,15 +177,28 @@
     list-style:none;
     opacity: 0;
 }
-.filter-listing.sub-filter-listing ul li{
+.filter-listingd.sub-filter-listing ul li{
     position: relative;
 }
 .sub-filter-listing .subfilter .each-filter-listing:hover .subsub-dropdown{
     opacity: 1;
 }
-.filter-listing ul.subfilter{
+.filter-listingd ul.subfilter{
     position:relative;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -238,6 +251,7 @@
     width:100%;
     height:100%;
     background-color: #c59f59;
+    z-index: 99999;
     transition:all 0.5s;
     -webkit-transition:all 0.5s;
 }
@@ -259,6 +273,7 @@
 .filter-content h4{
     text-align:center;
     color:#fff;
+    margin-bottom:0px;
     padding:10px 0px;
 }
 .filter-listing ul{
@@ -320,9 +335,3 @@
         display:block;
     }
 }
-@media screen and (max-width: 800px) {
-
-    .filter-bar .collapse{
-                display:block;
-          }  
-    }
