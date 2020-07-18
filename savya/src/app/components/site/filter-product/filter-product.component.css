@@ -1,0 +1,37 @@
+.prd-inside:hover{
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+.most-selling-product .prd .prd-inside {
+    background-color: transparent;
+    padding: 10px 10px 12px;
+    margin: 10px auto 10px;
+}
+.products-love-icon{
+    margin-left: 15px;
+}
+.middle-button{
+    margin: 0px auto;;
+}
+.product-border{
+    border:1px solid #e7e7e7;
+}
+/deep/.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #c59f59;
+    border-color: #c59f59;
+}
+/deep/.page-item .page-link:hover{
+    z-index: 1;
+    color: #fff;
+    background-color: #0e0d0c;
+    border-color: #111110;
+}
+
+@media(max-width:767px){
+    .size-swatch li > * {
+        margin: 0 4px 0 0;
+    }
+}

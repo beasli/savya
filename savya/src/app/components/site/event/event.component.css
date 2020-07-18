@@ -1,0 +1,11 @@
+button {
+    color: #fff;
+}
+.events-details-section{
+    padding:80px 0px;
+}
+.events-details{
+    border: 1px solid #e7e7e7;
+    height: 100%;
+    padding: 20px;
+}

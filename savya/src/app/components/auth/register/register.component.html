@@ -1,0 +1,172 @@
+<div class="page-content" style="margin-bottom: 65px;">
+    <div class="holder mt-0">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li><a routerLink="/home">Home</a></li>
+                <li><span>Create an Account</span></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="holder mt-0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-8 col-md-6">
+                    <h2 class="text-center">CREATE AN ACCOUNT</h2>
+                    <div *ngIf="alert">
+                        <p>
+                            <ngb-alert [dismissible]="false" type="danger" >
+                              <strong>{{message}}</strong> .
+                            </ngb-alert>
+                          </p>
+                    </div>
+                    <div class="form-wrapper">
+                        <p class="text-center">To access your whishlist, address book and contact preferences and to take advantage of our speedy checkout, create an account with us now.</p>
+                        <form #f="ngForm" (ngSubmit)="SignUp(f.value)">
+                            <!-- <div class="row"> -->
+                                <!-- <div class="col-sm-6"> -->
+                                    <div class="form-group" *ngIf="mobile"><input type="text" #name="ngModel"  ngModel  name="name" class="form-control"  placeholder="First name" required>
+                                        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+                                            Name is required.
+                                        </div>
+                                    </div>
+                                <!-- </div> -->
+                                <!-- <div class="col-sm-6">
+                                    <div class="form-group"><input type="text" #name="ngModel"  ngModel  name="name" class="form-control" (ngModelChange)="changeLname($event)" placeholder="Last name"></div>
+                                </div>
+                            </div> -->
+                            <!-- <div class="form-group"> <label for='register'>Register type</label>
+                                <select id="register" #register_type="ngModel"  ngModel  name="register_type"  class="form-control" required>
+                                    <option value=""></option>
+                                    <option >customer</option>
+                                    <option >Manufacturer</option>
+                                    <option >Retailer</option>
+                                    <option >Wholesaler</option>
+                                    <option >Franchise</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="register_type.touched && register_type.invalid">
+                                    Register Type is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  #designation="ngModel"  ngModel  name="designation" class="form-control" placeholder="Designation*" required>
+                                <div class="alert alert-danger" *ngIf="designation.touched && designation.invalid">
+                                    Designation is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  #company_name="ngModel"  ngModel  name="company_name" class="form-control" placeholder="Company/Firm Name" required>
+                                <div class="alert alert-danger" *ngIf="company_name.touched && company_name.invalid">
+                                    company name is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  #gstno="ngModel"  ngModel  name="gstno" class="form-control"  (ngModelChange)="changeGst($event)" placeholder="GST No.*" required>
+                                <div class="alert alert-danger" *ngIf="gstno.touched && gstno.invalid">
+                                    Gst no. is required.
+                                </div>
+                                <div *ngIf="checkGst()" class="alert alert-danger">Incorrect Gst no. </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  #panno="ngModel"  ngModel  name="panno" class="form-control" placeholder="Pan Card No.*"  (ngModelChange)="changePan($event)" required>
+                                <div class="alert alert-danger" *ngIf="panno.touched && panno.invalid">
+                                    Pan no. is required.
+                                </div>
+                                <div *ngIf="checkPan()" class="alert alert-danger">Incorrect Pan no. </div>
+
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  #address="ngModel"  ngModel  name="address" class="form-control" placeholder="Address*" required>
+                                <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
+                                    Address is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  #city="ngModel"  ngModel  name="city" class="form-control" placeholder="City*" required>
+                                <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+                                    City is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="number"  #pincode="ngModel"  ngModel  name="pincode" class="form-control"  (ngModelChange)="changePin($event)" placeholder="Pin Code" required>
+                                <div *ngIf="pin" class="alert alert-danger">Pin code should be atleast 10 digits  </div>
+                                <div class="alert alert-danger" *ngIf="pincode.touched && pincode.invalid">
+                                    Pin code is required.
+                                </div>
+                            </div>
+                            <div class="form-group"> <label for='state'>Select State</label>
+                                <select id="register" #state="ngModel"  ngModel  name="state"  class="form-control" required >
+                                    <option value=""></option>
+                                    <option >Rajasthan</option>
+                                    <option >Haryana</option>
+                                    <option >Gujrat</option>
+                                    <option >Himachal Pradesh</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="state.touched && state.invalid">
+                                    State is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password"  #password="ngModel"  ngModel  name="password" class="form-control" (ngModelChange)="setPassword($event)" placeholder="Password" required>
+                                <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+                                    Password is required.
+                                </div>
+                            </div>
+                            <div class="form-group">                                                                                        
+            
+                                <input type="password"  #retyped="ngModel"  ngModel  name="retyped" class="form-control" (ngModelChange)="changePassword($event)" placeholder="confirm Password" required >
+                                <div class="alert alert-danger" *ngIf="retyped.touched && retyped.invalid">
+                                   Confirmed Password is required.
+                                </div>
+                                <div *ngIf="checkPassword()" class="alert alert-danger">Password doesn't match  </div>
+                                
+
+                            </div> -->
+                            <div class="form-group" *ngIf="mobile">
+                                <input type="text"  #email="ngModel"  ngModel  name="email" class="form-control" placeholder="E-mail" required email>
+                                <div class="alert alert-danger" *ngIf="email.touched && email.invalid" >
+                                    <div *ngIf="email.errors.required">Email is required.</div>
+                                    <div *ngIf="email.errors.email">Please enter a valid Email</div>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="mobile">
+                                <input type="number"  #mobile_no="ngModel"  ngModel  name="mobile_no" class="form-control" (ngModelChange)="changeNumber($event)" placeholder="Mobile No*" required >
+                                <div class="alert alert-danger" *ngIf="mobile_no.touched && mobile_no.invalid">
+                                    <div *ngIf="mobile_no.errors.required">Mobile No. is required.</div>
+                                </div>
+                               <div *ngIf="mob" class="alert alert-danger">Mobile no. should be atleast 10 digits  </div>
+                                
+                            </div>
+                            <div class="form-group" *ngIf="mobile">
+                                <textarea #address="ngModel"  ngModel  name="address" class="form-control" placeholder="Address" required ></textarea>
+                                <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
+                                    <div *ngIf="address.errors.required">address is required.</div>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="mobile">
+                                <input type="text"  #referal="ngModel"  ngModel  name="referal" class="form-control" placeholder="Referral Code">
+                                
+                            </div>  
+                            <div class="form-group" *ngIf="!mobile">
+                                <input type="password"  #password="ngModel"  name="password" ngModel class="form-control" placeholder="Enter Otp" required>
+                                <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+                                   otp is required.
+                                </div>
+                            </div>
+                     
+                            <!-- <div class="clearfix">
+                                <input id="checkbox1"  name="checkbox1" type="checkbox" checked="checked" required> 
+                                <label for="checkbox1">By registering your details you agree to our Terms and Conditions and privacy and cookie policy</label>
+                            </div> -->
+                               
+                            <div class="text-center" ><input  class="btn"  *ngIf="sign" type="submit" value="create an account" [disabled]="!f.valid" ></div>
+                            <div class="text-center"><input  class="btn"   *ngIf="loading" type="submit" value="Loading..."  disabled></div>
+                            <button type="submit" *ngIf="otpcheck" class="btn">Verify Otp</button>
+                          
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

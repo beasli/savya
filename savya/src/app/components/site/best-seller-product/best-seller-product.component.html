@@ -1,0 +1,28 @@
+<div class="holder py-3 py-md-6 fullboxed aside--bg-none">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="h1-style">Most Selling Products</h2>
+        </div>
+        <div class="prd-grid prd-grid--nopad data-to-show-3 data-to-show-md-2 data-to-show-sm-2 data-to-show-xs-1 js-product-isotope mt-4">
+            <div class="prd prd-horizontal-simple" *ngFor="let s of mostselling">
+                <div class="prd-inside">
+                    <div class="prd-img-area"><a href="product.html" class="prd-img"><img [src]="url3 + s.image" alt="Tyssot 1853"></a>
+                        <a href="#" class="label-wishlist icon-heart js-label-wishlist"></a>
+                    </div>
+                    <div class="prd-info">
+                        <div class="prd-tag"><a href="#">{{s.productname}}</a></div>
+                        <h2 class="prd-title"><a href="product.html">{{s.size}}</a></h2>
+                        <div class="prd-rating prd-hidemobile"></div>
+                        <div class="prd-price">
+                            <div class="price-new">₹ 12000</div>
+                        </div>
+                        <div class="prd-action">
+                            <div class="prd-links"><a href="#" class="icon-eye prd-qview-link js-qview-link" data-fancybox data-src="#modalQuickView"></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="more-link-wrapper text-center"><a href="#" class="btn-decor">show all</a></div>
+    </div>
+</div>

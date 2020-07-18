@@ -1,0 +1,109 @@
+
+<div class="page-content" style="margin-bottom: 65px;">
+    <div class="holder mt-0">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li><a routerLink="/home">Home</a></li>
+                <li><span>{{heading}}</span></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="holder mt-0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-8 col-md-6">
+                    <h2 class="text-center">{{heading}}</h2>
+                  
+                    <div class="form-wrapper">
+                        <form #f="ngForm" (ngSubmit)="add(f.value)">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group"><input type="text" #first="ngModel"  [(ngModel)]="addresses['first']"  name="first" class="form-control" placeholder="First name" required>
+                                        <div class="alert alert-danger" *ngIf="first.touched && first.invalid">
+                                            Name is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group"><input type="text" #last="ngModel"  [(ngModel)]="addresses['last']"  name="last" class="form-control" placeholder="Last name"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="number"  #mobileno="ngModel"  [(ngModel)]="addresses['mobileno']"  name="mobileno" (ngModelChange)="changeNumber($event)" class="form-control" placeholder="Mobile No*" required>
+                                <div class="alert alert-danger" *ngIf="mobileno.touched && mobileno.invalid">
+                                    <div *ngIf="mobileno.errors.required">Mobile No. is required.</div>
+                                </div>
+                                <div *ngIf="mob" class="alert alert-danger">Mobile no. should be atleast 10 digits  </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  #address="ngModel"  [(ngModel)]="addresses['address']"  name="address" class="form-control" placeholder="Address*" required>
+                                <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
+                                    Address is required.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text"  #city="ngModel"  [(ngModel)]="addresses['city']"  name="city" class="form-control" placeholder="City*" required>
+                                <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+                                    City is required.
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="number"  #pincode="ngModel"  [(ngModel)]="addresses['pincode']" (ngModelChange)="changePin($event)"  name="pincode" class="form-control" placeholder="Pin Code" required>
+                                <div *ngIf="pin" class="alert alert-danger">Pin code should be atleast 6 digits  </div>
+                                <div class="alert alert-danger" *ngIf="pincode.touched && pincode.invalid">
+                                    Pin code is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  #country="ngModel"  [(ngModel)]="addresses['country']"  name="country" class="form-control" placeholder="country*" required>
+                                <div class="alert alert-danger" *ngIf="country.touched && country.invalid">
+                                    country is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <!-- <label for='region'>Select region</label> -->
+                                <input type="text" #region="ngModel"  [(ngModel)]="addresses['region']"  name="region" placeholder="Region*" class="form-control" required >
+                                    <!-- <option value=""></option>
+                                    <option >Rajasthan</option>
+                                    <option >Haryana</option>
+                                    <option >Gujarat</option>
+                                    <option >Himachal Pradesh</option>
+                                </select> -->
+                                <div class="alert alert-danger" *ngIf="region.touched && region.invalid">
+                                    region is required.
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group"> <label for='region'>Select region</label>
+                                <select id="register" #region="ngModel" [(ngModel)]="statecode.id" (change)="statechange($event.target.value)"  name="region"  class="form-control" required >
+                                    <option value="-1"></option>
+                                    <option *ngFor='let s of state' [value]="s.id" [selected]="s.id == statecode.id">{{s.name}}</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="region.touched && region.invalid">
+                                    region is required.
+                                </div>
+                            </div>
+
+                            <div class="form-group"><label for='region'>Select City</label>
+                                <select #city="ngModel"  [(ngModel)]="addresses['city']"  name="city"  class="form-control" required >
+                                    <option value=""></option>
+                                    <option *ngFor='let s of cities'  [selected]="s.city == addresses['city']">{{s.city}}</option>
+                                </select>
+                                <div class="alert alert-danger"  *ngIf="city.touched && city.invalid">
+                                    City is required.
+                                </div>
+                            </div> -->
+
+                            <div class="text-center" ><input  class="btn" type="submit" value="Done" [disabled]="!f.valid || mob || pin" ></div>
+                            <div class="text-center"><input  class="btn"   *ngIf="loading" type="submit" value="Loading..."  disabled></div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

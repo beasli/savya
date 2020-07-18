@@ -1,0 +1,41 @@
+<div class="holder most-selling-product bordershadow2" style="padding:20px 0px;background-color:#f9f9fa;">
+    <!-- modal start -->
+      <!-- modal end -->
+    <div class="container-fluid">
+        <div class="title-with-center text-center">
+            <h2 class="h1-style">{{heading}}</h2>
+            <!-- <div class="prd-carousel-tabs js-filters-prd d-none d-md-flex" data-grid="tabCarousel-01">
+                <span class="active" data-filter="prd">All</span> <span data-filter="prd-popular">Popular</span> <span data-filter="prd-sale">Sale</span> <span data-filter="prd-new">New</span>
+            </div>
+            <div class="prd-carousel-tabs js-filters-prd-sm d-md-none">
+                <span class="filters-label active" data-filter=".prd">All</span> <span class="filters-label" data-filter=".prd-popular">Popular</span> <span class="filters-label" data-filter=".prd-sale">Sale</span> <span class="filters-label" data-filter=".prd-new">New</span>
+            </div> -->
+        </div>
+        
+        <!-- <div class="prd-grid prd-carousel js-prd-carousel-tab slick-arrows-aside-simple slick-arrows-mobile-lg data-to-show-4 data-to-show-md-3 data-to-show-sm-2 data-to-show-xs-2 js-product-isotope-sm" id="tabCarousel-01" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'> -->
+            <ngx-slick-carousel class="carousel"  #slickModal="slick-carousel"  [config]="slideConfig" >
+
+                <div ngxSlickItem  class="prd prd-new prd-popular" style='height:100%' *ngFor="let s of mostselling">
+                    
+                        <div class="prd-inside product-border" >
+                            <div class="prd-img-area"><a (click)='go(s.product_id)' class="prd-img"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{url3+s.image}}" alt="Tyssot 1853"></a>
+                                
+                                <div class="gdw-loader"></div>
+                            </div>
+                            <div class="prd-info text-center">
+                                <h2 class="prd-title"><a (click)='go(s.product_id)'>{{s.product_name}}</a></h2>
+                            </div>
+                                    <div class="prd-action">
+                                       
+                                        <button class="btn middle-button" (click)='go(s.product_id)'><span>View Details</span></button> 
+                                       
+                                    </div>
+                        </div>
+                            
+                </div>
+                    
+                
+               
+            </ngx-slick-carousel>
+        </div>
+</div>
