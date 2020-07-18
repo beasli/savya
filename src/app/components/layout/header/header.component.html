@@ -81,7 +81,7 @@
                         <!-- /Header Wishlist -->
                         
                         <!-- Header Account -->
-                        <div class="dropdn dropdn_account @@classes"><a  class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
+                        <div id="account2" class="dropdn dropdn_account @@classes"><a  (click)='account2()' class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
 
                             
                       
@@ -120,7 +120,7 @@
                     <div class="col-auto hdr-topline-right links-holder">
                         <!-- Header Search -->
                  
-                        <div class="dropdn dropdn_search hide-mobile @@classes"><a href="javascript:void(0)" class="dropdn-link"><i class="icon icon-search2"></i><span>Search</span></a>
+                        <div id='searcher' class="dropdn dropdn_search hide-mobile @@classes" ><a href="javascript:void(0)" (click)='searchbar()' class="dropdn-link"><i class="icon icon-search2"></i><span>Search</span></a>
                             <div class="dropdn-content">
                                 <div class="container">
                                         <button class="search-button"><i class="icon-search2"></i></button>
@@ -142,11 +142,11 @@
                         <!-- /Header Search -->
                         
                         <!-- Header Wishlist -->
-                        <div class="dropdn dropdn_wishlist @@classes"><a routerLink="/account-wishlist" class="dropdn-link"><i class="icon icon-heart-fill"></i><span>Wishlist</span></a></div>
+                        <div  class="dropdn dropdn_wishlist @@classes"><a routerLink="/account-wishlist" class="dropdn-link"><i class="icon icon-heart-fill"></i><span>Wishlist</span></a></div>
                         <!-- /Header Wishlist -->
                         
                         <!-- Header Account -->
-                        <div class="dropdn dropdn_account @@classes"><a  class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
+                        <div id='account' class="dropdn dropdn_account @@classes"><a  (click)='account()'  class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
 
                             
                       
