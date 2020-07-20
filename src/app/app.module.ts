@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFilterComponent } from './components/layout/search-filter/search-filter.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

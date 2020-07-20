@@ -69,7 +69,8 @@ import { LoginGuardService } from '../../auth-guard/login-guard.service';
 import { AuthGuardService } from '../../auth-guard/auth-guard.service';
 import { CheckoutService } from '../../auth-guard/checkout.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { BlogComponent } from '../blog/blog.component';
+import { BlogDetailsComponent } from '../blog-details/blog-details.component';
 
 
 const customConfig: ShareButtonsConfig = {
@@ -132,7 +133,9 @@ const customConfig: ShareButtonsConfig = {
     EventHistoryComponent,
     OrderDetailComponent,
     OffersComponent,
-    SlugPipe
+    SlugPipe,
+    BlogComponent,
+    BlogDetailsComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -153,6 +156,8 @@ const customConfig: ShareButtonsConfig = {
      }),
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
+      { path: 'blog', component: BlogComponent},
+      { path: 'blog/:id', component: BlogDetailsComponent},
       { path: 'login', component: LoginComponent,canActivate: [LoginGuardService]},
       { path: 'register', component: RegisterComponent,canActivate: [LoginGuardService]},
       { path: 'kyc' , component: KycComponent, canActivate: [AuthGuardService]},

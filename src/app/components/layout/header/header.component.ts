@@ -96,7 +96,7 @@ export class HeaderComponent implements OnInit {
 
     if (document.getElementById('searcher').classList.contains('is-hovered')) {
       document.getElementById('searcher').classList.remove('is-hovered');
-    } else{
+    } else {
       document.getElementById('searcher').classList.add('is-hovered');
     }
   }
