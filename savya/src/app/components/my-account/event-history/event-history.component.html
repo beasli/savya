@@ -1,0 +1,56 @@
+<div class="page-content" style="margin-bottom: 65px;">
+    <div class="holder mt-0">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li><a routerLink="/home">Home</a></li>
+                <li><span>My Events</span></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="holder mt-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 aside aside--left">
+                    <div class="list-group"><a routerLink="/account-details" class="list-group-item ">Account Details</a> <a routerLink="/account-addresses" class="list-group-item">My Addresses</a> <a routerLink="/account-wishlist" class="list-group-item">My Wishlist</a><a routerLink="/offers" class="list-group-item">My Offers</a><a routerLink="/account-history" class="list-group-item">My Order History</a><a routerLink="/event-history" class="list-group-item active">My Event History</a><a routerLink="/kycpending" class="list-group-item">Upload KYC</a></div>
+                </div>
+                <div class="col-md-9 aside" *ngIf="page">
+                    <h2>My Event History</h2>
+                    <div *ngIf='!event.length'>
+                        <p>
+                            <ngb-alert [dismissible]="false">
+                              <strong>You don't have any Event Orders</strong> 
+                            </ngb-alert>
+                        </p>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-order-history" *ngIf='event.length'>
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Order Number</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Total Price</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let s of event;let i = index">
+                                    <td>{{i+1}}</td>
+                                    <td><b>{{s.order_no}}</b></td>
+                                    <td>{{s.created_at | date}}</td>
+                                    <td><span *ngIf="s.amount == 0">Free</span><span *ngIf="s.amount != 0">Paid</span></td>
+                                    <td><span class="color"><span *ngIf="s.amount != 0">₹ {{s.amount}}</span><span *ngIf="s.amount == 0">Free</span> </span></td>
+                                    <td><a (click)="detail(s)" class="btn">View Details</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div *ngIf="loader"><app-loader  ></app-loader></div>
+            </div>
+        </div>
+    </div>
+    
+</div>

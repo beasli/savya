@@ -1,0 +1,46 @@
+<div class="page-content" style="margin-bottom: 65px;">
+    <div class="holder mt-0">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li><a routerLink="/home">Home</a></li>
+                <li><span>My Account</span></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="holder mt-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 aside aside--left">
+                    <div class="list-group"><a routerLink="/account-details" class="list-group-item ">Account Details</a> <a routerLink="/account-addresses" class="list-group-item active">My Addresses</a> <a routerLink="/account-wishlist" class="list-group-item">My Wishlist</a><a routerLink="/offers" class="list-group-item">My Offers</a><a routerLink="/account-history" class="list-group-item">My Order History</a><a routerLink="/event-history" class="list-group-item">My Event History</a><a routerLink="/kycpending" class="list-group-item">Upload KYC</a></div>
+                </div>
+                <div class="col-md-9 aside" *ngIf="page" >
+                    <div style="padding:10px;">
+                    <h2 *ngIf='addresses.length'>My Addresses</h2>
+                    </div>
+                    <div style="padding:10px;" *ngIf='!addresses.length'>
+                                    <p>
+                                      <ngb-alert [dismissible]="false">
+                                        <strong>You don't have any address Click the button below to add a new address</strong> 
+                                      </ngb-alert>
+                                    </p>
+                              </div>
+                    <div class="row" *ngIf='addresses.length'>
+                        <div class="col-sm-6" *ngFor='let s of addresses;let i = index'>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3>Address {{i+1}} <span *ngIf='!i'>(Default)</span></h3>
+                                    <p>{{s.first}} {{s.last}}<br>{{s.address}}<br>{{s.city}}  {{s.pincode}}<br>{{s.region}}<br>{{s.country}}<br>{{s.mobileno}}</p>
+                                    <div class="mt-2 clearfix"><a href="javascript:void(0)" class="link-icn js-show-form" (click)='edit(s.id)'><i class="icon-pencil"></i>Edit</a> <a href="javascript:void(0)" class="link-icn ml-1 float-right" (click)='delete(s.id)'><i class="icon-cross"></i>Delete</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div><button (click)='edit(-1)' type="button" class="btn ml-1">Add New Address</button></div>
+                </div>
+                <div *ngIf="loader"><app-loader  ></app-loader></div>
+            </div>
+        </div>
+    </div>
+    
+</div>

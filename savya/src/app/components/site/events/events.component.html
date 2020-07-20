@@ -1,0 +1,26 @@
+<div class="container events-listing">
+  <div class='text-center'><h2>Events</h2></div>
+<div class="card-columns  p-2">
+    <div *ngFor="let slide of events" (click)='detail(slide)' class="card border bordershadow2">
+        <div class="embed-responsive embed-responsive-16by9">
+
+            <img alt="Card image cap" onerror="this.src='../../../../assets/images/logo-bw.png'" class="card-img-top w-100 embed-responsive-item" src="{{ url + slide.image }}" />
+
+         </div>
+      <div class="card-body">
+        <h5 class="card-title">{{slide.title}}</h5>
+        <p class="card-text">{{slide.eventtime}}<br>{{slide.date}}<br>{{slide.address}}</p>
+      </div>
+    </div>
+    <div class="col-md-9 aside" *ngIf="!events.length">
+      <ngb-alert [dismissible]="false" >
+          <strong>No events for Now</strong> 
+      </ngb-alert>
+  </div>
+ 
+  
+</div>
+<div *ngIf='pages'  class="col-4 mx-auto" style="padding-top:2vh;">
+    <ngb-pagination [collectionSize]="pages*10" [(page)]="current_page" (pageChange)='pagechanged()' [maxSize]="5" [rotate]="true"></ngb-pagination>
+</div>
+</div>

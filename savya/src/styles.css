@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "Domine";
+    src: local("Domine"), local("Domine-Regular"), url("https://fonts.gstatic.com/s/domine/v7/L0x8DFMnlVwD4h3hu_qn.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 400;
+    unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "Domine";
+    src: local("Domine Bold"), local("Domine-Bold"), url("https://fonts.gstatic.com/s/domine/v7/L0x_DFMnlVwD4h3pAN-ySghJ.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 700;
+    unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "Muli";
+    src: url("https://fonts.gstatic.com/s/muli/v20/7Aulp_0qiz-aVz7u3PJLcUMYOFnOkEk30eg.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 400;
+    unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "Muli";
+    src: url("https://fonts.gstatic.com/s/muli/v20/7Aulp_0qiz-aVz7u3PJLcUMYOFnOkEk50eiNxw.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 400;
+    unicode-range: U+100-24F, U+259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  @font-face {
+    font-family: "Muli";
+    src: url("https://fonts.gstatic.com/s/muli/v20/7Aulp_0qiz-aVz7u3PJLcUMYOFkQl0k30eg.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 600;
+    unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @media(max-width:767px){
+    .picsum-img-wrapper[_ngcontent-pgw-c38] img[_ngcontent-pgw-c38] {
+      flex-shrink: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: 100%;
+  }
+  }
+
+  .myCustomModalClass .modal-dialog {
+    max-width: 850px;
+  }
+
+  .bordershadow{
+    margin: 15px 15px!important;
+    border-radius:8px;
+    -webkit-box-shadow: 0px 0px 26px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 26px -8px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 17px -8px rgba(0,0,0,0.75);
+  }
+
+  .bordershadow2{
+    /* margin: 15px 15px!important;
+    border-radius:8px; */
+    padding:2%;
+    width: 100%;
+    -webkit-box-shadow: 0px 0px 26px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 26px -8px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 17px -8px rgba(0,0,0,0.75);
+  }
+ 

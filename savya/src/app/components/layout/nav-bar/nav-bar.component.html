@@ -1,0 +1,50 @@
+<div class="hdr-content hide-mobile">
+    <div class="container">
+        <div class="row">
+            <div *ngIf='logochange != 1' class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
+            <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/SJB_Machinery-1.png" srcset="assets/images/SJB_Machinery-1.png" alt=""></a></div>
+            <!--navigation-->
+            <div class="prev-menu-scroll icon-angle-left prev-menu-js"></div>
+            <div class="nav-holder">
+                <div class="hdr-nav">
+                    <!--mmenu-->
+                    <ul  class="mmenu mmenu-js">
+                        
+                        <ul class="mmenu mmenu-js">
+                            <li class="mmenu-item--simple">
+                                <a href="javascript:void(0)" routerLink="/" title="">HOME</a>
+                            </li>
+                            <li *ngFor='let s of catwithsub' class="mmenu-item--simple">
+                                
+                                <ng-container *ngIf="s.category != 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase]" title="">{{s.category}}</a></ng-container>
+                                <ng-container *ngIf="s.category == 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase]" title="">{{s.category}}</a></ng-container>
+                                <div class="mmenu-submenu">
+                                    <ul class="submenu-list">
+                                     <ng-container *ngIf="s.category != 'MACHINERY'"><li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase,p.subcategory  | slugify]">{{p.subcategory}}</a>
+                                        </li></ng-container>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="mmenu-item--simple"><a href="javascript:void(0)" title="">More</a>
+                                <div class="mmenu-submenu">
+                                    <ul class="submenu-list">
+                                        <li *ngFor='let s of catwithoutsub'><a href="javascript:void(0)" title="">{{s.category}}</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </ul>
+                        
+                    <!--/mmenu-->
+                </div>
+            </div>
+            <div class="next-menu-scroll icon-angle-right next-menu-js"></div>
+            <!--//navigation-->
+            <div *ngIf='drop' class="col-auto">
+                <div class="minicart"><a href="javascript:void(0)" routerLink="/cart" class="minicart-link"><i class="icon icon-handbag"></i> <span class="minicart-qty">{{ProductsInCart()}}</span> <span class="minicart-title">Shopping Cart</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

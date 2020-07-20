@@ -16,22 +16,25 @@
                             </li>
                             <li *ngFor='let s of catwithsub' class="mmenu-item--simple">
                                 
-                                <ng-container *ngIf="s.category != 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/', s.category]" title="">{{s.category}}</a></ng-container>
-                                <ng-container *ngIf="s.category == 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/', s.category]" title="">{{s.category}}</a></ng-container>
+                                <ng-container *ngIf="s.category != 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase]" title="">{{s.category}}</a></ng-container>
+                                <ng-container *ngIf="s.category == 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase]" title="">{{s.category}}</a></ng-container>
                                 <div class="mmenu-submenu">
                                     <ul class="submenu-list">
-                                     <ng-container *ngIf="s.category != 'MACHINERY'"><li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" (click)='gofilter(p.subcategory_id)'>{{p.subcategory}}</a>
+                                     <ng-container *ngIf="s.category != 'MACHINERY'"><li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase,p.subcategory  | slugify]">{{p.subcategory}}</a>
                                         </li></ng-container>
                                     </ul>
                                 </div>
                             </li>
-
+                            <ng-container *ngIf='catwithoutsub && catwithoutsub.length'>
                             <li class="mmenu-item--simple"><a href="javascript:void(0)" title="">More</a>
                                 <div class="mmenu-submenu">
                                     <ul class="submenu-list">
                                         <li *ngFor='let s of catwithoutsub'><a href="javascript:void(0)" title="">{{s.category}}</a></li>
                                     </ul>
                                 </div>
+                            </li>
+                            </ng-container>
+                            <li class="mmenu-item--simple"><a href="javascript:void(0)" [routerLink]="['/blog']" title="">Blog</a>
                             </li>
                         </ul>
                     </ul>

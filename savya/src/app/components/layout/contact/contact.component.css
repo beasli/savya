@@ -1,0 +1,102 @@
+.contact-details-wrapper{
+    padding:80px 0px;
+}
+.call-us-icon{
+    margin-bottom:20px;
+}
+.call-us-icon p{
+    font-size: 20px;
+    margin-top:0px;
+    nargin-bottom:0px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 0px;
+    margin-left: 15px;
+}
+.call-us-icon span{
+    font-size: 30px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.contact-heading{
+    margin-bottom: 50px;
+}
+.contact-heading h2{
+    color:#c59f59;
+}
+.call-us-numbers p{
+    font-size: 15px;
+    line-height:30px;
+    margin-bottom: 0px;;
+}
+.call-us-numbers p a{
+    color:#424242;
+}
+.call-us-numbers ul{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    font-size: 0px;
+}
+.call-us-numbers ul li{
+    display: inline-block;
+    padding:0px 10px;
+    border-right:1px solid #424242;
+    line-height:10px;
+}
+.call-us-numbers ul li a{
+    font-size: 15px;
+    line-height: 30px;
+    text-decoration: none;
+    color:#424242;
+}
+.call-us-numbers ul li:last-child{
+    border-right:0px solid #424242;
+}
+.call-us-numbers ul li a:hover{
+    color: #c59f59;
+}
+
+.address:after{
+    display:none;
+}
+.call-us{
+    display:inline-block;
+    width: 33.33%;
+    vertical-align:middle;
+    border-right:1px solid;
+}
+.address{
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    position: relative;
+    border-right: 0px;;
+}
+@media only screen and (max-width:991px){
+    .call-us{
+        display: block;
+        width: 100%;
+        border-right: 0px solid;
+        margin-bottom: 30px;
+    }
+    .call-us-icon p{
+        font-size:15px;
+    }
+    .call-us-icon span{
+        font-size: 23px;
+    }
+    .call-us-numbers ul li a{
+        font-size: 13px;
+    }
+    .call-us-numbers p{
+        font-size: 13px;
+        line-height: 26px;
+        margin-bottom: 0px;
+    }
+    .contact-details-wrapper{
+        padding: 50px 0px;
+    }
+    .contact-heading {
+        margin-bottom: 32px;
+    }
+}

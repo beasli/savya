@@ -1,0 +1,11 @@
+.product-size-select{
+    width: 100%;
+    border: 1px solid #c59f59;
+    padding: 3px 15px;
+    font-size: 12px;
+    border-radius: 0px;
+    background-image: url('../../../../assets/images/dropdown2.png');
+    background-size: 10px;
+    background-repeat:no-repeat;
+    background-position:95% center;
+}

@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   logochange: any;
   newurl: string;
   activ = 0;
+  activesearch = 0;
   catall: any;
   constructor(private api:ApiService ,private router:Router,private route:ActivatedRoute) {
     this.drop=this.api.drop; 
@@ -32,6 +33,9 @@ export class HeaderComponent implements OnInit {
       this.newurl = this.api.machineurl;
     }
   });
+  }
+  replacespace(value){
+    value.replace(/ /g, "-")
   }
   change(value)
   {
@@ -86,6 +90,32 @@ export class HeaderComponent implements OnInit {
     this.activ = 0;
     
     document.getElementById('close').click();
+  }
+
+  searchbar() {
+
+    if (document.getElementById('searcher').classList.contains('is-hovered')) {
+      document.getElementById('searcher').classList.remove('is-hovered');
+    } else {
+      document.getElementById('searcher').classList.add('is-hovered');
+    }
+  }
+  account() {
+
+    if (document.getElementById('account').classList.contains('is-hovered')) {
+      document.getElementById('account').classList.remove('is-hovered');
+    } else {
+      document.getElementById('account').classList.add('is-hovered');
+    }
+  }
+
+  account2() {
+
+    if (document.getElementById('account2').classList.contains('is-hovered')) {
+      document.getElementById('account2').classList.remove('is-hovered');
+    } else {
+      document.getElementById('account2').classList.add('is-hovered');
+    }
   }
 
   ProductsInCart()

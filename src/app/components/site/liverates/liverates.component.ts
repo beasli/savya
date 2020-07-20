@@ -84,7 +84,6 @@ rates: any;
 
       this.rates = contents.rows;
       this.gold = this.rates.find(x => x.Symbol == 'GLD');
-      console.log(this.rates)
       this.silver = this.rates.find(x => x.Symbol == 'SLR');
       this.xagold  = this.rates.find(x => x.Symbol == 'XAGUSD');
       this.xasilver  = this.rates.find(x => x.Symbol == 'XAUUSD');

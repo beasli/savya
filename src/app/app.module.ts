@@ -1,4 +1,4 @@
-
+import { SlugPipe } from './components/site/slug.pipe';
 import { SiteModule } from './components/site/site/site.module';
 import { AuthGuardService } from './components/auth-guard/auth-guard.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,6 +23,9 @@ import { KycDoneService } from './components/auth-guard/kyc-done.service';
 import { ModalComponent } from './components/layout/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFilterComponent } from './components/layout/search-filter/search-filter.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +33,8 @@ import { SearchFilterComponent } from './components/layout/search-filter/search-
     FooterComponent,
     NavBarComponent,
     ModalComponent,
-    SearchFilterComponent
+    SearchFilterComponent,
+  //  SlugPipe
   ],
   imports: [
     BrowserModule,

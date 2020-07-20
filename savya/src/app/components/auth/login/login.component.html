@@ -1,0 +1,70 @@
+<div class="page-content" style="margin-bottom: 65px;">
+	
+    <div class="holder mt-0">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li><a routerLink="/" href="javascript:void(0)">Home</a></li>
+                <li><span>Login to your account</span></li>
+            </ul>
+        </div>
+    </div> 
+    <div class="holder mt-0">
+        <div class="container">
+            <div class="row justify-content-around">
+                <div class="col-sm-6 col-md-4">
+                    <div id="loginForm">
+                        <h2 class="text-left">SIGN IN</h2>
+                        <div *ngIf="alert">
+                            <p>
+                                <ngb-alert [dismissible]="false" type="danger" >
+                                  <strong>{{message}}</strong> .
+                                </ngb-alert>
+                              </p>
+                        </div>
+                        <div class="form-wrapper">
+                            <p>If you have an account with us, please log in.</p>
+                            <form  #f="ngForm" (ngSubmit)="otpGenerate(f.value)">
+                                <div class="form-group" *ngIf="mobile">
+                                    <input type="text" #mobile_no="ngModel"  name="mobile_no" ngModel class="form-control" placeholder="Your Mobile No." required>
+                                    <div class="alert alert-danger" *ngIf="mobile_no.touched && mobile_no.invalid">
+                                        Mobile number is required.
+                                    </div>
+                                </div>
+                                <div class="form-group" *ngIf="!mobile">
+                                    <input type="password"  #password="ngModel"  name="password" ngModel class="form-control" placeholder="Enter Otp" required>
+                                    <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+                                       otp is required.
+                                    </div>
+                                </div>
+                                <!-- <p class="text-uppercase"><a routerLink="/forget" class="js-toggle-forms">Forgot Your Password?</a></p> -->
+                                <!-- <div class="clearfix"><input id="checkbox1" name="checkbox1" type="checkbox" checked="checked"> <label for="checkbox1">Remember me</label></div> -->
+                                <button type="submit" *ngIf="sign" class="btn">Sign in</button>
+                                <button type="submit" *ngIf="loading"  class="btn">Loading...</button>
+                                <button type="submit" *ngIf="otpcheck" class="btn">Verify Otp</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="recoverPasswordForm" class="d-none">
+                        <h2 class="text-left">RESET YOUR PASSWORD</h2>
+                        <div class="form-wrapper">
+                            <p>We will send you an email to reset your password.</p>
+                            <form action="#">
+                                <div class="form-group"><input type="text"  class="form-control" placeholder="Your Name" ></div>
+                                <div class="form-group"><input type="password" class="form-control" placeholder="Password" ></div>
+                                <div class="btn-toolbar"><a href="#" class="btn btn--alt js-toggle-forms">Cancel</a> <button class="btn ml-1" type="submit">Submit</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-divider"></div>
+                <div class="col-sm-6 col-md-4 mt-3 mt-sm-0">
+                    <h2 class="text-left">REGISTER</h2>
+                    <div class="form-wrapper">
+                        <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p><a routerLink="/register" class="btn">create an account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

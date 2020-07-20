@@ -1,3 +1,4 @@
+import { SlugPipe } from './../slug.pipe';
 import { SubsubComponent } from './../subsub/subsub.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventsComponent } from './../events/events.component';
@@ -35,6 +36,40 @@ import { BullianMerchantComponent } from '../bullian-merchant/bullian-merchant.c
 import { KycguardService } from '../../auth-guard/kycguard.service';
 import { MachineryProductComponent } from '../../layout/machinery-product/machinery-product.component';
 import { MachineryHolderComponent } from '../../layout/machinery-holder/machinery-holder.component';
+import { LoginComponent } from '../../auth/login/login.component';
+import { RegisterComponent } from '../../auth/register/register.component';
+import { OtpComponent } from '../../auth/otp/otp.component';
+import { KycPendingComponent } from '../../auth/kyc-pending/kyc-pending.component';
+import { ForgetPasswordComponent } from '../../auth/forget-password/forget-password.component';
+import { ForgetOtpComponent } from '../../auth/forget-otp/forget-otp.component';
+import { ChangePasswordComponent } from '../../auth/change-password/change-password.component';
+import { KycComponent } from '../../auth/kyc/kyc.component';
+import { ChangeProfileComponent } from '../../auth/change-profile/change-profile.component';
+import { ContactComponent } from '../../layout/contact/contact.component';
+import { AboutComponent } from '../../layout/about/about.component';
+import { TermsAndConditionComponent } from '../../layout/terms-and-condition/terms-and-condition.component';
+import { PaymentComponent } from '../../layout/payment/payment.component';
+import { SearchComponent } from '../../layout/search/search.component';
+import { ManufactureComponent } from '../../layout/manufacture/manufacture.component';
+import { PrivacyComponent } from '../../layout/privacy/privacy.component';
+import { MachinerySearchComponent } from '../../layout/machinery-search/machinery-search.component';
+import { MachineryProductsComponent } from '../../layout/machinery-products/machinery-products.component';
+import { CheckoutComponent } from '../../shopping/checkout/checkout.component';
+import { CartComponent } from '../../shopping/cart/cart.component';
+import { ProductComponent } from '../../shopping/product/product.component';
+import { AccountDetailsComponent } from '../../my-account/account-details/account-details.component';
+import { AccountAddressesComponent } from '../../my-account/account-addresses/account-addresses.component';
+import { AccountWishlistComponent } from '../../my-account/account-wishlist/account-wishlist.component';
+import { AccountHistoryComponent } from '../../my-account/account-history/account-history.component';
+import { EditAddressComponent } from '../../my-account/edit-address/edit-address.component';
+import { EventHistoryComponent } from '../../my-account/event-history/event-history.component';
+import { OrderDetailComponent } from '../../my-account/order-detail/order-detail.component';
+import { OffersComponent } from '../../my-account/offers/offers.component';
+import { LoginGuardService } from '../../auth-guard/login-guard.service';
+import { AuthGuardService } from '../../auth-guard/auth-guard.service';
+import { CheckoutService } from '../../auth-guard/checkout.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 const customConfig: ShareButtonsConfig = {
@@ -68,11 +103,43 @@ const customConfig: ShareButtonsConfig = {
     BullianMerchantComponent,
     MachineryProductComponent,
     MachineryHolderComponent,
+    LoginComponent,
+    RegisterComponent,
+    OtpComponent,
+    KycPendingComponent,
+    ForgetPasswordComponent,
+    ForgetOtpComponent,
+    ChangePasswordComponent,
+    KycComponent,
+    ChangeProfileComponent,
+    ContactComponent,
+    AboutComponent,
+    TermsAndConditionComponent,
+    PaymentComponent,
+    SearchComponent,
+    ManufactureComponent,
+    PrivacyComponent,
+    MachinerySearchComponent,
+    MachineryProductsComponent,
+    CheckoutComponent,
+    CartComponent,
+    ProductComponent,
+    AccountDetailsComponent,
+    AccountAddressesComponent,
+    AccountWishlistComponent,
+    AccountHistoryComponent,
+    EditAddressComponent,
+    EventHistoryComponent,
+    OrderDetailComponent,
+    OffersComponent,
+    SlugPipe
   ],
   imports: [
     FontAwesomeModule,
     CommonModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgbModule,
     SlickCarouselModule,
     BrowserAnimationsModule,
@@ -86,22 +153,43 @@ const customConfig: ShareButtonsConfig = {
      }),
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
+      { path: 'login', component: LoginComponent,canActivate: [LoginGuardService]},
+      { path: 'register', component: RegisterComponent,canActivate: [LoginGuardService]},
+      { path: 'kyc' , component: KycComponent, canActivate: [AuthGuardService]},
+      { path: 'changeProfile' , component: ChangeProfileComponent,  canActivate: [AuthGuardService]},
+      { path: 'kycpending' , component: KycPendingComponent, canActivate: [AuthGuardService]},
+      { path: 'account-details', component: AccountDetailsComponent,  canActivate: [AuthGuardService]},
+      { path: 'account-addresses', component: AccountAddressesComponent,  canActivate: [AuthGuardService]},
+      { path: 'account-wishlist', component: AccountWishlistComponent,  canActivate: [AuthGuardService]},
+      { path: 'account-history', component: AccountHistoryComponent,  canActivate: [AuthGuardService]},
+      { path: 'edit-address/:id', component: EditAddressComponent,  canActivate: [AuthGuardService]},
+      { path: 'add-address', component: EditAddressComponent,  canActivate: [AuthGuardService]},
+      { path: 'event-history', component: EventHistoryComponent,  canActivate: [AuthGuardService]},
+      { path: 'order-detail/:id', component: OrderDetailComponent,  canActivate: [AuthGuardService]},
+      { path: 'offers', component: OffersComponent,  canActivate: [AuthGuardService]},
+      { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService,CheckoutService]},
+      { path: 'cart', component: CartComponent, canActivate: [AuthGuardService]},
+      { path: 'product', component: ProductComponent},
+      { path: 'machinery/:id', component: MachineryProductsComponent},
+      { path: 'contact', component: ContactComponent},
+      { path: 'about', component: AboutComponent},
+      { path: 'terms', component: TermsAndConditionComponent},
+      { path: 'payment', component: PaymentComponent},
+      { path: 'machinery/search/:value', component: MachinerySearchComponent},
+      { path: 'search/:value', component: SearchComponent},
+      { path: 'privacy', component: PrivacyComponent},
       { path: 'home', component: HomeComponent},
       { path: 'manufacture/:id', component: CategoryComponent},
       { path: 'events' , component: EventsComponent},
-      { path: 'MACHINERY' , component: MachineryComponent},
-     
-      
+      { path: 'machinery' , component: MachineryComponent},
       { path: 'event/:id' , component: EventComponent, canActivate: [KycguardService]},
       { path: 'products/machinery/:id', component: MachineryProductComponent, canActivate: [KycguardService]},
       { path: 'product-details/:id' , component: ProductDetailsComponent, canActivate: [KycguardService]},
-      
-      { path: 'manufacture/:idm/subsub/:id' , component: SubsubComponent},
+      { path: 'manufacture/:idm/:subcategory/:subsubcategory' , component: SubsubComponent},
+      { path: 'manufacture/:idm/:cat/:sub/:subsub' , component: FilterProductComponent},
       { path: 'filternav' , component: FilterNavBarComponent},
-      
       { path: 'category', component: CategoryComponent},
-      
-      { path: 'manufacture/:idm/subcategory/:id', component: SubcategoryComponent},
+      { path: 'manufacture/:idm/:subcategory', component: SubcategoryComponent},
       { path: 'bullion', component: BullianComponent},
       { path: 'bullion/:id', component: BullianMerchantComponent},
       { path: ':subcategory', component: SubcategoryComponent},
@@ -112,6 +200,6 @@ const customConfig: ShareButtonsConfig = {
   exports: [LoaderComponent,NgbModule,
     SlickCarouselModule,
     BrowserAnimationsModule,
-    NgxImageZoomModule,]  ,
+    NgxImageZoomModule,SlugPipe]  ,
 })
 export class SiteModule { }

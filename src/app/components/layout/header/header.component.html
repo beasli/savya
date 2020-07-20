@@ -24,7 +24,7 @@
                                     <div class="cart-table-prd-image"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl+'category/' + s.image}}"  alt=""></div>
                                     {{s.category}}</a></ng-container>
                         <ng-container *ngIf="s.category == 'MACHINERY'">
-                            <a [routerLink]="['/machinery/', s.category_id]">
+                            <a [routerLink]="['/', s.category  | lowercase]">
                                 <div class="cart-table-prd-image"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl+'category/' + s.image}}"  alt=""></div>
                                 {{s.category}}</a>
                         </ng-container>
@@ -33,7 +33,7 @@
                             <ul class="nav-level-2">
                                 <ng-container *ngIf="s.category != 'MACHINERY'">
                                     <li *ngFor='let p of s.subcategory'>
-                                        <a href="javascript:void(0)" [routerLink]="['/subsub/', p.subcategory_id]">
+                                        <a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase,p.subcategory | slugify]">
                                         <!-- <div class="cart-table-prd-image"><img  src="{{baseurl+'subcategory/' + s.image}}"  alt=""></div> -->
                                         {{p.subcategory}}</a>
                                     </li>
@@ -77,11 +77,11 @@
                 <div class="hdr-mobile-right">
                     <div class="hdr-topline-right links-holder">
 
-                        <div class="dropdn dropdn_wishlist @@classes"><a routerLink="/account-wishlist" class="dropdn-link"><i class="icon icon-clock"></i><span>Recently viewed</span></a></div>
+                        <div class="dropdn dropdn_wishlist @@classes"><a routerLink="/account-wishlist" class="dropdn-link"><i class="icon icon-heart-fill"></i><span>Wishlist</span></a></div>
                         <!-- /Header Wishlist -->
                         
                         <!-- Header Account -->
-                        <div class="dropdn dropdn_account @@classes"><a  class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
+                        <div id="account2" class="dropdn dropdn_account @@classes"><a  (click)='account2()' class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
 
                             
                       
@@ -114,17 +114,18 @@
             <div class="container">
                 <div class="row">
                     <div class="col hdr-topline-center">
-                        <div class="custom-text"><i class="icon icon-phone"></i><b>+91-80 3966 4955</b></div>
+                        <div class="custom-text"><i class="icon icon-phone"></i><b>Toll free Number 
+                           <a href="tel:18004199612"> 18004199612</a></b></div>
                     </div>
                     <div class="col-auto hdr-topline-right links-holder">
                         <!-- Header Search -->
                  
-                        <div class="dropdn dropdn_search hide-mobile @@classes"><a href="javascript:void(0)" class="dropdn-link"><i class="icon icon-search2"></i><span>Search</span></a>
+                        <div id='searcher' class="dropdn dropdn_search hide-mobile @@classes" ><a href="javascript:void(0)" (click)='searchbar()' class="dropdn-link"><i class="icon icon-search2"></i><span>Search</span></a>
                             <div class="dropdn-content">
                                 <div class="container">
                                         <button class="search-button"><i class="icon-search2"></i></button>
                                     <div class="form-group"><input type="text" (keyup.enter)="search()" (keyup)="change($event)" class="form-control" class="search-input" placeholder="search keyword"></div> 
-                                    <div class="form-group"><button class="btn" (click)="search()">search</button></div>
+                                    <div class="form-group"><button class="btn" (click)="search()">Search</button></div>
                                     <div class="col-lg-12" >
                                         <div class="col-lg-4"></div>
                                         <div class="col-lg-6" >
@@ -133,7 +134,7 @@
                                         </ngb-alert>
                                         </div>
                                     </div>
-                                    <div class="search-popular js-search-autofill"><span class="search-popular-label">popular searches:</span><a href="javascript:void(0)" (click)="popularSearch('RINGS')">RINGS</a><a href="javascript:void(0)" (click)="popularSearch('DIAMOND')">Diamond</a><a href="javascript:void(0)" (click)="popularSearch('GOLD')">GOLD</a></div>
+                                    <div class="search-popular js-search-autofill"><span class="search-popular-label">Popular searches:</span><a href="javascript:void(0)" (click)="popularSearch('RINGS')">RINGS</a><a href="javascript:void(0)" (click)="popularSearch('DIAMOND')">Diamond</a><a href="javascript:void(0)" (click)="popularSearch('GOLD')">GOLD</a></div>
                                     
                                 </div>
                             </div>
@@ -141,11 +142,11 @@
                         <!-- /Header Search -->
                         
                         <!-- Header Wishlist -->
-                        <div class="dropdn dropdn_wishlist @@classes"><a routerLink="/account-wishlist" class="dropdn-link"><i class="icon icon-clock"></i><span>Recently viewed</span></a></div>
+                        <div  class="dropdn dropdn_wishlist @@classes"><a routerLink="/account-wishlist" class="dropdn-link"><i class="icon icon-heart-fill"></i><span>Wishlist</span></a></div>
                         <!-- /Header Wishlist -->
                         
                         <!-- Header Account -->
-                        <div class="dropdn dropdn_account @@classes"><a  class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
+                        <div id='account' class="dropdn dropdn_account @@classes"><a  (click)='account()'  class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
 
                             
                       
