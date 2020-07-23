@@ -270,8 +270,11 @@ export class ProductDetailsComponent implements OnInit {
         if (this.data.size_type && this.data.size_type != 'None' ) {
           this.defaultsize = this.data.default_size;
           this.sizes = this.data.size_type.split(',');
-          this.sizes = this.sizes.filter((v, i, a) => a.indexOf(v) === i); 
-          this.sizes = this.sizes.sort();
+          console.log(this.sizes);
+          this.sizes = this.sizes.filter((v, i, a) => a.indexOf(v) === i);
+          console.log(this.sizes);
+          this.sizes = this.bubbleSort(this.sizes);
+          console.log(this.sizes);
           this.selectedsize = this.defaultsize;
           let temp = [];
           if(this.sizelist){
@@ -337,6 +340,27 @@ export class ProductDetailsComponent implements OnInit {
   }).catch(d=>{console.log(d);});
 }
 
+bubbleSort(array) {
+  var done = false;
+  while (!done) {
+    done = true;
+    for (var i = 1; i < array.length; i += 1) {
+      if (array[i - 1] > array[i]) {
+        done = false;
+        var tmp = array[i - 1];
+        array[i - 1] = array[i];
+        array[i] = tmp;
+      }
+    }
+  }
+
+  return array;
+}
+
+
+
+
+
 diamondchange(diamond){
   console.log(diamond);
   this.diamond = this.diamondlist.find(x => x.jwellery_size == diamond);
@@ -344,6 +368,15 @@ diamondchange(diamond){
   this.diamondclarity = this.diamond.clarity.split(',');
   this.defaultdiamond = this.diamond.default_color_clarity.split('/');
   this.diamondprice();
+}
+ compare(a, b) {
+  if (a < b) {
+      return -1;
+  } else if (a > b) {
+      return 1;
+  } else {
+      return 0;
+  }
 }
 
    createjson() {

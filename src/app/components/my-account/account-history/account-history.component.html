@@ -44,9 +44,15 @@
                         </table>
                     </div>
                     <div *ngIf="loader"><app-loader  ></app-loader></div>
-                    <ngb-alert [dismissible]="false" *ngIf="alert">
-                        <strong>you don't have any order history.</strong> 
-                    </ngb-alert>
+                    <div *ngIf="alert">
+                        
+      
+                            <div class="row" style="margin:auto;">
+                            <img src="../../../../assets/images/savya-jewels/nothing-in-history.png"  class="embed-responsive" alt="">
+                            </div>
+                          
+                     
+                        </div>
                     <!-- <div class="text-right mt-2"><a href="javascript:void(0)" class="btn btn--alt">Clear History</a></div> -->
                 </div>
             </div>

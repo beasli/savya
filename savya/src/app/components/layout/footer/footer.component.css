@@ -1,5 +1,0 @@
-.page-footer ul:not([class]) li, .page-footer ul:not([class]) li a, .footer-block ul.contact-list li, .footer-block ul.contact-list li a {
-    font-size: 12px;
-    line-height: 18px;
-    text-transform: initial;
-}

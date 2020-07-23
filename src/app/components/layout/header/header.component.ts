@@ -46,6 +46,7 @@ export class HeaderComponent implements OnInit {
   search()
   {
     console.log(this.searchValue);
+    console.log(this.logochange);
     if(this.searchValue.length>3 && this.logochange != 1)
     {
         this.router.navigate(['/search',this.searchValue]);

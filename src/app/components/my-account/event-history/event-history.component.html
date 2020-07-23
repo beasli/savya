@@ -16,13 +16,7 @@
                 </div>
                 <div class="col-md-9 aside" *ngIf="page">
                     <h2>My Event History</h2>
-                    <div *ngIf='!event.length'>
-                        <p>
-                            <ngb-alert [dismissible]="false">
-                              <strong>You don't have any Event Orders</strong> 
-                            </ngb-alert>
-                        </p>
-                    </div>
+                    
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-order-history" *ngIf='event.length'>
                             <thead>
@@ -46,6 +40,13 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div *ngIf="!event.length">
+      
+                            <div class="row" style="margin:auto;">
+                            <img src="../../../../assets/images/savya-jewels/nothing-in-history.png"  class="embed-responsive" alt="">
+                            </div>
+                          
+                        </div>
                     </div>
                 </div>
                 <div *ngIf="loader"><app-loader  ></app-loader></div>

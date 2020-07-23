@@ -18,13 +18,13 @@
                     <div style="padding:10px;">
                     <h2 *ngIf='addresses.length'>My Addresses</h2>
                     </div>
-                    <div style="padding:10px;" *ngIf='!addresses.length'>
-                                    <p>
-                                      <ngb-alert [dismissible]="false">
-                                        <strong>You don't have any address Click the button below to add a new address</strong> 
-                                      </ngb-alert>
-                                    </p>
-                              </div>
+                    <div *ngIf="!addresses.length">
+      
+                        <div class="row" style="margin:auto;">
+                        <img src="../../../../assets/images/savya-jewels/no-address.png"  class="embed-responsive" alt="">
+                        </div>
+                      
+                    </div>
                     <div class="row" *ngIf='addresses.length'>
                         <div class="col-sm-6" *ngFor='let s of addresses;let i = index'>
                             <div class="card">

@@ -12,12 +12,14 @@
         <p class="card-text">{{slide.eventtime}}<br>{{slide.date}}<br>{{slide.address}}</p>
       </div>
     </div>
-    <div class="col-md-9 aside" *ngIf="!events.length">
-      <ngb-alert [dismissible]="false" >
-          <strong>No events for Now</strong> 
-      </ngb-alert>
+    
+    
   </div>
- 
+  <div *ngIf="!events.length">
+      
+    <div class="row" style="margin:auto;">
+    <img src="../../../../assets/images/savya-jewels/no-event.png"  class="embed-responsive" alt="">
+    </div>
   
 </div>
 <div *ngIf='pages'  class="col-4 mx-auto" style="padding-top:2vh;">

@@ -1,3 +1,4 @@
+import { SeoService } from './components/SEO/seo.service';
 import { SlugPipe } from './components/site/slug.pipe';
 import { SiteModule } from './components/site/site/site.module';
 import { AuthGuardService } from './components/auth-guard/auth-guard.service';
@@ -58,7 +59,7 @@ import { SearchFilterComponent } from './components/layout/search-filter/search-
     BrowserAnimationsModule,
   ],
   providers: [AuthGuardService,CheckoutService,OtpGuardService,KycguardService
-    ,LoginGuardService,KycDoneService],
+    ,LoginGuardService,KycDoneService,SeoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

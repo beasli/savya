@@ -1,1 +1,92 @@
-<p>blog-details works!</p>
+<section class="banner-area common-banner" style="background-image:url('assets/images/LEAP YEAR-01-01-01.jpg')">
+</section>
+<section class="blog-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="blog-details">
+                    <h1>{{current.title}}</h1>
+                    <div class="cf listing-meta meta below"> 
+                        <!-- <span class="meta-item author">By <a href="" title="Posts by Kate Hanson" rel="author">Kate Hanson</a></span> -->
+                        <time datetime="current.updated_at" class="meta-item">{{current.updated_at | date}}</time>
+                        <!-- <span class="meta-item comments"><a href=""><i class="fa fa-comments-o"></i> 3</a></span> -->
+                    </div>
+                    <div class="image-blog">
+                        <img [src]="image +'/' + current.blog_image" border="0" alt="" class="w-100">
+                    </div>
+                    <div [innerHTML]='current.description' class="blog-details-content">
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog-listing-left-part">
+                    <div class="thumb-blog">
+                        <div class="thumb-blog-heading">
+                            <h2>OUR PICKS</h2>
+                        </div>
+                        <div class="thumbs-gallery">
+                            <ul>
+                                <li *ngFor='let s of other'>
+                                    <a href="javascript:void(0)" (click)='gotoblog(s)'><img [src]="image +'/' + s.blog_image" border="0" alt=""></a>
+                                    <div class="thumb-content">
+                                        <a href="javascript:void(0)" (click)='gotoblog(s)'>{{s.title}}</a>
+                                        <div class="cf listing-meta meta below"> <time class="meta-item">{{s.updated_at | date}}</time></div>
+                                    </div>
+                                </li>
+                                <!-- <li>
+                                    <a href=""><img src="assets/images/thumb-image.jpg" border="0" alt=""></a>
+                                    <div class="thumb-content">
+                                        <a href=""> Hairstyle Tips &amp; Tricks from Designer Edition</a>
+                                        <div class="cf listing-meta meta below"> <time class="meta-item">Jan 6, 2017</time></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href=""><img src="assets/images/thumb-image.jpg" border="0" alt=""></a>
+                                    <div class="thumb-content">
+                                        <a href=""> Hairstyle Tips &amp; Tricks from Designer Edition</a>
+                                        <div class="cf listing-meta meta below"> <time class="meta-item">Jan 6, 2017</time></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href=""><img src="assets/images/thumb-image.jpg" border="0" alt=""></a>
+                                    <div class="thumb-content">
+                                        <a href=""> Hairstyle Tips &amp; Tricks from Designer Edition</a>
+                                        <div class="cf listing-meta meta below"> <time class="meta-item">Jan 6, 2017</time></div>
+                                    </div>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="blog-social">
+                        <div class="thumb-blog-heading">
+                            <h2>OUR Social</h2>
+                        </div>
+                        <ul>
+                            <li><a href="https://www.facebook.com/savyajewelsmeerut/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="http://localhost:4400/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="blog-left-blog-list">
+                        <div class="thumb-blog-heading">
+                            <h2>OUR Social</h2>
+                        </div>
+                        <!-- <div class="each-blog">
+                            <div class="each-blog-image">
+                                <a href=""><img src="assets/images/product-post-img-1.jpg" border="0" alt="" class="w-100"></a>
+                            </div>
+                            <div class="each-blog-details">
+                                <h3><a href="">World Renown Speaker Zackery Has  Politicians Stumped</a></h3>
+                                <div class="cf listing-meta meta below"> 
+                                <span class="meta-item author">By <a href="" title="Posts by Kate Hanson" rel="author">Kate Hanson</a></span><time datetime="2017-01-10T03:36:37+00:00" class="meta-item">Jan 10, 2017</time><span class="meta-item comments"><a href=""><i class="fa fa-comments-o"></i> 3</a></span></div>
+                                <p>It is important to be chic. I love the 2000s because everyone started to love…</p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

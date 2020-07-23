@@ -34,11 +34,11 @@
                                                  </div>
                                          </div>
                             </div>
-                             <div *ngIf="alert"   style="padding:200px">
-                                     <ngb-alert [dismissible]="false" >
-                                         <strong>No products to show</strong> 
-                                     </ngb-alert>
-                             </div>
+                            <div *ngIf="!products.length">
+                                <div class="row" style="margin:auto;">
+                                <img src="../../../../assets/images/savya-jewels/no-product-show.png"  class="embed-responsive" alt="">
+                                </div>
+                            </div>
                              
                            
                               </div>

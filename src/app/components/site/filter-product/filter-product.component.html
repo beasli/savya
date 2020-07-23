@@ -117,11 +117,13 @@
                                                 </div>
                                         </div>
                            </div>
-                            <div *ngIf="alert"   style="padding:200px">
-                                    <ngb-alert [dismissible]="false" >
-                                        <strong>{{message}}</strong> 
-                                    </ngb-alert>
-                            </div>
+                          
+                                <div *ngIf="!products.length">
+                                    <div class="row" style="margin:auto;">
+                                    <img src="../../../../assets/images/savya-jewels/no-product-show-category.png"  class="embed-responsive" alt="">
+                                    </div>
+                                </div>
+                            
                             <div *ngIf='pages'  class="col-4 mx-auto" style="padding-top:2vh;">
                             <ng-container *ngIf='!manufacture'>
                                 <ngb-pagination [collectionSize]="pages*10" [(page)]="current_page" (pageChange)='pagechanged()' [maxSize]="5" [rotate]="true"></ngb-pagination>

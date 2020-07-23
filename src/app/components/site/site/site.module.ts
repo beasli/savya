@@ -1,3 +1,5 @@
+import { BlogDetailsComponent } from './../blog-details/blog-details.component';
+import { BlogComponent } from './../blog/blog.component';
 import { SlugPipe } from './../slug.pipe';
 import { SubsubComponent } from './../subsub/subsub.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -69,6 +71,7 @@ import { LoginGuardService } from '../../auth-guard/login-guard.service';
 import { AuthGuardService } from '../../auth-guard/auth-guard.service';
 import { CheckoutService } from '../../auth-guard/checkout.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SeoService } from '../../SEO/seo.service';
 
 
 
@@ -132,7 +135,9 @@ const customConfig: ShareButtonsConfig = {
     EventHistoryComponent,
     OrderDetailComponent,
     OffersComponent,
-    SlugPipe
+    SlugPipe,
+    BlogComponent,
+    BlogDetailsComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -153,6 +158,8 @@ const customConfig: ShareButtonsConfig = {
      }),
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
+      { path: 'blog', component: BlogComponent},
+      { path: 'blog/:id', component: BlogDetailsComponent},
       { path: 'login', component: LoginComponent,canActivate: [LoginGuardService]},
       { path: 'register', component: RegisterComponent,canActivate: [LoginGuardService]},
       { path: 'kyc' , component: KycComponent, canActivate: [AuthGuardService]},
@@ -201,5 +208,6 @@ const customConfig: ShareButtonsConfig = {
     SlickCarouselModule,
     BrowserAnimationsModule,
     NgxImageZoomModule,SlugPipe]  ,
+    providers: [SeoService],
 })
 export class SiteModule { }

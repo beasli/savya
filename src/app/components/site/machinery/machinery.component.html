@@ -14,7 +14,7 @@
         <div class="row">
             <div *ngFor="let slide of categories" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                 <div (click)='go(slide,1)' class="card border bordershadow" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
-                    <img class="card-img-top" style="min-width: 100%;max-height:25vh;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
+                    <img style="min-width:100%;max-height:25vh;" class="card-img-top" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
                     <div class="card-body text-center">
                     <h4 class="card-title" style="margin-bottom: 0px;">{{slide.subcategory}}</h4>
                     </div>
@@ -36,6 +36,7 @@
                 </div>
             </div>
         </ngx-slick-carousel> -->
+
 
 
          <div class="testimonials seller bordershadow2" style="background-color:#f9f9fa;">

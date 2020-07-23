@@ -10,16 +10,15 @@
              <!-- Center column -->
              <div class="col-lg aside">
                  <div class="prd-grid-wrap">
-                    
-                     
-                     <!-- Products Grid -->
+                   
                      <app-loader  *ngIf="loader"></app-loader>
                      <div *ngIf="page">
                              <div  class="prd-grid product-listing data-to-show-4 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div" >
                                  
                                          <div class="prd" *ngFor="let s of products"  >
                                                  <div class="prd-inside product-border" >
-                                                     <div class="prd-img-area"><a (click)='go(s.machinery_id)' class="prd-img"><img onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="s.image" alt="Tyssot 1853"></a>
+                                                     <div class="prd-img-area"><a (click)='go(s.machinery_id)' class="prd-img">
+                                                         <img onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="s.image" alt="Tyssot 1853"></a>
                                                          
                                                          <div class="gdw-loader"></div>
                                                      </div>
@@ -36,11 +35,11 @@
                                                  </div>
                                          </div>
                             </div>
-                             <div *ngIf="alert"   style="padding:200px">
-                                     <ngb-alert [dismissible]="false" >
-                                         <strong>No products to show</strong> 
-                                     </ngb-alert>
-                             </div>
+                            <div *ngIf="!products.length">
+                                <div class="row" style="margin:auto;">
+                                <img src="../../../../assets/images/savya-jewels/no-product-show-category.png"  class="embed-responsive" alt="">
+                                </div>
+                            </div>
                              <div *ngIf='pages'  class="col-4 mx-auto" style="padding-top:2vh;">
                              <ng-container>
                                  <ngb-pagination [collectionSize]="pages*10" [(page)]="current_page" (pageChange)='pagechanged()' [maxSize]="5" [rotate]="true"></ngb-pagination>

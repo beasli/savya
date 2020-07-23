@@ -10,10 +10,11 @@
             <div class="col-lg-2 col-6 col-md-3" *ngFor="let slide of data">
                 <div class="each-listing-product" (click)="go(slide.subcategory) " [style.background-image]="getlink(slide.image)">
                 <div class="contant-box">
-                    <div class="product-content">
-                        <p >{{slide.subcategory}}</p>
-                    </div>
+                    
                 </div>
+            </div>
+            <div class="text-center">
+                <p >{{slide.subcategory}}</p>
             </div>
         </div>
 
@@ -30,9 +31,11 @@
         
          </div>
     
-    <div *ngIf="!data.length">
-        <ngb-alert [dismissible]="false" >
-            <strong>No subcategory found</strong> 
-        </ngb-alert>
-    </div>
+    
+        <div *ngIf="!data.length">
+            <div class="row" style="margin:auto;">
+            <img src="../../../../assets/images/savya-jewels/no-product-show-category.png"  class="embed-responsive" alt="">
+            </div>
+        </div>
+    
  </div>   

@@ -24,7 +24,7 @@
 <!-- modal end -->
 <div class="container search-page-listing">
   <div  *ngIf="page">
-    <div class="prd-grid product-listing data-to-show-4 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div" >
+    <div class="prd-grid product-listing data-to-show-4 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div && products" >
       <div class="prd" *ngFor="let s of products"  >
         <div class="prd-inside" >
           <div class="prd-img-area">
@@ -50,10 +50,10 @@
     <simple-notifications [options]="{position: ['top', 'right']}"></simple-notifications>
   </div>
 </div>
-<div class="col-sm-8" *ngIf="alert" style="padding: 200px;">
-	<ngb-alert [dismissible]="false" >
-		<strong>{{message}}</strong> 
-	</ngb-alert>
+<div *ngIf="!products || !products.length">
+  <div class="row" style="margin:auto;">
+  <img src="../../../../assets/images/savya-jewels/no-product-show.png"  class="embed-responsive" alt="">
+  </div>
 </div>
 <div *ngIf="loader">
 	<app-loader  ></app-loader>

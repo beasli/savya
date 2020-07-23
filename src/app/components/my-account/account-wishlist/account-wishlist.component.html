@@ -49,10 +49,10 @@
                             </div>
                         </div>
                         <simple-notifications [options]="{position: ['top', 'right']}"></simple-notifications>
-                        <div *ngIf="alert">
-                            <ngb-alert [dismissible]="false" >
-                                <strong>{{message}}</strong> 
-                            </ngb-alert>
+                        <div *ngIf="!results.length">
+                            <div class="row" style="margin:auto;">
+                            <img src="../../../../assets/images/savya-jewels/wishlist.png"  class="embed-responsive" alt="">
+                            </div>
                         </div>
                 </div>
                 <div  style="padding: 200px;" *ngIf="loader"><app-loader  ></app-loader></div>

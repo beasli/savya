@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { PRODUCTFILTERMENU } from 'src/config';
 
@@ -21,10 +21,28 @@ export class FilterNavBarComponent implements OnInit {
   prif = 0;
   purf = 0;
   jewt = 0;
-  constructor(private api:ApiService) { 
+  constructor(private api:ApiService,private eRef: ElementRef) { 
     this.filter=this.api.getfilter();
     }
+    @ViewChild('pricea', { static: true }) a: ElementRef;
+    @ViewChild('type', { static: true }) b: ElementRef;
+    @ViewChild('purityz', { static: true }) c: ElementRef;
+    @ViewChild('for', { static: true }) d: ElementRef;
+    @ViewChild('metal', { static: true }) e: ElementRef;
     
+
+    @HostListener('document:click', ['$event'])
+    clickout(event) {
+      if(this.eRef.nativeElement.contains(event.target)) {
+        
+      } else {
+        this.a.nativeElement.classList.remove('active');
+        this.b.nativeElement.classList.remove('active');
+        this.c.nativeElement.classList.remove('active');
+        this.d.nativeElement.classList.remove('active');
+        this.e.nativeElement.classList.remove('active');
+      }
+    }
 
     openclose(value) {
       if(value == 1) {
@@ -160,8 +178,10 @@ export class FilterNavBarComponent implements OnInit {
 
     checkClear()
     {
+      
       let f= this.api.getfilter();
-      if(f.menu.jewelery_type.length>0||f.menu.jewelery_for>0||f.menu.material.length>0||f.menu.purity.length>0||Object.keys(f.menu.price).length>0)
+      console.log(f.menu.jewelery_for);
+      if(f.menu.jewelery_type.length>0||f.menu.jewelery_for.length>0||f.menu.material.length>0||f.menu.purity.length>0||Object.keys(f.menu.price).length>0)
       {
         return true;
       }
@@ -187,6 +207,7 @@ changefilter(event,value)
   let f= this.api.getfilter();
   console.log(event);
   console.log(value);
+  console.log(name);
   if(name=="jewelery_for")
   {
             console.log("if condition");
@@ -214,7 +235,7 @@ changefilter(event,value)
             this.api.setfilter(f);
           }
   }
-  else if(name=="jewelery_typed" || name=="jewelery_typed")
+  else if(name=="jewelery_type")
   { 
     f.menu.jewelery_type=[]
     f.menu.jewelery_type.push(value);
@@ -275,7 +296,25 @@ changefilter(event,value)
             this.api.setfilter(f);
           }
   }
+  this.a.nativeElement.classList.remove('active');
+  this.b.nativeElement.classList.remove('active');
+  this.c.nativeElement.classList.remove('active');
+  this.d.nativeElement.classList.remove('active');
+  this.e.nativeElement.classList.remove('active');
 
+}
+
+abc(a) {
+  console.log(a);
+  
+
+  a.classList.toggle("active");
+  // var panel = a.nextElementSibling;
+  // if (panel.style.maxHeight) {
+  //   panel.style.maxHeight = null;
+  // } else {
+  //   panel.style.maxHeight = panel.scrollHeight + "px";
+  // }
 }
 getprice(event){
   console.log(event);

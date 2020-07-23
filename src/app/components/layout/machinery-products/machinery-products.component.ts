@@ -28,7 +28,7 @@ export class MachineryProductsComponent implements OnInit {
         this.current_page = Number(this.current_page);
         this.subcategory = params.get('subcategory_id');
         this.manufacture = params.get('manufacture_id');
-        console.log(this.manufacture)
+        console.log(this.manufacture);
         this.getproducts(this.current_page);
       });
   }
@@ -56,7 +56,7 @@ export class MachineryProductsComponent implements OnInit {
         console.log(d);
       });}
       else{
-        this.api.Post(MACHINESEARCH,{'manufacturer_id':this.manufacture,'page':page}).then(data  => {
+        this.api.Post(MACHINESEARCH,{'manufacture_id':Number(this.manufacture),'page':page}).then(data  => {
           this.page=true;
           this.loader=false;
           this.div=true;

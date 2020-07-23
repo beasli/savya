@@ -28,11 +28,15 @@ export class CategoryComponent implements OnInit {
         if(this.id!=null) {
         this.api.Post(CATEGORY, {manufacture_id: this.id} ).then(data  => {
           this.data = data['data'];
+          console.log(this.data);
+        //  this.data = [];
           this.api.Post(BANNER,{user_id:this.id,type:3}).then(data=>{this.Banner=data['data'].filter(slide => slide.place === 'Website');});
         });
       } else{
         this.api.Post(CATEGORY, {} ).then(data  => {
           this.data = data['data'];
+        //  this.data = [];
+          console.log(this.data);
       });
     }
   });
