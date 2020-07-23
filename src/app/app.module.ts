@@ -38,7 +38,7 @@ import { SearchFilterComponent } from './components/layout/search-filter/search-
   //  SlugPipe
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     
     AppRoutingModule,
     AccountModule,
