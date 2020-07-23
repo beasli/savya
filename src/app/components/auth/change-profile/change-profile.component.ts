@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { PROFILEUPDATE, PROFILEVIEW} from 'src/config';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
+
+import * as FormData from 'form-data';
 declare var $: any;
 const formData: FormData = new FormData();
 @Component({

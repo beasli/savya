@@ -10,6 +10,8 @@ import { WindowRefService } from '../../../window-ref/window-ref.service';
 import { ShareService } from '@ngx-share/core';
 import { from } from 'rxjs';
 
+import * as FormData from 'form-data';
+
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',

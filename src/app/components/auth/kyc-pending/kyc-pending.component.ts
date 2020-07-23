@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { Router } from '@angular/router';
 import { PROFILEUPDATE,IMAGE, PROFILEVIEW } from 'src/config';
+import * as FormData from 'form-data';
 const formData: FormData = new FormData();
 declare var $: any;
 @Component({

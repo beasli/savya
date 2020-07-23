@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { Router } from '@angular/router';
 import { USERKYC, PROFILEVIEW } from 'src/config';
+import * as FormData from 'form-data';
+
 declare var Tesseract;
 declare var $: any;
 const mobile: FormData = new FormData();
@@ -221,7 +223,8 @@ export class KycComponent implements OnInit {
       }
     }
 
-    if(gst.get('gst_back') && gst.get('gst_front') && this.gst){
+    if(this.kycValue.gst_back && this.kycValue.gst_front && this.gst) {
+    //  gst.get('gst_back') && gst.get('gst_front') && this.gst){
       gst.append('mobile_no', this.mob);
       gst.append('gst_no', this.gst);
       this.api.Post(USERKYC,gst)
@@ -237,7 +240,8 @@ export class KycComponent implements OnInit {
 
     }
 
-    if(aadhar.get('adhar_fornt') && aadhar.get('adhar_back') && this.aadhar){
+    if(this.kycValue.adhar_fornt && this.kycValue.adhar_back && this.aadhar) {
+  //  if(aadhar.get('adhar_fornt') && aadhar.get('adhar_back') && this.aadhar){
       aadhar.append('mobile_no', this.mob);
       aadhar.append('aadhar', this.aadhar);
       this.api.Post(USERKYC,aadhar)
@@ -253,7 +257,8 @@ export class KycComponent implements OnInit {
 
     }
 
-    if(pan.get('pan_front') && this.pan){
+    if(this.kycValue.pan_front && this.pan) {
+   // if(pan.get('pan_front') && this.pan){
       pan.append('mobile_no', this.mob);
       pan.append('pan_no', this.pan);
       this.api.Post(USERKYC,pan)
@@ -269,7 +274,8 @@ export class KycComponent implements OnInit {
 
     }
 
-    if(visiting.get('visiting_front') || visiting.get('visiting_back')){
+    if(this.kycValue.visiting_front && this.kycValue.visiting_back && this.pan) {
+  //  if(visiting.get('visiting_front') || visiting.get('visiting_back')){
       visiting.append('mobile_no', this.mob);
       this.api.Post(USERKYC,visiting)
      .then(data=>{
@@ -366,9 +372,16 @@ export class KycComponent implements OnInit {
     this.loader=true;
     this.page=false;
 
-    if((visiting.get('visiting_front') && visiting.get('visiting_back'))
-     || (pan.get('pan_front') && this.pan) ||
-     (aadhar.get('adhar_fornt') && aadhar.get('adhar_back') && this.aadhar) || (gst.get('gst_back') && gst.get('gst_front') && this.gst)){
+    // if((visiting.get('visiting_front') && visiting.get('visiting_back'))
+    //  || (pan.get('pan_front') && this.pan) 
+    //  || (aadhar.get('adhar_fornt') && aadhar.get('adhar_back') && this.aadhar) 
+    //  || (gst.get('gst_back') && gst.get('gst_front') && this.gst))
+     if((this.kycValue.visiting_front && this.kycValue.visiting_back)
+        || (this.kycValue.pan_front && this.pan) 
+        || (this.kycValue.adhar_fornt && this.kycValue.adhar_back && this.aadhar)
+        || (this.kycValue.gst_back && this.kycValue.gst_front && this.gst)
+     )
+     {
        this.api.onSuccess('Your Documents are submitted Successfully')
        this.router.navigate(['/']);
      } else{
