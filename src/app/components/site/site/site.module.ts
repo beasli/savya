@@ -15,7 +15,6 @@ import { SliderComponent } from '../slider/slider.component';
 import { TestimonialsComponent } from '../testimonials/testimonials.component';
 import { FilterProductComponent } from '../filter-product/filter-product.component';
 import { ProductHolderComponent } from '../product-holder/product-holder.component';
-import { BestSellerProductComponent } from '../best-seller-product/best-seller-product.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { EventComponent } from '../event/event.component';
@@ -40,11 +39,7 @@ import { MachineryProductComponent } from '../../layout/machinery-product/machin
 import { MachineryHolderComponent } from '../../layout/machinery-holder/machinery-holder.component';
 import { LoginComponent } from '../../auth/login/login.component';
 import { RegisterComponent } from '../../auth/register/register.component';
-import { OtpComponent } from '../../auth/otp/otp.component';
 import { KycPendingComponent } from '../../auth/kyc-pending/kyc-pending.component';
-import { ForgetPasswordComponent } from '../../auth/forget-password/forget-password.component';
-import { ForgetOtpComponent } from '../../auth/forget-otp/forget-otp.component';
-import { ChangePasswordComponent } from '../../auth/change-password/change-password.component';
 import { KycComponent } from '../../auth/kyc/kyc.component';
 import { ChangeProfileComponent } from '../../auth/change-profile/change-profile.component';
 import { ContactComponent } from '../../layout/contact/contact.component';
@@ -52,13 +47,11 @@ import { AboutComponent } from '../../layout/about/about.component';
 import { TermsAndConditionComponent } from '../../layout/terms-and-condition/terms-and-condition.component';
 import { PaymentComponent } from '../../layout/payment/payment.component';
 import { SearchComponent } from '../../layout/search/search.component';
-import { ManufactureComponent } from '../../layout/manufacture/manufacture.component';
 import { PrivacyComponent } from '../../layout/privacy/privacy.component';
 import { MachinerySearchComponent } from '../../layout/machinery-search/machinery-search.component';
 import { MachineryProductsComponent } from '../../layout/machinery-products/machinery-products.component';
 import { CheckoutComponent } from '../../shopping/checkout/checkout.component';
 import { CartComponent } from '../../shopping/cart/cart.component';
-import { ProductComponent } from '../../shopping/product/product.component';
 import { AccountDetailsComponent } from '../../my-account/account-details/account-details.component';
 import { AccountAddressesComponent } from '../../my-account/account-addresses/account-addresses.component';
 import { AccountWishlistComponent } from '../../my-account/account-wishlist/account-wishlist.component';
@@ -72,6 +65,7 @@ import { AuthGuardService } from '../../auth-guard/auth-guard.service';
 import { CheckoutService } from '../../auth-guard/checkout.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SeoService } from '../../SEO/seo.service';
+import { LiveComponent } from '../live/live.component';
 
 
 
@@ -90,7 +84,6 @@ const customConfig: ShareButtonsConfig = {
     TestimonialsComponent,
     FilterProductComponent,
     ProductHolderComponent,
-    BestSellerProductComponent,
     ExclusiveBannerComponent,
     LiveratesComponent,
     EventsComponent,
@@ -108,11 +101,7 @@ const customConfig: ShareButtonsConfig = {
     MachineryHolderComponent,
     LoginComponent,
     RegisterComponent,
-    OtpComponent,
     KycPendingComponent,
-    ForgetPasswordComponent,
-    ForgetOtpComponent,
-    ChangePasswordComponent,
     KycComponent,
     ChangeProfileComponent,
     ContactComponent,
@@ -120,13 +109,11 @@ const customConfig: ShareButtonsConfig = {
     TermsAndConditionComponent,
     PaymentComponent,
     SearchComponent,
-    ManufactureComponent,
     PrivacyComponent,
     MachinerySearchComponent,
     MachineryProductsComponent,
     CheckoutComponent,
     CartComponent,
-    ProductComponent,
     AccountDetailsComponent,
     AccountAddressesComponent,
     AccountWishlistComponent,
@@ -137,7 +124,8 @@ const customConfig: ShareButtonsConfig = {
     OffersComponent,
     SlugPipe,
     BlogComponent,
-    BlogDetailsComponent
+    BlogDetailsComponent,
+    LiveComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -158,6 +146,7 @@ const customConfig: ShareButtonsConfig = {
      }),
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
+      { path: 'live', component: LiveComponent},
       { path: 'blog', component: BlogComponent},
       { path: 'blog/:id', component: BlogDetailsComponent},
       { path: 'login', component: LoginComponent,canActivate: [LoginGuardService]},
@@ -176,7 +165,7 @@ const customConfig: ShareButtonsConfig = {
       { path: 'offers', component: OffersComponent,  canActivate: [AuthGuardService]},
       { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService,CheckoutService]},
       { path: 'cart', component: CartComponent, canActivate: [AuthGuardService]},
-      { path: 'product', component: ProductComponent},
+      
       { path: 'machinery/:id', component: MachineryProductsComponent},
       { path: 'contact', component: ContactComponent},
       { path: 'about', component: AboutComponent},

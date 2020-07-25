@@ -18,6 +18,7 @@
                 <div class="nav-wrapper show-menu" style="min-height:200vh;">
                     <div class="nav-toggle"><span class="nav-back"><i class="icon-arrow-left"></i></span> <span class="nav-title"></span></div>
                     <ul class="nav nav-level-1">
+                        <li class="text-center"><a [routerLink]="['/']">HOME</a></li>
                         <li *ngFor='let s of catall;let i = index'>
                             <ng-container *ngIf="s.category != 'MACHINERY'">
                                 <a id='{{i}}' href="javascript:void(0)">
@@ -31,6 +32,7 @@
 
                         <span class="arrow"></span>
                             <ul class="nav-level-2">
+                                
                                 <ng-container *ngIf="s.category != 'MACHINERY'">
                                     <li *ngFor='let p of s.subcategory'>
                                         <a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase,p.subcategory | slugify]">
@@ -38,8 +40,10 @@
                                         {{p.subcategory}}</a>
                                     </li>
                                 </ng-container>
+                                
                             </ul>
                         </li>
+                        <li class="text-center"><a [routerLink]="['/Bullion']">Bullian</a></li>
                         <li class="text-center"><a [routerLink]="['/events/']">Events</a></li>
                         <li>
                             <div class="row text-center">
@@ -81,7 +85,7 @@
                         <!-- /Header Wishlist -->
                         
                         <!-- Header Account -->
-                        <div id="account2" class="dropdn dropdn_account @@classes"><a  (click)='account2()' class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
+                        <div id="account2" class="dropdn dropdn_account @@classes"><a class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
 
                             
                       
@@ -99,7 +103,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /Header Account -->
                     </div>
                     <div class="col-auto minicart-holder">
                         <div class="minicart"><a routerLink="/cart" class="minicart-link"><i class="icon icon-handbag"></i> <span class="minicart-qty">{{ProductsInCart()}}</span></a></div>
@@ -114,18 +117,18 @@
             <div class="container">
                 <div class="row">
                     <div class="col hdr-topline-center">
-                        <div class="custom-text"><i class="icon icon-phone"></i><b>Toll free Number 
-                           <a href="tel:18004199612"> 18004199612</a></b></div>
+                        <div class="custom-text" style="text-transform: initial;"><i class="icon icon-phone" style="color: black;"></i><b>Toll Free Number 
+                           <a href="tel:18004199612" style="color: black;"> 18004199612</a></b></div>
                     </div>
                     <div class="col-auto hdr-topline-right links-holder">
-                        <!-- Header Search -->
+                        
                  
-                        <div id='searcher' class="dropdn dropdn_search hide-mobile @@classes" ><a href="javascript:void(0)" (click)='searchbar()' class="dropdn-link"><i class="icon icon-search2"></i><span>Search</span></a>
+                        <div id='searcher' class="dropdn dropdn_search hide-mobile @@classes" ><a href="javascript:void(0)" class="dropdn-link"><i style="color: black;" class="icon icon-search2"></i><span style="color: black;">Search</span></a>
                             <div class="dropdn-content">
                                 <div class="container">
                                         <button class="search-button"><i class="icon-search2"></i></button>
                                     <div class="form-group"><input type="text" (keyup.enter)="search()" (keyup)="change($event)" class="form-control" class="search-input" placeholder="search keyword"></div> 
-                                    <div class="form-group"><button class="btn" (click)="search()">Search</button></div>
+                                    <div class="form-group"><button class="btn" (click)="search()" style="color: black;">Search</button></div>
                                     <div class="col-lg-12" >
                                         <div class="col-lg-4"></div>
                                         <div class="col-lg-6" >
@@ -142,11 +145,11 @@
                         <!-- /Header Search -->
                         
                         <!-- Header Wishlist -->
-                        <div  class="dropdn dropdn_wishlist @@classes"><a routerLink="/account-wishlist" class="dropdn-link"><i class="icon icon-heart-fill"></i><span>Wishlist</span></a></div>
+                        <div  class="dropdn dropdn_wishlist @@classes"><a routerLink="/account-wishlist" class="dropdn-link"><i class="icon icon-heart-fill" style="color: black;"></i><span style="color: black;">Wishlist</span></a></div>
                         <!-- /Header Wishlist -->
                         
                         <!-- Header Account -->
-                        <div id='account' class="dropdn dropdn_account @@classes"><a  (click)='account()'  class="dropdn-link" ><i class="icon icon-person"></i><span *ngIf="!drop">Login/Register</span><span *ngIf="drop==1">My Account</span></a>
+                        <div id='account' class="dropdn dropdn_account @@classes"><a class="dropdn-link" ><i style="color: black;" class="icon icon-person"></i><span *ngIf="!drop" style="color: black;">Login/Register</span><span *ngIf="drop==1" style="color: black;">My Account</span></a>
 
                             
                       
@@ -164,7 +167,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /Header Account -->
                     </div>
                 </div>
             </div>
@@ -173,8 +175,8 @@
         <app-nav-bar></app-nav-bar>
     </div>
     <div class="sticky-holder compensate-for-scrollbar">
-        <div class="container">
-            <div class="row"><a href="#" class="mobilemenu-toggle show-mobile"><i class="icon icon-menu"></i></a>
+        <div class="container-fluid">
+            <div class="row"  style="margin-left:-100px"><a href="#" class="mobilemenu-toggle show-mobile"><i class="icon icon-menu"></i></a>
                 <div *ngIf='logochange != 1' class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
             <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/SJB_Machinery-1.png" srcset="assets/images/SJB_Machinery-1.png" alt=""></a></div>
                 <!--navigation-->

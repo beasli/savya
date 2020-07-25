@@ -1,5 +1,4 @@
 import { SeoService } from './components/SEO/seo.service';
-import { SlugPipe } from './components/site/slug.pipe';
 import { SiteModule } from './components/site/site/site.module';
 import { AuthGuardService } from './components/auth-guard/auth-guard.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,14 +15,13 @@ import { NavBarComponent } from './components/layout/nav-bar/nav-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutService } from './components/auth-guard/checkout.service';
-import { OtpGuardService } from './components/auth-guard/otp-guard.service';
 import { KycguardService } from './components/auth-guard/kycguard.service';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { LoginGuardService } from './components/auth-guard/login-guard.service';
 import { KycDoneService } from './components/auth-guard/kyc-done.service';
 import { ModalComponent } from './components/layout/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SearchFilterComponent } from './components/layout/search-filter/search-filter.component';
+import { LoginModalComponent } from './components/site/login-modal/login-modal.component';
 
 
 
@@ -34,8 +32,9 @@ import { SearchFilterComponent } from './components/layout/search-filter/search-
     FooterComponent,
     NavBarComponent,
     ModalComponent,
-    SearchFilterComponent,
-  //  SlugPipe
+    LoginModalComponent,
+   
+  
   ],
   imports: [
     BrowserModule,
@@ -58,7 +57,7 @@ import { SearchFilterComponent } from './components/layout/search-filter/search-
      }),
     BrowserAnimationsModule,
   ],
-  providers: [AuthGuardService,CheckoutService,OtpGuardService,KycguardService
+  providers: [AuthGuardService,CheckoutService,KycguardService
     ,LoginGuardService,KycDoneService,SeoService],
   bootstrap: [AppComponent]
 })

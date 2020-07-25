@@ -17,8 +17,6 @@ page:boolean=true;
 photo:any;
 kyc:any;
   constructor(private api:ApiService,private router:Router) {
-    // this.user=this.api.getUserInfo();
-    // this.name=this.user.name;
     this.api.Post(PROFILEVIEW, {}).then(data=>{
       this.page=true;
       this.loader=false;
@@ -27,7 +25,6 @@ kyc:any;
       this.kyc=data['kyc'];
       this.photo = data['url'];
       this.name=this.user.name;
-      //this.router.navigate(['/registerOtp']);
     }).catch(d=>{
       if(d.status == 503){
         this.api.onFail('Your session is expired please login again');

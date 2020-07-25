@@ -8,23 +8,23 @@
             <div *ngFor="let slide of merchant" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div class="card  border bordershadow" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
                 <div class="image-container" [ngStyle]="{'background-image': 'url(' + image + slide.cover_image + ')'}" style="padding-right:25%;padding-left:25%;padding-top:5%;">
-                    <img class="card-img-top justify-center" class="rounded-circle"  style="max-width: 100%;max-height:25vh;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="image + slide.image" alt="Card image cap">
+                    <img class="card-img-top justify-center"  style="max-width: 100%;max-height:25vh;border-radius:50%;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="image + slide.image" alt="Card image cap">
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title text-center"><strong> {{slide.name}}</strong></h5>
-                    <h5 class="card-title text-center"> {{slide.mobile}}</h5>
-                    <h5 class="card-title text-center"> {{slide.telephone}}</h5>
-                    <h5 class="card-title text-center"> {{slide.email}}</h5>
-                    <h5 class="card-title text-center"> {{slide.facebook_link}}</h5>
-                    <h5 class="card-title text-center"> {{slide.instagram_link}}</h5>
-                    <h5 class="card-title text-center"> {{slide.shop_name}}</h5>
-                    <h5 class="card-title text-center"> {{slide.address}}</h5>
+                <div class="card-body text-center">
+                   <span class="card-title text-center" *ngIf='slide.name'> <strong> {{slide.name}}</strong><br></span>
+                   <span class="card-title text-center" *ngIf='slide.mobile'> <i class="icon-mobile"></i><br> &nbsp;&nbsp; {{slide.mobile}}<br></span>
+                   <span class="card-title text-center" *ngIf='slide.telephone'> <i class="icon-phone"></i><br> &nbsp;&nbsp; {{slide.telephone}}<br></span>
+                   <span class="card-title text-center" *ngIf='slide.email'> <i class="icon-mail-envelope1"></i><br> &nbsp;&nbsp; {{slide.email}}<br></span>
+                   <span class="card-title text-center" *ngIf='slide.facebook_link'><i class="icon icon-facebook"></i><br> &nbsp;&nbsp; {{slide.facebook_link}}<br></span>
+                   <span class="card-title text-center" *ngIf='slide.instagram_link'><i class="icon icon-instagram"></i><br> &nbsp;&nbsp; {{slide.instagram_link}}<br></span>
+                   <span class="card-title text-center" *ngIf='slide.shop_name'><i class="icon-location1"></i><br> &nbsp;&nbsp; {{slide.shop_name}}<br></span>
+                   <span class="card-title text-center" *ngIf='slide.address'><i class="icon-location1"></i><br> &nbsp;&nbsp; {{slide.address}}<br></span>
                  </div>
             </div>
         </div>
         </div>
     </div>
-    <div  *ngIf="!merchant.length">
+    <div  *ngIf="!merchant && !merchant.length">
         <ngb-alert [dismissible]="false" >
             <strong>No Bullian merchant in this city</strong> 
         </ngb-alert>

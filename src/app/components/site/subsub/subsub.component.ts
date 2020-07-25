@@ -1,7 +1,7 @@
 import { IMAGE, BANNER, NAVIGATION } from './../../../../config';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SUBCATEGORYTYPE, CRAUSEL, CATEGORY, SUBCATEGORY } from 'src/config';
+import { SUBCATEGORYTYPE, CATEGORY, SUBCATEGORY } from 'src/config';
 import { ApiService } from 'src/app/api/api.service';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
@@ -45,7 +45,6 @@ slideConfig = {
     // instead of a settings object
   ]
 };
-// baseUrl:any="http://admin.savyajewelsbusiness.com/admin/";
   manufacturer: any;
   category: any;
   subcategory: any;
@@ -95,48 +94,32 @@ slideConfig = {
       this.page=true;
       this.loader=false;
       this.data = data['data'];
-      console.log(data);
-
       this.api.Post(CATEGORY, {} ).then(data  => {
         let result = data['data'].find(x => x.id == this.data[0]['category_id']);
         this.category = result['category'];
-        console.log(this.category);
-     }).catch(d=>{console.log(d);});
-
+     }).catch(d=>{});
      this.api.Post(SUBCATEGORY, {category_id: this.data[0]['category_id']} ).then(data  => {
-  
       let result = data['data'].find(x => x.id == this.data[0]['subcategory_id']);
       this.subcategory = result['subcategory'];
-      console.log(this.subcategory);
-    }).catch(d=>{
-        console.log(d);
-      });
-     }).catch(d=>{
-      console.log(d);
-    });}
+    }).catch(d=>{});
+     }).catch(d=>{});}
     if(!this.idm){
       this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.nsubcategory.id} ).then(data  => {
         this.page=true;
         this.loader=false;
         this.data = data['data'];
-        console.log(data);
-  
         this.api.Post(CATEGORY, {} ).then(data  => {
           let result = data['data'].find(x => x.id == this.data[0]['category_id']);
           this.category = result['category'];
-          console.log(this.category);
-       }).catch(d=>{console.log(d);});
-  
+       }).catch(d=>{});
        this.api.Post(SUBCATEGORY, {category_id: this.data[0]['category_id']} ).then(data  => {
-    
         let result = data['data'].find(x => x.id == this.data[0]['subcategory_id']);
         this.subcategory = result['subcategory'];
-        console.log(this.subcategory);
+        
       }).catch(d=>{
-          console.log(d);
         });
        }).catch(d=>{
-        console.log(d)});
+        });
       }
   
 }
@@ -147,7 +130,6 @@ slideConfig = {
     return this.sanitizer.bypassSecurityTrustStyle('url('+ IMAGE + 'subsubcategory/' + s + ')');
   }
   gofilter(value) {
-    console.log(value);
     if(!this.idm){
     this.router.navigate(['/',this.ncategory.category.toLowerCase() ,this.nsubcategory.subcategory.replace(/ /g, "-"),value.replace(/ /g, "-")],{queryParams:{'page':1}});}
     else{

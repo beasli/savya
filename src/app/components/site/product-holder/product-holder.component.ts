@@ -54,66 +54,15 @@ drop:any;
 @ViewChild('deleteclosebutton') deleteclosebutton;
   constructor(private api:ApiService,private router:Router) {
     this.drop=this.api.drop; 
-    // console.log(this.mostselling);
-    // console.log(this.url3);
-    // console.log(this.heading);
-    if(localStorage.getItem('savya_userInfo'))
-    {
-      this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data => {
-        this.cart = data['data'];
-    }).catch(d => {
-      if(d.status == 503){
-        this.api.onFail('Your session is expired please login again');
-        this.api.setGoto();
-        this.api.setlogin(0);
-        this.api.logout();
-        setTimeout(() => {
-        this.router.navigate(['/login']);
-        },1000);
-      } else{
-      console.log(d);
-      }
-    });
-    }
-    
-   }
-   quantity(pid)
-   {
-        let cart=this.api.getCart();
-        if(cart)
-      {
-              let result=cart.find(x => x.product_id == pid);
-              // console.log(result);
-              if(result)
-              { 
-                    let cartId=result.cart_id;
-                    let c=Number(result.count);
-                    return c;
-                } 
-                else{
-                  return(0);
-                }
-        }
-   }
-   qtyUpdate(pid,value)
-   {
-        this.api.qtyUpdate(pid,value);
-   }
- 
- 
-
-  
-
+   } 
   go(value) {
     this.api.godetail(value);
   }
   wishlist(pid) {
-    // console.log("in wishlist");
-    //console.log(pid);
    
      if(this.drop==0)
      {
-        // document.getElementById("openModalButton").click();
+    
         
        this.api.setGoto();
        this.api.onSuccess('Please Login First to Continue');
@@ -123,57 +72,44 @@ drop:any;
       this.api.checkWishlist(pid);
     }
   }
-  // goLogin()
-  // {
-  //   this.router.navigate(['/login']);
-  // }
+  
   checkHeart(pid)
   {
 
-    //console.log("checkheart");
     this.wish = this.api.getWishlist();
     if (this.wish) {
             let result = this.wish.find(x => x.product_id === pid);
-        //  console.log("result="+result);
+        
             if (result)
             { 
-             // console.log("present");
               return true;
             
             }
             else
             {
-              //console.log("not present");
               return false;
               
             } 
       }
       else{
-        //console.log("not present");
         return false;
       }
   }
   checkCart(pid)
   {
       let check=this.api.checkCart(pid);
-     // console.log(check);
+     
       return check;
  }
   deleteWishlist(pid)
   {
       this.api.deleteWishlist(pid);
-     
   }
-  addToCart(s)
-  {
-    this.api.addToCart(s);
-  }
+  
 
   ngOnInit() {
     this.api.getlogin.subscribe(data => {
-      console.log(+data);
       this.drop=data;
-      console.log(this.drop);    
      });
 
   }

@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-3">
+            <div class="col-md-6 col-lg-3" *ngIf='values'>
                 <div class="footer-block collapsed-mobile">
                     <div class="title">
                         <h4>contact us</h4>
@@ -75,11 +75,11 @@
                             <li><i class="icon-location1"></i><span><span class="h6-style" style="text-transform: initial;">Address:</span><span style="text-transform: initial;">{{values.address}}</span></span></li>
                         </ul>
                         <ul class="social-list">
-                            <li><a target="_blank" [href]="values.facebook" class="icon icon-facebook"></a></li>
-                            <li><a href="#" class="icon icon-twitter"></a></li>
-                            <li><a href="#" class="icon icon-google"></a></li>
-                            <li><a target="_blank" [href]="values.instagram" class="icon icon-instagram"></a></li>
-                            <li><a href="#" class="icon icon-youtube"></a></li>
+                            <li><a href="https://www.facebook.com/SavyaJewelsBusiness" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.instagram.com/savyajewelsbusiness/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="https://twitter.com/SavyaBusiness" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="https://in.linkedin.com/in/savya-jewels-business" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.youtube.com/channel/UC3Uvsiij6fpfzD8h01ildpA" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
                         </ul>
                     </div>
                 </div>

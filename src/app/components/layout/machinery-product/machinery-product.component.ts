@@ -1,4 +1,4 @@
-import { MACHINE, IMAGE, WISHLISTADD } from './../../../../config';
+import { MACHINE, IMAGE, WISHLISTADD, ASK } from './../../../../config';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -51,6 +51,17 @@ export class MachineryProductComponent implements OnInit {
       this.ngOnInit();
       });
    }
+
+   ask(){
+    this.api.Post(ASK,{product_id:this.pid}).then(data=>{
+      console.log(data);
+         this.api.updateWishlist();
+         this.api.onSuccess('Your request is send We will contact you shortly');
+    }).catch(d=>{
+      
+     });
+   }
+
 
    whislist(){
     this.api.Post(WISHLISTADD,{product_id:this.pid}).then(data=>{

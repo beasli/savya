@@ -20,11 +20,7 @@ message:any;
 loader:boolean;
 page:boolean;
   constructor(private api:ApiService,private router:Router) {
-    // this.data=this.api. getUserInfo();
-    // this.uid=this.data.uid;
-    //  console.log("uid"+this.uid);
     this.view();
-     //console.log(this.data);
     this.value=localStorage.getItem('wish');
   }
 
@@ -47,19 +43,14 @@ page:boolean;
   {
     
     this.api.Get(WISHLISTVIEW).then(data=>{
-    console.log(data);
-     this.page=true;
+      this.page=true;
       this.loader=false;
       this.div=true;
       this.alert=false;
-      // console.log(data['data']);
        this.baseurl=data['url']+"/";
-      // console.log("url"+this.baseurl);
        this.results=data['data'];
-       console.log(this.results);
        this.results = this.removeItemAll(this.results,'Machinery')
-         console.log(this.results);
-      //  console.log(this.baseurl);
+         
      }).catch(d=>{
       if(d.status == 503){
         this.api.onFail('Your session is expired please login again');
@@ -75,7 +66,7 @@ page:boolean;
        this.alert=true;
        this.div=false;
        this.message=d.error.data; 
-       console.log(d);}
+       }
      });
 
 
@@ -92,43 +83,15 @@ page:boolean;
       this.page=true;
       this.loader=false;
   }
-  addToCart(s)
-  {
-    this.api.addToCart(s);
-  }
+  
   go(value) {
     this.api.godetail(value);
   }
-  checkProductInCart(pid)
-  {
-     let cart=this.api.getCart();
-     console.log(cart);
-     if(cart)
-     {
-             let result=cart.find(x => x.product_id == pid);
-            
-             if(result)
-             { 
-             // console.log(result);
-                 return false;
-            }
-            else{
-             // console.log("this product is not present in cart");
-              return true;
-            } 
-       }
-       else{
-         return true;
-       }
-  }  
-
-
   ngOnInit() {
     this.loader=true;
     this.page=false;
     this.api.getWish.subscribe(data=>{
       this.view();
-       console.log("getWishSubscribe"+data);
        }) 
     
   }

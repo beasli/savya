@@ -1,300 +1,3 @@
-<!-- 
-<div class="filter-bar hide-mobile">
-    <ul class="collapse">
-        <li><a href="javascript:void(0)">PRICE</a>
-            <div class="filter-listingd price-listing">
-                <ul class="subfilter">
-                    <li >
-                        <div class="each-filter-listing">
-                            <span class="icon-container">
-                                <span class="icon blank-box"></span>
-                            </span>
-                            <div class="filter-text">
-                                <input type="radio"  [checked]="checkedprice(price[0])"  value="{{price[0]}}-{{price[1]}}" (change)="getprice($event)" id="price" name="priced">
-                                <label for="price">₹{{price[0]}}-₹{{price[1]}}</label>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="each-filter-listing">
-                            <span class="icon-container">
-                                <span class="icon blank-box"></span>
-                            </span>
-                            <div class="filter-text"><input type="radio"  [checked]="checkedprice(price[1])" value="{{price[1]}}-{{price[2]}}" (change)="getprice($event)" id="price1" name="priced"><label for="price1">₹{{price[1]}}-₹{{price[2]}}</label></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="each-filter-listing">
-                            <span class="icon-container">
-                                <span class="icon blank-box"></span>
-                            </span>
-                            <div class="filter-text"><input type="radio" value="{{price[2]}}-{{price[3]}}"  [checked]="checkedprice(price[2])" (change)="getprice($event)" id="price2" name="priced"><label for="price2">₹{{price[2]}}-₹{{price[3]}}</label></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="each-filter-listing">
-                            <span class="icon-container">
-                                <span class="icon blank-box"></span>
-                            </span>
-                            <div class="filter-text"><input type="radio" value="{{price[3]}}-{{price[4]}}"  [checked]="checkedprice(price[3])" (change)="getprice($event)" id="price3" name="priced"><label for="price3">₹{{price[3]}}-₹{{price[4]}}</label></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="each-filter-listing">
-                            <span class="icon-container">
-                                <span class="icon blank-box"></span>
-                            </span>
-                            <div class="filter-text"><input type="radio" value="{{price[4]}}-1000000"  [checked]="checkedprice(price[4])"  (change)="getprice($event)" id="price4"  name="priced"><label for="price4">Above ₹{{price[4]}}</label></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li><a href="javascript:void(0)">jewelery Type</a>
-            <div class="filter-listingd">
-                <ul class="subfilter" *ngFor="let m of jewelery_type">
-                    <li>
-                        <div class="each-filter-listing">
-                            <span class="icon-container">
-                                <span class="icon blank-box"></span>
-                            </span>
-                            <div class="filter-text">
-                                <input type="radio"  id="{{m}}" [checked]="checkedjewelery_type(m)" (change)="changefilter($event,m)" name="jewelery_typed">
-                                <label for="{{m}}">{{m}}</label>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li><a href="javascript:void(0)">purity</a>
-            <div class="filter-listingd">
-                <ul class="subfilter" *ngFor="let m of purity">
-                    <li>
-                        <div class="each-filter-listing">
-                            <span class="icon-container">
-                                <span class="icon blank-box"></span>
-                            </span>
-                            <div class="filter-text"><input type="checkbox"  id="{{m}}" [checked]="checkedpurity(m)" (change)="changefilter($event,m)" name="purity"><label for="{{m}}">{{m}}</label></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li><a href="javascript:void(0)">jewelery for</a>
-            <div class="filter-listingd">
-                <ul class="subfilter" *ngFor="let m of jewelery_for">
-                    <li>
-                        <div class="each-filter-listing">
-                            <span class="icon-container">
-                                <span class="icon blank-box"></span>
-                            </span>
-                            <div class="filter-text"><input type="checkbox" [checked]="checkedjewelery_for(m)" id="{{m}}" (change)="changefilter($event,m)" name="jewelery_for"><label for="{{m}}">{{m}}</label></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li><a href="javascript:void(0)">METAL</a>
-            <div class="filter-listingd">
-                <ul class="subfilter" *ngFor="let m of material">
-                    <li>
-                        <div class="each-filter-listing">
-                            <span class="icon-container">
-                                <span class="icon blank-box"></span>
-                            </span>
-                            <div class="filter-text"><input type="checkbox"  id="{{m}}" [checked]="checkedmaterial(m)" (change)="changefilter($event,m)" name="material"><label for="{{m}}">{{m}}</label></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </li>
-    </ul> 
-</div>
-<div class="mobile-filter show-mobile">
-    <ul>
-        <li class="filter-nav"><a href="javascript:void(0)" (click)='filteropen(1)'> <span><i class="fa fa-filter" aria-hidden="true"></i></span>Fliter</a></li>
-        <li><a href="javascript:vold(0)" data-toggle="modal" data-target="#filterModal"> <span><i class="fa fa-sort-amount-asc" aria-hidden="true"></i></span>Sort</a></li>
-    </ul>
-</div>
-<div class="sort-by-content">
-    <div class="modal" tabindex="-1" role="dialog" id="filterModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <h4 class="text-center">Sort</h4>
-                <form>
-                    <input type="radio" name="price" value="low">
-                    <label for="price">Price Low to high</label><br>
-                    <input type="radio" name="price" value="high">
-                    <label for="price">Price High to low</label><br>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="filter-content" [ngClass]="{'filter-content-open': hide==1}">
-    <div class="filter-content-header">
-        <div class="close-filter" (click)='filteropen(0)'><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
-        <h4>FILTER</h4>
-    </div>
-    <div class="">
-        <div class="filter-listing">
-            <ul>
-                <li class="sub-filtr"><a href="javascript:void(0)" (click) = 'openclose(1)'>Price</a>
-                    <ul class="drop-filter" [ngClass]="{'active': prif==1}">
-                            <li>
-                                <div class="each-filter-listing">
-                                    <span class="icon-container">
-                                        <span class="icon blank-box"></span>
-                                    </span>
-                                    <div class="filter-text">
-                                        <input type="radio"  [checked]="checkedprice(price[0])"  value="{{price[0]}}-{{price[1]}}" (change)="getprice($event)" id="price" name="price">
-                                        <label for="price">₹{{price[0]}}-₹{{price[1]}}</label>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="each-filter-listing">
-                                    <span class="icon-container">
-                                        <span class="icon blank-box"></span>
-                                    </span>
-                                    <div class="filter-text"><input type="radio"  [checked]="checkedprice(price[1])" value="{{price[1]}}-{{price[2]}}" (change)="getprice($event)" id="price1" name="price"><label for="price1">₹{{price[1]}}-₹{{price[2]}}</label></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="each-filter-listing">
-                                    <span class="icon-container">
-                                        <span class="icon blank-box"></span>
-                                    </span>
-                                    <div class="filter-text"><input type="radio" value="{{price[2]}}-{{price[3]}}"  [checked]="checkedprice(price[2])" (change)="getprice($event)" id="price2" name="price"><label for="price2">₹{{price[2]}}-₹{{price[3]}}</label></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="each-filter-listing">
-                                    <span class="icon-container">
-                                        <span class="icon blank-box"></span>
-                                    </span>
-                                    <div class="filter-text"><input type="radio" value="{{price[3]}}-{{price[4]}}"  [checked]="checkedprice(price[3])" (change)="getprice($event)" id="price3" name="price"><label for="price3">₹{{price[3]}}-₹{{price[4]}}</label></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="each-filter-listing">
-                                    <span class="icon-container">
-                                        <span class="icon blank-box"></span>
-                                    </span>
-                                    <div class="filter-text"><input type="radio" value="{{price[4]}}-1000000"  [checked]="checkedprice(price[4])"  (change)="getprice($event)" id="price4"  name="price"><label for="price4">Above ₹{{price[4]}}</label></div>
-                                </div>
-                            </li>
-                    </ul>
-                </li>
-                <li  class="sub-filtr"><a href="javascript:void(0)" (click) = 'openclose(2)'>jewelery Type</a>
-                    <ul class="drop-filter" [ngClass]="{'active': jewt==1}">
-                        <li *ngFor="let m of jewelery_type">
-                            <div class="each-filter-listing">
-                                <span class="icon-container">
-                                    <span class="icon blank-box"></span>
-                                </span>
-                                <div class="filter-text">
-                                    <input type="radio"  id="{{m}}" [checked]="checkedjewelery_type(m)" (change)="changefilter($event,m)" name="jewelery_type">
-                                    <label for="{{m}}">{{m}}</label>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li  class="sub-filtr"><a href="javascript:void(0)" (click) = 'openclose(3)'>purity</a>
-                    <ul class="drop-filter" [ngClass]="{'active': purf==1}">
-                        
-                            <li  *ngFor="let m of purity">
-                                <div class="each-filter-listing">
-                                    <span class="icon-container">
-                                        <span class="icon blank-box"></span>
-                                    </span>
-                                    <div class="filter-text"><input type="checkbox"  id="{{m}}" [checked]="checkedpurity(m)" (change)="changefilter($event,m)" name="purity"><label for="{{m}}">{{m}}</label></div>
-                                </div>
-                            </li>
-                        
-                    </ul>
-                </li>
-                <li class="sub-filtr"><a href="javascript:void(0)" (click) = 'openclose(4)'>jewelery for</a>
-                    <ul class="drop-filter" [ngClass]="{'active': jfor==1}">
-                        
-                            <li *ngFor="let m of jewelery_for">
-                                <div class="each-filter-listing">
-                                    <span class="icon-container">
-                                        <span class="icon blank-box"></span>
-                                    </span>
-                                    <div class="filter-text"><input type="checkbox" [checked]="checkedjewelery_for(m)" id="{{m}}" (change)="changefilter($event,m)" name="jewelery_for"><label for="{{m}}">{{m}}</label></div>
-                                </div>
-                            </li>
-                        
-                    </ul>
-                </li>
-                <li  class="sub-filtr"><a href="javascript:void(0)" (click) = 'openclose(5)'>Metal</a>
-                    <ul class="drop-filter" [ngClass]="{'active': metf==1}">
-                    
-                            <li  *ngFor="let m of material">
-                                <div class="each-filter-listing">
-                                    <span class="icon-container">
-                                        <span class="icon blank-box"></span>
-                                    </span>
-                                    <div class="filter-text"><input type="checkbox"  id="{{m}}" [checked]="checkedmaterial(m)" (change)="changefilter($event,m)" name="material"><label for="{{m}}">{{m}}</label></div>
-                                </div>
-                            </li>
-                        
-                    </ul>
-                </li>
-            </ul>
-            <ul class="row nav">
-                <li class="nav-item" *ngIf="checkP()" >
-                  <a class="nav-link"  href="javascript:void(0)"><h2><span  class=" badge badge-pill badge-secondary">₹{{filter.menu.price['min']}}-₹{{filter.menu.price['max']}}<i class="icon-cross"  (click)="deleteSelected('price',filter.menu.price['min'])"></i></span></h2></a>
-                </li>
-                 <li class="nav-item" *ngFor="let m of filter.menu.jewelery_type">
-                     <a class="nav-link" href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">{{m}}<i class="icon-cross" (click)="deleteSelected('jewelery_type',m)"></i></span></h2></a>
-                 </li>
-                 <li class="nav-item" *ngFor="let m of filter.menu.purity">
-                     <a class="nav-link" href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">{{m}}<i class="icon-cross" (click)="deleteSelected('purity',m)"></i></span></h2></a>
-                   </li>
-                 <li class="nav-item" *ngFor="let m of filter.menu.jewelery_for">
-                     <a class="nav-link " href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">{{m}}<i class="icon-cross" (click)="deleteSelected('jewelery_for',m)"></i></span></h2></a>
-                 </li>
-                 <li class="nav-item" *ngFor="let m of filter.menu.material">
-                     <a class="nav-link" href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">{{m}}<i class="icon-cross" (click)="deleteSelected('material',m)"></i></span></h2></a>
-                 </li>
-                 <li class="nav-item" *ngIf="checkClear()">
-                     <a class="nav-link" href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">Clear All<i class="icon-cross" (click)="clear()"></i></span></h2></a>
-                 </li>
-               </ul>
-        </div>
-    </div>
-</div>
-<ul class="row nav">
-   <li class="nav-item" *ngIf="checkP()" >
-     <a class="nav-link"  href="javascript:void(0)"><h2><span  class=" badge badge-pill badge-secondary">₹{{filter.menu.price['min']}}-₹{{filter.menu.price['max']}}<i class="icon-cross"  (click)="deleteSelected('price',filter.menu.price['min'])"></i></span></h2></a>
-   </li>
-    <li class="nav-item" *ngFor="let m of filter.menu.jewelery_type">
-        <a class="nav-link" href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">{{m}}<i class="icon-cross" (click)="deleteSelected('jewelery_type',m)"></i></span></h2></a>
-    </li>
-    <li class="nav-item" *ngFor="let m of filter.menu.purity">
-        <a class="nav-link" href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">{{m}}<i class="icon-cross" (click)="deleteSelected('purity',m)"></i></span></h2></a>
-      </li>
-    <li class="nav-item" *ngFor="let m of filter.menu.jewelery_for">
-        <a class="nav-link " href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">{{m}}<i class="icon-cross" (click)="deleteSelected('jewelery_for',m)"></i></span></h2></a>
-    </li>
-    <li class="nav-item" *ngFor="let m of filter.menu.material">
-        <a class="nav-link" href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">{{m}}<i class="icon-cross" (click)="deleteSelected('material',m)"></i></span></h2></a>
-    </li>
-    <li class="nav-item" *ngIf="checkClear()">
-        <a class="nav-link" href="javascript:void(0)"><h2><span class=" badge badge-pill badge-secondary">Clear All<i class="icon-cross" (click)="clear()"></i></span></h2></a>
-    </li>
-  </ul> -->
-
-
-  
-
-
-
-
   <div class="col-md-12 listing-margin-top mt-1">	
 	<div class="row">
 		<div class="col-md-12">		
@@ -343,7 +46,7 @@
 
 <div class="filter-bar">
     <ul>
-        <li #pricea (click)='abc(pricea)'>
+        <li #pricea name='price' (click)='abc(pricea,"price")'>
             <a href="javascript:void(0)">PRICE</a>
             <div class="filter-listing price-listing">
                 <ul class="subfilter">
@@ -402,19 +105,7 @@
             </div>
         </li>
 
-
-        
-
-
-
-
-
-
-
-
-
-
-        <li #type (click)='abc(type)'>
+        <li #type name='type' (click)='abc(type,"type")'>
             <a href="javascript:void(0)">jewelery Type</a>
             <div class="filter-listing">
                 <ul class="subfilter" *ngFor="let m of jewelery_type">
@@ -429,7 +120,7 @@
                 </ul>
             </div>
         </li>
-        <li  #purityz (click)='abc(purityz)'>
+        <li  #purityz name='purity' (click)='abc(purityz,"purity")'>
             <a href="javascript:void(0)">purity</a>
             <div class="filter-listing">
                 <ul class="subfilter" *ngFor="let m of purity">
@@ -444,7 +135,7 @@
                 </ul>
             </div>
         </li>
-        <li  #for (click)='abc(for)'>
+        <li  #for name='for' (click)='abc(for,"for")'>
             <a href="javascript:void(0)">jewelery for</a>
             <div class="filter-listing">
                 <ul class="subfilter" *ngFor="let m of jewelery_for">
@@ -459,7 +150,7 @@
                 </ul>
             </div>
         </li>
-        <li  #metal (click)='abc(metal)'>
+        <li  #metal name='metal' (click)='abc(metal,"metal")'>
             <a href="javascript:void(0)">METAL</a>
             <div class="filter-listing">
                 <ul class="subfilter" *ngFor="let m of material">

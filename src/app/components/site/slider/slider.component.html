@@ -1,8 +1,21 @@
-<ngb-carousel *ngIf=" slider_imgs && slider_imgs.length && slider_imgs[0].category">
-    <ng-template *ngFor="let slide of slider_imgs" ngbSlide>
-      <div class="picsum-img-wrapper" style="border-radius:8px;">
-       <img [routerLink]="['/', slide.category.category | lowercase , slide.subcategory]" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
-      </div>
-    </ng-template>
+<ngb-carousel *ngIf="slider_imgs">
+  <ng-template *ngFor="let slide of slider_imgs" ngbSlide>
+  <ng-container *ngIf='slide.banner_for == "Manufacture"'>
+    <div class="picsum-img-wrapper" style="border-radius:8px;">
+     <img [routerLink]="['/manufacture', slide.title | slugify]" [queryParams]="{ 'manufacturer': slide.user_id}" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
+    </div>
+  </ng-container>
+  <ng-container *ngIf='slide.banner_for == "Bullian"'>
+    <div class="picsum-img-wrapper" style="border-radius:8px;">
+     <img [routerLink]="['/bullion', slide.city_code]" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
+    </div>
+  </ng-container>
+  <ng-container *ngIf='slide.banner_for != "Bullian" && slide.banner_for != "Manufacture"'>
+    <div class="picsum-img-wrapper" style="border-radius:8px;">
+     <img onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
+    </div>
+  </ng-container>
+  </ng-template>
+  
 </ngb-carousel>
   

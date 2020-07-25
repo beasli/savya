@@ -31,8 +31,6 @@ export class RegisterComponent implements OnInit {
 changeNumber(e)
 {
   let t =new String(e);
-  // console.log(t.length);
-  // console.log(t);
   if(t.length==0||t=="null")
   {
     this.mob=false;
@@ -40,22 +38,18 @@ changeNumber(e)
   else if(t.length==10)
   {
     this.mob=false;
- //   console.log("perfect");
   }
   else{
     this.mob=true;
-  //  console.log("imperfect");
   }
 }
   SignUp(value){
     
         this.loading=true;
         this.sign=false;
-     //   console.log(this.mobile_no);
          if(value.name&&value.email&&value.mobile_no && !value.referal && value.address)
          {console.log(value.referal);
               this.mobile_no=value.mobile_no;
-              //console.log("if condition");
                 this.api.Post(REGISTER,{name:value.name,mobile_no:value.mobile_no,email:value.email,address:value.address}).then(data=>{
                   this.mobile=false;
                   this.loading=false;
@@ -71,7 +65,6 @@ changeNumber(e)
          }else if(value.name&&value.email&&value.mobile_no&&value.referal)
          {
           this.mobile_no=value.mobile_no;
-          //console.log("if condition");
             this.api.Post(REGISTER,{name:value.name,mobile_no:value.mobile_no,email:value.email,agent_code:value.referal,address:value.address}).then(data=>{
               this.mobile=false;
               this.loading=false;
@@ -94,20 +87,10 @@ changeNumber(e)
   }
   login(otpvalue)
 {
-
-  //console.log(this.mobile_no);
       this.api.Post(LOGIN,{mobile_no:this.mobile_no, otp:otpvalue,one_singnal:11}).then(data=>{
       this.loading=false;
         console.log(data['success'].token);
         this.api.setMobileNo(data['success'].token);
-        // this.api.updateWishlist();
-        // this.api.updateCart();
-        // this.api.Post(PROFILEVIEW, {}).then(data=>{
-        //   console.log(data);
-        //   this.api.setUserInfo(data['user']);
-        //   }).catch(d=>{
-        //         console.log(d);
-        //   });
         this.api.setlogin(1);
         if(this.api.goto){
           this.api.getGoto();
@@ -129,8 +112,6 @@ changeNumber(e)
         this.api.Post(PROFILEVIEW, {}).then(data=>{
           console.log(data);
           this.api.setUserInfo(data['user']);
-        //    this.api.updateWishlist();
-        // this.api.updateCart();
         if(localStorage.getItem('savya_userInfo'))
         {
           this.api.updateCart();

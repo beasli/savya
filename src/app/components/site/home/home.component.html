@@ -1,16 +1,14 @@
 <div class="page-content">
-	<!-- <div class="floating-whatsaap-btn">
-        <a target="_blank" href="https://wa.me/9711022520/?text=Hi"><img src="assets/images/WhatsApp.svg"/></a>
-    </div> -->
-    <!-- BN Slider 1 -->
+
+    
     <app-slider [slider_imgs] = 'slider_imgs' [url] = 'url'></app-slider>
-    <!-- //BN Slider 1 -->
+    
    
 
     <!-- live rates area-->
     <app-liverates *ngIf="page"></app-liverates>
     <!-- live rates area-->
-    <!-- <app-manufacture  [heading] = '""' [isShowAll] = 'false' [input] = 'logo' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = 'url2'></app-manufacture> -->
+    
     <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09 mt-1 mb-1 ">
       <div class="container-fluid">
             <div class="text-center">
@@ -18,29 +16,12 @@
                 <h2 class="h1-style">Our Associate Partners</h2>
 
 
-              <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
+         
           </div>
           <div class="testimonials seller" style="background-color:#f9f9fa;">
             <ngx-slick-carousel class="carousel" 
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
-
-                  
-<!-- 
-<div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" width="50%" class="card slide card-img-top embed-responsive embed-responsive-16by9" >
-  <img [routerLink]="['/manufacture/', slide.manufacture_id]" src="{{ manufacture + slide.logo }}"  onerror="this.src='../../../../assets/images/logo-bw.png'"  class="embed-responsive-item"  alt="" width="100%">
-  <div class="card-body">
-    <div class="text-center" [routerLink]="['/manufacture/', slide.manufacture_id]" *ngIf="slide.name">
-      <h5 class="card-title">{{ slide.name }}</h5>
-    </div>
-  </div>
-</div> -->
-
-
-
-
-
-
 
                   <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide he embed-responsive embed-responsive-16by9 border bordershadow">
                   <img (click)='fmanufacture(slide)' src="{{ manufacture + slide.logo }}"  onerror="this.src='../../../../assets/images/logo-bw.png'"  class="embed-responsive-item mt-1"  alt="" width="100%">
@@ -92,12 +73,6 @@
       </div>
     </section>
 
-    <!--/Product Holder -->
-    
-    
-    <!-- <app-testimonials [heading] = '""' [isShowAll] = 'false' [input] = 'models' [slidetoshow] = '"2"' [redirect] = '"N"'  [url] = '"assets/images/model/"' *ngIf="page"></app-testimonials> -->
-
-    <!--youtube-video-->
     <ngx-slick-carousel class="carousel" 
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
@@ -120,16 +95,14 @@
     <!--/Testimonial -->
 
 
-     <!-- Testimonials -->
-     <!--<app-testimonials [heading] = '"Partners"' [redirect] = '"N"' [input] = 'partners'  [url] = '"assets/images/"'></app-testimonials>-->
-     <!--/Testimonial -->
+    
 
 
      <div class="holder py-3 py-md-6 fullboxed aside--bg-none  mt-0" *ngIf="partner && partner.length">
           <div class="container">
               <div class="text-center">
                   <h2 class="h1-style">Partners</h2>
-                  <!-- <div class="under-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper justo sed massa posuere.</div> -->
+             
               </div>
               <div class="testimonials">
                   <ngx-slick-carousel class="carousel" 
@@ -152,16 +125,13 @@
           <div class="modal-content">
             <div class="modal-header">
               <h2 class="modal-title" id="exampleModalLongTitle">Network Issue</h2>
-              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button> -->
+              
             </div>
             <div class="modal-body">
               <h5>Check Your Internet Connection</h5>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <!-- <button type="button" class="btn btn-primary" (click)="goLogin()">Go</button> -->
             </div>
           </div>
         </div>

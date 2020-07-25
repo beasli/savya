@@ -26,26 +26,14 @@ export class NavBarComponent implements OnInit {
   machine: any;
   constructor(private api: ApiService, private router: Router) {
     
-                  //cart work start //
                   this.uid=this.api.uid;
-                  console.log("userid"+this.uid); 
                   this.api.getlogin.subscribe(data=>{
                     this.uid=this.api.uid;
                   })
-                  if(localStorage.getItem('savya_userInfo'))
-                  {
-                    this.view();
-                  }
-                  
-                  //cart work end//
-          
             this.api.Get(NAVIGATION).then(data => {
               this.catall = data['data'];
-              this.machine = this.catall.find(x => x.category == "MACHINERY");
-              console.log(this.machine);
               this.machine = '/machinery';
               this.api.machineurl = this.machine;
-              console.log(this.api.machineurl);
               this.catall.forEach(element => {
                 if (element['subcategory'].length){
                   this.catwithsub.push(element);
@@ -58,7 +46,6 @@ export class NavBarComponent implements OnInit {
              
             });
             this.api.changelogo.subscribe(data=>{this.logochange = data
-              console.log(this.logochange);
               if(data == 1){
                 this.newurl = this.api.machineurl;
               }
@@ -79,81 +66,12 @@ ProductsInCart()
     return (0);
   }
 }
-  deleteCart(pid)
-  {
-    this.api.deleteCart(pid);
-  }
-  view()
-  {
-      this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data=>{
-        console.log(data);  
-        this.baseurl=data['url']+"/";
-        this.results=data['data'];
-        this.alert=false;
-        this.div=true;
-      
-      }).catch(d=>{
-        if(d.status == 503){
-          this.api.onFail('Your session is expired please login again');
-          this.api.setGoto();
-          this.api.setlogin(0);
-          this.api.logout();
-          setTimeout(() => {
-          this.router.navigate(['/login']);
-          },1000);
-        } else{
-        this.div=false;
-        this.alert=true;
-        console.log(d);}
-      });
-  }
-
-
-
-  gofilter(value) {
-    console.log(value);
-    this.router.navigate(['/subsub', value]);
-  }
-
-  checkCart(pid)
-  {
-      let check=this.api.checkCart(pid);
-     // console.log(check);
-      return check;
- }
-  quantity(pid)
-  {
-       let cart=this.api.getCart();
-       if(cart)
-     {
-             let result=cart.find(x => x.product_id == pid);
-             // console.log(result);
-             if(result)
-             { 
-                   let cartId=result.cart_id;
-                   let c=Number(result.count);
-                   return c;
-               } 
-               else{
-                 return(0);
-               }
-       }
-  }
-  qtyUpdate(pid,value)
-  {
-       this.api.qtyUpdate(pid,value);
-  }
+ 
  
 ngOnInit() {
   this.api.getlogin.subscribe(data => {
-    console.log(+data);
     this.drop=data;
    })
-  this.api.Cart.subscribe(data => {
-    this.view();
-    console.log("changed");
-    console.log("getWishSubscribe"+data);
-     });
      this.drop=this.api.drop;
 }
 

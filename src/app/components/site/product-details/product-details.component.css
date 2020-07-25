@@ -179,3 +179,35 @@ label {
     margin-bottom: 6px;
     text-transform: initial;
 }
+
+
+
+
+
+
+
+
+
+
+
+.shopping-cart-item-details .cart-table-prd-qty{
+    width:4.6%;
+}
+
+.item-plus-minus table{
+    width:100%;
+}
+.item-plus-minus table tr td .btn{
+    padding: 10px 16px;
+}
+
+.item-plus-minus table tr td:nth-child(2){
+    width:30px;
+    text-align: center;;
+}
+.item-plus-minus{
+    text-align: left;
+    max-width: 120px;
+    margin-right: auto;
+    margin-left: 0;
+}

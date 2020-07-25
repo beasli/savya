@@ -119,20 +119,19 @@ export class HomeComponent implements OnInit {
             this.videos = childObj['video'];
           }else if (childObj.category === 'partner') {
             this.partner = childObj['partner'];
-            console.log(this.videos)
           }
        });
        this.exclusive.forEach(element => {
         element.image = element.image.replace(/ /g, "%20");
         element.image = element.image.replace(/\(/g, "%28");
         element.image = element.image.replace(/\)/g, "%29");
-        console.log(element.image);
+        
       });
       this.videos.forEach(element => {
         element.file_name = element.file_name.replace(/ /g, "%20");
         element.file_name = element.file_name.replace(/\(/g, "%28");
         element.file_name = element.file_name.replace(/\)/g, "%29");
-        console.log(element.image);
+        
       });
         this.url = IMAGE+"banner/";
         this.event = IMAGE+"events/";
@@ -147,8 +146,6 @@ export class HomeComponent implements OnInit {
     return this.DOM.bypassSecurityTrustResourceUrl(url);
   }
   fmanufacture(ob){
-    //ob.name = ob.name.replace(/ /g, "%20");
-    console.log(ob.name);
     
     this.router.navigate(['/manufacture', ob.name.replace(/ /g, "-")],{queryParams:{'manufacturer':ob.manufacture_id}});
   

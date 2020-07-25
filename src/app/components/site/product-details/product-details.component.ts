@@ -102,17 +102,7 @@ export class ProductDetailsComponent implements OnInit {
     this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data=>{
         this.cart=data['data'];
     }).catch(d => {
-      // if(d.status != 401 || d.status != 503){
-      //  // this.api.onFail('Your session is expired please login again');
-      //   this.api.setGoto();
-      //   this.api.setlogin(0);
-      //   this.api.logout();
-      //   setTimeout(() => {
-      // //  this.router.navigate(['/login']);
-      //   },1000);
-      // } else{
-      // console.log(d);
-      // }
+      
     })
     this.total();
    }
@@ -179,7 +169,6 @@ export class ProductDetailsComponent implements OnInit {
         //  console.log("result="+result);
             if (result)
             { 
-             // console.log("present");
               return true;
             
             }
@@ -214,7 +203,7 @@ export class ProductDetailsComponent implements OnInit {
     this.message = 'Please wait ...';
     document.getElementById("openModalButton").click();
     this.api.Post(CARTADD, s).then(data=>{
-      console.log(data);
+      
       this.api.updateCart();
       this.api.Cart.emit("cartUpdated"+Date.now());
       document.getElementById("mClose").click();
@@ -234,8 +223,6 @@ export class ProductDetailsComponent implements OnInit {
       }else if(d.status == 401){
         this.api.onFail('Product already in cart');
       } else{
-      console.log(d);
-      console.log
       this.api.Cart.emit("cartUpdated"+Date.now());
       }      
     });
@@ -247,7 +234,7 @@ export class ProductDetailsComponent implements OnInit {
      this.api.Put(PRODUCTDETAILS, this.pid ).then(data  => {
         this.page=true;
         this.loader=false;
-        console.log(data);
+        
         if(data['data'])  {
           this.data = data['data'];
           this.pricelist = data['price'];
@@ -270,21 +257,21 @@ export class ProductDetailsComponent implements OnInit {
         if (this.data.size_type && this.data.size_type != 'None' ) {
           this.defaultsize = this.data.default_size;
           this.sizes = this.data.size_type.split(',');
-          console.log(this.sizes);
+          
           this.sizes = this.sizes.filter((v, i, a) => a.indexOf(v) === i);
-          console.log(this.sizes);
-          this.sizes = this.bubbleSort(this.sizes);
-          console.log(this.sizes);
+          
+          this.sizes = this.sort(this.sizes);
+          
           this.selectedsize = this.defaultsize;
           let temp = [];
           if(this.sizelist){
           this.sizes.forEach(childObj => {
-            console.log(childObj);
+            
              let s = this.sizelist.find(x => x.sizes == childObj);
             temp.push(s);
           });
           this.sizelist = temp;
-          console.log(this.sizelist);}
+          }
         }
         
           if (this.assets) {
@@ -321,23 +308,32 @@ export class ProductDetailsComponent implements OnInit {
   
               let result = data['data'].find(x => x.id == this.data['subcategory_id']);
               this.subcategory = result['subcategory'];
-              console.log(data);
-              console.log(this.subcategory);
+              
               this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.data['subcategory_id']} ).then(data  => {
-                console.log(data);
+                
                   let result = data['data'].find(x => x.id == this.data['subsubcategory_id']);
                   this.subsubcategory = result['title'];
-                  console.log(this.subsubcategory);
-              }).catch(d=>{console.log(d);});
-       }).catch(d=>{console.log(d);});
-    }).catch(d=>{console.log(d);});
+                  
+              }).catch(d=>{});
+       }).catch(d=>{});
+    }).catch(d=>{});
 
     
-
+    
     this.api.Post(CATEGORY, {} ).then(data  => {
      let result = data['data'].find(x => x.id == this.data['category_id']);
      this.category = result['category'];
-  }).catch(d=>{console.log(d);});
+  }).catch(d=>{});
+}
+
+valuec(val,def='n'){
+  console.log(this.value);
+  console.log(val)
+  if(def='n'){
+    this.value += val;
+  } else{
+    this.value = val;
+  }
 }
 
 bubbleSort(array) {
@@ -357,12 +353,19 @@ bubbleSort(array) {
   return array;
 }
 
+sort(ary) {
+  let a;
+  // use custom compare function that sorts numbers ascending
+  a = ary.sort(function(a, b) {
+      return a - b;
+  });
+  return a;
+}
 
 
 
 
 diamondchange(diamond){
-  console.log(diamond);
   this.diamond = this.diamondlist.find(x => x.jwellery_size == diamond);
   this.diamondcolour = this.diamond.color.split(',');
   this.diamondclarity = this.diamond.clarity.split(',');
@@ -457,9 +460,7 @@ diamondchange(diamond){
     }
     let uid = this.api.getUserInfo();
     uid = uid.id;
-    console.log(uid);
     j['assests'] = temparray;
-  //  j['category'] = this.data['category_id'];
     j['count'] = this.value;
     j['jwellery_type'] = this.data.jwellery_type;
 
@@ -482,15 +483,12 @@ diamondchange(diamond){
     j['productId'] = Number(this.pid);
     j['productName'] = this.data.productname;
     j['productType'] = this.data.jwellery_type;
-  //  j['subCategory'] = this.data['subcategory_id'];
-  //  j['subSubCategory'] = this.data['subsubcategory_id'];
     j['userid'] = (uid).toString();
     temparray = [];
     temparray.push(j);
     j = {};
     j['data'] = temparray;
     this.addToCart(j);
-    console.log(this.loading);
     let check=this.checkCart(this.pid);
     if(check==true)
     {
@@ -522,6 +520,7 @@ diamondchange(diamond){
         this.button();
       }
    }
+   
 
    clean(){
     this.pid= null;
@@ -587,7 +586,7 @@ diamondchange(diamond){
 
    getgold(value) {
      this.gold = Object.assign({},this.goldlist.find(x => x.jwellery_size == value.jwellery_size));
-    console.log(this.gold);
+    
      if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Ring') {
         
       if(this.data.gender == 'FeMale'){
@@ -654,39 +653,28 @@ diamondchange(diamond){
    button(){
     if (this.gold && !this.pricegold) {
       this.btn = 0;
-      // document.getElementById("openModalButton2").click();
-      //  this.message = 'Please Choose Another option in gold in this product \n as it is not available with current gold selection';
     }
   else  if (this.platinum && !this.priceplat) {
     this.btn = 0;
     
-    // document.getElementById("openModalButton2").click();
-    // this.message = 'Please Choose Another option in platinum in this product \n as it is not available with current platinum selection';
     }
   else  if (this.diamond && !this.pricediamond) {
     this.btn = 0;
     
-    // document.getElementById("openModalButton2").click();
-    // this.message = 'Please Choose Another option in diamond in this product \n as it is not available with current diamond selection';
     }
  else   if (this.stone && !this.pricestone) {
   this.btn = 0;
   
-  // document.getElementById("openModalButton2").click();
-  // this.message = 'Please Choose Another option in stone in this product \n as it is not available with current stone selection';
     }
    else if (this.silver && !this.pricesilver) {
     this.btn = 0;
     
-    // document.getElementById("openModalButton2").click();
-    // this.message = 'Please Choose Another option in silver in this product \n as it is not available with current silver selection';
     } else{
       this.btn = 1;
     }
    }
    getplatinum() {
     this.platinum = Object.assign({},this.defplat);
-    console.log(this.platinum);
    if(this.platinum)
     {
       if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Ring') {
@@ -838,22 +826,13 @@ diamondchange(diamond){
 
       if(this.diamondcolour[i] != this.defaultdiamond[0] ){
       let p = this.pricelist.diamond_master.find(x => x.type == name);
-      console.log(name);
-      console.log("cla");
-      console.log(p);
       if(p){
         this.discol[i] = 0;
-        console.log(this.discol[i]);
       }else{
         this.discol[i] = 1;
-        console.log(this.discol[i]);
       }
     }
     }
-    console.log(this.discla);
-    console.log(this.discol);
-
-
     let name = this.defaultdiamond[0] + '/' + this.defaultdiamond[1];
     this.pricediamond = this.pricelist.diamond_master.find(x => x.type == name);
     if (this.pricediamond)
@@ -915,9 +894,7 @@ diamondchange(diamond){
     this.loader = true;
     this.page = false;
     this.api.getlogin.subscribe(data => {
-      console.log(+data);
       this.drop = data;
-      console.log(this.drop);
      });
   }
 

@@ -16,16 +16,12 @@ export class AppComponent {
   {
 
       this.api.Get(CONTACT).then(data=>{
-        //console.log(data['data'][0]);
         this.values=data['data'];
-       // console.log(this.values);
-       // console.log("values"+JSON.stringify(this.values));
       }).catch(d=>{
-        console.log(d);
       })
        
 this.api.getlogin.subscribe(data=>{
-  //console.log("app"+data);
+  
   if(data==1)
   {
     this.api.updateWishlist();
@@ -34,7 +30,6 @@ this.api.getlogin.subscribe(data=>{
 })
   }
   changeOfRoutes(){
-    console.log('hi im here');
-    this.api.updateCart()
+    this.api.updateCart();
   }
 }

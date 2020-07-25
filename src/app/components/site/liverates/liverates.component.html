@@ -1,4 +1,5 @@
-<div routerLink='/bullion' class="table-box-wrapper" style="padding:3% 0% 0%;" *ngIf="rates" >
+
+<div routerLink='/bullion' class="table-box-wrapper" style="padding:3% 0% 0%;" *ngIf="rates && pregold" >
   <ngx-slick-carousel class="carousel" 
                             #slickModal="slick-carousel" 
                             [config]="slideConfig" >
@@ -109,23 +110,3 @@
   </div>
 </ngx-slick-carousel>
 </div>
-<!-- <div class="table-box-wrapper for-mobile" *ngIf="rates">
-
-<table>
-  <tr>
-      <th></th>
-      <th>Bid</th>
-      <th>Ask</th>
-      <th>Low</th>
-      <th>High</th>
-  </tr>
-  
-  <tr  *ngFor="let rate of rates">
-    <td>{{ (rate.Symbol === 'GLD') ? 'Gold [₹]' : (rate.Symbol === 'SLR') ? 'Silver [₹]' : (rate.Symbol === 'XAUUSD') ? 'Gold [$]' : (rate.Symbol === 'XAGUSD') ? 'Silver [$]' : (rate.Symbol === 'INRSpot') ? 'INR [₹]' : ''}}</td>
-    <td>{{rate.Bid}}</td>
-    <td>{{rate.Ask}}</td>
-    <td>{{rate.High}}</td>
-    <td>{{rate.Low}}</td>
-  </tr>
-</table>
-</div> -->

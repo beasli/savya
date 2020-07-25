@@ -46,6 +46,29 @@
   .myCustomModalClass .modal-dialog {
     max-width: 850px;
   }
+  .myCustomModalClass2 .modal-dialog .modal-content{
+    max-width: 900px;
+    background-color: rgba(0,0,0,0);
+    min-height: 500px;
+  }
+  .myCustomModalClass2 .modal-dialog{
+    max-width: 900px;
+    min-height: 500px;
+  }
+
+
+  /* .dark-modal .modal-content {
+    background-color: #292b2c;
+    color: white;
+  } */
+  
+
+
+
+
+
+
+
 
   .bordershadow{
     margin: 15px 15px!important;

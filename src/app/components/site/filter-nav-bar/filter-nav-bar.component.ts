@@ -103,9 +103,6 @@ export class FilterNavBarComponent implements OnInit {
   deleteSelected(type,filterValue)
     {
       let f= this.api.getfilter();
-        console.log(type);
-        console.log(filterValue);
-        //console.log(Object.keys(this.filter.menu.price).length);
         if(type=="jewelery_type")
         {
           // console.log("if condition");
@@ -180,7 +177,6 @@ export class FilterNavBarComponent implements OnInit {
     {
       
       let f= this.api.getfilter();
-      console.log(f.menu.jewelery_for);
       if(f.menu.jewelery_type.length>0||f.menu.jewelery_for.length>0||f.menu.material.length>0||f.menu.purity.length>0||Object.keys(f.menu.price).length>0)
       {
         return true;
@@ -205,13 +201,8 @@ changefilter(event,value)
   let name=event.target.name;
   console.log(name);
   let f= this.api.getfilter();
-  console.log(event);
-  console.log(value);
-  console.log(name);
   if(name=="jewelery_for")
   {
-            console.log("if condition");
-            console.log(f.menu.jewelery_for);
             if(f.menu.jewelery_for.length>0)
             {
               let result=f.menu.jewelery_for.find(x => x == value);
@@ -243,8 +234,6 @@ changefilter(event,value)
   }
   else if(name=="purity")
   {
-            console.log("if condition");
-            console.log(f.menu.purity);
             if(f.menu.purity.length>0)
             {
               let result=f.menu.purity.find(x => x == value);
@@ -271,8 +260,6 @@ changefilter(event,value)
  
   else if(name=="material")
   {
-            console.log("if condition");
-            console.log(f.menu.material);
             if(f.menu.material.length>0)
             {
                   let result=f.menu.material.find(x => x == value);
@@ -304,20 +291,37 @@ changefilter(event,value)
 
 }
 
-abc(a) {
-  console.log(a);
-  
+abc(a,name) {
+  if(name == 'price' ) {
+    this.b.nativeElement.classList.remove('active');
+    this.c.nativeElement.classList.remove('active');
+    this.d.nativeElement.classList.remove('active');
+    this.e.nativeElement.classList.remove('active');
 
+  } else if (name == 'type') {
+    this.a.nativeElement.classList.remove('active');
+    this.c.nativeElement.classList.remove('active');
+    this.d.nativeElement.classList.remove('active');
+    this.e.nativeElement.classList.remove('active');
+  } else if(name == 'purity') {
+    this.a.nativeElement.classList.remove('active');
+    this.b.nativeElement.classList.remove('active');
+    this.d.nativeElement.classList.remove('active');
+    this.e.nativeElement.classList.remove('active');
+  } else if(name == 'for') {
+    this.a.nativeElement.classList.remove('active');
+    this.b.nativeElement.classList.remove('active');
+    this.c.nativeElement.classList.remove('active');
+    this.e.nativeElement.classList.remove('active');
+  } else if (name == 'metal') {
+    this.a.nativeElement.classList.remove('active');
+    this.b.nativeElement.classList.remove('active');
+    this.c.nativeElement.classList.remove('active');
+    this.d.nativeElement.classList.remove('active');
+  }
   a.classList.toggle("active");
-  // var panel = a.nextElementSibling;
-  // if (panel.style.maxHeight) {
-  //   panel.style.maxHeight = null;
-  // } else {
-  //   panel.style.maxHeight = panel.scrollHeight + "px";
-  // }
 }
 getprice(event){
-  console.log(event);
   let min;
   let max;
   let res:any;
@@ -340,6 +344,11 @@ getprice(event){
         f.menu.price.max=Number(max);
         this.api.setfilter(f);
     }
+    this.a.nativeElement.classList.remove('active');
+    this.b.nativeElement.classList.remove('active');
+    this.c.nativeElement.classList.remove('active');
+    this.d.nativeElement.classList.remove('active');
+    this.e.nativeElement.classList.remove('active');
 }
 clear()
 {
@@ -420,18 +429,17 @@ checkedpurity(value)
   ngOnInit(){
     this.api.Get(PRODUCTFILTERMENU).then(data  => {
       this.jewelery_for=data['menu'].jewelery_for;
-      console.log(data);
+      
        this.material=data['menu'].material;
        this.purity=data['menu'].purity;
        this.price=data['menu'].price;
        this.jewelery_type=data['menu'].jewelery_type;
-       console.log(this.jewelery_type);
+       
       }).catch(d=>{
-       console.log(d);
      });
      this.api.filterChange.subscribe(data=>{
        this.filter=this.api.getfilter();
-       console.log(this.filter);
+      
      })
   }
   

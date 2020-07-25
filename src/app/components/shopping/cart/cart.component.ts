@@ -70,6 +70,7 @@ products: any;
           this.div=true;
         
         }).catch(d=>{
+          console.log(d);
           if(d.status == 503){
             this.api.onFail('Your session is expired please login again');
             this.api.setGoto();
@@ -83,13 +84,13 @@ products: any;
          this.loader=false;
           this.div=false;
           this.alert=true;
-          console.log(d);}
+          }
         })
    }
    checkCart(pid)
    {
        let check=this.api.checkCart(pid);
-      // console.log(check);
+      
        return check;
   }
    quantity(cart_id)
@@ -98,7 +99,7 @@ products: any;
         if(cart)
       {
               let result=cart.find(x => x.cart_id == cart_id);
-              // console.log(result);
+              
               if(result)
               { 
                     let cartId=result.cart_id;
@@ -110,10 +111,6 @@ products: any;
                 }
         }
    }
-  //  qtyUpdate(pid,value)
-  //  {
-  //       this.api.qtyUpdate(pid,value);
-  //  }
 
    qtyUpdate(pid,value) {
      console.log(pid);
@@ -162,7 +159,6 @@ products: any;
     this.page=false;
     this.api.Cart.subscribe(data=>{
       this.view();
-       console.log("getWishSubscribe"+data);
        }) 
     
   }

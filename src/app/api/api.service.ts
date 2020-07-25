@@ -1,3 +1,4 @@
+import { LoginModalComponent } from './../components/site/login-modal/login-modal.component';
 import { Router } from '@angular/router';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -5,8 +6,7 @@ import { apiUrl, WISHLISTVIEW, WISHLISTADD, WISHLISTDELETE, CARTADD, CARTVIEW, C
 import * as CryptoJS from 'crypto-ts';
 import { JsonPipe } from '@angular/common';
 import { NotificationsService } from 'angular2-notifications';
-// import { MapsAPILoader } from '@agm/core';
-declare var google: any;
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
   providedIn: 'root'
@@ -31,25 +31,14 @@ export class ApiService {
   goto:any;
   cat: any;
   // geocoder = new google.maps.Geocoder();
-  constructor(public http: HttpClient,private service: NotificationsService, private router: Router) {
-    console.log('I AM CONSTRUCTOR');
+  constructor(public http: HttpClient,private service: NotificationsService, private router: Router,private modalService: NgbModal) {
     this.category();
     this.filter = {"menu":{"jewelery_for":[],"jewelery_type":[],"material":[],"price":{},"purity":[]}};
     if(localStorage.getItem('savya_userInfo'))
     {
      let u=this.getUserInfo();
     this.uid=u.id;
-    console.log("userid"+this.uid);
    }
-    // console.log("userid"+this.uid);
-    // if(this.getMobileNo())
-    // {
-    //   console.log("if condition");
-    //   this.updateCart();
-    //   this.updateWishlist();
-    //   this.updateOrderHistory();
-    // }
-    
     if (localStorage.getItem('drop')) {
       this.drop =  +this.decrypt((localStorage.getItem('drop')));
     } else {
@@ -60,9 +49,22 @@ export class ApiService {
       "Authorization",
        'Bearer'+" "+this.getMobileNo()
     );
-    console.log({headers:this.header});
-
-
+    if(this.drop == 0 ){
+      let count = 1;
+      const cell = this;
+      setInterval(function(){ 
+     //   debugger
+        count ++;
+        if(count==3){
+          clearInterval();
+          cell.modalService.open(LoginModalComponent,{ windowClass: 'myCustomModalClass2',backdrop : 'static',
+          keyboard : false})
+        }
+      }
+      , 1000);
+     
+   //   this.modalService.open(LoginComponent)
+    }
       this.getlogin.subscribe(data=>{
         if(this.drop==1)
         {
@@ -72,36 +74,14 @@ export class ApiService {
             this.updateWishlist();
             this.updateOrderHistory();
           }
-        // console.log("login emitter");
+      
         }
-        if(this.drop==0)
-        {
-        //  console.log("logout emitter");
-        }
+      
         
       })
 
  }
 
-//  geocodeAddress(location: string){
-//   console.log('Start geocoding!');
-  
-//       return (observer => {
-//         this.geocoder.geocode({'address': location}, (results, status) => {
-//           if (status == google.maps.GeocoderStatus.OK) {
-//             console.log('Geocoding complete!');
-//             observer.next({
-//               lat: results[0].geometry.location.lat(), 
-//               lng: results[0].geometry.location.lng()
-//             });
-//           } else {
-//               console.log('Error - ', results, ' & Status - ', status);
-//               observer.next({ lat: 0, lng: 0 });
-//           }
-//           observer.complete();     
-//     })
-//    })
-// }
 
 
 
@@ -122,7 +102,7 @@ export class ApiService {
       "Authorization",
        'Bearer'+" "+this.getMobileNo()
     );
-   // console.log(this.header);
+   
     return new Promise((resolve, reject) => {
       this.http.get(apiUrl + api,  {headers:this.header})
         .subscribe(res => {
@@ -147,7 +127,7 @@ export class ApiService {
       "Authorization",
        'Bearer'+" "+this.getMobileNo()
     );
-    console.log(this.header);
+   
     return new Promise((resolve, reject) => {
 
       let options = { headers: this.header ,params:parameters};
@@ -266,9 +246,6 @@ export class ApiService {
     });
   }
  
-  
-//cart functions
-
   updateCart()
   {
     if(localStorage.getItem('savya_userInfo'))
@@ -276,29 +253,17 @@ export class ApiService {
      let u=this.getUserInfo();
     this.uid=u.id;
     this.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
-      //console.log(data['data'][0].cart_id);
-      // console.log( data);
+ 
       localStorage.setItem('cart',JSON.stringify(data));  
     }).catch(d=>{
       if(d.status == 503){
-        // this.onFail('Your session is expired please login again');
-        // this.setGoto();
-        // this.setlogin(0);
-        // this.logout();
-        // setTimeout(() => {
-        // this.router.navigate(['/login']);
-        // },1000);
+        
       } else{
-      console.log(d);
       localStorage.removeItem('cart');
       this.Cart.emit("emptycart"+Date.now());}
      })
-    // console.log(this.uid);
+    
    }
-
-   
-
-    //console.log("in update cart function")
    
   }
   checkCart(pid)
@@ -574,7 +539,7 @@ getWishlist()
 
 
   public encrypt(data) {
-   // console.log(JSON.stringify(data));
+  
    const encryptedMessage = CryptoJS.AES.encrypt(JSON.stringify(data), 'test').toString();
    return encryptedMessage;
   }
@@ -592,24 +557,12 @@ getWishlist()
   }
   setMobileNo(value)
   {
-   // let e=this.encrypt(value.mobile_no);
     localStorage.setItem('token',value);
-              // var encrypted = CryptoJS.AES.encrypt(
-              //   value,
-              //   'test',
-              //   {
-              //     mode: CryptoJS.mode.CBC,
-              //     padding: CryptoJS.pad.PKCS7
-              //   }
-              // );
   }
   getMobileNo()
   {
     let m=localStorage.getItem('token');
-    // let d =this.decrypt(m);
-    //  return d;
     return m;
-
   }
 
   changelg(number:number){
@@ -628,6 +581,11 @@ getWishlist()
     // console.log(d);
     return d;
   }
+
+  public dismissModel(){
+    this.modalService.dismissAll();
+  }
+
   logout()
   {
     this.header = null;
@@ -636,6 +594,22 @@ getWishlist()
       localStorage.removeItem('wishlist');
       localStorage.removeItem('cart');
       localStorage.removeItem('orders');
+      if(this.drop == 0 ){
+        let count = 1;
+        const cell = this;
+        setInterval(function(){ 
+       //   debugger
+          count ++;
+          if(count==3){
+            clearInterval();
+            cell.modalService.open(LoginModalComponent,{ windowClass: 'myCustomModalClass2',backdrop : 'static',
+            keyboard : false})
+          }
+        }
+        , 1000);
+       
+     //   this.modalService.open(LoginComponent)
+      }
   }
 setOtp(value)
 {
@@ -648,11 +622,9 @@ getOtp()
 setOtpGuard(value)
 {
     this.otpGuard=value;
-   // console.log("apiservice"+this.otpGuard);
 }
 getOtpGuard()
 {
-  //console.log("apiservice"+this.otpGuard);
     return this.otpGuard;
     
 }
@@ -675,13 +647,7 @@ calculate(products){
         let pricegold = price.gold.find(x => x.type == '24KT');
         let value = price.gold.find(x => x.type == gold.materialType);
         value = value.value_in;
-        console.log(value);
-        console.log(pricegold.price);
-        console.log(gold.options);
-        console.log(gold.makingCharge);
-        console.log(gold.weight);
         let outcome = this.price(gold.weight,pricegold.price,gold.options,gold.makingCharge,0,value);
-        console.log(outcome);
             weight += Number(gold.weight);
             goldweight = Number(outcome.weight);
             priceProduct += outcome.price;
@@ -721,9 +687,14 @@ calculate(products){
     priceProduct += outcome.price;
     making += Number(outcome.making_charge);
   }
-   
+   if(gold){
     let data = {'weight':weight.toFixed(3),'price':priceProduct,'goldcat':gold.materialType,'goldweight':goldweight,'making':making};
     priceWeight.push(data);
+    } else{
+      let data = {'weight':weight.toFixed(3),'price':priceProduct,'goldcat':null,'goldweight':goldweight,'making':making};
+      priceWeight.push(data);
+    }
+   
   });
   return priceWeight;
 }
@@ -750,22 +721,19 @@ price(weight, rate, option, makingcharge, wastage = 0, value = 0) {
 }
 setfilter(value)
 {
-  //localStorage.setItem('filter',JSON.stringify(value));
+  
   this.filter = value;
   this.filterChange.emit("filterchanged"+Date.now()); 
 }
 getfilter()
 {
   return this.filter;
-  //return JSON.parse(localStorage.getItem('filter'));
+  
 }
 
 category(){
   this.Get(NAVIGATION).then(data => {
     this.cat = data['data'];
-    console.log(data['data']);
   });
-
 }
-
 }

@@ -41,7 +41,7 @@ url: any;
         setTimeout(() => {
         this.router.navigate(['/login']);
         },1000);
-      } else{console.log(d)}
+      }
     });
   }
 

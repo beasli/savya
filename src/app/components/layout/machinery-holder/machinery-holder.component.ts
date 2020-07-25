@@ -42,14 +42,11 @@ export class MachineryHolderComponent implements OnInit {
   };
   @Input() heading;
   constructor(private router:Router) { 
-    console.log("hellooo");
   }
   go(argument){
     this.router.navigate(['/products/machinery', argument]);
   }
   ngOnInit(): void {
-    console.log("hellooo");
-    console.log(this.mostselling);
   }
 
 }

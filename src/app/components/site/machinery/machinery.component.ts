@@ -14,6 +14,7 @@ export class MachineryComponent implements OnInit {
 slider_imgs:any;
 url = IMAGE+"machinarybanner/";
 manufacture = IMAGE+"users/";
+base = IMAGE;
 eventraiser:number;
 data:any;
 slideConfig = {
@@ -92,15 +93,19 @@ imagemodel=IMAGE+'machinerygallery/'
           data['body'].forEach(childObj => {
             if (childObj.category === 'machinery_banners') {
               this.slider_imgs = childObj['machinery_banners'].filter(slide => slide.place === 'Website');
-             // console.log(this.slider_imgs);
-             // console.log(IMAGE+"machinarybanner/"+this.slider_imgs[0].image)
+            
             }
             else if (childObj.category === 'exclusive_banners') {
               this.exclusive = childObj['exclusive_banners'].filter(slide => slide.place === 'Website');
+              this.exclusive.forEach(element => {
+                element.image = element.image.replace(/ /g, "%20");
+                element.image = element.image.replace(/\(/g, "%28");
+                element.image = element.image.replace(/\)/g, "%29");
+              });
             }
             else if (childObj.category === 'Machinery_product') {
               this.mostselling = childObj['Machinery_product'];
-              console.log(this.mostselling);
+             
             }
             else if (childObj.category === 'machinery_model') {
               this.models = childObj['machinery_model']
@@ -110,31 +115,26 @@ imagemodel=IMAGE+'machinerygallery/'
 
             }else if (childObj.category === 'categories') {
               this.categories = childObj['categories'];
-              console.log(this.categories)
-            }else if (childObj.category === 'machinery_partner ') {
+              
+            }else if (childObj.category === 'machinery_partner') {
               this.Partners = childObj['machinery_partner'];
             }
          });
 
             if(this.slider_imgs && this.categories){
-              console.log('hello')
-              console.log(this.categories);
-              console.log(this.slider_imgs);
+              
               this.slider_imgs.forEach(childObj =>{
                 let a = this.categories.find(slide => slide.category_id == childObj.category_id);
-                console.log(a);
+                
                 childObj.category = a.subcategory;
               });
-              console.log(this.slider_imgs);
+              
             }
 
           
         })
         
       });
-
-     console.log(this.videos);
-     console.log(this.exclusive);
      
   }
 

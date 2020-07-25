@@ -27,20 +27,16 @@ export class ExclusiveBannerComponent implements OnInit {
       this.exclusive.forEach(element => {
         element.category = this.catall.find(x => x.category_id == element.category_id);
         element.subcategory = element.category.subcategory.find(x => x.subcategory_id == element.subcategory_id);
-        console.log(element.category);
         if(element.subcategory){
         element.subcategory = element.subcategory.subcategory.replace(/ /g, "-");
       }
       });
-      console.log(this.exclusive);
     }
   }
 
 
 
   ngOnInit(): void {
-    // console.log(this.url2);
-    // console.log(this.exclusive);
   }
 
 }

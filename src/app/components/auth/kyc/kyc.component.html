@@ -1,102 +1,4 @@
-<!-- <div class="page-content" style="margin-bottom: 65px;">
-    <div class="holder mt-0">
-        <div class="container">
-            <ul class="breadcrumbs">
-                <li><a href="index.html">Home</a></li>
-                <li><span>Change Profile</span></li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="holder mt-0">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-sm-8 col-md-6">
-                    <h2 class="text-center">CHANGE PROFILE</h2>
-                  
-                    <div class="form-wrapper">
-                        <form #f="ngForm" (ngSubmit)="kyc(f.value)">
-                            <div class="form-group">
-                                <label for='gstno'>Gst No</label>
-                                <input type="text"  #gst_no="ngModel" ngModel  name="gst_no" class="form-control" (ngModelChange)="changeGst($event)" placeholder="GST No.*" required>
-                                <div class="alert alert-danger" *ngIf="gst_no.touched && gst_no.invalid">
-                                    Gst no. is required.
-                                </div>
-                                <div *ngIf="checkGst()" class="alert alert-danger">Incorrect Gst no. </div>
-                            </div>
-                            <div class="form-group">
-                                <label for='panno'>Pan No</label>
-                                <input type="text"  #pan_no="ngModel"  ngModel  name="pan_no" (ngModelChange)="changePan($event)" class="form-control" placeholder="Pan Card No.*" required>
-                                <div class="alert alert-danger" *ngIf="pan_no.touched && pan_no.invalid">
-                                    Pan no. is required.
-                                </div>
-                                <div *ngIf="checkPan()" class="alert alert-danger">Incorrect Pan no. </div>
-                            </div>
-                            <div class="form-group">
-                                <label for='aadhar'>Aadhar No.</label>
-                                <input type="text"  #aadhar="ngModel"  ngModel  name="aadhar" class="form-control" (ngModelChange)="changeAadhar($event)" placeholder="Aadhar No." required>
-                                <div class="alert alert-danger" *ngIf="aadhar.touched && aadhar.invalid" >
-                                    Aadhar no. is required.
-                                </div>
-                                <div *ngIf=" checkAdhar()" class="alert alert-danger">Incorrect Aadhar no. </div>
-                            </div>
-                            <div class="form-group">
-                                <label for='gst_doc'>Gst Document</label>
-                                <input type="file"  #gst_doc="ngModel"  ngModel name="gst_doc" class="form-control" placeholder="Gst Document" required>
-                                <div class="alert alert-danger" *ngIf="gst_doc.touched && gst_doc.invalid">
-                                    Gst Document is required.
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for='aadhar_doc'>Aadhar Document</label>
-                                <input type="file"  #aadhar_doc="ngModel"  ngModel name="aadhar_doc" class="form-control" placeholder="Aadhar Document" required>
-                                <div class="alert alert-danger" *ngIf="aadhar_doc.touched && aadhar_doc.invalid">
-                                    Aadhar Document is required.
-                                </div>
-                            </div>
 
-
-                            <div class="form-group">
-                                <label for='visiting_doc'>Visiting Document</label>
-                                <input type="file"  #visiting_doc="ngModel"  ngModel name="visiting_doc" class="form-control" placeholder="Visiting Document" required>
-                                <div class="alert alert-danger" *ngIf="visiting_doc.touched && visiting_doc.invalid">
-                                    Visiting Document is required.
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for='pan_doc'>Pan Document</label>
-                                <input type="file"  #pan_doc="ngModel"  ngModel name="pan_doc" class="form-control" placeholder="Pan Document" required>
-                                <div class="alert alert-danger" *ngIf="pan_doc.touched && pan_doc.invalid">
-                                    Pan Document is required.
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for='mobile_no'>Mobile No</label>
-                                <input type="text"  #pan_no="ngModel"  ngModel  name="mobile_no" class="form-control" placeholder="Mobile No.*" required>
-                                <div class="alert alert-danger" *ngIf="pan_no.touched && pan_no.invalid">
-                                    Pan No. is required.
-                                </div>
-                            </div>
-                            <div *ngIf="alert">
-                                <p>
-                                  <ngb-alert [type]="type" >
-                                  <strong>{{message}}</strong> 
-                                  </ngb-alert>
-                                </p>
-                          </div>
-                            
-                            <div class="text-center" ><input  class="btn"  *ngIf="sign" type="submit" value="Submit" [disabled]="!f.valid"></div>
-                            <div class="text-center"><input  class="btn"   *ngIf="loading" type="submit" value="Loading..."  disabled></div>
-                            <div *ngIf="alert">
-                                <a routerLink="/home"><strong>Click to go Home</strong></a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <div class="kyc-second-skin" *ngIf="page">
     <div class="holder mt-0">
@@ -114,8 +16,6 @@
                     <div [ngClass]="{'glowing-border':rejcted.gst,'each-photo-upload-wpapper':true}">
                         <div class="select-feild">
                             
-                              <!-- <input type="radio" *ngIf="kycValue==null" [checked]="gst_doc1.valid&&gst_no.valid" id="gst-reg-front"> -->
-                            
                             <label for="gst-reg-front">GST REG 01 (Registration Certificate)</label><br>
                         </div>
                         <div class="uplod-documents">
@@ -123,7 +23,7 @@
                                 <div class="col-6" *ngIf="kycValue==null||kycValue.gst_doc==null || why[0]=='1'">
                                     <div class="photop-upload-area preview" id="preview"  >
                                         <img id="gst_front" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/1.+GST+(1)/GST_Front-0.jpg" >
-                                        <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
+                                        
                                     </div>
                                 </div>
                                 <div class="col-6" *ngIf="kycValue!=null&&kycValue.gst_doc!=null && why[0]=='0'">
@@ -139,7 +39,7 @@
                                             <li>Legel Number</li>
                                             <li>Trade Name</li>
                                         </ul>
-                                        <!-- <div *ngIf="kycValue==null||kycValue.gst_doc==null"> -->
+                                     
                                         <div>
                                             <input type="text"  #gst_no="ngModel" [(ngModel)]="kycValue.gst_no"  name="gst_no" class="form-control" (ngModelChange)="changeGst($event)" placeholder="GST No.*" required>
                                             <div *ngIf="gst_check" class="alert alert-danger">Invalid Gst no.</div>
@@ -147,11 +47,9 @@
                                                 Gst no. is required.
                                             </div>
                                         </div>
-                                        <!-- <div *ngIf="kycValue!=null && kycValue.gst_no!=null">
-                                            <input type="text"  #gst_no="ngModel" [(ngModel)]="kycValue.gst_no"  name="gst_no" class="form-control" placeholder="GST No.*" readonly>
-                                        </div> -->
+                                      
                                          <div class="photo-upload-btn" >
-                                            <!-- <button (click)="modal(gst_doc1)" *ngIf="kycValue==null || kycValue.gst_doc == null" class="btn">Upload Image</button> -->
+                                            
                                             <button (click)="modal(gst_doc1)" class="btn">Upload Image</button>
                                             <div class="form-group" [hidden]="true"  >
                                                 <label for='gst_doc1'>Gst Document Front</label>
@@ -176,7 +74,7 @@
                 <div class="col-md-6">
                     <div [ngClass]="{'glowing-border':rejcted.gst,'each-photo-upload-wpapper':true}">
                         <div class="select-feild">
-                            <!-- <input type="radio" *ngIf="kycValue==null" [checked]="gst_doc2.valid" id="gst-reg-2"> -->
+                           
                             <label for="gst-reg-2">GST REG 02 (Registration Certificate)</label><br>
                         </div>
                         <div class="uplod-documents">
@@ -184,7 +82,7 @@
                                 <div class="col-6" *ngIf="kycValue==null||kycValue.gst_back==null  || why[1]=='1'">
                                     <div class="photop-upload-area preview" id="preview">
                                         <img id="gst_back" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/2.+GST+(2)/GST_Back-0.jpg" >
-                                        <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
+                                      
                                     </div>
                                 </div>
                                 <div class="col-6" *ngIf="kycValue!=null&&kycValue.gst_back!=null  && why[1]=='0'">
@@ -226,7 +124,7 @@
                 <div class="col-md-6">
                     <div [ngClass]="{'glowing-border':rejcted.adhar,'each-photo-upload-wpapper':true}">
                         <div class="select-feild">
-                            <!-- <input type="radio" *ngIf="kycValue==null" [checked]="aadhar_doc1.valid&&aadhar.valid" id="adhar-1"> -->
+                            
                             <label for="adhar-1">Aadhaar REG (Front)</label><br>
                         </div>
                         <div class="uplod-documents">
@@ -234,7 +132,7 @@
                                 <div class="col-6" *ngIf="kycValue==null||kycValue.aadhar_doc==null || why[2]=='1'">
                                     <div class="photop-upload-area preview" id="preview" >
                                         <img id="adhar_front" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/3.+Aadhar+(1)/Aadhar_Front-0.jpg" >
-                                        <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
+                                       
                                     </div>
                                 </div>
                                 <div class="col-6" *ngIf="kycValue!=null&&kycValue.aadhar_doc!=null  && why[2]=='0'">
@@ -251,7 +149,6 @@
                                             <li>Date of birth</li>
                                             <li>Photo</li>
                                         </ul>
-                                        <!-- <div *ngIf="kycValue==null || kycValue.aadhar==null"> -->
                                         <div>
                                             <input type="text"  #aadhar="ngModel"  [(ngModel)]="kycValue.aadhar"  name="aadhar" class="form-control" (ngModelChange)="changeAadhar($event)" placeholder="Aadhar No." required>
                                             <div *ngIf="adhar_check" class="alert alert-danger">Invalid Aadhaar Enter with proper spaces</div>
@@ -259,9 +156,6 @@
                                                 Aadhaar no. is required.
                                             </div>
                                         </div>
-                                        <!-- <div *ngIf="kycValue!=null && kycValue.aadhar !=null">
-                                            <input type="text"  #aadhar="ngModel"  [(ngModel)]="kycValue.aadhar"  name="aadhar" class="form-control" placeholder="Aadhar No." readonly>
-                                        </div> -->
                                         <div class="photo-upload-btn">
                                             <button (click)="modal(aadhar_doc1)" class="btn">upload Image</button>
                                             <div class="form-group" [hidden]="true">
@@ -288,7 +182,6 @@
                 <div class="col-md-6">
                     <div [ngClass]="{'glowing-border':rejcted.adhar,'each-photo-upload-wpapper':true}">
                         <div class="select-feild">
-                            <!-- <input type="radio" *ngIf="kycValue==null" [checked]="aadhar_doc2.valid" id="adhar-2"> -->
                             <label for="adhar-2">Aadhaar REG (Back)</label><br>
                         </div>
                         <div class="uplod-documents">
@@ -296,8 +189,7 @@
                                 <div class="col-6" *ngIf="kycValue == null || kycValue.aadhar_back == null || why[3]=='1'">
                                     <div class="photop-upload-area preview"  id="preview" >
                                         <img id="adhar_back" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/4+Aadhar+(2)/Aadhar_Back-0.jpg" >
-                                        <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
-                                    </div>
+                                       </div>
                                 </div>
                                 <div class="col-6" *ngIf="kycValue!=null&&kycValue.aadhar_back!=null && why[3]=='0'">
                                     <div class="photop-upload-area">
@@ -336,7 +228,6 @@
                 <div class="col-md-6">
                     <div [ngClass]="{'glowing-border':rejcted.pan,'each-photo-upload-wpapper':true}">
                         <div class="select-feild">
-                            <!-- <input type="radio" *ngIf="kycValue==null" [checked]="pan_doc.valid&&pan_no.valid" id="pan"> -->
                             <label for="pan">PAN REG </label><br>
                         </div>
                         <div class="uplod-documents">
@@ -344,8 +235,7 @@
                                 <div class="col-6" *ngIf="kycValue==null||kycValue.pan_doc==null|| why[4]=='1'">
                                     <div class="photop-upload-area preview" id="preview" >
                                         <img id="pan_front" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/5.+PAN/PANCARD-0.jpg" >
-                                        <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
-                                    </div>
+                                        </div>
                                 </div>
                                 <div class="col-6" *ngIf=" kycValue!=null&&kycValue.pan_doc!=null && why[4]=='0'">
                                     <div class="photop-upload-area">
@@ -368,9 +258,6 @@
                                                 Pan no. is required.
                                             </div>
                                         </div>
-                                        <!-- <div *ngIf="kycValue!=null && kycValue.pan_no != null">
-                                            <input type="text"  #pan_no="ngModel"  [(ngModel)]="kycValue.pan_no"  name="pan_no"  class="form-control" placeholder="Pan Card No.*" readonly>
-                                        </div> -->
                                         <div class="photo-upload-btn">
                                             <button (click)="modal(pan_doc)" class="btn">upload Image</button>
                                             <div class="form-group" [hidden]="true">
@@ -397,7 +284,7 @@
                 <div class="col-md-6">
                     <div [ngClass]="{'glowing-border':rejcted.visiting,'each-photo-upload-wpapper':true}">
                         <div class="select-feild">
-                            <!-- <input type="radio" *ngIf="kycValue==null" [checked]="visiting_doc1.valid" id="visiting-card-1"> -->
+                            
                             <label for="visiting-card-1">Visiting ( Business Card Front)</label><br>
                         </div>
                         <div class="uplod-documents">
@@ -405,7 +292,7 @@
                                 <div class="col-6" *ngIf="kycValue==null||kycValue.visiting_doc==null || why[5]=='1'">
                                     <div class="photop-upload-area preview" id="preview"  >
                                         <img id="visiting_front" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/6.+Visiting+Card/VisitingCard_Front-0.jpg" >
-                                        <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
+                                        
                                     </div>
                                 </div>
                                 <div class="col-6" *ngIf="kycValue!=null&&kycValue.visiting_doc!=null && why[5]=='0'">
@@ -455,7 +342,7 @@
                                 <div class="col-6" *ngIf="kycValue==null||kycValue.visiting_back==null || why[6]=='1'">
                                     <div class="photop-upload-area preview" id="preview" >
                                         <img id="visiting_back" src="https://s3.ap-south-1.amazonaws.com/www.savyajewelsbusiness.com/video/otherassets/KYC+new+Images/7.+Visiting+Card/VisitingCard_Back-0.jpg" >
-                                        <!-- <img src="../../assets/images/GST_Front-1.jpg"/> -->
+                                        
                                     </div>
                                 </div>
                                 <div class="col-6" *ngIf="kycValue!=null&&kycValue.visiting_back!=null && why[6]=='0'">

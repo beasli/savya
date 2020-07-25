@@ -18,9 +18,7 @@ val:boolean;
       this.im=false;
       this.val=true;
       this.values=data['data'];
-     // console.log(this.values);
     }).catch(d=>{
-      console.log(d);
     })
   }
 

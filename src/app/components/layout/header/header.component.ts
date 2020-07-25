@@ -39,14 +39,10 @@ export class HeaderComponent implements OnInit {
   }
   change(value)
   {
-    
     this.searchValue=value.target.value;
-    //console.log(this.searchValue);
   }
   search()
   {
-    console.log(this.searchValue);
-    console.log(this.logochange);
     if(this.searchValue.length>3 && this.logochange != 1)
     {
         this.router.navigate(['/search',this.searchValue]);
@@ -57,7 +53,6 @@ export class HeaderComponent implements OnInit {
   }
   popularSearch(value)
   {
-    console.log("in search");
     this.router.navigate(['/search',value]);
   }
   alert()
@@ -79,7 +74,6 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/home']);
   }
   mobile(){
-    console.log(this.activ);
     if(this.activ==0){
       this.activ = 1;
     } else{
@@ -133,7 +127,6 @@ export class HeaderComponent implements OnInit {
 }
   ngOnInit() {
     this.api.getlogin.subscribe(data => {
-      
       this.drop=data;
      });
      

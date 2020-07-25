@@ -1,36 +1,22 @@
 
  <!-- modal start -->
- <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-     <div class="modal-dialog modal-dialog-centered" role="document">
-       <div class="modal-content">
-         <div class="modal-header">
-           <h2 class="modal-title" id="exampleModalLongTitle">You are not logged in.</h2>
-         
-         </div>
-         <div class="modal-body">
-             <h5>Please Login first</h5>
-         </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         </div>
-       </div>
-     </div>
-   </div>
    <!-- modal end -->
   
    <app-filter-nav-bar></app-filter-nav-bar>
   <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09">
    <div class="container">
       
-       
+    <div class="text-center">
+        <h2>{{subsubcategory.title}}</h2>
+    </div>
        <div class="row" >
            
             <div class="col-lg aside">
                 <div class="prd-grid-wrap">
                     <app-loader  *ngIf="loader"></app-loader>
                     <div *ngIf="page">
+                        
                             <div  class="prd-grid product-listing data-to-show-4 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div" >
                                 
                                         <div class="prd" *ngFor="let s of products"  >

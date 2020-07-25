@@ -1,7 +1,7 @@
 import { IMAGE, GETADDRESS } from './../../../../config';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterStateSnapshot, Router } from '@angular/router';
+import { ActivatedRoute , Router } from '@angular/router';
 import { ORDERHISTORY } from 'src/config';
 
 @Component({

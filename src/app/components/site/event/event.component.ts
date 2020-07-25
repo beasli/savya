@@ -27,7 +27,6 @@ page:boolean;
 constructor(private api: ApiService, private route: ActivatedRoute,private router:Router, public share: ShareService, library: FaIconLibrary, private winRef: WindowRefService) {
         library.addIcons(...iconpack);
         this.uid = this.api.uid;
-       // this.event = JSON.parse(this.api.getEvent());
         this.route.params.subscribe(params => {
           this.eid = params.id;
           this.api.Get(EVENTS).then(data => {
@@ -64,9 +63,7 @@ register() {
         this.router.navigate(['/login']);
         },1000);
       } else{
-        console.log(d);
         document.getElementById('openmodalbutton2').click();;
-        
       }
     });
   } else {
@@ -123,8 +120,6 @@ register() {
           },1000);
         } else{document.getElementById('openmodalbutton2').click();}
       });
-      console.log(response);
-      console.log(options);
       // call your backend api to verify payment signature & capture transaction
     });
     options.modal.ondismiss = (() => {

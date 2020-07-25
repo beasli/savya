@@ -2,7 +2,7 @@
     <ngb-carousel *ngIf="slider_imgs">
         <ng-template *ngFor="let slide of slider_imgs" ngbSlide>
           <div class="picsum-img-wrapper bordershadow">
-            <img [routerLink]='["/machinery",slide.category | slugify]' [queryParams]="{'page' :1 ,'subcategory_id': slide.category_id}" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
+            <img [routerLink]='["/machinery",slide.title | slugify]' [queryParams]="{'page' :1 ,'manufacture_id': slide.user_id}" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
           </div>
         </ng-template>
     </ngb-carousel>
@@ -14,30 +14,13 @@
         <div class="row">
             <div *ngFor="let slide of categories" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                 <div (click)='go(slide,1)' class="card border bordershadow" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
-                    <img style="min-width:100%;max-height:25vh;" class="card-img-top" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
+                    <img style="min-width:100%;" class="card-img-top" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
                     <div class="card-body text-center">
-                    <h4 class="card-title" style="margin-bottom: 0px;">{{slide.subcategory}}</h4>
+                    <h4 class="card-title" style="margin-bottom: 0px;min-height:50px;">{{slide.subcategory}}</h4>
                     </div>
                 </div>
             </div>
          </div>
-
-
-         <!-- <ngx-slick-carousel class="carousel"  #slickModal="slick-carousel"  [config]="slideConfig" >
-             <div class="row">
-                <div ngxSlickItem  class="prd prd-new prd-popular" *ngFor="let slide of manufacturer">
-                    <div class="prd-inside product-border" >
-                        <div class="prd-img-area"><a [routerLink]="['/manufacture/', slide.manufacture_id]" class="prd-img"><img src="{{ manufacture + slide.logo }}" onerror="this.src='../../../../assets/images/logo-bw.png'" alt="Tyssot 1853"></a>
-                        </div>
-                        <div class="prd-info text-center">
-                            <h2 class="prd-title"><a [routerLink]="['/manufacture/', slide.manufacture_id]">{{slide.name}}</a></h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </ngx-slick-carousel> -->
-
-
 
          <div class="testimonials seller bordershadow2" style="background-color:#f9f9fa;">
             <ngx-slick-carousel class="carousel" 
@@ -54,59 +37,85 @@
                   </div>
               </ngx-slick-carousel>
            </div>
-
-
-         
-
-
-    <!-- <div *ngFor="let slide of data" class="card col-3 border" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="width: 15rem;">
-        <img class="card-img-top" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{slide.subcategory}}</h5>
-         </div>
-      </div> -->
     </div>
 </div>
 <div class="testimonials bordershadow2" style="background-color:#f9f9fa;">
     <ngx-slick-carousel class="carousel" 
               #slickModal="slick-carousel" 
               [config]="slideConfig3" >
-    <div ngxSlickItem *ngFor="let slide of models;let i = index"class="slide embed-responsive border bordershadow2 embed-responsive-4by3">
-    <img src="{{ imagemodel + slide.file_name }}" onerror="this.src='../../../../assets/images/logo-bw.png'" class="embed-responsive-item"  alt="" width="100%">
-    <div class="overlay-effect">
-        <div class="overlay-effect-content">
-          
-        </div>
+    
+        <div ngxSlickItem *ngFor="let slide of models;let i = index"class="slide embed-responsive border bordershadow2 embed-responsive-4by3">
+            <ng-container *ngIf='slide.file_type == "image"'>
+                <img src="{{ imagemodel + slide.file_name }}" onerror="this.src='../../../../assets/images/logo-bw.png'" class="embed-responsive-item"  alt="" width="100%">
+                <div class="overlay-effect">
+                    <div class="overlay-effect-content">
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf='slide.file_type == "video"'>
+                <video style="width:100%;max-height:100%;" controls>
+                    <source src="{{ imagemodel + slide.file_name }}" type="video/mp4">
+                </video>
+                <div class="overlay-effect">
+                    <div class="overlay-effect-content">
+                    </div>
+                </div>
+            </ng-container>
     </div>
-    </div>
+    
     </ngx-slick-carousel>
 </div>
 
-
-<!-- <div class="testimonials seller">
-    <ngx-slick-carousel class="carousel" 
-                    #slickModal="slick-carousel" 
-                    [config]="slideConfig" >
-          <div ngxSlickItem *ngFor="let slide of categories;let i = index" class="slide">
-          <img [src]="bypass(slide.image)" alt="" width="50%">
-          <div class="overlay-effect">
-              <div *ngIf="slide.name" class="overlay-effect-content">
-                <h2>{{ slide.name }}</h2>
-              </div>
-          </div>
-          </div>
-          </ngx-slick-carousel>
-</div> -->
-
-<!-- <div class="row">
-    <div class="col-6" *ngFor="let slide of videos">
-        <video width="100%" poster="{{slide.imagePreview}}" style="padding:3vh;" controls>
-            <source [src]="bypass(slide.image)" type="video/mp4">
-        </video>
-    </div>
-</div> -->
 <ng-container *ngIf="exclusive && exclusive.length">
-<app-exclusive-banner [url2] = '""' [exclusive] = 'exclusive'></app-exclusive-banner>
+    <div class="holder fullboxed full-nopad mt-0" *ngFor='let s of exclusive; let i = index;'>
+        <div class="container" *ngIf="i%2 == 0">
+            <div class="row row-chess" >
+            <div class="chess-right-bg" [ngStyle]="{'background-image': 'url(' + url +'/'+ s.image + ')'}"></div>
+                <div class="col-md-6">
+                    <div class="py-3 py-md-10 px-md-6  text-center">
+                        <h2 class="h1-style text-center">{{s.title}}</h2>
+                        <p>{{s.description}}</p>
+                        <div class="more-link-wrapper text-center mt-2"><a [routerLink]='["/machinery",s.title | slugify]' [queryParams]="{'page' :1 ,'manufacture_id': s.user_id}" href="javascript:void(0)" class="btn-decor">show me all</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="container" *ngIf="i%2 != 0">
+            <div class="row row-chess" >
+                <div class="chess-left-bg left-bg" [ngStyle]="{'background-image': 'url(' + url + s.image + ')'}" style="left: auto; right: 50%"></div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <div class="py-3 py-md-10 px-md-6 text-center">
+                        <h2 class="h1-style text-center">{{s.title}}</h2>
+                        <p>{{s.description}}</p>
+                        <div class="more-link-wrapper text-center mt-2"><a [routerLink]='["/machinery", s.title | slugify]' [queryParams]="{'page' :1 ,'manufacture_id': s.user_id}" href="javascript:void(0)" class="btn-decor">show me all</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </ng-container>
+
+<div class="holder py-3 py-md-6 fullboxed aside--bg-none  mt-0" *ngIf="Partners && Partners.length">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="h1-style">Partners</h2>
+       
+        </div>
+        <div class="testimonials">
+            <ngx-slick-carousel class="carousel" 
+                      #slickModal="slick-carousel" 
+                      [config]="slideConfig" >
+            <div ngxSlickItem class="slide embed-responsive embed-responsive-16by9" *ngFor="let s of Partners">
+              <img src="{{ base+'machinerypartner/' + s.image }}" class="embed-responsive-item"  alt="" width="100%" style="border:1px solid #c59f59">
+            </div>
+            
+            </ngx-slick-carousel>
+        </div>
+    </div>
+</div>
+
+
 <app-machinery-holder [heading]="'Most Selling'" [mostselling] = 'mostselling' ></app-machinery-holder>
   

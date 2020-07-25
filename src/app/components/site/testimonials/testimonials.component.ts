@@ -52,8 +52,7 @@ export class TestimonialsComponent implements OnInit {
   
   ngOnInit() {
     this.slideConfig.slidesToShow = this.slidetoshow;
-    console.log(this.url);
-    console.log(this.heading);
+   
   }
 
 }

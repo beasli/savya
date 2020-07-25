@@ -19,7 +19,6 @@ page:boolean;
       this.page=true;
       this.loader=false;
       this.data=data['user'];
-      //this.router.navigate(['/registerOtp']);
 }).catch(d=>{
   if(d.status == 503){
     this.api.onFail('Your session is expired please login again');

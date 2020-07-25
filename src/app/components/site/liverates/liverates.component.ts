@@ -59,6 +59,7 @@ rates: any;
   }
 
   ngOnInit(): void {
+    this.getRates();
     this.timer = setInterval(() => {
       this.getRates();
     }, 5000);
@@ -73,12 +74,13 @@ rates: any;
     fetch(proxyurl + LIVERATE)
     .then(response => response.text())
     .then((contents: any) => {
-
+      if(this.rates)  {
       this.pregold = this.gold;
       this.presilver = this.silver;
       this.prexagold  = this.xagold;
       this.prexasilver  = this.xasilver;
       this.preinr = this.inr;
+      }
 
       contents = JSON.parse(contents);
 
