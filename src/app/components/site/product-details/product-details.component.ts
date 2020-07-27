@@ -150,7 +150,7 @@ export class ProductDetailsComponent implements OnInit {
       this.api.setGoto();
       this.api.onSuccess('Please Login First to Continue');
       setTimeout(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
           },1000);
         
     }
@@ -218,7 +218,7 @@ export class ProductDetailsComponent implements OnInit {
         this.api.setlogin(0);
         this.api.logout();
         setTimeout(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
         },1000);
       }else if(d.status == 401){
         this.api.onFail('Product already in cart');
@@ -390,7 +390,7 @@ diamondchange(diamond){
       this.api.setGoto();
       this.api.onSuccess('Please Login First to Continue');
       setTimeout(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
           },1000);
     }
     else if(this.drop==1)

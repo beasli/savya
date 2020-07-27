@@ -28,7 +28,7 @@ export class KycDoneService {
           this.api.setlogin(0);
           this.api.logout();
           setTimeout(() => {
-          this.route.navigate(['/login']);
+          this.route.navigate(['/']);
           },1000);
         } else{
           console.log(d);

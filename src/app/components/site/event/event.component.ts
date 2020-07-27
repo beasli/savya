@@ -42,7 +42,7 @@ constructor(private api: ApiService, private route: ActivatedRoute,private route
               this.api.setlogin(0);
               this.api.logout();
               setTimeout(() => {
-              this.router.navigate(['/login']);
+              this.router.navigate(['/']);
               },1000);
             } else{console.log(d)}
           });
@@ -60,7 +60,7 @@ register() {
         this.api.setlogin(0);
         this.api.logout();
         setTimeout(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
         },1000);
       } else{
         document.getElementById('openmodalbutton2').click();;
@@ -116,7 +116,7 @@ register() {
           this.api.setlogin(0);
           this.api.logout();
           setTimeout(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
           },1000);
         } else{document.getElementById('openmodalbutton2').click();}
       });

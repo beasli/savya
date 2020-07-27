@@ -41,16 +41,6 @@
                                     </div>
                                    <div *ngIf="mob" class="alert alert-danger">Mobile no. should be atleast 10 digits</div>
                                 </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group p-relative mb-2">
-                                        <div class="each-feild-icon"><i class="icon-location1" aria-hidden="true"></i></div>
-                                        <textarea type="text" [readonly]='!mobile' #address="ngModel"  ngModel class="form-control name-feild" placeholder="Address"></textarea>
-                                        
-                                    </div>
-                                    <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
-                                        <div *ngIf="address.errors.required">address is required.</div>
-                                    </div>
-                                </div>
                                 <div class="col-lg-12" *ngIf="mobile">
                                     <div class="form-group p-relative mb-2">
                                         <input type="text" [readonly]='!mobile' #referal="ngModel"  ngModel  name="referal" class="form-control name-feild" placeholder="Referral Code"/>

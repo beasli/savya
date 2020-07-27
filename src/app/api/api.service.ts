@@ -203,7 +203,7 @@ export class ApiService {
         this.setlogin(0);
         this.logout();
         setTimeout(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
         },1000);
       } else{
       console.log(d);
@@ -339,7 +339,7 @@ qtyUpdate(pid,value)
                         this.setlogin(0);
                         this.logout();
                         setTimeout(() => {
-                        this.router.navigate(['/login']);
+                        this.router.navigate(['/']);
                         },1000);
                       } else{console.log(d)}
                     });
@@ -363,7 +363,7 @@ qtyUpdate(pid,value)
         this.setlogin(0);
         this.logout();
         setTimeout(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
         },1000);
       } else{
       this.updateCart();
@@ -390,7 +390,7 @@ qtyUpdate(pid,value)
         this.setlogin(0);
         this.logout();
         setTimeout(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
         },1000);
       } else{
       console.log(d);
@@ -434,7 +434,7 @@ qtyUpdate(pid,value)
         this.setlogin(0);
         this.logout();
         setTimeout(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
         },1000);
       } else{
         console.log(d);
@@ -462,7 +462,7 @@ qtyUpdate(pid,value)
           this.setlogin(0);
           this.logout();
           setTimeout(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
           },1000);
         } else{
          console.log(d);}
@@ -496,7 +496,7 @@ checkWishlist(pid)
                   this.setlogin(0);
                   this.logout();
                   setTimeout(() => {
-                  this.router.navigate(['/login']);
+                  this.router.navigate(['/']);
                   },1000);
                 } else{
                  console.log(d);}
@@ -515,7 +515,7 @@ checkWishlist(pid)
             this.setlogin(0);
             this.logout();
             setTimeout(() => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/']);
             },1000);
           } else{
            console.log(d);}

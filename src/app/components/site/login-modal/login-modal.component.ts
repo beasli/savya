@@ -124,7 +124,7 @@ changeNumber(e)
          if(value.name&&value.email&&value.mobile_no && !value.password)
          {console.log(value.referal);
               this.mobile_no=value.mobile_no;
-                this.api.Post(REGISTER,{name:value.name,mobile_no:value.mobile_no,email:value.email,address:value.address}).then(data=>{
+                this.api.Post(REGISTER,{name:value.name,mobile_no:value.mobile_no,email:value.email}).then(data=>{
                   this.mobile=false;
                   this.loading=false;
                   this.otpcheck=true;
@@ -187,7 +187,7 @@ changeNumber(e)
               this.api.setlogin(0);
               this.api.logout();
               setTimeout(() => {
-              this.router.navigate(['/login']);
+              this.router.navigate(['/']);
               },1000);
             } else{
               console.log(d);

@@ -21,7 +21,7 @@ export class AuthGuardService  implements CanActivate {
            this.api.setGoto();
            console.log(this.api.goto);
 
-           this.router.navigate(['/login']);
+           this.router.navigate(['/']);
           }
     return false;
         }

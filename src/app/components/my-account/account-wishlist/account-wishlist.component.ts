@@ -58,7 +58,7 @@ page:boolean;
         this.api.setlogin(0);
         this.api.logout();
         setTimeout(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
         },1000);
       } else{
       this.page=true;

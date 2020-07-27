@@ -149,8 +149,8 @@ const customConfig: ShareButtonsConfig = {
       { path: 'live', component: LiveComponent},
       { path: 'blog', component: BlogComponent},
       { path: 'blog/:id', component: BlogDetailsComponent},
-      { path: 'login', component: LoginComponent,canActivate: [LoginGuardService]},
-      { path: 'register', component: RegisterComponent,canActivate: [LoginGuardService]},
+      // { path: 'login', component: LoginComponent,canActivate: [LoginGuardService]},
+      // { path: 'register', component: RegisterComponent,canActivate: [LoginGuardService]},
       { path: 'kyc' , component: KycComponent, canActivate: [AuthGuardService]},
       { path: 'changeProfile' , component: ChangeProfileComponent,  canActivate: [AuthGuardService]},
       { path: 'kycpending' , component: KycPendingComponent, canActivate: [AuthGuardService]},
@@ -165,7 +165,6 @@ const customConfig: ShareButtonsConfig = {
       { path: 'offers', component: OffersComponent,  canActivate: [AuthGuardService]},
       { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService,CheckoutService]},
       { path: 'cart', component: CartComponent, canActivate: [AuthGuardService]},
-      
       { path: 'machinery/:id', component: MachineryProductsComponent},
       { path: 'contact', component: ContactComponent},
       { path: 'about', component: AboutComponent},

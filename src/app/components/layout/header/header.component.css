@@ -6,3 +6,6 @@
 .cart-table-prd-image img {
     width: 33px;
 }
+.logo-holder img, .logo-holder-s img {
+    max-width: 300px !important;
+}
