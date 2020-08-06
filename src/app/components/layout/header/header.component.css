@@ -9,3 +9,8 @@
 .logo-holder img, .logo-holder-s img {
     max-width: 300px !important;
 }
+.hdr .custom-text {
+    font-size: 13px;
+    line-height: 20px;
+    text-transform: uppercase;
+}

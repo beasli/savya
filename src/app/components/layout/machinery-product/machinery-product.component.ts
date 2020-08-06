@@ -13,6 +13,7 @@ export class MachineryProductComponent implements OnInit {
   page: boolean;
   loader: boolean;
   data: any;
+  tableheader:any;
   manufacture: any;
   recents: any;
   prd_img: any;
@@ -33,6 +34,8 @@ export class MachineryProductComponent implements OnInit {
         }
       }]
   };
+  table: any;
+  tabledata: any;
 
   constructor(private api:ApiService, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
@@ -46,7 +49,13 @@ export class MachineryProductComponent implements OnInit {
         this.data = data['Machinerydata'];
         this.recents = data['recent_product'];
         this.manufacture = data['manufacture'];
-        console.log(data);
+        this.table = data['Machinerydata'][0]['description_table'];
+        if(this.table){
+          this.tableheader = this.table.find(x => x.rowType == 'header');
+          this.tabledata = this.table.filter(x => x.rowType == 'Normal');
+          console.log(this.tableheader);
+          console.log(this.tabledata);
+        }
       });
       this.ngOnInit();
       });

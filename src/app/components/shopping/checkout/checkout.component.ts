@@ -38,7 +38,7 @@ export class CheckoutComponent implements OnInit {
 
     this.api.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
       this.products=data['data'];
-      console.log(this.products);
+      this.products = this.products.filter((v,i,a)=>a.findIndex(t=>(t.cart_id === v.cart_id))===i);
       this.priceWeight = this.api.calculate(this.products);
       let i = 0;
       if(this.priceWeight){

@@ -1,6 +1,6 @@
 import { BlogDetailsComponent } from './../blog-details/blog-details.component';
 import { BlogComponent } from './../blog/blog.component';
-import { SlugPipe } from './../slug.pipe';
+import { SlugPipe, MyCurrencyPipe, SummaryPipe } from './../slug.pipe';
 import { SubsubComponent } from './../subsub/subsub.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventsComponent } from './../events/events.component';
@@ -123,6 +123,8 @@ const customConfig: ShareButtonsConfig = {
     OrderDetailComponent,
     OffersComponent,
     SlugPipe,
+    MyCurrencyPipe,
+    SummaryPipe,
     BlogComponent,
     BlogDetailsComponent,
     LiveComponent,

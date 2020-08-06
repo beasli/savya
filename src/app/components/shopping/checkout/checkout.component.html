@@ -64,7 +64,7 @@
                         <h2 class="custom-color">ORDER SUMMARY</h2>
                         <app-loader *ngIf="!priceWeight"></app-loader>
                         <ng-container *ngIf="priceWeight">
-                        <div class="cart-table cart-table--sm" style='min-height:45vh;max-height:45vh; overflow-y:auto;'>
+                        <div class="cart-table cart-table--sm" style='min-height:45vh;max-height:45vh; overflow-y:auto;padding:5px;'>
                             <div class="cart-table-prd cart-table-prd-headings d-none d-lg-table">
                                 <div class="cart-table-prd-image"></div>
                                 <div class="cart-table-prd-image"></div>
@@ -72,7 +72,7 @@
                                 <div class="cart-table-prd-qty"><b>QTY</b></div>
                                 <div class="cart-table-prd-price"><b>PRICE</b></div>
                             </div>
-                            <div *ngFor="let r of products;let i = index" class="cart-table-prd">
+                            <div *ngFor="let r of products;let i = index" class="cart-table-prd bordershadow2">
                                 <div class="cart-table-prd-image"><b>{{i+1}}</b></div>
                                 <div class="cart-table-prd-image"><a [routerLink]="['/product-details/', r.product_id]"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl + r.image}}"  alt=""></a></div>
                                 <div class="cart-table-prd-name">
@@ -83,41 +83,43 @@
                                 <tr>
                                     <td>{{a.metal}}</td>
                                     <td> &nbsp;&nbsp; &nbsp;&nbsp;{{a.materialType}} &nbsp;&nbsp; &nbsp;&nbsp;</td>
-                                    <td>{{a.weight * r.count  | number : '1.3-3'}} &nbsp;<ng-container *ngIf='a.metal == "Diamond" || a.metal == "Stone"'>ct</ng-container><ng-container *ngIf='a.metal != "Diamond" && a.metal != "Stone"'>g</ng-container>&nbsp;</td>
+                                    <td>{{a.weight * r.count  | number : '1.3-3'}} &nbsp;
+                                        <ng-container *ngIf='a.metal == "Diamond" || a.metal == "Stone"'>Ct</ng-container>
+                                        <ng-container *ngIf='a.metal != "Diamond" && a.metal != "Stone"'>g</ng-container>&nbsp;</td>
                                 </tr>
                                 </ng-container>
                             </tbody>
                         </table>
                                 </div>
                                 <div class="cart-table-prd-qty"><b>{{r.count}}</b></div>
-                                <div class="cart-table-prd-price"><b> {{priceWeight[i].price * r.count | currency:'INR'}}</b></div>
+                                <div class="cart-table-prd-price"><b> {{priceWeight[i].price * r.count | mcurrency:'INR'}}</b></div>
                             </div>
                         </div>
                         <div class="card-total-sm">
-                            <div class="float-right">Total Price <span class="card-total-price"> {{total.price | currency:'INR'}}</span></div>
+                            <div class="float-right">Total Price <span class="card-total-price"> {{total.price | mcurrency:'INR'}}</span></div>
                         </div>
                         <div class="mt-2"></div>
                         <div class="card-body" *ngIf="total.price != 0">
                             <h3>Your Bill </h3>
                             <p><strong>
-                                <div>Total Price <span class="card-total-price"> {{total.price | currency:'INR'}}</span></div>
+                                <div>Total Price <span class="card-total-price"> {{total.price | mcurrency:'INR'}}</span></div>
                                 <div>Total Gross Weight <span class="card-total-price"> {{totalw   | number : '1.3-3'}} g</span></div>
-                                  Surcharge : {{total.price*0.01 | currency:'INR'}}<br>
-                                  Sgst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>
-                                  Cgst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br>
-                                  Delivery Charge:  {{ 800 | currency:'INR'}}<br>
-                                  <!-- Igst(1.5 %):  {{total.price*0.015 | currency:'INR'}}<br> -->
-                                  <ng-container *ngIf='discountamount'>Total(after GST):  {{final+disamt | currency:'INR'}}<br></ng-container>
+                                  Surcharge : {{total.price*0.01 | mcurrency:'INR'}}<br>
+                                  Sgst(1.5 %):  {{total.price*0.015 | mcurrency:'INR'}}<br>
+                                  Cgst(1.5 %):  {{total.price*0.015 | mcurrency:'INR'}}<br>
+                                  Delivery Charge:  {{ 800 | mcurrency:'INR'}}<br>
+                                  <!-- Igst(1.5 %):  {{total.price*0.015 | mcurrency:'INR'}}<br> -->
+                                  <ng-container *ngIf='discountamount'>Total(after GST):  {{final+disamt | mcurrency:'INR'}}<br></ng-container>
                                   <ng-container *ngIf='discountamount'>
                                       DISCOUNT COUPAN :{{discountamount.coupan}} <br>
-                                      <ng-container *ngIf='discountamount.offertype == "Fixed"'>DISCOUNT :   {{discountamount.value | currency:'INR'}} off </ng-container>
+                                      <ng-container *ngIf='discountamount.offertype == "Fixed"'>DISCOUNT :   {{discountamount.value | mcurrency:'INR'}} off </ng-container>
                                       <ng-container *ngIf='discountamount.offertype == "Percentage"'> DISCOUNT :{{discountamount.value}} % off</ng-container><br>
-                                      DISCOUNT AMOUNT :  {{disamt | currency:'INR'}} off
+                                      DISCOUNT AMOUNT :  {{disamt | mcurrency:'INR'}} off
                                   </ng-container>
                                 </strong>
                               </p>
                               <div class="card-total-sm">
-                                <div class="float-right">Final Total <span class="card-total-price"> {{final | currency:'INR'}}</span></div>
+                                <div class="float-right">Final Total <span class="card-total-price"> {{final | mcurrency:'INR'}}</span></div>
                             </div>
                             <div class="clearfix">
                                 <label for="id_select">Payment Mode: </label>

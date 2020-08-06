@@ -88,6 +88,14 @@ export class ProductDetailsComponent implements OnInit {
   btn = 1;
   privious: any;
   sizelist: any[];
+  defaultdiamond2: any;
+  discla2=[];
+  diamondclarity2: any;
+  diamond2: any;
+  diamondcolour2: any;
+  discol2=[];
+  pricediamond2: any;
+  totaldiamond2: any;
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
     this.drop=this.api.drop;
     this.route.params.subscribe(params => {
@@ -283,7 +291,8 @@ export class ProductDetailsComponent implements OnInit {
            this.stonelist.length ? this.getstone(this.stonelist[0]):false;
          
             this.diamondlist = this.assets.filter(x => x.metrial_type == "Diamond");
-            if(this.diamondlist.length){
+            
+            if(this.diamondlist.length == 1){
               this.diamond = this.diamondlist[0];
              this.diamondcolour = this.diamond.color.split(',');
             this.diamondclarity = this.diamond.clarity.split(',');
@@ -295,7 +304,36 @@ export class ProductDetailsComponent implements OnInit {
             });
             this.defaultdiamond = this.diamond.default_color_clarity.split('/');
             this.diamondprice();
-          }
+          } else if(this.diamondlist.length == 2){
+
+            this.diamond = this.diamondlist[0];
+            this.diamondcolour = this.diamond.color.split(',');
+           this.diamondclarity = this.diamond.clarity.split(',');
+           this.diamondcolour.forEach(element => {
+             this.discol.push(0);
+           });
+           this.diamondclarity.forEach(element => {
+             this.discla.push(0)
+           });
+           this.defaultdiamond = this.diamond.default_color_clarity.split('/');
+           this.diamondprice();
+
+            this.diamond2 = this.diamondlist[1];
+            console.log(this.diamond2);
+           this.diamondcolour2 = this.diamond2.color.split(',');
+          this.diamondclarity2 = this.diamond2.clarity.split(',');
+         // console.log(this.)
+          this.diamondcolour2.forEach(element => {
+            this.discol2.push(0);
+          });
+          this.diamondclarity2.forEach(element => {
+            this.discla2.push(0);
+          });
+          this.defaultdiamond2 = this.diamond2.default_color_clarity.split('/');
+          this.diamondprice(2);
+
+
+        }
           this.defplat = this.assets.find(x => x.metrial_type == "Platinum");
             if(this.defplat){
               this.getplatinum();}
@@ -327,8 +365,6 @@ export class ProductDetailsComponent implements OnInit {
 }
 
 valuec(val,def='n'){
-  console.log(this.value);
-  console.log(val)
   if(def='n'){
     this.value += val;
   } else{
@@ -364,14 +400,6 @@ sort(ary) {
 
 
 
-
-diamondchange(diamond){
-  this.diamond = this.diamondlist.find(x => x.jwellery_size == diamond);
-  this.diamondcolour = this.diamond.color.split(',');
-  this.diamondclarity = this.diamond.clarity.split(',');
-  this.defaultdiamond = this.diamond.default_color_clarity.split('/');
-  this.diamondprice();
-}
  compare(a, b) {
   if (a < b) {
       return -1;
@@ -398,6 +426,8 @@ diamondchange(diamond){
     let j = {};
     let temparray = [];
     if (this.gold) {
+         j['meenacost_option'] = this.gold.meenacost_option;
+         j['meena_cost'] = this.gold.meena_cost;
         j['option'] = this.gold.charges_option;
         j['weight'] = this.gold.weight;
         j['wastage'] = this.gold.wastage;
@@ -410,9 +440,12 @@ diamondchange(diamond){
         j = {};
       }
     if (this.diamond) {
+      j['crtcost_option'] = this.diamond.crtcost_option;
+        j['certification_cost'] = this.diamond.certification_cost;
       j['option'] = this.diamond.charges_option;
       j['weight'] = this.diamond.weight;
       j['wastage'] = this.diamond.wastage;
+      j['diamond_index'] = '1';
         //j['product_size'] = this.selectedsize;
       j['materialType'] = this.defaultdiamond[0] + '/' + this.defaultdiamond[1];
       j['productId'] = this.pid;
@@ -421,12 +454,30 @@ diamondchange(diamond){
       temparray.push(j);
       j = {};
     }
+    if (this.diamond2) {
+      j['crtcost_option'] = this.diamond2.crtcost_option;
+      j['certification_cost'] = this.diamond2.certification_cost;
+      j['option'] = this.diamond2.charges_option;
+      j['weight'] = this.diamond2.weight;
+      j['wastage'] = this.diamond2.wastage;
+      j['diamond_index'] = '2';
+        //j['product_size'] = this.selectedsize;
+      j['materialType'] = this.defaultdiamond2[0] + '/' + this.defaultdiamond2[1];
+      j['productId'] = this.pid;
+      j['metal'] = 'Diamond';
+      j['makingCharge'] = this.diamond2.making_charge;
+      temparray.push(j);
+      j = {};
+    }
     if (this.platinum!=null) {
+      j['meenacost_option'] = this.platinum.meenacost_option;
+      j['meena_cost'] = this.platinum.meena_cost;
       j['option'] = this.platinum.charges_option;
       j['weight'] = this.platinum.weight;
       j['materialType'] = "Platinum";
       j['wastage'] = this.platinum.wastage;
         //j['product_size'] = this.selectedsize;
+        j['purity'] =  this.platinum.purity;
       j['productId'] = this.pid;
       j['metal'] = 'Platinum';
       j['makingCharge'] = this.platinum.making_charge;
@@ -447,6 +498,9 @@ diamondchange(diamond){
     }
 
     if (this.silver!=null) {
+      j['purity'] =  this.silver.purity;
+      j['meenacost_option'] = this.silver.meenacost_option;
+      j['meena_cost'] = this.silver.meena_cost;
       j['option'] = this.silver.charges_option;
       j['weight'] = this.silver.weight;
       j['materialType'] = 'Silver';
@@ -511,8 +565,8 @@ diamondchange(diamond){
       let name = this.stone.jwellery_size;
       this.pricestone = this.pricelist.stone.find(x => x.type.toUpperCase() == name.toUpperCase());
       if(this.pricestone){
-      this.totalstone = this.api.price(this.stone.weight,this.pricestone.price,this.stone.charges_option,this.stone.making_charge);
-      this.totalstone = Math.round(this.totalstone.price);
+      this.totalstone = this.api.price(this.stone.weight,this.pricestone.price,'PerGram',0);
+      this.totalstone = this.totalstone.price;
       this.total();
       this.grossweight();
       this.button();
@@ -582,6 +636,14 @@ diamondchange(diamond){
     this.defplat= null;
     this.manufacture= null;
     this.sizelist= null;
+    this.defaultdiamond2 = null;
+    this.discla2=[];
+    this.diamondclarity2 = null;
+    this.diamond2 = null;
+    this.diamondcolour2 =null;
+    this.discol2=[];
+    this.pricediamond2 =null;
+    this.totaldiamond2 =null;
   }
 
    getgold(value) {
@@ -633,14 +695,15 @@ diamondchange(diamond){
      //this.pricegold = {"id":1,"metrial_type":"Gold","user_id":"5","type":"14KT","price":"2700","value_in":"60","created_at":"2020-04-21 15:53:56","updated_at":"2020-04-21 15:53:56"};
     if(this.pricegold) {
      this.pricegold2 = this.pricelist.gold.find(x => x.type == '24KT');
+   //  this.pricegold2.price = Number(this.pricegold2.price)*(Number(this.gold.wastage) + Number(this.pricegold.value_in))/100;
      if (this.gold.charges_option == "PerGram" || this.gold.charges_option == "Fixed" ) {
-      this.totalgold = this.api.price(this.gold.weight,this.pricegold.price,this.gold.charges_option,this.gold.making_charge);
+      this.totalgold = this.api.price(this.gold.weight,this.pricegold2.price,this.gold.charges_option,this.gold.making_charge,this.gold.wastage,this.pricegold.value_in,this.gold.meena_cost,this.gold.meenacost_option);
       this.finegold = Number(this.totalgold.weight).toFixed(3);
-      this.totalgold = Math.round(this.totalgold.price);
+      this.totalgold = this.totalgold.price;
      }  else if (this.gold.charges_option == "Percentage") {
       this.totalgold = this.api.price(this.gold.weight,this.pricegold2.price,this.gold.charges_option,this.gold.making_charge,0,this.pricegold.value_in);
       this.finegold = Number(this.totalgold.weight).toFixed(3);
-      this.totalgold = Math.round(this.totalgold.price);
+      this.totalgold = this.totalgold.price;
     }
      this.total();
      this.grossweight();
@@ -722,8 +785,8 @@ diamondchange(diamond){
 
     this.priceplat = this.pricelist.platinum.find(x => x.metrial_type == "Platinum");
       if(this.priceplat){
-    this.totalplat = this.api.price(this.platinum.weight,this.priceplat.price,this.platinum.charges_option,this.platinum.making_charge,this.platinum.wastage);
-    this.totalplat = Math.round(this.totalplat.price);
+    this.totalplat = this.api.price(this.platinum.weight,this.priceplat.price,this.platinum.charges_option,this.platinum.making_charge,this.platinum.wastage,this.platinum.purity,this.platinum.meena_cost,this.platinum.meenacost_option);
+    this.totalplat = this.totalplat.price;
     this.total();
     this.grossweight();
     this.button();
@@ -785,8 +848,8 @@ diamondchange(diamond){
 
     this.pricesilver = this.pricelist.silver.find(x => x.type == "Silver");
      if(this.pricesilver) {
-    this.totalsilver = this.api.price(this.silver.weight,this.pricesilver.price,this.silver.charges_option,this.silver.making_charge,this.silver.wastage);
-    this.totalsilver = Math.round(this.totalsilver.price);
+    this.totalsilver = this.api.price(this.silver.weight,this.pricesilver.price,this.silver.charges_option,this.silver.making_charge,this.silver.wastage,this.silver.purity,this.silver.meena_cost,this.silver.meenacost_option);
+    this.totalsilver = this.totalsilver.price;
     this.total();
     this.grossweight();
     this.button();
@@ -795,7 +858,10 @@ diamondchange(diamond){
     }
   }
   }
-   colorClarity(value0, value1) {
+   colorClarity(value0, value1,type=1) {
+     if(type==1){
+
+     
      if(value0 != 0)
      {
       this.defaultdiamond[0] = value0;
@@ -804,10 +870,21 @@ diamondchange(diamond){
       this.defaultdiamond[1] = value1;
       this.diamondprice();
     }
+
+    }else if(type=2){
+      if(value0 != 0)
+     {
+      this.defaultdiamond2[0] = value0;
+      this.diamondprice(2);
+    }else if(value1 != 0){
+      this.defaultdiamond2[1] = value1;
+      this.diamondprice(2);
+    }
+    }
   }
 
-  diamondprice()  {
-   
+  diamondprice(type=1)  {
+   if(type==1){
     for(let i=0;i < this.diamondclarity.length;i++){
       let name = this.defaultdiamond[0] + '/' +this.diamondclarity[i];
       if(this.diamondclarity[i] != this.defaultdiamond[1] ){
@@ -837,14 +914,54 @@ diamondchange(diamond){
     this.pricediamond = this.pricelist.diamond_master.find(x => x.type == name);
     if (this.pricediamond)
     {
-      this.totaldiamond = this.api.price(this.diamond.weight,this.pricediamond.price,this.diamond.charges_option,this.diamond.making_charge);
-      this.totaldiamond = Math.round(this.totaldiamond.price);
+      this.totaldiamond = this.api.price(this.diamond.weight,this.pricediamond.price,'PerGram',0,0,0,0,"",this.diamond.crtcost_option,this.diamond.certification_cost);
+      this.totaldiamond = this.totaldiamond.price;
     
     this.total();
     this.grossweight();
     this.button();
   } else  {
       this.button();
+    }
+    } else if(type ==2){
+      for(let i=0;i < this.diamondclarity2.length;i++){
+        let name = this.defaultdiamond2[0] + '/' +this.diamondclarity2[i];
+        if(this.diamondclarity[i] != this.defaultdiamond[1] ){
+        let p = this.pricelist.diamond_master.find(x => x.type == name);
+        
+        if(p){
+          this.discla2[i] = 0;
+        }else{
+          this.discla2[i] = 1;
+        }}
+      }
+  
+      for(let i=0;i < this.diamondcolour2.length;i++){
+  
+        let name = this.diamondcolour2[i] + '/' +this.defaultdiamond2[1];
+  
+        if(this.diamondcolour2[i] != this.defaultdiamond2[0] ){
+        let p = this.pricelist.diamond_master.find(x => x.type == name);
+        if(p){
+          this.discol2[i] = 0;
+        }else{
+          this.discol2[i] = 1;
+        }
+      }
+      }
+      let name = this.defaultdiamond2[0] + '/' + this.defaultdiamond2[1];
+      this.pricediamond2 = this.pricelist.diamond_master.find(x => x.type == name);
+      if (this.pricediamond2)
+      {
+        this.totaldiamond2 = this.api.price(this.diamond2.weight,this.pricediamond2.price,'PerGram',0,0,0,0,"",this.diamond2.crtcost_option,this.diamond2.certification_cost);
+        this.totaldiamond2 = this.totaldiamond2.price;
+      
+      this.total();
+      this.grossweight();
+      this.button();
+    } else  {
+        this.button();
+      }
     }
   }
 
@@ -878,6 +995,9 @@ diamondchange(diamond){
     }
     if (this.pricediamond) {
       price = price + this.totaldiamond;
+    }
+    if (this.pricediamond2) {
+      price = price + this.totaldiamond2;
     }
     if (this.pricestone) {
       price = price + this.totalstone;

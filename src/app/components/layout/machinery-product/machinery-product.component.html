@@ -16,7 +16,12 @@
                             <ngx-slick-carousel class="carousel" 
                                         #slickModal="slick-carousel" 
                                         [config]="slideConfig" >
-                                        
+                                        <div ngxSlickItem class="slide">
+                                            <lib-ngx-image-zoom
+                                                        [thumbImage]="url+'product'+'/'+data[0].image"
+                                                        [magnification]=2
+                                            ></lib-ngx-image-zoom>
+                                        </div>
                             <div ngxSlickItem *ngFor="let slide of prd_img;let i = index"  class="slide">
                                 <ng-container *ngIf='slide.type == 1'>
                                     <lib-ngx-image-zoom
@@ -31,13 +36,12 @@
                                     </ng-container>
                             </div>
                             </ngx-slick-carousel>
+                            <span>
+                                <img (click)="slickModal.slickGoTo(0)" src="{{ url+'product'+'/' + data[0].image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
+                            </span>
                             <span *ngFor="let slide of prd_img;let i = index">
-                                <ng-container *ngIf='slide.type == 1'>
+                               
                                 <img (click)="slickModal.slickGoTo(i+1)" src="{{ url+'product'+'/' + slide.image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
-                                </ng-container>
-                                <ng-container *ngIf='slide.type == 2'>
-                                    <img (click)="slickModal.slickGoTo(i+1)" src="{{ url+'product'+'/' + slide.thumbnail }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
-                                </ng-container>
                             </span>
                             
 
@@ -47,7 +51,8 @@
                     <!-- /Product Gallery -->
                     <div class="prd-safecheckout topline slider-bottom-support-image">
                     <div> 
-                        <h3 class="h2-style">Manufactured by:</h3>
+                       <ng-container *ngIf='data[0].manufacture_type == 1'> <h3 class="h2-style">Dealer</h3> </ng-container>
+                       <ng-container *ngIf='data[0].manufacture_type == 2'> <h3 class="h2-style">Retailer</h3> </ng-container>
                         <img [src]="url+ 'users/' + manufacture.logo" onerror="this.src='../../../../assets/images/logo-bw.png'"><h3 class="h2-style">{{manufacture.company_name}}</h3>
                     </div>
                 </div>
@@ -79,6 +84,12 @@
                 
                                
                     </div>
+                    <ng-container *ngIf="table">
+                    <table  border="1">
+                        <thead  *ngIf='tableheader'><th *ngFor='let z of tableheader.col'>{{z}}</th></thead>
+                        <tr *ngFor="let a of tabledata;let j = index"><td *ngFor='let c of a.col'>{{c}}</td></tr>
+                    </table>
+                    </ng-container>
                     <div class="prd-block_actions">
                         <div class="prd-hover">
                             <div class="prd-action button-margin-none">

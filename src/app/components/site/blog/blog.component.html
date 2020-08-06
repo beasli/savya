@@ -43,13 +43,12 @@
                                         <div class="each-blog-details">
                                             <h3><a href="javascript:void(0)" (click)='gotoblog(s)'>{{s.title}}</a></h3>
                                             <div class="cf listing-meta meta below"> 
-                                            <!-- <span class="meta-item author">By <a href="" title="Posts by Kate Hanson" rel="author">Kate Hanson</a></span> -->
+                                            
                                             <time datetime="s.updated_at" class="meta-item">{{s.updated_at | date}}</time>
-                                            <!--  <span class="meta-item comments">
-                                               <a href=""><i class="fa fa-comments-o"></i> 3</a></span> -->
+                                            
                                             </div>
-                                            <div [innerHTML]='s.description'></div>
-                                            <!-- <p>It is important to be chic. I love the 2000s because everyone started to love…</p> -->
+                                            <p [innerHTML]='s.description | summary'></p>
+                                            <a href="javascript:void(0)" (click)='gotoblog(s)'> read more</a>
                                         </div>
                                     </div>
                                 </div>

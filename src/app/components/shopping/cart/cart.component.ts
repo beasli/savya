@@ -45,6 +45,8 @@ products: any;
           this.api.Get(CARTVIEW+"?user_id="+this.uid).then(data=>{
           console.log(this.total);
           this.products=data['data'];
+          this.products = this.products.filter((v,i,a)=>a.findIndex(t=>(t.cart_id === v.cart_id))===i);
+          console.log( this.products);
           this.priceWeight = this.api.calculate(this.products);
           let i = 0;
           if(this.priceWeight){
@@ -65,7 +67,7 @@ products: any;
             this.realFinal = this.final;
           this.page=true;
           this.loader=false;
-          this.results=data['data'];
+          this.results=this.products;
           this.alert=false;
           this.div=true;
         
