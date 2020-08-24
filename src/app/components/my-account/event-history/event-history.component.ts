@@ -22,6 +22,8 @@ export class EventHistoryComponent implements OnInit {
       this.loader=false;
       this.event = data['data']['data'];
     }).catch(d=>{
+      this.page=true;
+      this.loader=false;
       if(d.status == 503){
         this.api.onFail('Your session is expired please login again');
         this.api.setGoto();

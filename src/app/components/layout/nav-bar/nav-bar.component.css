@@ -2,3 +2,14 @@
     max-width: 300px !important;
 }
 
+#live:hover{
+    color:green;
+    
+}
+a#live::before {
+    background-color: green;
+}
+
+/* .hdr-desktop .mmenu:not(.mmenu--vertical) > li> a#live:hover::before {
+    background-color: green;
+} */

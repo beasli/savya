@@ -37,8 +37,8 @@
                                     <td>{{o.created_at | date}}</td>
                                     <td>{{o.payment_mode}}</td>
                                     <td><span class="color">{{o.order_status}}</span></td>
-                                    <td>{{o.totalamount}}</td>
-                                    <td><a href="javascript:void(0)" class="btn">REORDER</a></td>
+                                    <td>{{o.totalamount  | INRCurrency}}</td>
+                                    <td><a (click)="orderDetail(o.Order_id)" href="javascript:void(0)" class="btn">Track My Order</a></td>
                                 </tr> 
                             </tbody>
                         </table>

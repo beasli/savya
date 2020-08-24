@@ -15,10 +15,10 @@ banner:any;
     this.api.Get(LIVEBANNER).then(data=>{
       data['body'].forEach(childObj => {
         if (childObj.category === 'LiveRate_Exclusivebanners') {
-          this.banner = childObj['LiveRate_Exclusivebanners'].filter(slide => slide.place === 'Website');
+          this.exclusive = childObj['LiveRate_Exclusivebanners'].filter(slide=> slide.place === 'Website');;
         }
         else if (childObj.category === 'LiveRate_Listbanners') {
-          this.exclusive = childObj['LiveRate_Listbanners'].filter(slide => slide.place === 'Website');
+          this.banner = childObj['LiveRate_Listbanners'].filter(slide=> slide.place === 'Website');;
         }
         console.log(this.exclusive);
         console.log(this.banner);

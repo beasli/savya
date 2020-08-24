@@ -12,14 +12,43 @@
     <div class="row">
 
         <div class="row">
-            <div *ngFor="let slide of categories" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div (click)='go(slide,1)' class="card border bordershadow" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
+            
+
+
+
+
+
+
+
+
+
+            <div class="testimonials seller bordershadow2" style="background-color:#f9f9fa;">
+                <div class="text-center">
+                    <h2 class="h1-style">Subcategories</h2>
+              </div>
+              <div class="container-fluid" style="width:97vw;padding:5px;">
+                <ngx-slick-carousel class="carousel" 
+                                #slickModal="slick-carousel" 
+                                [config]="slideConfig5" >
+                     <div ngxSlickItem *ngFor="let slide of categories" class="slide">
+                <div (click)='go(slide,1)' class="card border" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
                     <img style="min-width:100%;" class="card-img-top" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
                     <div class="card-body text-center">
                     <h4 class="card-title" style="margin-bottom: 0px;min-height:50px;">{{slide.subcategory}}</h4>
                     </div>
                 </div>
             </div>
+                  </ngx-slick-carousel>
+                </div>
+               </div>
+            <!-- <div *ngFor="let slide of categories" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div (click)='go(slide,1)' class="card border bordershadow" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
+                    <img style="min-width:100%;" class="card-img-top" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="img_url + 'subcategory/' + slide.image" alt="Card image cap">
+                    <div class="card-body text-center">
+                    <h4 class="card-title" style="margin-bottom: 0px;min-height:50px;">{{slide.subcategory}}</h4>
+                    </div>
+                </div>
+            </div> -->
          </div>
 
          <div class="testimonials seller bordershadow2" style="background-color:#f9f9fa;">
@@ -117,5 +146,5 @@
 </div>
 
 
-<app-machinery-holder [heading]="'Most Selling'" [mostselling] = 'mostselling' ></app-machinery-holder>
+<app-machinery-holder [heading]="'Most Selling Products'" [mostselling] = 'mostselling' ></app-machinery-holder>
   

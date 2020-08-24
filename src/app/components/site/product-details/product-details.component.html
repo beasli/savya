@@ -85,11 +85,15 @@
                         <!-- /Product Gallery -->
                         <div class="prd-safecheckout topline slider-bottom-support-image">
                         <div *ngIf='certificate && certificate.length>0' > 
-                            <h3 class="h2-style">certified by:</h3>
-                            <img [src]="url+ 'certificate/' + certificate[0].image" onerror="this.src='../../../../assets/images/logo-bw.png'"> </div>
                         
-                            <h3 class="h2-style">Manufactured by:</h3>
-                            <img [src]="url+ 'users/' + manufacture.logo" onerror="this.src='../../../../assets/images/logo-bw.png'"><h4>{{manufacture.company_name}}</h4>
+                            <h4>certified by:</h4>
+                            <img class="bordershadow2" style="width:100px;height:auto" [src]="url+ 'certificate/' + certificate[0].image" onerror="this.src='../../../../assets/images/logo-bw.png'"> 
+                        </div>
+                        <div>
+                            <h4>Company by:</h4>
+                            <img class="bordershadow2" style="width:100px;height:auto" [src]="url+ 'users/' + manufacture.logo" onerror="this.src='../../../../assets/images/logo-bw.png'">
+                          <br>  <strong>{{manufacture.company_name}}</strong>
+                        </div>
                         </div>
                     </div>
                     <div class="col-md">
@@ -99,8 +103,8 @@
                                     <h1 class="prd-block_title product-details-item-heading">{{data.productname}}</h1>
                                 </div>
                                 <div class="prd-block_info-top">
-                                    <div *ngIf='value>0' class="product-sku product-price">{{totalprice | mcurrency:'INR'}}<span *ngIf='gold && goldlist.length' class="product-size">( {{gold.jwellery_size}} )</span></div>
-                                    <div class="product-weight">Gross Weight: &nbsp;&nbsp; {{gross  | number : '1.3-3'}} <span style="text-transform: initial;"> g</span></div>
+                                    <div *ngIf='value>0' class="product-sku product-price">{{totalprice | INRCurrency}}<span *ngIf='gold && goldlist.length' class="product-size">( {{gold.jwellery_size}} )</span></div>
+                                    <div class="product-weight"><strong> <span style="font-weight:700px !important"> Gross Weight: &nbsp;&nbsp; {{gross  | number : '1.3-3'}}</span> <span style="text-transform: initial;"> g</span></strong></div>
                                 </div>
                             </div>   
                             <ng-container   *ngIf='data.jwellery_type == "Ring" || data.jwellery_type == "Chain"'>
@@ -141,145 +145,242 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div  class="prd-block_options topline ">
+                            <div  class="prd-block_options topline">
+                                <div *ngIf=(platinum)  >
+
+                                    <div class="prd-size swatches">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                       <strong><span style="font-weight:700px !important">Platinum Type:</span></strong>
+                                                </td>
+                                                <td>
+                                        <div class="radio-group">
+                                                <input [checked]='true' class='radio-control' type="radio" id="{{platinum.jwellery_size}}" name="Platinum">
+                                                <label for="{{platinum.jwellery_size}}">{{platinum.jwellery_size}}</label>
+                                        </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <table>
+                                        <tr class="product-code" class="option-label"><td> Product Code</td><td>&nbsp;:&nbsp; {{data.productcode}}</td></tr>
+                                    <tr *ngIf=(platinum.weight) class="option-label"><td> Platinum Price</td><td>&nbsp;:&nbsp;  {{this.pricelist.platinum[0].price | INRCurrency}} / <span style="text-transform: initial;"> g</span></td></tr>
+                                    <tr *ngIf=(platinum.weight) class="option-label"><td>Platinum Weight</td><td>&nbsp;:&nbsp;  {{platinum.weight | number : '1.3-3'}} <span style="text-transform: initial;"> g</span></td></tr>
+                                    <tr *ngIf=(platinum.purity) class="option-label"><td>Platinum Purity</td><td>&nbsp;:&nbsp;  {{platinum.purity}} <span style="text-transform: initial;"> %</span></td></tr>
+                                    <tr *ngIf=(platinum.wastage) class="option-label"><td>Planitum wastage</td><td>&nbsp;:&nbsp;  {{platinum.wastage}} %</td></tr>
+                                    <tr *ngIf="platinum.charges_option != 'Percentage'  && platinum.making_charge !=0" class="option-label"><td>Making Charges</td><td>&nbsp;:&nbsp; {{platinum.making_charge| INRCurrency}}<span *ngIf='platinum.charges_option=="PerGram"'>/ g</span><span *ngIf='platinum.charges_option=="Fixed"'>(Fixed)</span></td></tr>
+                                    <tr *ngIf="platinum.charges_option!= 'Percentage' && platinum.making_charge !=0" class="option-label"><td>Total Making Charge</td> 
+                                        <ng-container *ngIf='platinum.charges_option=="Fixed"'><td>&nbsp;:&nbsp; {{platinum.making_charge| INRCurrency}}</td></ng-container>
+                                        <ng-container *ngIf='platinum.charges_option=="PerGram"'><td>&nbsp;:&nbsp;{{platinum.making_charge*1*platinum.weight*1| INRCurrency}} </td></ng-container>
+                                    </tr>
+                                    <tr class="option-label"><td>Total Platinum Price</td><td>&nbsp;:&nbsp;{{totalplat | INRCurrency}}</td></tr>
+                                </table>
+                                </div>
+
+
                                 <div *ngIf='gold && goldlist.length' class="prd-size swatches">
-                                    <span class="option-label">Gold:</span>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                   <strong><span style="font-weight:700px !important;vertical-align:top;">Gold Type:</span></strong>
+                                            </td>
+                                            <td>
                                     <div class="radio-group">
                                         <ng-container *ngFor='let s of goldlist;let i = index'>
                                             <input [checked]='(i==0) ? true:false' class='radio-control' (change)='getgold(s)' type="radio" id="{{s.jwellery_size}}" name="gold">
-                                            <label for="{{s.jwellery_size}}">{{s.jwellery_size}}</label></ng-container>
+                                            <label for="{{s.jwellery_size}}">{{s.jwellery_size}}</label>
+                                        </ng-container>
                                     </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
-                                        
-                                    <div class="product-code" class="option-label">Product Code: {{data.productcode}}</div>
                                     <div *ngIf='gold && pricegold'>
-                                        <div *ngIf=(gold.weight) class="option-label">Gold (weight):  {{gold.weight| number : '1.3-3'}} <span style="text-transform: initial;"> g</span></div>
-
-                                        <div *ngIf="pricegold2" class="option-label">Gold Rate:  {{pricegold2.price| mcurrency:'INR'}} <span style="text-transform: initial;">/ g</span></div>
-                                        <div  class="option-label">Gold Purity: {{pricegold.value_in}} %</div>
-                                        <div *ngIf="gold.wastage && gold.charges_option != 'Percentage'" class="option-label">Gold wastage:  {{gold.wastage}} %</div>
-                                        <div *ngIf="gold.charges_option == 'Percentage'" class="option-label">Gold wastage:  {{gold.making_charge*1 + gold.wastage*1}} %</div>
-                                        <div *ngIf="gold.charges_option != 'Percentage'" class="option-label">Making Charges:  {{gold.making_charge| mcurrency:'INR'}}</div>
-                                        <div *ngIf="gold.charges_option == 'Percentage'" class="option-label">Making Charges:  {{'0' | mcurrency:'INR'}}</div>
-                                        <div class="option-label">Fine Gold Weight:  {{finegold| number : '1.3-3'}} <span style="text-transform: initial;"> g</span></div>
-                                        <div *ngIf="gold.charges_option!= 'Percentage'" class="option-label">Gold Charges Type:  {{gold.charges_option}}</div>
-                                        <div *ngIf="gold.meenacost_option == 'PerGram'" class="option-label">Total Meena Price:  {{gold.weight * gold.meena_cost | mcurrency:'INR'}}</div>
-                                        <div class="option-label">Total Gold Price:  {{totalgold| mcurrency:'INR'}}</div>
-
+                                        <table>
+                                        <tr class="product-code" class="option-label"><td> Product Code</td><td>&nbsp;:&nbsp; {{data.productcode}}</td></tr>
+                                        <tr  class="option-label"><td>Gold Purity</td><td>&nbsp;:&nbsp; {{pricegold.value_in}} %</td></tr>
+                                        <tr *ngIf=(gold.weight) class="option-label"><td>Net Gold Weight</td><td>&nbsp;:&nbsp;  {{gold.weight| number : '1.3-3'}} <span style="text-transform: initial;"> g</span></td></tr>
+                                        <tr *ngIf="gold.wastage && gold.wastage != 0  && gold.charges_option != 'Percentage'" class="option-label"><td>Gold wastage</td><td>&nbsp;:&nbsp; {{gold.wastage}} %</td></tr>
+                                        <tr *ngIf="gold.charges_option == 'Percentage'" class="option-label"><td>Gold wastage</td><td>&nbsp;:&nbsp; {{gold.making_charge*1 + gold.wastage*1}} %</td></tr>
+                                        <tr *ngIf="gold.charges_option != 'Percentage'  && gold.making_charge !=0" class="option-label"><td>Making Charges</td><td>&nbsp;:&nbsp;  {{gold.making_charge| INRCurrency}} 
+                                            <span *ngIf='gold.charges_option == "Fixed"'>(Fixed)</span>
+                                            <span *ngIf='gold.charges_option == "PerGram"'>/ g</span>
+                                        </td></tr>
+                                        <tr class="option-label"><td>Fine Gold Weight</td><td>&nbsp;:&nbsp;  {{finegold| number : '1.3-3'}} <span style="text-transform: initial;"> g</span></td></tr>
+                                        <tr *ngIf="pricegold2" class="option-label"><td>Fine Gold Rate</td><td>&nbsp;:&nbsp;  {{pricegold2.price| INRCurrency}} <span style="text-transform: initial;">/ g</span></td></tr>
+                                        <tr *ngIf="gold.charges_option!= 'Percentage' && gold.making_charge !=0" class="option-label"><td>Total Making Charge</td>
+                                             <ng-container *ngIf='gold.charges_option=="Fixed"'> <td>&nbsp;:&nbsp;{{gold.making_charge| INRCurrency}}</td></ng-container>
+                                            <ng-container *ngIf='gold.charges_option=="PerGram"'><td>&nbsp;:&nbsp;{{gold.making_charge*1*gold.weight*1| INRCurrency}} </td></ng-container></tr>
+                                        <tr *ngIf="gold.meenacost_option == 'PerGram' && gold.meena_cost!=0" class="option-label"><td>Meena Cost</td><td>&nbsp;:&nbsp;  {{gold.weight * gold.meena_cost | INRCurrency}}</td></tr>
+                                        <tr class="option-label"><td>Total Amount</td><td>&nbsp;:&nbsp;  {{totalgold| INRCurrency}}</td></tr>
+                                    </table>
                                     </div>
 
                                     <div *ngIf=(silver)>
-                                        <div class="option-label">Silver(weight): {{silver.weight| number : '1.3-3'}} <span style="text-transform: initial;"> g</span></div>
-                                        <div class="option-label">Silver Rate: {{pricelist.silver[0].price | mcurrency:'INR'}} <span style="text-transform: initial;">/ g</span></div>
-                                        <div *ngIf=(silver.wastage) class="option-label">Silver wastage:  {{silver.wastage}} %</div>
-                                        <div class="option-label">Making Charges: {{silver.making_charge}}</div>
-                                        <div class="option-label">Charges Type: {{silver.charges_option}}</div>
-                                        <div class="option-label">Total Silver Price: {{totalsilver | mcurrency:'INR'}}</div>
+                                    <table>
+                                        <tr class="option-label"><td> Silver Weight</td><td>&nbsp;:&nbsp;  {{silver.weight| number : '1.3-3'}} <span style="text-transform: initial;"> g</span></td></tr>
+                                        <tr class="option-label"><td>Silver Rate</td><td>&nbsp;:&nbsp;  {{pricelist.silver[0].price | INRCurrency}} <span style="text-transform: initial;">/ g</span></td></tr>
+                                        <tr *ngIf=(silver.wastage) class="option-label"><td>Silver wastage</td><td>&nbsp;:&nbsp;  {{silver.wastage}} %</td></tr>
+                                        <tr class="option-label"><td>Making Charges</td><td>&nbsp;:&nbsp;  {{silver.making_charge}}</td></tr>
+                                        <tr class="option-label"><td>Charges Type</td><td>&nbsp;:&nbsp;  {{silver.charges_option}}</td></tr>
+                                        <tr class="option-label"><td>Total Silver Price</td><td>&nbsp;:&nbsp;  {{totalsilver | INRCurrency}}</td></tr>
+                                    </table>
                                     </div>
 
                                     <div *ngIf=(diamond) class="choose-diamond">
-                                        <label for="id_select" class="option-label"> Diamond: </label>
+                                       
+                                       <strong>
+                                           <label for="id_select">
+                                               <span style="font-weight:700px !important">Diamond:</span>
+                                            </label>
+                                        </strong>
+                                               
                                         <div class="diamond-selectbox">
-                                            <select class="product-size-select">
-                                                <option [value]="diamondlist[0].jwellery_size">{{diamondlist[0].jwellery_size}}</option>
+                                            <select class="product-size-select" (change)="diamondchange(1,$event.target.value)">
+                                                <option *ngFor="let dia of diamondlist1" [value]="dia.jwellery_size">{{dia.jwellery_size}}</option>
                                             </select>
                                         </div>
+                                                
                                     </div>
                                     <div *ngIf=(diamond)  class="prd-size">
-                                        <span class="option-label">Diamond Color:</span>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                      <strong>  <span style="font-weight:700px !important">Diamond Color:</span> </strong>
+                                                </td>
+                                                <td>
                                             <div class="radio-group">
                                                 <ng-container *ngFor='let s of diamondcolour;let i = index'>
                                                     <input [disabled]='discol[i]==1' [checked]='(s==defaultdiamond[0]) ? true:false' class='radio-control' (change)='colorClarity(s,0)' type="radio" id="{{s}}" name="diamondcolour">
                                                     <label for="{{s}}">{{s}}</label>
                                                 </ng-container>
                                             </div>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                     <div *ngIf=(diamond)  class="prd-size">
-                                        <span for="id_select" class="option-label"> Diamond Clarity:</span>
+                                        <tr>
+                                            <td>
+                                    <strong><span for="id_select" style="font-weight:700px !important"> Diamond Clarity:</span> </strong>
+                                            </td>
+                                            <td>
                                             <div class="radio-group">
                                                 <ng-container *ngFor='let s of diamondclarity;let i = index'>
                                                     <input [disabled]='discla[i]==1' [checked]='(s==defaultdiamond[1]) ? true:false' class='radio-control' (change)='colorClarity(0,s)' type="radio" id="{{s}}" name="diamondclarity">
                                                     <label for="{{s}}">{{s}}</label>
                                                 </ng-container>
                                             </div>
+                                            </td>
+                                        </tr>
                                     </div>
 
                                     <div *ngIf='diamond && pricediamond'>
-                                        <div class="option-label">Name: {{diamond.jwellery_size}}</div>
-                                        <div *ngIf=(diamond.weight) class="option-label">Weight:  {{diamond.weight | number : '1.3-3'}} <span style="text-transform: initial;"> Ct</span></div>
-                                        <div *ngIf=(pricediamond) class="option-label">Diamond Price: {{pricediamond.price  | mcurrency:'INR'}}/<span style="text-transform: initial;"> Ct</span></div>
-                                        <div *ngIf=(diamond.quantity) class="option-label">No of Diamond:  {{diamond.quantity}} <span style="text-transform: initial;"> pc</span></div> 
-                                        <div *ngIf=(diamond.certification_cost) class="option-label">Certificate Charges: {{diamond.certification_cost  | mcurrency:'INR'}}<span *ngIf='diamond.crtcost_option == "PerCarat"' style="text-transform: initial;">/ Ct</span></div>
-                                        <div *ngIf='diamond.crtcost_option == "PerCarat"' class="option-label">Total Certificate Charges:  {{diamond.certification_cost * diamond.weight | mcurrency:'INR'}}</div>
-                                        <div *ngIf='diamond.crtcost_option == "Fixed"' class="option-label">Total Certificate Charges:  {{diamond.certification_cost * diamond.weight | mcurrency:'INR'}}</div>
-                                        <div class="option-label">Diamond Total:{{totaldiamond   | mcurrency:'INR'}} </div>
-                                        <div class="option-label">Diamond Color/Clarity: {{this.defaultdiamond[0] + '/' + this.defaultdiamond[1]}}</div>
+                                    <table>
+                                        <tr class="option-label"><td> Name</td><td>&nbsp;:&nbsp; {{diamond.jwellery_size}}</td></tr>
+                                        <tr *ngIf=(diamond.weight) class="option-label"><td> Weight</td><td>&nbsp;:&nbsp;  {{diamond.weight | number : '1.3-3'}} <span style="text-transform: initial;"> Ct</span></td></tr>
+                                        <tr *ngIf=(pricediamond) class="option-label"><td> Diamond Price</td><td>&nbsp;:&nbsp; {{pricediamond.price  | INRCurrency}}/<span style="text-transform: initial;"> Ct</span></td></tr>
+                                        <tr *ngIf=(diamond.quantity) class="option-label"><td> No of Diamond</td><td>&nbsp;:&nbsp;  {{diamond.quantity}} <span style="text-transform: initial;"> pc</span></td></tr> 
+                                        <tr *ngIf='diamond.certification_cost && diamond.certification_cost!=0' class="option-label"><td> Certificate Charges</td><td>&nbsp;:&nbsp; {{diamond.certification_cost  | INRCurrency}}<span *ngIf='diamond.crtcost_option == "PerCarat"' style="text-transform: initial;">/ Ct</span></td></tr>
+                                        <tr *ngIf='diamond.crtcost_option == "PerCarat"  && diamond.certification_cost!=0' class="option-label"><td> Total Certificate Charges</td><td>&nbsp;:&nbsp;  {{diamond.certification_cost * diamond.weight | INRCurrency}}</td></tr>
+                                        <tr *ngIf='diamond.crtcost_option == "Fixed" && diamond.certification_cost!=0' class="option-label"><td> Total Certificate Charges</td><td>&nbsp;:&nbsp;  {{diamond.certification_cost * diamond.weight | INRCurrency}}</td></tr>
+                                        <tr class="option-label"><td> Diamond Total</td><td>&nbsp;:&nbsp;{{totaldiamond   | INRCurrency}} </td></tr>
+                                        <tr class="option-label"><td> Diamond Color/Clarity</td><td>&nbsp;:&nbsp; {{this.defaultdiamond[0] + '/' + this.defaultdiamond[1]}}</td></tr>
+                                    </table>
                                     </div>
 
 
 
                                     <div *ngIf='diamond2 && defaultdiamond2' class="choose-diamond">
-                                        <label for="id_select" class="option-label"> Diamond: </label>
+                                        
+                                        <strong>
+                                            <label for="id_select" style="font-weight:700px !important">
+                                                <span style="font-weight:700px !important">Diamond:</span>
+                                            </label>
+                                        </strong>
+                                            
                                         <div class="diamond-selectbox">
-                                            <select class="product-size-select">
-                                                <option [value]="diamondlist[1].jwellery_size">{{diamondlist[1].jwellery_size}}</option>
+                                            <select class="product-size-select" (change)="diamondchange(2,$event.target.value)">
+                                                <option *ngFor="let dia of diamondlist2" [value]="dia.jwellery_size">{{dia.jwellery_size}}</option>
                                             </select>
                                         </div>
+                                            
                                     </div>
                                     <div *ngIf='diamond2  && defaultdiamond2'  class="prd-size">
-                                        <span class="option-label">Diamond Color:</span>
+                                        <table>
+                                            <tr>
+                                            <td>
+                                       <strong> <span style="font-weight:700px !important">Diamond Color:</span></strong>
+                                            </td>
+                                            <td>
                                             <div class="radio-group">
                                                 <ng-container *ngFor='let s of diamondcolour2;let i = index'>
                                                     <input [disabled]='discol2[i]==1' [checked]='(s==defaultdiamond2[0]) ? true:false' class='radio-control' (change)='colorClarity(s,0,2)' type="radio" id="{{s+'d'}}" name="diamondcolour2">
                                                     <label for="{{s+'d'}}">{{s}}</label>
                                                 </ng-container>
                                             </div>
+                                            </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                     <div *ngIf='diamond2  && defaultdiamond2'  class="prd-size">
+                                        <table>
+                                            <tr>
+                                            <td>
+                                    <strong>
                                         <span for="id_select" class="option-label"> Diamond Clarity:</span>
+                                    </strong>
+                                            </td>
+                                            <td>
                                             <div class="radio-group">
                                                 <ng-container *ngFor='let s of diamondclarity2;let i = index'>
                                                     <input [disabled]='discla2[i]==1' [checked]='(s==defaultdiamond2[1]) ? true:false' class='radio-control' (change)='colorClarity(0,s,2)' type="radio" id="{{s+'d'}}" name="diamondclarity2">
                                                     <label for="{{s+'d'}}">{{s}}</label>
                                                 </ng-container>
                                             </div>
+                                            </td>
+                                            </tr>
+                                        </table>
                                     </div>
 
                                     <div *ngIf='diamond2 && pricediamond2 && defaultdiamond2'>
-                                        <div class="option-label">Name: {{diamond2.jwellery_size}}</div>
-                                        <div *ngIf=(diamond2.weight) class="option-label">Weight:  {{diamond2.weight | number : '1.3-3'}} <span style="text-transform: initial;"> Ct</span></div>
-                                        <div *ngIf=(pricediamond2) class="option-label">Diamond Price: {{pricediamond2.price  | mcurrency:'INR'}}/<span style="text-transform: initial;"> Ct</span></div>
-                                        <div *ngIf=(diamond2.quantity) class="option-label">No of Diamond:  {{diamond2.quantity}} <span style="text-transform: initial;"> pc</span></div> 
-                                        <div *ngIf=(diamond2.certification_cost) class="option-label">Certificate Charges: {{diamond2.certification_cost  | mcurrency:'INR'}}<span *ngIf='diamond2.crtcost_option == "PerCarat"' style="text-transform: initial;">/ Ct</span></div>
-                                        <div *ngIf='diamond2.crtcost_option == "PerCarat"' class="option-label">Total Certificate Charges:  {{diamond2.certification_cost * diamond2.weight | mcurrency:'INR'}}</div>
-                                        <div *ngIf='diamond2.crtcost_option == "Fixed"' class="option-label">Total Certificate Charges:  {{diamond2.certification_cost * diamond2.weight | mcurrency:'INR'}}</div>  
-                                        <div *ngIf='totaldiamond2' class="option-label">Diamond Total:Rs. {{totaldiamond2   | mcurrency:'INR'}} </div>
-                                        <div class="option-label">Diamond Color/Clarity: {{this.defaultdiamond2[0] + '/' + this.defaultdiamond2[1]}}</div>
+                                        <tr class="option-label"><td> Name</td><td>&nbsp;:&nbsp; {{diamond2.jwellery_size}}</tr>
+                                        <tr *ngIf=(diamond2.weight) class="option-label"><td> Weight</td><td>&nbsp;:&nbsp;  {{diamond2.weight | number : '1.3-3'}} <span style="text-transform: initial;"> Ct</span></td></tr>
+                                        <tr *ngIf=(pricediamond2) class="option-label"><td> Diamond Price</td><td>&nbsp;:&nbsp; {{pricediamond2.price  | INRCurrency}}/<span style="text-transform: initial;"> Ct</span></td></tr>
+                                        <tr *ngIf=(diamond2.quantity) class="option-label"><td> No of Diamond</td><td>&nbsp;:&nbsp;  {{diamond2.quantity}} <span style="text-transform: initial;"> pc</span></td></tr> 
+                                        <tr *ngIf="diamond2.certification_cost && diamond2.certification_cost!=0" class="option-label"><td> Certificate Charges</td><td>&nbsp;:&nbsp; {{diamond2.certification_cost  | INRCurrency}}<span *ngIf='diamond2.crtcost_option == "PerCarat"' style="text-transform: initial;">/ Ct</span></td></tr>
+                                        <tr *ngIf='diamond2.crtcost_option == "PerCarat"  && diamond2.certification_cost!=0' class="option-label"><td> Total Certificate Charges</td><td>&nbsp;:&nbsp;  {{diamond2.certification_cost * diamond2.weight | INRCurrency}}</td></tr>
+                                        <tr *ngIf='diamond2.crtcost_option == "Fixed"  && diamond2.certification_cost!=0' class="option-label"><td> Total Certificate Charges</td><td>&nbsp;:&nbsp;  {{diamond2.certification_cost * diamond2.weight | INRCurrency}}</td></tr>  
+                                        <tr *ngIf='totaldiamond2' class="option-label"><td> Diamond Total</td><td>&nbsp;:&nbsp;Rs. {{totaldiamond2   | INRCurrency}} </td></tr>
+                                        <tr class="option-label"><td> Diamond Color/Clarity</td><td>&nbsp;:&nbsp; {{this.defaultdiamond2[0] + '/' + this.defaultdiamond2[1]}}</td></tr>
                                     </div>
 
-                                    <div *ngIf=(platinum) >
-                                        <div *ngIf=(platinum.weight) class="option-label">Platinum (weight):  {{platinum.weight | number : '1.3-3'}} <span style="text-transform: initial;"> g</span></div>
-                                        <div *ngIf=(platinum.weight) class="option-label">Platinum Rate:  {{this.pricelist.platinum[0].price | mcurrency:'INR'}} / <span style="text-transform: initial;"> g</span></div>
-                                        <div *ngIf=(platinum.wastage) class="option-label">Planitum wastage:  {{platinum.wastage}} %</div>
-                                        <div *ngIf=(!platinum.wastage) class="option-label">Planitum wastage:  0 %</div>
-                                        <div *ngIf="platinum.charges_option != 'Percentage'" class="option-label">Making Charges: {{platinum.making_charge| mcurrency:'INR'}}</div>
-                                        <div *ngIf="platinum.charges_option != 'Percentage'" class="option-label">Charges Type:  {{platinum.charges_option}}</div>
-                                        <div class="option-label">Total Platinum Price: {{totalplat | mcurrency:'INR'}}</div> 
-                                    </div>
+                                    
                                 
                                 <div *ngIf='stone && stonelist.length' class="prd-size swatches">
-                                    <span class="option-label">Stone:</span>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                   <span style="font-weight:700px !important"><strong> Stone:</strong></span>
+                                            </td>
+                                            <td>
                                     <div class="radio-group">
-                                        <ng-container *ngFor='let s of stonelist;let i = index'><input [checked]='(i==0) ? true:false' class='radio-control' (change)='getstone(s)' type="radio" id="{{s.jwellery_size}}" name="stone"><label for="{{s.jwellery_size}}">{{s.jwellery_size}}</label></ng-container>
-                                        </div>
+                                        <ng-container *ngFor='let s of stonelist;let i = index'>
+                                            <input [checked]='(i==0) ? true:false' class='radio-control' (change)='getstone(s)' type="radio" id="{{s.jwellery_size}}" name="stone"><label for="{{s.jwellery_size}}">{{s.jwellery_size}}</label></ng-container>
+                                    </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
 
                                 <div *ngIf=(stone)>
-                                    <div class="option-label">Stone (weight):  {{stone.weight | number : '1.3-3'}} <span style="text-transform: initial;"> Ct</span></div>
-                                    <div *ngIf=(pricestone) class="option-label">Fine Stone Rate:{{pricestone.price| mcurrency:'INR'}}/<span style="text-transform: initial;"> Ct</span></div>
-                                    <div class="option-label">No Stone:  {{stone.quantity}} <span style="text-transform: initial;"> Ct</span></div>
-                                    
-                                    <div class="option-label" *ngIf=(pricestone)>Stone Total: {{totalstone | mcurrency:'INR'}} </div>
+                                <table>
+                                    <tr class="option-label"><td> No Stone</td><td>&nbsp;:&nbsp;  {{stone.quantity}} <span style="text-transform: initial;"> Pc</span></td></tr>
+                                    <tr class="option-label"><td> Stone Weight</td><td>&nbsp;:&nbsp;  {{stone.weight | number : '1.3-3'}} <span style="text-transform: initial;"> Ct</span></td></tr>
+                                    <tr *ngIf=(pricestone) class="option-label"><td> Stone Rate</td><td>&nbsp;:&nbsp;{{pricestone.price| INRCurrency}}/<span style="text-transform: initial;"> Ct</span></td></tr>
+                                    <tr class="option-label" *ngIf=(pricestone)><td> Stone Total</td><td>&nbsp;:&nbsp; {{totalstone | INRCurrency}}</td></tr>
+                                </table>
                                 </div>
 
                             </div>

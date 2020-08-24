@@ -5,7 +5,8 @@
     height:165px;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 90%;
+    cursor:pointer;
     position: relative;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -77,6 +78,7 @@
     margin-bottom: 20px;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
+    cursor:pointer;
 }
 .subsub-product-listing-heading{
     margin-bottom:70px;

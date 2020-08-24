@@ -17,6 +17,14 @@ export class BullianMerchantComponent implements OnInit {
     this.router.params.subscribe(params=>{
       this.api.Get(MERCHANT+'/'+params.id).then(data=>{
         this.merchant = data['data'];
+        if(this.merchant){
+          this.merchant.forEach(element => {
+            element.cover_image = element.cover_image.replace(/ /g, "%20");
+            element.cover_image = element.cover_image.replace(/\(/g, "%28");
+            element.cover_image = element.cover_image.replace(/\)/g, "%29");
+            
+          });
+        }
       });
     });
   }

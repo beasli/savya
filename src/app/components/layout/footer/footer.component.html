@@ -34,9 +34,10 @@
                     </div>
                     <div class="collapsed-content">
                         <ul>
-                            <li><a routerLink="/terms">Terms of Use</a></li>
+                            <li><a routerLink="/terms">Buyers Terms & Conditions</a></li>
+                            <li><a routerLink="/sterms">Sellers Terms & Conditions</a></li>
                             <li><a routerLink="/privacy">Privacy Policy</a></li>
-                            <li><a routerLink="/contact">Contact Info</a></li>
+                            <li><a routerLink="/contact">Contact Us</a></li>
                             <li><a routerLink="/about">About Us</a></li>
                             <li><a routerLink="/payment">Payment & Refunds</a></li>
                             <li><a *ngIf="drop!=1" routerLink="/register" class="js-back-to-top">Create Account</a></li>
@@ -72,7 +73,7 @@
                         <ul class="contact-list">
                             <li><i class="icon-phone"></i><span><span class="h6-style" style="text-transform: initial;">Call Us:</span><span style="text-transform: initial;">{{values.mobile}}<br>{{values.landline}}</span></span></li>
                             <li><i class="icon-mail-envelope1"></i><span><span class="h6-style" style="text-transform: initial;">E-mail:</span><span style="text-transform: lowercase;"><a [href]="'mailto:'+values.email">{{values.email}}</a></span></span></li>
-                            <li><i class="icon-location1"></i><span><span class="h6-style" style="text-transform: initial;">Address:</span><span style="text-transform: initial;">{{values.address}}</span></span></li>
+                            <li><i class="icon-location1"></i><span><span class="h6-style" style="text-transform: initial;">Address:</span><span style="text-transform: initial;"><a target="_blank" [href]="'https://maps.google.com/?q='+values.address">{{values.address}}</a></span></span></li>
                         </ul>
                         <ul class="social-list">
                             <li><a href="https://www.facebook.com/SavyaJewelsBusiness" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -96,12 +97,12 @@
                     <div class="download-app">
                         <span class="playstore">
                             <a href="https://play.google.com/store/apps/details?id=savyajewels.business" target="new">
-                                <img src="https://www.designpieces.com/wp-content/uploads/2016/02/google-play-badge.png">
+                                <img src="assets/images/google-play-badge.png">
                             </a>
                         </span>
                         <span class="appstore">
                             <a href="https://apps.apple.com/in/app/savya-jewels-business/id1472834371" target="new">
-                                <img src="https://www.designpieces.com/wp-content/uploads/2016/02/download-on-the-app-store.png">
+                                <img src="assets/images/apple.png">
                             </a>
                         </span>
                     </div>

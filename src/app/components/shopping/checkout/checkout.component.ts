@@ -238,7 +238,7 @@ export class CheckoutComponent implements OnInit {
   payWithRazor() {
     const options: any = {
       key: 'rzp_test_Dmzimsnc9gzT7E',
-      amount: (this.final.toFixed(2))*100, // amount should be in paise format to display Rs 1255 without decimal point
+      amount: Math.round(Number(this.final.toFixed(2))*100), // amount should be in paise format to display Rs 1255 without decimal point
       currency: 'INR',
       name: 'Savya Jewels Business', // company name or product name
       description: '',  // product description

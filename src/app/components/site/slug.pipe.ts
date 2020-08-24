@@ -24,6 +24,35 @@ export class SummaryPipe implements PipeTransform {
 
       return value.substr(0,500)+'...';
     }
+
+
+  
 }
 
+
+
+@Pipe({
+  name:'INRCurrency'
+})
+export class INRCurrencyPipe implements PipeTransform {
+  transform(value:number): string{
+
+      // value = Math.round(value);
+      var result = value.toString().split('.');
+      if(!result[1]){result[1] = "00";}else if(result[1].length <2){ result[1] = result[1]+"0"; }
+      
+      var lastThree = result[0].substring(result[0].length - 3);
+      var otherNumbers = result[0].substring(0, result[0].length - 3);
+      if (otherNumbers != '' && otherNumbers != '-')
+          lastThree = ',' + lastThree;
+      var output = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+
+      if (result.length > 1) {
+          output += "." + result[1].substring(0, 2);
+      }
+
+      return "₹ "+output;
+
+  }
+}
 

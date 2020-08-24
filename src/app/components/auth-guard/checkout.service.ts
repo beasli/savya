@@ -31,8 +31,9 @@ value:any;
         let i = 0;
         this.priceWeight.forEach(element => {
         this.total.price +=element.price;
-        this.total.weight +=Number(element.weight);
-        this.total.weight = this.total.weight*this.data[i].count;
+        this.total.weight +=Number(element.weight)*this.data[i].count;
+      //  this.total.weight = this.total.weight*this.data[i].count;
+      //  console.log(this.total.weight);
         i = i+1;
       });
     }

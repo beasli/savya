@@ -21,12 +21,12 @@
                                <ng-container *ngFor="let a of r.assests;let i=index">
                                 <tr>
                                     <td>{{a.metal}}</td>
-                                    <td> &nbsp;&nbsp; &nbsp;&nbsp;{{a.materialType}} &nbsp;&nbsp; &nbsp;&nbsp;</td>
-                                    <td>{{a.weight | number : '1.3-3'}} &nbsp;<ng-container *ngIf='a.metal == "Diamond" || a.metal == "Stone"'>Ct</ng-container><ng-container *ngIf='a.metal != "Diamond" && a.metal != "Stone"'>g</ng-container>&nbsp;</td>
+                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;<ng-container *ngIf='a.diamondType'>{{a.diamondType}}</ng-container>&nbsp;&nbsp;{{a.materialType}} &nbsp;&nbsp; &nbsp;&nbsp;</td>
+                                    <td>{{a.weight* quantity(r.cart_id) | number : '1.3-3'}} &nbsp;<ng-container *ngIf='a.metal == "Diamond" || a.metal == "Stone"'>Ct</ng-container><ng-container *ngIf='a.metal != "Diamond" && a.metal != "Stone"'>g</ng-container>&nbsp;</td>
                                 </tr>
                                 </ng-container>
                                 <tr>
-                                    <td colspan="3"><h4>{{priceWeight[i].price * quantity(r.cart_id)  | mcurrency:'INR'}}</h4></td>
+                                    <td colspan="3"><h4>{{priceWeight[i].price * quantity(r.cart_id)  | INRCurrency}}</h4></td>
                                     <td>
                                         <div   *ngIf= "checkCart(r.product_id)" class="row no=gutters" >
                                             <div class="col-lg-12">
@@ -53,21 +53,21 @@
                 <div class="card-body  border bordershadow2">
                     <h3>Your Bill </h3>
                     <p><strong>
-                        <div>Total Price <span class="card-total-price"> {{total.price | mcurrency:'INR'}}</span></div>
+                        <div>Total Price <span class="card-total-price"> {{total.price | INRCurrency}}</span></div>
                         <div>Total Gross Weight <span class="card-total-price"> {{totalw | number : '1.3-3'}} g</span></div>
-                          Surcharge : {{total.price*0.01 | mcurrency:'INR'}}<br>
-                          Sgst(1.5 %):  {{final*0.015 | mcurrency:'INR'}}<br>
-                          Cgst(1.5 %):  {{final*0.015 | mcurrency:'INR'}}<br>
-                          Delivery Charge:  {{ 800 | mcurrency:'INR'}}<br>
+                          Surcharge : {{total.price*0.01 | INRCurrency}}<br>
+                          Sgst(1.5 %):  {{final*0.015 | INRCurrency}}<br>
+                          Cgst(1.5 %):  {{final*0.015 | INRCurrency}}<br>
+                          Delivery Charge:  {{ 800 | INRCurrency}}<br>
                         </strong>
                       </p>
                       <div class="card-total-sm">
-                        <div class="float-right">Final Total <span class="card-total-price"> {{final + final *0.03 + 800| mcurrency:'INR'}}</span></div>
+                        <div class="float-right">Final Total <span class="card-total-price"> {{final + final *0.03 + 800| INRCurrency}}</span></div>
                     </div>
                 </div>
                 <div class="cart-table-total">
                     <div class="row">
-                        <div class="col-sm"><a routerLink="/home" class="btn btn--alt"><i class="icon-angle-left"></i><span>continue shopping</span></a></div>
+                        <div class="col-sm" ><a *ngIf='totalw < 100' routerLink="/home" class="btn btn--alt"><i class="icon-angle-left"></i><span>continue shopping</span></a></div>
                         <div class="col-sm-auto"><a routerLink="/checkout" class="btn"><span>continue checkout</span> <i class="icon-angle-right"></i></a></div>
                     </div>
                 </div>

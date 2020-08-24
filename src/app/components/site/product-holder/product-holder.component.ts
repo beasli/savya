@@ -55,6 +55,19 @@ drop:any;
   constructor(private api:ApiService,private router:Router) {
     this.drop=this.api.drop; 
    } 
+   ngOnChanges(){
+     if(this.mostselling && this.mostselling.length){
+      this.mostselling.forEach(element => {
+        element.gross = 0;
+        if(element.weight.Gold){element.gross += Number(element.weight.Gold)};
+        if(element.weight.Silver){element.gross += Number(element.weight.Silver)};
+        if(element.weight.Diamond){element.gross += Number(element.weight.Diamond)*0.2};
+        if(element.weight.Stone){element.gross += Number(element.weight.Stone)*0.2};
+        if(element.weight.Platinum){element.gross += Number(element.weight.Platinum)};
+        console.log(element.gross);
+      });
+     }
+   }
   go(value) {
     this.api.godetail(value);
   }

@@ -92,6 +92,7 @@ export class HomeComponent implements OnInit {
   event: any;
   product: string;
   manufacture: string;
+  mobile: any;
   
   constructor(private api: ApiService, private DOM: DomSanitizer,private router:Router) {
       this.api.Get(CRAUSEL).then(data => {
@@ -99,10 +100,11 @@ export class HomeComponent implements OnInit {
       this.loader=false;
         data['body'].forEach(childObj => {
           if (childObj.category === 'app_banners') {
+            this.mobile = childObj['app_banners'].filter(slide => slide.place === 'App');
             this.slider_imgs = childObj['app_banners'].filter(slide => slide.place === 'Website');
           }
-          else if (childObj.category === 'exclusive_banners') {
-            this.exclusive = childObj['exclusive_banners'].filter(slide => slide.place === 'Website');
+          else if (childObj.category === 'exclusive_banners') { 
+            this.exclusive = childObj['exclusive_banners'].filter(slide=> slide.place === 'Website');
           }
           else if (childObj.category === 'product') {
             this.mostselling = childObj['product'];

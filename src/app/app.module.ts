@@ -33,12 +33,9 @@ import { LoginModalComponent } from './components/site/login-modal/login-modal.c
     NavBarComponent,
     ModalComponent,
     LoginModalComponent,
-   
-  
   ],
   imports: [
-    BrowserModule,
-    
+    BrowserModule,    
     AppRoutingModule,
     AccountModule,
     AuthModule,

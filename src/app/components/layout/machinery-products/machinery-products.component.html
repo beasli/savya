@@ -1,9 +1,17 @@
+<ng-container *ngIf='manufacture'>
+    <ngb-carousel>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper bordershadow">
+            <img onerror="this.src='../../../../assets/images/logo-bw.png'" width="100%" src="../../../../assets/images/Machinery.jpg" alt="Random first slide" >
+          </div>
+        </ng-template>
+    </ngb-carousel>
+</ng-container>
 <div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09">
     <div class="container">
         <!-- <div class="text-center">
             <h2 class="h1-style">Product with side filter</h2>
         </div> -->
-        
         <div class="row" >
              <div class="col-lg aside">
                  <div class="prd-grid-wrap">

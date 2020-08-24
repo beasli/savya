@@ -29,6 +29,9 @@
     background-color: #0e0d0c;
     border-color: #111110;
 }
+.prd-grid.data-to-show-4 .prd{
+    cursor:pointer;
+}
 
 @media(max-width:767px){
     .size-swatch li > * {

@@ -23,7 +23,9 @@ export const CONTACT = 'contact'; //done
 export const ABOUT = 'pages/2'; //done
 export const TERMSANDCONDITION = 'pages/3';//done
 export const PAYMENT = 'pages/1';//done
-
+export const BUYING = 'pages/4';
+export const SELLING = 'pages/5';
+export const RETURN = 'pages/6';
  // wishlist
 //export const WISHLISTVIEW = 'user/wishlist/view';
 export const WISHLISTVIEW='wishlist';

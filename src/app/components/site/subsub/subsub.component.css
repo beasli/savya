@@ -5,7 +5,8 @@
     height:165px;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 90%;
+    cursor:pointer;
     position: relative;
     margin-bottom: 0px;
     transition: all 0.5s;

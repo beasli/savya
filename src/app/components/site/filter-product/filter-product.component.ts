@@ -77,6 +77,17 @@ export class FilterProductComponent implements OnInit {
       this.div=true;
       this.alert=false
       this.products = data['data'];
+      if(this.products.length){
+        this.products.forEach(element => {
+          element.gross = 0;
+          if(element.weight.Gold){element.gross += Number(element.weight.Gold)};
+          if(element.weight.Silver){element.gross += Number(element.weight.Silver)};
+          if(element.weight.Diamond){element.gross += Number(element.weight.Diamond)*0.2};
+          if(element.weight.Stone){element.gross += Number(element.weight.Stone)*0.2};
+          if(element.weight.Platinum){element.gross += Number(element.weight.Platinum)};
+          console.log(element.gross);
+        });
+      }
       this.pages = Math.ceil(data['pagination']/16);
       this.url = data['url'] + '/';
        }).catch(d=>{
@@ -87,6 +98,17 @@ export class FilterProductComponent implements OnInit {
           this.div=true;
           this.alert=false
           this.products = data['data'];
+          if(this.products.length){
+            this.products.forEach(element => {
+              element.gross = 0;
+              if(element.weight.Gold){element.gross += Number(element.weight.Gold)};
+              if(element.weight.Silver){element.gross += Number(element.weight.Silver)};
+              if(element.weight.Diamond){element.gross += Number(element.weight.Diamond)*0.2};
+              if(element.weight.Stone){element.gross += Number(element.weight.Stone)*0.2};
+              if(element.weight.Platinum){element.gross += Number(element.weight.Platinum)};
+              console.log(element.gross);
+            });
+          }
         
           this.url = data['url'] + '/';
           
@@ -104,6 +126,17 @@ export class FilterProductComponent implements OnInit {
           this.div=true;
           this.alert=false
           this.products = data['data'];
+          if(this.products.length){
+            this.products.forEach(element => {
+              element.gross = 0;
+              if(element.weight.Gold){element.gross += Number(element.weight.Gold)};
+              if(element.weight.Silver){element.gross += Number(element.weight.Silver)};
+              if(element.weight.Diamond){element.gross += Number(element.weight.Diamond)*0.2};
+              if(element.weight.Stone){element.gross += Number(element.weight.Stone)*0.2};
+              if(element.weight.Platinum){element.gross += Number(element.weight.Platinum)};
+              console.log(element.gross);
+            });
+          }
           this.pages = Math.ceil(data['pagination']/16)
           this.url = data['url'] + '/';
           
@@ -115,7 +148,17 @@ export class FilterProductComponent implements OnInit {
               this.div=true;
               this.alert=false
               this.products = data['data'];
-          
+              if(this.products.length){
+                this.products.forEach(element => {
+                  element.gross = 0;
+                  if(element.weight.Gold){element.gross += Number(element.weight.Gold)};
+                  if(element.weight.Silver){element.gross += Number(element.weight.Silver)};
+                  if(element.weight.Diamond){element.gross += Number(element.weight.Diamond)*0.2};
+                  if(element.weight.Stone){element.gross += Number(element.weight.Stone)*0.2};
+                  if(element.weight.Platinum){element.gross += Number(element.weight.Platinum)};
+                  console.log(element.gross);
+                });
+              }
               this.url = data['url'] + '/';
           
                });

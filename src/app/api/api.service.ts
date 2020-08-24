@@ -652,6 +652,7 @@ calculate(products){
             weight += Number(gold.weight);
             goldweight = Number(outcome.weight);
             priceProduct += outcome.price;
+            making += Number(outcome.making_charge);
       } else {
         let pricegold = price.gold.find(x => x.type == '24KT');
         let value = price.gold.find(x => x.type == gold.materialType);
@@ -660,6 +661,7 @@ calculate(products){
         weight += Number(outcome.weight2);
         goldweight = Number(outcome.weight);
         priceProduct += outcome.price;
+        making += Number(outcome.making_charge);
       }
   }
   if(silver)  {
@@ -677,14 +679,16 @@ calculate(products){
     making += Number(outcome.making_charge);
   }
   if(diamond[0])  {
-    let pricediamond = price.diamond_master.find(x => x.type == diamond[0].materialType);
+    let pricediamond = price.diamond_master.filter(x => x.diamond_type == diamond[0].diamondType);
+    pricediamond = price.diamond_master.find(x => x.type == diamond[0].materialType);
     let outcome = this.price(diamond[0].weight,pricediamond.price,'PerGram',0,0,0,0,"",diamond[0].crtcost_option,diamond[0].certification_cost);
     weight += Number(outcome.weight2)*0.2;
     priceProduct += outcome.price;
     making += Number(outcome.making_charge);
   }
   if(diamond[1])  {
-    let pricediamond = price.diamond_master.find(x => x.type == diamond[1].materialType);
+    let pricediamond = price.diamond_master.filter(x => x.diamond_type == diamond[1].diamondType);
+    pricediamond = pricediamond.find(x => x.type == diamond[1].materialType);
     let outcome = this.price(diamond[1].weight,pricediamond.price,'PerGram',0,0,0,0,"",diamond[1].crtcost_option,diamond[1].certification_cost);
     weight += Number(outcome.weight2)*0.2;
     priceProduct += outcome.price;
@@ -748,7 +752,7 @@ price(weight, rate, option, makingcharge, wastage = 0, value = 0,meenacost=0,mee
  }
  let weight2=weight;
  if(value!=0){
- weight = ((Number(value)-Number(wastage)) / 100) *Number(weight);
+ weight = (Number(value) / 100) *Number(weight);
  console.log(weight);
  }
   let data = {'weight': weight,'weight2':weight2,'price': metalprice,'making_charge':making};

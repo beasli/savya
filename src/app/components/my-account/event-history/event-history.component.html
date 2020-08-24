@@ -14,11 +14,12 @@
                 <div class="col-md-3 aside aside--left">
                     <div class="list-group"><a routerLink="/account-details" class="list-group-item ">Account Details</a> <a routerLink="/account-addresses" class="list-group-item">My Addresses</a> <a routerLink="/account-wishlist" class="list-group-item">My Wishlist</a><a routerLink="/offers" class="list-group-item">My Offers</a><a routerLink="/account-history" class="list-group-item">My Order History</a><a routerLink="/event-history" class="list-group-item active">My Event History</a><a routerLink="/kycpending" class="list-group-item">Upload KYC</a></div>
                 </div>
-                <div class="col-md-9 aside" *ngIf="page">
+                
+                <div class="col-md-9 aside" >
                     <h2>My Event History</h2>
-                    
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-order-history" *ngIf='event.length'>
+                    <app-loader *ngIf="loader"></app-loader>    
+                    <div class="table-responsive" *ngIf="page">
+                        <table class="table table-bordered table-striped table-order-history" *ngIf='event && event.length'>
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -40,7 +41,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div *ngIf="!event.length">
+                        
+                        <div *ngIf="!event || !event.length">
       
                             <div class="row" style="margin:auto;">
                             <img src="../../../../assets/images/savya-jewels/nothing-in-history.png"  class="embed-responsive" alt="">
@@ -49,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="loader"><app-loader></app-loader></div>
+                
             </div>
         </div>
     </div>

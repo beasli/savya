@@ -13,7 +13,7 @@
                                     <th scope="col">Payment Mode</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Total Price</th>
-                                    <th scope="col"></th>
+                                    
                                 </tr>
                             </thead>
                             
@@ -25,7 +25,7 @@
                                     <td>{{o.payment_mode}}</td>
                                     <td><span class="color">{{o.order_status}}</span></td>
                                     <td>{{o.totalamount}}</td>
-                                    <td><a href="javascript:void(0)" class="btn">REORDER</a></td>
+                                    
                                 </tr> 
                             </tbody>
                         </table>
@@ -60,6 +60,8 @@
         <div class="card-body">
             <h3>Your Bill </h3>
             <p><strong>
+                  <span style="color:green">
+                  Order Current Status:&nbsp; {{current.order_status}} </span><br>
                   Payment mode: {{current.payment_mode}}<br>
                   Total Amount: ₹ {{current.totalamount}}<br>
               <ng-container *ngIf='current.payment_mode != "cod"'>

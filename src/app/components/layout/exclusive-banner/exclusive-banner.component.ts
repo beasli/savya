@@ -25,10 +25,11 @@ export class ExclusiveBannerComponent implements OnInit {
   ngOnChanges() {
     if(this.exclusive && this.catall){
       this.exclusive.forEach(element => {
-        element.category = this.catall.find(x => x.category_id == element.category_id);
-        element.subcategory = element.category.subcategory.find(x => x.subcategory_id == element.subcategory_id);
+       if(element.category_id){ element.category = this.catall.find(x => x.category_id == element.category_id);}
+        if(element.subcategory_id){element.subcategory = element.category.subcategory.find(x => x.subcategory_id == element.subcategory_id);}
         if(element.subcategory){
         element.subcategory = element.subcategory.subcategory.replace(/ /g, "-");
+        console.log(element);
       }
       });
     }

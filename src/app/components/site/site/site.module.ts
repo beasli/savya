@@ -1,6 +1,6 @@
 import { BlogDetailsComponent } from './../blog-details/blog-details.component';
 import { BlogComponent } from './../blog/blog.component';
-import { SlugPipe, MyCurrencyPipe, SummaryPipe } from './../slug.pipe';
+import { SlugPipe, MyCurrencyPipe, SummaryPipe, INRCurrencyPipe } from './../slug.pipe';
 import { SubsubComponent } from './../subsub/subsub.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventsComponent } from './../events/events.component';
@@ -66,6 +66,7 @@ import { CheckoutService } from '../../auth-guard/checkout.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SeoService } from '../../SEO/seo.service';
 import { LiveComponent } from '../live/live.component';
+import { SelltermsComponent } from '../sellterms/sellterms.component';
 
 
 
@@ -125,9 +126,11 @@ const customConfig: ShareButtonsConfig = {
     SlugPipe,
     MyCurrencyPipe,
     SummaryPipe,
+    INRCurrencyPipe,
     BlogComponent,
     BlogDetailsComponent,
     LiveComponent,
+    SelltermsComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -149,6 +152,7 @@ const customConfig: ShareButtonsConfig = {
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
       { path: 'live', component: LiveComponent},
+      { path: 'sterms', component: SelltermsComponent},
       { path: 'blog', component: BlogComponent},
       { path: 'blog/:id', component: BlogDetailsComponent},
       // { path: 'login', component: LoginComponent,canActivate: [LoginGuardService]},

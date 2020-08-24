@@ -5,8 +5,8 @@
             <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/SJB_Machinery-1.png" srcset="assets/images/SJB_Machinery-1.png" alt=""></a></div>
             
             <div class="prev-menu-scroll icon-angle-left prev-menu-js"></div>
-            <div class="nav-holder">
-                <div class="hdr-nav">
+            <div class="nav-holder" style="height:120px;">
+                <div class="hdr-nav" >
                 
                     <ul  class="mmenu mmenu-js">
                         
@@ -14,17 +14,42 @@
                             <li class="mmenu-item--simple">
                                 <a href="javascript:void(0)" routerLink="/" title="">HOME</a>
                             </li>
-                            <li *ngFor='let s of catwithsub' class="mmenu-item--simple">
+                            <ng-container *ngFor='let s of catwithsub;let i = index'>
+                            <li class="mmenu-item--simple">
                                 
-                                <ng-container *ngIf="s.category != 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase]" title="">{{s.category}}</a></ng-container>
-                                <ng-container *ngIf="s.category == 'MACHINERY'"><a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase]" title="">{{s.category}}</a></ng-container>
-                                <div class="mmenu-submenu">
+                                <ng-container *ngIf="s.category != 'MACHINERY' && i != length"><a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase]" title="">{{s.category}}</a></ng-container>
+                                <ng-container *ngIf="i == length">
+                                    <a id='live' href="javascript:void(0)" [routerLink]="['/live']" title="">Live Rate</a>
+                                </ng-container>
+                                <ng-container *ngIf="s.category == 'MACHINERY'  && i != length"><a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase]" title="">{{s.category}}</a></ng-container>
+                                <div *ngIf='i!=length' class="mmenu-submenu">
                                     <ul class="submenu-list">
-                                     <ng-container *ngIf="s.category != 'MACHINERY'"><li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase,p.subcategory  | slugify]">{{p.subcategory}}</a>
-                                        </li></ng-container>
+                                     <ng-container *ngIf="s.category != 'MACHINERY'">
+                                         <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase,p.subcategory  | slugify]">{{p.subcategory}}</a>
+                                        </li>
+                                    </ng-container>
+                                        <ng-container *ngIf="s.category == 'MACHINERY'">
+                                            <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['/machinery',p.subcategory | slugify]" [queryParams]="{'page' :1 ,'subcategory_id': p.subcategory_id}">{{p.subcategory}}</a>
+                                            </li>
+                                        </ng-container>
                                     </ul>
                                 </div>
                             </li>
+                            <li class="mmenu-item--simple" *ngIf='i==length'>
+                                <a href="javascript:void(0)" [routerLink]="['/', catall[i].category  | lowercase]" title="">{{catall[i].category}}</a>
+                                <div class="mmenu-submenu">
+                                    <ul class="submenu-list">
+                                     
+                                         <li *ngFor='let p of catall[i].subcategory'>
+                                             <a href="javascript:void(0)" [routerLink]="['/', catall[i].category  | lowercase,p.subcategory  | slugify]">{{p.subcategory}}</a>
+                                        </li>
+                                    
+                                    </ul>
+                                </div>
+                            </li>
+
+                            </ng-container>
+
                             <ng-container *ngIf='catwithoutsub && catwithoutsub.length'>
                             <li class="mmenu-item--simple"><a href="javascript:void(0)" title="">More</a>
                                 <div class="mmenu-submenu">
@@ -36,9 +61,9 @@
                             </ng-container>
                             <li class="mmenu-item--simple"><a href="javascript:void(0)" [routerLink]="['/blog']" title="">Blog</a>
                             </li>
-                            <li class="mmenu-item--simple"><a href="javascript:void(0)" [routerLink]="['/bullion']" title="">Bullion</a>
+                            <li class="mmenu-item--simple"><a href="javascript:void(0)" [routerLink]="['/bullion']" title="">Bullion Merchant</a>
                             </li>
-                            <li class="mmenu-item--simple"><a href="javascript:void(0)" [routerLink]="['/live']" title="">LiveRate</a>
+                            
                         </ul>
                     </ul>
                         

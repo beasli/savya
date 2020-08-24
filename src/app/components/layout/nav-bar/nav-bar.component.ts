@@ -17,6 +17,7 @@ export class NavBarComponent implements OnInit {
   logochange:number = 0;
   uid:any;
   results:any[];
+  length:any;
   alert:boolean=false;
   div:boolean=false;
   baseurl:any;
@@ -25,13 +26,13 @@ export class NavBarComponent implements OnInit {
   drop: any;
   machine: any;
   constructor(private api: ApiService, private router: Router) {
-    
                   this.uid=this.api.uid;
                   this.api.getlogin.subscribe(data=>{
                     this.uid=this.api.uid;
                   })
             this.api.Get(NAVIGATION).then(data => {
               this.catall = data['data'];
+              this.length = Math.ceil((this.catall.length)/2);
               this.machine = '/machinery';
               this.api.machineurl = this.machine;
               this.catall.forEach(element => {

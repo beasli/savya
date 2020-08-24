@@ -40,8 +40,12 @@
                                 <img (click)="slickModal.slickGoTo(0)" src="{{ url+'product'+'/' + data[0].image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
                             </span>
                             <span *ngFor="let slide of prd_img;let i = index">
-                               
+                            <ng-container *ngIf='slide.type == 1'>
                                 <img (click)="slickModal.slickGoTo(i+1)" src="{{ url+'product'+'/' + slide.image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
+                            </ng-container>
+                            <ng-container *ngIf='slide.type == 2'>
+                                <img (click)="slickModal.slickGoTo(i+1)" src="{{ url+'product'+'/' + slide.thumbnail }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
+                            </ng-container>
                             </span>
                             
 
@@ -51,8 +55,9 @@
                     <!-- /Product Gallery -->
                     <div class="prd-safecheckout topline slider-bottom-support-image">
                     <div> 
-                       <ng-container *ngIf='data[0].manufacture_type == 1'> <h3 class="h2-style">Dealer</h3> </ng-container>
-                       <ng-container *ngIf='data[0].manufacture_type == 2'> <h3 class="h2-style">Retailer</h3> </ng-container>
+                        <h3 class="h2-style">Company Name</h3>
+                       <!-- <ng-container *ngIf='data[0].manufacture_type == 1'> <h3 class="h2-style">Dealer</h3> </ng-container>
+                       <ng-container *ngIf='data[0].manufacture_type == 2'> <h3 class="h2-style">Retailer</h3> </ng-container> -->
                         <img [src]="url+ 'users/' + manufacture.logo" onerror="this.src='../../../../assets/images/logo-bw.png'"><h3 class="h2-style">{{manufacture.company_name}}</h3>
                     </div>
                 </div>
@@ -67,9 +72,9 @@
                                 <h1 class="prd-block_title product-details-item-heading">{{data[0].product_name}}</h1>
                             </div>
                             <div class="prd-block_info-top">
-                                <div *ngIf='data[0].amount && data[0].amount != 0' class="product-sku product-price">Rs: {{data[0].amount}}</div>
+                                <div *ngIf='data[0].amount && data[0].amount != 0' class="product-sku product-price">{{data[0].amount | INRCurrency}}</div>
                                 <div *ngIf='!data[0].amount || data[0].amount == 0'><button (click)='ask();' class="btn" ><span>Ask Price</span></button></div>
-                                
+                               
                                 
                             </div>
                         </div>   
@@ -77,7 +82,7 @@
                         
                     </div>
                     <ul class="nav nav-tabs product-tab">
-                        <li style='width:100%;position:relative;'><a  class=" product-price">Description</a> <input type="hidden"> <button (click)="whislist()" style="position: absolute;top:-6px;right:0px;" class="btn" ><span>INTERESTED</span></button> </li>
+                        <li style='width:100%;position:relative;'><a  class=" product-price">Description</a> <input type="hidden"> <div><button (click)="whislist()" style="position: absolute;top:-6px;right:0px;" class="btn" ><span>INTERESTED</span></button> </div></li>
                     </ul><!-- Tab panes -->
                     <div class="tab-content"  [innerHTML]="data[0].description">
                     

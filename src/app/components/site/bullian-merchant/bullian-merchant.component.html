@@ -6,19 +6,28 @@
     <div *ngIf='merchant' class="card-group mb-5">
         <div class="row" style="justify-content:center; align-items: center;">
             <div *ngFor="let slide of merchant" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <div class="card  border bordershadow" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
-                <div class="image-container" [ngStyle]="{'background-image': 'url(' + image + slide.cover_image + ')'}" style="padding-right:25%;padding-left:25%;padding-top:5%;">
-                    <img class="card-img-top justify-center"  style="max-width: 100%;max-height:25vh;border-radius:50%;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="image + slide.image" alt="Card image cap">
+            <div class="card  border bordershadow2" style="min-width: 100%;margin-bottom:1vh;">
+                <div class="image-container" >
+                    <img class="card-img-top justify-center"  style="max-width: 100%;max-height:45vh;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="image + slide.cover_image" alt="Card image cap">
+                </div>
+                <div style="margin-left:auto;margin-right:auto;margin-top:-75px;position: relative;z-index:99999;height:150px;width:150px;overflow: hidden;border-radius: 50%;">
+                    <img class="card-img-top justify-center"  style="max-width:100%;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="image + slide.image" alt="Card image cap">
                 </div>
                 <div class="card-body text-center">
-                    <span class="card-title text-center" *ngIf='slide.shop_name'><br><i class="icon-location1"></i> &nbsp;&nbsp; {{slide.shop_name}}<br></span>
-                   <span class="card-title text-center" *ngIf='slide.name'><br><i class="icon-person"></i> &nbsp;&nbsp; {{slide.name}}<br></span>
-                   <span class="card-title text-center" *ngIf='slide.mobile'><br><a target="_blank" [href]="'tel:'+slide.mobile"><i class="icon-mobile"></i> &nbsp;&nbsp; {{slide.mobile}}</a><br></span>
-                   <span class="card-title text-center" *ngIf='slide.telephone'><br><a target="_blank" [href]="'tel:'+slide.telephone"><i class="icon-phone"></i> &nbsp;&nbsp; {{slide.telephone}}</a><br></span>
-                   <span class="card-title text-center" *ngIf='slide.email'><br><a target="_blank" [href]="'mailto:'+slide.email"><i class="icon-mail-envelope1"></i> &nbsp;&nbsp; {{slide.email}}</a><br></span>
-                   <span class="card-title text-center" *ngIf='slide.facebook_link'><br><a target="_blank" [href]="slide.facebook_link"><i class="icon icon-facebook"></i> &nbsp;&nbsp; {{slide.facebook_link}}</a><br></span>
-                   <span class="card-title text-center" *ngIf='slide.instagram_link'><br><a target="_blank" [href]="slide.instagram_link"><i class="icon icon-instagram"></i> &nbsp;&nbsp; {{slide.instagram_link}}</a><br></span>
-                   <span class="card-title text-center" *ngIf='slide.address'><br><i class="icon-location1"></i> &nbsp;&nbsp; {{slide.address}}<br></span>
+                    <table class="table">
+                    <tr  *ngIf='slide.shop_name'><td><span class="card-title text-center"><strong><i class="icon-location1"></i> &nbsp;&nbsp; {{slide.shop_name}}</strong><br></span></td></tr>
+                    <tr *ngIf='slide.name'><td><span class="card-title text-center" ><strong><i class="icon-person"></i> &nbsp;&nbsp; {{slide.name}}</strong><br></span></td></tr>
+                        <tr *ngIf="slide.about"><td><div >
+                       <strong> About</strong><br>
+                       {{slide.about}}
+                   </div></td></tr>
+                   <tr *ngIf='slide.mobile'><td><span class="card-title text-center" ><a target="_blank" [href]="'tel:'+slide.mobile"><i class="icon-mobile"></i> &nbsp;&nbsp; {{slide.mobile}}</a><br></span></td></tr>
+                   <tr *ngIf='slide.telephone'><td><span class="card-title text-center" ><a target="_blank" [href]="'tel:'+slide.telephone"><i class="icon-phone"></i> &nbsp;&nbsp; {{slide.telephone}}</a><br></span></td></tr>
+                   <tr *ngIf='slide.email'><td><span class="card-title text-center" ><a target="_blank" [href]="'mailto:'+slide.email"><i class="icon-mail-envelope1"></i> &nbsp;&nbsp; {{slide.email}}</a><br></span></td></tr>
+                   <tr *ngIf='slide.facebook_link'><td><span class="card-title text-center" ><a target="_blank" [href]="slide.facebook_link"><i class="icon icon-facebook"></i> &nbsp;&nbsp; {{slide.facebook_link}}</a><br></span></td></tr>
+                   <tr *ngIf='slide.instagram_link'><td><span class="card-title text-center" ><a target="_blank" [href]="slide.instagram_link"><i class="icon icon-instagram"></i> &nbsp;&nbsp; {{slide.instagram_link}}</a><br></span></td></tr>
+                   <tr *ngIf='slide.address'><td><span class="card-title text-center"><a target="_blank" [href]="'https://maps.google.com/?q='+slide.address"><i class="icon-location1"></i> &nbsp;&nbsp; {{slide.address}}</a><br></span></td></tr>
+                </table>
                  </div>
             </div>
         </div>

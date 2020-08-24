@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
-import { TERMSANDCONDITION } from 'src/config';
+import { TERMSANDCONDITION, BUYING } from 'src/config';
 
 @Component({
   selector: 'app-terms-and-condition',
@@ -14,7 +14,7 @@ val:boolean;
   constructor(private api:ApiService) { 
     this.im=true;
     this.val=false;
-    this.api.Get(TERMSANDCONDITION).then(data=>{
+    this.api.Get(BUYING).then(data=>{
       this.im=false;
       this.val=true;
       this.values=data['data'];

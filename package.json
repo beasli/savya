@@ -36,6 +36,7 @@
     "bootstrap": "^4.4.1",
     "crypto-ts": "^1.0.2",
     "jquery": "^3.5.0",
+    "ng-in-viewport": "^6.1.1",
     "ng2-validation": "^4.2.0",
     "ngx-bootstrap": "^5.6.1",
     "ngx-image-zoom": "^0.6.0",
