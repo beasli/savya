@@ -22,6 +22,7 @@ import { KycDoneService } from './components/auth-guard/kyc-done.service';
 import { ModalComponent } from './components/layout/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModalComponent } from './components/site/login-modal/login-modal.component';
+import { ZoomComponent } from './components/site/zoom/zoom.component';
 
 
 
@@ -33,6 +34,7 @@ import { LoginModalComponent } from './components/site/login-modal/login-modal.c
     NavBarComponent,
     ModalComponent,
     LoginModalComponent,
+    ZoomComponent,
   ],
   imports: [
     BrowserModule,    

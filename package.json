@@ -40,6 +40,7 @@
     "ng2-validation": "^4.2.0",
     "ngx-bootstrap": "^5.6.1",
     "ngx-image-zoom": "^0.6.0",
+    "ngx-img-zoom": "^4.1.2",
     "ngx-slick-carousel": "^0.4.7",
     "ngx-toastr": "^12.0.0",
     "rxjs": "~6.5.4",

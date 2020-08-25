@@ -52,16 +52,25 @@
                                             [config]="slideConfig" >
                                             <div ngxSlickItem class="slide">
                                                 <lib-ngx-image-zoom
-                                                            [thumbImage]="url+'product'+'/'+data.image"
-                                                            [magnification]=2
-                                                ></lib-ngx-image-zoom>
+                                                [thumbImage]="url+'product'+'/'+data.image"
+                                                [fullImage]="url+'product'+'/'+data.image"
+                                                [magnification]="1"
+                                                [enableScrollZoom]="true"
+                                                [enableLens]="true"
+                                                [lensWidth]="200">
+                                                </lib-ngx-image-zoom>
                                             </div>
                                 <div ngxSlickItem *ngFor="let slide of prd_img;let i = index"  class="slide">
                                     <ng-container *ngIf='slide.type == 1'>
                                         <lib-ngx-image-zoom
-                                                [thumbImage]="url+'product'+'/'+slide.image"
-                                                [magnification]=2
-                                            ></lib-ngx-image-zoom>
+                                        [thumbImage]="url+'product'+'/'+slide.image"
+                                        [fullImage]="url+'product'+'/'+slide.image"
+                                        [imgStyle]="'width:400px; height:400px'"
+                                        [magnification]="1"
+                                        [enableScrollZoom]="true"
+                                        [enableLens]="true"
+                                        [lensWidth]="200">
+                                            </lib-ngx-image-zoom>
                                         </ng-container>
                                         <ng-container *ngIf='slide.type == 2'>
                                             <video width="100%" controls>
@@ -237,7 +246,7 @@
                                         </strong>
                                                
                                         <div class="diamond-selectbox">
-                                            <select class="product-size-select" (change)="diamondchange(1,$event.target.value)">
+                                            <select class="product-size-select" style="width:50%;" (change)="diamondchange(1,$event.target.value)">
                                                 <option *ngFor="let dia of diamondlist1" [value]="dia.jwellery_size">{{dia.jwellery_size}}</option>
                                             </select>
                                         </div>
@@ -426,28 +435,6 @@
                                     <div class="text1">24/7 customer support</div>
                                 </div>
                             </a></div>
-                    </div>
-                    <div class="prd-block-prevnext"><a href="#" class="prd-block-prevnext-arrow js-prd-block-next"><i class="icon-angle-right"></i></a>
-                        <div class="prd-next">
-                            <div class="prd-next-img"></div>
-                            <div class="prd-next-info">
-                                <div class="prd-next-tag"><a href="#">canverse</a></div>
-                                <h2 class="prd-next-title"><a href="#">Long top with print</a></h2>
-                                <div class="prd-prevnext-price">
-                                    <div class="price-new">₹ 20.00</div>
-                                </div>
-                            </div>
-                        </div><a href="#" class="prd-block-prevnext-arrow js-prd-block-prev"><i class="icon-angle-left"></i></a>
-                        <div class="prd-prev">
-                            <div class="prd-next-img"></div>
-                            <div class="prd-next-info">
-                                <div class="prd-next-tag"><a href="#">colvin klein</a></div>
-                                <h2 class="prd-next-title"><a href="#">Tie with texture</a></h2>
-                                <div class="prd-prevnext-price">
-                                    <div class="price-new">₹ 34.00</div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
