@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/search',this.searchValue]);
     } else if(this.searchValue.length>3 && this.logochange == 1)
     {
-      this.router.navigate(['machinery/search',this.searchValue]);
+      this.router.navigate(['machinery-jewelry/search',this.searchValue]);
     }
   }
   popularSearch(value)

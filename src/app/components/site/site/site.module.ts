@@ -1,6 +1,6 @@
 import { BlogDetailsComponent } from './../blog-details/blog-details.component';
 import { BlogComponent } from './../blog/blog.component';
-import { SlugPipe, MyCurrencyPipe, SummaryPipe, INRCurrencyPipe } from './../slug.pipe';
+import { SlugPipe, MyCurrencyPipe, SummaryPipe, INRCurrencyPipe, CategoryPipe, SubCategoryPipe } from './../slug.pipe';
 import { SubsubComponent } from './../subsub/subsub.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventsComponent } from './../events/events.component';
@@ -67,6 +67,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SeoService } from '../../SEO/seo.service';
 import { LiveComponent } from '../live/live.component';
 import { SelltermsComponent } from '../sellterms/sellterms.component';
+import { BangleComponent } from '../bangle/bangle.component';
+import { RingComponent } from '../ring/ring.component';
 
 
 
@@ -127,10 +129,14 @@ const customConfig: ShareButtonsConfig = {
     MyCurrencyPipe,
     SummaryPipe,
     INRCurrencyPipe,
+    CategoryPipe,
+    SubCategoryPipe,
     BlogComponent,
     BlogDetailsComponent,
     LiveComponent,
     SelltermsComponent,
+    BangleComponent,
+    RingComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -151,7 +157,9 @@ const customConfig: ShareButtonsConfig = {
      }),
     ShareModule.withConfig(customConfig),
     RouterModule.forChild([
-      { path: 'live', component: LiveComponent},
+      { path: 'page/bangle', component: BangleComponent},
+      { path: 'page/ring', component: RingComponent},
+      { path: 'gold-silver-live-rates', component: LiveComponent},
       { path: 'sterms', component: SelltermsComponent},
       { path: 'blog', component: BlogComponent},
       { path: 'blog/:id', component: BlogDetailsComponent},
@@ -171,37 +179,38 @@ const customConfig: ShareButtonsConfig = {
       { path: 'offers', component: OffersComponent,  canActivate: [AuthGuardService]},
       { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService,CheckoutService]},
       { path: 'cart', component: CartComponent, canActivate: [AuthGuardService]},
-      { path: 'machinery/:id', component: MachineryProductsComponent},
+      { path: 'machinery-jewelry/:id', component: MachineryProductsComponent},
       { path: 'contact', component: ContactComponent},
       { path: 'about', component: AboutComponent},
       { path: 'terms', component: TermsAndConditionComponent},
       { path: 'payment', component: PaymentComponent},
-      { path: 'machinery/search/:value', component: MachinerySearchComponent},
+      { path: 'machinery-jewelry/search/:value', component: MachinerySearchComponent},
       { path: 'search/:value', component: SearchComponent},
       { path: 'privacy', component: PrivacyComponent},
       { path: 'home', component: HomeComponent},
       { path: 'manufacture/:id', component: CategoryComponent},
       { path: 'events' , component: EventsComponent},
-      { path: 'machinery' , component: MachineryComponent},
+      { path: 'machinery-jewelry' , component: MachineryComponent},
       { path: 'event/:id' , component: EventComponent, canActivate: [KycguardService]},
       { path: 'products/machinery/:id', component: MachineryProductComponent, canActivate: [KycguardService]},
-      { path: 'product-details/:id' , component: ProductDetailsComponent, canActivate: [KycguardService]},
+      { path: 'product-details' , component: ProductDetailsComponent, canActivate: [KycguardService]},
       { path: 'manufacture/:idm/:subcategory/:subsubcategory' , component: SubsubComponent},
       { path: 'manufacture/:idm/:cat/:sub/:subsub' , component: FilterProductComponent},
       { path: 'filternav' , component: FilterNavBarComponent},
       { path: 'category', component: CategoryComponent},
       { path: 'manufacture/:idm/:subcategory', component: SubcategoryComponent},
-      { path: 'bullion', component: BullianComponent},
-      { path: 'bullion/:id', component: BullianMerchantComponent},
+      { path: 'bullion-dealers', component: BullianComponent},
+      { path: 'bullion-dealers/:id', component: BullianMerchantComponent},
       { path: ':subcategory', component: SubcategoryComponent},
       { path: ':subcategory/:subsubcategory' , component: SubsubComponent},
       { path: ':cat/:sub/:subsub' , component: FilterProductComponent},
+      { path: ':cat/:sub/:subsub/:product' , component: ProductDetailsComponent, canActivate: [KycguardService]},
     ])
   ],
   exports: [LoaderComponent,NgbModule,
     SlickCarouselModule,
     BrowserAnimationsModule,
-    NgxImageZoomModule,SlugPipe]  ,
-    providers: [SeoService],
+    NgxImageZoomModule,SlugPipe,CategoryPipe,SubCategoryPipe]  ,
+    providers: [SeoService,CategoryPipe,SubCategoryPipe,SlugPipe],
 })
 export class SiteModule { }

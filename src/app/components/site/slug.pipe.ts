@@ -8,6 +8,27 @@ export class SlugPipe implements PipeTransform {
   }
 }
 
+
+@Pipe({name: 'category'})
+export class CategoryPipe implements PipeTransform {
+  transform(value: string): string {
+
+     value = value.replace(/ /g, '-');
+     value = value.toLowerCase();
+      return value+'-jewelry';
+  }
+}
+@Pipe({name: 'subcategory'})
+export class SubCategoryPipe implements PipeTransform {
+  transform(value: string): string {
+
+     value = value.replace(/ /g, '-');
+     value = value.toLowerCase();
+      return 'jewelry-'+value;
+  }
+}
+
+
 @Pipe({name: 'mcurrency'})
 export class MyCurrencyPipe extends CurrencyPipe implements PipeTransform {
   transform(value: any, currencyCode: string, symbolDisplay = true, ): string {

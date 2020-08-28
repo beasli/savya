@@ -12,43 +12,36 @@
             <div class="row prd-block prd-block--mobile-image-first js-prd-gallery" id="prdGallery100">
                 <div class="col-lg-6 col-xl-4">
                     <div class="prd-block_main-image main-image--slide js-main-image--slide">
-                        <div class="prd-block_main-image-holder js-main-image-zoom" data-zoomtype="inner">
-                            <ngx-slick-carousel class="carousel" 
-                                        #slickModal="slick-carousel" 
-                                        [config]="slideConfig" >
-                                        <div ngxSlickItem class="slide">
-                                            <lib-ngx-image-zoom
-                                                        [thumbImage]="url+'product'+'/'+data[0].image"
-                                                        [magnification]=2
-                                            ></lib-ngx-image-zoom>
-                                        </div>
-                            <div ngxSlickItem *ngFor="let slide of prd_img;let i = index"  class="slide">
-                                <ng-container *ngIf='slide.type == 1'>
-                                    <lib-ngx-image-zoom
-                                            [thumbImage]="url+'product'+'/'+slide.image"
-                                            [magnification]=2
-                                        ></lib-ngx-image-zoom>
-                                    </ng-container>
-                                    <ng-container *ngIf='slide.type == 2'>
-                                        <video width="100%" controls>
-                                            <source [src]="url+'product'+'/'+slide.image" type="video/mp4">
-                                        </video>
-                                    </ng-container>
+                        <div class="prd-block_main-image main-image--slide js-main-image--slide">
+                            <div #slidez class="prd-block_main-image-holder js-main-image-zoom" data-zoomtype="inner">
+                                
+                                            <div class="slide active">
+                                                <lib-ngx-image-zoom
+                                                [thumbImage]="url+'product'+'/'+data[0].image"
+                                                            [magnification]=2>
+                                                </lib-ngx-image-zoom>
+                                            </div>
+                                <div *ngFor="let slide of prd_img;let i = index"  class="slide">
+                                    <ng-container *ngIf='slide.type == 1'>
+                                        <lib-ngx-image-zoom
+                                        [thumbImage]="url+'product'+'/'+slide.image"
+                                                            [magnification]=2>
+                                            </lib-ngx-image-zoom>
+                                        </ng-container>
+                                        <ng-container *ngIf='slide.type == 2'>
+                                            <video width="100%" controls>
+                                                <source [src]="url+'product'+'/'+slide.image" type="video/mp4">
+                                            </video>
+                                        </ng-container>
+                                </div> 
                             </div>
-                            </ngx-slick-carousel>
-                            <span>
-                                <img (click)="slickModal.slickGoTo(0)" src="{{ url+'product'+'/' + data[0].image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
+                            <span (click)="indicateSlide(0)">
+                                <img src="{{ url+'product'+'/' + data[0].image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
                             </span>
-                            <span *ngFor="let slide of prd_img;let i = index">
-                            <ng-container *ngIf='slide.type == 1'>
-                                <img (click)="slickModal.slickGoTo(i+1)" src="{{ url+'product'+'/' + slide.image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
-                            </ng-container>
-                            <ng-container *ngIf='slide.type == 2'>
-                                <img (click)="slickModal.slickGoTo(i+1)" src="{{ url+'product'+'/' + slide.thumbnail }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
-                            </ng-container>
+                            <span (click)="indicateSlide(i+1)" *ngFor="let slide of prd_img;let i = index">
+                               
+                                <img src="{{ url+'product'+'/' + slide.image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
                             </span>
-                            
-
                         </div>
                     </div>
                    

@@ -1,6 +1,6 @@
 import { PRICELIST, CARTVIEW, IMAGE, CARTADD } from './../../../../config';
 import { ApiService } from 'src/app/api/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PRODUCTDETAILS, CATEGORY, SUBCATEGORY, SUBCATEGORYTYPE } from 'src/config';
 
@@ -45,9 +45,9 @@ export class ProductDetailsComponent implements OnInit {
   value = 1;
   wish:any;
   cart:any;
-  stone: any;
-  totalstone:any;
-  pricestone: any;
+  stone = [];
+  totalstone = [];
+  pricestone = [];
   pricegold2: any;
   gross:any;
   colvalue: any;
@@ -98,11 +98,17 @@ export class ProductDetailsComponent implements OnInit {
   totaldiamond2: any;
   diamondlist1: any;
   diamondlist2: any;
+  slides: any;
+  index = 0;
+  @ViewChild('slidez') zlides: ElementRef<HTMLElement>;
+  stone_index=[];
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
     this.drop=this.api.drop;
-    this.route.params.subscribe(params => {
+    this.route.queryParamMap.subscribe(params =>{
       this.clean();
-      this.pid = params.id;
+      console.log(params.get('detail'));
+      this.pid = params.get('detail');
+      
       this.ngOnInit();
       this.getproduct();
       });
@@ -116,7 +122,23 @@ export class ProductDetailsComponent implements OnInit {
     })
     this.total();
    }
-   
+   ngAfterViewChecked(){
+    setTimeout(() => {this.slides = this.zlides.nativeElement.children;},1000);
+   }
+
+ 
+  
+  indicateSlide(a) {
+    console.log("I"+a);
+    this.index = a;
+    this.changeSlide();
+  }
+   changeSlide() {
+    for(let i=0;i<this.slides.length;i++){
+      this.slides[i].classList.remove("active");
+    }
+    this.slides[this.index].classList.add("active");
+  }
    sizechange(value) {
     this.privious = this.selectedsize;
     this.selectedsize = value;
@@ -290,8 +312,24 @@ export class ProductDetailsComponent implements OnInit {
            if(this.goldlist.length) {this.getgold(this.goldlist[0])};
          
             this.stonelist = this.assets.filter(x => x.metrial_type == "Stone");
-           this.stonelist.length ? this.getstone(this.stonelist[0]):false;
-         
+            if(this.stonelist.length){
+              for(let i=0;i>=0;i++){
+                console.log(i);
+                let a = this.stonelist.filter(x => x.stone_index == i+1);
+                if(a.length)
+                {
+                  this.stone_index[i] = a;
+                  console.log(this.stone_index[i][0]);
+                 
+                 this.getstone(this.stone_index[i][0],i);
+                }else{
+                  console.log(i);
+                  break;
+                }
+              }
+
+            }
+            // this.stonelist.length ? :false;
             this.diamondlist = this.assets.filter(x => x.metrial_type == "Diamond");
             this.diamondlist1 = this.diamondlist.filter(x => x.diamond_index == 1);
             this.diamondlist2 = this.diamondlist.filter(x => x.diamond_index == 2);
@@ -343,6 +381,11 @@ export class ProductDetailsComponent implements OnInit {
             if(this.defsilver){
               this.getsilver();}
           }
+          this.api.Post(CATEGORY, {} ).then(data  => {
+            let result = data['data'].find(x => x.id == this.data['category_id']);
+            this.category = result['category'];
+            console.log(this.category);
+         }).catch(d=>{});
                          
         this.api.Post(SUBCATEGORY, {category_id: this.data['category_id']} ).then(data  => {
   
@@ -360,10 +403,7 @@ export class ProductDetailsComponent implements OnInit {
 
     
     
-    this.api.Post(CATEGORY, {} ).then(data  => {
-     let result = data['data'].find(x => x.id == this.data['category_id']);
-     this.category = result['category'];
-  }).catch(d=>{});
+    
 }
 
 valuec(val,def='n'){
@@ -432,8 +472,6 @@ diamondchange(value,value2) {
   }
 }
 
-
-
  compare(a, b) {
   if (a < b) {
       return -1;
@@ -466,6 +504,7 @@ diamondchange(value,value2) {
       j['weight'] = this.platinum.weight;
       j['materialType'] = "Platinum";
       j['wastage'] = this.platinum.wastage;
+      j['stone_index'] = '1';
         //j['product_size'] = this.selectedsize;
         j['purity'] =  this.platinum.purity;
       j['productId'] = this.pid;
@@ -484,12 +523,14 @@ diamondchange(value,value2) {
         j['materialType'] = this.pricegold.type;
         j['productId'] = this.pid;
         j['metal'] = 'Gold';
+        j['stone_index'] = '1';
         j['makingCharge'] = this.gold.making_charge;
         temparray.push(j);
         j = {};
       }
       if (this.silver!=null) {
         j['purity'] =  this.silver.purity;
+        j['stone_index'] = '1';
         j['meenacost_option'] = this.silver.meenacost_option;
         j['meena_cost'] = this.silver.meena_cost;
         j['option'] = this.silver.charges_option;
@@ -506,6 +547,7 @@ diamondchange(value,value2) {
     if (this.diamond) {
       j['crtcost_option'] = this.diamond.crtcost_option;
         j['certification_cost'] = this.diamond.certification_cost;
+        j['stone_index'] = '1';
       j['option'] = 'PerGram';
       j['weight'] = this.diamond.weight;
       j['wastage'] = this.diamond.wastage;
@@ -535,17 +577,21 @@ diamondchange(value,value2) {
       temparray.push(j);
       j = {};
     }
-    if (this.stone) {
-      j['option'] = 'PerGram';
-      j['weight'] = this.stone.weight;
-      j['materialType'] = this.stone.jwellery_size;
-      j['productId'] = this.pid;
-      j['metal'] = 'Stone';
-      j['wastage'] = this.stone.wastage;
-        //j['product_size'] = this.selectedsize;
-      j['makingCharge'] = this.stone.making_charge;
-      temparray.push(j);
-      j = {};
+    if (this.stone.length) {
+      this.stone.forEach(obj=>{
+        j['option'] = 'PerGram';
+        j['weight'] = obj.weight;
+        j['materialType'] = obj.jwellery_size;
+        j['productId'] = this.pid;
+        j['metal'] = 'Stone';
+        j['wastage'] = obj.wastage;
+        j['stone_index'] = obj.stone_index.toString();
+      //j['product_size'] = this.selectedsize;
+        j['makingCharge'] = obj.making_charge;
+        temparray.push(j);
+        j = {};
+      })
+      
     }
 
   
@@ -597,13 +643,16 @@ diamondchange(value,value2) {
   colormetal(value) {
     this.colvalue = value;
   }
-   getstone(value)  {
-      this.stone = value;
-      let name = this.stone.jwellery_size;
-      this.pricestone = this.pricelist.stone.find(x => x.type.toUpperCase() == name.toUpperCase());
-      if(this.pricestone){
-      this.totalstone = this.api.price(this.stone.weight,this.pricestone.price,'PerGram',0);
-      this.totalstone = this.totalstone.price;
+   getstone(value,i)  {
+      this.stone[i] = value;
+      console.log(i)
+      console.log(this.stone);
+      let name = this.stone[i].jwellery_size;
+      this.pricestone[i] = this.pricelist.stone.find(x => x.type.toUpperCase() == name.toUpperCase());
+      if(this.pricestone[i]){
+      this.totalstone[i] = this.api.price(this.stone[i].weight,this.pricestone[i].price,'PerGram',0);
+      this.totalstone[i] = this.totalstone[i].price;
+      console.log(i);
       this.total();
       this.grossweight();
       this.button();
@@ -618,6 +667,7 @@ diamondchange(value,value2) {
     this.data= null;
     this.assets= null;
     this.recents= null;
+    this.stone_index=[];
     this.category= null;
     this.subcategory= null;
     this.subsubcategory= null;
@@ -647,9 +697,9 @@ diamondchange(value,value2) {
     this.value = 1;
     this.wish= null;
     this.cart= null;
-    this.stone= null;
-    this.totalstone= null;
-    this.pricestone= null;
+    this.stone= [];
+    this.totalstone= [];
+    this.pricestone= [];
     this.pricegold2= null;
     this.gross= null;
     this.colvalue= null;
@@ -664,7 +714,7 @@ diamondchange(value,value2) {
     this.viewdone=0;
     this.metalcolour= null;
     this.goldlist= null;
-    this.stonelist= null;
+    this.stonelist= [];
     this.diamondlist= null;
     this.message= null;
     this.btn = 1;
@@ -1021,8 +1071,10 @@ diamondchange(value,value2) {
     if (this.diamond) {
       weight = weight + Number(this.diamond.weight * 0.2);
     }
-    if (this.stone) {
-      weight = weight + Number(this.stone.weight * 0.2);
+    if (this.stone.length) {
+      this.stone.forEach(child=>{
+        weight = weight + Number(child.weight * 0.2);
+      });
     }
     if (this.silver) {
       weight = weight + Number(this.silver.weight);
@@ -1044,8 +1096,10 @@ diamondchange(value,value2) {
     if (this.pricediamond2) {
       price = price + this.totaldiamond2;
     }
-    if (this.pricestone) {
-      price = price + this.totalstone;
+    if (this.pricestone.length) {
+      this.totalstone.forEach(childObj => {
+      price = price + childObj;
+      });
     }
     if (this.pricesilver) {
       price = price + this.totalsilver;

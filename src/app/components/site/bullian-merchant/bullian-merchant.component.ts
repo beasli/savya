@@ -14,8 +14,10 @@ export class BullianMerchantComponent implements OnInit {
   image = IMAGE+'bullian_merchant/';
   callshadow:any;
   constructor(private api: ApiService,private router: ActivatedRoute) {
-    this.router.params.subscribe(params=>{
-      this.api.Get(MERCHANT+'/'+params.id).then(data=>{
+    this.router.queryParamMap.subscribe(params =>{
+          
+      
+      this.api.Get(MERCHANT+'/'+params.get('city_id')).then(data=>{
         this.merchant = data['data'];
         if(this.merchant){
           this.merchant.forEach(element => {

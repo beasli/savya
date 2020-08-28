@@ -1,6 +1,6 @@
 import { MACHINE, IMAGE, WISHLISTADD, ASK } from './../../../../config';
 import { ApiService } from './../../../api/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -18,6 +18,9 @@ export class MachineryProductComponent implements OnInit {
   recents: any;
   prd_img: any;
   url = IMAGE;
+  slides: any;
+  index = 0;
+  @ViewChild('slidez') zlides: ElementRef<HTMLElement>;
   slideConfig = {
     "slidesToShow": 1,
     "slidesToScroll": 1,
@@ -83,6 +86,24 @@ export class MachineryProductComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewChecked(){
+    setTimeout(() => {this.slides = this.zlides.nativeElement.children;},1000);
+   }
+
+ 
+  
+  indicateSlide(a) {
+    console.log("I"+a);
+    this.index = a;
+    this.changeSlide();
+  }
+   changeSlide() {
+    for(let i=0;i<this.slides.length;i++){
+      this.slides[i].classList.remove("active");
+    }
+    this.slides[this.index].classList.add("active");
   }
 
 }

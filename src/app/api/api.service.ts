@@ -408,7 +408,7 @@ qtyUpdate(pid,value)
   godetail(value) {
     if (value >= 0) {
      // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/product-details', value]);
+        this.router.navigate(['/product-details'],{queryParams:{'detail':value}});
      //   });
              }
             }
@@ -634,7 +634,7 @@ calculate(products){
   products.forEach(childObj => {
   let gold = childObj.assests.find(slide => slide.metal === 'Gold');
   let silver = childObj.assests.find(slide => slide.metal === 'Silver');
-  let stone = childObj.assests.find(slide => slide.metal === 'Stone');
+  let stone = childObj.assests.filter(slide => slide.metal === 'Stone');
   let diamond = childObj.assests.filter(slide => slide.metal === 'Diamond');
   let platinum = childObj.assests.find(slide => slide.metal === 'Platinum');
   let price = childObj.price;
@@ -671,12 +671,16 @@ calculate(products){
     priceProduct += outcome.price;
     making += Number(outcome.making_charge);
   }
-  if(stone)  {
-    let pricestone = price.stone.find(x => x.type.toUpperCase() == stone.materialType.toUpperCase());
-    let outcome = this.price(stone.weight,pricestone.price,'PerGram',0);
+  if(stone.length)  {
+    stone.forEach(element => {
+      
+    console.log(element);
+    let pricestone = price.stone.find(x => x.type.toUpperCase() == element.materialType.toUpperCase());
+    let outcome = this.price(element.weight,pricestone.price,'PerGram',0);
     weight += Number(outcome.weight2)*0.2;
     priceProduct += outcome.price;
     making += Number(outcome.making_charge);
+  });
   }
   if(diamond[0])  {
     let pricediamond = price.diamond_master.filter(x => x.diamond_type == diamond[0].diamondType);

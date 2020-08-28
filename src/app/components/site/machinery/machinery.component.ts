@@ -4,6 +4,7 @@ import { Component, OnInit,Output,EventEmitter} from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SUBCATEGORY } from 'src/config';
+import { SubCategoryPipe } from '../slug.pipe';
 
 @Component({
   selector: 'app-machinery',
@@ -107,7 +108,8 @@ imagemodel=IMAGE+'machinerygallery/'
   models: any;
   Partners: any;
   Banner: any;
-  constructor(private api: ApiService, private router: Router, private route: ActivatedRoute, private DOM: DomSanitizer) { 
+  constructor(private api: ApiService, private router: Router, private route: ActivatedRoute, private DOM: DomSanitizer,
+    private subcatpipe: SubCategoryPipe) { 
     this.route.params.subscribe(
       params=>{
 
@@ -174,9 +176,9 @@ imagemodel=IMAGE+'machinerygallery/'
   go(slide, value) {
     if (value == 1)
     {
-    this.router.navigate(['/machinery',slide.subcategory.replace(/ /g, "-")], { queryParams:{ 'page' :1 ,'subcategory_id': slide.id}});
+    this.router.navigate(['/machinery-jewelry',this.subcatpipe.transform(slide.subcategory)], { queryParams:{ 'page' :1 ,'subcategory_id': slide.id}});
     } else if(value==0){
-      this.router.navigate(['/machinery',slide.name.replace(/ /g, "-")], { queryParams:{ 'page' :1 ,'manufacture_id': slide.manufacture_id}});
+      this.router.navigate(['/machinery-jewelry',slide.name.replace(/ /g, "-")], { queryParams:{ 'page' :1 ,'manufacture_id': slide.manufacture_id}});
     }
   }
  

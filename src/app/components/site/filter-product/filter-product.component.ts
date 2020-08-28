@@ -1,8 +1,10 @@
+import { SlugPipe } from './../slug.pipe';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SUBCATEGORYTYPE, PRODUCTLIST, NAVIGATION } from 'src/config';
 import { HttpClient } from '@angular/common/http';
+import { CategoryPipe, SubCategoryPipe } from '../slug.pipe';
 
 @Component({
   selector: 'app-filter-product',
@@ -36,7 +38,8 @@ export class FilterProductComponent implements OnInit {
   current_page: any;
   pages: any;
   manufacture: string;
-  constructor(private api: ApiService, private route: ActivatedRoute,private router:Router,private http:HttpClient) {
+  constructor(private api: ApiService, private route: ActivatedRoute,private router:Router,private http:HttpClient,
+    private catpipe: CategoryPipe,private subcatpipe: SubCategoryPipe,private slug :SlugPipe) {
     this.drop=this.api.drop; 
 
 
@@ -45,14 +48,15 @@ export class FilterProductComponent implements OnInit {
       this.category = data['data'];
 
     this.route.params.subscribe(params => {
-
-      this.category = this.category.find(x => x.category.toLowerCase()  == params.cat);
+      console.log(params.cat.slice(0,-8).replace(/-/g, " "));
+      console.log(params.sub.slice(8).replace(/-/g, " "));
+      this.category = this.category.find(x => x.category.toLowerCase()  == params.cat.slice(0,-8).replace(/-/g, " "));
     
-      this.subcategory = this.category.subcategory.find(x => x.subcategory == params.sub.replace(/-/g, " "));
+      this.subcategory = this.category.subcategory.find(x => x.subcategory.toLowerCase() == params.sub.slice(8).replace(/-/g, " "));
     
       this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subcategory.id} ).then(data  => {
         this.subsubcategory = data['data'];
-        this.subsubcategory = this.subsubcategory.find(x => x.title == params.subsub.replace(/-/g, " "));
+        this.subsubcategory = this.subsubcategory.find(x => x.title.toLowerCase() == params.subsub.slice(8).replace(/-/g, " "));
       this.route.queryParamMap.subscribe(params =>{
       this.current_page = params.get('page');
       this.manufacture = params.get('manufacturer');
@@ -171,13 +175,13 @@ export class FilterProductComponent implements OnInit {
   }
   pagechanged(){
     if(!this.manufacture){
-    this.router.navigate(['',this.category.category.toLowerCase(),this.subcategory.subcategory.replace(/ /g, "-"),this.subsubcategory.title.replace(/ /g, "-")], { queryParams: { page: this.current_page}});
+    this.router.navigate(['',this.subcatpipe.transform(this.category.category),this.subcatpipe.transform(this.subcategory.subcategory),this.subcatpipe.transform(this.subsubcategory.title)], { queryParams: { page: this.current_page}});
     } else{
-      this.router.navigate(['',this.manufacture,this.category.category.toLowerCase(),this.subcategory.subcategory.replace(/ /g, "-"),this.subsubcategory.title.replace(/ /g, "-")], { queryParams: { page: this.current_page,manufacturer:this.manufacture}});
+      this.router.navigate(['',this.manufacture,this.subcatpipe.transform(this.category.category),this.subcatpipe.transform(this.subcategory.subcategory),this.subcatpipe.transform(this.subsubcategory.title),this.slug.transform(name)], { queryParams: { page: this.current_page,manufacturer:this.manufacture}});
     }
   }
-  go(value) {
-    this.api.godetail(value);
+  go(value,name) {
+    this.router.navigate(['',this.subcatpipe.transform(this.category.category),this.subcatpipe.transform(this.subcategory.subcategory),this.subcatpipe.transform(this.subsubcategory.title),this.slug.transform(name)], { queryParams: { detail: value}});
   }
  
 

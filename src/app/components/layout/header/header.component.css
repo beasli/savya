@@ -14,3 +14,10 @@
     line-height: 20px;
     text-transform: uppercase;
 }
+
+
+@media screen and (max-width: 991px) {
+    .logo-holder img, .logo-holder-s img {
+        max-width: 125px !important;
+    }
+}

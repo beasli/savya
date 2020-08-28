@@ -2,12 +2,12 @@
   <ng-template *ngFor="let slide of slider_imgs" ngbSlide>
   <ng-container *ngIf='slide.banner_for == "Manufacture"'>
     <div class="picsum-img-wrapper" style="border-radius:8px;">
-     <img [routerLink]="['/manufacture', slide.title | slugify]" [queryParams]="{ 'manufacturer': slide.user_id}" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
+     <img [routerLink]="['/manufacture', slide.title | slugify]" [queryParams]="{ 'manufacture_id': slide.user_id}" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
     </div>
   </ng-container>
   <ng-container *ngIf='slide.banner_for == "Bullian"'>
     <div class="picsum-img-wrapper" style="border-radius:8px;">
-     <img [routerLink]="['/bullion', slide.city_code]" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
+     <img [routerLink]="['/bullion-dealers', slide.city_code]" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
     </div>
   </ng-container>
   <ng-container *ngIf='slide.banner_for != "Bullian" && slide.banner_for != "Manufacture"'>

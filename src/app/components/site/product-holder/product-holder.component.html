@@ -17,11 +17,13 @@
                             <div class="gdw-loader"></div>
                         </div>
                         <div class="prd-info text-center">
-                                                     
-                            <div class="prd-tag prd-hidemobile" *ngIf="s.product_category == 'GOLD'">
+                                                
+
+                            <div class="prd-tag prd-hidemobile">
 
                                 <table style="width:100%;">
-                                    <thead>
+                                    <thead><th colspan="3">{{s.product_name}}</th></thead>
+                                    <tbody>
                                         <tr>
                                             <th style="width:25%;">
                                             <ng-container *ngIf='s.weight.Diamond'>
@@ -31,74 +33,15 @@
                                             <th style="width:40%;"></th>
                                             <th style="width:35%;">
                                                 
-                                                    <a (click)='go(s.product_id)'>{{s.gross   | number : '1.3-3'}}<span style="text-transform: initial;"> g/{{s.quality.Gold}}</span></a>
-                                                
-                                            </th>  
-                                        </tr>
-                                    </thead>
-                                    <th></th>
-                                </table>
-                            </div>
-                            <div class="prd-tag prd-hidemobile" *ngIf="s.product_category=='GOLD CHAINS' && s.quality.Gold">
+                                                    <a (click)='go(s.product_id)'>{{s.gross   | number : '1.3-3'}} g<span style="text-transform: initial;">
+                                                    <ng-container *ngIf="s.product_category == 'PLATINUM JEWELLERY'">/{{s.quality.Platinum}}</ng-container>
+                                                    <ng-container *ngIf="s.product_category == 'GOLD JEWELLERY' || s.product_category == 'DIAMOND JEWELLERY' || s.product_category == 'GOLD CHAINS'">/{{s.quality.Gold}}
 
-                                <table style="width:100%;">
-                                    <thead>
-                                        <tr>
-                                            <th style="width:25%;">
-                                            <ng-container *ngIf='s.weight.Diamond'>
-                                                    <a (click)='go(s.product_id)'>{{s.weight.Diamond   | number : '1.3-3'}} <span style="text-transform: initial;"> Ct</span></a>
-                                            </ng-container>
-                                            </th>
-                                            <th style="width:40%;"></th>
-                                            <th style="width:35%;">
-                                                
-                                                    <a (click)='go(s.product_id)'>{{s.gross   | number : '1.3-3'}}<span style="text-transform: initial;"> g/{{s.quality.Gold}}</span></a>
-                                            
-                                            </th>  
-                                        </tr>
-                                    </thead>
-                                    <th></th>
-                                </table>
-                            </div>
-                            <div class="prd-tag prd-hidemobile" *ngIf="s.product_category == 'DIAMOND'">
-                                <table style="width:100%;">
-                                    <thead>
-                                        <tr>
-                                            <th style="width:25%;">
-                                            <ng-container *ngIf='s.weight.Diamond'>
-                                                    <a (click)='go(s.product_id)'>{{s.weight.Diamond   | number : '1.3-3'}} <span style="text-transform: initial;"> Ct</span></a>
-                                            </ng-container>
-                                            </th>
-                                            <th style="width:40%;"></th>
-                                            <th style="width:35%;">
-                                                
-                                                    <a (click)='go(s.product_id)'>{{s.gross   | number : '1.3-3'}}<span style="text-transform: initial;"> g/{{s.quality.Gold}}</span></a>
-                                            
-                                            </th>  
-                                        </tr>
-                                    </thead>
-                                    <th></th>
-                                </table>
-                            </div>
-
-                            <div class="prd-tag prd-hidemobile" *ngIf="s.product_category == 'PLATINUM'">
-
-                                <table style="width:100%;">
-                                    <thead>
-                                        <tr>
-                                            <th style="width:25%;">
-                                            <ng-container *ngIf='s.weight.Diamond'>
-                                                    <a (click)='go(s.product_id)'>{{s.weight.Diamond   | number : '1.3-3'}} <span style="text-transform: initial;"> Ct</span></a>
-                                            </ng-container>
-                                            </th>
-                                            <th style="width:40%;"></th>
-                                            <th style="width:35%;">
-                                                
-                                                    <a (click)='go(s.product_id)'>{{s.gross   | number : '1.3-3'}} <span style="text-transform: initial;"> g/{{s.quality.Platinum}}</span></a>
+                                                    </ng-container></span></a>
                                                 
                                             </th>  
                                         </tr>
-                                    </thead>
+                                    </tbody>
                                     <th></th>
                                 </table>
                                 

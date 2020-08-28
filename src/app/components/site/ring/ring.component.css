@@ -1,0 +1,144 @@
+body{
+    padding:0px;
+    margin:0px;
+}
+.container-fluid{
+    padding:0px 40px;
+}
+.bangle-guide{
+    padding:80px 0px;
+}
+.bangle-guide h3{
+    font-size:20px;
+    color:#ffa500;
+    font-weight: 600;
+}
+.little-description h4{
+    font-size:18px;
+    color:#666;
+    font-weight: 600;
+}
+.little-description p{
+    font-size:15px;
+}
+.guide-area{
+    padding: 15px;
+    background-color: #ffa500;
+    margin: 100px 0px;
+    border-top-left-radius: 70px;
+    border-bottom-left-radius: 70px;
+}
+.guide-area .step-box{
+    width:100px;
+    height:100px;
+    background-color:#fff;
+    border-radius:100%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+.guide-area .step-box span{
+    font-size:20px;
+    color:#ffa500;
+    font-weight:600;
+    text-align:center;
+}
+.image-area{
+    position: absolute;
+    top: -96px;
+    left: 0;
+    width: 300px;
+    height: 200px;
+}
+.image-area img{
+    width:100%;
+}
+.guide-area ul{
+    padding:0;
+    margin:0;
+}
+.guide-area ul li{
+    font-weight:600;
+}
+.step-guide table{
+    width:100%;
+}
+.step-guide table th{
+    padding:10px;
+    background-color:#ffa500;
+    color:#fff;
+    width:100%;
+    border:2px solid #fff;
+}
+.step-guide table td{
+    padding:10px;
+    background-color:#ffa50070;
+    color:#000;
+    width:100%;
+    border:2px solid #fff;
+}
+.step-guide{
+    padding-bottom:80px;
+}
+.bangle-guide h3{
+    margin-bottom:30px;
+}
+.step-guide h3{
+    margin-bottom:10px;
+}
+@media(max-width:1200px){
+    /* .image-area{
+        top:-17px;
+    } */
+}
+@media(max-width:992px){
+    .guide-area{
+        margin:80px 0px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .guide-area .step-box{
+        margin:0px auto;
+    }
+    .guide-area ul{
+        list-style:none;
+        text-align:center;
+    }
+    .image-area{
+        position: relative;
+        width: 300px;
+        height: 200px;
+        margin-right: auto;
+        margin-left: auto;
+        top: auto;
+        margin-bottom: -70px;
+        padding-top: 20px;
+        padding-right:0;
+    }
+    .step-guide table{
+        margin-bottom:30px;
+    }
+}
+@media(max-width:480px){
+    .guide-area{
+        padding:10px 0px;
+    }
+    .step-guide p{
+        font-size:14px;
+    }
+    .little-description p{
+        font-size:14px;
+    }
+    
+    .image-area{
+        width:260px;
+    }
+
+
+
+
+    
+    .container-fluid{
+        padding: 0px 15px;
+    }
+}

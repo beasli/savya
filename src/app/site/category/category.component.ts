@@ -3,6 +3,7 @@ import { CATEGORY, IMAGE, BANNER } from './../../../config';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer,SafeStyle } from '@angular/platform-browser';
+import { CategoryPipe } from 'src/app/components/site/slug.pipe';
 
 @Component({
   selector: 'app-category',
@@ -17,10 +18,11 @@ export class CategoryComponent implements OnInit {
   img_url=IMAGE;
   Banner:any;
   name: any;
-  constructor(private route: ActivatedRoute,private api: ApiService,private router:Router,private sanitizer: DomSanitizer) { 
+  constructor(private route: ActivatedRoute,private api: ApiService,private router:Router,private sanitizer: DomSanitizer
+    ,private catpipe: CategoryPipe) { 
     this.route.queryParamMap.subscribe(params =>{
       
-        this.id = params.get('manufacturer');
+        this.id = params.get('manufacture_id');
         this.route.params.subscribe(
           params=>{
             this.name = params.id;
@@ -52,10 +54,10 @@ export class CategoryComponent implements OnInit {
 
   go(value){
     if(this.id){
-      this.router.navigate(['manufacture', this.name.replace(/ /g, "-"), value.toLowerCase().replace(/ /g, "-")],{queryParams:{'manufacture':this.id}});
+      this.router.navigate(['manufacture', this.name.replace(/ /g, "-"), this.catpipe.transform(value)],{queryParams:{'manufacture':this.id}});
     }
     else{
-      this.router.navigate(['subcategory', value.toLowerCase().replace(/ /g, "-")]);
+      this.router.navigate(['subcategory', this.catpipe.transform(value)]);
     }
   }
 

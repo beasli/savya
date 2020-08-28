@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SUBCATEGORYTYPE, CATEGORY, SUBCATEGORY } from 'src/config';
 import { ApiService } from 'src/app/api/api.service';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-
+import { CategoryPipe, SubCategoryPipe } from '../slug.pipe';
 @Component({
   selector: 'app-subsub',
   templateUrl: './subsub.component.html',
@@ -57,7 +57,7 @@ slideConfig = {
   mname: any;
   constructor(private route:ActivatedRoute,private api:ApiService,
     private sanitizer: DomSanitizer,
-    private router:Router) {
+    private router:Router,private catpipe: CategoryPipe,private subcatpipe: SubCategoryPipe) {
 
       this.api.Get(NAVIGATION).then(data => {
 
@@ -65,9 +65,10 @@ slideConfig = {
         this.catall = data['data'];
 
     this.route.params.subscribe(params => {
-
-      this.ncategory = this.catall.find(x => x.category.toLowerCase()  == params.subcategory);
-      this.nsubcategory = this.ncategory.subcategory.find(x => x.subcategory == params.subsubcategory.replace(/-/g, " "));
+      console.log(params.subcategory.slice(0,-8));
+      console.log(params.subsubcategory.slice(8));
+      this.ncategory = this.catall.find(x => x.category.toLowerCase()  == params.subcategory.slice(0,-8).replace(/-/g, " "));
+      this.nsubcategory = this.ncategory.subcategory.find(x => x.subcategory.toLowerCase() == params.subsubcategory.slice(8).replace(/-/g, " "));
       if(params.idm){
         this.mname = params.idm;
         this.route.queryParamMap.subscribe(params =>{
@@ -131,9 +132,9 @@ slideConfig = {
   }
   gofilter(value) {
     if(!this.idm){
-    this.router.navigate(['/',this.ncategory.category.toLowerCase() ,this.nsubcategory.subcategory.replace(/ /g, "-"),value.replace(/ /g, "-")],{queryParams:{'page':1}});}
+    this.router.navigate(['/',this.catpipe.transform(this.ncategory.category) ,this.subcatpipe.transform(this.nsubcategory.subcategory),this.subcatpipe.transform(value)],{queryParams:{'page':1}});}
     else{
-      this.router.navigate(['/manufacture', this.mname,this.ncategory.category.toLowerCase() ,this.nsubcategory.subcategory.replace(/ /g, "-"),value.replace(/ /g, "-")],{queryParams:{'page':1,'manufacturer':this.idm}});
+      this.router.navigate(['/manufacture', this.mname,this.catpipe.transform(this.ncategory.category) ,this.subcatpipe.transform(this.nsubcategory.subcategory),this.subcatpipe.transform(value)],{queryParams:{'page':1,'manufacturer':this.idm}});
     }
   }
 

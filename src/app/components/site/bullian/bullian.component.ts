@@ -53,9 +53,9 @@ export class BullianComponent implements OnInit {
    }
 
 
-   goMerchant(id) {
+   goMerchant(id,name='') {
     document.getElementById("mClose").click();
-    this.route.navigate(['/bullion', id]);
+    this.route.navigate(['/bullion-dealers', 'bullian-dealers-'+name],{queryParams:{'city_id':id}});
   }
    selectSta(j) {
     if (j.type == 'state') {

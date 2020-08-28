@@ -7,7 +7,7 @@
     <div class="card-group">
         <div class="row">
             <div *ngFor="let slide of city" class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-            <div class="card  border" [routerLink]="['/bullion/', slide.id]" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
+            <div class="card  border" [routerLink]="['/bullion-dealers/', 'bullian-dealers-' + slide.city]" [queryParams]="{ 'city_id': slide.id}" [ngClass]="{shadow:callshadow==slide.id}" (mouseover)="callshadow=slide.id" (mouseout)="callshadow='a'" style="min-width: 100%;margin-top: 1vh;margin-bottom: 1vh;">
                 <img class="card-img-top" style="min-width: 100%;max-height:25vh;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="image + slide.image" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title text-center"><strong>{{slide.city}}</strong></h5>
@@ -95,7 +95,7 @@
         </div>
         <div *ngIf="statecities" class="modal-body">
             <div class="list-group">
-                <a href="javascript:void(0)" *ngFor="let slide of statecities"  (click) = 'goMerchant(slide.id)' [ngClass]="{active:s == slide.id}" (mouseover)="s=slide.id" (mouseout)="s='a'" class="list-group-item list-group-item-action border">
+                <a href="javascript:void(0)" *ngFor="let slide of statecities"  (click) = 'goMerchant(slide.id,slide.city)' [ngClass]="{active:s == slide.id}" (mouseover)="s=slide.id" (mouseout)="s='a'" class="list-group-item list-group-item-action border">
                   {{slide.city}}
                 </a>
             </div>

@@ -2,7 +2,7 @@
     <ngb-carousel *ngIf="slider_imgs">
         <ng-template *ngFor="let slide of slider_imgs" ngbSlide>
           <div class="picsum-img-wrapper bordershadow">
-            <img [routerLink]='["/machinery",slide.title | slugify]' [queryParams]="{'page' :1 ,'manufacture_id': slide.user_id}" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
+            <img [routerLink]='["/machinery-jewelry",slide.title | subcategory]' [queryParams]="{'page' :1 ,'manufacture_id': slide.user_id}" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
           </div>
         </ng-template>
     </ngb-carousel>

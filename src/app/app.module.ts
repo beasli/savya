@@ -37,7 +37,7 @@ import { ZoomComponent } from './components/site/zoom/zoom.component';
     ZoomComponent,
   ],
   imports: [
-    BrowserModule,    
+    BrowserModule,
     AppRoutingModule,
     AccountModule,
     AuthModule,

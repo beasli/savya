@@ -25,7 +25,7 @@
                                     <div class="cart-table-prd-image"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl+'category/' + s.image}}"  alt=""></div>
                                     {{s.category}}</a></ng-container>
                         <ng-container *ngIf="s.category == 'MACHINERY'">
-                            <a [routerLink]="['/', s.category  | lowercase]">
+                            <a [routerLink]="['/', s.category  | category]">
                                 <div class="cart-table-prd-image"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl+'category/' + s.image}}"  alt=""></div>
                                 {{s.category}}</a>
                         </ng-container>
@@ -35,7 +35,7 @@
                                 
                                 <ng-container *ngIf="s.category != 'MACHINERY'">
                                     <li *ngFor='let p of s.subcategory'>
-                                        <a href="javascript:void(0)" [routerLink]="['/', s.category  | lowercase,p.subcategory | slugify]">
+                                        <a href="javascript:void(0)" [routerLink]="['/', s.category  | category,p.subcategory | subcategory]">
                                         <!-- <div class="cart-table-prd-image"><img  src="{{baseurl+'subcategory/' + s.image}}"  alt=""></div> -->
                                         {{p.subcategory}}</a>
                                     </li>
@@ -43,7 +43,7 @@
                                 
                             </ul>
                         </li>
-                        <li class="text-center"><a [routerLink]="['/Bullion']">Bullion</a></li>
+                        <li class="text-center"><a [routerLink]="['/bullion-dealers']">Bullion</a></li>
                         <li class="text-center"><a [routerLink]="['/events/']">Events</a></li>
                         <li>
                             <div class="row text-center">
