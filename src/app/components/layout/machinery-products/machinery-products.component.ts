@@ -20,11 +20,15 @@ export class MachineryProductsComponent implements OnInit {
   products: any;
   pages: number;
   url: string;
+  title: any;
 
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router,private http:HttpClient) {
+
+    this.route.params.subscribe(data=>{this.title = data.id})
       this.route.queryParamMap.subscribe(params =>{
         this.current_page = params.get('page');
         this.current_page = Number(this.current_page);
+      //  this.title
         this.subcategory = params.get('subcategory_id');
         this.manufacture = params.get('manufacture_id');
         console.log(this.manufacture);
@@ -70,10 +74,10 @@ export class MachineryProductsComponent implements OnInit {
   pagechanged(){
     if(!this.manufacture){
       
-      this.router.navigate(['/products/machinery'], { queryParams:{ page :this.current_page ,'subcategory_id': this.subcategory}});
+      this.router.navigate(['/jewelry/machinery', this.title], { queryParams:{ page :this.current_page ,'subcategory_id': this.subcategory}});
     } else{
     
-      this.router.navigate(['/products/machinery'], { queryParams: { page: this.current_page,'manufacture_id':this.manufacture}});
+      this.router.navigate(['/jewelry/machinery', this.title], { queryParams: { page: this.current_page,'manufacture_id':this.manufacture}});
     }
   }
 

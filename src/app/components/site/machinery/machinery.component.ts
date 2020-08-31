@@ -176,9 +176,9 @@ imagemodel=IMAGE+'machinerygallery/'
   go(slide, value) {
     if (value == 1)
     {
-    this.router.navigate(['/machinery-jewelry',this.subcatpipe.transform(slide.subcategory)], { queryParams:{ 'page' :1 ,'subcategory_id': slide.id}});
+    this.router.navigate(['jewelry/machinery',this.subcatpipe.transform(slide.subcategory)], { queryParams:{ 'page' :1 ,'subcategory_id': slide.id}});
     } else if(value==0){
-      this.router.navigate(['/machinery-jewelry',slide.name.replace(/ /g, "-")], { queryParams:{ 'page' :1 ,'manufacture_id': slide.manufacture_id}});
+      this.router.navigate(['jewelry/machinery',slide.name.replace(/ /g, "-")], { queryParams:{ 'page' :1 ,'manufacture_id': slide.manufacture_id}});
     }
   }
  

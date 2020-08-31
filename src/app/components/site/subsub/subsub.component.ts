@@ -55,6 +55,7 @@ slideConfig = {
  ncategory:any;
  nsubcategory:any;
   mname: any;
+  sid:any;
   constructor(private route:ActivatedRoute,private api:ApiService,
     private sanitizer: DomSanitizer,
     private router:Router,private catpipe: CategoryPipe,private subcatpipe: SubCategoryPipe) {
@@ -65,14 +66,17 @@ slideConfig = {
         this.catall = data['data'];
 
     this.route.params.subscribe(params => {
+
+      
+
       console.log(params.subcategory.slice(0,-8));
       console.log(params.subsubcategory.slice(8));
-      this.ncategory = this.catall.find(x => x.category.toLowerCase()  == params.subcategory.slice(0,-8).replace(/-/g, " "));
-      this.nsubcategory = this.ncategory.subcategory.find(x => x.subcategory.toLowerCase() == params.subsubcategory.slice(8).replace(/-/g, " "));
+      this.ncategory = params.subcategory;
+      this.nsubcategory = params.subsubcategory;
       if(params.idm){
         this.mname = params.idm;
         this.route.queryParamMap.subscribe(params =>{
-          //  this.id = params.get('manufacturer');
+        this.sid = params.get('subcategory');
          this.idm = params.get('manufacture');
         this.getsubsub();
         this.baseUrl = IMAGE+'banner/';
@@ -81,7 +85,10 @@ slideConfig = {
         });
       });
       } else {
+        this.route.queryParamMap.subscribe(params =>{
+            this.sid = params.get('subcategory');
         this.getsubsub();
+      }); 
       }
     }); 
   });
@@ -91,7 +98,7 @@ slideConfig = {
 
    getsubsub() {
      if(this.idm){
-    this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.nsubcategory.id,manufacture_id: this.idm  } ).then(data  => {
+    this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.sid,manufacture_id: this.idm  } ).then(data  => {
       this.page=true;
       this.loader=false;
       this.data = data['data'];
@@ -105,7 +112,7 @@ slideConfig = {
     }).catch(d=>{});
      }).catch(d=>{});}
     if(!this.idm){
-      this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.nsubcategory.id} ).then(data  => {
+      this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.sid} ).then(data  => {
         this.page=true;
         this.loader=false;
         this.data = data['data'];
@@ -116,13 +123,9 @@ slideConfig = {
        this.api.Post(SUBCATEGORY, {category_id: this.data[0]['category_id']} ).then(data  => {
         let result = data['data'].find(x => x.id == this.data[0]['subcategory_id']);
         this.subcategory = result['subcategory'];
-        
-      }).catch(d=>{
-        });
-       }).catch(d=>{
-        });
+      }).catch(d=>{});
+       }).catch(d=>{});
       }
-  
 }
   getlink(s):SafeStyle {
     s = s.replace(/ /g, "%20");
@@ -130,11 +133,11 @@ slideConfig = {
     s = s.replace(/\)/g, "%29");
     return this.sanitizer.bypassSecurityTrustStyle('url('+ IMAGE + 'subsubcategory/' + s + ')');
   }
-  gofilter(value) {
+  gofilter(value,id) {
     if(!this.idm){
-    this.router.navigate(['/',this.catpipe.transform(this.ncategory.category) ,this.subcatpipe.transform(this.nsubcategory.subcategory),this.subcatpipe.transform(value)],{queryParams:{'page':1}});}
+    this.router.navigate(['jewelry/',this.ncategory,this.nsubcategory,this.subcatpipe.transform(value)],{queryParams:{'page':1,'subsubcategory':id}});}
     else{
-      this.router.navigate(['/manufacture', this.mname,this.catpipe.transform(this.ncategory.category) ,this.subcatpipe.transform(this.nsubcategory.subcategory),this.subcatpipe.transform(value)],{queryParams:{'page':1,'manufacturer':this.idm}});
+      this.router.navigate(['jewelry/manufacture', this.mname,this.ncategory,this.nsubcategory,this.subcatpipe.transform(value)],{queryParams:{'page':1,'manufacturer':this.idm,'subsubcategory':id}});
     }
   }
 

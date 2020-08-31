@@ -52,12 +52,12 @@ export class CategoryComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustStyle('url('+ IMAGE + 'category/' + s + ')');
   }
 
-  go(value){
+  go(value,id){
     if(this.id){
-      this.router.navigate(['manufacture', this.name.replace(/ /g, "-"), this.catpipe.transform(value)],{queryParams:{'manufacture':this.id}});
+      this.router.navigate(['jewelry/manufacture', this.name.replace(/ /g, "-"), this.catpipe.transform(value)],{queryParams:{'manufacture':this.id,'category':id}});
     }
     else{
-      this.router.navigate(['subcategory', this.catpipe.transform(value)]);
+      this.router.navigate(['jewelry/subcategory', this.catpipe.transform(value)],{queryParams:{'category':id}});
     }
   }
 

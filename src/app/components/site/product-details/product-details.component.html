@@ -3,8 +3,8 @@
             <div class="container">
                 <ul class="breadcrumbs">
                     <li><a  routerLink="/">Home</a></li>
-                    <li *ngIf='subcategory'><a  routerLink="/{{category  | category}}/{{subcategory | subcategory}}">{{subcategory}}</a></li>
-                    <li *ngIf='subsubcategory'><a routerLink="/{{category | category}}/{{subcategory | subcategory}}/{{subsubcategory | subcategory}}">{{subsubcategory}}</a></li>
+                    <li *ngIf='subcategory'><a  routerLink="/jewelry/{{category  | category}}/{{subcategory | subcategory}}" [queryParams]="{ 'subcategory': data.subcategory_id}">{{subcategory}}</a></li>
+                    <li *ngIf='subsubcategory'><a routerLink="/jewelry/{{category | category}}/{{subcategory | subcategory}}/{{subsubcategory | subcategory}}" [queryParams]="{ 'subsubcategory': data.subsubcategory_id}">{{subsubcategory}}</a></li>
                 </ul>
             </div>
         </div>

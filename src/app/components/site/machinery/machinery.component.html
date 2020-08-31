@@ -2,7 +2,7 @@
     <ngb-carousel *ngIf="slider_imgs">
         <ng-template *ngFor="let slide of slider_imgs" ngbSlide>
           <div class="picsum-img-wrapper bordershadow">
-            <img [routerLink]='["/machinery-jewelry",slide.title | subcategory]' [queryParams]="{'page' :1 ,'manufacture_id': slide.user_id}" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
+            <img [routerLink]='["/jewelry/machinery",slide.title | subcategory]' [queryParams]="{'page' :1 ,'manufacture_id': slide.user_id}" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="url + slide.image" alt="Random first slide" >
           </div>
         </ng-template>
     </ngb-carousel>
@@ -104,7 +104,7 @@
                     <div class="py-3 py-md-10 px-md-6  text-center">
                         <h2 class="h1-style text-center">{{s.title}}</h2>
                         <p>{{s.description}}</p>
-                        <div class="more-link-wrapper text-center mt-2"><a [routerLink]='["/machinery",s.title | slugify]' [queryParams]="{'page' :1 ,'manufacture_id': s.user_id}" href="javascript:void(0)" class="btn-decor">show me all</a></div>
+                        <div class="more-link-wrapper text-center mt-2"><a [routerLink]='["/jewelry/machinery",s.title | slugify]' [queryParams]="{'page' :1 ,'manufacture_id': s.user_id}" href="javascript:void(0)" class="btn-decor">show me all</a></div>
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                     <div class="py-3 py-md-10 px-md-6 text-center">
                         <h2 class="h1-style text-center">{{s.title}}</h2>
                         <p>{{s.description}}</p>
-                        <div class="more-link-wrapper text-center mt-2"><a [routerLink]='["/machinery", s.title | slugify]' [queryParams]="{'page' :1 ,'manufacture_id': s.user_id}" href="javascript:void(0)" class="btn-decor">show me all</a></div>
+                        <div class="more-link-wrapper text-center mt-2"><a [routerLink]='["/jewelry/machinery", s.title | slugify]' [queryParams]="{'page' :1 ,'manufacture_id': s.user_id}" href="javascript:void(0)" class="btn-decor">show me all</a></div>
                     </div>
                 </div>
             </div>

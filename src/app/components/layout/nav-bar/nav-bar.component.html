@@ -17,31 +17,31 @@
                             <ng-container *ngFor='let s of catwithsub;let i = index'>
                             <li class="mmenu-item--simple">
                                 
-                                <ng-container *ngIf="s.category != 'MACHINERY' && i != length"><a href="javascript:void(0)" [routerLink]="['/', s.category  | category]" title="">{{s.category}}</a></ng-container>
+                                <ng-container *ngIf="s.category != 'MACHINERY' && i != length"><a href="javascript:void(0)" [routerLink]="['jewelry/', s.category  | category]" [queryParams]="{'category': s.category_id}" title="">{{s.category}}</a></ng-container>
                                 <ng-container *ngIf="i == length">
                                     <a id='live' href="javascript:void(0)" [routerLink]="['/gold-silver-live-rates']" title="">Live Rate</a>
                                 </ng-container>
-                                <ng-container *ngIf="s.category == 'MACHINERY'  && i != length"><a href="javascript:void(0)" [routerLink]="['/', s.category  | category]" title="">{{s.category}}</a></ng-container>
+                                <ng-container *ngIf="s.category == 'MACHINERY'  && i != length"><a href="javascript:void(0)" [routerLink]="['jewelry', s.category  | category]" [queryParams]="{'category': s.category_id}" title="">{{s.category}}</a></ng-container>
                                 <div *ngIf='i!=length' class="mmenu-submenu">
                                     <ul class="submenu-list">
                                      <ng-container *ngIf="s.category != 'MACHINERY'">
-                                         <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['/', s.category | category,p.subcategory  | subcategory]">{{p.subcategory}}</a>
+                                         <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['jewelry/', s.category | category,p.subcategory  | subcategory]" [queryParams]="{'subcategory': p.subcategory_id}">{{p.subcategory}}</a>
                                         </li>
                                     </ng-container>
                                         <ng-container *ngIf="s.category == 'MACHINERY'">
-                                            <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['/', s.category  | category,p.subcategory | subcategory]" [queryParams]="{'page' :1 ,'subcategory_id': p.subcategory_id}">{{p.subcategory}}</a>
+                                            <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['jewelry/', s.category  | category,p.subcategory | subcategory]" [queryParams]="{'subcategory': p.subcategory_id}">{{p.subcategory}}</a>
                                             </li>
                                         </ng-container>
                                     </ul>
                                 </div>
                             </li>
                             <li class="mmenu-item--simple" *ngIf='i==length'>
-                                <a href="javascript:void(0)" [routerLink]="['/', catall[i].category | category]" title="">{{catall[i].category}}</a>
+                                <a href="javascript:void(0)" [routerLink]="['jewelry/', catall[i].category | category]" [queryParams]="{'category': s.category_id}">{{catall[i].category}}</a>
                                 <div class="mmenu-submenu">
                                     <ul class="submenu-list">
                                      
                                          <li *ngFor='let p of catall[i].subcategory'>
-                                             <a href="javascript:void(0)" [routerLink]="['/', catall[i].category  | category,p.subcategory  | subcategory]">{{p.subcategory}}</a>
+                                             <a href="javascript:void(0)" [routerLink]="['jewelry/', catall[i].category  | category,p.subcategory  | subcategory]" [queryParams]="{'subcategory': p.subcategory_id}">{{p.subcategory}}</a>
                                         </li>
                                     
                                     </ul>

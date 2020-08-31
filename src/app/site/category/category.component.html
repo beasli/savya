@@ -8,7 +8,7 @@
     <div class="card-deck">
         <div class="row">
             <div class="col-lg-2 col-6 col-md-3" *ngFor="let s of data">
-                <div class="each-listing-product" (click)='go(s.category)' [style.background-image]="getlink(s.image)">
+                <div class="each-listing-product" (click)='go(s.category,s.id)' [style.background-image]="getlink(s.image)">
                 <div class="contant-box">
                     <div class="product-content">
                        

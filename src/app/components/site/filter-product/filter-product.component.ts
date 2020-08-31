@@ -13,7 +13,7 @@ import { CategoryPipe, SubCategoryPipe } from '../slug.pipe';
 })
 export class FilterProductComponent implements OnInit {
   subid: any;
-   url :any;
+  url :any;
   data:any;
   products:any;
   wish:any;
@@ -38,6 +38,8 @@ export class FilterProductComponent implements OnInit {
   current_page: any;
   pages: any;
   manufacture: string;
+  subsub: any;
+  ssid: any;
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router,private http:HttpClient,
     private catpipe: CategoryPipe,private subcatpipe: SubCategoryPipe,private slug :SlugPipe) {
     this.drop=this.api.drop; 
@@ -50,24 +52,23 @@ export class FilterProductComponent implements OnInit {
     this.route.params.subscribe(params => {
       console.log(params.cat.slice(0,-8).replace(/-/g, " "));
       console.log(params.sub.slice(8).replace(/-/g, " "));
-      this.category = this.category.find(x => x.category.toLowerCase()  == params.cat.slice(0,-8).replace(/-/g, " "));
-    
-      this.subcategory = this.category.subcategory.find(x => x.subcategory.toLowerCase() == params.sub.slice(8).replace(/-/g, " "));
-    
-      this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subcategory.id} ).then(data  => {
-        this.subsubcategory = data['data'];
-        this.subsubcategory = this.subsubcategory.find(x => x.title.toLowerCase() == params.subsub.slice(8).replace(/-/g, " "));
+      this.category = params.cat;
+      this.subcategory = params.sub;
+      this.subsub = params.subsub.replace(/-/g, " ");
+      // this.api.Post(SUBCATEGORYTYPE, {subcategory_id: this.subcategory.id} ).then(data  => {
+      //   this.subsubcategory = data['data'];
+      //   this.subsubcategory = this.subsubcategory.find(x => x.title.toLowerCase() == params.subsub.slice(8).replace(/-/g, " "));
       this.route.queryParamMap.subscribe(params =>{
       this.current_page = params.get('page');
       this.manufacture = params.get('manufacturer');
-    
+      this.ssid =  params.get('subsubcategory');
       this.current_page = Number(this.current_page);
-      this.getProduct(this.subsubcategory.id,this.current_page);
+      this.getProduct(this.ssid,this.current_page);
       
           });
         });
       });
-    });
+    //});
   }
   getProduct(value,page=1)
   {
@@ -175,13 +176,13 @@ export class FilterProductComponent implements OnInit {
   }
   pagechanged(){
     if(!this.manufacture){
-    this.router.navigate(['',this.subcatpipe.transform(this.category.category),this.subcatpipe.transform(this.subcategory.subcategory),this.subcatpipe.transform(this.subsubcategory.title)], { queryParams: { page: this.current_page}});
+    this.router.navigate(['jewelry/',this.category,this.subcategory,this.subcatpipe.transform(this.subsub)], { queryParams: { page: this.current_page,subsubcategory:this.ssid}});
     } else{
-      this.router.navigate(['',this.manufacture,this.subcatpipe.transform(this.category.category),this.subcatpipe.transform(this.subcategory.subcategory),this.subcatpipe.transform(this.subsubcategory.title),this.slug.transform(name)], { queryParams: { page: this.current_page,manufacturer:this.manufacture}});
+      this.router.navigate(['jewelry/',this.manufacture,this.category,this.subcategory,this.subcatpipe.transform(this.subsub),this.slug.transform(name)], { queryParams: { page: this.current_page,manufacturer:this.manufacture,subsubcategory:this.ssid}});
     }
   }
   go(value,name) {
-    this.router.navigate(['',this.subcatpipe.transform(this.category.category),this.subcatpipe.transform(this.subcategory.subcategory),this.subcatpipe.transform(this.subsubcategory.title),this.slug.transform(name)], { queryParams: { detail: value}});
+    this.router.navigate(['jewelry/',this.category,this.subcategory,this.subcatpipe.transform(this.subsub),this.slug.transform(name)], { queryParams: { detail: value}});
   }
  
 

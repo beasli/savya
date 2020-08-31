@@ -24,12 +24,12 @@
                             [config]="slideConfig" >
 
                   <div ngxSlickItem *ngFor="let slide of manufacturer;let i = index" class="slide he embed-responsive embed-responsive-16by9 border bordershadow">
-                  <img [routerLink]='["/manufacture",slide.name | slugify]' [queryParams]="{'manufacture_id': slide.manufacture_id}" src="{{ manufacture + slide.logo }}"  onerror="this.src='../../../../assets/images/logo-bw.png'"  class="embed-responsive-item mt-1"  alt="" width="100%">
+                  <img [routerLink]='["/jewelry/manufacture",slide.name | slugify]' [queryParams]="{'manufacture_id': slide.manufacture_id}" src="{{ manufacture + slide.logo }}"  onerror="this.src='../../../../assets/images/logo-bw.png'"  class="embed-responsive-item mt-1"  alt="" width="100%">
                   <div class="overlay-effect mt-1">
-                      <div [routerLink]='["/manufacture",slide.name | slugify]' [queryParams]="{'manufacture_id': slide.manufacture_id}" *ngIf="slide.name" class="overlay-effect-content for-desktop hide-mobile">
+                      <div [routerLink]='["/jewelry/manufacture",slide.name | slugify]' [queryParams]="{'manufacture_id': slide.manufacture_id}" *ngIf="slide.name" class="overlay-effect-content for-desktop hide-mobile">
                         <h4>{{ slide.name }}</h4>
                       </div>
-                      <div [routerLink]='["/manufacture",slide.name | slugify]' [queryParams]="{'manufacture_id': slide.manufacture_id}" *ngIf="slide.name" class="overlay-effect-content show-mobile">
+                      <div [routerLink]='["/jewelry/manufacture",slide.name | slugify]' [queryParams]="{'manufacture_id': slide.manufacture_id}" *ngIf="slide.name" class="overlay-effect-content show-mobile">
                         <h6>{{ slide.name }}</h6>
                       </div>
                   </div>

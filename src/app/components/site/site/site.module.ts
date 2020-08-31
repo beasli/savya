@@ -1,6 +1,6 @@
 import { BlogDetailsComponent } from './../blog-details/blog-details.component';
 import { BlogComponent } from './../blog/blog.component';
-import { SlugPipe, MyCurrencyPipe, SummaryPipe, INRCurrencyPipe, CategoryPipe, SubCategoryPipe } from './../slug.pipe';
+import { SlugPipe, MyCurrencyPipe, SummaryPipe, INRCurrencyPipe, CategoryPipe, SubCategoryPipe, AntiPipe } from './../slug.pipe';
 import { SubsubComponent } from './../subsub/subsub.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventsComponent } from './../events/events.component';
@@ -131,6 +131,7 @@ const customConfig: ShareButtonsConfig = {
     INRCurrencyPipe,
     CategoryPipe,
     SubCategoryPipe,
+    AntiPipe,
     BlogComponent,
     BlogDetailsComponent,
     LiveComponent,
@@ -179,38 +180,38 @@ const customConfig: ShareButtonsConfig = {
       { path: 'offers', component: OffersComponent,  canActivate: [AuthGuardService]},
       { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService,CheckoutService]},
       { path: 'cart', component: CartComponent, canActivate: [AuthGuardService]},
-      { path: 'machinery-jewelry/:id', component: MachineryProductsComponent},
+      { path: 'jewelry/machinery/:id', component: MachineryProductsComponent},
       { path: 'contact', component: ContactComponent},
       { path: 'about', component: AboutComponent},
       { path: 'terms', component: TermsAndConditionComponent},
       { path: 'payment', component: PaymentComponent},
-      { path: 'machinery-jewelry/search/:value', component: MachinerySearchComponent},
+      { path: 'jewelry/machinery/search/:value', component: MachinerySearchComponent},
       { path: 'search/:value', component: SearchComponent},
       { path: 'privacy', component: PrivacyComponent},
       { path: 'home', component: HomeComponent},
-      { path: 'manufacture/:id', component: CategoryComponent},
+      { path: 'jewelry/manufacture/:id', component: CategoryComponent},
       { path: 'events' , component: EventsComponent},
-      { path: 'machinery-jewelry' , component: MachineryComponent},
+      { path: 'jewelry/machinery' , component: MachineryComponent},
       { path: 'event/:id' , component: EventComponent, canActivate: [KycguardService]},
       { path: 'products/machinery/:id', component: MachineryProductComponent, canActivate: [KycguardService]},
       { path: 'product-details' , component: ProductDetailsComponent, canActivate: [KycguardService]},
-      { path: 'manufacture/:idm/:subcategory/:subsubcategory' , component: SubsubComponent},
-      { path: 'manufacture/:idm/:cat/:sub/:subsub' , component: FilterProductComponent},
+      { path: 'jewelry/manufacture/:idm/:subcategory/:subsubcategory' , component: SubsubComponent},
+      { path: 'jewelry/manufacture/:idm/:cat/:sub/:subsub' , component: FilterProductComponent},
       { path: 'filternav' , component: FilterNavBarComponent},
       { path: 'category', component: CategoryComponent},
-      { path: 'manufacture/:idm/:subcategory', component: SubcategoryComponent},
+      { path: 'jewelry/manufacture/:idm/:subcategory', component: SubcategoryComponent},
       { path: 'bullion-dealers', component: BullianComponent},
       { path: 'bullion-dealers/:id', component: BullianMerchantComponent},
-      { path: ':subcategory', component: SubcategoryComponent},
-      { path: ':subcategory/:subsubcategory' , component: SubsubComponent},
-      { path: ':cat/:sub/:subsub' , component: FilterProductComponent},
-      { path: ':cat/:sub/:subsub/:product' , component: ProductDetailsComponent, canActivate: [KycguardService]},
+      { path: 'jewelry/:subcategory', component: SubcategoryComponent},
+      { path: 'jewelry/:subcategory/:subsubcategory' , component: SubsubComponent},
+      { path: 'jewelry/:cat/:sub/:subsub' , component: FilterProductComponent},
+      { path: 'jewelry/:cat/:sub/:subsub/:product' , component: ProductDetailsComponent, canActivate: [KycguardService]},
     ])
   ],
   exports: [LoaderComponent,NgbModule,
     SlickCarouselModule,
     BrowserAnimationsModule,
-    NgxImageZoomModule,SlugPipe,CategoryPipe,SubCategoryPipe]  ,
+    NgxImageZoomModule,SlugPipe,CategoryPipe,SubCategoryPipe,AntiPipe]  ,
     providers: [SeoService,CategoryPipe,SubCategoryPipe,SlugPipe],
 })
 export class SiteModule { }

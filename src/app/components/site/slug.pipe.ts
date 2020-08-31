@@ -15,7 +15,9 @@ export class CategoryPipe implements PipeTransform {
 
      value = value.replace(/ /g, '-');
      value = value.toLowerCase();
-      return value+'-jewelry';
+     value = value.replace('-jewellery', '');
+    
+      return value;
   }
 }
 @Pipe({name: 'subcategory'})
@@ -24,7 +26,17 @@ export class SubCategoryPipe implements PipeTransform {
 
      value = value.replace(/ /g, '-');
      value = value.toLowerCase();
-      return 'jewelry-'+value;
+      return value;
+  }
+}
+
+@Pipe({name: 'anti'})
+export class AntiPipe implements PipeTransform {
+  transform(value: string): string {
+
+    // value = value.replace(/-/g, ' ');
+     value = value.toUpperCase();
+      return value;
   }
 }
 

@@ -149,7 +149,7 @@ export class HomeComponent implements OnInit {
   }
   fmanufacture(ob){
     
-    this.router.navigate(['/manufacture', ob.name.replace(/ /g, "-")],{queryParams:{'manufacturer':ob.manufacture_id}});
+    this.router.navigate(['jewelry/manufacture', ob.name.replace(/ /g, "-")],{queryParams:{'manufacturer':ob.manufacture_id}});
   
   }
   bypass2(url){

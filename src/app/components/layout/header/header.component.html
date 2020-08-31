@@ -25,7 +25,7 @@
                                     <div class="cart-table-prd-image"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl+'category/' + s.image}}"  alt=""></div>
                                     {{s.category}}</a></ng-container>
                         <ng-container *ngIf="s.category == 'MACHINERY'">
-                            <a [routerLink]="['/', s.category  | category]">
+                            <a [routerLink]="['jewelry/', s.category  | category]" [queryParams]="{'category': s.category_id}">
                                 <div class="cart-table-prd-image"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl+'category/' + s.image}}"  alt=""></div>
                                 {{s.category}}</a>
                         </ng-container>
@@ -35,7 +35,7 @@
                                 
                                 <ng-container *ngIf="s.category != 'MACHINERY'">
                                     <li *ngFor='let p of s.subcategory'>
-                                        <a href="javascript:void(0)" [routerLink]="['/', s.category  | category,p.subcategory | subcategory]">
+                                        <a href="javascript:void(0)" [routerLink]="['jewelry/', s.category  | category,p.subcategory | subcategory]" [queryParams]="{'subcategory': p.subcategory_id}">
                                         <!-- <div class="cart-table-prd-image"><img  src="{{baseurl+'subcategory/' + s.image}}"  alt=""></div> -->
                                         {{p.subcategory}}</a>
                                     </li>

@@ -10,7 +10,7 @@
                         
                     </p>
                     <div *ngIf='s.banner_for != "liveRateBanner"' class="more-link-wrapper text-center mt-2">
-                        <a [routerLink]="['/', s.category.category | category , s.subcategory | subcategory]" href="javascript:void(0)" class="btn-decor">
+                        <a [routerLink]="['/jewelry', s.category.category | category , s.subcategory | subcategory]" [queryParams]="{ 'subcategory': s.subcategory_id}" href="javascript:void(0)" class="btn-decor">
                             show me all
                         </a>
                     </div>
@@ -28,7 +28,7 @@
                     <h2 class="h1-style text-center">{{s.title}}</h2>
                     <p>{{s.description}}</p>
                     <div *ngIf='s.banner_for != "liveRateBanner"' class="more-link-wrapper text-center mt-2">
-                        <a [routerLink]="['/', s.category.category | category , s.subcategory  | subcategory]" href="javascript:void(0)" class="btn-decor">
+                        <a [routerLink]="['/jewelry', s.category.category | category , s.subcategory  | subcategory]" [queryParams]="{ 'subcategory': s.subcategory_id}"href="javascript:void(0)" class="btn-decor">
                             show me all
                         </a>
                     </div>
