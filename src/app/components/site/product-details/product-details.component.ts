@@ -191,76 +191,75 @@ export class ProductDetailsComponent implements OnInit {
      this.api.checkWishlist(pid);
    }
    }
-   checkHeart(pid)
-  {
+checkHeart(pid)
+{
 
-    //console.log("checkheart");
-    this.wish = this.api.getWishlist();
-    if (this.wish) {
-            let result = this.wish.find(x => x.product_id === pid);
-        //  console.log("result="+result);
-            if (result)
-            { 
-              return true;
-            
-            }
-            else
-            {
-              //console.log("not present");
-              return false;
-              
-            } 
-      }
-      else{
-        //console.log("not present");
-        return false;
-      }
+//console.log("checkheart");
+this.wish = this.api.getWishlist();
+if (this.wish) {
+        let result = this.wish.find(x => x.product_id === pid);
+    //  console.log("result="+result);
+        if (result)
+        { 
+          return true;
+        
+        }
+        else
+        {
+          //console.log("not present");
+          return false;
+          
+        } 
   }
-   qtyUpdate(pid,value)
-   {
-        this.api.qtyUpdate(pid,value);
-   }
-   checkCart(pid)
-  {
-      let check=this.api.checkCart(pid);
-     // console.log(check);
-      return check;
+  else{
+    //console.log("not present");
+    return false;
   }
-  deleteWishlist(pid)
-  {
-      this.api.deleteWishlist(pid);
-  }
-  addToCart(s)
-  {
-    this.message = 'Please wait ...';
-    document.getElementById("openModalButton").click();
-    this.api.Post(CARTADD, s).then(data=>{
-      
-      this.api.updateCart();
-      this.api.Cart.emit("cartUpdated"+Date.now());
-      document.getElementById("mClose").click();
-    this.api.onSuccess('Product Successfully added to the cart');
-    //  localStorage.setItem('cart',JSON.stringify(data));  
-    }).catch(d=>{
-      document.getElementById("mClose").click();
-      if(d.status == 503){
-        this.api.onFail('Your session is expired please login again');
+}
+qtyUpdate(pid,value)
+{
+    this.api.qtyUpdate(pid,value);
+}
+checkCart(pid)
+{
+    let check=this.api.checkCart(pid);
+    return check;
+}
+deleteWishlist(pid)
+{
+    this.api.deleteWishlist(pid);
+}
+addToCart(s)
+{
+  this.message = 'Please wait ...';
+  document.getElementById("openModalButton").click();
+  this.api.Post(CARTADD, s).then(data=>{
+    
+    this.api.updateCart();
+    this.api.Cart.emit("cartUpdated"+Date.now());
+    document.getElementById("mClose").click();
+  this.api.onSuccess('Product Successfully added to the cart');
+  //  localStorage.setItem('cart',JSON.stringify(data));  
+  }).catch(d=>{
+    document.getElementById("mClose").click();
+    if(d.status == 503){
+      this.api.onFail('Your session is expired please login again');
 
-        this.api.setGoto();
-        this.api.setlogin(0);
-        this.api.logout();
-        setTimeout(() => {
-        this.router.navigate(['/']);
-        },1000);
-      }else if(d.status == 401){
-        this.api.onFail('Product already in cart');
-      } else{
-      this.api.Cart.emit("cartUpdated"+Date.now());
-      }      
-    });
-    this.message = null;
-  }
-   getproduct() {
+      this.api.setGoto();
+      this.api.setlogin(0);
+      this.api.logout();
+      setTimeout(() => {
+      this.router.navigate(['/']);
+      },1000);
+    }else if(d.status == 401){
+      this.api.onFail('Product already in cart');
+    } else{
+    this.api.Cart.emit("cartUpdated"+Date.now());
+    }      
+  });
+  this.message = null;
+}
+getproduct() {
      this.loader=true;
      this.page=false;
      this.api.Put(PRODUCTDETAILS, this.pid ).then(data  => {
@@ -400,12 +399,7 @@ export class ProductDetailsComponent implements OnInit {
               }).catch(d=>{});
        }).catch(d=>{});
     }).catch(d=>{});
-
-    
-    
-    
 }
-
 valuec(val,def='n'){
   if(def='n'){
     this.value += val;
@@ -413,7 +407,6 @@ valuec(val,def='n'){
     this.value = val;
   }
 }
-
 bubbleSort(array) {
   var done = false;
   while (!done) {
@@ -430,7 +423,6 @@ bubbleSort(array) {
 
   return array;
 }
-
 sort(ary) {
   let a;
   // use custom compare function that sorts numbers ascending
@@ -439,7 +431,6 @@ sort(ary) {
   });
   return a;
 }
-
 diamondchange(value,value2) {
   console.log(value);
   console.log(value2);
@@ -471,7 +462,6 @@ diamondchange(value,value2) {
     this.diamondprice(2);
   }
 }
-
  compare(a, b) {
   if (a < b) {
       return -1;
@@ -481,7 +471,6 @@ diamondchange(value,value2) {
       return 0;
   }
 }
-
    createjson() {
      this.loading=true;
      this.drop=this.api.drop;
@@ -639,7 +628,6 @@ diamondchange(value,value2) {
 
     
    }
-
   colormetal(value) {
     this.colvalue = value;
   }
@@ -660,8 +648,6 @@ diamondchange(value,value2) {
         this.button();
       }
    }
-   
-
    clean(){
     this.pid= null;
     this.data= null;
@@ -732,7 +718,6 @@ diamondchange(value,value2) {
     this.pricediamond2 =null;
     this.totaldiamond2 =null;
   }
-
    getgold(value) {
      this.gold = Object.assign({},this.goldlist.find(x => x.jwellery_size == value.jwellery_size));
     
@@ -799,7 +784,6 @@ diamondchange(value,value2) {
        this.button();
      }
    }
-
    button(){
     if (this.gold && !this.pricegold) {
       this.btn = 0;
@@ -882,7 +866,6 @@ diamondchange(value,value2) {
     }
   }
   }
-
   getsilver() {
     console.log('In silver');
     this.silver = Object.assign({},this.defsilver);
@@ -945,7 +928,7 @@ diamondchange(value,value2) {
     }
   }
   }
-   colorClarity(value0, value1,type=1) {
+  colorClarity(value0, value1,type=1) {
      if(type==1){
 
      
@@ -969,7 +952,6 @@ diamondchange(value,value2) {
     }
     }
   }
-
   diamondprice(type=1)  {
    if(type==1){
     for(let i=0;i < this.diamondclarity.length;i++){
@@ -1059,7 +1041,6 @@ diamondchange(value,value2) {
       }
     }
   }
-
   grossweight() {
     let weight = 0;
     if (this.gold) {
@@ -1081,7 +1062,6 @@ diamondchange(value,value2) {
     }
     this.gross = weight.toFixed(3);
   }
-
   total() {
     let price = 0;
     if (this.pricegold) {
@@ -1106,9 +1086,6 @@ diamondchange(value,value2) {
     }
     this.totalprice = price;
   }
-
-
-  
   ngOnInit() {
     this.loader = true;
     this.page = false;
