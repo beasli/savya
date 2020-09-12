@@ -1,7 +1,7 @@
 import { BlogDetailsComponent } from './../blog-details/blog-details.component';
 import { BlogComponent } from './../blog/blog.component';
 import { SlugPipe, MyCurrencyPipe, SummaryPipe, INRCurrencyPipe, CategoryPipe, SubCategoryPipe, AntiPipe } from './../slug.pipe';
-import { SubsubComponent } from './../subsub/subsub.component';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventsComponent } from './../events/events.component';
 import { LiveratesComponent } from './../liverates/liverates.component';
@@ -13,12 +13,12 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { SliderComponent } from '../slider/slider.component';
 import { TestimonialsComponent } from '../testimonials/testimonials.component';
-import { FilterProductComponent } from '../filter-product/filter-product.component';
+
 import { ProductHolderComponent } from '../product-holder/product-holder.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { EventComponent } from '../event/event.component';
-import { ProductDetailsComponent } from '../product-details/product-details.component';
+
 import { ShareButtonsConfig, ShareModule } from '@ngx-share/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
@@ -29,13 +29,10 @@ import { LoaderComponent } from '../loader/loader.component';
 
 // Import the library
 import { NgxImageZoomModule } from 'ngx-image-zoom';
-import { MachineryComponent } from '../machinery/machinery.component';
-import { CategoryComponent } from 'src/app/site/category/category.component';
-import { SubcategoryComponent } from 'src/app/site/subcategory/subcategory.component';
 import { BullianComponent } from '../bullian/bullian.component';
 import { BullianMerchantComponent } from '../bullian-merchant/bullian-merchant.component';
 import { KycguardService } from '../../auth-guard/kycguard.service';
-import { MachineryProductComponent } from '../../layout/machinery-product/machinery-product.component';
+
 import { MachineryHolderComponent } from '../../layout/machinery-holder/machinery-holder.component';
 import { LoginComponent } from '../../auth/login/login.component';
 import { RegisterComponent } from '../../auth/register/register.component';
@@ -48,8 +45,6 @@ import { TermsAndConditionComponent } from '../../layout/terms-and-condition/ter
 import { PaymentComponent } from '../../layout/payment/payment.component';
 import { SearchComponent } from '../../layout/search/search.component';
 import { PrivacyComponent } from '../../layout/privacy/privacy.component';
-import { MachinerySearchComponent } from '../../layout/machinery-search/machinery-search.component';
-import { MachineryProductsComponent } from '../../layout/machinery-products/machinery-products.component';
 import { CheckoutComponent } from '../../shopping/checkout/checkout.component';
 import { CartComponent } from '../../shopping/cart/cart.component';
 import { AccountDetailsComponent } from '../../my-account/account-details/account-details.component';
@@ -85,22 +80,16 @@ const customConfig: ShareButtonsConfig = {
     HomeComponent,
     SliderComponent,
     TestimonialsComponent,
-    FilterProductComponent,
     ProductHolderComponent,
     ExclusiveBannerComponent,
     LiveratesComponent,
     EventsComponent,
     EventComponent,
-    ProductDetailsComponent,
-    SubsubComponent,
     LoaderComponent,
     FilterNavBarComponent,
-    MachineryComponent,
-    CategoryComponent,
-    SubcategoryComponent,
     BullianComponent,
     BullianMerchantComponent,
-    MachineryProductComponent,
+   
     MachineryHolderComponent,
     LoginComponent,
     RegisterComponent,
@@ -113,8 +102,6 @@ const customConfig: ShareButtonsConfig = {
     PaymentComponent,
     SearchComponent,
     PrivacyComponent,
-    MachinerySearchComponent,
-    MachineryProductsComponent,
     CheckoutComponent,
     CartComponent,
     AccountDetailsComponent,
@@ -164,8 +151,6 @@ const customConfig: ShareButtonsConfig = {
       { path: 'sterms', component: SelltermsComponent},
       { path: 'blog', component: BlogComponent},
       { path: 'blog/:id', component: BlogDetailsComponent},
-      // { path: 'login', component: LoginComponent,canActivate: [LoginGuardService]},
-      // { path: 'register', component: RegisterComponent,canActivate: [LoginGuardService]},
       { path: 'kyc' , component: KycComponent, canActivate: [AuthGuardService]},
       { path: 'changeProfile' , component: ChangeProfileComponent,  canActivate: [AuthGuardService]},
       { path: 'kycpending' , component: KycPendingComponent, canActivate: [AuthGuardService]},
@@ -180,32 +165,33 @@ const customConfig: ShareButtonsConfig = {
       { path: 'offers', component: OffersComponent,  canActivate: [AuthGuardService]},
       { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuardService,CheckoutService]},
       { path: 'cart', component: CartComponent, canActivate: [AuthGuardService]},
-      { path: 'jewelry/machinery/:id', component: MachineryProductsComponent},
+      // { path: 'jewelry/machinery/:id', component: MachineryProductsComponent},
       { path: 'contact', component: ContactComponent},
       { path: 'about', component: AboutComponent},
       { path: 'terms', component: TermsAndConditionComponent},
       { path: 'payment', component: PaymentComponent},
-      { path: 'jewelry/machinery/search/:value', component: MachinerySearchComponent},
+      // { path: 'jewelry/machinery/search/:value', component: MachinerySearchComponent},
       { path: 'search/:value', component: SearchComponent},
       { path: 'privacy', component: PrivacyComponent},
       { path: 'home', component: HomeComponent},
-      { path: 'jewelry/manufacture/:id', component: CategoryComponent},
+      // { path: 'jewelry/manufacture/:id', component: CategoryComponent},
       { path: 'events' , component: EventsComponent},
-      { path: 'jewelry/machinery' , component: MachineryComponent},
+      // { path: 'jewelry/machinery' , component: MachineryComponent},
       { path: 'event/:id' , component: EventComponent, canActivate: [KycguardService]},
-      { path: 'products/machinery/:id', component: MachineryProductComponent, canActivate: [KycguardService]},
-      { path: 'product-details' , component: ProductDetailsComponent, canActivate: [KycguardService]},
-      { path: 'jewelry/manufacture/:idm/:subcategory/:subsubcategory' , component: SubsubComponent},
-      { path: 'jewelry/manufacture/:idm/:cat/:sub/:subsub' , component: FilterProductComponent},
+      // { path: 'products/machinery/:id', component: MachineryProductComponent, canActivate: [KycguardService]},
+      // { path: 'product-details' , component: ProductDetailsComponent, canActivate: [KycguardService]},
+      // { path: 'jewelry/manufacture/:idm/:subcategory/:subsubcategory' , component: SubsubComponent},
+      // { path: 'jewelry/manufacture/:idm/:cat/:sub/:subsub' , component: FilterProductComponent},
       { path: 'filternav' , component: FilterNavBarComponent},
-      { path: 'category', component: CategoryComponent},
-      { path: 'jewelry/manufacture/:idm/:subcategory', component: SubcategoryComponent},
+      // { path: 'category', component: CategoryComponent},
+      // { path: 'jewelry/manufacture/:idm/:subcategory', component: SubcategoryComponent},
       { path: 'bullion-dealers', component: BullianComponent},
       { path: 'bullion-dealers/:id', component: BullianMerchantComponent},
-      { path: 'jewelry/:subcategory', component: SubcategoryComponent},
-      { path: 'jewelry/:subcategory/:subsubcategory' , component: SubsubComponent},
-      { path: 'jewelry/:cat/:sub/:subsub' , component: FilterProductComponent},
-      { path: 'jewelry/:cat/:sub/:subsub/:product' , component: ProductDetailsComponent, canActivate: [KycguardService]},
+    //   { path: 'jewelry/:subcategory', component: SubcategoryComponent},
+    //   { path: 'jewelry/:subcategory/:subsubcategory' , component: SubsubComponent},
+    //   { path: 'jewelry/:cat/:sub/:subsub' , component: FilterProductComponent},
+    //   { path: 'jewelry/:cat/:sub/:subsub/:product' , component: ProductDetailsComponent, canActivate: [KycguardService]
+    // },
     ])
   ],
   exports: [LoaderComponent,NgbModule,
