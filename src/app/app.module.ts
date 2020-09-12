@@ -22,7 +22,9 @@ import { KycDoneService } from './components/auth-guard/kyc-done.service';
 import { ModalComponent } from './components/layout/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModalComponent } from './components/site/login-modal/login-modal.component';
-
+import { JewelryModule } from './components/jewelry/jewelry.module';
+import { SharedModule } from './components/shared/shared.module';
+import { CategoryPipe, SubCategoryPipe, SlugPipe } from './components/site/slug.pipe';
 
 
 
@@ -44,7 +46,9 @@ import { LoginModalComponent } from './components/site/login-modal/login-modal.c
     ShoppingModule,
     SiteModule,
     FormsModule,
+    SharedModule,
     ReactiveFormsModule ,
+    JewelryModule,
     NgbModule,
     SimpleNotificationsModule.forRoot({
       position:["middle","center"],
@@ -56,7 +60,7 @@ import { LoginModalComponent } from './components/site/login-modal/login-modal.c
     BrowserAnimationsModule,
   ],
   providers: [AuthGuardService,CheckoutService,KycguardService
-    ,LoginGuardService,KycDoneService,SeoService],
+    ,LoginGuardService,KycDoneService,SeoService,CategoryPipe,SubCategoryPipe,SlugPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

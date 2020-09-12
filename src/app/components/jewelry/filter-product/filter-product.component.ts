@@ -1,10 +1,10 @@
-import { SlugPipe } from './../slug.pipe';
+import { SlugPipe } from 'src/app/components/site/slug.pipe';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SUBCATEGORYTYPE, PRODUCTLIST, NAVIGATION } from 'src/config';
 import { HttpClient } from '@angular/common/http';
-import { CategoryPipe, SubCategoryPipe } from '../slug.pipe';
+import { CategoryPipe, SubCategoryPipe } from 'src/app/components/site/slug.pipe';
 
 @Component({
   selector: 'app-filter-product',

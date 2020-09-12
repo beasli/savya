@@ -1,9 +1,9 @@
 import { ApiService } from 'src/app/api/api.service';
-import { CATEGORY, IMAGE, BANNER } from './../../../config';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer,SafeStyle } from '@angular/platform-browser';
 import { CategoryPipe } from 'src/app/components/site/slug.pipe';
+import { CATEGORY, IMAGE, BANNER } from 'src/config';
 
 @Component({
   selector: 'app-category',

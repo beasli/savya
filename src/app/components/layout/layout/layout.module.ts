@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { SiteModule } from '../../site/site/site.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { SiteModule } from '../../site/site/site.module';
   imports: [
     CommonModule,
     SiteModule,
+    SharedModule,
     SimpleNotificationsModule.forRoot({
       position:["bottom","left"],
        timeOut: 3000,

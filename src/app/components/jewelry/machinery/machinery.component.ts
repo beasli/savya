@@ -4,7 +4,7 @@ import { Component, OnInit,Output,EventEmitter} from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SUBCATEGORY } from 'src/config';
-import { SubCategoryPipe } from '../slug.pipe';
+import { SubCategoryPipe } from 'src/app/components/site/slug.pipe';
 
 @Component({
   selector: 'app-machinery',

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SUBCATEGORYTYPE, CATEGORY, SUBCATEGORY } from 'src/config';
 import { ApiService } from 'src/app/api/api.service';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { CategoryPipe, SubCategoryPipe } from '../slug.pipe';
+import { CategoryPipe, SubCategoryPipe } from 'src/app/components/site/slug.pipe';
 @Component({
   selector: 'app-subsub',
   templateUrl: './subsub.component.html',

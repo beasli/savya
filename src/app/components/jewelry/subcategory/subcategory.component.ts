@@ -1,4 +1,4 @@
-import { CategoryPipe, SubCategoryPipe } from './../../components/site/slug.pipe';
+import { CategoryPipe, SubCategoryPipe } from 'src/app/components/site/slug.pipe';
 import { Component, OnInit } from '@angular/core';
 import { SUBCATEGORY, CATEGORY, IMAGE, BANNER, NAVIGATION } from 'src/config';
 import { ActivatedRoute, Router } from '@angular/router';
