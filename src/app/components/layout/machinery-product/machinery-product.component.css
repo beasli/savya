@@ -178,9 +178,15 @@
     display:block ;
 }
  /deep/.ngxImageZoomContainer{
-    width:458px !important;
-    height:458px  !important;
+    width:100% !important;
+    height:350px  !important;
     overflow: visible !important;
+}
+/deep/.ngxImageZoomContainer img{
+    width:auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 /deep/.ngxImageZoomFullContainer{
     width:458px !important;

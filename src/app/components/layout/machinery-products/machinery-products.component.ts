@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { MACHINESEARCH } from 'src/config';
+import { MACHINESEARCH, IMAGE } from 'src/config';
 
 @Component({
   selector: 'app-machinery-products',
@@ -21,6 +21,8 @@ export class MachineryProductsComponent implements OnInit {
   pages: number;
   url: string;
   title: any;
+  slider_imgs: any;
+  url2 = IMAGE+"machinarybanner/"
 
   constructor(private api: ApiService, private route: ActivatedRoute,private router:Router,private http:HttpClient) {
 
@@ -46,6 +48,7 @@ export class MachineryProductsComponent implements OnInit {
       this.div=true;
       this.alert=false
       this.products = data['data'];
+      this.slider_imgs = data['Machinery Banners'].filter(slide => slide.place === 'Website');;
       this.pages = Math.ceil(data['pagination']/16);
       this.url = data['url'] + '/';
        }).catch(d=>{
@@ -61,6 +64,7 @@ export class MachineryProductsComponent implements OnInit {
           this.div=true;
           this.alert=false
           this.products = data['data'];
+          this.slider_imgs = data['Machinery Banners'].filter(slide => slide.place === 'Website');;
           this.pages = Math.ceil(data['pagination']/16)
           this.url = data['url'] + '/';
            }).catch(d=>{

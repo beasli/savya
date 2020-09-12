@@ -141,10 +141,10 @@ imagemodel=IMAGE+'machinerygallery/'
               this.models = childObj['machinery_model']
             }
             else if (childObj.category === 'manufacture') {
-              this.manufacturer = childObj['manufacture'];
+              this.manufacturer = api.shuffle(childObj['manufacture']);
 
             }else if (childObj.category === 'categories') {
-              this.categories = childObj['categories'];
+              this.categories = api.shuffle(childObj['categories']);
               
             }else if (childObj.category === 'machinery_partner') {
               this.Partners = childObj['machinery_partner'];

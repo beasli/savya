@@ -29,7 +29,7 @@
                                         </li>
                                     </ng-container>
                                         <ng-container *ngIf="s.category == 'MACHINERY'">
-                                            <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['jewelry/', s.category  | category,p.subcategory | subcategory]" [queryParams]="{'subcategory': p.subcategory_id}">{{p.subcategory}}</a>
+                                            <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['jewelry/', s.category  | category,p.subcategory | subcategory]" [queryParams]="{'subcategory_id': p.subcategory_id,'page':1}">{{p.subcategory}}</a>
                                             </li>
                                         </ng-container>
                                     </ul>

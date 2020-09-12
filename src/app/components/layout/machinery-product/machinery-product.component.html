@@ -39,8 +39,12 @@
                                 <img src="{{ url+'product'+'/' + data[0].image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
                             </span>
                             <span (click)="indicateSlide(i+1)" *ngFor="let slide of prd_img;let i = index">
-                               
+                            <ng-container *ngIf='slide.type == 1'> 
                                 <img src="{{ url+'product'+'/' + slide.image }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
+                            </ng-container>
+                            <ng-container *ngIf='slide.type == 2'> 
+                                <img src="{{ url+'product'+'/' + slide.thumbnail }}" class="thumbnail" style="max-height: 100px;" alt="" height="100px" width="100px">
+                            </ng-container>
                             </span>
                         </div>
                     </div>

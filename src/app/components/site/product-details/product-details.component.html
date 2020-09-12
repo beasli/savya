@@ -278,7 +278,7 @@
                                         <tr class="option-label"><td> Name</td><td>&nbsp;:&nbsp; {{diamond.jwellery_size}}</td></tr>
                                         <tr *ngIf=(diamond.weight) class="option-label"><td> Weight</td><td>&nbsp;:&nbsp;  {{diamond.weight | number : '1.3-3'}} <span style="text-transform: initial;"> Ct</span></td></tr>
                                         <tr *ngIf=(pricediamond) class="option-label"><td> Diamond Price</td><td>&nbsp;:&nbsp; {{pricediamond.price  | INRCurrency}}/<span style="text-transform: initial;"> Ct</span></td></tr>
-                                        <tr *ngIf=(diamond.quantity) class="option-label"><td> No of Diamond</td><td>&nbsp;:&nbsp;  {{diamond.quantity}} <span style="text-transform: initial;"> pc</span></td></tr> 
+                                        <tr *ngIf=(diamond.quantity) class="option-label"><td> No of Diamond</td><td>&nbsp;:&nbsp;  {{diamond.quantity}} <span style="text-transform: initial;"> Pc</span></td></tr> 
                                         <tr *ngIf='diamond.certification_cost && diamond.certification_cost!=0' class="option-label"><td> Certificate Charges</td><td>&nbsp;:&nbsp; {{diamond.certification_cost  | INRCurrency}}<span *ngIf='diamond.crtcost_option == "PerCarat"' style="text-transform: initial;">/ Ct</span></td></tr>
                                         <tr *ngIf='diamond.crtcost_option == "PerCarat"  && diamond.certification_cost!=0' class="option-label"><td> Total Certificate Charges</td><td>&nbsp;:&nbsp;  {{diamond.certification_cost * diamond.weight | INRCurrency}}</td></tr>
                                         <tr *ngIf='diamond.crtcost_option == "Fixed" && diamond.certification_cost!=0' class="option-label"><td> Total Certificate Charges</td><td>&nbsp;:&nbsp;  {{diamond.certification_cost * diamond.weight | INRCurrency}}</td></tr>
@@ -345,7 +345,7 @@
                                         <tr class="option-label"><td> Name</td><td>&nbsp;:&nbsp; {{diamond2.jwellery_size}}</tr>
                                         <tr *ngIf=(diamond2.weight) class="option-label"><td> Weight</td><td>&nbsp;:&nbsp;  {{diamond2.weight | number : '1.3-3'}} <span style="text-transform: initial;"> Ct</span></td></tr>
                                         <tr *ngIf=(pricediamond2) class="option-label"><td> Diamond Price</td><td>&nbsp;:&nbsp; {{pricediamond2.price  | INRCurrency}}/<span style="text-transform: initial;"> Ct</span></td></tr>
-                                        <tr *ngIf=(diamond2.quantity) class="option-label"><td> No of Diamond</td><td>&nbsp;:&nbsp;  {{diamond2.quantity}} <span style="text-transform: initial;"> pc</span></td></tr> 
+                                        <tr *ngIf=(diamond2.quantity) class="option-label"><td> No of Diamond</td><td>&nbsp;:&nbsp;  {{diamond2.quantity}} <span style="text-transform: initial;"> Pc</span></td></tr> 
                                         <tr *ngIf="diamond2.certification_cost && diamond2.certification_cost!=0" class="option-label"><td> Certificate Charges</td><td>&nbsp;:&nbsp; {{diamond2.certification_cost  | INRCurrency}}<span *ngIf='diamond2.crtcost_option == "PerCarat"' style="text-transform: initial;">/ Ct</span></td></tr>
                                         <tr *ngIf='diamond2.crtcost_option == "PerCarat"  && diamond2.certification_cost!=0' class="option-label"><td> Total Certificate Charges</td><td>&nbsp;:&nbsp;  {{diamond2.certification_cost * diamond2.weight | INRCurrency}}</td></tr>
                                         <tr *ngIf='diamond2.crtcost_option == "Fixed"  && diamond2.certification_cost!=0' class="option-label"><td> Total Certificate Charges</td><td>&nbsp;:&nbsp;  {{diamond2.certification_cost * diamond2.weight | INRCurrency}}</td></tr>  
@@ -409,17 +409,17 @@
                         </div>
                     </div>
                     <div class="col-xl-3 mt-3 mt-xl-0 sidebar-product">
-                        <div class="shop-features-style4"><a href="#" class="shop-feature">
+                        <div class="shop-features-style4"><a class="shop-feature">
                                 <div class="shop-feature-icon"><i class="icon-box3"></i></div>
                                 <div class="shop-feature-text">
                                     <div class="text1">Worlwide delivery</div>
                                 </div>
-                            </a><a href="#" class="shop-feature">
+                            </a><a class="shop-feature">
                                 <div class="shop-feature-icon"><i class="icon-arrow-left-circle"></i></div>
                                 <div class="shop-feature-text">
                                     <div class="text1">100% money back guarantee</div>
                                 </div>
-                            </a><a href="#" class="shop-feature">
+                            </a><a class="shop-feature">
                                 <div class="shop-feature-icon"><i class="icon-call"></i></div>
                                 <div class="shop-feature-text">
                                     <div class="text1">24/7 customer support</div>

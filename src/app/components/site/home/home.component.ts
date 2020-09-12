@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit {
             this.events = childObj['events']
           }
           else if (childObj.category === 'manufacture') {
-            this.manufacturer = childObj['manufacture'];
+            this.manufacturer = api.shuffle(childObj['manufacture']);
           }else if (childObj.category === 'gallery') {
             this.gallery = childObj['gallery'];
             this.gallery.forEach(element => {element.image = element.file_name});
