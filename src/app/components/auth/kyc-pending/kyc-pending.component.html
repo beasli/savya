@@ -82,11 +82,11 @@
                     </div>
                     
                     <div *ngIf='kyc!=null && kyc.document_verified == 2' class="link-button">
-                        <a routerLink="/kyc" class="btn">Your Documents are Verified</a>
+                        <a routerLink="/account/kyc" class="btn">Your Documents are Verified</a>
                     </div>
 
                     <div *ngIf='kyc==null || kyc.document_verified != 2' class="link-button">
-                        <a routerLink="/kyc" class="btn">verify now</a>
+                        <a routerLink="/account/kyc" class="btn">verify now</a>
                     </div>
                 </div>
             </div>

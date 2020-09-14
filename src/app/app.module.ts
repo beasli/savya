@@ -1,7 +1,8 @@
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SeoService } from './components/SEO/seo.service';
 import { SiteModule } from './components/site/site/site.module';
 import { AuthGuardService } from './components/auth-guard/auth-guard.service';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,9 +21,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { LoginGuardService } from './components/auth-guard/login-guard.service';
 import { KycDoneService } from './components/auth-guard/kyc-done.service';
 import { ModalComponent } from './components/layout/modal/modal.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModalComponent } from './components/site/login-modal/login-modal.component';
-import { JewelryModule } from './components/jewelry/jewelry.module';
 import { SharedModule } from './components/shared/shared.module';
 import { CategoryPipe, SubCategoryPipe, SlugPipe } from './components/site/slug.pipe';
 
@@ -38,7 +37,6 @@ import { CategoryPipe, SubCategoryPipe, SlugPipe } from './components/site/slug.
     LoginModalComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     AccountModule,
     AuthModule,
@@ -47,8 +45,10 @@ import { CategoryPipe, SubCategoryPipe, SlugPipe } from './components/site/slug.
     SiteModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule ,
-    JewelryModule,
+    ReactiveFormsModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    // JewelryModule,
     NgbModule,
     SimpleNotificationsModule.forRoot({
       position:["middle","center"],
@@ -57,7 +57,6 @@ import { CategoryPipe, SubCategoryPipe, SlugPipe } from './components/site/slug.
        pauseOnHover: true,
        clickToClose: true
      }),
-    BrowserAnimationsModule,
   ],
   providers: [AuthGuardService,CheckoutService,KycguardService
     ,LoginGuardService,KycDoneService,SeoService,CategoryPipe,SubCategoryPipe,SlugPipe],

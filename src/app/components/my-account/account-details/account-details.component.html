@@ -12,7 +12,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 aside aside--left">
-                    <div class="list-group"><a routerLink="/account-details" class="list-group-item active">Account Details</a> <a routerLink="/account-addresses" class="list-group-item">My Addresses</a> <a routerLink="/account-wishlist" class="list-group-item">My Wishlist</a><a routerLink="/offers" class="list-group-item">My Offers</a> <a routerLink="/account-history" class="list-group-item">My Order History</a><a routerLink="/event-history" class="list-group-item">My Event History</a><a routerLink="/kycpending" class="list-group-item">Upload KYC</a></div>
+                    <div class="list-group"><a routerLink="/account/account-details" class="list-group-item active">Account Details</a> 
+                        <a routerLink="/account/account-addresses" class="list-group-item">My Addresses</a> 
+                        <a routerLink="/account/account-wishlist" class="list-group-item">My Wishlist</a>
+                        <a routerLink="/account/offers" class="list-group-item">My Offers</a>
+                         <a routerLink="/account/account-history" class="list-group-item">My Order History</a>
+                         <a routerLink="/account/event-history" class="list-group-item">My Event History</a>
+                         <a routerLink="/account/kycpending" class="list-group-item">Upload KYC</a></div>
                 </div>
                 <div class="col-md-9 aside">
                     <h2>Account Details</h2>
@@ -24,7 +30,7 @@
                                     <p><b>First Name:</b>{{data.name}}<br><b>E-mail:</b> {{data.email}}<br><b>Phone:</b> {{data.mobile_no}}<br>
                                      
                                     
-                                    <div class="mt-2 clearfix"><a routerLink="/changeProfile" class="link-icn js-show-form" data-form="#updateDetails"><i class="icon-pencil"></i>Edit</a></div>
+                                    <div class="mt-2 clearfix"><a routerLink="/account/changeProfile" class="link-icn js-show-form" data-form="#updateDetails"><i class="icon-pencil"></i>Edit</a></div>
                                 </div>
                                 <div *ngIf="loader"><app-loader></app-loader></div>
                                 

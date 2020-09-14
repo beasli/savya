@@ -45,7 +45,7 @@ export class TestimonialsComponent implements OnInit {
 
    detail(value) {
      if (this.redirect == 'Y'){
-      this.router.navigate(['/event', value.id]);
+      this.router.navigate(['/events', value.id]);
     }
   }
   

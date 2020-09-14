@@ -27,10 +27,8 @@ import { SharedModule } from '../shared/shared.module';
     MachineryProductsComponent,
     FilterNavBarComponent],
   imports: [
-    CommonModule,
     SharedModule,
     RouterModule.forChild([ 
-     { path:'jewelry',children:[
       { path: 'machinery' , component: MachineryComponent},
       { path: 'machinery/:id', component: MachineryProductsComponent},
       { path: 'machinery/search/:value', component: MachinerySearchComponent},
@@ -42,7 +40,7 @@ import { SharedModule } from '../shared/shared.module';
       { path: ':subcategory/:subsubcategory' , component: SubsubComponent},
       { path: ':cat/:sub/:subsub' , component: FilterProductComponent},
       { path: ':cat/:sub/:subsub/:product' , component: ProductDetailsComponent, canActivate: [KycguardService]},
-    ] },
+    
       ])
   ]
 })

@@ -36,10 +36,10 @@ export class AccountAddressesComponent implements OnInit {
 
    edit(value) {
      if (value >= 0) {
-        this.router.navigate(['/edit-address', value]);
+        this.router.navigate(['/account/edit-address', value]);
               }
     else {
-      this.router.navigate(['/add-address']);
+      this.router.navigate(['/account/add-address']);
     }
    }
 

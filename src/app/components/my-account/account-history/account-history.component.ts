@@ -16,7 +16,7 @@ alert:boolean;
   constructor(private api:ApiService,private router:Router) { }
   orderDetail(id)
   {
-    this.router.navigate(['order-detail',id]);
+    this.router.navigate(['account/order-detail',id]);
   }
   ngOnInit() {
     this.loader=true;

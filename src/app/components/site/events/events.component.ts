@@ -46,7 +46,7 @@ url: any;
   }
 
   detail(value) {
-    this.router.navigate(['/event', value.id]);
+    this.router.navigate(['/events', value.id]);
   }
   ngOnInit(): void {
   }

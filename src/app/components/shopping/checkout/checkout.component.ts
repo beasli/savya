@@ -203,7 +203,7 @@ export class CheckoutComponent implements OnInit {
 
   addAddress(){
     this.api.setGoto();
-    this.router.navigate(['/add-address']);
+    this.router.navigate(['/account/add-address']);
   }
 
   register(){
