@@ -1,6 +1,6 @@
 import { PRICELIST, CARTVIEW, IMAGE, CARTADD } from './../../../../config';
 import { ApiService } from 'src/app/api/api.service';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PRODUCTDETAILS, CATEGORY, SUBCATEGORY, SUBCATEGORYTYPE } from 'src/config';
 
@@ -12,6 +12,7 @@ import { PRODUCTDETAILS, CATEGORY, SUBCATEGORY, SUBCATEGORYTYPE } from 'src/conf
 export class ProductDetailsComponent implements OnInit {
   pid: string;
   data:any;
+  check=0;
   assets: any;
   recents: any;
   category: any;
@@ -99,35 +100,88 @@ export class ProductDetailsComponent implements OnInit {
   diamondlist1: any;
   diamondlist2: any;
   slides: any;
+  a:HTMLInputElement;
   index = 0;
+  cartassests={};
   @ViewChild('slidez') zlides: ElementRef<HTMLElement>;
   stone_index=[];
-  constructor(private api: ApiService, private route: ActivatedRoute,private router:Router) {
+  cid: any;
+  constructor(private api: ApiService, private route: ActivatedRoute,private router:Router,private zone:NgZone) {
     this.drop=this.api.drop;
     this.route.queryParamMap.subscribe(params =>{
       this.clean();
       console.log(params.get('detail'));
       this.pid = params.get('detail');
-      
+      this.cid = params.get('cart');
       this.ngOnInit();
-      this.getproduct();
+      this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data=>{
+        this.cart=data['data'];
+        if(this.cid){
+          this.cart = this.cart.find(x=>x.cart_id ==this.cid);
+          console.log(this.cart);
+          this.getproduct();
+          this.edit();
+        }else{this.getproduct();}
+    }).catch(d => {
+      if(this.cid){
+        this.cart = this.cart.find(x=>x.cart_id ==this.cid);
+        console.log(this.cart);
+        this.getproduct();
+        this.edit();
+      }else{this.getproduct();}
+    })
+      
       });
 
     
 
-    this.api.Get(CARTVIEW+"?user_id="+this.api.uid).then(data=>{
-        this.cart=data['data'];
-    }).catch(d => {
-      
-    })
+    
     this.total();
    }
    ngAfterViewChecked(){
     setTimeout(() => {this.slides = this.zlides.nativeElement.children;},1000);
    }
+   edit(){
+     this.value = this.cart.count;
+     this.colvalue = this.cart.selectedColor;
+    if(this.cart.assests.find(x=>x.metal == 'Gold')) {
+    this.cartassests['gold'] = this.cart.assests.find(x=>x.metal == 'Gold');
+      this.getgold(this.cartassests['gold'].materialType);
+    }
+    if(this.cart.assests.filter(x=>x.metal == 'Diamond').length) {
+    this.cartassests['dilist'] = this.cart.assests.filter(x=>x.metal == 'Diamond');}
 
- 
-  
+    if(this.cart.assests.filter(x=>x.metal == 'Diamond').length >=1 ) {
+    this.cartassests['diamond1'] = this.cartassests['dilist'].find(x=>x.diamond_index == '1');
+    this.diamondchange(1,this.cartassests['diamond1'].diamondType,this.cartassests['diamond1'].materialType);
+  }
+    if(this.cart.assests.filter(x=>x.metal == 'Diamond').length>=2) {
+    this.cartassests['diamond2'] = this.cartassests['dilist'].find(x=>x.diamond_index == '2');
+    this.diamondchange(2,this.cartassests['diamond2'].diamondType,this.cartassests['diamond2'].materialType);
+  }
+  console.log('edit')
+  console.log(this.cart.product_size);
+  this.sizechange(this.cart.product_size);
+  console.log('here');
+    if(this.cart.assests.filter(x=>x.metal == 'Stone').length) {
+      
+    this.cartassests['stone'] = this.cart.assests.filter(x=>x.metal == 'Stone');
+     let i = 0;
+   //  console.log(i);
+   //  console.log(this.cartassests['stone']);
+     this.cartassests['stone'].forEach(childObj=>{
+      //  console.log(this.stone_index);
+       let a =  this.stone_index[i].find(x=>x.jwellery_size == childObj.materialType);
+      //  console.log(a);
+      // console.log(i);
+      this.getstone(a.jwellery_size,i);
+    i++;
+     });
+  }
+
+   }
+
+
   indicateSlide(a) {
     console.log("I"+a);
     this.index = a;
@@ -144,7 +198,7 @@ export class ProductDetailsComponent implements OnInit {
     this.selectedsize = value;
     
       if (this.gold)  {
-        this.getgold(this.gold);
+        this.getgold(this.gold.jwellery_size);
         }
         if (this.platinum)  {
         this.getplatinum();
@@ -238,7 +292,7 @@ addToCart(s)
     this.api.updateCart();
     this.api.Cart.emit("cartUpdated"+Date.now());
     document.getElementById("mClose").click();
-  this.api.onSuccess('Product Successfully added to the cart');
+ if(!this.cid){ this.api.onSuccess('Product Successfully added to the cart');}else{this.api.onSuccess('Your Changes are saved to the cart');}
   //  localStorage.setItem('cart',JSON.stringify(data));  
   }).catch(d=>{
     document.getElementById("mClose").click();
@@ -308,7 +362,7 @@ getproduct() {
           if (this.assets) {
       
             this.goldlist = this.assets.filter(x => x.metrial_type == "Gold");
-           if(this.goldlist.length) {this.getgold(this.goldlist[0])};
+           if(this.goldlist.length) {this.getgold(this.goldlist[0].jwellery_size)};
          
             this.stonelist = this.assets.filter(x => x.metrial_type == "Stone");
             if(this.stonelist.length){
@@ -318,9 +372,7 @@ getproduct() {
                 if(a.length)
                 {
                   this.stone_index[i] = a;
-                  console.log(this.stone_index[i][0]);
-                 
-                 this.getstone(this.stone_index[i][0],i);
+                 this.getstone(this.stone_index[i][0].jwellery_size,i);
                 }else{
                   console.log(i);
                   break;
@@ -380,6 +432,8 @@ getproduct() {
             if(this.defsilver){
               this.getsilver();}
           }
+          if(this.cid){
+          this.edit()}
           this.api.Post(CATEGORY, {} ).then(data  => {
             let result = data['data'].find(x => x.id == this.data['category_id']);
             this.category = result['category'];
@@ -431,7 +485,7 @@ sort(ary) {
   });
   return a;
 }
-diamondchange(value,value2) {
+diamondchange(value,value2,col=null) {
   console.log(value);
   console.log(value2);
   if(value == 1) {
@@ -444,21 +498,30 @@ diamondchange(value,value2) {
     this.diamondclarity.forEach(element => {
       this.discla.push(0)
     });
-    this.defaultdiamond = this.diamond.default_color_clarity.split('/');
+    if(!col){
+    this.defaultdiamond = this.diamond.default_color_clarity.split('/');}
+    else{
+      this.defaultdiamond = col.split('/');
+    }
     this.diamondprice();
   } else if(value == 2) {
+    
     this.diamond2 = this.diamondlist2.find(x => x.jwellery_size == value2);
     console.log(this.diamond2)
     this.diamondcolour2 = this.diamond2.color.split(',');
     this.diamondclarity2 = this.diamond2.clarity.split(',');
-
+    
     this.diamondcolour2.forEach(element => {
     this.discol2.push(0);
   });
     this.diamondclarity2.forEach(element => {
     this.discla2.push(0);
   });
-    this.defaultdiamond2 = this.diamond2.default_color_clarity.split('/');
+  if(col){
+    this.defaultdiamond2 = this.diamond2.default_color_clarity.split('/');}
+    else{
+      this.defaultdiamond2 = col.split('/');
+    }
     this.diamondprice(2);
   }
 }
@@ -554,6 +617,7 @@ diamondchange(value,value2) {
       j['crtcost_option'] = this.diamond2.crtcost_option;
       j['certification_cost'] = this.diamond2.certification_cost;
       j['option'] = 'PerGram';
+      j['stone_index'] = '1';
       j['weight'] = this.diamond2.weight;
       j['wastage'] = this.diamond2.wastage;
       j['diamondType'] = this.diamond2.jwellery_size;
@@ -614,7 +678,9 @@ diamondchange(value,value2) {
     temparray.push(j);
     j = {};
     j['data'] = temparray;
-    this.addToCart(j);
+
+    if(this.cid){this.api.deleteCart(this.cid,'1');this.addToCart(j);}else{this.addToCart(j);}
+    
     let check=this.checkCart(this.pid);
     if(check==true)
     {
@@ -631,24 +697,38 @@ diamondchange(value,value2) {
   colormetal(value) {
     this.colvalue = value;
   }
-   getstone(value,i)  {
-      this.stone[i] = value;
-      console.log(i)
-      console.log(this.stone);
-      let name = this.stone[i].jwellery_size;
-      this.pricestone[i] = this.pricelist.stone.find(x => x.type.toUpperCase() == name.toUpperCase());
+   getstone(value,i,j=null)  {
+    console.log('RUN START');
+       this.stone[i] = this.stone_index[i].find(x => x.jwellery_size == value);
+      this.pricestone[i] = this.pricelist.stone.find(x => x.type.toUpperCase() == value.toUpperCase());
       if(this.pricestone[i]){
-      this.totalstone[i] = this.api.price(this.stone[i].weight,this.pricestone[i].price,'PerGram',0);
-      this.totalstone[i] = this.totalstone[i].price;
-      console.log(i);
+      this.totalstone[i] = this.api.price(this.stone[i].weight,this.pricestone[i].price,'PerGram',0).price;
       this.total();
       this.grossweight();
       this.button();
     } else{
         this.button();
       }
+      if(j && this.check == 0){
+        this.check =1;
+        console.log('check'+this.check);
+        setTimeout(()=> {document.getElementById(j).click();},100)
+      }
+      if(j && this.check == 0){
+        this.check =1;
+        console.log('check'+this.check);
+        setTimeout(()=> {document.getElementById(j).click();},100)
+      }
+      
+      if(j && this.check == 1){
+        this.check = 0;
+        console.log('check 2nd run'+this.check);
+    }
+    // if(j && this.check ==0)
+
    }
    clean(){
+     this.cid = null;
     this.pid= null;
     this.data= null;
     this.assets= null;
@@ -719,7 +799,7 @@ diamondchange(value,value2) {
     this.totaldiamond2 =null;
   }
    getgold(value) {
-     this.gold = Object.assign({},this.goldlist.find(x => x.jwellery_size == value.jwellery_size));
+     this.gold = Object.assign({},this.goldlist.find(x => x.jwellery_size == value));
     
      if (this.sizes && this.privious != this.selectedsize && this.data.jwellery_type == 'Ring') {
         
@@ -795,10 +875,17 @@ diamondchange(value,value2) {
   else  if (this.diamond && !this.pricediamond) {
     this.btn = 0;
     
-    }
- else   if (this.stone && !this.pricestone) {
-  this.btn = 0;
+    }else  if (this.diamond2 && !this.pricediamond2) {
+      this.btn = 0;
+      
+      }
+ else   if (this.stone.length) {
+  if (this.pricestone.length) {
+    this.pricestone.forEach(childObj => {
+      if(!childObj){this.btn = 0;}
+    });
   
+  }
     }
    else if (this.silver && !this.pricesilver) {
     this.btn = 0;

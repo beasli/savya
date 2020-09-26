@@ -72,6 +72,7 @@ export class FilterProductComponent implements OnInit {
   }
   getProduct(value,page=1)
   {
+    console.log('function called')
     this.loader=true;
     this.page=false;
     this.f=this.api.getfilter();
@@ -240,14 +241,14 @@ export class FilterProductComponent implements OnInit {
              this.f=this.api.getfilter();
                       if(this.f)
                     {
-                          this.getProduct(this.subsubcategory.id);
+                          this.getProduct(this.ssid);
                     }
                     else if(!this.f)
                     {
 
                       let initial={"menu":{"jewelery_for":[],"jewelery_type":[],"material":[],"price":{},"purity":[]}};
                       this.api.setfilter(initial);
-                      this.getProduct(this.subsubcategory.id);
+                      this.getProduct(this.ssid);
                     }
           })
   }

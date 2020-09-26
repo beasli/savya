@@ -16,6 +16,13 @@
 .search-page-listing .prd-img img {
     max-height:260px;
 }
+.product-list-01{
+    transform:translateY(0px) !important;
+    margin:0px !important;
+}
+.marb-11{
+    margin-bottom:30px !important;
+}
 @media(max-width:767px){
     .search-page-listing .prd-img img {
         width: 100%;
@@ -27,3 +34,4 @@
         padding-bottom: 65px;
     }
 }
+

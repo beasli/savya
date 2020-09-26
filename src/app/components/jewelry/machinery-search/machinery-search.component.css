@@ -1,0 +1,36 @@
+.search-page-listing .prd-grid:not(.listing-view) .prd .prd-hover {
+    position: relative;
+    width: 100%;
+    opacity: 1;
+}
+.search-page-listing .prd-inside{
+    border:1px solid #e7e7e7;
+}
+.search-page-listing .prd-info{
+    text-align:center;
+}
+.search-page-listing{
+    padding-top:30px;
+    padding-bottom:65px;
+}
+.search-page-listing .prd-img img {
+    max-height:260px;
+}
+.product-list-01{
+    transform:translateY(0px) !important;
+    margin:0px !important;
+}
+.marb-11{
+    margin-bottom:30px !important;
+}
+@media(max-width:767px){
+    .search-page-listing .prd-img img {
+        width: 100%;
+        height:auto;
+        border:0px;
+    }
+    .search-page-listing{
+        padding-top: 0px;
+        padding-bottom: 65px;
+    }
+}

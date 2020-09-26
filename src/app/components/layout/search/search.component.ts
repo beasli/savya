@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SEARCH } from 'src/config';
+import { IMAGE, SEARCH } from 'src/config';
 
 
 @Component({
@@ -20,8 +20,10 @@ loader:boolean;
 page:boolean;
 message:any="Nothing To Show";
 drop:any;
+manufacture = IMAGE+"users/";
 @ViewChild('addclosebutton') addclosebutton;
 @ViewChild('deleteclosebutton') deleteclosebutton;
+  manufacturer: any;
   constructor(private api:ApiService,private route:ActivatedRoute,private router:Router) { 
     this.drop=this.api.drop; 
     this.route.params.subscribe(params => {
@@ -33,13 +35,25 @@ searchApi()
 {
   this.loader=true;
     this.page=false;
-  this.api.Post(SEARCH,{'name':this.data}).then(data=>{
+  this.api.Post(SEARCH,{'search':this.data}).then(data=>{
     this.page=true;
       this.loader=false;
     this.alert=false;
     this.div=true;
     console.log(data);
     this.products = data['data'];
+    if(this.products.length){
+      this.products.forEach(element => {
+        element.gross = 0;
+        if(element.weight.Gold){element.gross += Number(element.weight.Gold)};
+        if(element.weight.Silver){element.gross += Number(element.weight.Silver)};
+        if(element.weight.Diamond){element.gross += Number(element.weight.Diamond)*0.2};
+        if(element.weight.Stone){element.gross += Number(element.weight.Stone)*0.2};
+        if(element.weight.Platinum){element.gross += Number(element.weight.Platinum)};
+        console.log(element.gross);
+      });
+    }
+    this.manufacturer = data['manufacture_data'];
     console.log(this.products);
     this.url = data['url'] + '/';
   }).catch(d=>{
@@ -49,6 +63,11 @@ searchApi()
     this.div=false;
     console.log(d); 
   })
+}
+openmodal(a=null,b=null){
+  console.log(a);
+  console.log(b);
+  this.api.advertiserModalShow(a,b);
 }
 go(value) {
   this.api.godetail(value);

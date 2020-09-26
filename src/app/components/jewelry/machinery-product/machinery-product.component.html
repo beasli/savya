@@ -52,10 +52,8 @@
                     <!-- /Product Gallery -->
                     <div class="prd-safecheckout topline slider-bottom-support-image">
                     <div> 
-                        <h3 class="h2-style">Company Name</h3>
-                       <!-- <ng-container *ngIf='data[0].manufacture_type == 1'> <h3 class="h2-style">Dealer</h3> </ng-container>
-                       <ng-container *ngIf='data[0].manufacture_type == 2'> <h3 class="h2-style">Retailer</h3> </ng-container> -->
-                        <img [src]="url+ 'users/' + manufacture.logo" onerror="this.src='../../../../assets/images/logo-bw.png'"><h3 class="h2-style">{{manufacture.company_name}}</h3>
+                        <h6>Company Name</h6>
+                        <img [src]="url+ 'users/' + manufacture.logo"  style="width:50px;height:auto" onerror="this.src='../../../../assets/images/logo-bw.png'"><br><h6>{{manufacture.company_name}}</h6>
                     </div>
                 </div>
                 
@@ -87,7 +85,7 @@
                                
                     </div>
                     <ng-container *ngIf="table">
-                    <table  border="1">
+                    <table class="table border">
                         <thead  *ngIf='tableheader'><th *ngFor='let z of tableheader.col'>{{z}}</th></thead>
                         <tr *ngFor="let a of tabledata;let j = index"><td *ngFor='let c of a.col'>{{c}}</td></tr>
                     </table>

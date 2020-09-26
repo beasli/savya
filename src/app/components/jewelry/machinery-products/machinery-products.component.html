@@ -22,17 +22,17 @@
                                  
                                          <div class="prd" *ngFor="let s of products"  >
                                                  <div class="prd-inside product-border" >
-                                                     <div class="prd-img-area"><a (click)='go(s.machinery_id)' class="prd-img">
+                                                     <div class="prd-img-area"><a (click)='go(s)' class="prd-img">
                                                          <img onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="s.image" alt="Tyssot 1853"></a>
                                                          
                                                          <div class="gdw-loader"></div>
                                                      </div>
                                                      <div class="prd-info text-center">
-                                                         <h2 class="prd-title"><a (click)='go(s.machinery_id)'>{{s.machinery_name}}</a></h2>
+                                                         <h2 class="prd-title"><a (click)='go(s)'>{{s.machinery_name}}</a></h2>
                                                          </div>
                                                              <div class="prd-action">
                                                                 
-                                                                 <button class="btn middle-button" (click)='go(s.machinery_id)'><span>View Details</span></button> 
+                                                                 <button class="btn middle-button" (click)='go(s)'><span>View Details</span></button> 
                                                                 
                                                               </div>
                                                       </div>

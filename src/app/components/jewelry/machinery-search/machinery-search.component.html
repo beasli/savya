@@ -1,6 +1,26 @@
-<div class="holder py-3 py-md-6 fullboxed aside--bg-none holder-bg-09">
-    <div class="container">
-      
+    <div class="container search-page-listing">
+        <div *ngIf='manufacturer && manufacturer.length' class="prd-grid product-listing marb-11 data-to-show-4 data-to-show-md-3 data-to-show-sm-2 js-category-grid">
+            <div class='text-center row'>  
+              <div class="col-12">
+                <h3>Machinery Manufacturer Results for keyword '{{data}}'</h3>
+              </div>
+            </div>
+              <div class="prd" *ngFor="let s of manufacturer">
+                <div class="prd-inside" >
+                <div (click)='openmodal(s.company_name,s.description)' [routerLink]='["/jewelry/machinery",s.company_name | slugify]' [queryParams]="{'manufacture_id': s.manufacture_id,'page':1}" class="prd-img-area">
+                  <a (click)='openmodal(s.company_name,s.description)' [routerLink]='["/jewelry/machinery",s.company_name | slugify]' [queryParams]="{'manufacture_id': s.manufacture_id,'page':1}" class="prd-img">
+                    <img style="border:0px;width:25%;" onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="manufacture + s.logo" alt="Tyssot 1853">
+                  </a>
+                  
+                  <div class="gdw-loader"></div>
+                </div>
+                <div class="prd-info p-1">
+                  <h5><a (click)='openmodal(s.company_name,s.description)' [routerLink]='["/jewelry/machinery",s.company_name | slugify]' [queryParams]="{'manufacture_id': s.manufacture_id,'page':1}">{{s.company_name}}</a></h5>
+                </div>
+                <div class="prd-hover"></div>
+              </div>
+              </div>    
+            </div>
         
         <div class="row" >  
              <div class="col-lg aside">
@@ -9,19 +29,23 @@
                      <app-loader  *ngIf="loader"></app-loader>
                      <div *ngIf="page">
                              <div  class="prd-grid product-listing data-to-show-4 data-to-show-md-3 data-to-show-sm-2 js-category-grid" *ngIf="div" >
-                                 
+                                <div class='text-center row'>  
+                                    <div class="col-12">
+                                      <h3>Machinery Results for keyword '{{data}}'</h3>
+                                    </div>
+                                  </div>
                                          <div class="prd" *ngFor="let s of products"  >
                                                  <div class="prd-inside product-border" >
-                                                     <div class="prd-img-area"><a (click)='go(s.machinery_id)' class="prd-img"><img onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="s.image" alt="Tyssot 1853"></a>
+                                                     <div class="prd-img-area"><a (click)='go(s)' class="prd-img"><img onerror="this.src='../../../../assets/images/logo-bw.png'" [src]="s.image" alt="Tyssot 1853"></a>
                                                          
                                                          <div class="gdw-loader"></div>
                                                      </div>
                                                      <div class="prd-info text-center">
-                                                         <h2 class="prd-title"><a (click)='go(s.machinery_id)'>{{s.machinery_name}}</a></h2>
+                                                         <h2 class="prd-title"><a (click)='go(s)'>{{s.machinery_name}}</a></h2>
                                                          </div>
                                                              <div class="prd-action">
                                                                 
-                                                                 <button class="btn middle-button" (click)='go(s.machinery_id)'><span>View Details</span></button> 
+                                                                 <button class="btn middle-button" (click)='go(s)'><span>View Details</span></button> 
                                                                 
                                                               </div>
                                                       </div>
@@ -40,7 +64,7 @@
             </div>       
         </div>
     </div>
-</div>
+
          <simple-notifications [options]="{position: ['top', 'right']}"></simple-notifications>
 
      

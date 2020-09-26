@@ -7,7 +7,7 @@
 .call-us-icon p{
     font-size: 20px;
     margin-top:0px;
-    nargin-bottom:0px;
+    margin-bottom:0px;
     display: inline-block;
     vertical-align: middle;
     margin-bottom: 0px;
@@ -22,7 +22,7 @@
     margin-bottom: 50px;
 }
 .contact-heading h2{
-    color:#c59f59;
+    color:#f58220;
 }
 .call-us-numbers p{
     font-size: 15px;
@@ -54,7 +54,7 @@
     border-right:0px solid #424242;
 }
 .call-us-numbers ul li a:hover{
-    color: #c59f59;
+    color: #f58220;
 }
 
 .address:after{

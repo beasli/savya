@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { MACHINESEARCH, IMAGE } from 'src/config';
 
 @Component({
@@ -24,7 +23,8 @@ export class MachineryProductsComponent implements OnInit {
   slider_imgs: any;
   url2 = IMAGE+"machinarybanner/"
 
-  constructor(private api: ApiService, private route: ActivatedRoute,private router:Router,private http:HttpClient) {
+  constructor(private api: ApiService, private route: ActivatedRoute,
+    private router:Router) {
 
     this.route.params.subscribe(data=>{this.title = data.id})
       this.route.queryParamMap.subscribe(params =>{
@@ -33,10 +33,13 @@ export class MachineryProductsComponent implements OnInit {
       //  this.title
         this.subcategory = params.get('subcategory_id');
         this.manufacture = params.get('manufacture_id');
+       
         console.log(this.manufacture);
         this.getproducts(this.current_page);
       });
   }
+
+
 
   getproducts(page=1){
     this.loader=true;
@@ -72,7 +75,8 @@ export class MachineryProductsComponent implements OnInit {
       }
   }
   go(argument){
-    this.router.navigate(['/products/machinery', argument]);
+    
+    this.router.navigate(['/jewelry/machinery', this.title,argument.machinery_name.replace(/ /g, "-")],{queryParams:{'detail':argument.machinery_id}});
   }
 
   pagechanged(){

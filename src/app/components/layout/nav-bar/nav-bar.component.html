@@ -1,11 +1,11 @@
 <div class="hdr-content hide-mobile">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row px-2">
             <div *ngIf='logochange != 1' class="col-auto logo-holder"><a routerLink="/" class="logo"><img src="assets/images/savyalogoblack.png" srcset="assets/images/savyalogoblack.png 2x" alt=""></a></div>
             <div *ngIf='logochange ==  1' class="col-auto logo-holder"><a [routerLink]="newurl" class="logo"><img src="assets/images/SJB_Machinery-1.png" srcset="assets/images/SJB_Machinery-1.png" alt=""></a></div>
             
             <div class="prev-menu-scroll icon-angle-left prev-menu-js"></div>
-            <div class="nav-holder" style="min-height:120px;">
+            <div class="nav-holder">
                 <div class="hdr-nav" >
                 
                     <ul  class="mmenu mmenu-js">
@@ -14,42 +14,44 @@
                             <li class="mmenu-item--simple">
                                 <a href="javascript:void(0)" routerLink="/" title="">HOME</a>
                             </li>
-                            <ng-container *ngFor='let s of catwithsub;let i = index'>
+                            
                             <li class="mmenu-item--simple">
-                                
-                                <ng-container *ngIf="s.category != 'MACHINERY' && i != length"><a href="javascript:void(0)" [routerLink]="['jewelry/', s.category  | category]" [queryParams]="{'category': s.category_id}" title="">{{s.category}}</a></ng-container>
-                                <ng-container *ngIf="i == length">
-                                    <a id='live' href="javascript:void(0)" [routerLink]="['/gold-silver-live-rates']" title="">Live Rate</a>
-                                </ng-container>
-                                <ng-container *ngIf="s.category == 'MACHINERY'  && i != length"><a href="javascript:void(0)" [routerLink]="['jewelry', s.category  | category]" [queryParams]="{'category': s.category_id}" title="">{{s.category}}</a></ng-container>
-                                <div *ngIf='i!=length' class="mmenu-submenu">
-                                    <ul class="submenu-list">
-                                     <ng-container *ngIf="s.category != 'MACHINERY'">
-                                         <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['jewelry/', s.category | category,p.subcategory  | subcategory]" [queryParams]="{'subcategory': p.subcategory_id}">{{p.subcategory}}</a>
-                                        </li>
-                                    </ng-container>
-                                        <ng-container *ngIf="s.category == 'MACHINERY'">
-                                            <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['jewelry/', s.category  | category,p.subcategory | subcategory]" [queryParams]="{'subcategory_id': p.subcategory_id,'page':1}">{{p.subcategory}}</a>
+                                <a href="javascript:void(0)" title="">JEWELLERY</a>
+                                <div class="mmenu-submenu">
+                                    <ul class="submenu-list">                                        
+                                            <li *ngFor='let s of catwithsub;let i = index'>
+                                                <ng-container *ngIf="s.category != 'MACHINERY'">
+                                                    <a href="javascript:void(0)" [routerLink]="['jewelry/', s.category  | category]" [queryParams]="{'category': s.category_id}">{{s.category}}</a>
+                                                </ng-container>
                                             </li>
-                                        </ng-container>
+                                        
                                     </ul>
                                 </div>
                             </li>
-                            <li class="mmenu-item--simple" *ngIf='i==length'>
-                                <a href="javascript:void(0)" [routerLink]="['jewelry/', catall[i].category | category]" [queryParams]="{'category': s.category_id}">{{catall[i].category}}</a>
+                            <ng-container *ngFor='let s of catwithsub;let i = index'>
+                            <li *ngIf="s.category == 'MACHINERY'" class="mmenu-item--simple">
+                                <a href="javascript:void(0)" [routerLink]="['jewelry', s.category  | category]" [queryParams]="{'category': s.category_id}" title="">{{s.category}}</a>
                                 <div class="mmenu-submenu">
                                     <ul class="submenu-list">
-                                     
-                                         <li *ngFor='let p of catall[i].subcategory'>
-                                             <a href="javascript:void(0)" [routerLink]="['jewelry/', catall[i].category  | category,p.subcategory  | subcategory]" [queryParams]="{'subcategory': p.subcategory_id}">{{p.subcategory}}</a>
+                                    
+                                         <li *ngFor='let p of s.subcategory'><a href="javascript:void(0)" [routerLink]="['jewelry/', s.category | category,p.subcategory  | subcategory]" [queryParams]="{'subcategory_id': p.subcategory_id,'page':1}">{{p.subcategory}}</a>
                                         </li>
                                     
+                                      
                                     </ul>
                                 </div>
                             </li>
-
                             </ng-container>
+                            <li class="mmenu-item--simple"><a href="javascript:void(0)" [routerLink]="['/bullion-dealers']" title="">Bullion Merchant</a>
+                            </li>
 
+                           
+                            <li class="mmenu-item--simple">
+                                <a id='live' href="javascript:void(0)" [routerLink]="['/gold-silver-live-rates']" title="">Live Rate</a>
+                            </li>
+                            <li class="mmenu-item--simple">
+                                <a href="javascript:void(0)" routerLink="/events" [queryParams]="{page: 1}" title="">Events</a>
+                            </li>
                             <ng-container *ngIf='catwithoutsub && catwithoutsub.length'>
                             <li class="mmenu-item--simple"><a href="javascript:void(0)" title="">More</a>
                                 <div class="mmenu-submenu">
@@ -59,11 +61,6 @@
                                 </div>
                             </li>
                             </ng-container>
-                            <li class="mmenu-item--simple"><a href="javascript:void(0)" [routerLink]="['/blog']" title="">Blog</a>
-                            </li>
-                            <li class="mmenu-item--simple"><a href="javascript:void(0)" [routerLink]="['/bullion-dealers']" title="">Bullion Merchant</a>
-                            </li>
-                            
                         </ul>
                     </ul>
                         
@@ -72,10 +69,10 @@
             </div>
             <div class="next-menu-scroll icon-angle-right next-menu-js"></div>
             
-            <div *ngIf='drop' class="col-auto">
+            <!-- <div *ngIf='drop' class="col-auto">
                 <div class="minicart"><a href="javascript:void(0)" routerLink="/account/cart" class="minicart-link"><i class="icon icon-handbag"></i> <span class="minicart-qty">{{ProductsInCart()}}</span> <span class="minicart-title">Shopping Cart</span></a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

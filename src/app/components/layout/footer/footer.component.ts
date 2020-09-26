@@ -1,4 +1,5 @@
-import { Router,NavigationStart } from '@angular/router';
+import { SeoService } from './../../SEO/seo.service';
+import { Router,NavigationStart, NavigationEnd } from '@angular/router';
 import { ApiService } from 'src/app/api/api.service';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -12,7 +13,7 @@ export class FooterComponent implements OnInit {
   logochange:number = 0;
   newurl: any;
   drop: any;
-  constructor(private api:ApiService, private router:Router) { 
+  constructor(private api:ApiService, private router:Router,private seo:SeoService) { 
     this.drop=this.api.drop; 
     this.api.getlogin.subscribe(data => {
       console.log(+data);
@@ -23,7 +24,12 @@ export class FooterComponent implements OnInit {
 
       if (event instanceof NavigationStart) {
           document.getElementById('top').click();
+         this.seo.removeCanonicalLink();
       }
+      if (event instanceof NavigationEnd) {
+      //  document.getElementById('top').click();
+        this.seo.createLinkForCanonicalURL();
+    }
       if (this.router.url.includes('/machinery')) 
           {  
             console.log("include");

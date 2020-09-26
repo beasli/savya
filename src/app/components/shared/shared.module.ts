@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgForOf } from '@angular/common';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
@@ -14,6 +14,7 @@ import { MachineryHolderComponent } from '../layout/machinery-holder/machinery-h
 import { TestimonialsComponent } from '../site/testimonials/testimonials.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
   declarations: [
@@ -43,8 +44,16 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     CommonModule,
     NgxImageZoomModule,
+    SimpleNotificationsModule.forRoot({
+      position:["middle","center"],
+       timeOut: 3000,
+       showProgressBar: true,
+       pauseOnHover: true,
+       clickToClose: true
+     }),
   ],
   exports: [LoaderComponent,
+    SimpleNotificationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

@@ -44,7 +44,8 @@ export class MachineryHolderComponent implements OnInit {
   constructor(private router:Router) { 
   }
   go(argument){
-    this.router.navigate(['/products/machinery', argument]);
+    this.router.navigate(['/jewelry/machinery', argument.product_subcategory.replace(/ /g, "-"),
+    argument.product_name.replace(/ /g, "-")],{queryParams:{'detail':argument.product_id}});
   }
   ngOnInit(): void {
   }

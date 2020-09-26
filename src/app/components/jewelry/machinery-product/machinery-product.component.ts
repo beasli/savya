@@ -41,10 +41,11 @@ export class MachineryProductComponent implements OnInit {
   tabledata: any;
 
   constructor(private api:ApiService, private route: ActivatedRoute) {
-    this.route.params.subscribe(params => {
+    this.route.queryParamMap.subscribe(params =>{
+      
+      this.pid = params.get('detail');
       this.loader=true;
      this.page=false;
-      this.pid = params.id;
       this.api.Put(MACHINE,this.pid).then(data =>{
         this.page=true;
         this.loader=false;
@@ -56,11 +57,8 @@ export class MachineryProductComponent implements OnInit {
         if(this.table){
           this.tableheader = this.table.find(x => x.rowType == 'header');
           this.tabledata = this.table.filter(x => x.rowType == 'Normal');
-          console.log(this.tableheader);
-          console.log(this.tabledata);
         }
       });
-      this.ngOnInit();
       });
    }
 
@@ -89,7 +87,10 @@ export class MachineryProductComponent implements OnInit {
   }
 
   ngAfterViewChecked(){
+    if(!this.slides){
     setTimeout(() => {this.slides = this.zlides.nativeElement.children;},1000);
+    console.log('its me');}
+    
    }
 
  

@@ -1,3 +1,4 @@
+import { ManmodalComponent } from './../components/jewelry/manmodal/manmodal.component';
 import { LoginModalComponent } from './../components/site/login-modal/login-modal.component';
 import { Router } from '@angular/router';
 import { Injectable, EventEmitter, Output } from '@angular/core';
@@ -368,13 +369,21 @@ qtyUpdate(pid,value)
      }
 }
 
-  deleteCart(pid)
+
+advertiserModalShow(a=null,b=null) {
+  if(b){
+  const activeModal = this.modalService.open(ManmodalComponent, { size: 'lg' });
+  activeModal.componentInstance.header = a;
+  activeModal.componentInstance.message = b;}
+}
+
+  deleteCart(pid,z=null)
   {
     this.Delete(CARTDELETE+"?cart_id="+pid+"&user_id="+this.uid).then(data=>{
       //console.log("deletecart"+data)
       this.updateCart();
       this.Cart.emit("cartUpdated"+Date.now());
-      this.onSuccess('Product Successfully Removed from the cart');
+      if(!z){this.onSuccess('Product Successfully Removed from the cart');}
      
     }).catch(d=>{
       if(d.status == 503){
@@ -427,7 +436,7 @@ qtyUpdate(pid,value)
   godetail(value) {
     if (value >= 0) {
      // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/product-details'],{queryParams:{'detail':value}});
+        this.router.navigate(['jewelry/product-details'],{queryParams:{'detail':value}});
      //   });
              }
             }
@@ -563,12 +572,10 @@ getWishlist()
    const encryptedMessage = CryptoJS.AES.encrypt(JSON.stringify(data), 'test').toString();
    return encryptedMessage;
   }
-
   public decrypt(data) {
     const decryptedMessage = CryptoJS.AES.decrypt(data, 'test');
     return JSON.parse(decryptedMessage.toString(CryptoJS.enc.Utf8));
    }
-
   setUserInfo(value)
   {
    let e=this.encrypt(value);
@@ -584,7 +591,6 @@ getWishlist()
     let m=localStorage.getItem('token');
     return m;
   }
-
   changelg(number:number){
     this.changelogo.emit(number);
   }
@@ -595,42 +601,40 @@ getWishlist()
         this.drop=this.decrypt(e);
       this.getlogin.emit(this.drop);
 }
-  getUserInfo()
-  {
-    let d =this.decrypt(localStorage.getItem('savya_userInfo'));
-    // console.log(d);
-    return d;
-  }
-
-  public dismissModel(){
-    this.modalService.dismissAll();
-  }
-
-  logout()
-  {
-    this.header = null;
-      localStorage.removeItem('savya_userInfo');
-      localStorage.removeItem('token');
-      localStorage.removeItem('wishlist');
-      localStorage.removeItem('cart');
-      localStorage.removeItem('orders');
-      if(this.drop == 0 ){
-        let count = 1;
-        const cell = this;
-        setInterval(function(){ 
-       //   debugger
-          count ++;
-          if(count==3){
-            clearInterval();
-            cell.modalService.open(LoginModalComponent,{ windowClass: 'myCustomModalClass2',backdrop : 'static',
-            keyboard : false})
-          }
+getUserInfo()
+{
+  let d =this.decrypt(localStorage.getItem('savya_userInfo'));
+  // console.log(d);
+  return d;
+}
+public dismissModel(){
+  this.modalService.dismissAll();
+}
+logout()
+{
+  this.header = null;
+    localStorage.removeItem('savya_userInfo');
+    localStorage.removeItem('token');
+    localStorage.removeItem('wishlist');
+    localStorage.removeItem('cart');
+    localStorage.removeItem('orders');
+    if(this.drop == 0 ){
+      let count = 1;
+      const cell = this;
+      setInterval(function(){ 
+      //   debugger
+        count ++;
+        if(count==3){
+          clearInterval();
+          cell.modalService.open(LoginModalComponent,{ windowClass: 'myCustomModalClass2',backdrop : 'static',
+          keyboard : false})
         }
-        , 1000);
-       
-     //   this.modalService.open(LoginComponent)
       }
-  }
+      , 1000);
+      
+    //   this.modalService.open(LoginComponent)
+    }
+}
 setOtp(value)
 {
  this.otp=value;

@@ -172,6 +172,10 @@ imagemodel=IMAGE+'machinerygallery/'
     return this.DOM.bypassSecurityTrustResourceUrl(url);
   }
 
+  openmodal(a=null,b=null){
+    this.api.advertiserModalShow(a,b);
+  }
+
 
   go(slide, value) {
     if (value == 1)

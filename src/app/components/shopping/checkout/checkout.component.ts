@@ -208,13 +208,13 @@ export class CheckoutComponent implements OnInit {
 
   register(){
     if(this.total.weight >= 100 && this.currentAddress){
-      if(this.paymnetmode=='cod'){
+     // if(this.paymnetmode=='cod'){
         this.createjson();
-      } else if(this.paymnetmode=='online'){
-        this.payWithRazor();
-      } else{
-        this.api.onFail('Please Choose a Proper Payment method');
-      }
+      // } else if(this.paymnetmode=='online'){
+      //   this.payWithRazor();
+      // } else{
+     //   this.api.onFail('Please Choose a Proper Payment method');
+   //   }
     } else  {
           if(this.total.weight <= 100)  {
           this.api.onFail('Minimum Weight of order should be 100 g' + ' You need ' + (100 - this.total.weight) + 'g more');
@@ -235,41 +235,41 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-  payWithRazor() {
-    const options: any = {
-      key: 'rzp_test_Dmzimsnc9gzT7E',
-      amount: Math.round(Number(this.final.toFixed(2))*100), // amount should be in paise format to display Rs 1255 without decimal point
-      currency: 'INR',
-      name: 'Savya Jewels Business', // company name or product name
-      description: '',  // product description
-      image: 'http://savyajewelsbusiness.com/assets/images/savyalogoblack.png', // company logo or product image
-    //  order_id: val, // order_id created by you in backend
-      modal: {
-        // We should prevent closing of the form when esc key is pressed.
-        escape: false,
-      },
-      notes: {
-        // include notes if any
-      },
-      theme: {
-        color: '#c59f59'
-      }
-    };
-    options.handler = ((response, error) => {
-      options.response = response;
-      this.transaction = response.razorpay_payment_id;
-       this.createjson('online',response.razorpay_payment_id)
-      console.log(response);
-      console.log(options);
-      // call your backend api to verify payment signature & capture transaction
-    });
-    options.modal.ondismiss = (() => {
-      // handle the case when user closes the form while transaction is in progress
-      console.log('Transaction cancelled.');
-    });
-    const rzp = new this.winRef.nativeWindow.Razorpay(options);
-    rzp.open();
-  }
+  // payWithRazor() {
+  //   const options: any = {
+  //     key: 'rzp_test_Dmzimsnc9gzT7E',
+  //     amount: Math.round(Number(this.final.toFixed(2))*100), // amount should be in paise format to display Rs 1255 without decimal point
+  //     currency: 'INR',
+  //     name: 'Savya Jewels Business', // company name or product name
+  //     description: '',  // product description
+  //     image: 'http://savyajewelsbusiness.com/assets/images/savyalogoblack.png', // company logo or product image
+  //   //  order_id: val, // order_id created by you in backend
+  //     modal: {
+  //       // We should prevent closing of the form when esc key is pressed.
+  //       escape: false,
+  //     },
+  //     notes: {
+  //       // include notes if any
+  //     },
+  //     theme: {
+  //       color: '#c59f59'
+  //     }
+  //   };
+  //   options.handler = ((response, error) => {
+  //     options.response = response;
+  //     this.transaction = response.razorpay_payment_id;
+  //      this.createjson('online',response.razorpay_payment_id)
+  //     console.log(response);
+  //     console.log(options);
+  //     // call your backend api to verify payment signature & capture transaction
+  //   });
+  //   options.modal.ondismiss = (() => {
+  //     // handle the case when user closes the form while transaction is in progress
+  //     console.log('Transaction cancelled.');
+  //   });
+  //   const rzp = new this.winRef.nativeWindow.Razorpay(options);
+  //   rzp.open();
+  // }
 
   ngOnInit() {
   }

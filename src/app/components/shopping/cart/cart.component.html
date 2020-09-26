@@ -13,9 +13,9 @@
             <h1 class="text-center">Shopping Cart</h1>
             <div class="cart-table" *ngIf="div">
                 <div class="cart-table-prd border bordershadow2"  *ngFor="let r of results;let i=index">
-                    <div class="cart-table-prd-image"><a  (click)='go(r.product_id)'><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl + r.image}}" alt=""></a></div>
+                    <div class="cart-table-prd-image"><a  routerLink='/jewelry/cart/{{r.productName}}' [queryParams]="{'detail': r.product_id}"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{baseurl + r.image}}" alt=""></a></div>
                     <div class="cart-table-prd-name">
-                        <h4><a  href="javascript:void(0)" (click)='go(r.product_id)'>{{r.productName}} &nbsp;&nbsp; size:&nbsp;({{r.product_size}})</a></h4>
+                        <h4><a  href="javascript:void(0)" routerLink='/jewelry/cart/{{r.productName}}' [queryParams]="{'detail': r.product_id}">{{r.productName}} &nbsp;&nbsp; size:&nbsp;({{r.product_size}})</a></h4>
                         <table>
                             <tbody>
                                <ng-container *ngFor="let a of r.assests;let i=index">
@@ -36,6 +36,12 @@
                                                          <td><button  (click)="qtyUpdate(r.cart_id,-1)" class="btn btn-secondary btn-block">-</button></td>
                                                          <td>{{quantity(r.cart_id)}}</td>
                                                          <td><button  (click)="qtyUpdate(r.cart_id,+1)" class="btn btn-secondary btn-block">+</button></td>
+                                                         <td>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                         </td>
+                                                         <td>
+                                                            <button routerLink='/jewelry/cart/{{r.productName}}' [queryParams]="{'detail': r.product_id,'cart':r.cart_id}" class="btn btn-secondary btn-block">Edit Product</button> 
+                                                        </td>
                                                      </tr>
                                                  </table>
                                              </div>

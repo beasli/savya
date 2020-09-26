@@ -20,8 +20,22 @@ export class HeaderComponent implements OnInit {
   constructor(private api:ApiService ,private router:Router,private route:ActivatedRoute) {
     this.drop=this.api.drop; 
 
+
+
    router.events.subscribe((val) => {
      this.close();
+
+
+    if(document.getElementById('searcher')){
+     if (this.router.url.includes('/search')) 
+     {  
+       
+       document.getElementById('searcher').classList.add('is-hovered');
+     }else{
+       document.getElementById('searcher').classList.remove('is-hovered');
+     }}
+
+
    });
    
   this.api.Get(NAVIGATION).then(data => {
@@ -40,15 +54,16 @@ export class HeaderComponent implements OnInit {
   change(value)
   {
     this.searchValue=value.target.value;
+    this.search();
   }
   search()
   {
-    if(this.searchValue.length>3 && this.logochange != 1)
+    if(this.logochange != 1)
     {
         this.router.navigate(['/search',this.searchValue]);
-    } else if(this.searchValue.length>3 && this.logochange == 1)
+    } else if(this.logochange == 1)
     {
-      this.router.navigate(['machinery-jewelry/search',this.searchValue]);
+      this.router.navigate(['/jewelry/machinery/search',this.searchValue]);
     }
   }
   popularSearch(value)

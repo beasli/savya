@@ -2,7 +2,7 @@
 <app-slider [slider_imgs] = 'Banner' [url] = 'img_url + "banner/"'></app-slider>
 
 <div class="text-center" style='padding:3vh;'>
-    <h2>Categories</h2>
+    <h2>{{name}}</h2>
 </div>
 <div class="container justify-content-center text-center">
     <div class="card-deck">
@@ -21,7 +21,7 @@
         </div>
         </div>
     </div>
-    <div *ngIf="!data.length">
+    <div *ngIf="data && !data.length">
         <div class="row" style="margin:auto;">
         <img src="../../../../assets/images/savya-jewels/no-product-show-category.png"  class="embed-responsive" alt="">
         </div>

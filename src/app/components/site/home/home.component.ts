@@ -155,6 +155,11 @@ export class HomeComponent implements OnInit {
   bypass2(url){
     return this.DOM.bypassSecurityTrustResourceUrl(IMAGE+"gallery/"+url);
   }
+  openmodal(a=null,b=null){
+    console.log(a);
+    console.log(b);
+    this.api.advertiserModalShow(a,b);
+  }
 
   ngOnInit() {
     this.loader=true;

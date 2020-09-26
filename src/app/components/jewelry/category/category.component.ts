@@ -1,9 +1,11 @@
+
 import { ApiService } from 'src/app/api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer,SafeStyle } from '@angular/platform-browser';
 import { CategoryPipe } from 'src/app/components/site/slug.pipe';
 import { CATEGORY, IMAGE, BANNER } from 'src/config';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-category',
@@ -23,10 +25,11 @@ export class CategoryComponent implements OnInit {
     this.route.queryParamMap.subscribe(params =>{
       
         this.id = params.get('manufacture_id');
+      
         this.route.params.subscribe(
           params=>{
-            this.name = params.id;
-          });    
+            this.name = params.id.replace(/-/g, " ");
+          });
         if(this.id!=null) {
         this.api.Post(CATEGORY, {manufacture_id: this.id} ).then(data  => {
           this.data = data['data'];
@@ -44,7 +47,7 @@ export class CategoryComponent implements OnInit {
   });
   }
 
-
+ 
   getlink(s): SafeStyle {
     s = s.replace(/ /g, "%20");
     s = s.replace(/\(/g, "%28");

@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { KycguardService } from '../auth-guard/kycguard.service';
 import { FilterNavBarComponent } from './filter-nav-bar/filter-nav-bar.component';
 import { SharedModule } from '../shared/shared.module';
+import { ManmodalComponent } from './manmodal/manmodal.component';
 
 @NgModule({
   declarations: [
@@ -25,17 +26,25 @@ import { SharedModule } from '../shared/shared.module';
     FilterProductComponent,
     MachinerySearchComponent,
     MachineryProductsComponent,
-    FilterNavBarComponent],
+    FilterNavBarComponent,
+    ManmodalComponent],
   imports: [
     SharedModule,
     RouterModule.forChild([ 
-      { path: 'machinery' , component: MachineryComponent},
-      { path: 'machinery/:id', component: MachineryProductsComponent},
       { path: 'machinery/search/:value', component: MachinerySearchComponent},
+      { path: 'machinery/:sid/:name' , component: MachineryProductComponent},
+      { path: 'machinery' , component: MachineryComponent},
+      { path: 'cart/:id' , component: ProductDetailsComponent, canActivate: [KycguardService]},
+      { path: 'wishlist/:id' , component: ProductDetailsComponent, canActivate: [KycguardService]},
+      { path: 'order-detail/:id' , component: ProductDetailsComponent, canActivate: [KycguardService]},
+      { path: 'checkout/:id' , component: ProductDetailsComponent, canActivate: [KycguardService]},
+      { path: 'machinery/:id', component: MachineryProductsComponent},
       { path: 'manufacture/:id', component: CategoryComponent},
       { path: 'manufacture/:idm/:subcategory/:subsubcategory' , component: SubsubComponent},
       { path: 'manufacture/:idm/:cat/:sub/:subsub' , component: FilterProductComponent},
       { path: 'manufacture/:idm/:subcategory', component: SubcategoryComponent},
+      
+      { path: 'product-details' , component: ProductDetailsComponent, canActivate: [KycguardService]},
       { path: ':subcategory', component: SubcategoryComponent},
       { path: ':subcategory/:subsubcategory' , component: SubsubComponent},
       { path: ':cat/:sub/:subsub' , component: FilterProductComponent},

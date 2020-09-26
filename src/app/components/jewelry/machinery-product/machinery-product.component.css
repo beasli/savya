@@ -1,6 +1,6 @@
 
 .product-details-item-heading{
-    color: #c59f59;
+    color:  #f58220;
 }
 .product-price{
     font-size:16px;
@@ -17,7 +17,7 @@
 }
 .product-size-select{
     width: 100%;
-    border: 1px solid #c59f59;
+    border: 1px solid  #f58220;
     padding: 3px 15px;
     font-size: 12px;
     border-radius: 0px;
@@ -129,7 +129,7 @@
 
   .radio-group input[type=radio]:checked + label {
         color: #ffffff;
-      background: #c59f59;
+      background: #f58220;
   }
 
   .radio-group label + input[type=radio] + label {
@@ -152,7 +152,7 @@
   .thumbnail {
     height: 100px;
     width: 100px;
-    border: 1px solid #c59f59;
+    border: 1px solid  #f58220;
   } 
   .tab-content {
     position: relative;

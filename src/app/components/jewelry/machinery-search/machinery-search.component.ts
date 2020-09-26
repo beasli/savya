@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from './../../../api/api.service';
 import { Component, OnInit } from '@angular/core';
-import { MACHINESEARCH } from 'src/config';
+import { IMAGE, MACHINESEARCH } from 'src/config';
 
 @Component({
   selector: 'app-machinery-search',
@@ -16,7 +16,8 @@ export class MachinerySearchComponent implements OnInit {
   div: boolean;
   data: any;
   url: string;
-
+  manufacturer: any;
+  manufacture = IMAGE+"users/";
   constructor(private api:ApiService,private route:ActivatedRoute,private router:Router) { 
     this.route.params.subscribe(params => {
       console.log(params.value);
@@ -25,7 +26,11 @@ export class MachinerySearchComponent implements OnInit {
       });
   }
   go(argument){
-    this.router.navigate(['/products/machinery', argument]);
+    
+    this.router.navigate(['/jewelry/machinery', argument.machinery_category,argument.machinery_name.replace(/ /g, "-")],{queryParams:{'detail':argument.machinery_id}});
+  }
+  openmodal(a=null,b=null){
+    this.api.advertiserModalShow(a,b);
   }
 
   searchApi()
@@ -39,6 +44,7 @@ export class MachinerySearchComponent implements OnInit {
     this.div=true;
     console.log(data);
     this.products = data['data'];
+    this.manufacturer = data['manufacture_data'];
     console.log(this.products);
     this.url = data['url'] + '/';
   }).catch(d=>{

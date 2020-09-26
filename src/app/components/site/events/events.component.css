@@ -9,8 +9,8 @@
 /deep/.page-item.active .page-link {
     z-index: 1;
     color: #fff;
-    background-color: #c59f59;
-    border-color: #c59f59;
+    background-color: #f58220;
+    border-color: #f58220;
 }
 /deep/.page-item .page-link:hover{
     z-index: 1;

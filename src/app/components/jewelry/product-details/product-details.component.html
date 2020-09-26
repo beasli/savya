@@ -79,16 +79,18 @@
                        
                         <!-- /Product Gallery -->
                         <div class="prd-safecheckout topline slider-bottom-support-image">
-                        <div *ngIf='certificate && certificate.length>0' > 
+                        <div class="row" *ngIf='certificate && certificate.length>0' > 
+                            <div class="col-auto">
+                            <h6>certified by:</h6>
+                            <img class="bordershadow2" style="width:50px;height:auto" [src]="url+ 'certificate/' + certificate[0].image" onerror="this.src='../../../../assets/images/logo-bw.png'"> 
+                        </div>
+                        <div class='col-auto'>
+                            <h6>Company by:</h6>
+                            <img class="bordershadow2" style="width:50px;height:auto" [src]="url+ 'users/' + manufacture.logo" onerror="this.src='../../../../assets/images/logo-bw.png'">
+                          <br>  <h6>{{manufacture.company_name}}</h6>
+                        </div>
+                        </div>
                         
-                            <h4>certified by:</h4>
-                            <img class="bordershadow2" style="width:100px;height:auto" [src]="url+ 'certificate/' + certificate[0].image" onerror="this.src='../../../../assets/images/logo-bw.png'"> 
-                        </div>
-                        <div>
-                            <h4>Company by:</h4>
-                            <img class="bordershadow2" style="width:100px;height:auto" [src]="url+ 'users/' + manufacture.logo" onerror="this.src='../../../../assets/images/logo-bw.png'">
-                          <br>  <strong>{{manufacture.company_name}}</strong>
-                        </div>
                         </div>
                     </div>
                     <div class="col-md">
@@ -102,9 +104,13 @@
                                     <div class="product-weight"><strong> <span style="font-weight:700px !important"> Gross Weight: &nbsp;&nbsp; {{gross  | number : '1.3-3'}}</span> <span style="text-transform: initial;"> g</span></strong></div>
                                 </div>
                             </div>   
+                            <ng-container *ngIf='!cid'>
                             <ng-container   *ngIf='data.jwellery_type == "Ring" || data.jwellery_type == "Chain"'>
                                 <div *ngIf="data.default_size != 'None'" class="product-size-box">
-                                    <label for="id_select" class="option-label"> Select {{data.jwellery_type}} Size </label>
+                                    <label for="id_select" class="option-label"> Select {{data.jwellery_type}} 
+                                        <ng-container *ngIf='data.jwellery_type == "Ring"'>Size</ng-container>
+                                        <ng-container *ngIf='data.jwellery_type == "Chain"'>Length</ng-container>
+                                    </label>
                                     <select *ngIf="data.size_type != '' && data.size_type != 'None' " id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
                                         <option *ngFor="let option of sizes" [value]="option" [selected]="option === defaultsize">
                                         {{option}}
@@ -134,6 +140,45 @@
                                     <ng-container *ngIf='data.jwellery_type == "Bangles"'><a href="javascript:void(0)" routerLink='/page/bangle'> Bangle Size ?</a></ng-container>
                                 </div>
                             </ng-container>
+                            </ng-container>
+
+                            <ng-container *ngIf='cid && cart'>
+                                <ng-container   *ngIf='data.jwellery_type == "Ring" || data.jwellery_type == "Chain"'>
+                                    <div *ngIf="data.default_size != 'None'" class="product-size-box">
+                                        <label for="id_select" class="option-label"> Select {{data.jwellery_type}} 
+                                            <ng-container *ngIf='data.jwellery_type == "Ring"'>Size</ng-container>
+                                            <ng-container *ngIf='data.jwellery_type == "Chain"'>Length</ng-container>
+                                        </label>
+                                        <select *ngIf="data.size_type != '' && data.size_type != 'None' " id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                                            <option *ngFor="let option of sizes" [value]="option" [selected]="option === cart.product_size">
+                                            {{option}}
+                                            </option>
+                                        </select>
+                                        <select *ngIf="data.size_type == ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                                            <option [value]="defaultsize" [selected]>
+                                            {{defaultsize}}
+                                            </option>
+                                        </select>
+                                        <ng-container *ngIf='data.jwellery_type == "Ring"'><a href="javascript:void(0)" routerLink='/page/ring'> Ring Size ?</a></ng-container>
+                                    </div>
+                                </ng-container>
+                                <ng-container   *ngIf='data.jwellery_type == "Bangles"'>
+                                    <div *ngIf="data.default_size != 'None'" class="product-size-box">
+                                        <label for="id_select" class="option-label"> Select {{data.jwellery_type}} Size </label>
+                                        <select *ngIf="data.size_type != '' && data.size_type != 'None' " id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                                            <option *ngFor="let option of sizelist" [value]="option.sizes" [selected]="option.sizes === cart.product_size">
+                                            {{option.bangle_size}}
+                                            </option>
+                                        </select>
+                                        <select *ngIf="data.size_type == ''" id="id_select" (change)="sizechange($event.target.value)" autofocus="true" placeholder="Select Size" class="product-size-select">
+                                            <option [value]="defaultsize" [selected]>
+                                            {{defaultsize}}
+                                            </option>
+                                        </select>
+                                        <ng-container *ngIf='data.jwellery_type == "Bangles"'><a href="javascript:void(0)" routerLink='/page/bangle'> Bangle Size ?</a></ng-container>
+                                    </div>
+                                </ng-container>
+                                </ng-container>
                             <div  *ngIf="metalcolour && metalcolour.length" class="color-chose-box d-table">
                                 <div class="color-text d-table-cell option-label"><p>Choose Color:</p></div>
                                 <div class="sample-box"> 
@@ -148,8 +193,8 @@
                                     <div class="prd-size swatches">
                                         <table>
                                             <tr>
-                                                <td>
-                                       <strong><span style="font-weight:700px !important">Platinum Type:</span></strong>
+                                                <td style="vertical-align: top;">
+                                       <strong><span style="font-weight:700px !important;">Platinum Type:&nbsp;</span></strong>
                                                 </td>
                                                 <td>
                                         <div class="radio-group">
@@ -179,14 +224,20 @@
                                 <div *ngIf='gold && goldlist.length' class="prd-size swatches">
                                     <table>
                                         <tr>
-                                            <td>
-                                   <strong><span style="font-weight:700px !important;vertical-align:top;">Gold Type:</span></strong>
+                                            <td style="vertical-align: top;">
+                                   <strong><span style="font-weight:700px !important;vertical-align:top;">Gold Type:&nbsp;</span></strong>
                                             </td>
                                             <td>
                                     <div class="radio-group">
                                         <ng-container *ngFor='let s of goldlist;let i = index'>
-                                            <input [checked]='(i==0) ? true:false' class='radio-control' (change)='getgold(s)' type="radio" id="{{s.jwellery_size}}" name="gold">
+                                            <ng-container *ngIf='!cid'>
+                                            <input [checked]='(i==0) ? true:false' class='radio-control' (change)='getgold(s.jwellery_size)' type="radio" id="{{s.jwellery_size}}" name="gold">
                                             <label for="{{s.jwellery_size}}">{{s.jwellery_size}}</label>
+                                        </ng-container>
+                                        <ng-container *ngIf='cid && cart'>
+                                            <input [checked]='(s.jwellery_size==cartassests["gold"].materialType) ? true:false' class='radio-control' (change)='getgold(s.jwellery_size)' type="radio" id="{{s.jwellery_size}}" name="gold">
+                                            <label for="{{s.jwellery_size}}">{{s.jwellery_size}}</label>
+                                        </ng-container>
                                         </ng-container>
                                     </div>
                                             </td>
@@ -243,8 +294,8 @@
                                     <div *ngIf=(diamond)  class="prd-size">
                                         <table>
                                             <tr>
-                                                <td>
-                                      <strong>  <span style="font-weight:700px !important">Diamond Color:</span> </strong>
+                                                <td style="vertical-align: top;">
+                                      <strong>  <span style="font-weight:700px !important">Diamond Color:&nbsp;</span> </strong>
                                                 </td>
                                                 <td>
                                             <div class="radio-group">
@@ -259,8 +310,8 @@
                                     </div>
                                     <div *ngIf=(diamond)  class="prd-size">
                                         <tr>
-                                            <td>
-                                    <strong><span for="id_select" style="font-weight:700px !important"> Diamond Clarity:</span> </strong>
+                                            <td style="vertical-align: top;">
+                                    <strong><span for="id_select" style="font-weight:700px !important"> Diamond Clarity:&nbsp;</span> </strong>
                                             </td>
                                             <td>
                                             <div class="radio-group">
@@ -307,8 +358,8 @@
                                     <div *ngIf='diamond2  && defaultdiamond2'  class="prd-size">
                                         <table>
                                             <tr>
-                                            <td>
-                                       <strong> <span style="font-weight:700px !important">Diamond Color:</span></strong>
+                                            <td style="vertical-align: top;">
+                                       <strong> <span style="font-weight:700px !important">Diamond Color:&nbsp;</span></strong>
                                             </td>
                                             <td>
                                             <div class="radio-group">
@@ -324,9 +375,9 @@
                                     <div *ngIf='diamond2  && defaultdiamond2'  class="prd-size">
                                         <table>
                                             <tr>
-                                            <td>
+                                            <td style="vertical-align: top;"> 
                                     <strong>
-                                        <span for="id_select" class="option-label"> Diamond Clarity:</span>
+                                        <span for="id_select" class="option-label"> Diamond Clarity:&nbsp;</span>
                                     </strong>
                                             </td>
                                             <td>
@@ -349,23 +400,50 @@
                                         <tr *ngIf="diamond2.certification_cost && diamond2.certification_cost!=0" class="option-label"><td> Certificate Charges</td><td>&nbsp;:&nbsp; {{diamond2.certification_cost  | INRCurrency}}<span *ngIf='diamond2.crtcost_option == "PerCarat"' style="text-transform: initial;">/ Ct</span></td></tr>
                                         <tr *ngIf='diamond2.crtcost_option == "PerCarat"  && diamond2.certification_cost!=0' class="option-label"><td> Total Certificate Charges</td><td>&nbsp;:&nbsp;  {{diamond2.certification_cost * diamond2.weight | INRCurrency}}</td></tr>
                                         <tr *ngIf='diamond2.crtcost_option == "Fixed"  && diamond2.certification_cost!=0' class="option-label"><td> Total Certificate Charges</td><td>&nbsp;:&nbsp;  {{diamond2.certification_cost * diamond2.weight | INRCurrency}}</td></tr>  
-                                        <tr *ngIf='totaldiamond2' class="option-label"><td> Diamond Total</td><td>&nbsp;:&nbsp;Rs. {{totaldiamond2   | INRCurrency}} </td></tr>
+                                        <tr *ngIf='totaldiamond2' class="option-label"><td> Diamond Total</td><td>&nbsp;:&nbsp;{{totaldiamond2   | INRCurrency}} </td></tr>
                                         <tr class="option-label"><td> Diamond Color/Clarity</td><td>&nbsp;:&nbsp; {{this.defaultdiamond2[0] + '/' + this.defaultdiamond2[1]}}</td></tr>
                                     </div>
 
                                     
-                                <ng-container *ngIf='stone.length'>
+                                <ng-container *ngIf='stone.length && stone_index.length'>
                                     <ng-container *ngFor='let b of stone;let i=index'>
+
+                                    <!-- <strong>
+                                        <label for="'id_select'+{{i}}" style="font-weight:700px !important">
+                                            <span style="font-weight:700px !important">Stone:</span>
+                                        </label>
+                                    </strong>
+                                        
+                                    <div *ngIf='!cid' class="diamond-selectbox">
+                                        <select class="product-size-select" id="id_select'+{{i}}" (change)="getstone($event.target.value,i)">
+                                            <option *ngFor="let s of stone_index[i];let j = index" id="" [value]="s.jwellery_size" [selected]="j == 0">{{s.jwellery_size}}</option>
+                                        </select>
+                                    </div>
+                                    <div *ngIf='cid' id="id_select'+{{i}}" class="diamond-selectbox">
+                                        <select class="product-size-select" (change)="getstone($event.target.value,i)">
+                                            
+                                            <option *ngFor="let s of stone_index[i];let j = index" [value]="s.jwellery_size" [selected]='s.jwellery_size===cartassests["stone"][i].materialType'>{{s.jwellery_size}}</option>
+                                        </select>
+                                    </div> -->
+   
                                 <div *ngIf='stone_index[i].length' class="prd-size swatches">
                                     <table>
                                         <tr>
-                                            <td>
-                                   <span style="font-weight:700px !important"><strong> Stone:</strong></span>
+                                            <td style="vertical-align: top;">
+                                   <span style="font-weight:700px !important"><strong> Stone: &nbsp;</strong></span>
                                             </td>
                                             <td>
-                                    <div class="radio-group">
-                                        <ng-container *ngFor='let s of stone_index[i];let j = index'>
-                                            <input [checked]='(j==0) ? true:false' class='radio-control' (change)='getstone(s,i)' type="radio" [id]="s.jwellery_size+i" [name]="'stone'+i"><label for="{{s.jwellery_size}}">{{s.jwellery_size}}</label></ng-container>
+                                    <div *ngFor='let s of stone_index[i];let j = index' class="radio-group">
+                                        
+                                            <ng-container *ngIf='!cid'>
+                                          <a><input  [checked]='(j==0) ? true:false' class='radio-control' (change)='getstone(s.jwellery_size,i,j+"stone"+i)' type="radio" id="{{j+'stone'+i}}" [name]="'stone'+i">
+                                                <label for="{{j+'stone'+i}}">{{s.jwellery_size}}</label></a>
+                                            </ng-container>
+                                            <ng-container *ngIf='cid'>
+                                                <input [checked]='(s.jwellery_size==cartassests["stone"][i].materialType) ? true:false' class='radio-control' (change)='getstone(s.jwellery_size,i,j+"stone"+i)' type="radio" id="{{j+'stone'+i}}" [name]="'stone'+i">
+                                                <label for="{{j+'stone'+i}}">{{s.jwellery_size}}</label>
+                                            </ng-container>
+                                        
                                     </div>
                                             </td>
                                         </tr>
@@ -400,8 +478,8 @@
                                        
                                         
                                         
-                                        <input type="hidden"> <button class="btn" [disabled]="btn==0" (click)="createjson()"><i class="icon icon-handbag"></i><span>Add To Cart</span></button> 
-                                        
+                                        <input type="hidden"> <button class="btn" [disabled]="btn==0" (click)="createjson()"><i class="icon icon-handbag"></i><span *ngIf='cid'>Save Changes To Cart</span><span *ngIf='!cid'>Add To Cart</span></button> 
+                                    
                                         <div style="padding-left:15px;" class="prd-links"><a (click)="wishlist(data.id)" *ngIf="!checkHeart(data.id)"  class="label-wishlist icon-heart js-label-wishlist"></a><a (click)="deleteWishlist(data.id)"  *ngIf="checkHeart(data.id)" class="label-wishlist icon-heart-fill js-label-wishlist"></a></div>
                                     </div>
                                 </div>

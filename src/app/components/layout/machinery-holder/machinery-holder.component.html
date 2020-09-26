@@ -2,8 +2,7 @@
   
     <div class="container-fluid">
         <div class="title-with-center text-center">
-            <h2 class="h1-style">{{heading}}</h2>
-           
+            <h3 class="h1-style">{{heading}}</h3>
         </div>
         
        
@@ -12,16 +11,16 @@
                 <div ngxSlickItem  class="prd prd-new prd-popular" style='height:100%' *ngFor="let s of mostselling">
                     
                         <div class="prd-inside product-border" >
-                            <div class="prd-img-area"><a (click)='go(s.product_id)' class="prd-img"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{url3+s.image}}" alt="Tyssot 1853"></a>
+                            <div class="prd-img-area"><a (click)='go(s)' class="prd-img"><img onerror="this.src='../../../../assets/images/logo-bw.png'" src="{{url3+s.image}}" alt="Tyssot 1853"></a>
                                 
                                 <div class="gdw-loader"></div>
                             </div>
                             <div class="prd-info text-center">
-                                <h2 class="prd-title"><a (click)='go(s.product_id)'>{{s.product_name}}</a></h2>
+                                <h3 class="prd-title"><a (click)='go(s)'>{{s.product_name}}</a></h3>
                             </div>
                                     <div class="prd-action">
                                        
-                                        <button class="btn middle-button" (click)='go(s.product_id)'><span>View Details</span></button> 
+                                        <button class="btn middle-button" (click)='go(s)'><span>View Details</span></button> 
                                        
                                     </div>
                         </div>
